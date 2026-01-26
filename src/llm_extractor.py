@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 class LLMProperties(BaseModel):
     """Properties of an LLM model following ORKG template R609825."""
+
     model_name: str
     model_family: Optional[str] = None
     date_created: Optional[str] = None
@@ -57,13 +58,14 @@ class LLMProperties(BaseModel):
 
 class MultiModelResponse(BaseModel):
     """Response containing multiple extracted models."""
+
     models: List[LLMProperties]
     paper_describes_multiple_models: bool
 
 
 class LLMExtractor:
     """Extracts LLM information using KISSKI Chat AI API."""
-    
+
     def __init__(
         self,
         api_key: str,
@@ -72,11 +74,11 @@ class LLMExtractor:
         temperature: float = 0.0,
         max_tokens: int = 4000,
         timeout: int = 60,
-        rate_limit_delay: float = 2.0
+        rate_limit_delay: float = 2.0,
     ):
         """
         Initialize KISSKI API extractor.
-        
+
         Args:
             api_key: KISSKI API key (provided by professor)
             base_url: KISSKI API base URL
@@ -90,7 +92,7 @@ class LLMExtractor:
             max_tokens: Maximum tokens in response
             timeout: Request timeout in seconds
             rate_limit_delay: Delay between requests in seconds (default: 2.0)
-        
+
         Note:
             KISSKI API is OpenAI-compatible. Rate limits:
             - 1000 requests per minute
@@ -105,26 +107,22 @@ class LLMExtractor:
         self.timeout = timeout
         self.rate_limit_delay = rate_limit_delay
         self.last_request_time = 0
-        
+
         # Initialize OpenAI client configured for KISSKI
-        self.client = OpenAI(
-            api_key=api_key,
-            base_url=base_url,
-            timeout=timeout
-        )
-        
+        self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout)
+
         logger.info(f"Initialized KISSKI extractor with model: {model}")
         logger.info(f"API endpoint: {base_url}")
         logger.info(f"Rate limit: {rate_limit_delay}s between requests")
-    
+
     def _enforce_rate_limit(self):
         """
         Enforce rate limiting between API requests.
-        
+
         Implements client-side rate limiting to avoid overloading KISSKI servers
         as requested by professor. Server has limits of:
         - 1000 requests/minute
-        - 10000 requests/hour  
+        - 10000 requests/hour
         - 50000 requests/day
         """
         elapsed = time.time() - self.last_request_time
@@ -133,96 +131,100 @@ class LLMExtractor:
             logger.debug(f"Rate limiting: sleeping {sleep_time:.2f}s")
             time.sleep(sleep_time)
         self.last_request_time = time.time()
-    
+
     def _create_extraction_messages(
-        self, 
-        paper_text: str, 
-        paper_metadata: Optional[Dict[str, Any]] = None
+        self, paper_text: str, paper_metadata: Optional[Dict[str, Any]] = None
     ) -> List[Dict[str, str]]:
         """
         Create extraction messages with few-shot examples (matching Grete approach).
-        
+
         Returns list of messages for OpenAI chat API with few-shot examples.
         """
         # Inject metadata if available
         meta_str = ""
         if paper_metadata:
             meta_str = f"PAPER METADATA:\nTitle: {paper_metadata.get('title', 'Unknown')}\nAuthored: {paper_metadata.get('year', '')}-{paper_metadata.get('month', '')}\nAuthors: {paper_metadata.get('authors', [])}\n"
-        
+
         # Use up to 65,000 chars (matching Grete)
         paper_snippet = paper_text[:65000] if len(paper_text) > 65000 else paper_text
-        
+
         # Prepend metadata to snippet
         if meta_str:
             paper_snippet = meta_str + "\n\nPAPER CONTENT:\n" + paper_snippet
-        
+
         # Few-shot examples (matching Grete approach)
         # Example 1: BERT (with all ORKG R609825 required fields)
         example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus."
         example1_output = {
-            "models": [{
-                "model_name": "BERT",
-                "model_family": "BERT",
-                "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
-                "organization": "Google",
-                "parameters": "340M",
-                "parameters_millions": 340,
-                "date_created": "2018-10",
-                "pretraining_architecture": "Encoder",
-                "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
-                "pretraining_corpus": "English Wikipedia, BookCorpus",
-                "optimizer": "Adam",
-                "innovation": "Bidirectional training of Transformer encoder",
-                "research_problem": "Language Understanding",
-                "application": "Natural language understanding, question answering, text classification",
-                "license": "Apache 2.0"
-            }]
+            "models": [
+                {
+                    "model_name": "BERT",
+                    "model_family": "BERT",
+                    "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+                    "organization": "Google",
+                    "parameters": "340M",
+                    "parameters_millions": 340,
+                    "date_created": "2018-10",
+                    "pretraining_architecture": "Encoder",
+                    "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
+                    "pretraining_corpus": "English Wikipedia, BookCorpus",
+                    "optimizer": "Adam",
+                    "innovation": "Bidirectional training of Transformer encoder",
+                    "research_problem": "Language Understanding",
+                    "application": "Natural language understanding, question answering, text classification",
+                    "license": "Apache 2.0",
+                }
+            ]
         }
-        
+
         # Example 2: GPT-2 (with all ORKG R609825 required fields)
         example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on WebText dataset."
         example2_output = {
-            "models": [{
-                "model_name": "GPT-2", 
-                "model_family": "GPT",
-                "paper_title": "Language Models are Unsupervised Multitask Learners",
-                "organization": "OpenAI", 
-                "parameters": "1.5B",
-                "parameters_millions": 1500,
-                "date_created": "2019-02",
-                "pretraining_architecture": "Decoder", 
-                "pretraining_task": "Causal language modeling",
-                "pretraining_corpus": "WebText",
-                "innovation": "Zero-shot task transfer via large-scale unsupervised learning",
-                "research_problem": "Large Language Models",
-                "application": "Text generation, language modeling, zero-shot task transfer",
-                "license": "Modified MIT License"
-            }]
+            "models": [
+                {
+                    "model_name": "GPT-2",
+                    "model_family": "GPT",
+                    "paper_title": "Language Models are Unsupervised Multitask Learners",
+                    "organization": "OpenAI",
+                    "parameters": "1.5B",
+                    "parameters_millions": 1500,
+                    "date_created": "2019-02",
+                    "pretraining_architecture": "Decoder",
+                    "pretraining_task": "Causal language modeling",
+                    "pretraining_corpus": "WebText",
+                    "innovation": "Zero-shot task transfer via large-scale unsupervised learning",
+                    "research_problem": "Large Language Models",
+                    "application": "Text generation, language modeling, zero-shot task transfer",
+                    "license": "Modified MIT License",
+                }
+            ]
         }
-        
+
         # Example 3: GPT-1 (with all ORKG R609825 required fields)
         example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset."
         example3_output = {
-            "models": [{
-                "model_name": "GPT-1",
-                "model_family": "GPT", 
-                "paper_title": "Improving Language Understanding by Generative Pre-Training",
-                "organization": "OpenAI",
-                "parameters": "117M",
-                "parameters_millions": 117,
-                "date_created": "2018-06",
-                "pretraining_architecture": "Decoder",
-                "pretraining_task": "Causal language modeling",
-                "pretraining_corpus": "BooksCorpus",
-                "finetuning_task": "Supervised discriminative fine-tuning",
-                "optimizer": "Adam",
-                "innovation": "Generative pre-training followed by discriminative fine-tuning",
-                "license": "closed source",
-                "research_problem": "Language Understanding",
-                "application": "Natural language understanding, text classification, question answering"
-            }]
+            "models": [
+                {
+                    "model_name": "GPT-1",
+                    "model_family": "GPT",
+                    "paper_title": "Improving Language Understanding by Generative Pre-Training",
+                    "organization": "OpenAI",
+                    "parameters": "117M",
+                    "parameters_millions": 117,
+                    "date_created": "2018-06",
+                    "pretraining_architecture": "Decoder",
+                    "pretraining_task": "Causal language modeling",
+                    "pretraining_corpus": "BooksCorpus",
+                    "finetuning_task": "Supervised discriminative fine-tuning",
+                    "optimizer": "Adam",
+                    "innovation": "Generative pre-training followed by discriminative fine-tuning",
+                    "license": "closed source",
+                    "research_problem": "Language Understanding",
+                    "application": "Natural language understanding, text classification, question answering",
+                }
+            ]
         }
-        
+
         # Example 4: Multiple model versions (Llama 3.1 with different sizes - all ORKG R609825 required fields)
         example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. Released under Llama 3.1 Community License."
         example4_output = {
@@ -241,7 +243,7 @@ class LLMExtractor:
                     "innovation": "Large-scale language models",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
-                    "license": "Llama 3.1 Community License"
+                    "license": "Llama 3.1 Community License",
                 },
                 {
                     "model_name": "Llama 3.1 70B",
@@ -257,7 +259,7 @@ class LLMExtractor:
                     "innovation": "Large-scale language models",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
-                    "license": "Llama 3.1 Community License"
+                    "license": "Llama 3.1 Community License",
                 },
                 {
                     "model_name": "Llama 3.1 405B",
@@ -273,50 +275,38 @@ class LLMExtractor:
                     "innovation": "Large-scale language models",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
-                    "license": "Llama 3.1 Community License"
-                }
+                    "license": "Llama 3.1 Community License",
+                },
             ],
-            "paper_describes_multiple_models": True
+            "paper_describes_multiple_models": True,
         }
-        
+
         # Build messages with few-shot examples
         messages = [
             {
-                "role": "system", 
-                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation/contribution\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture (e.g. Encoder, Decoder, Transformer)\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer (e.g. Adam, AdamW)\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Use YYYY-MM-DD when known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n6. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n\nReturn JSON only."
+                "role": "system",
+                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation/contribution\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture (e.g. Encoder, Decoder, Transformer)\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer (e.g. Adam, AdamW)\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Use YYYY-MM-DD when known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n6. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n\nReturn JSON only.",
             },
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}"
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}",
             },
-            {
-                "role": "assistant",
-                "content": json.dumps(example1_output)
-            },
-            {
-                "role": "user", 
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}"
-            },
-            {
-                "role": "assistant",
-                "content": json.dumps(example2_output)
-            },
+            {"role": "assistant", "content": json.dumps(example1_output)},
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}"
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}",
             },
-            {
-                "role": "assistant",
-                "content": json.dumps(example3_output)
-            },
+            {"role": "assistant", "content": json.dumps(example2_output)},
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}"
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}",
             },
+            {"role": "assistant", "content": json.dumps(example3_output)},
             {
-                "role": "assistant",
-                "content": json.dumps(example4_output)
+                "role": "user",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}",
             },
+            {"role": "assistant", "content": json.dumps(example4_output)},
             {
                 "role": "user",
                 "content": f"""Extract ALL model versions, variants, and sizes introduced in this paper according to ORKG template R609825:
@@ -351,59 +341,57 @@ CRITICAL INSTRUCTIONS:
 - Extract ALL required fields. If not mentioned in paper, use null, but try to infer from context when possible.
 - Always extract pretraining_architecture (Encoder/Decoder/Transformer), pretraining_task, finetuning_task, optimizer when the paper states them. Use null only if not stated.
 
-Output JSON:"""
-            }
+Output JSON:""",
+            },
         ]
-        
+
         return messages
-    
+
     def extract(
-        self,
-        paper_text: str,
-        paper_metadata: Optional[Dict[str, Any]] = None
+        self, paper_text: str, paper_metadata: Optional[Dict[str, Any]] = None
     ) -> Optional[MultiModelResponse]:
         """
         Extract LLM information from paper text using KISSKI API with few-shot examples.
-        
+
         Args:
             paper_text: Full text of the research paper
             paper_metadata: Optional metadata (title, authors, etc.)
-            
+
         Returns:
             MultiModelResponse with extracted models or None if extraction failed
         """
         try:
             logger.info("Extracting LLM information using KISSKI API")
-            
+
             # Enforce rate limiting
             self._enforce_rate_limit()
-            
+
             # Create messages with few-shot examples (matching Grete approach)
             messages = self._create_extraction_messages(paper_text, paper_metadata)
-            
+
             # Call KISSKI API (OpenAI-compatible)
             logger.debug(f"Sending request to KISSKI API (model: {self.model_name})")
-            
+
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
                 temperature=self.temperature,
-                max_tokens=self.max_tokens
+                max_tokens=self.max_tokens,
             )
-            
+
             # Extract response text
             if not response.choices or len(response.choices) == 0:
                 logger.warning("No response from KISSKI API")
                 return None
-            
+
             response_text = response.choices[0].message.content
-            
+
             if not response_text or not response_text.strip():
                 logger.warning("Empty response from KISSKI API")
                 return None
-            
+
             logger.debug(f"Received response ({len(response_text)} characters)")
-            
+
             # Parse JSON response
             json_data = self._parse_json_response(response_text)
             if not json_data:
@@ -412,63 +400,65 @@ Output JSON:"""
 
             # Coerce "null" strings to None so evaluation and ORKG get proper nulls
             json_data = self._coerce_null_strings(json_data)
-            
+
             # Ensure required fields have defaults
-            if 'models' in json_data:
-                for model_data in json_data['models']:
+            if "models" in json_data:
+                for model_data in json_data["models"]:
                     # Set None for missing required fields
-                    if not model_data.get('organization'):
-                        model_data['organization'] = None
-                    if not model_data.get('parameters'):
-                        model_data['parameters'] = None
-                    if not model_data.get('license'):
-                        model_data['license'] = None
-            
+                    if not model_data.get("organization"):
+                        model_data["organization"] = None
+                    if not model_data.get("parameters"):
+                        model_data["parameters"] = None
+                    if not model_data.get("license"):
+                        model_data["license"] = None
+
             # Validate against schema
             result = MultiModelResponse(**json_data)
-            
+
             if result and result.models:
                 logger.info(f"Successfully extracted {len(result.models)} model(s)")
-                
+
                 # Enrich with paper metadata
                 if paper_metadata:
                     for model in result.models:
-                        if not model.paper_title and 'title' in paper_metadata:
-                            model.paper_title = paper_metadata['title']
-                        if not model.organization and 'authors' in paper_metadata:
-                            model.organization = self._extract_organization(paper_metadata.get('authors', []))
-                
+                        if not model.paper_title and "title" in paper_metadata:
+                            model.paper_title = paper_metadata["title"]
+                        if not model.organization and "authors" in paper_metadata:
+                            model.organization = self._extract_organization(
+                                paper_metadata.get("authors", [])
+                            )
+
                 return result
             else:
                 logger.warning("No models extracted")
                 return None
-                
+
         except Exception as e:
             logger.error(f"Extraction error: {e}", exc_info=True)
             return None
-    
+
     def _parse_json_response(self, response_text: str) -> Optional[Dict[str, Any]]:
         """
         Parse JSON from model response with robust parsing (matching Grete approach).
-        
+
         Handles responses wrapped in markdown code blocks and common JSON issues.
         """
         if not response_text or not response_text.strip():
             logger.error("Empty response from model")
             return None
-        
+
         original_response = response_text
         try:
             import re
-            
+
             def _quote_unquoted_keys(text: str) -> str:
                 """Quote unquoted JSON object keys, including keys with spaces/hyphens."""
                 return re.sub(
-                    r'([{,]\s*)([A-Za-z_][A-Za-z0-9_\- ]*?)\s*:',
+                    r"([{,]\s*)([A-Za-z_][A-Za-z0-9_\- ]*?)\s*:",
                     lambda m: f'{m.group(1)}"{m.group(2).strip()}":',
                     text,
                 )
-            
+
             def _balance_json_brackets(text: str) -> str:
                 """Append missing closing brackets/braces based on a stack."""
                 stack: List[str] = []
@@ -494,17 +484,17 @@ Output JSON:"""
                         stack.pop()
                     elif ch == "]" and stack and stack[-1] == "[":
                         stack.pop()
-                
+
                 # Append missing closers in reverse order
                 if stack:
                     closers = {"{": "}", "[": "]"}
                     text += "".join(closers[sym] for sym in reversed(stack))
                 return text
-            
+
             # Remove prompt echo if present
             if "<|assistant|>" in response_text:
                 response_text = response_text.split("<|assistant|>")[-1]
-            
+
             # Remove markdown code blocks
             if "```json" in response_text:
                 response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -512,112 +502,126 @@ Output JSON:"""
                 parts = response_text.split("```")
                 if len(parts) >= 2:
                     response_text = parts[1].strip()
-            
+
             # Find JSON object - look for the complete JSON structure
             start = response_text.find("{")
             if start < 0:
-                logger.error(f"No JSON object found in response. Response preview: {original_response[:200]}")
+                logger.error(
+                    f"No JSON object found in response. Response preview: {original_response[:200]}"
+                )
                 return None
-            
+
             # Find matching closing brace by counting braces
             brace_count = 0
             end = start
             for i, char in enumerate(response_text[start:], start):
-                if char == '{':
+                if char == "{":
                     brace_count += 1
-                elif char == '}':
+                elif char == "}":
                     brace_count -= 1
                     if brace_count == 0:
                         end = i + 1
                         break
-            
+
             if end <= start:
                 # Fallback to simple rfind
                 end = response_text.rfind("}") + 1
-            
+
             if end > start:
                 response_text = response_text[start:end]
             else:
-                logger.error(f"No valid JSON object found. Response preview: {original_response[:200]}")
+                logger.error(
+                    f"No valid JSON object found. Response preview: {original_response[:200]}"
+                )
                 return None
-            
+
             # Enhanced cleaning
             # Remove dots before field names (e.g., ."field_name" -> "field_name")
             response_text = re.sub(r'\.\s*"', '"', response_text)
-            
+
             # Fix missing opening quotes for field names (handles spaces/hyphens too)
             response_text = _quote_unquoted_keys(response_text)
-            
+
             # Fix missing closing quotes (e.g., "field":"value, -> "field":"value",)
             response_text = re.sub(r':\s*([^",}\]]+?)(\s*[,}\]])', r': "\1"\2', response_text)
-            
+
             # Fix cases like "short_description:"", -> "short_description":"",
             response_text = re.sub(r':\s*"",', r': "",', response_text)
-            
+
             # Fix double quotes (e.g., ""value"" -> "value")
             response_text = re.sub(r'""([^"]+)""', r'"\1"', response_text)
             response_text = re.sub(r'""+', '"', response_text)
-            
+
             # Fix empty comma patterns (e.g., ", ," or ",  ,")
-            response_text = re.sub(r',\s*,', ',', response_text)
-            
+            response_text = re.sub(r",\s*,", ",", response_text)
+
             # Fix field names with trailing spaces (e.g., "field_name " -> "field_name")
             response_text = re.sub(r'"(\w+)\s+":', r'"\1":', response_text)
-            
+
             # Insert missing commas between objects in arrays (e.g., "} {")
-            response_text = re.sub(r'}\s*{', '},{', response_text)
-            
+            response_text = re.sub(r"}\s*{", "},{", response_text)
+
             # Insert missing commas between values and the next key
             response_text = re.sub(
                 r'(?<=[0-9"\]}])\s+(?="[^"]+"\s*:)',
-                ',',
+                ",",
                 response_text,
             )
-            
+
             # Remove control characters (newlines, tabs, etc.) that break JSON parsing
-            response_text = re.sub(r'[\x00-\x1f\x7f-\x9f]', '', response_text)
-            
+            response_text = re.sub(r"[\x00-\x1f\x7f-\x9f]", "", response_text)
+
             # Remove JSON comments (// and /* */)
-            response_text = re.sub(r'//.*?$', '', response_text, flags=re.MULTILINE)
-            response_text = re.sub(r'/\*.*?\*/', '', response_text, flags=re.DOTALL)
-            
+            response_text = re.sub(r"//.*?$", "", response_text, flags=re.MULTILINE)
+            response_text = re.sub(r"/\*.*?\*/", "", response_text, flags=re.DOTALL)
+
             # Remove placeholder text like "Add more models here..."
-            response_text = re.sub(r',?\s*//.*?Add more.*?$', '', response_text, flags=re.MULTILINE | re.IGNORECASE)
-            
+            response_text = re.sub(
+                r",?\s*//.*?Add more.*?$", "", response_text, flags=re.MULTILINE | re.IGNORECASE
+            )
+
             # Remove trailing commas before } or ]
-            response_text = re.sub(r',\s*}', '}', response_text)
-            response_text = re.sub(r',\s*]', ']', response_text)
-            
+            response_text = re.sub(r",\s*}", "}", response_text)
+            response_text = re.sub(r",\s*]", "]", response_text)
+
             # Fix leading commas after { or [
-            response_text = re.sub(r'{\s*,', '{', response_text)
-            response_text = re.sub(r'\[\s*,', '[', response_text)
-            
+            response_text = re.sub(r"{\s*,", "{", response_text)
+            response_text = re.sub(r"\[\s*,", "[", response_text)
+
             # Remove any text after the JSON (like "Note - ...")
-            last_brace = response_text.rfind('}')
+            last_brace = response_text.rfind("}")
             if last_brace > 0:
-                response_text = response_text[:last_brace + 1]
-            
+                response_text = response_text[: last_brace + 1]
+
             # Balance brackets/braces if the JSON is truncated
             response_text = _balance_json_brackets(response_text)
-            
+
             if not response_text.strip():
                 logger.error("Response became empty after cleaning")
                 logger.debug(f"Original response: {original_response[:500]}")
                 return None
-            
+
             # Try to parse JSON - if it fails, attempt repair
             try:
                 parsed = json.loads(response_text)
             except json.JSONDecodeError as parse_error:
                 logger.warning(f"Initial JSON parse failed: {parse_error}. Attempting repair...")
-                
+
                 # Attempt to repair common issues
                 # Fix incomplete strings (e.g., "value, -> "value",)
-                response_text = re.sub(r':\s*"([^"]*?)([,}\]])', lambda m: f': "{m.group(1)}"{m.group(2)}' if not m.group(1).endswith('"') else f': {m.group(1)}{m.group(2)}', response_text)
-                
+                response_text = re.sub(
+                    r':\s*"([^"]*?)([,}\]])',
+                    lambda m: (
+                        f': "{m.group(1)}"{m.group(2)}'
+                        if not m.group(1).endswith('"')
+                        else f": {m.group(1)}{m.group(2)}"
+                    ),
+                    response_text,
+                )
+
                 # Fix unclosed strings at end of object
                 response_text = re.sub(r':\s*"([^"]*?)(\s*[}\]])', r': "\1"\2', response_text)
-                
+
                 # Try parsing again
                 try:
                     parsed = json.loads(response_text)
@@ -625,19 +629,21 @@ Output JSON:"""
                 except json.JSONDecodeError as repair_error:
                     logger.error(f"JSON repair also failed: {repair_error}")
                     logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
-                    logger.error(f"Cleaned response (first 500 chars): {response_text[:500] if response_text else 'EMPTY'}")
+                    logger.error(
+                        f"Cleaned response (first 500 chars): {response_text[:500] if response_text else 'EMPTY'}"
+                    )
                     return None
-            
+
             # Normalize field names in the parsed JSON
             parsed = self._normalize_field_names(parsed)
-            
+
             return parsed
         except json.JSONDecodeError as e:
             logger.error(f"JSON parse error: {e}")
             logger.error(f"Response length: {len(original_response)}")
             logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
             return None
-    
+
     def _normalize_field_names(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Normalize field names to expected format."""
         # Field name mapping: various names -> correct name
@@ -687,38 +693,38 @@ Output JSON:"""
             "hw_used": "hardware_used",
             "hardware": "hardware_used",
         }
-        
+
         def normalize_dict(d: Dict[str, Any]) -> Dict[str, Any]:
             """Normalize field names in a dictionary."""
             normalized = {}
             for key, value in d.items():
                 # Normalize key: lowercase, strip whitespace
                 norm_key = key.lower().strip().replace(" ", "_")
-                
+
                 # Map to correct field name if known
                 if norm_key in field_mapping:
                     norm_key = field_mapping[norm_key]
                 else:
                     # Keep original key if not in mapping
                     norm_key = key
-                
+
                 # Recursively normalize nested dicts
                 if isinstance(value, dict):
                     value = normalize_dict(value)
                 elif isinstance(value, list):
                     value = [normalize_dict(v) if isinstance(v, dict) else v for v in value]
-                
+
                 normalized[norm_key] = value
-            
+
             return normalized
-        
+
         # Normalize the top-level keys
         result = normalize_dict(data)
-        
+
         # Handle case where "Models" is used instead of "models"
         if "Models" in result and "models" not in result:
             result["models"] = result.pop("Models")
-        
+
         return result
 
     def _coerce_null_strings(self, data: Any) -> Any:
@@ -730,44 +736,41 @@ Output JSON:"""
         if isinstance(data, str) and data.strip().lower() in ("null", "none", "n/a"):
             return None
         return data
-    
+
     def extract_from_chunks(
-        self,
-        text_chunks: List[str],
-        paper_metadata: Optional[Dict[str, Any]] = None
+        self, text_chunks: List[str], paper_metadata: Optional[Dict[str, Any]] = None
     ) -> Optional[MultiModelResponse]:
         """
         Extract from multiple text chunks (for long papers).
-        
+
         Args:
             text_chunks: List of text chunks
             paper_metadata: Optional metadata
-            
+
         Returns:
             MultiModelResponse with deduplicated models
         """
         all_models = []
-        
+
         for i, chunk in enumerate(text_chunks):
             logger.info(f"Processing chunk {i+1}/{len(text_chunks)}")
             result = self.extract(chunk, paper_metadata)
-            
+
             if result and result.models:
                 all_models.extend(result.models)
-        
+
         if not all_models:
             logger.warning("No models extracted from any chunk")
             return None
-        
+
         # Deduplicate models
         unique_models = self._deduplicate_models(all_models)
         logger.info(f"Deduplicated to {len(unique_models)} unique model(s)")
-        
+
         return MultiModelResponse(
-            models=unique_models,
-            paper_describes_multiple_models=len(unique_models) > 1
+            models=unique_models, paper_describes_multiple_models=len(unique_models) > 1
         )
-    
+
     def _deduplicate_models(self, models: List[LLMProperties]) -> List[LLMProperties]:
         """
         Deduplicate models: merge variants that refer to the same model
@@ -793,6 +796,7 @@ Output JSON:"""
             if len(group) == 1:
                 result.append(group[0])
                 continue
+
             # Pick representative: prefer canonical "Family-N" (e.g. GPT-1) over "Family 117M"
             def _specificity(m: LLMProperties) -> int:
                 n = (m.model_name or "").strip().lower()
@@ -813,65 +817,86 @@ Output JSON:"""
                     if field_value is None:
                         continue
                     existing = getattr(representative, field_name)
-                    if existing is None or (isinstance(existing, str) and str(existing).strip() in ("", "null", "none")):
+                    if existing is None or (
+                        isinstance(existing, str) and str(existing).strip() in ("", "null", "none")
+                    ):
                         setattr(representative, field_name, field_value)
             result.append(representative)
 
         return result
-    
+
     def _extract_organization(self, authors: List[str]) -> Optional[str]:
         """
         Extract organization from author list.
-        
+
         Looks for common organization keywords in author affiliations.
         """
         if not authors:
             return None
-        
+
         org_keywords = [
-            "Meta", "Google", "OpenAI", "Anthropic", "Microsoft",
-            "DeepMind", "AI", "Research", "University", "Institute",
-            "Facebook", "Amazon", "IBM", "NVIDIA", "Hugging Face",
-            "Alibaba", "DeepSeek", "Mistral", "Stability"
+            "Meta",
+            "Google",
+            "OpenAI",
+            "Anthropic",
+            "Microsoft",
+            "DeepMind",
+            "AI",
+            "Research",
+            "University",
+            "Institute",
+            "Facebook",
+            "Amazon",
+            "IBM",
+            "NVIDIA",
+            "Hugging Face",
+            "Alibaba",
+            "DeepSeek",
+            "Mistral",
+            "Stability",
         ]
-        
+
         for author in authors:
             for keyword in org_keywords:
                 if keyword.lower() in str(author).lower():
                     return keyword
-        
+
         return None
-    
+
     def validate_extraction(self, result: MultiModelResponse) -> Dict[str, Any]:
         """
         Validate extraction results.
-        
+
         Args:
             result: Extraction result to validate
-            
+
         Returns:
             Validation report with errors and warnings
         """
-        report = {
-            "valid": True,
-            "warnings": [],
-            "errors": []
-        }
-        
+        report = {"valid": True, "warnings": [], "errors": []}
+
         for i, model in enumerate(result.models):
             # Check required fields
             if not model.model_name:
                 report["errors"].append(f"Model {i+1}: Missing model_name (required)")
                 report["valid"] = False
-            
+
             # Check field formats
-            if model.parameters and not any(c in str(model.parameters) for c in ['B', 'M', 'K', 'billion', 'million']):
-                report["warnings"].append(f"Model {i+1}: Unusual parameters format: {model.parameters}")
-            
+            if model.parameters and not any(
+                c in str(model.parameters) for c in ["B", "M", "K", "billion", "million"]
+            ):
+                report["warnings"].append(
+                    f"Model {i+1}: Unusual parameters format: {model.parameters}"
+                )
+
             if model.context_length and not any(c.isdigit() for c in str(model.context_length)):
-                report["warnings"].append(f"Model {i+1}: Unusual context_length format: {model.context_length}")
-            
+                report["warnings"].append(
+                    f"Model {i+1}: Unusual context_length format: {model.context_length}"
+                )
+
             if model.parameters_millions is not None and model.parameters_millions <= 0:
-                report["warnings"].append(f"Model {i+1}: Invalid parameters_millions: {model.parameters_millions}")
-        
+                report["warnings"].append(
+                    f"Model {i+1}: Invalid parameters_millions: {model.parameters_millions}"
+                )
+
         return report
