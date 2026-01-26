@@ -13,12 +13,12 @@ class TestLLMExtractor:
         props = LLMProperties(
             model_name="Test Model",
             parameters="7B",
-            architecture="Transformer"
+            pretraining_architecture="Transformer",
         )
-        
+
         assert props.model_name == "Test Model"
         assert props.parameters == "7B"
-        assert props.architecture == "Transformer"
+        assert props.pretraining_architecture == "Transformer"
     
     def test_multi_model_response(self):
         """Test MultiModelResponse model."""
@@ -37,35 +37,37 @@ class TestLLMExtractor:
     def test_extractor_init(self, mock_openai):
         """Test extractor initialization."""
         extractor = LLMExtractor(api_key="test_key", model="gpt-4o")
-        
-        assert extractor.model == "gpt-4o"
+
+        assert extractor.model_name == "gpt-4o"
         assert extractor.temperature == 0.0
         mock_openai.assert_called_once()
     
-    def test_deduplicate_models(self):
+    @patch('src.llm_extractor.OpenAI')
+    def test_deduplicate_models(self, mock_openai):
         """Test model deduplication."""
         extractor = LLMExtractor(api_key="test_key")
-        
+
         model1 = LLMProperties(
             model_name="Test",
             model_version="1.0",
             parameters="7B",
-            architecture="Transformer"
+            pretraining_architecture="Transformer",
         )
         model2 = LLMProperties(
             model_name="Test",
             model_version="1.0",
             parameters="7B",
-            organization="TestOrg"
+            organization="TestOrg",
         )
-        
+
         deduplicated = extractor._deduplicate_models([model1, model2])
-        
+
         assert len(deduplicated) == 1
-        assert deduplicated[0].architecture == "Transformer"
+        assert deduplicated[0].pretraining_architecture == "Transformer"
         assert deduplicated[0].organization == "TestOrg"
     
-    def test_validate_extraction(self):
+    @patch('src.llm_extractor.OpenAI')
+    def test_validate_extraction(self, mock_openai):
         """Test extraction validation."""
         extractor = LLMExtractor(api_key="test_key")
         
@@ -85,7 +87,8 @@ class TestLLMExtractor:
         assert report["valid"] is True
         assert len(report["errors"]) == 0
     
-    def test_validate_extraction_missing_name(self):
+    @patch('src.llm_extractor.OpenAI')
+    def test_validate_extraction_missing_name(self, mock_openai):
         """Test validation with missing model name."""
         extractor = LLMExtractor(api_key="test_key")
         

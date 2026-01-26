@@ -52,9 +52,11 @@ class TestORKGClient:
         """Test fetching template."""
         mock_instance = Mock()
         mock_template = {"id": "R609825", "label": "LLM Template"}
-        mock_instance.templates.get.return_value = mock_template
+        mock_response = Mock()
+        mock_response.content = mock_template
+        mock_instance.resources.by_id.return_value = mock_response
         mock_orkg.return_value = mock_instance
-        
+
         client = ORKGClient()
         template = client.get_template("R609825")
         assert template == mock_template
@@ -64,9 +66,11 @@ class TestORKGClient:
         """Test fetching comparison."""
         mock_instance = Mock()
         mock_comparison = {"id": "R1364660", "label": "AI Models"}
-        mock_instance.comparisons.get.return_value = mock_comparison
+        mock_response = Mock()
+        mock_response.content = mock_comparison
+        mock_instance.resources.by_id.return_value = mock_response
         mock_orkg.return_value = mock_instance
-        
+
         client = ORKGClient()
         comparison = client.get_comparison("R1364660")
         assert comparison == mock_comparison
@@ -77,11 +81,13 @@ class TestORKGClient:
         mock_instance = Mock()
         mock_papers = [
             {"id": "R1", "title": "Paper 1"},
-            {"id": "R2", "title": "Paper 2"}
+            {"id": "R2", "title": "Paper 2"},
         ]
-        mock_instance.papers.get_list.return_value = mock_papers
+        mock_response = Mock()
+        mock_response.content = mock_papers
+        mock_instance.papers.get.return_value = mock_response
         mock_orkg.return_value = mock_instance
-        
+
         client = ORKGClient()
         papers = client.search_papers("LLM")
         assert len(papers) == 2

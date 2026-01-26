@@ -1,8 +1,8 @@
 """Tests for the extraction pipeline."""
 
 import pytest
-from unittest.mock import Mock, patch, MagicMock
-from pathlib import Path
+from unittest.mock import Mock, patch
+
 from src.pipeline import ExtractionPipeline
 
 
@@ -13,20 +13,19 @@ class TestExtractionPipeline:
     @patch('src.pipeline.LLMExtractor')
     def test_pipeline_init(self, mock_llm, mock_orkg):
         """Test pipeline initialization."""
-        with patch.dict('os.environ', {'OPENAI_API_KEY': 'test_key'}):
+        with patch.dict('os.environ', {'KISSKI_API_KEY': 'test_key'}):
             pipeline = ExtractionPipeline()
-            
+
             assert pipeline.orkg_client is not None
             assert pipeline.paper_fetcher is not None
             assert pipeline.pdf_parser is not None
             assert pipeline.template_mapper is not None
-            assert pipeline.comparison_updater is not None
     
     @patch('src.pipeline.ORKGClient')
     @patch('src.pipeline.LLMExtractor')
     def test_test_connection(self, mock_llm, mock_orkg):
         """Test connection testing."""
-        with patch.dict('os.environ', {'OPENAI_API_KEY': 'test_key'}):
+        with patch.dict('os.environ', {'KISSKI_API_KEY': 'test_key'}):
             pipeline = ExtractionPipeline()
             pipeline.orkg_client.ping = Mock(return_value=True)
             
@@ -39,7 +38,7 @@ class TestExtractionPipeline:
     @patch('src.pipeline.LLMExtractor')
     def test_get_status(self, mock_llm, mock_orkg):
         """Test status retrieval."""
-        with patch.dict('os.environ', {'OPENAI_API_KEY': 'test_key'}):
+        with patch.dict('os.environ', {'KISSKI_API_KEY': 'test_key'}):
             pipeline = ExtractionPipeline()
             pipeline.orkg_client.ping = Mock(return_value=True)
             
