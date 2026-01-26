@@ -1,0 +1,61 @@
+# ORKG Configuration
+orkg:
+  host: sandbox  # Options: sandbox, incubating, production
+  template_id: R609825  # LLM template ID
+  comparison_id: R2147679  # Generative AI Model Landscape comparison ID
+  timeout: 30  # API timeout in seconds
+
+# KISSKI Chat AI API Configuration (SAIA Platform)
+# API is OpenAI-compatible, hosted by GWDG Academic Cloud
+kisski:
+  base_url: https://chat-ai.academiccloud.de/v1  # KISSKI API base URL
+  model: openai-gpt-oss-120b  # Recommended: openai-gpt-oss-120b (best), meta-llama-3.1-8b-instruct (fast), qwen3-32b (reasoning)
+  temperature: 0.0  # 0.0 = deterministic, higher = more creative
+  max_tokens: 4000  # Maximum tokens for response
+  timeout: 60  # API timeout in seconds
+  rate_limit_delay: 2.0  # Delay between requests (seconds) - DO NOT reduce below 2.0
+
+# ArXiv Configuration
+arxiv:
+  max_results: 10  # Maximum papers to fetch per query
+  categories:
+    - cs.CL  # Computation and Language
+    - cs.AI  # Artificial Intelligence
+    - cs.LG  # Machine Learning
+  download_dir: data/papers
+
+# Extraction Configuration
+extraction:
+  fields:
+    - model_name
+    - model_version
+    - parameters
+    - architecture
+    - training_data
+    - training_compute
+    - context_length
+    - performance_metrics
+    - release_date
+    - organization
+    - license
+    - model_type
+  
+  # Chunk size for processing long papers
+  max_chunk_size: 8000
+  
+  # Enable extraction of multiple models from single paper
+  multi_model_extraction: true
+
+# Logging Configuration
+logging:
+  level: INFO  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: data/logs/pipeline.log
+  console: true
+
+# Pipeline Configuration
+pipeline:
+  retry_attempts: 3
+  retry_delay: 5  # seconds
+  save_intermediate: true  # Save extracted data before ORKG upload
+
