@@ -6,7 +6,8 @@ interaction with the ORKG API, including template and comparison operations.
 """
 
 import logging
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
+
 from orkg import ORKG, Hosts
 
 logger = logging.getLogger(__name__)
@@ -332,7 +333,8 @@ class ORKGClient:
                     ]
 
                 logger.info(
-                    f"Successfully created paper: {paper_id} with {len(contribution_ids)} contributions"
+                    f"Successfully created paper: {paper_id} "
+                    f"with {len(contribution_ids)} contributions"
                 )
                 return {
                     "paper_id": paper_id,
@@ -455,7 +457,8 @@ class ORKGClient:
         """
         try:
             logger.info(
-                f"Adding contribution {contribution_data.get('label')} to paper {paper_id} using append strategy"
+                f"Adding contribution {contribution_data.get('label')} to paper "
+                f"{paper_id} using append strategy"
             )
 
             # Prepare the payload for the 'Old Endpoint' structure which supports merge_if_exists
@@ -551,7 +554,7 @@ class ORKGClient:
             if response.succeeded:
                 # ... (rest of success handling) ...
                 result_content = response.content
-                # Decode if needed (reuse the fix from get_paper logic if applicable, though usually add returns dict)
+                # Decode if needed (add returns dict; get_paper logic similar)
                 if isinstance(result_content, bytes):
                     import json
 
@@ -566,7 +569,7 @@ class ORKGClient:
                     updated_paper = self.get_paper(result_content.get("id"))
                     if updated_paper and "contributions" in updated_paper:
                         for c in updated_paper["contributions"]:
-                            # The old endpoint might return contributions as list of dicts with 'label'
+                            # Old endpoint may return contributions as list of dicts w/ 'label'
                             c_label = c.get("label")
                             if c_label == new_contrib_label:
                                 return c.get("id")
@@ -672,11 +675,12 @@ class ORKGClient:
         """
         try:
             logger.info(
-                f"Updating comparison {comparison_id} with {len(new_contribution_ids)} contributions"
+                f"Updating comparison {comparison_id} "
+                f"with {len(new_contribution_ids)} contributions"
             )
 
-            # ORKG comparisons are updated by creating a new version of the comparison
-            # The correct argument name in some versions is 'comparison_id' or it expects it as part of the payload
+            # ORKG comparisons are updated by creating a new version of the comparison.
+            # Argument may be 'comparison_id' or part of the payload depending on client.
             response = self.orkg.comparisons.create(
                 comparison_id=comparison_id,
                 title=title,

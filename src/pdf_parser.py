@@ -7,9 +7,10 @@ This module handles extracting and preprocessing text from PDF files.
 import logging
 import re
 from pathlib import Path
-from typing import Optional, Dict, Any
-import PyPDF2
+from typing import Any, Dict, Optional
+
 import pdfplumber
+import PyPDF2
 
 logger = logging.getLogger(__name__)
 
@@ -113,7 +114,7 @@ class PDFParser:
 
         # Fallback to alternative method if first fails
         if text is None or len(text.strip()) < 100:
-            logger.warning(f"Primary method failed or extracted too little text, trying fallback")
+            logger.warning("Primary method failed or extracted too little text, trying fallback")
             if self.method == "pypdf2":
                 text = self.extract_text_pdfplumber(pdf_path)
             else:

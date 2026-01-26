@@ -7,12 +7,13 @@ using the KISSKI Chat AI API (SAIA platform).
 The KISSKI API is OpenAI-compatible and hosted by GWDG Academic Cloud.
 """
 
-import logging
 import json
+import logging
 import time
-from typing import List, Optional, Dict, Any
-from pydantic import BaseModel
+from typing import Any, Dict, List, Optional
+
 from openai import OpenAI
+from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +144,7 @@ class LLMExtractor:
         # Inject metadata if available
         meta_str = ""
         if paper_metadata:
-            meta_str = f"PAPER METADATA:\nTitle: {paper_metadata.get('title', 'Unknown')}\nAuthored: {paper_metadata.get('year', '')}-{paper_metadata.get('month', '')}\nAuthors: {paper_metadata.get('authors', [])}\n"
+            meta_str = f"PAPER METADATA:\nTitle: {paper_metadata.get('title', 'Unknown')}\nAuthored: {paper_metadata.get('year', '')}-{paper_metadata.get('month', '')}\nAuthors: {paper_metadata.get('authors', [])}\n"  # noqa: E501
 
         # Use up to 65,000 chars (matching Grete)
         paper_snippet = paper_text[:65000] if len(paper_text) > 65000 else paper_text
@@ -154,13 +155,13 @@ class LLMExtractor:
 
         # Few-shot examples (matching Grete approach)
         # Example 1: BERT (with all ORKG R609825 required fields)
-        example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus."
+        example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus."  # noqa: E501
         example1_output = {
             "models": [
                 {
                     "model_name": "BERT",
                     "model_family": "BERT",
-                    "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+                    "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",  # noqa: E501
                     "organization": "Google",
                     "parameters": "340M",
                     "parameters_millions": 340,
@@ -171,14 +172,14 @@ class LLMExtractor:
                     "optimizer": "Adam",
                     "innovation": "Bidirectional training of Transformer encoder",
                     "research_problem": "Language Understanding",
-                    "application": "Natural language understanding, question answering, text classification",
+                    "application": "Natural language understanding, question answering, text classification",  # noqa: E501
                     "license": "Apache 2.0",
                 }
             ]
         }
 
         # Example 2: GPT-2 (with all ORKG R609825 required fields)
-        example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on WebText dataset."
+        example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on WebText dataset."  # noqa: E501
         example2_output = {
             "models": [
                 {
@@ -194,20 +195,20 @@ class LLMExtractor:
                     "pretraining_corpus": "WebText",
                     "innovation": "Zero-shot task transfer via large-scale unsupervised learning",
                     "research_problem": "Large Language Models",
-                    "application": "Text generation, language modeling, zero-shot task transfer",
+                    "application": "Text generation, language modeling, zero-shot task transfer",  # noqa: E501
                     "license": "Modified MIT License",
                 }
             ]
         }
 
         # Example 3: GPT-1 (with all ORKG R609825 required fields)
-        example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset."
+        example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset."  # noqa: E501
         example3_output = {
             "models": [
                 {
                     "model_name": "GPT-1",
                     "model_family": "GPT",
-                    "paper_title": "Improving Language Understanding by Generative Pre-Training",
+                    "paper_title": "Improving Language Understanding by Generative Pre-Training",  # noqa: E501
                     "organization": "OpenAI",
                     "parameters": "117M",
                     "parameters_millions": 117,
@@ -220,13 +221,13 @@ class LLMExtractor:
                     "innovation": "Generative pre-training followed by discriminative fine-tuning",
                     "license": "closed source",
                     "research_problem": "Language Understanding",
-                    "application": "Natural language understanding, text classification, question answering",
+                    "application": "Natural language understanding, text classification, question answering",  # noqa: E501
                 }
             ]
         }
 
-        # Example 4: Multiple model versions (Llama 3.1 with different sizes - all ORKG R609825 required fields)
-        example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. Released under Llama 3.1 Community License."
+        # Example 4: Multiple model versions (Llama 3.1 - all ORKG R609825 required fields)
+        example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. Released under Llama 3.1 Community License."  # noqa: E501
         example4_output = {
             "models": [
                 {
@@ -285,31 +286,31 @@ class LLMExtractor:
         messages = [
             {
                 "role": "system",
-                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation/contribution\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture (e.g. Encoder, Decoder, Transformer)\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer (e.g. Adam, AdamW)\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Use YYYY-MM-DD when known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n6. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n\nReturn JSON only.",
+                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation/contribution\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture (e.g. Encoder, Decoder, Transformer)\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer (e.g. Adam, AdamW)\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Use YYYY-MM-DD when known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n6. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n\nReturn JSON only.",  # noqa: E501
             },
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}",  # noqa: E501
             },
             {"role": "assistant", "content": json.dumps(example1_output)},
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}",  # noqa: E501
             },
             {"role": "assistant", "content": json.dumps(example2_output)},
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}",  # noqa: E501
             },
             {"role": "assistant", "content": json.dumps(example3_output)},
             {
                 "role": "user",
-                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}",  # noqa: E501
             },
             {"role": "assistant", "content": json.dumps(example4_output)},
             {
                 "role": "user",
-                "content": f"""Extract ALL model versions, variants, and sizes introduced in this paper according to ORKG template R609825:
+                "content": f"""Extract ALL model versions, variants, and sizes (ORKG R609825):
 
 {paper_snippet}
 
@@ -322,24 +323,24 @@ REQUIRED FIELDS (must extract for each model):
 6. pretraining_corpus (required): Training dataset/corpus mentioned
 7. research_problem (required): Research problem addressed
 8. parameters (required): Number of parameters as text (e.g., "7B", "175B", "117M")
-9. parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B, 117 for 117M)
+9. parameters_millions (required): Parameters in millions (e.g., 7000 for 7B, 117 for 117M)
 10. application (required): Use cases/applications mentioned
-11. license (required): License type mentioned (e.g., "open source", "closed source", "Apache 2.0")
+11. license (required): License (e.g., "open source", "closed source", "Apache 2.0")
 
 CRITICAL INSTRUCTIONS:
-- Extract ALL model versions/variants described in the paper (e.g., if paper mentions "Llama 3.1 8B", "Llama 3.1 70B", "Llama 3.1 405B", create 3 separate entries)
+- Extract ALL model versions/variants (e.g. "Llama 3.1 8B/70B/405B" -> 3 entries)
 - Extract ALL model sizes mentioned (different parameter counts = different entries)
 - Extract ALL model versions mentioned (3.1, 3.2, 3.3 = separate entries)
 - Extract ALL architectural variants (Base, Large, XL, etc. = separate entries)
-- Each distinct model size/version/variant should be a SEPARATE entry in the models array
-- Extract models THIS paper introduces (the main contributions)
+- Each distinct model size/version/variant = SEPARATE entry in models array
+- Extract models THIS paper introduces (main contributions)
 - NOT models mentioned as related work or comparisons
-- The model name should include version/size if mentioned (e.g., "Llama 3.1 8B" not just "Llama")
-- Model name is NOT the architecture (e.g., "GPT" not "Transformer")
-- If the paper describes multiple models, set "paper_describes_multiple_models": true
-- For parameters_millions: Convert "7B" to 7000, "117M" to 117, "1.5B" to 1500, etc.
-- Extract ALL required fields. If not mentioned in paper, use null, but try to infer from context when possible.
-- Always extract pretraining_architecture (Encoder/Decoder/Transformer), pretraining_task, finetuning_task, optimizer when the paper states them. Use null only if not stated.
+- Model name include version/size if mentioned (e.g. "Llama 3.1 8B" not just "Llama")
+- Model name is NOT the architecture (e.g. "GPT" not "Transformer")
+- If multiple models, set "paper_describes_multiple_models": true
+- parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500
+- Extract ALL required fields. Use null if not in paper; infer when possible.
+- Always extract pretraining_architecture, pretraining_task, finetuning_task, optimizer when stated.
 
 Output JSON:""",
             },
@@ -630,7 +631,8 @@ Output JSON:""",
                     logger.error(f"JSON repair also failed: {repair_error}")
                     logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
                     logger.error(
-                        f"Cleaned response (first 500 chars): {response_text[:500] if response_text else 'EMPTY'}"
+                        "Cleaned response (first 500 chars): "
+                        f"{response_text[:500] if response_text else 'EMPTY'}"
                     )
                     return None
 

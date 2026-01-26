@@ -1,9 +1,10 @@
 import logging
 from datetime import datetime
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, Optional
+
+from src.llm_extractor import LLMProperties, MultiModelResponse
 from src.orkg_client import ORKGClient
 from src.template_mapper import TemplateMapper
-from src.llm_extractor import MultiModelResponse, LLMProperties
 
 logger = logging.getLogger(__name__)
 
@@ -100,22 +101,23 @@ class ORKGPaperManager:
             #
             #         # Fetch its contributions to check for duplicates
             #         paper_data = self.client.get_paper(paper_id)
-            #         existing_contribs = paper_data.get('contributions', []) if paper_data else []
-            #         existing_labels = {c.get('label', '').strip().lower() for c in existing_contribs if isinstance(c, dict)}
+            #         existing_contribs = paper_data.get('contributions', []) if paper_data else []  # noqa: E501
+            #         existing_labels = {c.get('label', '').strip().lower() for c in existing_contribs if isinstance(c, dict)}  # noqa: E501
             #
-            #         contribution_ids = [c.get('id') for c in existing_contribs if isinstance(c, dict)]
+            #         contribution_ids = [c.get('id') for c in existing_contribs if isinstance(c, dict)]  # noqa: E501
             #
             #         # Add new contributions that don't exist yet
             #         for contrib_data in mapped_data["contributions"]:
             #             label = contrib_data.get("label", "").strip()
             #             if label.lower() not in existing_labels:
-            #                 logger.info(f"Adding new contribution '{label}' to existing paper {paper_id}")
-            #                 new_cid = self.client.add_contribution_to_paper(paper_id, contrib_data)
+            #                 logger.info(f"Adding contribution '{label}' to paper {paper_id}")
+            #                 new_cid = self.client.add_contribution_to_paper(
+            #                     paper_id, contrib_data)
             #                 if new_cid:
             #                     contribution_ids.append(new_cid)
             #                     existing_labels.add(label.lower())
             #             else:
-            #                 logger.info(f"Contribution '{label}' already exists on paper {paper_id}. Skipping.")
+            #                 logger.info(f"Contribution '{label}' exists, skipping")
             #         break
 
             # Always create new paper (for testing)
@@ -125,7 +127,8 @@ class ORKGPaperManager:
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 unique_paper_title = f"{paper_title} [TEST-{timestamp}]"
                 logger.info(
-                    "TESTING MODE: Paper search disabled. Creating new paper in ORKG (duplicates allowed)..."
+                    "TESTING MODE: Paper search disabled. Creating new paper "
+                    "in ORKG (duplicates allowed)..."
                 )
                 logger.info(f"Using unique title: {unique_paper_title}")
                 result = self.client.create_paper_with_contributions(

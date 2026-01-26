@@ -5,11 +5,10 @@ This module handles fetching research papers from ArXiv and downloading PDFs.
 """
 
 import logging
-import os
 import re
-from pathlib import Path
-from typing import Dict, List, Optional, Any
 from datetime import datetime as _datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 import arxiv
 import requests

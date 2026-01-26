@@ -5,7 +5,8 @@ This module maps extracted LLM data to ORKG template format.
 """
 
 import logging
-from typing import Dict, List, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from src.llm_extractor import LLMProperties, MultiModelResponse
 
 logger = logging.getLogger(__name__)
@@ -44,7 +45,7 @@ class TemplateMapper:
             "optimizer": "P105017",  # optimizer
             "tokenizer": "P43065",  # tokenizer
             "parameters": "P103002",  # number of parameters (required, text)
-            "parameters_millions": "P110076",  # maximum number of parameters in million (required, integer)
+            "parameters_millions": "P110076",  # max params in million (required, int)
             # "context_length": "P163009",  # DISABLED: not found in sandbox
             # "supported_language": "P163010",  # DISABLED: not found in sandbox
             "hardware_used": "P119138",  # hardware used
@@ -271,10 +272,10 @@ class TemplateMapper:
         # Check property structure
         for prop in contribution.get("properties", []):
             if "property" not in prop:
-                report["errors"].append(f"Property missing 'property' field")
+                report["errors"].append("Property missing 'property' field")
                 report["valid"] = False
             if "value" not in prop:
-                report["errors"].append(f"Property missing 'value' field")
+                report["errors"].append("Property missing 'value' field")
                 report["valid"] = False
 
         return report

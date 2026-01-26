@@ -5,7 +5,8 @@ This module handles updating ORKG comparisons with new model data.
 """
 
 import logging
-from typing import Dict, List, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from src.orkg_client import ORKGClient
 from src.template_mapper import TemplateMapper
 
@@ -346,7 +347,6 @@ class ComparisonUpdater:
 
         # Extract paper metadata
         paper_title = paper_metadata.get("title", "Unnamed Paper")
-        arxiv_id = paper_metadata.get("arxiv_id", "")
 
         # Check if paper already exists - skip if it does
         existing_papers = self.orkg_client.search_papers(paper_title, size=5)
@@ -354,7 +354,8 @@ class ComparisonUpdater:
             if paper.get("title", "").strip().lower() == paper_title.strip().lower():
                 existing_paper_id = paper.get("id")
                 logger.info(
-                    f"Paper already exists: {existing_paper_id} - SKIPPING (will only create new papers)"
+                    f"Paper already exists: {existing_paper_id} - SKIPPING "
+                    "(will only create new papers)"
                 )
 
                 # Skip existing papers - return early
@@ -363,7 +364,10 @@ class ComparisonUpdater:
                     "reason": "Paper already exists",
                     "paper_id": existing_paper_id,
                     "paper_url": f"https://sandbox.orkg.org/resource/{existing_paper_id}",
-                    "message": "Paper already exists in ORKG. Use a different paper or modify the title to test paper creation.",
+                    "message": (
+                        "Paper already exists in ORKG. Use a different paper or "
+                        "modify the title to test paper creation."
+                    ),
                 }
 
         paper_authors = paper_metadata.get("authors", [])
@@ -387,7 +391,8 @@ class ComparisonUpdater:
         MAX_CONTRIBUTIONS_PER_PAPER = 15
         if len(contributions_for_paper) > MAX_CONTRIBUTIONS_PER_PAPER:
             logger.warning(
-                f"Too many contributions ({len(contributions_for_paper)}), limiting to {MAX_CONTRIBUTIONS_PER_PAPER}"
+                f"Too many contributions ({len(contributions_for_paper)}), "
+                f"limiting to {MAX_CONTRIBUTIONS_PER_PAPER}"
             )
             contributions_for_paper = contributions_for_paper[:MAX_CONTRIBUTIONS_PER_PAPER]
 
@@ -420,9 +425,8 @@ class ComparisonUpdater:
 
         logger.info(f"Created paper {paper_id} with {len(contribution_ids)} contributions")
 
-        # Note: Comparison update is skipped because ORKG Python client doesn't support updating comparisons
-        # Contributions are successfully created and linked to the paper
-        # They can be manually added to comparisons via the ORKG web interface
+        # Note: Comparison update skipped (ORKG Python client doesn't support it).
+        # Contributions are created and linked. Add to comparisons via ORKG UI.
 
         return {
             "status": "success",
@@ -436,7 +440,10 @@ class ComparisonUpdater:
             ],
             "added": len(contribution_ids),
             "failed": 0,
-            "note": "Paper and contributions created successfully. Comparison update skipped (not supported by ORKG Python client).",
+            "note": (
+                "Paper and contributions created successfully. Comparison update "
+                "skipped (not supported by ORKG Python client)."
+            ),
         }
 
     def get_comparison_summary(self) -> Dict[str, Any]:

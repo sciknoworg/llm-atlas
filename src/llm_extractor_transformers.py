@@ -4,13 +4,15 @@ LLM Extractor using Hugging Face Transformers
 For use on GWDG Grete GPU cluster. Runs models locally on GPU without API limits.
 """
 
-import logging
 import json
-import torch
+import logging
 import os
-from typing import Optional, Dict, Any, List
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from src.llm_extractor import LLMProperties, MultiModelResponse
+from typing import Any, Dict, List, Optional
+
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from src.llm_extractor import MultiModelResponse
 
 logger = logging.getLogger(__name__)
 
@@ -108,8 +110,12 @@ class LLMExtractorTransformers:
         # Inject metadata if available
         meta_str = ""
         if paper_metadata:
-            meta_str = f"PAPER METADATA:\nTitle: {paper_metadata.get('title', 'Unknown')}\nAuthored: {paper_metadata.get('year', '')}-{paper_metadata.get('month', '')}\nAuthors: {paper_metadata.get('authors', [])}\n"
-        schema = MultiModelResponse.model_json_schema()
+            meta_str = (
+                f"PAPER METADATA:\nTitle: {paper_metadata.get('title', 'Unknown')}\n"
+                f"Authored: {paper_metadata.get('year', '')}-"
+                f"{paper_metadata.get('month', '')}\n"
+                f"Authors: {paper_metadata.get('authors', [])}\n"
+            )
 
         # Instruction-tuned models (Llama 3.1, Qwen, etc.) use chat template format
         if "instruct" in self.model_name.lower() or "chat" in self.model_name.lower():
@@ -126,16 +132,16 @@ class LLMExtractorTransformers:
                     paper_snippet = meta_str + "\n\nPAPER CONTENT:\n" + paper_snippet
 
                 # FEW-SHOT LEARNING WITH COMPREHENSIVE EXAMPLES
-                # We provide full examples to teach the model to extract ALL fields (innovation, tasks, architecture, etc.)
+                # Full examples to teach model to extract ALL fields.
 
                 # Example 1: BERT
-                example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer."
+                example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer."  # noqa: E501
                 example1_output = {
                     "models": [
                         {
                             "model_name": "BERT",
                             "model_family": "BERT",
-                            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+                            "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",  # noqa: E501
                             "organization": "Google",
                             "parameters": "340M",
                             "date_created": "2018-10",
@@ -149,7 +155,7 @@ class LLMExtractorTransformers:
                 }
 
                 # Example 2: GPT-2
-                example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective."
+                example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective."  # noqa: E501
                 # Example 2: GPT-2
                 example2_output = {
                     "models": [
@@ -162,21 +168,21 @@ class LLMExtractorTransformers:
                             "date_created": "2019-02",
                             "pretraining_architecture": "Decoder",
                             "pretraining_task": "Causal language modeling",
-                            "innovation": "Zero-shot task transfer via large-scale unsupervised learning",
+                            "innovation": "Zero-shot task transfer via large-scale unsupervised learning",  # noqa: E501
                             "introduction_date": "2019",
                         }
                     ]
                 }
 
                 # Example 3: GPT-1 (Targeting the user's specific case)
-                example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer."
+                example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer."  # noqa: E501
                 # Example 3: GPT-1
                 example3_output = {
                     "models": [
                         {
                             "model_name": "GPT-1",
                             "model_family": "GPT",
-                            "paper_title": "Improving Language Understanding by Generative Pre-Training",
+                            "paper_title": "Improving Language Understanding by Generative Pre-Training",  # noqa: E501
                             "organization": "OpenAI",
                             "parameters": "117M",
                             "date_created": "2018-06",
@@ -184,7 +190,7 @@ class LLMExtractorTransformers:
                             "pretraining_task": "Causal language modeling",
                             "finetuning_task": "Supervised discriminative fine-tuning",
                             "optimizer": "Adam",
-                            "innovation": "Generative pre-training followed by discriminative fine-tuning",
+                            "innovation": "Generative pre-training followed by discriminative fine-tuning",  # noqa: E501
                             "license": "closed source",
                             "research_problem": "Language Understanding",
                         }
@@ -192,7 +198,7 @@ class LLMExtractorTransformers:
                 }
 
                 # Example 4: Multiple model versions (Llama 3.1 with different sizes)
-                example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task."
+                example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task."  # noqa: E501
                 example4_output = {
                     "models": [
                         {
@@ -238,45 +244,77 @@ class LLMExtractorTransformers:
                 messages = [
                     {
                         "role": "system",
-                        "content": "You are an expert AI researcher. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper. CRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries. If a paper describes multiple model sizes (e.g., 8B, 70B, 405B), versions (e.g., 3.1, 3.2, 3.3), or variants (e.g., Base, Large, XL), create a separate entry for EACH one.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant.\n4. DATES: Priority 1: Metadata. Priority 2: Header/footer dates. Priority 3: Latest citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\nFields: model_name, model_family, paper_title, organization, parameters, date_created, pretraining_architecture, pretraining_task, finetuning_task, optimizer, innovation, license, hardware_used.\nReturn JSON only.",
+                        "content": (
+                            "You are an expert AI researcher. Extract DETAILED information about "
+                            "ALL MODEL VERSIONS/VARIANTS introduced in the paper. CRITICAL RULES:\n"
+                            "1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign "
+                            "it to 'paper_title'.\n"
+                            "2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as "
+                            "SEPARATE entries. If a paper describes multiple model sizes (e.g., "
+                            "8B, 70B, 405B), versions (e.g., 3.1, 3.2, 3.3), or variants (e.g., "
+                            "Base, Large, XL), create a separate entry for EACH one.\n"
+                            "3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or "
+                            "'B'. Extract parameter sizes for each variant.\n"
+                            "4. DATES: Priority 1: Metadata. Priority 2: Header/footer dates. "
+                            "Priority 3: Latest citation year.\n"
+                            "5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if "
+                            "the paper describes multiple distinct models, versions, or size "
+                            "variants.\n"
+                            "Fields: model_name, model_family, paper_title, organization, "
+                            "parameters, date_created, pretraining_architecture, pretraining_task, "
+                            "finetuning_task, optimizer, innovation, license, hardware_used.\n"
+                            "Return JSON only."
+                        ),
                     },
                     {
                         "role": "user",
-                        "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}",
+                        "content": (
+                            f"Extract ALL model versions/variants introduced in this paper:\n\n"
+                            f"{example1_input}"
+                        ),
                     },
                     {"role": "assistant", "content": json.dumps(example1_output)},
                     {
                         "role": "user",
-                        "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}",
+                        "content": (
+                            f"Extract ALL model versions/variants introduced in this paper:\n\n"
+                            f"{example2_input}"
+                        ),
                     },
                     {"role": "assistant", "content": json.dumps(example2_output)},
                     {
                         "role": "user",
-                        "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}",
+                        "content": (
+                            f"Extract ALL model versions/variants introduced in this paper:\n\n"
+                            f"{example3_input}"
+                        ),
                     },
                     {"role": "assistant", "content": json.dumps(example3_output)},
                     {
                         "role": "user",
-                        "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}",
+                        "content": (
+                            f"Extract ALL model versions/variants introduced in this paper:\n\n"
+                            f"{example4_input}"
+                        ),
                     },
                     {"role": "assistant", "content": json.dumps(example4_output)},
                     {
                         "role": "user",
-                        "content": f"""Extract ALL model versions, variants, and sizes introduced in this paper:
+                        "content": f"""Extract ALL model versions, variants, and sizes:
 
 {paper_snippet}
 
 CRITICAL INSTRUCTIONS:
-- Extract ALL model versions/variants described in the paper (e.g., if paper mentions "Llama 3.1 8B", "Llama 3.1 70B", "Llama 3.1 405B", create 3 separate entries)
-- Extract ALL model sizes mentioned (different parameter counts = different entries)
-- Extract ALL model versions mentioned (3.1, 3.2, 3.3 = separate entries)
-- Extract ALL architectural variants (Base, Large, XL, etc. = separate entries)
-- Each distinct model size/version/variant should be a SEPARATE entry in the models array
-- Extract models THIS paper introduces (the main contributions)
-- NOT models mentioned as related work or comparisons
-- The model name should include version/size if mentioned (e.g., "Llama 3.1 8B" not just "Llama")
-- Model name is NOT the architecture (e.g., "GPT" not "Transformer")
-- If the paper describes multiple models, set "paper_describes_multiple_models": true
+- Extract ALL model versions/variants (e.g. Llama 3.1 8B/70B/405B -> 3 entries)
+- Extract ALL model sizes (different param counts = different entries)
+- Extract ALL versions (3.1, 3.2, 3.3 = separate entries)
+- Extract ALL architectural variants (Base, Large, XL = separate entries)
+- Each distinct size/version/variant = SEPARATE entry in models array
+- Extract models THIS paper introduces (main contributions)
+- NOT related work or comparisons
+- Model name include version/size if mentioned (e.g. "Llama 3.1 8B")
+- Model name is NOT architecture (e.g. "GPT" not "Transformer")
+- If multiple models, set "paper_describes_multiple_models": true
 
 Output JSON:""",
                     },
@@ -315,17 +353,20 @@ Output JSON:""",
                     "paper_describes_multiple_models": False,
                 }
                 prompt = f"""<|system|>
-You are an expert at extracting structured information from research papers about Large Language Models. You MUST extract information ONLY from the provided paper text. Do NOT use information from your training data. Return valid JSON with no comments or placeholders.
+You are an expert at extracting structured information from research papers about Large Language
+Models. You MUST extract information ONLY from the provided paper text. Do NOT use information
+from your training data. Return valid JSON with no comments or placeholders.
 <|end|>
 <|user|>
 Read this research paper excerpt CAREFULLY and extract ALL LLM model versions/variants/sizes.
 
-CRITICAL: Extract information ONLY from the paper text below. Do NOT use your training data or memory. Do NOT add models that are not mentioned in the paper.
+CRITICAL: Extract information ONLY from the paper text below. Do NOT use your training data or
+memory. Do NOT add models that are not mentioned in the paper.
 
 IMPORTANT: Extract ALL model versions, variants, and sizes as SEPARATE entries:
-- If paper mentions multiple sizes (8B, 70B, 405B) → create separate entry for each
-- If paper mentions multiple versions (3.1, 3.2, 3.3) → create separate entry for each
-- If paper mentions multiple variants (Base, Large, XL) → create separate entry for each
+- If paper mentions multiple sizes (8B, 70B, 405B) -> create separate entry for each
+- If paper mentions multiple versions (3.1, 3.2, 3.3) -> create separate entry for each
+- If paper mentions multiple variants (Base, Large, XL) -> create separate entry for each
 - Each distinct model size/version/variant = separate entry in models array
 
 Return JSON matching this structure (replace placeholder values with actual data from the paper):
@@ -336,29 +377,29 @@ Paper excerpt:
 {paper_snippet}
 
 REQUIRED FIELDS TO EXTRACT (from the paper text only):
-- model_name: The exact model name with version/size if mentioned (e.g., "Llama 3.1 8B", "GPT-2", "BERT-Base")
-- model_family: The model family/line (e.g., "GPT", "BERT", "LLaMA")
-- organization: The organization/company mentioned in the paper (e.g., "OpenAI", "Google", "Meta")
-- date_created: Publication date or year from the paper (format: YYYY-MM-DD or YYYY)
-- parameters: Number of parameters mentioned (e.g., "8B", "70B", "117M")
-- parameters_millions: Parameters in millions as integer (e.g., 8000 for 8B, 117 for 117M)
-- pretraining_architecture: Architecture type (e.g., "Decoder", "Encoder", "Encoder-Decoder")
-- pretraining_task: Pre-training task (e.g., "Causal language modeling", "Masked language modeling")
-- finetuning_task: Fine-tuning task mentioned (e.g., "Supervised discriminative fine-tuning")
-- optimizer: Optimizer mentioned (e.g., "Adam optimizer", "Adam")
-- license: License mentioned (e.g., "closed source", "open source", "non-commercial")
-- research_problem: Research problem addressed (e.g., "Large Language Models", "Natural language understanding")
-- architecture: General architecture (e.g., "Transformer")
+- model_name: Exact model name with version/size if mentioned (e.g. "Llama 3.1 8B", "GPT-2")
+- model_family: Model family/line (e.g. "GPT", "BERT", "LLaMA")
+- organization: Organization/company (e.g. "OpenAI", "Google", "Meta")
+- date_created: Publication date or year (format: YYYY-MM-DD or YYYY)
+- parameters: Number of parameters (e.g. "8B", "70B", "117M")
+- parameters_millions: Params in millions (e.g. 8000 for 8B, 117 for 117M)
+- pretraining_architecture: Encoder/Decoder/Encoder-Decoder
+- pretraining_task: e.g. Causal LM, Masked LM, Next-token prediction
+- finetuning_task: e.g. Supervised discriminative fine-tuning
+- optimizer: e.g. Adam, AdamW
+- license: e.g. closed source, open source, Apache 2.0
+- research_problem: e.g. Large Language Models, NLU
+- architecture: e.g. Transformer
 - innovation: Key innovation or contribution described
-- hardware_used: Hardware mentioned (e.g., "GPU", "TPU", or null if not mentioned)
+- hardware_used: Hardware (e.g. "GPU", "TPU", or null if not mentioned)
 
 CRITICAL RULES:
 1. Extract ONLY from the paper text - do NOT use your training data
 2. Extract ALL model versions/variants/sizes as SEPARATE entries
 3. If a field is not mentioned in the paper, set it to null
-4. Do NOT add models that are not in the paper (e.g., do NOT add LLaMA if the paper is about GPT)
-5. If the paper describes multiple models/versions/sizes, create separate entry for EACH one
-6. Set "paper_describes_multiple_models" to true if you extract 2+ models/versions/variants
+4. Do NOT add models not in the paper (e.g. no LLaMA if paper is about GPT)
+5. Multiple models/versions/sizes -> create separate entry for EACH
+6. Set "paper_describes_multiple_models" true if you extract 2+ models/versions/variants
 7. Return ONLY valid JSON - no comments, no placeholders
 8. Start with {{ and end with }}
 
@@ -375,7 +416,8 @@ Extract and return valid JSON now:
 Paper text (full paper):
 {paper_text}
 
-Extract model information in JSON format with fields: model_name, model_family, organization, parameters, license, date_created, architecture.
+Extract model information in JSON format with fields: model_name, model_family, organization,
+parameters, license, date_created, architecture.
 
 JSON:
 """
@@ -577,7 +619,8 @@ JSON:
                     logger.error(f"Response length: {len(original_response)}")
                     logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
                     logger.error(
-                        f"Cleaned response (first 500 chars): {response_text[:500] if response_text else 'EMPTY'}"
+                        "Cleaned response (first 500 chars): "
+                        f"{response_text[:500] if response_text else 'EMPTY'}"
                     )
                     return None
 
@@ -590,7 +633,8 @@ JSON:
             logger.error(f"Response length: {len(original_response)}")
             logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
             logger.error(
-                f"Cleaned response (first 500 chars): {response_text[:500] if response_text else 'EMPTY'}"
+                "Cleaned response (first 500 chars): "
+                f"{response_text[:500] if response_text else 'EMPTY'}"
             )
             return None
 
@@ -763,13 +807,15 @@ JSON:
                     )
                     logger.error(f"Invalid token IDs: {invalid_tokens[:10]}")
                     raise ValueError(
-                        f"Invalid token IDs detected: tokens {invalid_tokens[:5]} are >= vocab size {model_vocab_size}"
+                        f"Invalid token IDs detected: tokens {invalid_tokens[:5]} "
+                        f"are >= vocab size {model_vocab_size}"
                     )
 
             # Log actual model being used
             actual_model_size = getattr(self.model.config, "hidden_size", None)
             logger.info(
-                f"Using model: {self.model_name}, hidden_size: {actual_model_size}, vocab_size: {model_vocab_size}"
+                f"Using model: {self.model_name}, hidden_size: {actual_model_size}, "
+                f"vocab_size: {model_vocab_size}"
             )
 
             _debug_log(
@@ -839,7 +885,8 @@ JSON:
                     and pad_token_id >= model_vocab_size
                 ):
                     logger.warning(
-                        f"pad_token_id {pad_token_id} >= vocab_size {model_vocab_size}, using eos_token_id instead"
+                        f"pad_token_id {pad_token_id} >= vocab_size {model_vocab_size}, "
+                        "using eos_token_id instead"
                     )
                     pad_token_id = (
                         self.tokenizer.eos_token_id
@@ -856,7 +903,8 @@ JSON:
                     and eos_token_id >= model_vocab_size
                 ):
                     logger.warning(
-                        f"eos_token_id {eos_token_id} >= vocab_size {model_vocab_size}, using 0 instead"
+                        f"eos_token_id {eos_token_id} >= vocab_size {model_vocab_size}, "
+                        "using 0 instead"
                     )
                     eos_token_id = 0
 
@@ -879,7 +927,8 @@ JSON:
                     bos_token_id = self.tokenizer.bos_token_id
                     if model_vocab_size and bos_token_id >= model_vocab_size:
                         logger.warning(
-                            f"bos_token_id {bos_token_id} >= vocab_size {model_vocab_size}, setting to None"
+                            f"bos_token_id {bos_token_id} >= vocab_size {model_vocab_size}, "
+                            "setting to None"
                         )
                         bos_token_id = None
 
@@ -905,7 +954,6 @@ JSON:
                 # Greedy decoding was too deterministic and produced malformed JSON
                 # Sampling allows the model more flexibility to generate valid JSON
                 outputs = None
-                generation_successful = False
 
                 # Attempt: Low-temperature sampling (better for structured output)
                 try:
@@ -913,11 +961,11 @@ JSON:
                     torch.cuda.empty_cache()  # Clear cache before generation
                     outputs = self.model.generate(
                         **inputs,
-                        max_new_tokens=actual_max_tokens,  # Use full allowance for detailed extraction
-                        temperature=0.1,  # Very low temp for deterministic structured output
-                        do_sample=True,  # Enable sampling
-                        top_p=0.95,  # Slightly higher top_p for better coherence
-                        repetition_penalty=1.1,  # Lower penalty - avoid breaking JSON structure
+                        max_new_tokens=actual_max_tokens,
+                        temperature=0.1,
+                        do_sample=True,
+                        top_p=0.95,
+                        repetition_penalty=1.1,
                         pad_token_id=pad_token_id,
                         eos_token_id=eos_token_id,
                         bos_token_id=bos_token_id if bos_token_id is not None else None,
@@ -925,7 +973,6 @@ JSON:
                     )
                     # Move to CPU immediately to protect from future CUDA errors
                     outputs = outputs.cpu()
-                    generation_successful = True
                     logger.info("Low-temperature sampling completed successfully")
                 except RuntimeError as e:
                     if "CUDA" in str(e) or "device-side assert" in str(e):
@@ -947,7 +994,6 @@ JSON:
                                 use_cache=False,
                             )
                             outputs = outputs.cpu()
-                            generation_successful = True
                             logger.info("Reduced-output sampling completed successfully")
                         except RuntimeError as e_retry:
                             logger.error(f"Reduced-output GPU retry failed: {e_retry}")
@@ -974,7 +1020,6 @@ JSON:
                                 bos_token_id=bos_token_id if bos_token_id is not None else None,
                                 use_cache=True,
                             )
-                            generation_successful = True
                             logger.info("CPU-based sampling completed successfully")
 
                             # Move model back to GPU
@@ -1029,7 +1074,8 @@ JSON:
                     unique_chars = len(set(response_text[:100]))
                     if unique_chars < 3:
                         logger.error(
-                            f"Repetitive output detected: response contains mostly same character(s)"
+                            "Repetitive output detected: response contains "
+                            "mostly same character(s)"
                         )
                         logger.error(f"Response preview: {repr(response_text[:200])}")
                         logger.error(
@@ -1039,7 +1085,8 @@ JSON:
                         json_start = response_text.find("{")
                         if json_start >= 0:
                             logger.info(
-                                f"Found JSON start at position {json_start}, attempting to extract..."
+                                f"Found JSON start at position {json_start}, "
+                                "attempting to extract..."
                             )
                             response_text = response_text[
                                 : json_start + 1000

@@ -4,23 +4,24 @@ Extraction Pipeline
 Main orchestrator for the LLM extraction and ORKG update pipeline.
 """
 
-import logging
 import json
+import logging
 import os
 import re
 import sys
-from pathlib import Path
-from typing import Dict, List, Any, Optional
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
 import yaml
 from dotenv import load_dotenv
 
+from src.llm_extractor import LLMExtractor
 from src.orkg_client import ORKGClient
+from src.orkg_manager import ORKGPaperManager
 from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser
-from src.llm_extractor import LLMExtractor
 from src.template_mapper import TemplateMapper
-from src.orkg_manager import ORKGPaperManager
 
 # Load environment variables
 load_dotenv()
@@ -169,9 +170,9 @@ class ExtractionPipeline:
         Returns:
             Processing results
         """
-        logger.info(f"=" * 80)
+        logger.info("=" * 80)
         logger.info(f"Processing paper: {arxiv_id}")
-        logger.info(f"=" * 80)
+        logger.info("=" * 80)
 
         result = {
             "arxiv_id": arxiv_id,
@@ -711,7 +712,7 @@ def main():
                 "url": extraction_data.get("paper_url"),
             }
 
-        print(f"\nUploading to ORKG (using model family grouping)...")
+        print("\nUploading to ORKG (using model family grouping)...")
 
         # Transform data to match ORKGPaperManager's expected format
         # ORKGPaperManager expects 'raw_extraction' key, not 'extraction_data'
@@ -736,20 +737,20 @@ def main():
             paper_id = result.get("paper_id")
             contrib_ids = result.get("contribution_ids", [])
 
-            print(f"✓ SUCCESS: Uploaded to ORKG")
+            print("✓ SUCCESS: Uploaded to ORKG")
             print(f"\nPaper ID: {paper_id}")
             print(f"Contributions: {len(contrib_ids)}")
-            print(f"\nPaper URL:")
+            print("\nPaper URL:")
             print(f"https://sandbox.orkg.org/paper/{paper_id}")
 
             if contrib_ids:
-                print(f"\nContribution URLs:")
+                print("\nContribution URLs:")
                 for i, cid in enumerate(contrib_ids[:5], 1):
                     print(f"  {i}. https://sandbox.orkg.org/resource/{cid}")
                 if len(contrib_ids) > 5:
                     print(f"  ... and {len(contrib_ids) - 5} more")
         else:
-            print(f"✗ FAILED: Upload to ORKG failed")
+            print("✗ FAILED: Upload to ORKG failed")
             if result:
                 print(json.dumps(result, indent=2))
 
@@ -827,7 +828,7 @@ def main():
             # Show ORKG upload results (if uploaded)
             if result.get("orkg_results"):
                 orkg_result = result["orkg_results"]
-                print(f"\nORKG Upload:")
+                print("\nORKG Upload:")
                 if orkg_result.get("paper_id"):
                     print(f"  Paper ID: {orkg_result.get('paper_id')}")
                     print(
@@ -835,12 +836,12 @@ def main():
                     )
                     print(f"  Contributions: {len(orkg_result.get('contribution_ids', []))}")
                 else:
-                    print(f"  Status: Failed")
+                    print("  Status: Failed")
         else:
             print(f"✗ Status: {result.get('status', 'unknown')}")
             if result.get("error"):
                 print(f"  Error: {result.get('error')}")
-            print(f"\nFull result:")
+            print("\nFull result:")
             print(json.dumps(result, indent=2))
 
     elif args.search:
