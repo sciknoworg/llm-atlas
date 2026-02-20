@@ -170,7 +170,7 @@ class LLMExtractor:
                     "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
                     "pretraining_corpus": "English Wikipedia, BookCorpus",
                     "optimizer": "Adam",
-                    "innovation": "Bidirectional training of Transformer encoder",
+                    "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",
                     "research_problem": "Language Understanding",
                     "application": "Natural language understanding, question answering, text classification",  # noqa: E501
                     "license": "Apache 2.0",
@@ -286,7 +286,7 @@ class LLMExtractor:
         messages = [
             {
                 "role": "system",
-                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation/contribution\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture (e.g. Encoder, Decoder, Transformer)\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer (e.g. Adam, AdamW)\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Use YYYY-MM-DD when known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n6. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n\nReturn JSON only.",  # noqa: E501
+                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation or contribution. Prefer the paper's own framing: name the main technique or method (e.g. \"masked language model\", \"Cloze\") and how it differs from prior work (e.g. \"enabling bidirectional context\"). One or two sentences.\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture: MUST be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n- extension: ONLY when the paper explicitly describes an additional technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding, module, or technique that enables a capability compared to prior work). One sentence, factual. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If the paper does NOT mention such an extension, use null; do NOT guess or infer from other papers.\n\nOPTIONAL: tokenizer, hardware_used, etc.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not \"Google AI Language\").\n6. PARAMETERS: For multiple sizes use comma-separated (e.g. \"110M, 340M\").\n7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.\n10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants of the same model (e.g. 'Llama 3 8K' and 'Llama 3 128K-context' are the SAME model as 'Llama 3'). Record the context length in the context_length field of that single entry instead.\n11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained (instruction-tuned) variants of the same model (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 (post-trained)' are ONE entry 'Llama 3'). Mention both stages in the innovation or finetuning_task fields.\n\nFORMAT: date_created=YYYY-MM; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple.\n\nReturn JSON only.",  # noqa: E501
             },
             {
                 "role": "user",
@@ -319,7 +319,7 @@ REQUIRED FIELDS (must extract for each model):
 2. model_family (required): Model family/series (e.g., GPT, BERT, Llama)
 3. date_created (required): Publication date from paper (YYYY-MM-DD or YYYY)
 4. organization (required): Organization/company that created the model
-5. innovation (required): Key innovation or contribution described
+5. innovation (required): Key innovation or contribution. Use the paper's own terms for the main method (e.g. MLM, Cloze, bidirectional) and keep to 1-2 sentences.
 6. pretraining_corpus (required): Training dataset/corpus mentioned
 7. research_problem (required): Research problem addressed
 8. parameters (required): Number of parameters as text (e.g., "7B", "175B", "117M")
@@ -335,12 +335,26 @@ CRITICAL INSTRUCTIONS:
 - Each distinct model size/version/variant = SEPARATE entry in models array
 - Extract models THIS paper introduces (main contributions)
 - NOT models mentioned as related work or comparisons
+- Focus on PRIMARY model contributions intended as standalone released models.
+- Do NOT create separate entries for auxiliary artifacts such as tools, guards,
+  safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules
+  when the paper also contains main model contributions.
+- If auxiliary artifacts are mentioned, capture them inside innovation/extension fields
+  of the relevant primary model instead of as standalone models.
+- Do NOT create separate entries for context-window variants of the same model
+  (e.g. "Llama 3 8K" and "Llama 3 128K context" are ONE entry "Llama 3"; put the
+  context length in the context_length field).
+- Do NOT create separate entries for pre-trained vs post-trained variants of the same
+  model (e.g. "Llama 3 (pre-trained)" and "Llama 3 (post-trained)" are ONE entry
+  "Llama 3"; describe both stages in innovation or finetuning_task).
 - Model name include version/size if mentioned (e.g. "Llama 3.1 8B" not just "Llama")
 - Model name is NOT the architecture (e.g. "GPT" not "Transformer")
 - If multiple models, set "paper_describes_multiple_models": true
 - parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500
 - Extract ALL required fields. Use null if not in paper; infer when possible.
-- Always extract pretraining_architecture, pretraining_task, finetuning_task, optimizer when stated.
+- pretraining_architecture: use exactly one of Encoder, Decoder, or Encoder-Decoder (determine from the paper); null if not stated.
+- Always extract pretraining_architecture, pretraining_task, finetuning_task when stated. For optimizer: extract ONLY when the paper explicitly mentions it; if the paper does not mention the optimizer, use null and do NOT guess or infer from other papers. For extension: extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding or technique that extends the model vs a baseline); one sentence; if not mentioned, use null; do not infer from other papers.
+- FORMAT: date_created use YYYY-MM when possible; organization use canonical name (Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, otherwise null; extension = one-sentence technical detail when stated, otherwise null.
 
 Output JSON:""",
             },
@@ -536,99 +550,94 @@ Output JSON:""",
                 )
                 return None
 
-            # Enhanced cleaning
-            # Remove dots before field names (e.g., ."field_name" -> "field_name")
-            response_text = re.sub(r'\.\s*"', '"', response_text)
-
-            # Fix missing opening quotes for field names (handles spaces/hyphens too)
-            response_text = _quote_unquoted_keys(response_text)
-
-            # Fix missing closing quotes (e.g., "field":"value, -> "field":"value",)
-            response_text = re.sub(r':\s*([^",}\]]+?)(\s*[,}\]])', r': "\1"\2', response_text)
-
-            # Fix cases like "short_description:"", -> "short_description":"",
-            response_text = re.sub(r':\s*"",', r': "",', response_text)
-
-            # Fix double quotes (e.g., ""value"" -> "value")
-            response_text = re.sub(r'""([^"]+)""', r'"\1"', response_text)
-            response_text = re.sub(r'""+', '"', response_text)
-
-            # Fix empty comma patterns (e.g., ", ," or ",  ,")
-            response_text = re.sub(r",\s*,", ",", response_text)
-
-            # Fix field names with trailing spaces (e.g., "field_name " -> "field_name")
-            response_text = re.sub(r'"(\w+)\s+":', r'"\1":', response_text)
-
-            # Insert missing commas between objects in arrays (e.g., "} {")
-            response_text = re.sub(r"}\s*{", "},{", response_text)
-
-            # Insert missing commas between values and the next key
-            response_text = re.sub(
-                r'(?<=[0-9"\]}])\s+(?="[^"]+"\s*:)',
-                ",",
-                response_text,
-            )
-
-            # Remove control characters (newlines, tabs, etc.) that break JSON parsing
-            response_text = re.sub(r"[\x00-\x1f\x7f-\x9f]", "", response_text)
-
-            # Remove JSON comments (// and /* */)
-            response_text = re.sub(r"//.*?$", "", response_text, flags=re.MULTILINE)
-            response_text = re.sub(r"/\*.*?\*/", "", response_text, flags=re.DOTALL)
-
-            # Remove placeholder text like "Add more models here..."
-            response_text = re.sub(
-                r",?\s*//.*?Add more.*?$", "", response_text, flags=re.MULTILINE | re.IGNORECASE
-            )
-
-            # Remove trailing commas before } or ]
-            response_text = re.sub(r",\s*}", "}", response_text)
-            response_text = re.sub(r",\s*]", "]", response_text)
-
-            # Fix leading commas after { or [
-            response_text = re.sub(r"{\s*,", "{", response_text)
-            response_text = re.sub(r"\[\s*,", "[", response_text)
-
-            # Remove any text after the JSON (like "Note - ...")
-            last_brace = response_text.rfind("}")
-            if last_brace > 0:
-                response_text = response_text[: last_brace + 1]
-
-            # Balance brackets/braces if the JSON is truncated
-            response_text = _balance_json_brackets(response_text)
-
-            if not response_text.strip():
-                logger.error("Response became empty after cleaning")
-                logger.debug(f"Original response: {original_response[:500]}")
-                return None
-
-            # Try to parse JSON - if it fails, attempt repair
+            # BEST PRACTICE: Try parsing the minimally cleaned JSON first
+            # Only apply aggressive repair if standard parsing fails
+            parsed = None
             try:
                 parsed = json.loads(response_text)
-            except json.JSONDecodeError as parse_error:
-                logger.warning(f"Initial JSON parse failed: {parse_error}. Attempting repair...")
+                # Success: valid JSON, no cleaning needed
+            except json.JSONDecodeError as initial_error:
+                # Parsing failed - apply enhanced cleaning and repair
+                logger.debug(f"Initial parse failed: {initial_error}. Applying cleaning...")
 
-                # Attempt to repair common issues
-                # Fix incomplete strings (e.g., "value, -> "value",)
+                # Enhanced cleaning (only when needed)
+                # Remove dots before field names (e.g., ."field_name" -> "field_name")
+                response_text = re.sub(r'\.\s*"', '"', response_text)
+
+                # Fix missing opening quotes for field names (handles spaces/hyphens too)
+                response_text = _quote_unquoted_keys(response_text)
+
+                # Fix missing closing quotes for UNQUOTED VALUES (but NOT arrays/objects)
+                # OLD (broke []): r':\s*([^",}\]]+?)(\s*[,}\]])'
+                # NEW: only match when value doesn't start with [ or { (to preserve [] and {})
                 response_text = re.sub(
-                    r':\s*"([^"]*?)([,}\]])',
-                    lambda m: (
-                        f': "{m.group(1)}"{m.group(2)}'
-                        if not m.group(1).endswith('"')
-                        else f": {m.group(1)}{m.group(2)}"
-                    ),
+                    r':\s*([^",}\[\{][^",}\]]*?)(\s*[,}\]])',
+                    r': "\1"\2',
+                    response_text
+                )
+
+                # Fix cases like "short_description:"", -> "short_description":"",
+                response_text = re.sub(r':\s*"",', r': "",', response_text)
+
+                # Fix double quotes (e.g., ""value"" -> "value")
+                response_text = re.sub(r'""([^"]+)""', r'"\1"', response_text)
+                response_text = re.sub(r'""+', '"', response_text)
+
+                # Fix empty comma patterns (e.g., ", ," or ",  ,")
+                response_text = re.sub(r",\s*,", ",", response_text)
+
+                # Fix field names with trailing spaces (e.g., "field_name " -> "field_name")
+                response_text = re.sub(r'"(\w+)\s+":', r'"\1":', response_text)
+
+                # Insert missing commas between objects in arrays (e.g., "} {")
+                response_text = re.sub(r"}\s*{", "},{", response_text)
+
+                # Insert missing commas between values and the next key
+                response_text = re.sub(
+                    r'(?<=[0-9"\]}])\s+(?="[^"]+"\s*:)',
+                    ",",
                     response_text,
                 )
 
-                # Fix unclosed strings at end of object
-                response_text = re.sub(r':\s*"([^"]*?)(\s*[}\]])', r': "\1"\2', response_text)
+                # Remove control characters (newlines, tabs, etc.) that break JSON parsing
+                response_text = re.sub(r"[\x00-\x1f\x7f-\x9f]", "", response_text)
 
-                # Try parsing again
+                # Remove JSON comments (// and /* */)
+                response_text = re.sub(r"//.*?$", "", response_text, flags=re.MULTILINE)
+                response_text = re.sub(r"/\*.*?\*/", "", response_text, flags=re.DOTALL)
+
+                # Remove placeholder text like "Add more models here..."
+                response_text = re.sub(
+                    r",?\s*//.*?Add more.*?$", "", response_text, flags=re.MULTILINE | re.IGNORECASE
+                )
+
+                # Remove trailing commas before } or ]
+                response_text = re.sub(r",\s*}", "}", response_text)
+                response_text = re.sub(r",\s*]", "]", response_text)
+
+                # Fix leading commas after { or [
+                response_text = re.sub(r"{\s*,", "{", response_text)
+                response_text = re.sub(r"\[\s*,", "[", response_text)
+
+                # Remove any text after the JSON (like "Note - ...")
+                last_brace = response_text.rfind("}")
+                if last_brace > 0:
+                    response_text = response_text[: last_brace + 1]
+
+                # Balance brackets/braces if the JSON is truncated
+                response_text = _balance_json_brackets(response_text)
+
+                if not response_text.strip():
+                    logger.error("Response became empty after cleaning")
+                    logger.debug(f"Original response: {original_response[:500]}")
+                    return None
+
+                # Try to parse JSON after cleaning
                 try:
                     parsed = json.loads(response_text)
                     logger.info("JSON repair successful")
-                except json.JSONDecodeError as repair_error:
-                    logger.error(f"JSON repair also failed: {repair_error}")
+                except json.JSONDecodeError as parse_error:
+                    logger.error(f"JSON parse failed after repair: {parse_error}")
                     logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
                     logger.error(
                         "Cleaned response (first 500 chars): "

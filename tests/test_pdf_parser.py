@@ -54,3 +54,20 @@ class TestPDFParser:
         assert 'year' in metadata
         assert metadata['year'] == '2023'
 
+    def test_table_to_markdown(self):
+        """Test table conversion to markdown."""
+        table = [
+            ["Model", "Size", "F1"],
+            ["BERT", "110M", "0.89"],
+            ["GPT-2", "1.5B", "0.92"],
+        ]
+        md = PDFParser._table_to_markdown(table)
+        assert "| Model | Size | F1 |" in md
+        assert "| BERT | 110M | 0.89 |" in md
+        assert "|---|" in md or "---|" in md
+
+    def test_table_to_markdown_empty(self):
+        """Test empty table returns empty string."""
+        assert PDFParser._table_to_markdown([]) == ""
+        assert PDFParser._table_to_markdown([[]]) == ""
+

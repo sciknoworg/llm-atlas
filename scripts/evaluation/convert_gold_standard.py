@@ -152,16 +152,65 @@ def convert_csv_to_json(csv_path: Path, json_path: Path) -> None:
     logger.info(f"Reading CSV from: {csv_path}")
     
     models = []
+    skipped_rows = 0
     
-    with open(csv_path, 'r', encoding='utf-8-sig') as csvfile:  # utf-8-sig handles BOM automatically
+    with open(csv_path, 'r', encoding='utf-8-sig', newline='') as csvfile:  # utf-8-sig handles BOM automatically, newline='' for proper CSV handling
+        # CSV reader handles multi-line quoted fields by default
         reader = csv.DictReader(csvfile)
         
         for i, row in enumerate(reader, 1):
             # Normalize the row to handle BOM and quoted column names
             normalized_row = normalize_csv_row(row)
+            
+            # Skip rows that don't have a valid Title field
+            # This filters out continuation lines from multi-line CSV fields
+            title_field = normalized_row.get("Title", "")
+            if not title_field or not title_field.strip():
+                skipped_rows += 1
+                logger.debug(f"Skipping row {i}: No Title field (likely a continuation line)")
+                continue
+            
+            # Check if Title field looks like a continuation line (not a real paper title)
+            # Continuation lines typically:
+            # 1. Don't contain " - Contribution" (the standard suffix)
+            # 2. Start with lowercase or continuation phrases
+            title_stripped = title_field.strip()
+            first_words_lower = title_stripped[:50].lower()
+            
+            # Skip if it's clearly a continuation line
+            continuation_indicators = [
+                "compared with", "t0pp is", "a variety", "the t5 model",
+                "t0 stands for", "obtained by", "fine-tuned with"
+            ]
+            
+            if any(first_words_lower.startswith(indicator) for indicator in continuation_indicators):
+                skipped_rows += 1
+                logger.warning(f"Skipping row {i}: Title appears to be a continuation line: '{title_stripped[:60]}...'")
+                continue
+            
+            # Skip if Title doesn't contain " - Contribution" AND doesn't look like a paper title
+            # (Paper titles are usually capitalized and longer)
+            if " - Contribution" not in title_field:
+                # Check if it looks like a paper title (starts with capital, has reasonable length)
+                if len(title_stripped) < 20 or not title_stripped[0].isupper():
+                    skipped_rows += 1
+                    logger.warning(f"Skipping row {i}: Title doesn't look like a paper title: '{title_stripped[:60]}...'")
+                    continue
+            
             model_data = map_csv_row_to_json(normalized_row)
+            
+            # Final validation: Skip entries with invalid paper titles
+            paper_title = model_data.get("paper_title", "").strip()
+            if not paper_title or len(paper_title) < 10:  # Paper titles should be reasonably long
+                skipped_rows += 1
+                logger.warning(f"Skipping row {i}: Invalid paper title: '{paper_title}'")
+                continue
+            
             models.append(model_data)
             logger.info(f"Processed model {i}: {model_data.get('model_name')}")
+    
+    if skipped_rows > 0:
+        logger.info(f"Skipped {skipped_rows} invalid/continuation rows")
     
     # Create gold-standard dataset structure
     gold_standard = {
@@ -177,7 +226,16 @@ def convert_csv_to_json(csv_path: Path, json_path: Path) -> None:
         json.dump(gold_standard, jsonfile, indent=2, ensure_ascii=False)
     
     logger.info(f"✓ Conversion complete: {len(models)} models converted")
+    if skipped_rows > 0:
+        logger.info(f"✓ Skipped {skipped_rows} invalid/continuation rows")
     logger.info(f"✓ Gold-standard dataset saved to: {json_path}")
+    
+    # Validate: Check for duplicate paper titles (should be minimal, some papers have multiple models)
+    paper_titles = [m.get("paper_title") for m in models if m.get("paper_title")]
+    unique_titles = set(paper_titles)
+    if len(paper_titles) != len(unique_titles):
+        duplicates = len(paper_titles) - len(unique_titles)
+        logger.info(f"Note: {duplicates} entries share paper titles (some papers have multiple model contributions)")
 
 
 def main():

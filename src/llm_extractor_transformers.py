@@ -148,7 +148,7 @@ class LLMExtractorTransformers:
                             "pretraining_architecture": "Encoder",
                             "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
                             "optimizer": "Adam",
-                            "innovation": "Bidirectional training of Transformer encoder",
+                            "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",
                             "research_problem": "Language Understanding",
                         }
                     ]
@@ -260,9 +260,20 @@ class LLMExtractorTransformers:
                             "5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if "
                             "the paper describes multiple distinct models, versions, or size "
                             "variants.\n"
+                            "6. CONTEXT VARIANTS: Do NOT create separate entries for context-window "
+                            "variants of the same model (e.g. 'Llama 3 8K' and 'Llama 3 128K' are "
+                            "ONE entry 'Llama 3'). Record context length in context_length field.\n"
+                            "7. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs "
+                            "post-trained variants (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 "
+                            "(post-trained)' are ONE entry 'Llama 3'). Describe both stages in "
+                            "innovation or finetuning_task.\n"
                             "Fields: model_name, model_family, paper_title, organization, "
                             "parameters, date_created, pretraining_architecture, pretraining_task, "
-                            "finetuning_task, optimizer, innovation, license, hardware_used.\n"
+                            "finetuning_task, optimizer, extension, innovation (use paper's terms, 1-2 sentences), license, hardware_used.\n"
+                            "OPTIMIZER: Use optimizer ONLY when the paper explicitly names an optimizer (e.g. Adam, AdamW). "
+                            "If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n"
+                            "EXTENSION: Use extension ONLY when the paper explicitly describes a technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding or technique). One sentence. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If not mentioned, use null; do NOT guess or infer from other papers.\n"
+                            "PRETRAINING_ARCHITECTURE: Must be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n"
                             "Return JSON only."
                         ),
                     },
@@ -312,9 +323,25 @@ CRITICAL INSTRUCTIONS:
 - Each distinct size/version/variant = SEPARATE entry in models array
 - Extract models THIS paper introduces (main contributions)
 - NOT related work or comparisons
+- Focus on PRIMARY model contributions intended as standalone released models.
+- Do NOT create separate entries for auxiliary artifacts such as tools, guards,
+  safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules
+  when main model contributions are present.
+- If auxiliary artifacts are mentioned, include them in innovation/extension fields
+  of the related primary model instead of adding standalone model entries.
+- Do NOT create separate entries for context-window variants of the same model
+  (e.g. "Llama 3 8K" and "Llama 3 128K context" are ONE entry "Llama 3"; put the
+  context length in the context_length field).
+- Do NOT create separate entries for pre-trained vs post-trained variants of the same
+  model (e.g. "Llama 3 (pre-trained)" and "Llama 3 (post-trained)" are ONE entry
+  "Llama 3"; describe both stages in innovation or finetuning_task).
+- pretraining_architecture: exactly one of Encoder, Decoder, or Encoder-Decoder (determine from the paper); null if not stated.
+- innovation: Use the paper's own terms for the main method (e.g. MLM, Cloze, bidirectional); keep to 1-2 sentences.
 - Model name include version/size if mentioned (e.g. "Llama 3.1 8B")
 - Model name is NOT architecture (e.g. "GPT" not "Transformer")
 - If multiple models, set "paper_describes_multiple_models": true
+- optimizer: Extract ONLY when the paper explicitly mentions it; if the paper does not mention the optimizer, use null and do NOT guess or infer from other papers.
+- extension: Extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding that extends the model vs a baseline). One sentence. If not mentioned, use null; do not infer from other papers.
 
 Output JSON:""",
                     },
@@ -368,6 +395,14 @@ IMPORTANT: Extract ALL model versions, variants, and sizes as SEPARATE entries:
 - If paper mentions multiple versions (3.1, 3.2, 3.3) -> create separate entry for each
 - If paper mentions multiple variants (Base, Large, XL) -> create separate entry for each
 - Each distinct model size/version/variant = separate entry in models array
+- Focus on PRIMARY model contributions intended as standalone released models.
+- Do NOT create separate entries for auxiliary artifacts such as tools, guards,
+  safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules
+  when main model contributions are present.
+- Do NOT create separate entries for context-window variants (e.g. "Llama 3 8K" and
+  "Llama 3 128K" are ONE entry "Llama 3"; put context length in context_length field).
+- Do NOT create separate entries for pre-trained vs post-trained variants (e.g.
+  "Llama 3 (pre-trained)" and "Llama 3 (post-trained)" are ONE entry "Llama 3").
 
 Return JSON matching this structure (replace placeholder values with actual data from the paper):
 
@@ -383,14 +418,15 @@ REQUIRED FIELDS TO EXTRACT (from the paper text only):
 - date_created: Publication date or year (format: YYYY-MM-DD or YYYY)
 - parameters: Number of parameters (e.g. "8B", "70B", "117M")
 - parameters_millions: Params in millions (e.g. 8000 for 8B, 117 for 117M)
-- pretraining_architecture: Encoder/Decoder/Encoder-Decoder
+- pretraining_architecture: MUST be exactly one of Encoder, Decoder, or Encoder-Decoder (determine from the paper); null if not stated.
 - pretraining_task: e.g. Causal LM, Masked LM, Next-token prediction
 - finetuning_task: e.g. Supervised discriminative fine-tuning
-- optimizer: e.g. Adam, AdamW
+- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, use null; do NOT guess or infer from other papers.
+- extension: ONLY when the paper explicitly describes a technical detail that extends the model beyond a baseline (e.g. \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model\"). One sentence; if not mentioned, use null.
 - license: e.g. closed source, open source, Apache 2.0
 - research_problem: e.g. Large Language Models, NLU
 - architecture: e.g. Transformer
-- innovation: Key innovation or contribution described
+- innovation: Key innovation; use paper's terms (e.g. MLM, Cloze), 1-2 sentences
 - hardware_used: Hardware (e.g. "GPU", "TPU", or null if not mentioned)
 
 CRITICAL RULES:

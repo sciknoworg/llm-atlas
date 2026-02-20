@@ -130,6 +130,22 @@ Predicted=False     FN          TN
 ### Fuzzy Matching
 For long text fields (innovation, pretraining_corpus, etc.), the evaluator uses fuzzy string matching with a configurable threshold (default 80% similarity).
 
+### Strict evaluator: smart matching (`evaluate_extraction_strict.py`)
+The strict evaluator uses **field-specific rules** so that equivalent information is credited:
+- **date_created:** Same year counts as a match (e.g. "2018" vs "2018-10-01"); if both have month, same year+month required.
+- **organization:** Exact match, or one string contains the other (e.g. "Google" vs "Google AI Language"), or known aliases (e.g. "Meta AI" vs "Meta").
+- **parameters:** Set-based comparison (comma-separated sizes); match when overlap meets threshold.
+- **parameters_millions:** Numeric equality (or both null).
+Long-text fields still use semantic/fuzzy similarity. This yields a more reliable metric (e.g. BERT date and organization no longer 0% when the information is correct).
+
+## Extraction format and normalizer
+
+The pipeline **normalizes** extraction output before merge and evaluation so stored data is consistent:
+- **date_created:** "2018" → "2018-01", "2018-10-01" → "2018-10" (YYYY-MM).
+- **organization:** Variants like "Google AI Language" → "Google", "Meta AI" → "Meta" (see `src/extraction_normalizer.py`).
+
+Extraction prompts also ask for **canonical formats**: date as YYYY-MM, organization as canonical name, parameters as comma-separated sizes. Together, extraction rules + normalizer + smart evaluation give a more reliable workflow.
+
 ## Improving Extraction Quality
 
 Based on evaluation results:

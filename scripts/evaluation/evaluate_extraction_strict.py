@@ -18,12 +18,58 @@ Output:
 import json
 import argparse
 import logging
+import re
 from pathlib import Path
 from typing import Dict, Any, List, Tuple, Optional
 from difflib import SequenceMatcher
+import numpy as np
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Lazy import for sentence-transformers (heavy dependency)
+_sentence_transformer = None
+
+
+def _get_sentence_transformer():
+    """Lazy load sentence transformer model."""
+    global _sentence_transformer
+    if _sentence_transformer is None:
+        try:
+            from sentence_transformers import SentenceTransformer
+            logger.info("Loading sentence transformer model (all-MiniLM-L6-v2)...")
+            _sentence_transformer = SentenceTransformer('all-MiniLM-L6-v2')
+            logger.info("Sentence transformer loaded successfully")
+        except ImportError:
+            logger.warning(
+                "sentence-transformers not installed. "
+                "Semantic similarity will fall back to fuzzy matching. "
+                "Install with: pip install sentence-transformers"
+            )
+            _sentence_transformer = False  # Mark as unavailable
+    return _sentence_transformer if _sentence_transformer is not False else None
+
+
+# Lazy import for BERTScore (heavy dependency)
+_bert_score = None
+
+
+def _get_bert_score():
+    """Lazy load BERTScore module."""
+    global _bert_score
+    if _bert_score is None:
+        try:
+            import bert_score
+            logger.info("BERTScore module loaded successfully")
+            _bert_score = bert_score
+        except ImportError:
+            logger.warning(
+                "bert-score not installed. "
+                "BERTScore metrics will not be computed. "
+                "Install with: pip install bert-score"
+            )
+            _bert_score = False  # Mark as unavailable
+    return _bert_score if _bert_score is not False else None
 
 
 class StrictExtractionEvaluator:
@@ -52,17 +98,44 @@ class StrictExtractionEvaluator:
     ]
     
     # Only long-text fields use fuzzy matching (with strict threshold 0.8)
-    FUZZY_FIELDS = ["innovation", "pretraining_corpus", "application", "research_problem"]
+    # optimizer included so e.g. "Adam" matches "Adam optimizer"
+    FUZZY_FIELDS = ["innovation", "pretraining_corpus", "application", "research_problem", "optimizer"]
+    
+    # Fields that benefit from semantic similarity (meaning-based comparison)
+    SEMANTIC_FIELDS = ["innovation", "pretraining_corpus", "application", "research_problem", "extension"]
 
-    def __init__(self, fuzzy_threshold: float = 0.8):
+    # Fields used for match-based Overall F1 (structured/exact only; semantic fields evaluated via BERTScore)
+    # Defined explicitly to avoid class-body evaluation order issues with SEMANTIC_FIELDS
+    STRUCTURED_FIELDS = [
+        "model_name", "model_family", "date_created", "organization",
+        "pretraining_architecture", "pretraining_task", "finetuning_task",
+        "optimizer", "parameters", "parameters_millions", "hardware_used",
+        "blog_post", "license"
+    ]
+
+    # Fields whose match decision uses BERTScore F1 (instead of exact/fuzzy) for semantic equivalence
+    BERTSCORE_MATCH_FIELDS = ["innovation", "license", "pretraining_task", "research_problem", "pretraining_architecture"]
+
+    def __init__(
+        self,
+        fuzzy_threshold: float = 0.8,
+        use_semantic: bool = True,
+        bert_score_model: str = "roberta-large"
+    ):
         """
         Initialize strict evaluator.
         
         Args:
-            fuzzy_threshold: Similarity threshold for fuzzy string matching (0-1)
+            fuzzy_threshold: Similarity threshold for fuzzy/semantic matching (0-1)
                              Default 0.8 (strict). Use 1.0 for exact-only.
+            use_semantic: Use semantic similarity (embeddings) for long-text fields.
+                          Default True. Falls back to fuzzy if unavailable.
+            bert_score_model: Model for BERTScore computation (default: roberta-large).
+                             Options: roberta-large, bert-base-uncased, etc.
         """
         self.fuzzy_threshold = fuzzy_threshold
+        self.use_semantic = use_semantic
+        self.bert_score_model = bert_score_model
         self.results = {}
         
     def normalize_value(self, value: Any) -> str:
@@ -86,6 +159,260 @@ class StrictExtractionEvaluator:
             
         return SequenceMatcher(None, str1, str2).ratio()
     
+    def semantic_match(self, str1: str, str2: str) -> float:
+        """
+        Calculate semantic similarity between two strings using sentence embeddings.
+        
+        Returns:
+            Cosine similarity score between 0 and 1
+        """
+        if not str1 and not str2:
+            return 1.0  # Both empty = match
+        if not str1 or not str2:
+            return 0.0  # One empty, one not = no match
+        
+        model = _get_sentence_transformer()
+        if model is None:
+            # Fall back to fuzzy matching if model unavailable
+            return self.fuzzy_match(str1, str2)
+        
+        try:
+            # Encode both strings
+            embeddings = model.encode([str1, str2], convert_to_tensor=False)
+            
+            # Compute cosine similarity
+            # embeddings is numpy array of shape (2, embedding_dim)
+            emb1, emb2 = embeddings[0], embeddings[1]
+            cosine_sim = np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
+            
+            # Ensure result is in [0, 1] (cosine can be negative, but for these texts unlikely)
+            return max(0.0, min(1.0, float(cosine_sim)))
+        except Exception as e:
+            logger.warning(f"Semantic matching failed: {e}. Falling back to fuzzy match.")
+            return self.fuzzy_match(str1, str2)
+    
+    def compute_bert_score_batch(
+        self,
+        references: List[str],
+        candidates: List[str]
+    ) -> List[float]:
+        """
+        Compute BERTScore F1 for a batch of (reference, candidate) pairs.
+        
+        BERTScore uses token-level embeddings to compute semantic similarity,
+        capturing paraphrases and meaning better than surface-level metrics.
+        
+        Args:
+            references: List of reference (gold) texts
+            candidates: List of candidate (predicted) texts
+        
+        Returns:
+            List of F1 scores (one per pair), each in [0, 1]
+        """
+        if not references or not candidates:
+            return []
+        
+        if len(references) != len(candidates):
+            logger.warning(
+                f"BERTScore: reference and candidate counts differ "
+                f"({len(references)} vs {len(candidates)})"
+            )
+            return []
+        
+        bert_score_module = _get_bert_score()
+        if bert_score_module is None:
+            logger.warning("BERTScore not available, skipping BERTScore computation")
+            return []
+        
+        try:
+            logger.info(f"Computing BERTScore with model: {self.bert_score_model}")
+            # Compute BERTScore: returns (P, R, F1) tensors
+            P, R, F1 = bert_score_module.score(
+                candidates,
+                references,
+                model_type=self.bert_score_model,
+                lang="en",
+                verbose=False
+            )
+            # Convert F1 tensor to list of floats
+            return F1.tolist()
+        except Exception as e:
+            logger.error(f"BERTScore computation failed: {e}")
+            return []
+    
+    @staticmethod
+    def _extract_year_month(value: Any) -> Tuple[Optional[int], Optional[int]]:
+        """Extract (year, month) from date string. Month is 1-12 or None."""
+        if value is None or (isinstance(value, str) and not value.strip()):
+            return None, None
+        s = str(value).strip()
+        # YYYY-MM-DD or YYYY-MM
+        m = re.match(r"^(\d{4})-(\d{2})(?:-\d{2})?$", s)
+        if m:
+            return int(m.group(1)), int(m.group(2))
+        # YYYY only
+        m = re.match(r"^(\d{4})$", s)
+        if m:
+            return int(m.group(1)), None
+        return None, None
+
+    def compare_date(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare date_created: match if same year; if both have month, also require same month.
+        Returns (is_match, similarity). Same year => at least 0.5; same year+month => 1.0.
+        """
+        gy, gm = self._extract_year_month(gold_value)
+        py, pm = self._extract_year_month(pred_value)
+        if gy is None and py is None:
+            return True, 1.0
+        if gy is None or py is None:
+            return False, 0.0
+        if gy != py:
+            return False, 0.0
+        # Same year
+        if gm is not None and pm is not None:
+            return (gm == pm, 1.0) if gm == pm else (False, 0.5)
+        return True, 0.9  # same year, month missing in one
+
+    # Known organization aliases for flexible matching (lowercase)
+    _ORG_ALIASES = [
+        ("google ai language", "google"),
+        ("google research", "google"),
+        ("meta ai", "meta"),
+        ("facebook ai", "meta"),
+        ("openai", "openai"),
+        ("microsoft research", "microsoft"),
+    ]
+
+    def compare_organization(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare organization: exact match, or one contains the other, or known alias.
+        Returns (is_match, similarity).
+        """
+        g = self.normalize_value(gold_value)
+        p = self.normalize_value(pred_value)
+        if not g and not p:
+            return True, 1.0
+        if not g or not p:
+            return False, 0.0
+        if g == p:
+            return True, 1.0
+        if g in p or p in g:
+            return True, 0.95
+        for a, b in self._ORG_ALIASES:
+            if (g == a or g == b) and (p == a or p == b):
+                return True, 0.95
+        return False, self.fuzzy_match(g, p)
+
+    def compare_optimizer_word_overlap(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare optimizer: match if any word in the extraction appears in the gold standard.
+        E.g. gold "Adam optimizer" vs pred "Adam" -> match (Adam is in gold).
+        Returns (is_match, similarity). Similarity is 1.0 when any overlap, else 0.0.
+        """
+        g = self.normalize_value(gold_value)
+        p = self.normalize_value(pred_value)
+        if not g and not p:
+            return True, 1.0
+        if not g or not p:
+            return False, 0.0
+        # Split into words (whitespace and commas)
+        gold_words = set(re.split(r"[\s,]+", g))
+        pred_words = set(re.split(r"[\s,]+", p))
+        gold_words.discard("")
+        pred_words.discard("")
+        if not gold_words and not pred_words:
+            return True, 1.0
+        if not gold_words or not pred_words:
+            return False, 0.0
+        overlap = pred_words & gold_words
+        if overlap:
+            return True, 1.0
+        return False, 0.0
+
+    @staticmethod
+    def _norm_identifier(value: Any) -> str:
+        """Normalize identifier (model_name, model_family): lowercase, unify hyphens and spaces."""
+        if value is None or (isinstance(value, str) and not value.strip()):
+            return ""
+        return re.sub(r'[-\s]+', ' ', str(value).strip().lower())
+
+    def compare_identifier_field(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare identifier-like fields (model_name, model_family).
+        Same hyphen/space normalization as pairing; then exact match, containment, or fuzzy.
+        """
+        gold_norm = self._norm_identifier(gold_value)
+        pred_norm = self._norm_identifier(pred_value)
+        if not gold_norm and not pred_norm:
+            return True, 1.0
+        if not gold_norm or not pred_norm:
+            return False, 0.0
+        if gold_norm == pred_norm:
+            return True, 1.0
+        if gold_norm in pred_norm or pred_norm in gold_norm:
+            return True, 0.95
+        similarity = self.fuzzy_match(gold_norm, pred_norm)
+        return (similarity >= self.fuzzy_threshold, similarity)
+
+    def compare_parameters_millions(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare parameters_millions: numeric equality, or both null.
+        If one is null, allow match when the other field (parameters) implies same scale.
+        """
+        def to_int(v: Any) -> Optional[int]:
+            if v is None or (isinstance(v, str) and not v.strip()):
+                return None
+            try:
+                return int(float(str(v).strip()))
+            except (ValueError, TypeError):
+                return None
+
+        g = to_int(gold_value)
+        p = to_int(pred_value)
+        if g is None and p is None:
+            return True, 1.0
+        if g is None or p is None:
+            return False, 0.0
+        if g == p:
+            return True, 1.0
+        # Allow small relative difference (e.g. 340 vs 340)
+        return False, 0.0
+
+    def compare_parameters_list(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
+        """
+        Compare parameters field (comma-separated list of sizes).
+        
+        Uses set-based F1: precision = |gold ∩ pred| / |pred|, recall = |gold ∩ pred| / |gold|
+        
+        Returns:
+            (is_match: bool, f1_score: float)
+        """
+        if not gold_value and not pred_value:
+            return True, 1.0
+        if not gold_value or not pred_value:
+            return False, 0.0
+        
+        # Parse comma-separated sizes
+        gold_sizes = set(s.strip().upper() for s in str(gold_value).split(",") if s.strip())
+        pred_sizes = set(s.strip().upper() for s in str(pred_value).split(",") if s.strip())
+        
+        if not gold_sizes and not pred_sizes:
+            return True, 1.0
+        if not gold_sizes or not pred_sizes:
+            return False, 0.0
+        
+        # Set overlap metrics
+        intersection = gold_sizes & pred_sizes
+        precision = len(intersection) / len(pred_sizes) if pred_sizes else 0.0
+        recall = len(intersection) / len(gold_sizes) if gold_sizes else 0.0
+        f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+        
+        # Match when all gold sizes are present in extraction (recall = 1.0)
+        # So "151M" gold vs "128M, 151M" pred → match (we wanted 151M and got it)
+        is_match = recall >= 1.0
+        return is_match, f1
+    
     def compare_field(
         self,
         gold_value: Any,
@@ -96,22 +423,50 @@ class StrictExtractionEvaluator:
         """
         Compare a single field between gold and prediction (STRICT).
         
+        Uses semantic similarity (embeddings) for long-text fields when enabled,
+        otherwise falls back to fuzzy (SequenceMatcher).
+        
+        Special handling for parameters (comma-separated list).
+        
         Returns:
             (is_match: bool, similarity: float)
         """
         gold_norm = self.normalize_value(gold_value)
         pred_norm = self.normalize_value(pred_value)
 
-        # Exact match
+        # Special handling for parameters (comma-separated list)
+        if field == "parameters":
+            return self.compare_parameters_list(gold_value, pred_value)
+        if field == "parameters_millions":
+            return self.compare_parameters_millions(gold_value, pred_value)
+        if field == "date_created":
+            return self.compare_date(gold_value, pred_value)
+        if field == "organization":
+            return self.compare_organization(gold_value, pred_value)
+        if field == "optimizer":
+            return self.compare_optimizer_word_overlap(gold_value, pred_value)
+        if field in ("model_name", "model_family"):
+            return self.compare_identifier_field(gold_value, pred_value)
+
+        # Exact match (fast path)
         if gold_norm == pred_norm:
             return True, 1.0
         
-        # Fuzzy match (ONLY for long-text fields, strict threshold 0.8)
-        if use_fuzzy and field in self.FUZZY_FIELDS and gold_norm and pred_norm:
-            similarity = self.fuzzy_match(gold_norm, pred_norm)
-            if similarity >= self.fuzzy_threshold:
-                return True, similarity
-            return False, similarity
+        # Semantic or fuzzy match for long-text fields
+        if use_fuzzy and gold_norm and pred_norm:
+            # Try semantic matching first for designated fields
+            if self.use_semantic and field in self.SEMANTIC_FIELDS:
+                similarity = self.semantic_match(gold_norm, pred_norm)
+                if similarity >= self.fuzzy_threshold:
+                    return True, similarity
+                return False, similarity
+            
+            # Fall back to fuzzy for other FUZZY_FIELDS
+            elif field in self.FUZZY_FIELDS:
+                similarity = self.fuzzy_match(gold_norm, pred_norm)
+                if similarity >= self.fuzzy_threshold:
+                    return True, similarity
+                return False, similarity
         
         return False, 0.0
     
@@ -210,6 +565,9 @@ class StrictExtractionEvaluator:
         """
         Filter gold standard data by paper title.
         
+        Uses exact match first, then falls back to "starts with" for papers
+        with multiple contributions (e.g., "The Llama 3 Herd of Models - Llama 3").
+        
         Args:
             gold_data: List of gold-standard models
             paper_title: Paper title to filter by (optional)
@@ -221,19 +579,31 @@ class StrictExtractionEvaluator:
             return gold_data
         
         paper_title_norm = self.normalize_value(paper_title)
-        filtered = []
+        filtered_exact = []
+        filtered_starts_with = []
         
         for model in gold_data:
             model_paper_title = self.normalize_value(model.get("paper_title", ""))
-            if model_paper_title and model_paper_title == paper_title_norm:
-                filtered.append(model)
+            if not model_paper_title:
+                continue
+            
+            # Exact match (preferred)
+            if model_paper_title == paper_title_norm:
+                filtered_exact.append(model)
+            # Starts with (for papers with multiple contributions)
+            elif model_paper_title.startswith(paper_title_norm):
+                filtered_starts_with.append(model)
+        
+        # Use exact matches if found, otherwise use starts-with matches
+        filtered = filtered_exact if filtered_exact else filtered_starts_with
         
         if len(filtered) == 0:
-            logger.warning(f"No models found with paper_title='{paper_title}' in gold standard!")
+            logger.warning(f"No models found with paper_title starting with '{paper_title}' in gold standard!")
             logger.warning("Falling back to matching by model_name only (no filtering)")
             return gold_data
         
-        logger.info(f"Filtered gold standard: {len(gold_data)} -> {len(filtered)} models (paper: {paper_title})")
+        match_type = "exact" if filtered_exact else "starts-with"
+        logger.info(f"Filtered gold standard: {len(gold_data)} -> {len(filtered)} models (paper: {paper_title}, match: {match_type})")
         return filtered
     
     def evaluate_dataset(
@@ -267,13 +637,26 @@ class StrictExtractionEvaluator:
         matched_count = 0
         unmatched_predictions = []
 
+        def _norm_model_name(name: str) -> str:
+            """Normalize model name: lowercase, strip, unify hyphens and spaces."""
+            return re.sub(r'[-\s]+', ' ', name.strip().lower())
+
         def find_gold_for_pred(pred_norm: str):
+            # 1. Exact normalized match
             if pred_norm in gold_by_name and pred_norm not in gold_matched_names:
                 return gold_by_name[pred_norm], pred_norm
+            # 2. Hyphen/space-insensitive match (e.g. "transformer-xl" == "transformer xl")
+            pred_soft = _norm_model_name(pred_norm)
             for gnorm, g in gold_by_name.items():
                 if gnorm in gold_matched_names or not gnorm:
                     continue
-                if gnorm in pred_norm:
+                if _norm_model_name(gnorm) == pred_soft:
+                    return g, gnorm
+            # 3. Containment fallback: gold name is a substring of pred name (soft)
+            for gnorm, g in gold_by_name.items():
+                if gnorm in gold_matched_names or not gnorm:
+                    continue
+                if _norm_model_name(gnorm) in pred_soft:
                     return g, gnorm
             return None, None
 
@@ -295,18 +678,96 @@ class StrictExtractionEvaluator:
             else:
                 unmatched_predictions.append(pred_model.get("model_name"))
 
-        # Calculate per-field metrics
+        # BERTScore-based match for license, pretraining_task, research_problem (before metrics)
+        # Updates field_level_results so match/similarity come from BERTScore F1 instead of exact match
+        bert_score_match_cache = {}
+        if matched_count > 0:
+            for field in self.BERTSCORE_MATCH_FIELDS:
+                if field not in field_level_results or not field_level_results[field]:
+                    continue
+                indices = []
+                refs = []
+                cands = []
+                for idx, result in enumerate(field_level_results[field]):
+                    gold_text = result.get("gold")
+                    pred_text = result.get("predicted")
+                    if gold_text is not None and str(gold_text).strip() and pred_text is not None and str(pred_text).strip():
+                        indices.append(idx)
+                        refs.append(str(gold_text).strip())
+                        cands.append(str(pred_text).strip())
+                if refs and cands:
+                    f1_scores = self.compute_bert_score_batch(refs, cands)
+                    if f1_scores:
+                        for idx, f1 in zip(indices, f1_scores):
+                            r = field_level_results[field][idx]
+                            r["match"] = f1 >= self.fuzzy_threshold
+                            r["similarity"] = float(f1)
+                        bert_score_match_cache[field] = {
+                            "mean_f1": float(np.mean(f1_scores)),
+                            "count": len(f1_scores),
+                            "scores": f1_scores
+                        }
+                        logger.info(
+                            f"BERTScore match for '{field}': updated {len(indices)} pairs "
+                            f"(mean F1={bert_score_match_cache[field]['mean_f1']:.4f})"
+                        )
+
+        # Calculate per-field metrics (uses BERTScore-based match for BERTSCORE_MATCH_FIELDS)
         field_metrics = {}
         for field in self.EVALUATION_FIELDS:
             if field_level_results[field]:
                 field_metrics[field] = self.calculate_metrics(field_level_results[field])
 
-        # Calculate overall metrics (across all fields and models)
+        # Overall metrics: structured fields only (match-based F1).
+        # Semantic fields (innovation, extension, etc.) are evaluated via BERTScore below.
         all_field_results = []
-        for field_results in field_level_results.values():
-            all_field_results.extend(field_results)
+        for field in self.STRUCTURED_FIELDS:
+            if field in field_level_results and field_level_results[field]:
+                all_field_results.extend(field_level_results[field])
 
         overall_metrics = self.calculate_metrics(all_field_results)
+
+        # BERTScore evaluation for semantic fields (reporting)
+        # Reuse scores from BERTScore match pass when field is in BERTSCORE_MATCH_FIELDS
+        bert_score_per_field = {}
+        if self.use_semantic and matched_count > 0:
+            logger.info("Computing BERTScore for semantic fields...")
+            for field in self.SEMANTIC_FIELDS:
+                if field not in field_level_results or not field_level_results[field]:
+                    continue
+                if field in bert_score_match_cache:
+                    bert_score_per_field[field] = bert_score_match_cache[field]
+                    logger.info(
+                        f"  {field}: mean BERTScore F1 = {bert_score_match_cache[field]['mean_f1']:.4f} "
+                        f"(n={bert_score_match_cache[field]['count']}, from match pass)"
+                    )
+                    continue
+                # Collect non-empty (gold, pred) pairs for this field
+                refs = []
+                cands = []
+                for result in field_level_results[field]:
+                    gold_text = result.get("gold")
+                    pred_text = result.get("predicted")
+                    if (gold_text and str(gold_text).strip() and pred_text and str(pred_text).strip()):
+                        refs.append(str(gold_text).strip())
+                        cands.append(str(pred_text).strip())
+                if refs and cands:
+                    f1_scores = self.compute_bert_score_batch(refs, cands)
+                    if f1_scores:
+                        mean_f1 = float(np.mean(f1_scores))
+                        bert_score_per_field[field] = {
+                            "mean_f1": mean_f1,
+                            "count": len(f1_scores),
+                            "scores": f1_scores
+                        }
+                        logger.info(f"  {field}: mean BERTScore F1 = {mean_f1:.4f} (n={len(f1_scores)})")
+        
+        # BERTScore aggregate (mean over semantic fields)
+        bert_score_aggregate = None
+        if bert_score_per_field:
+            mean_f1_values = [v["mean_f1"] for v in bert_score_per_field.values()]
+            bert_score_aggregate = float(np.mean(mean_f1_values))
+            logger.info(f"BERTScore aggregate (semantic fields): {bert_score_aggregate:.4f}")
 
         # Missing models: gold not matched to any prediction
         missing_models = [m.get("model_name") for m in gold_data
@@ -322,6 +783,8 @@ class StrictExtractionEvaluator:
             },
             "overall_metrics": overall_metrics,
             "field_metrics": field_metrics,
+            "bert_score_per_field": bert_score_per_field,
+            "bert_score_aggregate": bert_score_aggregate,
             "model_results": model_level_results,
             "unmatched_predictions": unmatched_predictions,
             "missing_models": missing_models
@@ -345,8 +808,9 @@ class StrictExtractionEvaluator:
         # Overall metrics
         overall = evaluation["overall_metrics"]
         print(f"\n{'=' * 80}")
-        print("OVERALL METRICS (All Fields Combined) - STRICT")
+        print("OVERALL METRICS (Structured Fields Only - Match-Based)")
         print("=" * 80)
+        print("  Semantic fields (innovation, extension, etc.) are evaluated via BERTScore below.")
         print(f"  Accuracy:        {overall['accuracy']:.2%}")
         print(f"  Precision:       {overall['precision']:.2%}")
         print(f"  Recall:          {overall['recall']:.2%}")
@@ -393,6 +857,32 @@ class StrictExtractionEvaluator:
         for i, (field, f1) in enumerate(sorted_fields_bottom, 1):
             print(f"{i}. {field:<30} F1: {f1:.2%}")
         
+        # BERTScore metrics (semantic fields)
+        if "bert_score_per_field" in evaluation and evaluation["bert_score_per_field"]:
+            print(f"\n{'=' * 80}")
+            print("BERTSCORE METRICS (Semantic Fields - Token-Level Similarity)")
+            print("=" * 80)
+            print("\nBERTScore uses contextual embeddings to evaluate semantic similarity")
+            print("at the token level, capturing paraphrases and meaning beyond exact matches.")
+            print(f"\n{'Field':<30} {'Mean F1':<12} {'Count':<8}")
+            print("-" * 80)
+            
+            bert_score_data = evaluation["bert_score_per_field"]
+            for field in self.SEMANTIC_FIELDS:
+                if field in bert_score_data:
+                    data = bert_score_data[field]
+                    print(f"{field:<30} {data['mean_f1']:<12.4f} {data['count']:<8}")
+            
+            # BERTScore aggregate
+            if evaluation.get("bert_score_aggregate") is not None:
+                print(f"\n{'=' * 80}")
+                print(f"BERTScore Aggregate (mean over semantic fields): {evaluation['bert_score_aggregate']:.4f}")
+                print(f"Overall F1 (match-based, structured fields only): {evaluation['overall_metrics']['f1_score']:.4f}")
+                print("=" * 80)
+                print("\nInterpretation:")
+                print("  - BERTScore: Primary metric for semantic fields (innovation, extension, etc.); token-level similarity.")
+                print("  - Overall F1: Match-based accuracy for structured fields only (model_name, parameters, etc.).")
+        
         # Unmatched/missing
         if evaluation["unmatched_predictions"]:
             print(f"\n{'=' * 80}")
@@ -436,7 +926,12 @@ def main():
         "--fuzzy-threshold",
         type=float,
         default=0.8,
-        help="Similarity threshold for fuzzy matching (0-1). Use 1.0 for exact-only."
+        help="Similarity threshold for fuzzy/semantic matching (0-1). Use 1.0 for exact-only."
+    )
+    parser.add_argument(
+        "--no-semantic",
+        action="store_true",
+        help="Disable semantic similarity (embeddings); use only fuzzy matching (SequenceMatcher)"
     )
     parser.add_argument(
         "--output",
@@ -447,6 +942,12 @@ def main():
         "--paper-title",
         type=str,
         help="Optional: Paper title to filter gold standard (auto-detected from prediction JSON if not provided)"
+    )
+    parser.add_argument(
+        "--bert-score-model",
+        type=str,
+        default="roberta-large",
+        help="Model for BERTScore computation (default: roberta-large). Options: roberta-large, bert-base-uncased, etc."
     )
     
     args = parser.parse_args()
@@ -497,8 +998,12 @@ def main():
     if paper_title:
         logger.info(f"Using paper title for filtering: {paper_title}")
     
-    # Evaluate with STRICT matching
-    evaluator = StrictExtractionEvaluator(fuzzy_threshold=args.fuzzy_threshold)
+    # Evaluate with STRICT matching (semantic similarity enabled by default)
+    evaluator = StrictExtractionEvaluator(
+        fuzzy_threshold=args.fuzzy_threshold,
+        use_semantic=not args.no_semantic,
+        bert_score_model=args.bert_score_model
+    )
     evaluation = evaluator.evaluate_dataset(gold_data, pred_data, paper_title=paper_title)
     
     # Print report

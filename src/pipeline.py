@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import re
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -16,7 +17,10 @@ from typing import Any, Dict, List, Optional
 import yaml
 from dotenv import load_dotenv
 
-from src.llm_extractor import LLMExtractor
+from src.extraction_normalizer import normalize_extraction
+from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
+from src.model_contribution_selector import select_primary_model_contributions
+from src.model_variant_merger import merge_model_variants
 from src.orkg_client import ORKGClient
 from src.orkg_manager import ORKGPaperManager
 from src.paper_fetcher import PaperFetcher
@@ -234,17 +238,49 @@ class ExtractionPipeline:
             result["steps"]["extract"] = "success"
             result["models_extracted"] = len(extraction_result.models)
             result["extraction_data"] = [model.model_dump() for model in extraction_result.models]
+            self._inject_date_created_from_metadata(result["extraction_data"], paper_metadata)
+            result["extraction_data"] = normalize_extraction(result["extraction_data"])
 
-            # Step 4: Map to ORKG template
+            # Step 3.25: Keep contribution-level models, drop auxiliary artifacts
+            logger.info("Step 3.25: Selecting primary model contributions")
+            result["extraction_data"] = select_primary_model_contributions(
+                result["extraction_data"],
+                paper_metadata
+            )
+            result["models_after_selection"] = len(result["extraction_data"])
+            logger.info(
+                "Models after selection: %s -> %s",
+                result["models_extracted"],
+                result["models_after_selection"],
+            )
+
+            # Step 3.5: Merge size variants (align with gold-standard structure)
+            logger.info("Step 3.5: Merging size variants (gold-standard alignment)")
+            result["extraction_data"] = merge_model_variants(
+                result["extraction_data"],
+                paper_metadata
+            )
+            result["models_after_merge"] = len(result["extraction_data"])
+            logger.info(
+                f"Models after merge: {result['models_extracted']} -> "
+                f"{result['models_after_merge']}"
+            )
+
+            # Step 4: Map to ORKG template (use merged models for downstream alignment)
             logger.info("Step 4: Mapping to ORKG template")
-            mapped_result = self.template_mapper.map_extraction_result(extraction_result)
+            merged_response = MultiModelResponse(
+                models=[LLMProperties(**model) for model in result["extraction_data"]],
+                paper_describes_multiple_models=(len(result["extraction_data"]) > 1),
+            )
+            mapped_result = self.template_mapper.map_extraction_result(merged_response)
 
             result["steps"]["map"] = "success"
             result["contributions"] = mapped_result["contributions"]
 
             # Save intermediate results if requested
             if save_intermediate:
-                self._save_intermediate_results(arxiv_id, result)
+                saved_path = self._save_intermediate_results(arxiv_id, result)
+                result["saved_path"] = str(saved_path) if saved_path else None
 
             # Step 5: Upload to ORKG (uses model family grouping)
             if update_orkg:
@@ -386,11 +422,42 @@ class ExtractionPipeline:
             result["steps"]["extract"] = "success"
             result["models_extracted"] = len(extraction_result.models)
             result["extraction_data"] = [m.model_dump() for m in extraction_result.models]
+            self._inject_date_created_from_metadata(result["extraction_data"], paper_metadata)
+            result["extraction_data"] = normalize_extraction(result["extraction_data"])
             result["paper_metadata"] = paper_metadata
 
-            # Step 4: Map to ORKG template
+            # Step 3.25: Keep contribution-level models, drop auxiliary artifacts
+            logger.info("Step 3.25: Selecting primary model contributions")
+            result["extraction_data"] = select_primary_model_contributions(
+                result["extraction_data"],
+                paper_metadata
+            )
+            result["models_after_selection"] = len(result["extraction_data"])
+            logger.info(
+                "Models after selection: %s -> %s",
+                result["models_extracted"],
+                result["models_after_selection"],
+            )
+
+            # Step 3.5: Merge size variants (align with gold-standard structure)
+            logger.info("Step 3.5: Merging size variants (gold-standard alignment)")
+            result["extraction_data"] = merge_model_variants(
+                result["extraction_data"],
+                paper_metadata
+            )
+            result["models_after_merge"] = len(result["extraction_data"])
+            logger.info(
+                f"Models after merge: {result['models_extracted']} -> "
+                f"{result['models_after_merge']}"
+            )
+
+            # Step 4: Map to ORKG template (use merged models for downstream alignment)
             logger.info("Step 4: Mapping to ORKG template")
-            mapped_result = self.template_mapper.map_extraction_result(extraction_result)
+            merged_response = MultiModelResponse(
+                models=[LLMProperties(**model) for model in result["extraction_data"]],
+                paper_describes_multiple_models=(len(result["extraction_data"]) > 1),
+            )
+            mapped_result = self.template_mapper.map_extraction_result(merged_response)
             result["steps"]["map"] = "success"
             result["contributions"] = mapped_result["contributions"]
 
@@ -521,7 +588,7 @@ class ExtractionPipeline:
         return self.process_multiple_papers(arxiv_ids, update_orkg=update_orkg)
 
     def _save_intermediate_results(self, arxiv_id: str, result: Dict[str, Any]):
-        """Save intermediate results to JSON file."""
+        """Save intermediate results to JSON file. Returns path if saved, None otherwise."""
         output_dir = Path("data/extracted")
         output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -529,11 +596,39 @@ class ExtractionPipeline:
         filepath = output_dir / filename
 
         try:
-            with open(filepath, "w") as f:
-                json.dump(result, f, indent=2)
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
             logger.info(f"Saved intermediate results to {filepath}")
+            return filepath
         except Exception as e:
             logger.error(f"Error saving intermediate results: {e}")
+            return None
+
+    def _inject_date_created_from_metadata(
+        self, extraction_data: List[Dict[str, Any]], paper_metadata: Optional[Dict[str, Any]]
+    ) -> None:
+        """
+        Set date_created for all models from paper published date when available.
+        Mutates extraction_data in place. Format: YYYY-MM (e.g. 2022-05).
+        """
+        if not paper_metadata:
+            return
+        published = paper_metadata.get("published")
+        if not published:
+            return
+        year = self._extract_year(published)
+        if year is None:
+            return
+        month = self._extract_month(published)
+        date_created = f"{year}-{month:02d}" if month else f"{year}-01"
+        injected = 0
+        for model in extraction_data:
+            current = model.get("date_created")
+            if current in (None, "", "null", "None"):
+                model["date_created"] = date_created
+                injected += 1
+        if injected:
+            logger.info("Set missing date_created from paper metadata for %s model(s): %s", injected, date_created)
 
     def _extract_year(self, date_string: Optional[str]) -> Optional[int]:
         """Extract year from ISO date string."""
@@ -584,6 +679,30 @@ class ExtractionPipeline:
         }
 
 
+def _run_evaluation(prediction_path: str, gold_path: str) -> bool:
+    """
+    Run strict evaluation script after successful extraction.
+    Returns True if evaluation ran successfully (exit code 0).
+    """
+    project_root = Path(__file__).resolve().parent.parent
+    script = project_root / "scripts" / "evaluation" / "evaluate_extraction_strict.py"
+    if not script.exists():
+        logger.warning("Evaluation script not found: %s", script)
+        return False
+    gold = Path(gold_path)
+    if not gold.is_absolute():
+        gold = project_root / gold_path
+    if not gold.exists():
+        logger.warning("Gold standard not found: %s", gold)
+        return False
+    cmd = [sys.executable, str(script), "--prediction", prediction_path, "--gold", str(gold)]
+    print("\n" + "=" * 80)
+    print("EVALUATION (strict)")
+    print("=" * 80)
+    r = subprocess.run(cmd)
+    return r.returncode == 0
+
+
 def main():
     """Main entry point for command-line usage."""
     import argparse
@@ -601,6 +720,16 @@ def main():
     parser.add_argument("--search", help="Search query")
     parser.add_argument("--max-results", type=int, default=10, help="Max search results")
     parser.add_argument("--no-update", action="store_true", help="Don't update ORKG")
+    parser.add_argument(
+        "--no-evaluate",
+        action="store_true",
+        help="Skip evaluation after extraction (default: run strict evaluation when successful)",
+    )
+    parser.add_argument(
+        "--gold",
+        default="data/gold_standard/R1364660.json",
+        help="Gold-standard JSON for evaluation (default: R1364660.json)",
+    )
     parser.add_argument("--test", action="store_true", help="Test connections")
     parser.add_argument("--status", action="store_true", help="Show pipeline status")
 
@@ -768,11 +897,30 @@ def main():
         if result.get("status") == "completed":
             print(f"[OK] Status: {result.get('status')}")
             print(f"[OK] Models extracted: {result.get('models_extracted', 0)}")
+            if result.get("models_after_selection") is not None:
+                print(f"[OK] Models after selection: {result.get('models_after_selection')}")
+            if result.get("models_after_merge") is not None:
+                print(f"[OK] Models after merge: {result.get('models_after_merge')}")
             saved = result.get("saved_path")
             if saved:
                 print(f"[OK] Saved to: {saved}")
-                print("\nRun evaluation (accuracy / grade):")
-                print(f'  python scripts/evaluation/evaluate_extraction.py --prediction "{saved}"')
+            # Show ORKG upload results (if uploaded)
+            if result.get("orkg_results"):
+                orkg_result = result["orkg_results"]
+                print("\nORKG Upload:")
+                if orkg_result.get("paper_id"):
+                    print(f"  Paper ID: {orkg_result.get('paper_id')}")
+                    print(
+                        f"  Paper URL: https://sandbox.orkg.org/paper/{orkg_result.get('paper_id')}"
+                    )
+                    print(f"  Contributions: {len(orkg_result.get('contribution_ids', []))}")
+                else:
+                    print("  Status: Failed")
+            if saved and not args.no_evaluate:
+                _run_evaluation(saved, args.gold)
+            elif saved and args.no_evaluate:
+                print("\nRun evaluation manually:")
+                print(f'  python scripts/evaluation/evaluate_extraction_strict.py --prediction "{saved}" --gold {args.gold}')
         else:
             print(f"[FAIL] Status: {result.get('status', 'unknown')}")
             if result.get("error"):
@@ -792,6 +940,10 @@ def main():
         if result.get("status") == "completed":
             print(f"✓ Status: {result.get('status')}")
             print(f"✓ Models extracted: {result.get('models_extracted', 0)}")
+            if result.get("models_after_selection") is not None:
+                print(f"✓ Models after selection: {result.get('models_after_selection')}")
+            if result.get("models_after_merge") is not None:
+                print(f"✓ Models after merge: {result.get('models_after_merge')}")
 
             # Show extraction data with key fields for each model version
             if result.get("extraction_data"):

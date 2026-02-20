@@ -148,6 +148,67 @@ pipeline.process_paper("2302.13971")  # ArXiv ID for Llama paper
 python -m src.pipeline --arxiv-id 2302.13971
 ```
 
+## Evaluation
+
+The project includes a comprehensive evaluation framework combining match-based metrics and semantic similarity (BERTScore) for assessing extraction quality.
+
+### Quick Start
+
+```bash
+# Evaluate extraction against gold standard
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --gold data/gold_standard/R1364660.json \
+    --prediction data/extracted/your_extraction.json
+
+# Save evaluation report
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --gold data/gold_standard/R1364660.json \
+    --prediction data/extracted/your_extraction.json \
+    --output results/evaluation_report.json
+```
+
+### Evaluation Metrics
+
+**1. Match-Based Metrics (All Fields)**
+- Precision, Recall, F1-Score for each field
+- Overall F1 across all fields
+- Per-field breakdown showing strengths/weaknesses
+
+**2. BERTScore (Semantic Fields)**
+- Token-level semantic similarity using RoBERTa embeddings
+- Per-field scores for: innovation, extension, application, research_problem, pretraining_corpus
+- BERTScore aggregate (mean over semantic fields)
+
+### Why BERTScore?
+
+Traditional exact matching fails for long-text fields where the same meaning can be expressed differently:
+
+**Gold**: "Introduces a new mixture-of-experts architecture with dynamic routing"  
+**Prediction**: "Presents MoE with dynamic expert routing"
+
+BERTScore captures this semantic similarity through contextual embeddings, making it ideal for evaluating context-rich fields.
+
+### Configuration
+
+```bash
+# Use different BERTScore model
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --bert-score-model bert-base-uncased \
+    --gold data/gold_standard/R1364660.json \
+    --prediction data/extracted/your_extraction.json
+
+# Adjust matching threshold
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --fuzzy-threshold 0.85 \
+    --gold data/gold_standard/R1364660.json \
+    --prediction data/extracted/your_extraction.json
+```
+
+### Documentation
+
+- **Methodology**: [docs/EVALUATION_METHODOLOGY.md](docs/EVALUATION_METHODOLOGY.md)
+- **Implementation details**: [scripts/evaluation/evaluate_extraction_strict.py](scripts/evaluation/evaluate_extraction_strict.py)
+
 ## Testing
 
 ### Run All Tests

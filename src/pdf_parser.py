@@ -7,26 +7,36 @@ This module handles extracting and preprocessing text from PDF files.
 import logging
 import re
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import pdfplumber
 import PyPDF2
 
 logger = logging.getLogger(__name__)
 
+# Delimiter so the LLM knows the following block is structured tables from the document
+TABLES_BLOCK_START = "\n\n[TABLES FROM DOCUMENT]\n"
+TABLES_BLOCK_END = "\n[/TABLES]\n"
+
 
 class PDFParser:
-    """Parses PDF files and extracts text."""
+    """Parses PDF files and extracts text. When using pdfplumber, also extracts tables as markdown."""
 
-    def __init__(self, method: str = "pdfplumber"):
+    def __init__(self, method: str = "pdfplumber", extract_tables: bool = True):
         """
         Initialize PDF parser.
 
         Args:
             method: Parsing method ("pypdf2" or "pdfplumber")
+            extract_tables: If True and method is pdfplumber, extract tables and append as markdown.
         """
         self.method = method
-        logger.info(f"Initialized PDFParser with method: {method}")
+        self.extract_tables = extract_tables
+        logger.info(
+            "Initialized PDFParser with method=%s, extract_tables=%s",
+            method,
+            extract_tables,
+        )
 
     def extract_text_pypdf2(self, pdf_path: Path) -> Optional[str]:
         """
@@ -87,6 +97,63 @@ class PDFParser:
         except Exception as e:
             logger.error(f"Error extracting text with pdfplumber: {e}")
             return None
+
+    @staticmethod
+    def _table_to_markdown(table: List[List[Any]]) -> str:
+        """
+        Convert a table (list of rows, each row list of cell values) to markdown.
+
+        Args:
+            table: List of rows; each row is a list of cell values (str or None).
+
+        Returns:
+            Markdown string with header row and separator.
+        """
+        if not table:
+            return ""
+        # Normalize: same number of columns per row, str cells, escape pipe
+        rows = []
+        ncols = max(len(r) for r in table) if table else 0
+        for row in table:
+            cells = [str(c).strip() if c is not None else "" for c in row]
+            # Pad to ncols
+            while len(cells) < ncols:
+                cells.append("")
+            # Escape pipe so it doesn't break markdown
+            cells = [c.replace("|", "\\|").replace("\n", " ") for c in cells]
+            rows.append(cells)
+        if ncols == 0:
+            return ""
+        header = "| " + " | ".join(rows[0]) + " |"
+        sep = "|" + "---|" * ncols
+        body = "\n".join("| " + " | ".join(cells) + " |" for cells in rows[1:])
+        if body:
+            return header + "\n" + sep + "\n" + body
+        return header
+
+    def extract_tables_pdfplumber(self, pdf_path: Path) -> List[List[List[Any]]]:
+        """
+        Extract all tables from the PDF using pdfplumber (one table = list of rows).
+
+        Args:
+            pdf_path: Path to PDF file.
+
+        Returns:
+            List of tables; each table is a list of rows (list of cell strings).
+        """
+        all_tables = []
+        try:
+            with pdfplumber.open(pdf_path) as pdf:
+                for page in pdf.pages:
+                    tables = page.extract_tables()
+                    if tables:
+                        for t in tables:
+                            if t and any(any(cell for cell in row) for row in t):
+                                all_tables.append(t)
+            logger.info("Extracted %d tables from PDF (pdfplumber)", len(all_tables))
+        except Exception as e:
+            logger.warning("Table extraction failed: %s", e)
+        return all_tables
 
     def extract_text(self, pdf_path: Path) -> Optional[str]:
         """
@@ -193,6 +260,8 @@ class PDFParser:
     def parse(self, pdf_path: Path) -> Optional[Dict[str, Any]]:
         """
         Parse PDF and return structured data.
+        When using pdfplumber with extract_tables=True, appends document tables
+        as markdown after the main text so the LLM can use them for extraction.
 
         Args:
             pdf_path: Path to PDF file
@@ -205,11 +274,29 @@ class PDFParser:
         if not raw_text:
             return None
 
-        # Clean text
+        # Clean text (body only; tables are appended later and not cleaned)
         cleaned_text = self.clean_text(raw_text)
 
-        # Extract sections
-        sections = self.extract_sections(cleaned_text)
+        # Extract tables as markdown (pdfplumber only) and append
+        if self.method == "pdfplumber" and self.extract_tables:
+            tables = self.extract_tables_pdfplumber(pdf_path)
+            if tables:
+                tables_md = "\n\n".join(
+                    self._table_to_markdown(t) for t in tables
+                )
+                if tables_md.strip():
+                    cleaned_text = (
+                        cleaned_text
+                        + TABLES_BLOCK_START
+                        + tables_md
+                        + TABLES_BLOCK_END
+                    )
+                    logger.info(
+                        "Appended %d table(s) as markdown to parsed text",
+                        len(tables),
+                    )
+        # Extract sections (from body text only to avoid matching inside tables)
+        sections = self.extract_sections(self.clean_text(raw_text))
 
         result = {
             "pdf_path": str(pdf_path),
@@ -220,7 +307,11 @@ class PDFParser:
             "word_count": len(cleaned_text.split()),
         }
 
-        logger.info(f"Parsed PDF: {len(cleaned_text)} chars, {result['word_count']} words")
+        logger.info(
+            "Parsed PDF: %d chars, %d words",
+            len(cleaned_text),
+            result["word_count"],
+        )
         return result
 
     def chunk_text(self, text: str, max_chunk_size: int = 8000, overlap: int = 500) -> list[str]:
