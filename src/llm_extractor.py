@@ -170,7 +170,7 @@ class LLMExtractor:
                     "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
                     "pretraining_corpus": "English Wikipedia, BookCorpus",
                     "optimizer": "Adam",
-                    "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",
+                    "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",  # noqa: E501
                     "research_problem": "Language Understanding",
                     "application": "Natural language understanding, question answering, text classification",  # noqa: E501
                     "license": "Apache 2.0",
@@ -319,7 +319,8 @@ REQUIRED FIELDS (must extract for each model):
 2. model_family (required): Model family/series (e.g., GPT, BERT, Llama)
 3. date_created (required): Publication date from paper (YYYY-MM-DD or YYYY)
 4. organization (required): Organization/company that created the model
-5. innovation (required): Key innovation or contribution. Use the paper's own terms for the main method (e.g. MLM, Cloze, bidirectional) and keep to 1-2 sentences.
+5. innovation (required): Key innovation or contribution. Use the paper's own terms for the main \
+method (e.g. MLM, Cloze, bidirectional) and keep to 1-2 sentences.
 6. pretraining_corpus (required): Training dataset/corpus mentioned
 7. research_problem (required): Research problem addressed
 8. parameters (required): Number of parameters as text (e.g., "7B", "175B", "117M")
@@ -351,10 +352,19 @@ CRITICAL INSTRUCTIONS:
 - Model name is NOT the architecture (e.g. "GPT" not "Transformer")
 - If multiple models, set "paper_describes_multiple_models": true
 - parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500
-- Extract ALL required fields. Use null if not in paper; infer when possible.
-- pretraining_architecture: use exactly one of Encoder, Decoder, or Encoder-Decoder (determine from the paper); null if not stated.
-- Always extract pretraining_architecture, pretraining_task, finetuning_task when stated. For optimizer: extract ONLY when the paper explicitly mentions it; if the paper does not mention the optimizer, use null and do NOT guess or infer from other papers. For extension: extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding or technique that extends the model vs a baseline); one sentence; if not mentioned, use null; do not infer from other papers.
-- FORMAT: date_created use YYYY-MM when possible; organization use canonical name (Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, otherwise null; extension = one-sentence technical detail when stated, otherwise null.
+- Extract ALL required fields. Use null if not in paper; \
+infer when possible.
+- pretraining_architecture: use exactly one of Encoder, Decoder, or Encoder-Decoder \
+(determine from the paper); null if not stated.
+- Always extract pretraining_architecture, pretraining_task, finetuning_task when stated. \
+For optimizer: extract ONLY when the paper explicitly mentions it; if the paper does not \
+mention the optimizer, use null and do NOT guess or infer from other papers. For extension: \
+extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a \
+specific encoding or technique that extends the model vs a baseline); one sentence; if not \
+mentioned, use null; do not infer from other papers.
+- FORMAT: date_created use YYYY-MM when possible; organization use canonical name \
+(Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, \
+otherwise null; extension = one-sentence technical detail when stated, otherwise null.
 
 Output JSON:""",
             },

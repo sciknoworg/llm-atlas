@@ -150,4 +150,3 @@ def select_primary_model_contributions(
         len(primary),
     )
     return primary
-

@@ -628,7 +628,10 @@ class ExtractionPipeline:
                 model["date_created"] = date_created
                 injected += 1
         if injected:
-            logger.info("Set missing date_created from paper metadata for %s model(s): %s", injected, date_created)
+            logger.info(
+                "Set missing date_created from paper metadata for %s model(s): %s",
+                injected, date_created,
+            )
 
     def _extract_year(self, date_string: Optional[str]) -> Optional[int]:
         """Extract year from ISO date string."""
@@ -920,7 +923,10 @@ def main():
                 _run_evaluation(saved, args.gold)
             elif saved and args.no_evaluate:
                 print("\nRun evaluation manually:")
-                print(f'  python scripts/evaluation/evaluate_extraction_strict.py --prediction "{saved}" --gold {args.gold}')
+                print(
+                    '  python scripts/evaluation/evaluate_extraction_strict.py '
+                    f'--prediction "{saved}" --gold {args.gold}'
+                )
         else:
             print(f"[FAIL] Status: {result.get('status', 'unknown')}")
             if result.get("error"):

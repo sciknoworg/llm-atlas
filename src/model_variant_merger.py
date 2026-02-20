@@ -121,13 +121,13 @@ def _get_canonical_name(model_name: str) -> str:
     patterns = [
         # Parenthetical role labels: "(ablation)", "(baseline)", "(checkpoint)", etc.
         # Must come first so e.g. "Transformer-XL 151M (ablation)" exposes "151M" for the next pass.
-        r'\s*\((ablation|baseline|checkpoint|variant|experiment|configuration|config|finetuned|fine-tuned|quantized|distilled|pruned|instruct|chat)\)$',
+        r'\s*\((ablation|baseline|checkpoint|variant|experiment|configuration|config|finetuned|fine-tuned|quantized|distilled|pruned|instruct|chat)\)$',  # noqa: E501
         # Parenthetical explicit sizes: "(340M)", "(1.5B)"
         r'\s*\(\d+\.?\d*[MBT]\)$',
         # Trailing corpus/source qualifiers: "-wikibooks", "_bookcorpus", " commoncrawl", etc.
-        # This keeps contributions version-centric (e.g., XLNet variants on WikiBooks merge into XLNet).
-        r'[-_\s]+(wikibooks?|wikipedia|bookcorpus|books?corpus|openwebtext|commoncrawl|cc-?news|c4|pile|ptb|wt103|enwik8|text8)$',
-        # Trailing size words after a space/hyphen/underscore: "BERT Base", "T5-Large", "xlnet_base"
+        # Keeps contributions version-centric (e.g. XLNet on WikiBooks merges into XLNet).
+        r'[-_\s]+(wikibooks?|wikipedia|bookcorpus|books?corpus|openwebtext|commoncrawl|cc-?news|c4|pile|ptb|wt103|enwik8|text8)$',  # noqa: E501
+        # Trailing size words: "BERT Base", "T5-Large", "xlnet_base"
         r'[-_\s]+(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$',
         # Concatenated size words (no separator): "BERTBASE", "BERTLARGE"
         r'(?<=[a-z0-9])(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$',
@@ -257,7 +257,9 @@ def _merge_field(models: List[Dict[str, Any]], field: str) -> Any:
         return None
 
     # Text fields: prefer longest
-    if field in ["innovation", "extension", "pretraining_corpus", "application", "research_problem"]:
+    if field in [
+            "innovation", "extension", "pretraining_corpus", "application", "research_problem"
+    ]:
         return max(non_null, key=lambda v: len(str(v)))
 
     # List/multi-value fields (e.g., blog_post): merge and deduplicate

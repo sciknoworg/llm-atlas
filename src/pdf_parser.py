@@ -20,7 +20,7 @@ TABLES_BLOCK_END = "\n[/TABLES]\n"
 
 
 class PDFParser:
-    """Parses PDF files and extracts text. When using pdfplumber, also extracts tables as markdown."""
+    """Parses PDF files and extracts text. With pdfplumber, also extracts tables as markdown."""
 
     def __init__(self, method: str = "pdfplumber", extract_tables: bool = True):
         """
