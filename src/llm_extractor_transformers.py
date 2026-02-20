@@ -272,8 +272,8 @@ class LLMExtractorTransformers:
                             "finetuning_task, optimizer, extension, innovation (use paper's terms, 1-2 sentences), license, hardware_used.\n"  # noqa: E501
                             "OPTIMIZER: Use optimizer ONLY when the paper explicitly names an optimizer (e.g. Adam, AdamW). "  # noqa: E501
                             "If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n"  # noqa: E501
-                            "EXTENSION: Use extension ONLY when the paper explicitly describes a technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding or technique). One sentence. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If not mentioned, use null; do NOT guess or infer from other papers.\n"  # noqa: E501
-                            "PRETRAINING_ARCHITECTURE: Must be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n"  # noqa: E501
+                            'EXTENSION: Use extension ONLY when the paper explicitly describes a technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding or technique). One sentence. Example: "Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model." If not mentioned, use null; do NOT guess or infer from other papers.\n'  # noqa: E501
+                            'PRETRAINING_ARCHITECTURE: Must be exactly one of "Encoder", "Decoder", or "Encoder-Decoder" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n'  # noqa: E501
                             "Return JSON only."
                         ),
                     },

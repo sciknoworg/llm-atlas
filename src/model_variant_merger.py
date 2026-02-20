@@ -26,8 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def merge_model_variants(
-    models: List[Dict[str, Any]],
-    paper_metadata: Optional[Dict[str, Any]] = None
+    models: List[Dict[str, Any]], paper_metadata: Optional[Dict[str, Any]] = None
 ) -> List[Dict[str, Any]]:
     """
     Merge size variants of the same model into single contributions.
@@ -77,8 +76,7 @@ def merge_model_variants(
             merged.append(merged_model)
             sizes = [m.get("parameters") for m in group if m.get("parameters")]
             logger.info(
-                f"  {canonical_name}: merged {len(group)} variants "
-                f"(sizes: {', '.join(sizes)})"
+                f"  {canonical_name}: merged {len(group)} variants " f"(sizes: {', '.join(sizes)})"
             )
 
     logger.info(f"Result: {len(merged)} unique model(s) after merging")
@@ -121,30 +119,30 @@ def _get_canonical_name(model_name: str) -> str:
     patterns = [
         # Parenthetical role labels: "(ablation)", "(baseline)", "(checkpoint)", etc.
         # Must come first so e.g. "Transformer-XL 151M (ablation)" exposes "151M" for the next pass.
-        r'\s*\((ablation|baseline|checkpoint|variant|experiment|configuration|config|finetuned|fine-tuned|quantized|distilled|pruned|instruct|chat)\)$',  # noqa: E501
+        r"\s*\((ablation|baseline|checkpoint|variant|experiment|configuration|config|finetuned|fine-tuned|quantized|distilled|pruned|instruct|chat)\)$",  # noqa: E501
         # Parenthetical explicit sizes: "(340M)", "(1.5B)"
-        r'\s*\(\d+\.?\d*[MBT]\)$',
+        r"\s*\(\d+\.?\d*[MBT]\)$",
         # Trailing corpus/source qualifiers: "-wikibooks", "_bookcorpus", " commoncrawl", etc.
         # Keeps contributions version-centric (e.g. XLNet on WikiBooks merges into XLNet).
-        r'[-_\s]+(wikibooks?|wikipedia|bookcorpus|books?corpus|openwebtext|commoncrawl|cc-?news|c4|pile|ptb|wt103|enwik8|text8)$',  # noqa: E501
+        r"[-_\s]+(wikibooks?|wikipedia|bookcorpus|books?corpus|openwebtext|commoncrawl|cc-?news|c4|pile|ptb|wt103|enwik8|text8)$",  # noqa: E501
         # Trailing size words: "BERT Base", "T5-Large", "xlnet_base"
-        r'[-_\s]+(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$',
+        r"[-_\s]+(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$",
         # Concatenated size words (no separator): "BERTBASE", "BERTLARGE"
-        r'(?<=[a-z0-9])(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$',
+        r"(?<=[a-z0-9])(Base|Large|XL|XXL|Small|Medium|Tiny|Mini)$",
         # Explicit trailing sizes (no parens): "1.5B", "405B", "117M", "151M", "llama-3-8B"
-        r'[-_\s]+\d+\.?\d*[MBT]$',
+        r"[-_\s]+\d+\.?\d*[MBT]$",
         # Layer/depth count suffixes: "12L", "18L", "24L", "96L", "12-layer", "96-layer"
-        r'[-_\s]+\d+[-_\s]?[Ll](?:ayer(?:s)?)?$',
+        r"[-_\s]+\d+[-_\s]?[Ll](?:ayer(?:s)?)?$",
         # Context-window variants: "8K", "128K", "8K-context", "128K context"
-        r'[-_\s]+\d+[Kk](?:[-_\s]?context(?:\s+window)?)?$',
+        r"[-_\s]+\d+[Kk](?:[-_\s]?context(?:\s+window)?)?$",
         # Training-stage variants: "(pre-trained)", "(post-trained)", "(pre trained)"
-        r'\s*\((?:pre|post)[-\s]?trained\)$',
+        r"\s*\((?:pre|post)[-\s]?trained\)$",
         # Cleanup any trailing separators left after previous stripping steps.
-        r'[-_\s]+$',
+        r"[-_\s]+$",
     ]
 
     for pattern in patterns:
-        name = re.sub(pattern, '', name, flags=re.IGNORECASE)
+        name = re.sub(pattern, "", name, flags=re.IGNORECASE)
 
     return name.strip()
 
@@ -187,10 +185,22 @@ def _merge_group(models: List[Dict[str, Any]], canonical_name: str) -> Dict[str,
 
     # Merge other fields
     fields_to_merge = [
-        "model_family", "date_created", "organization", "innovation",
-        "pretraining_architecture", "pretraining_task", "pretraining_corpus",
-        "finetuning_task", "optimizer", "hardware_used", "extension",
-        "blog_post", "license", "research_problem", "application", "paper_title"
+        "model_family",
+        "date_created",
+        "organization",
+        "innovation",
+        "pretraining_architecture",
+        "pretraining_task",
+        "pretraining_corpus",
+        "finetuning_task",
+        "optimizer",
+        "hardware_used",
+        "extension",
+        "blog_post",
+        "license",
+        "research_problem",
+        "application",
+        "paper_title",
     ]
 
     for field in fields_to_merge:
@@ -208,13 +218,13 @@ def _normalize_parameter_string(param_str: str) -> Optional[str]:
         return None
 
     # Extract numeric + unit (M, B, T)
-    match = re.match(r'^(\d+\.?\d*)\s*([MBT])$', param_str)
+    match = re.match(r"^(\d+\.?\d*)\s*([MBT])$", param_str)
     if match:
         num, unit = match.groups()
         return f"{num}{unit}"
 
     # If it's just a number, assume millions
-    if param_str.replace('.', '').isdigit():
+    if param_str.replace(".", "").isdigit():
         return f"{param_str}M"
 
     return param_str
@@ -229,7 +239,7 @@ def _size_sort_key(size_str: str) -> float:
         "1.5B" → 1500
         "175B" → 175000
     """
-    match = re.match(r'(\d+\.?\d*)\s*([MBT])', size_str.upper())
+    match = re.match(r"(\d+\.?\d*)\s*([MBT])", size_str.upper())
     if not match:
         return 0
 
@@ -258,7 +268,11 @@ def _merge_field(models: List[Dict[str, Any]], field: str) -> Any:
 
     # Text fields: prefer longest
     if field in [
-            "innovation", "extension", "pretraining_corpus", "application", "research_problem"
+        "innovation",
+        "extension",
+        "pretraining_corpus",
+        "application",
+        "research_problem",
     ]:
         return max(non_null, key=lambda v: len(str(v)))
 

@@ -244,8 +244,7 @@ class ExtractionPipeline:
             # Step 3.25: Keep contribution-level models, drop auxiliary artifacts
             logger.info("Step 3.25: Selecting primary model contributions")
             result["extraction_data"] = select_primary_model_contributions(
-                result["extraction_data"],
-                paper_metadata
+                result["extraction_data"], paper_metadata
             )
             result["models_after_selection"] = len(result["extraction_data"])
             logger.info(
@@ -257,8 +256,7 @@ class ExtractionPipeline:
             # Step 3.5: Merge size variants (align with gold-standard structure)
             logger.info("Step 3.5: Merging size variants (gold-standard alignment)")
             result["extraction_data"] = merge_model_variants(
-                result["extraction_data"],
-                paper_metadata
+                result["extraction_data"], paper_metadata
             )
             result["models_after_merge"] = len(result["extraction_data"])
             logger.info(
@@ -429,8 +427,7 @@ class ExtractionPipeline:
             # Step 3.25: Keep contribution-level models, drop auxiliary artifacts
             logger.info("Step 3.25: Selecting primary model contributions")
             result["extraction_data"] = select_primary_model_contributions(
-                result["extraction_data"],
-                paper_metadata
+                result["extraction_data"], paper_metadata
             )
             result["models_after_selection"] = len(result["extraction_data"])
             logger.info(
@@ -442,8 +439,7 @@ class ExtractionPipeline:
             # Step 3.5: Merge size variants (align with gold-standard structure)
             logger.info("Step 3.5: Merging size variants (gold-standard alignment)")
             result["extraction_data"] = merge_model_variants(
-                result["extraction_data"],
-                paper_metadata
+                result["extraction_data"], paper_metadata
             )
             result["models_after_merge"] = len(result["extraction_data"])
             logger.info(
@@ -630,7 +626,8 @@ class ExtractionPipeline:
         if injected:
             logger.info(
                 "Set missing date_created from paper metadata for %s model(s): %s",
-                injected, date_created,
+                injected,
+                date_created,
             )
 
     def _extract_year(self, date_string: Optional[str]) -> Optional[int]:
@@ -924,7 +921,7 @@ def main():
             elif saved and args.no_evaluate:
                 print("\nRun evaluation manually:")
                 print(
-                    '  python scripts/evaluation/evaluate_extraction_strict.py '
+                    "  python scripts/evaluation/evaluate_extraction_strict.py "
                     f'--prediction "{saved}" --gold {args.gold}'
                 )
         else:

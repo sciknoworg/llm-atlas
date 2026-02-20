@@ -281,16 +281,9 @@ class PDFParser:
         if self.method == "pdfplumber" and self.extract_tables:
             tables = self.extract_tables_pdfplumber(pdf_path)
             if tables:
-                tables_md = "\n\n".join(
-                    self._table_to_markdown(t) for t in tables
-                )
+                tables_md = "\n\n".join(self._table_to_markdown(t) for t in tables)
                 if tables_md.strip():
-                    cleaned_text = (
-                        cleaned_text
-                        + TABLES_BLOCK_START
-                        + tables_md
-                        + TABLES_BLOCK_END
-                    )
+                    cleaned_text = cleaned_text + TABLES_BLOCK_START + tables_md + TABLES_BLOCK_END
                     logger.info(
                         "Appended %d table(s) as markdown to parsed text",
                         len(tables),

@@ -581,9 +581,7 @@ Output JSON:""",
                 # OLD (broke []): r':\s*([^",}\]]+?)(\s*[,}\]])'
                 # NEW: only match when value doesn't start with [ or { (to preserve [] and {})
                 response_text = re.sub(
-                    r':\s*([^",}\[\{][^",}\]]*?)(\s*[,}\]])',
-                    r': "\1"\2',
-                    response_text
+                    r':\s*([^",}\[\{][^",}\]]*?)(\s*[,}\]])', r': "\1"\2', response_text
                 )
 
                 # Fix cases like "short_description:"", -> "short_description":"",
