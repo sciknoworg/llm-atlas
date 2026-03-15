@@ -1,0 +1,480 @@
+{
+  "arxiv_id": "2201.07520v1",
+  "status": "started",
+  "timestamp": "2026-02-26T02:22:51.810689",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2201.07520",
+    "title": "CM3: A Causal Masked Multimodal Model of the Internet",
+    "authors": [
+      "Armen Aghajanyan",
+      "Bernie Huang",
+      "Candace Ross",
+      "Vladimir Karpukhin",
+      "Hu Xu",
+      "Naman Goyal",
+      "Dmytro Okhonko",
+      "Mandar Joshi",
+      "Gargi Ghosh",
+      "Mike Lewis",
+      "Luke Zettlemoyer"
+    ],
+    "abstract": "We introduce CM3, a family of causally masked generative models trained over a large corpus of structured multi-modal documents that can contain both text and image tokens. Our new causally masked approach generates tokens left to right while also masking out a small number of long token spans that are generated at the end of the string, instead of their original positions. The casual masking object provides a type of hybrid of the more common causal and masked language models, by enabling full generative modeling while also providing bidirectional context when generating the masked spans. We train causally masked language-image models on large-scale web and Wikipedia articles, where each document contains all of the text, hypertext markup, hyperlinks, and image tokens (from a VQVAE-GAN), provided in the order they appear in the original HTML source (before masking). The resulting CM3 models can generate rich structured, multi-modal outputs while conditioning on arbitrary masked document contexts, and thereby implicitly learn a wide range of text, image, and cross modal tasks. They can be prompted to recover, in a zero-shot fashion, the functionality of models such as DALL-E, GENRE, and HTLM. We set the new state-of-the-art in zero-shot summarization, entity linking, and entity disambiguation while maintaining competitive performance in the fine-tuning setting. We can generate images unconditionally, conditioned on text (like DALL-E) and do captioning all in a zero-shot setting with a single model.",
+    "published": "2022-01-19T10:45:38+00:00",
+    "updated": "2022-01-19T10:45:38+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2201.07520v1",
+    "entry_id": "http://arxiv.org/abs/2201.07520v1",
+    "pdf_path": "data\\papers\\2201.07520.pdf"
+  },
+  "text_length": 52534,
+  "word_count": 4295,
+  "models_extracted": 11,
+  "extraction_data": [
+    {
+      "model_name": "CM3",
+      "parameters": "800M, 2.7B, 13B",
+      "parameters_millions": 13000,
+      "model_family": "CM3",
+      "date_created": "2022-01",
+      "organization": "Meta",
+      "innovation": "Introduces a causally masked training objective that enables both full generative modeling and bidirectional context understanding, extending the capabilities of standard causal language models to multimodal tasks like image generation, captioning, and entity linking.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal masked language modeling",
+      "pretraining_corpus": "Large-scale web and Wikipedia articles containing text, hypertext markup, hyperlinks, and image tokens (VQVAE-GAN)",
+      "finetuning_task": "Supervised fine-tuning, adversarial fine-tuning, prompt-based fine-tuning",
+      "optimizer": "Adam",
+      "hardware_used": "240 V100 GPUs",
+      "extension": "Causally masked objective enables bidirectional context for masked spans while maintaining left-to-right generation for unmasked tokens, using enumerated mask tokens and span relocation to the end of the document.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal language modeling of structured documents (HTML) with images and hypertext",
+      "application": "Zero-shot summarization, entity linking, entity disambiguation, image generation, image captioning, unconditional image generation, chat, and general language tasks",
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    },
+    {
+      "model_name": "CM3-X",
+      "parameters": "125M",
+      "parameters_millions": 125,
+      "model_family": "CM3",
+      "date_created": "2021-01",
+      "organization": "Meta",
+      "innovation": "Causally masked multimodal modeling of structured documents (HTML) including images and hypertext links, extending prior work on text-only pre-training with a decoder-only architecture and a new causally masked objective.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causally masked language modeling",
+      "pretraining_corpus": "CC-NEWS, English Wikipedia",
+      "finetuning_task": null,
+      "optimizer": "Adam",
+      "hardware_used": "240 V100 GPUs (for medium/large models; XSmall/Small under-trained for hyperparameter testing)",
+      "extension": "Size hints for mask generation were tested but degraded performance, and image tokenization via VQVAE-GAN was integrated into the HTML document structure.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multimodal language modeling of structured documents (HTML) with images and hypertext",
+      "application": "Zero-shot and few-shot prompting for image generation, text generation, and multimodal tasks",
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    },
+    {
+      "model_name": "CM3-Caption-Beam",
+      "model_family": "CM3",
+      "date_created": "2022-01",
+      "organization": "Meta",
+      "innovation": "Zero-shot captioning using beam search decoding for multimodal generation tasks.",
+      "pretraining_corpus": "Large-scale multimodal corpus (HTML-based documents including Wikipedia and Common Crawl)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Zero-shot captioning",
+      "license": null,
+      "research_problem": "Multimodal learning, zero-shot captioning",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal masked modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    },
+    {
+      "model_name": "CM3-Caption-CLIP",
+      "model_family": "CM3",
+      "date_created": "2022-01",
+      "organization": "Meta",
+      "innovation": "Zero-shot captioning using CLIP-based decoding for improved semantic alignment in multimodal tasks.",
+      "pretraining_corpus": "Large-scale multimodal corpus (HTML-based documents including Wikipedia and Common Crawl)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Zero-shot captioning",
+      "license": null,
+      "research_problem": "Multimodal learning, zero-shot captioning",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal masked modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    }
+  ],
+  "models_after_selection": 11,
+  "models_after_merge": 4,
+  "contributions": [
+    {
+      "label": "CM3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a causally masked training objective that enables both full generative modeling and bidirectional context understanding, extending the capabilities of standard causal language models to multimodal tasks like image generation, captioning, and entity linking.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal masked language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale web and Wikipedia articles containing text, hypertext markup, hyperlinks, and image tokens (VQVAE-GAN)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning, adversarial fine-tuning, prompt-based fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "800M, 2.7B, 13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "13000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "240 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot summarization, entity linking, entity disambiguation, image generation, image captioning, unconditional image generation, chat, and general language tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language modeling of structured documents (HTML) with images and hypertext",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CM3-X",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3-X",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Causally masked multimodal modeling of structured documents (HTML) including images and hypertext links, extending prior work on text-only pre-training with a decoder-only architecture and a new causally masked objective.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causally masked language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC-NEWS, English Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "125M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "125",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "240 V100 GPUs (for medium/large models; XSmall/Small under-trained for hyperparameter testing)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot and few-shot prompting for image generation, text generation, and multimodal tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language modeling of structured documents (HTML) with images and hypertext",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CM3-Caption-Beam",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3-Caption-Beam",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Zero-shot captioning using beam search decoding for multimodal generation tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal masked modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale multimodal corpus (HTML-based documents including Wikipedia and Common Crawl)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal learning, zero-shot captioning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CM3-Caption-CLIP",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3-Caption-CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Zero-shot captioning using CLIP-based decoding for improved semantic alignment in multimodal tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal masked modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale multimodal corpus (HTML-based documents including Wikipedia and Common Crawl)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal learning, zero-shot captioning",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

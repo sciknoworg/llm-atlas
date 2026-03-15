@@ -1,0 +1,1522 @@
+{
+  "arxiv_id": "2112.06905v2",
+  "status": "started",
+  "timestamp": "2026-03-02T02:31:49.794525",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2112.06905",
+    "title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts",
+    "authors": [
+      "Nan Du",
+      "Yanping Huang",
+      "Andrew M. Dai",
+      "Simon Tong",
+      "Dmitry Lepikhin",
+      "Yuanzhong Xu",
+      "Maxim Krikun",
+      "Yanqi Zhou",
+      "Adams Wei Yu",
+      "Orhan Firat",
+      "Barret Zoph",
+      "Liam Fedus",
+      "Maarten Bosma",
+      "Zongwei Zhou",
+      "Tao Wang",
+      "Yu Emma Wang",
+      "Kellie Webster",
+      "Marie Pellat",
+      "Kevin Robinson",
+      "Kathleen Meier-Hellstern",
+      "Toju Duke",
+      "Lucas Dixon",
+      "Kun Zhang",
+      "Quoc V Le",
+      "Yonghui Wu",
+      "Zhifeng Chen",
+      "Claire Cui"
+    ],
+    "abstract": "Scaling language models with more data, compute and parameters has driven significant progress in natural language processing. For example, thanks to scaling, GPT-3 was able to achieve strong results on in-context learning tasks. However, training these large dense models requires significant amounts of computing resources. In this paper, we propose and develop a family of language models named GLaM (Generalist Language Model), which uses a sparsely activated mixture-of-experts architecture to scale the model capacity while also incurring substantially less training cost compared to dense variants. The largest GLaM has 1.2 trillion parameters, which is approximately 7x larger than GPT-3. It consumes only 1/3 of the energy used to train GPT-3 and requires half of the computation flops for inference, while still achieving better overall zero-shot and one-shot performance across 29 NLP tasks.",
+    "published": "2021-12-13T18:58:19+00:00",
+    "updated": "2022-08-01T21:07:58+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2112.06905v2",
+    "entry_id": "http://arxiv.org/abs/2112.06905v2",
+    "pdf_path": "data\\papers\\2112.06905.pdf"
+  },
+  "text_length": 94017,
+  "word_count": 9200,
+  "models_extracted": 21,
+  "extraction_data": [
+    {
+      "model_name": "GLaM 64B/64E",
+      "parameters": "64B, 64B/64E",
+      "parameters_millions": 64,
+      "model_family": "GLaM",
+      "date_created": "2022-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to sparsely activate a subset of parameters (64B out of 1.2T), enabling efficient scaling while maintaining performance on few-shot learning tasks.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "pretraining_corpus": "Large-scale text corpus (filtered and unfiltered)",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "TPU-v4",
+      "extension": "Mixture-of-Experts (MoE) architecture for sparse parameter activation.",
+      "blog_post": null,
+      "license": "closed source (Google)",
+      "research_problem": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+      "application": "General language understanding, few-shot learning, natural language processing tasks",
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM",
+      "parameters": "117M, 1.5B, 7B, 137B, 1.2T",
+      "parameters_millions": 1500,
+      "model_family": "GLaM",
+      "date_created": "2022-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a dense decoder-only architecture with Mixture-of-Experts (MoE) layers to efficiently scale language models while maintaining computational efficiency. The model dynamically selects the best two experts per token, reducing computational cost.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "pretraining_corpus": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "NVIDIA V100 GPUs (as inferred from similar works)",
+      "extension": "The use of Mixture-of-Experts (MoE) layers allows for sparse activation of experts, reducing computational cost while maintaining model capacity.",
+      "blog_post": null,
+      "license": "closed source (Google)",
+      "research_problem": "Efficient scaling of large language models while maintaining performance on few-shot learning tasks.",
+      "application": "General language understanding, few-shot learning, natural language processing tasks",
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 8B/64E",
+      "parameters": "8B, 8B/64E",
+      "parameters_millions": 8000,
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "GLaM introduces a Mixture-of-Experts (MoE) architecture where each Transformer layer is replaced by a sparse MoE layer, enabling efficient scaling of language models while maintaining computational efficiency. The model dynamically selects the best two experts per token, reducing computational cost.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "NVIDIA V100 GPUs (as inferred from similar works)",
+      "extension": "The use of Mixture-of-Experts (MoE) layers allows for sparse activation of experts, reducing computational cost while maintaining model capacity.",
+      "blog_post": null,
+      "license": "Llama 3 Community License",
+      "research_problem": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+      "application": "Natural language understanding, text generation, and other language tasks.",
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 405B/64E",
+      "parameters": "405B/64E, 405B",
+      "parameters_millions": 405000,
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "GLaM introduces a decoder-only architecture with Mixture-of-Experts (MoE) layers, enabling efficient scaling of language models by dynamically selecting the best two experts per token, reducing computational cost.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "NVIDIA V100 GPUs (as inferred from similar works)",
+      "extension": "The use of Mixture-of-Experts (MoE) layers allows for sparse activation of experts, reducing computational cost while maintaining model capacity.",
+      "blog_post": null,
+      "license": "Llama 3 Community License",
+      "research_problem": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+      "application": "Natural language understanding, text generation, and other language tasks.",
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 1.9B/64E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "1.9B/64E",
+      "parameters_millions": 1900,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 20B/64E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "20B/64E",
+      "parameters_millions": 2000,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 27B/256E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "27B/256E",
+      "parameters_millions": 2700,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 53B/128E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "53B/128E",
+      "parameters_millions": 5300,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 105B/128E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "105B/128E",
+      "parameters_millions": 1050,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 1.2T/64E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+      "pretraining_corpus": "Filtered web pages (143B tokens)",
+      "parameters": "1.2T/64E",
+      "parameters_millions": 12000,
+      "application": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+      "license": "Not specified (likely closed source)",
+      "research_problem": "Efficient scaling of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 1.7B/64E",
+      "model_family": "GLaM",
+      "date_created": "2022-07",
+      "organization": "Google",
+      "innovation": "GLaM introduces a Mixture-of-Experts (MoE) architecture that sparsely activates a subset of parameters per prediction, enabling efficient scaling of language models while maintaining performance. This approach reduces computational and energy costs compared to dense models.",
+      "pretraining_corpus": "Large-scale text corpus (filtered and unfiltered)",
+      "parameters": "1.7B",
+      "parameters_millions": 1700,
+      "application": "Natural language understanding, text generation, and other language tasks.",
+      "license": "Not specified (likely closed source, as the paper does not mention a license)",
+      "research_problem": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPU-v4",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Mixture-of-Experts (MoE) architecture for sparse parameter activation, enabling efficient scaling.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 70B/64E",
+      "model_family": "GLaM",
+      "date_created": "2022-07",
+      "organization": "Google",
+      "innovation": "GLaM uses a Mixture-of-Experts (MoE) architecture to sparsely activate parameters, enabling efficient scaling while maintaining performance.",
+      "pretraining_corpus": "Large-scale text corpus (filtered and unfiltered)",
+      "parameters": "70B",
+      "parameters_millions": 7000,
+      "application": "Natural language understanding, text generation, and other language tasks.",
+      "license": "Not specified (likely closed source, as the paper does not mention a license)",
+      "research_problem": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPU-v4",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Mixture-of-Experts (MoE) architecture for sparse parameter activation.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    },
+    {
+      "model_name": "GLaM 0.1B/64E",
+      "model_family": "GLaM",
+      "date_created": "2023-07",
+      "organization": "Google",
+      "innovation": "Efficient scaling of language models using Mixture-of-Experts (MoE) architecture to reduce computational cost while maintaining performance.",
+      "pretraining_corpus": "Large-scale text corpus",
+      "parameters": "0.1B",
+      "parameters_millions": 100,
+      "application": "General language understanding, question answering, and reasoning tasks",
+      "license": "Closed source (Google)",
+      "research_problem": "Scaling large language models efficiently",
+      "model_version": null,
+      "pretraining_architecture": "Transformer",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GLaM: Efficient Scaling of Language Models with Mixture-of-Experts"
+    }
+  ],
+  "models_after_selection": 20,
+  "models_after_merge": 13,
+  "contributions": [
+    {
+      "label": "GLaM 64B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 64B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to sparsely activate a subset of parameters (64B out of 1.2T), enabling efficient scaling while maintaining performance on few-shot learning tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling (next-token prediction)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus (filtered and unfiltered)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "64B, 64B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "64",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPU-v4",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General language understanding, few-shot learning, natural language processing tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a dense decoder-only architecture with Mixture-of-Experts (MoE) layers to efficiently scale language models while maintaining computational efficiency. The model dynamically selects the best two experts per token, reducing computational cost.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling (next-token prediction)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "117M, 1.5B, 7B, 137B, 1.2T",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1500",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs (as inferred from similar works)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General language understanding, few-shot learning, natural language processing tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance on few-shot learning tasks.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 8B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 8B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM introduces a Mixture-of-Experts (MoE) architecture where each Transformer layer is replaced by a sparse MoE layer, enabling efficient scaling of language models while maintaining computational efficiency. The model dynamically selects the best two experts per token, reducing computational cost.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B, 8B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "8000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs (as inferred from similar works)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text generation, and other language tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 405B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 405B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM introduces a decoder-only architecture with Mixture-of-Experts (MoE) layers, enabling efficient scaling of language models by dynamically selecting the best two experts per token, reducing computational cost.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered Webpages, Wikipedia, Conversations, Books, News, Forums",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "405B/64E, 405B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "405000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs (as inferred from similar works)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text generation, and other language tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 1.9B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 1.9B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.9B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1900",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 20B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 20B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "2000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 27B/256E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 27B/256E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "27B/256E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "2700",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 53B/128E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 53B/128E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "53B/128E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "5300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 105B/128E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 105B/128E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "105B/128E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1050",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 1.2T/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 1.2T/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a mixture-of-experts architecture to scale language models efficiently by sparsely activating a subset of experts during inference, reducing computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Filtered web pages (143B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2T/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "12000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural Language Understanding (NLU) and Natural Language Generation (NLG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 1.7B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 1.7B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM introduces a Mixture-of-Experts (MoE) architecture that sparsely activates a subset of parameters per prediction, enabling efficient scaling of language models while maintaining performance. This approach reduces computational and energy costs compared to dense models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling (next-token prediction)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus (filtered and unfiltered)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1700",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPU-v4",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text generation, and other language tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 70B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 70B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GLaM uses a Mixture-of-Experts (MoE) architecture to sparsely activate parameters, enabling efficient scaling while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling (next-token prediction)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus (filtered and unfiltered)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "7000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPU-v4",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text generation, and other language tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient scaling of large language models while maintaining performance and reducing computational resources.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GLaM 0.1B/64E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GLaM 0.1B/64E",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GLaM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Efficient scaling of language models using Mixture-of-Experts (MoE) architecture to reduce computational cost while maintaining performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Transformer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "100",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General language understanding, question answering, and reasoning tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling large language models efficiently",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

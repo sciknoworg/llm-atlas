@@ -1,0 +1,262 @@
+{
+  "arxiv_id": "2203.11147v1",
+  "status": "started",
+  "timestamp": "2026-02-26T04:47:15.481960",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2203.11147",
+    "title": "Teaching language models to support answers with verified quotes",
+    "authors": [
+      "Jacob Menick",
+      "Maja Trebacz",
+      "Vladimir Mikulik",
+      "John Aslanides",
+      "Francis Song",
+      "Martin Chadwick",
+      "Mia Glaese",
+      "Susannah Young",
+      "Lucy Campbell-Gillingham",
+      "Geoffrey Irving",
+      "Nat McAleese"
+    ],
+    "abstract": "Recent large language models often answer factual questions correctly. But users can't trust any given claim a model makes without fact-checking, because language models can hallucinate convincing nonsense. In this work we use reinforcement learning from human preferences (RLHP) to train \"open-book\" QA models that generate answers whilst also citing specific evidence for their claims, which aids in the appraisal of correctness. Supporting evidence is drawn from multiple documents found via a search engine, or from a single user-provided document. Our 280 billion parameter model, GopherCite, is able to produce answers with high quality supporting evidence and abstain from answering when unsure. We measure the performance of GopherCite by conducting human evaluation of answers to questions in a subset of the NaturalQuestions and ELI5 datasets. The model's response is found to be high-quality 80\\% of the time on this Natural Questions subset, and 67\\% of the time on the ELI5 subset. Abstaining from the third of questions for which it is most unsure improves performance to 90\\% and 80\\% respectively, approaching human baselines. However, analysis on the adversarial TruthfulQA dataset shows why citation is only one part of an overall strategy for safety and trustworthiness: not all claims supported by evidence are true.",
+    "published": "2022-03-21T17:26:29+00:00",
+    "updated": "2022-03-21T17:26:29+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2203.11147v1",
+    "entry_id": "http://arxiv.org/abs/2203.11147v1",
+    "pdf_path": "data\\papers\\2203.11147.pdf"
+  },
+  "text_length": 127937,
+  "word_count": 6866,
+  "models_extracted": 7,
+  "extraction_data": [
+    {
+      "model_name": "GopherCite",
+      "parameters": "1.4B, 7B, 280B",
+      "parameters_millions": 280000,
+      "model_family": "Gopher",
+      "date_created": "2022-01",
+      "organization": "Google",
+      "innovation": "GopherCite introduces a mechanism for language models to support answers with verified quotes using inline evidence syntax, enabling the model to generate claims and directly cite verbatim quotes from source documents. This approach focuses on reading comprehension and supporting individual claims with evidence.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": null,
+      "finetuning_task": "Supervised fine-tuning (SFT) and Reinforcement Learning (RL) with human preferences",
+      "optimizer": "SGD",
+      "hardware_used": "TPUv3 (128 cores)",
+      "extension": "Uses a reward model for reranking candidate answers and reinforcement learning to improve the quality of supported and plausible responses, including an abstention mechanism based on reward model confidence thresholds.",
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "Teaching language models to support their answers with verified quotes from retrieved documents",
+      "application": "Question answering with evidence support, explanation-seeking tasks, chatbots requiring verifiable responses",
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "GopherCite v2",
+      "model_family": "Gopher",
+      "date_created": "2022-01",
+      "organization": "Google",
+      "innovation": "Enhanced version of GopherCite that integrates source trustworthiness and alignment techniques like debate to improve the reliability and trustworthiness of generated quotes and answers.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Question answering, fact verification, explainable AI, dialogue systems",
+      "license": null,
+      "research_problem": "Improving the reliability and trustworthiness of language model outputs by incorporating source evaluation and selective abstention.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning with reward model-based abstention and source trustworthiness evaluation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Incorporates source trustworthiness evaluation and reward model-based abstention to decline answering a configurable proportion of questions, ensuring more careful qualification of answers.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    }
+  ],
+  "models_after_selection": 5,
+  "models_after_merge": 2,
+  "contributions": [
+    {
+      "label": "GopherCite",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GopherCite",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Gopher",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GopherCite introduces a mechanism for language models to support answers with verified quotes using inline evidence syntax, enabling the model to generate claims and directly cite verbatim quotes from source documents. This approach focuses on reading comprehension and supporting individual claims with evidence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) and Reinforcement Learning (RL) with human preferences",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "SGD",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.4B, 7B, 280B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "280000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPUv3 (128 cores)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question answering with evidence support, explanation-seeking tasks, chatbots requiring verifiable responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Teaching language models to support their answers with verified quotes from retrieved documents",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GopherCite v2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GopherCite v2",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Gopher",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Enhanced version of GopherCite that integrates source trustworthiness and alignment techniques like debate to improve the reliability and trustworthiness of generated quotes and answers.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning with reward model-based abstention and source trustworthiness evaluation",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question answering, fact verification, explainable AI, dialogue systems",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving the reliability and trustworthiness of language model outputs by incorporating source evaluation and selective abstention.",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

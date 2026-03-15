@@ -1,0 +1,274 @@
+{
+  "arxiv_id": "2212.03533v2",
+  "status": "started",
+  "timestamp": "2026-02-26T04:49:09.860366",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2212.03533",
+    "title": "Text Embeddings by Weakly-Supervised Contrastive Pre-training",
+    "authors": [
+      "Liang Wang",
+      "Nan Yang",
+      "Xiaolong Huang",
+      "Binxing Jiao",
+      "Linjun Yang",
+      "Daxin Jiang",
+      "Rangan Majumder",
+      "Furu Wei"
+    ],
+    "abstract": "This paper presents E5, a family of state-of-the-art text embeddings that transfer well to a wide range of tasks. The model is trained in a contrastive manner with weak supervision signals from our curated large-scale text pair dataset (called CCPairs). E5 can be readily used as a general-purpose embedding model for any tasks requiring a single-vector representation of texts such as retrieval, clustering, and classification, achieving strong performance in both zero-shot and fine-tuned settings. We conduct extensive evaluations on 56 datasets from the BEIR and MTEB benchmarks. For zero-shot settings, E5 is the first model that outperforms the strong BM25 baseline on the BEIR retrieval benchmark without using any labeled data. When fine-tuned, E5 obtains the best results on the MTEB benchmark, beating existing embedding models with 40x more parameters.",
+    "published": "2022-12-07T09:25:54+00:00",
+    "updated": "2024-02-22T06:21:51+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.IR"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2212.03533v2",
+    "entry_id": "http://arxiv.org/abs/2212.03533v2",
+    "pdf_path": "data\\papers\\2212.03533.pdf"
+  },
+  "text_length": 53359,
+  "word_count": 3660,
+  "models_extracted": 10,
+  "extraction_data": [
+    {
+      "model_name": "E5",
+      "parameters": "33M, 110M, 330M, 1.3B",
+      "parameters_millions": 1300,
+      "model_family": "E5",
+      "date_created": "2022-01",
+      "organization": "Microsoft",
+      "innovation": "E5 introduces weakly-supervised contrastive pre-training using a curated large-scale text pair dataset (CCPairs), enabling strong zero-shot and fine-tuned performance on retrieval, clustering, and classification tasks without relying on labeled data or low-quality synthetic pairs.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Weakly-supervised contrastive learning with in-batch negatives",
+      "pretraining_corpus": "CommonCrawl, Wikipedia, Reddit, S2ORC, StackExchange, News, and others (∼270M text pairs)",
+      "finetuning_task": "Fine-tuning on labeled datasets for specific tasks",
+      "optimizer": "AdamW",
+      "hardware_used": "Nvidia V100 GPU",
+      "extension": "Consistency-based data filtering technique to remove noisy text pairs, and asymmetric design with prefix identifiers ('query:' and 'passage:') to break symmetry in text pairs.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "General-purpose text embeddings for retrieval, clustering, and classification",
+      "application": "Zero-shot retrieval, few-shot text classification, zero-shot text classification, semantic textual similarity, text clustering",
+      "paper_title": "Text Embeddings by Weakly-Supervised Contrastive Pre-training"
+    },
+    {
+      "model_name": "E5-PT",
+      "parameters": "BASE, 300M",
+      "parameters_millions": 300,
+      "model_family": "E5",
+      "date_created": "2023-01",
+      "organization": "Microsoft",
+      "innovation": "Weakly-supervised contrastive pre-training on curated CCPairs dataset, enabling unsupervised models to outperform BM25 on BEIR benchmark.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive pre-training",
+      "pretraining_corpus": "CCPairs dataset",
+      "finetuning_task": "Supervised fine-tuning on MS-MARCO, NQ, and NLI datasets",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": "Contrastive pre-training on weakly-supervised CCPairs dataset, using mined hard negatives and re-ranker scores from SimLM for fine-tuning.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Text embeddings for information retrieval and semantic similarity tasks",
+      "application": "Information retrieval, text classification, clustering, reranking, semantic textual similarity (STS), summarization",
+      "paper_title": "Text Embeddings by Weakly-Supervised Contrastive Pre-training"
+    }
+  ],
+  "models_after_selection": 10,
+  "models_after_merge": 2,
+  "contributions": [
+    {
+      "label": "E5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "E5",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "E5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "E5 introduces weakly-supervised contrastive pre-training using a curated large-scale text pair dataset (CCPairs), enabling strong zero-shot and fine-tuned performance on retrieval, clustering, and classification tasks without relying on labeled data or low-quality synthetic pairs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Weakly-supervised contrastive learning with in-batch negatives",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CommonCrawl, Wikipedia, Reddit, S2ORC, StackExchange, News, and others (∼270M text pairs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Fine-tuning on labeled datasets for specific tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "33M, 110M, 330M, 1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1300",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia V100 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot retrieval, few-shot text classification, zero-shot text classification, semantic textual similarity, text clustering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "General-purpose text embeddings for retrieval, clustering, and classification",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "E5-PT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "E5-PT",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "E5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Weakly-supervised contrastive pre-training on curated CCPairs dataset, enabling unsupervised models to outperform BM25 on BEIR benchmark.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CCPairs dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on MS-MARCO, NQ, and NLI datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "BASE, 300M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Information retrieval, text classification, clustering, reranking, semantic textual similarity (STS), summarization",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text embeddings for information retrieval and semantic similarity tasks",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

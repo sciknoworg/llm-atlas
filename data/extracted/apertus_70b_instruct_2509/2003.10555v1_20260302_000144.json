@@ -1,0 +1,152 @@
+{
+  "arxiv_id": "2003.10555v1",
+  "status": "started",
+  "timestamp": "2026-03-01T23:48:56.236754",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2003.10555",
+    "title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+    "authors": [
+      "Kevin Clark",
+      "Minh-Thang Luong",
+      "Quoc V. Le",
+      "Christopher D. Manning"
+    ],
+    "abstract": "Masked language modeling (MLM) pre-training methods such as BERT corrupt the input by replacing some tokens with [MASK] and then train a model to reconstruct the original tokens. While they produce good results when transferred to downstream NLP tasks, they generally require large amounts of compute to be effective. As an alternative, we propose a more sample-efficient pre-training task called replaced token detection. Instead of masking the input, our approach corrupts it by replacing some tokens with plausible alternatives sampled from a small generator network. Then, instead of training a model that predicts the original identities of the corrupted tokens, we train a discriminative model that predicts whether each token in the corrupted input was replaced by a generator sample or not. Thorough experiments demonstrate this new pre-training task is more efficient than MLM because the task is defined over all input tokens rather than just the small subset that was masked out. As a result, the contextual representations learned by our approach substantially outperform the ones learned by BERT given the same model size, data, and compute. The gains are particularly strong for small models; for example, we train a model on one GPU for 4 days that outperforms GPT (trained using 30x more compute) on the GLUE natural language understanding benchmark. Our approach also works well at scale, where it performs comparably to RoBERTa and XLNet while using less than 1/4 of their compute and outperforms them when using the same amount of compute.",
+    "published": "2020-03-23T21:17:42+00:00",
+    "updated": "2020-03-23T21:17:42+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2003.10555v1",
+    "entry_id": "http://arxiv.org/abs/2003.10555v1",
+    "pdf_path": "data\\papers\\2003.10555.pdf"
+  },
+  "text_length": 61329,
+  "word_count": 5150,
+  "models_extracted": 9,
+  "extraction_data": [
+    {
+      "model_name": "ELECTRA",
+      "parameters": "14M, 85M, 110M, 300M, 330M, 335M, 400M, 600M",
+      "parameters_millions": 600,
+      "model_family": "ELECTRA",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "ELECTRA introduces a novel pre-training objective where the model learns to distinguish between real and fake text samples, improving efficiency by using a smaller generator and a larger discriminator. This approach reduces computational requirements while maintaining strong performance.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Replaced Token Detection",
+      "pretraining_corpus": "Large-scale text corpus (e.g., BooksCorpus)",
+      "finetuning_task": "Supervised discriminative fine-tuning",
+      "optimizer": "REINFORCE (reinforcement learning)",
+      "hardware_used": null,
+      "extension": "Adversarial contrastive estimation (Bose et al., 2018) approach for language modeling",
+      "blog_post": null,
+      "license": "Closed source (as per paper)",
+      "research_problem": "Efficient pre-training for large language models",
+      "application": "Natural language understanding, text classification, question answering",
+      "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators"
+    }
+  ],
+  "models_after_selection": 8,
+  "models_after_merge": 1,
+  "contributions": [
+    {
+      "label": "ELECTRA",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-05",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ELECTRA introduces a novel pre-training objective where the model learns to distinguish between real and fake text samples, improving efficiency by using a smaller generator and a larger discriminator. This approach reduces computational requirements while maintaining strong performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Replaced Token Detection",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus (e.g., BooksCorpus)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised discriminative fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "REINFORCE (reinforcement learning)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14M, 85M, 110M, 300M, 330M, 335M, 400M, 600M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "600",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text classification, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient pre-training for large language models",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

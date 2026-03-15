@@ -1,0 +1,458 @@
+{
+  "arxiv_id": "2003.10555v1",
+  "status": "started",
+  "timestamp": "2026-03-02T01:47:34.988531",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2003.10555",
+    "title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+    "authors": [
+      "Kevin Clark",
+      "Minh-Thang Luong",
+      "Quoc V. Le",
+      "Christopher D. Manning"
+    ],
+    "abstract": "Masked language modeling (MLM) pre-training methods such as BERT corrupt the input by replacing some tokens with [MASK] and then train a model to reconstruct the original tokens. While they produce good results when transferred to downstream NLP tasks, they generally require large amounts of compute to be effective. As an alternative, we propose a more sample-efficient pre-training task called replaced token detection. Instead of masking the input, our approach corrupts it by replacing some tokens with plausible alternatives sampled from a small generator network. Then, instead of training a model that predicts the original identities of the corrupted tokens, we train a discriminative model that predicts whether each token in the corrupted input was replaced by a generator sample or not. Thorough experiments demonstrate this new pre-training task is more efficient than MLM because the task is defined over all input tokens rather than just the small subset that was masked out. As a result, the contextual representations learned by our approach substantially outperform the ones learned by BERT given the same model size, data, and compute. The gains are particularly strong for small models; for example, we train a model on one GPU for 4 days that outperforms GPT (trained using 30x more compute) on the GLUE natural language understanding benchmark. Our approach also works well at scale, where it performs comparably to RoBERTa and XLNet while using less than 1/4 of their compute and outperforms them when using the same amount of compute.",
+    "published": "2020-03-23T21:17:42+00:00",
+    "updated": "2020-03-23T21:17:42+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2003.10555v1",
+    "entry_id": "http://arxiv.org/abs/2003.10555v1",
+    "pdf_path": "data\\papers\\2003.10555.pdf"
+  },
+  "text_length": 61329,
+  "word_count": 5150,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "ELECTRA",
+      "parameters": "110M, 117M, 330M, 335M",
+      "parameters_millions": 335,
+      "model_family": "ELECTRA",
+      "date_created": "2020-01",
+      "organization": "Google",
+      "innovation": "ELECTRA introduces replaced token detection, a more sample-efficient pre-training task where a discriminator predicts whether each token in the corrupted input was replaced by a generator sample or not.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Replaced token detection",
+      "pretraining_corpus": "ClueWeb, CommonCrawl, Gigaword",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "Efficient pre-training of language models",
+      "application": "Natural language understanding, downstream tasks",
+      "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators"
+    },
+    {
+      "model_name": "ELECTRA with Weight Tying",
+      "model_family": "ELECTRA",
+      "date_created": "2020-01",
+      "organization": "Google",
+      "innovation": "Improving the efficiency of pre-training by sharing weights between the generator and discriminator, specifically tying token embeddings.",
+      "pretraining_corpus": "Wikipedia, BooksCorpus",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Natural language understanding, downstream tasks",
+      "license": "closed source",
+      "research_problem": "Pre-training Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators"
+    },
+    {
+      "model_name": "ELECTRA with Smaller Generator",
+      "model_family": "ELECTRA",
+      "date_created": "2020-01",
+      "organization": "Google",
+      "innovation": "Using a smaller generator to reduce the computational cost of pre-training ELECTRA.",
+      "pretraining_corpus": "Wikipedia, BooksCorpus",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Natural language understanding, downstream tasks",
+      "license": "closed source",
+      "research_problem": "Pre-training Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators"
+    },
+    {
+      "model_name": "ELECTRA-Small 50% trained",
+      "model_family": "ELECTRA",
+      "date_created": "2020-01",
+      "organization": "Google",
+      "innovation": "ELECTRA introduces a pre-training approach where the model is trained as a discriminator to distinguish between real and replaced tokens, rather than as a generator like BERT.",
+      "pretraining_corpus": "Unspecified",
+      "parameters": "14M",
+      "parameters_millions": 14,
+      "application": "Natural language understanding",
+      "license": "Apache 2.0",
+      "research_problem": "Efficient pre-training of language models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Discriminative pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators"
+    }
+  ],
+  "models_after_selection": 10,
+  "models_after_merge": 4,
+  "contributions": [
+    {
+      "label": "ELECTRA",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ELECTRA introduces replaced token detection, a more sample-efficient pre-training task where a discriminator predicts whether each token in the corrupted input was replaced by a generator sample or not.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Replaced token detection",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ClueWeb, CommonCrawl, Gigaword",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "110M, 117M, 330M, 335M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "335",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient pre-training of language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ELECTRA with Weight Tying",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ELECTRA with Weight Tying",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Improving the efficiency of pre-training by sharing weights between the generator and discriminator, specifically tying token embeddings.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia, BooksCorpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Pre-training Language Models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ELECTRA with Smaller Generator",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ELECTRA with Smaller Generator",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Using a smaller generator to reduce the computational cost of pre-training ELECTRA.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia, BooksCorpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Pre-training Language Models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ELECTRA-Small 50% trained",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ELECTRA-Small 50% trained",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ELECTRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ELECTRA introduces a pre-training approach where the model is trained as a discriminator to distinguish between real and replaced tokens, rather than as a generator like BERT.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Discriminative pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Unspecified",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "14",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient pre-training of language models",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

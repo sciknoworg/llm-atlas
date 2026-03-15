@@ -1,0 +1,1844 @@
+{
+  "arxiv_id": "2103.00020v1",
+  "status": "started",
+  "timestamp": "2026-02-25T21:01:52.339957",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2103.00020",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": [
+      "Alec Radford",
+      "Jong Wook Kim",
+      "Chris Hallacy",
+      "Aditya Ramesh",
+      "Gabriel Goh",
+      "Sandhini Agarwal",
+      "Girish Sastry",
+      "Amanda Askell",
+      "Pamela Mishkin",
+      "Jack Clark",
+      "Gretchen Krueger",
+      "Ilya Sutskever"
+    ],
+    "abstract": "State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (image, text) pairs collected from the internet. After pre-training, natural language is used to reference learned visual concepts (or describe new ones) enabling zero-shot transfer of the model to downstream tasks. We study the performance of this approach by benchmarking on over 30 different existing computer vision datasets, spanning tasks such as OCR, action recognition in videos, geo-localization, and many types of fine-grained object classification. The model transfers non-trivially to most tasks and is often competitive with a fully supervised baseline without the need for any dataset specific training. For instance, we match the accuracy of the original ResNet-50 on ImageNet zero-shot without needing to use any of the 1.28 million training examples it was trained on. We release our code and pre-trained model weights at https://github.com/OpenAI/CLIP.",
+    "published": "2021-02-26T19:04:58+00:00",
+    "updated": "2021-02-26T19:04:58+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2103.00020v1",
+    "entry_id": "http://arxiv.org/abs/2103.00020v1",
+    "pdf_path": "data\\papers\\2103.00020.pdf"
+  },
+  "text_length": 216233,
+  "word_count": 17882,
+  "models_extracted": 21,
+  "extraction_data": [
+    {
+      "model_name": "CLIP",
+      "parameters": "100CLASSES, 1KCLASSES, 2KCLASSES, 117M",
+      "parameters_millions": 117,
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive pre-training task that jointly trains an image encoder and a text encoder to predict correct image-text pairings. This enables zero-shot transfer by using natural language descriptions to synthesize classifiers at test time.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "pretraining_corpus": "Web-scale dataset of image-text pairs (not explicitly named, but implied from context: large-scale internet data)",
+      "finetuning_task": "Zero-shot transfer to downstream tasks",
+      "optimizer": "AdamW",
+      "hardware_used": "2 days on 256 V100 GPUs",
+      "extension": "Uses a contrastive objective to align image and text embeddings in a shared multi-modal embedding space, maximizing cosine similarity for correct (image, text) pairs and minimizing it for incorrect ones.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Zero-shot transfer learning for visual recognition using natural language supervision",
+      "application": "Image classification, zero-shot identity detection, surveillance analysis, fine-grained object detection, gender and occupation bias analysis",
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP RN50x4",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+      "pretraining_corpus": "WebText",
+      "parameters": "252M",
+      "parameters_millions": 252,
+      "application": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+      "license": "open source",
+      "research_problem": "Zero-shot image classification and transferable visual representation learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Zero-shot transfer to ImageNet",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a linear projection to map image and text representations to a shared multimodal embedding space, avoiding non-linear projections that may co-adapt with image-specific details.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP RN50x16",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+      "pretraining_corpus": "WebText",
+      "parameters": "1.008B",
+      "parameters_millions": 1008,
+      "application": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+      "license": "open source",
+      "research_problem": "Zero-shot image classification and transferable visual representation learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Zero-shot transfer to ImageNet",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a linear projection to map image and text representations to a shared multimodal embedding space, avoiding non-linear projections that may co-adapt with image-specific details.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP RN50x64",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+      "pretraining_corpus": "WebText",
+      "parameters": "4.032B",
+      "parameters_millions": 4032,
+      "application": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+      "license": "open source",
+      "research_problem": "Zero-shot image classification and transferable visual representation learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Zero-shot transfer to ImageNet",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a linear projection to map image and text representations to a shared multimodal embedding space, avoiding non-linear projections that may co-adapt with image-specific details.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ViT-B/32",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+      "pretraining_corpus": "WebText",
+      "parameters": "432M",
+      "parameters_millions": 432,
+      "application": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+      "license": "open source",
+      "research_problem": "Zero-shot image classification and transferable visual representation learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Zero-shot transfer to ImageNet",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a linear projection to map image and text representations to a shared multimodal embedding space, avoiding non-linear projections that may co-adapt with image-specific details.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ViT-L/14",
+      "model_family": "CLIP",
+      "date_created": "2021-06",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+      "pretraining_corpus": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+      "parameters": "1.5B",
+      "parameters_millions": 1500,
+      "application": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning in computer vision using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP-RN50",
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+      "pretraining_corpus": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+      "parameters": "25M",
+      "parameters_millions": 25,
+      "application": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+      "license": "open source",
+      "research_problem": "Transferable visual models from natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-101",
+      "model_family": "CLIP",
+      "date_created": "2021-06",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+      "pretraining_corpus": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+      "parameters": "44M",
+      "parameters_millions": 44,
+      "application": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning in computer vision using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-50x4",
+      "model_family": "CLIP",
+      "date_created": "2021-06",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+      "pretraining_corpus": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+      "parameters": "100M",
+      "parameters_millions": 100,
+      "application": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning in computer vision using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-50x16",
+      "model_family": "CLIP",
+      "date_created": "2021-06",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+      "pretraining_corpus": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+      "parameters": "400M",
+      "parameters_millions": 400,
+      "application": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning in computer vision using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-50x64",
+      "model_family": "CLIP",
+      "date_created": "2021-06",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+      "pretraining_corpus": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+      "parameters": "1.6B",
+      "parameters_millions": 1600,
+      "application": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning in computer vision using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive language-image pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing, fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP-RN101",
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+      "pretraining_corpus": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+      "parameters": "43M",
+      "parameters_millions": 43,
+      "application": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+      "license": "open source",
+      "research_problem": "Transferable visual models from natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP-ViT-B/32",
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+      "pretraining_corpus": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+      "parameters": "86M",
+      "parameters_millions": 86,
+      "application": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+      "license": "open source",
+      "research_problem": "Transferable visual models from natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Linear probing on downstream vision tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP-ViT-B/16",
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+      "pretraining_corpus": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "application": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+      "license": "open source",
+      "research_problem": "Transferable visual models from natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP-ViT-L/14",
+      "parameters": "300M, 304M",
+      "parameters_millions": 304,
+      "model_family": "CLIP",
+      "date_created": "2021-02",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Contrastive learning",
+      "pretraining_corpus": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+      "finetuning_task": "Linear probing on downstream vision tasks",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Transferable visual representation learning with natural language supervision",
+      "application": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    }
+  ],
+  "models_after_selection": 17,
+  "models_after_merge": 15,
+  "contributions": [
+    {
+      "label": "CLIP",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive pre-training task that jointly trains an image encoder and a text encoder to predict correct image-text pairings. This enables zero-shot transfer by using natural language descriptions to synthesize classifiers at test time.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale dataset of image-text pairs (not explicitly named, but implied from context: large-scale internet data)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot transfer to downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "100CLASSES, 1KCLASSES, 2KCLASSES, 117M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "117",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "2 days on 256 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot identity detection, surveillance analysis, fine-grained object detection, gender and occupation bias analysis",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning for visual recognition using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP RN50x4",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP RN50x4",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebText",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot transfer to ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "252M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "252",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot image classification and transferable visual representation learning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP RN50x16",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP RN50x16",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebText",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot transfer to ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.008B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1008",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot image classification and transferable visual representation learning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP RN50x64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP RN50x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebText",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot transfer to ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4.032B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "4032",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot image classification and transferable visual representation learning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ViT-B/32",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ViT-B/32",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning objective to align image and text representations using natural language supervision, enabling zero-shot transfer to image classification tasks without task-specific fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebText",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot transfer to ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "432M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "432",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, multimodal understanding, visual search",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot image classification and transferable visual representation learning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ViT-L/14",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ViT-L/14",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1500",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning in computer vision using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP-RN50",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP-RN50",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "25M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "25",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transferable visual models from natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-101",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-101",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "44M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "44",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning in computer vision using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-50x4",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-50x4",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "100M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "100",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning in computer vision using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-50x16",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-50x16",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "400M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "400",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning in computer vision using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-50x64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-50x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that jointly trains vision and language encoders on massive web-scale image-text pairs, enabling zero-shot transfer to diverse downstream tasks by aligning visual and textual representations in a shared embedding space.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive language-image pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text pairs (Instagram, Wikipedia, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing, fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1600",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, zero-shot transfer, geo-localization, optical character recognition, facial emotion recognition, action recognition, fine-grained recognition (e.g., cars, traffic signs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning in computer vision using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP-RN101",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP-RN101",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "43M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "43",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transferable visual models from natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP-ViT-B/32",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP-ViT-B/32",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing on downstream vision tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "86M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "86",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transferable visual models from natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP-ViT-B/16",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP-ViT-B/16",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "110M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "110",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transferable visual models from natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP-ViT-L/14",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP-ViT-L/14",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-02",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a contrastive learning framework that aligns image and text representations using natural language supervision, enabling zero-shot transfer to downstream tasks without fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-text dataset (YFCC100M, LAION-400M, etc.)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Linear probing on downstream vision tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "300M, 304M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "304",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, image retrieval, visual reasoning, cross-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transferable visual representation learning with natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

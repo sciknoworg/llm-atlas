@@ -1,0 +1,959 @@
+{
+  "arxiv_id": "2206.09959v5",
+  "status": "started",
+  "timestamp": "2026-02-26T03:16:59.598059",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2206.09959",
+    "title": "Global Context Vision Transformers",
+    "authors": [
+      "Ali Hatamizadeh",
+      "Hongxu Yin",
+      "Greg Heinrich",
+      "Jan Kautz",
+      "Pavlo Molchanov"
+    ],
+    "abstract": "We propose global context vision transformer (GC ViT), a novel architecture that enhances parameter and compute utilization for computer vision. Our method leverages global context self-attention modules, joint with standard local self-attention, to effectively and efficiently model both long and short-range spatial interactions, without the need for expensive operations such as computing attention masks or shifting local windows. In addition, we address the lack of the inductive bias in ViTs, and propose to leverage a modified fused inverted residual blocks in our architecture. Our proposed GC ViT achieves state-of-the-art results across image classification, object detection and semantic segmentation tasks. On ImageNet-1K dataset for classification, the variants of GC ViT with 51M, 90M and 201M parameters achieve 84.3%, 85.0% and 85.7% Top-1 accuracy, respectively, at 224 image resolution and without any pre-training, hence surpassing comparably-sized prior art such as CNN-based ConvNeXt and ViT-based MaxViT and Swin Transformer by a large margin. Pre-trained GC ViT backbones in downstream tasks of object detection, instance segmentation, and semantic segmentation using MS COCO and ADE20K datasets outperform prior work consistently. Specifically, GC ViT with a 4-scale DINO detection head achieves a box AP of 58.3 on MS COCO dataset.",
+    "published": "2022-06-20T18:42:44+00:00",
+    "updated": "2023-06-06T08:17:18+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2206.09959v5",
+    "entry_id": "http://arxiv.org/abs/2206.09959v5",
+    "pdf_path": "data\\papers\\2206.09959.pdf"
+  },
+  "text_length": 50604,
+  "word_count": 4289,
+  "models_extracted": 21,
+  "extraction_data": [
+    {
+      "model_name": "GCViT",
+      "parameters": "51M, 90M, 201M",
+      "parameters_millions": 201,
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "GCViT introduces a novel hierarchical Vision Transformer (ViT) that efficiently captures global context using global query tokens interacting with local regions via partitioned windows, avoiding the need to attend to the entire input sequence.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "pretraining_corpus": "ImageNet-1K",
+      "finetuning_task": "Image classification, object detection, semantic segmentation",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A40 GPU",
+      "extension": "Global query generator extracts global query tokens that interact with local key and value representations, enabling cross-region interaction and enlarging receptive field. Uses relative position bias in attention formulation to improve performance on dense prediction tasks.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Computer vision tasks including image classification, object detection, and semantic segmentation",
+      "application": "Image classification (ImageNet-1K), object detection (COCO), semantic segmentation (ADE20K)",
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-XXT",
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+      "pretraining_corpus": "ImageNet-1K, ImageNet-21K",
+      "parameters": "12M",
+      "parameters_millions": 12,
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "license": null,
+      "research_problem": "Vision Transformers for image classification, object detection, and segmentation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A40 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Global context self-attention module enhances the model's ability to capture long-range dependencies compared to local attention mechanisms in Swin Transformer.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-XT",
+      "parameters": "20M",
+      "parameters_millions": 20,
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "pretraining_corpus": "ImageNet-1K, ImageNet-21K",
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A40 GPU",
+      "extension": "Global context self-attention module enhances the model's ability to capture long-range dependencies compared to local attention mechanisms in Swin Transformer.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-T",
+      "parameters": "28M",
+      "parameters_millions": 28,
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "pretraining_corpus": "ImageNet-1K, ImageNet-21K",
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A40 GPU",
+      "extension": "Global context self-attention module enhances the model's ability to capture long-range dependencies compared to local attention mechanisms in Swin Transformer.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-T2",
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+      "pretraining_corpus": "ImageNet-1K, ImageNet-21K",
+      "parameters": "34M",
+      "parameters_millions": 34,
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "license": null,
+      "research_problem": "Vision Transformers for image classification, object detection, and segmentation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A40 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Global context self-attention module enhances the model's ability to capture long-range dependencies compared to local attention mechanisms in Swin Transformer.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-S2",
+      "model_family": "GCViT",
+      "date_created": "2023-01",
+      "organization": "NVIDIA",
+      "innovation": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+      "pretraining_corpus": "ImageNet-1K, ImageNet-21K",
+      "parameters": "68M",
+      "parameters_millions": 68,
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "license": null,
+      "research_problem": "Vision Transformers for image classification, object detection, and segmentation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A40 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Global context self-attention module enhances the model's ability to capture long-range dependencies compared to local attention mechanisms in Swin Transformer.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-S",
+      "model_family": "GCViT",
+      "date_created": "2022-01",
+      "organization": "NVIDIA",
+      "innovation": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "license": null,
+      "research_problem": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A100 GPU, NVIDIA A40 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Global query mechanism replaces traditional global key/value computation, enabling efficient modeling of long-range dependencies in vision transformers.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Global Context Vision Transformers"
+    },
+    {
+      "model_name": "GCViT-B",
+      "model_family": "GCViT",
+      "date_created": "2022-01",
+      "organization": "NVIDIA",
+      "innovation": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "license": null,
+      "research_problem": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image classification, object detection, instance segmentation, semantic segmentation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A100 GPU, NVIDIA A40 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Global query mechanism replaces traditional global key/value computation, enabling efficient modeling of long-range dependencies in vision transformers.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Global Context Vision Transformers"
+    }
+  ],
+  "models_after_selection": 16,
+  "models_after_merge": 8,
+  "contributions": [
+    {
+      "label": "GCViT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GCViT introduces a novel hierarchical Vision Transformer (ViT) that efficiently captures global context using global query tokens interacting with local regions via partitioned windows, avoiding the need to attend to the entire input sequence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "51M, 90M, 201M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "201",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification (ImageNet-1K), object detection (COCO), semantic segmentation (ADE20K)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Computer vision tasks including image classification, object detection, and semantic segmentation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-XXT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-XXT",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K, ImageNet-21K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "12M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "12",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision Transformers for image classification, object detection, and segmentation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-XT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-XT",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K, ImageNet-21K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "20",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-T",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-T",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K, ImageNet-21K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "28M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "28",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-T2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-T2",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K, ImageNet-21K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "34M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "34",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision Transformers for image classification, object detection, and segmentation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-S2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-S2",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Global context self-attention mechanism that improves computational efficiency and performance over competing Vision Transformer models by capturing long-range dependencies more effectively.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-1K, ImageNet-21K",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "68M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "68",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision Transformers for image classification, object detection, and segmentation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-S",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-S",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU, NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCViT-B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCViT-B",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCViT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduction of Global Context (GC) self-attention module that enables cross-region interactions without window shifting, improving performance on vision tasks by reusing global query tokens computed via Global Token Generation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU, NVIDIA A40 GPU",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image classification, object detection, instance segmentation, semantic segmentation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving vision transformers for image classification, object detection, and segmentation tasks by enhancing global context modeling.",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

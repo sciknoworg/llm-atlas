@@ -6,13 +6,24 @@ This script uses Hugging Face transformers running on Grete's GPU.
 No API keys needed, no quotas, completely free.
 """
 
+import os
+import re
 import sys
 import json
 import torch
 from pathlib import Path
 from datetime import datetime
 
-sys.path.insert(0, str(Path(__file__).parent))
+
+def slugify(text: str) -> str:
+    """Create filename-safe slug from model name (same as batch_extract_all_papers.py)."""
+    slug = (text or "unknown").lower()
+    slug = re.sub(r"[^a-z0-9]+", "_", slug).strip("_")
+    return slug[:100] or "unknown"
+
+# Project root (llm-extraction) so that "src" is importable when run from any cwd
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser
@@ -21,13 +32,24 @@ from src.template_mapper import TemplateMapper
 
 
 def main():
-    # Get ArXiv ID from command line
-    arxiv_id = sys.argv[1] if len(sys.argv) > 1 else "2302.13971"
-    
+    import argparse
+    parser_args = argparse.ArgumentParser(description="LLM Extraction on Grete GPU")
+    parser_args.add_argument("arxiv_id", nargs="?", default="2302.13971", help="ArXiv ID to process")
+    parser_args.add_argument(
+        "--model",
+        type=str,
+        default=os.environ.get("GRETE_EXTRACT_MODEL", "meta-llama/Meta-Llama-3.1-8B-Instruct"),
+        help="HuggingFace model ID (default: meta-llama/Meta-Llama-3.1-8B-Instruct or GRETE_EXTRACT_MODEL env var)",
+    )
+    args = parser_args.parse_args()
+    arxiv_id = args.arxiv_id
+    model_name = args.model
+
     print("=" * 70)
     print(f"LLM Extraction on Grete GPU")
     print("=" * 70)
     print(f"Paper: {arxiv_id}")
+    print(f"Model: {model_name}")
     print(f"Device: {'GPU' if torch.cuda.is_available() else 'CPU'}")
     if torch.cuda.is_available():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
@@ -38,7 +60,7 @@ def main():
     fetcher = PaperFetcher(download_dir="data/papers")
     parser = PDFParser(method="pdfplumber")
     extractor = LLMExtractorTransformers(
-        model_name="meta-llama/Meta-Llama-3.1-8B-Instruct",  # 8B model with 128K context window
+        model_name=model_name,
         temperature=0.3,  # Lower temperature for more deterministic JSON output
         max_new_tokens=1500  # Increased for complete JSON responses
     )
@@ -63,20 +85,30 @@ def main():
     
     text = parsed.get("cleaned_text", "") or parsed.get("raw_text", "")
     print(f"✓ Parsed {len(text)} characters")
-    
+
     # Extract with local LLM (on GPU!)
     print(f"\n[4/5] Extracting with local LLM on GPU...")
     print("  (This uses Grete's GPU, no API needed)")
-    
-    result = extractor.extract(
-        paper_text=text,
-        paper_metadata={
-            "title": paper["title"],
-            "arxiv_id": arxiv_id,
-            "authors": paper.get("authors", [])
-        }
-    )
-    
+
+    paper_metadata = {
+        "title": paper["title"],
+        "arxiv_id": arxiv_id,
+        "authors": paper.get("authors", []),
+    }
+
+    # For small/local models use chunked extraction so the prompt fits in context.
+    # Each chunk is max 20 000 chars (≈ 5 000 tokens) which comfortably fits any
+    # Ministral-3 model's context window with room for the few-shot examples and
+    # generated JSON.  The pipeline's batch script uses the same path.
+    MAX_CHUNK = 20000
+    if len(text) > MAX_CHUNK:
+        print(f"  Paper is long ({len(text)} chars) – using chunked extraction")
+        chunks = parser.chunk_text(text, max_chunk_size=MAX_CHUNK, overlap=500)
+        print(f"  Split into {len(chunks)} chunk(s)")
+        result = extractor.extract_from_chunks(chunks, paper_metadata)
+    else:
+        result = extractor.extract(paper_text=text, paper_metadata=paper_metadata)
+
     if not result or not result.models:
         print("✗ Extraction failed or no models found")
         sys.exit(1)
@@ -90,10 +122,11 @@ def main():
     mapped = mapper.map_extraction_result(result)
     print(f"✓ Mapped {len(mapped.get('contributions', []))} contribution(s)")
     
-    # Save results
-    output_dir = Path("data/extracted")
+    # Save results under data/extracted/<model_slug>/
+    model_slug = slugify(extractor.model_name)
+    output_dir = PROJECT_ROOT / "data" / "extracted" / model_slug
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_file = output_dir / f"{arxiv_id.replace('/', '_')}_{timestamp}.json"
     

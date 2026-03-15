@@ -9,9 +9,22 @@
 #SBATCH --error=extract_url_%j.err
 #SBATCH -C inet
 
+# Usage:
+#   sbatch grete_extract_url_job.sh <pdf_url> [paper_title] [model_id]
+#
+# Examples:
+#   sbatch grete/jobs/grete_extract_url_job.sh https://arxiv.org/pdf/2302.13971.pdf
+#   sbatch grete/jobs/grete_extract_url_job.sh https://arxiv.org/pdf/2302.13971.pdf "LLaMA" meta-llama/Llama-3.2-1B-Instruct
+
+PDF_URL="$1"
+PAPER_TITLE="${2:-}"
+MODEL_ID="${3:-meta-llama/Meta-Llama-3.1-8B-Instruct}"
+
 echo "=========================================="
 echo "LLM Extraction from URL Job on Grete"
-echo "Model: Meta-Llama-3.1-8B-Instruct"
+echo "URL:   $PDF_URL"
+echo "Title: $PAPER_TITLE"
+echo "Model: $MODEL_ID"
 echo "=========================================="
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURMD_NODENAME"
@@ -27,9 +40,8 @@ cd /mnt/vast-kisski/home/alaa.kefi/u25486/llm-extraction
 
 nvidia-smi
 
-# Extract from URL: $1 = PDF URL, $2 = optional paper title
-# Using Meta-Llama-3.1-8B-Instruct (requires HuggingFace login)
-python grete_extract_from_url.py "$1" "$2"
+# Extract from URL with the specified model
+python grete/extraction/grete_extract_from_url.py "$PDF_URL" "$PAPER_TITLE" --model "$MODEL_ID"
 
 echo "=========================================="
 echo "Job completed: $SLURM_JOB_ID"

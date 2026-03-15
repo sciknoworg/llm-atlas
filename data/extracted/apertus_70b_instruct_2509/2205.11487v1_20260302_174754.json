@@ -1,0 +1,721 @@
+{
+  "arxiv_id": "2205.11487v1",
+  "status": "started",
+  "timestamp": "2026-03-02T17:27:13.841459",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2205.11487",
+    "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+    "authors": [
+      "Chitwan Saharia",
+      "William Chan",
+      "Saurabh Saxena",
+      "Lala Li",
+      "Jay Whang",
+      "Emily Denton",
+      "Seyed Kamyar Seyed Ghasemipour",
+      "Burcu Karagol Ayan",
+      "S. Sara Mahdavi",
+      "Rapha Gontijo Lopes",
+      "Tim Salimans",
+      "Jonathan Ho",
+      "David J Fleet",
+      "Mohammad Norouzi"
+    ],
+    "abstract": "We present Imagen, a text-to-image diffusion model with an unprecedented degree of photorealism and a deep level of language understanding. Imagen builds on the power of large transformer language models in understanding text and hinges on the strength of diffusion models in high-fidelity image generation. Our key discovery is that generic large language models (e.g. T5), pretrained on text-only corpora, are surprisingly effective at encoding text for image synthesis: increasing the size of the language model in Imagen boosts both sample fidelity and image-text alignment much more than increasing the size of the image diffusion model. Imagen achieves a new state-of-the-art FID score of 7.27 on the COCO dataset, without ever training on COCO, and human raters find Imagen samples to be on par with the COCO data itself in image-text alignment. To assess text-to-image models in greater depth, we introduce DrawBench, a comprehensive and challenging benchmark for text-to-image models. With DrawBench, we compare Imagen with recent methods including VQ-GAN+CLIP, Latent Diffusion Models, and DALL-E 2, and find that human raters prefer Imagen over other models in side-by-side comparisons, both in terms of sample quality and image-text alignment. See https://imagen.research.google/ for an overview of the results.",
+    "published": "2022-05-23T17:42:53+00:00",
+    "updated": "2022-05-23T17:42:53+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2205.11487v1",
+    "entry_id": "http://arxiv.org/abs/2205.11487v1",
+    "pdf_path": "data\\papers\\2205.11487.pdf"
+  },
+  "text_length": 81900,
+  "word_count": 4804,
+  "models_extracted": 20,
+  "extraction_data": [
+    {
+      "model_name": "Imagen",
+      "parameters": "117M, 8B, 70B, 405B",
+      "parameters_millions": 405000,
+      "model_family": "Imagen",
+      "date_created": "2023-06",
+      "organization": "Google",
+      "innovation": "Imagen leverages large pre-trained language models (e.g., T5) to encode text for image synthesis, demonstrating that text-only models can be surprisingly effective for text-to-image generation. The key innovation is the use of frozen text encoders (e.g., T5) to map text to embeddings, combined with diffusion models for high-fidelity image generation.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Causal language modeling (T5)",
+      "pretraining_corpus": "Text-only corpus (e.g., BooksCorpus, Wikipedia)",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "N/A (not mentioned)",
+      "extension": "The model uses a decoder architecture and is trained on uncurated web-scale data, which introduces social and cultural biases. The paper highlights the need for future work on bias evaluation and mitigation in text-to-image models.",
+      "blog_post": null,
+      "license": "Closed source (Google Research)",
+      "research_problem": "Generating photorealistic images from text while addressing social and cultural biases in large language models.",
+      "application": "Text-to-image generation, image synthesis, responsible AI",
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen Base 64x64",
+      "model_family": "Imagen",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "Imagen introduces a cascaded diffusion model architecture with text-conditioned base and super-resolution stages, using dynamic thresholding to prevent saturation and improve image fidelity.",
+      "pretraining_corpus": "Large-scale text corpus",
+      "parameters": "64x64",
+      "parameters_millions": 64,
+      "application": "Text-to-image synthesis, photorealistic image generation",
+      "license": "Closed source",
+      "research_problem": "Text-to-image generation with high fidelity and alignment",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Text-to-image generation",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Dynamic thresholding to prevent saturation in guided diffusion sampling",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 256x256",
+      "parameters": "256X256, 600M",
+      "parameters_millions": 600,
+      "model_family": "Imagen",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "Imagen's 256x256 variant uses a super-resolution architecture to scale images from 64x64 to 256x256, improving resolution while maintaining alignment with text prompts.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Text-to-image generation",
+      "pretraining_corpus": "Combination of internal datasets and Laion dataset",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+      "extension": "Cascaded diffusion model with noise conditioning augmentation",
+      "blog_post": null,
+      "license": "Closed source",
+      "research_problem": "Scaling text-to-image models to higher resolutions while preserving photorealism and text alignment.",
+      "application": "High-resolution text-to-image synthesis, photorealistic image generation at 256x256 resolution",
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 1024x1024",
+      "parameters": "1024X1024, 400M",
+      "parameters_millions": 1024,
+      "model_family": "Imagen",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "Imagen's 1024x1024 variant further scales images to 1024x1024 resolution using a super-resolution architecture, maintaining high fidelity and text alignment.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Text-to-image generation",
+      "pretraining_corpus": "Combination of internal datasets and Laion dataset",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+      "extension": "Cascaded diffusion model with noise conditioning augmentation",
+      "blog_post": null,
+      "license": "Closed source",
+      "research_problem": "Scaling text-to-image models to very high resolutions while preserving photorealism and text alignment.",
+      "application": "High-resolution text-to-image synthesis, photorealistic image generation at 1024x1024 resolution",
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 64x64",
+      "model_family": "Imagen",
+      "date_created": "2023-07",
+      "organization": "Meta",
+      "innovation": "Imagen introduces a text-to-image model with a large text encoder (T5-XXL) and a diffusion model architecture, enabling high fidelity and alignment with text prompts. It uses a classifier-free guidance mechanism to improve image-text alignment.",
+      "pretraining_corpus": "Combination of internal datasets and Laion dataset",
+      "parameters": "2B",
+      "parameters_millions": 2000,
+      "application": "Text-to-image synthesis, photorealistic image generation, caption-guided image generation",
+      "license": "Closed source (Meta AI)",
+      "research_problem": "Improving text-to-image synthesis for photorealism and alignment with text prompts.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 4.6B (T5-XXL)",
+      "model_family": "Imagen",
+      "date_created": "2023-06",
+      "organization": "Meta",
+      "innovation": "Imagen uses a large, frozen T5-XXL text encoder to achieve state-of-the-art text-to-image alignment and fidelity, demonstrating that scaling the text encoder size is more impactful than scaling the U-Net.",
+      "pretraining_corpus": "Large-scale text corpus",
+      "parameters": "4.6B",
+      "parameters_millions": 4600,
+      "application": "Text-to-image synthesis, image generation with text guidance",
+      "license": "closed source",
+      "research_problem": "Text-to-image generation with high fidelity and alignment to text prompts",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "N/A (not mentioned)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Large-scale frozen language model (T5-XXL) as text encoder for improved text-to-image alignment",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    }
+  ],
+  "models_after_selection": 11,
+  "models_after_merge": 6,
+  "contributions": [
+    {
+      "label": "Imagen",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen leverages large pre-trained language models (e.g., T5) to encode text for image synthesis, demonstrating that text-only models can be surprisingly effective for text-to-image generation. The key innovation is the use of frozen text encoders (e.g., T5) to map text to embeddings, combined with diffusion models for high-fidelity image generation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling (T5)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Text-only corpus (e.g., BooksCorpus, Wikipedia)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "117M, 8B, 70B, 405B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "405000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "N/A (not mentioned)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image synthesis, responsible AI",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Generating photorealistic images from text while addressing social and cultural biases in large language models.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen Base 64x64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen Base 64x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen introduces a cascaded diffusion model architecture with text-conditioned base and super-resolution stages, using dynamic thresholding to prevent saturation and improve image fidelity.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "64x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "64",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image synthesis, photorealistic image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-to-image generation with high fidelity and alignment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 256x256",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 256x256",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen's 256x256 variant uses a super-resolution architecture to scale images from 64x64 to 256x256, improving resolution while maintaining alignment with text prompts.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Combination of internal datasets and Laion dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "256X256, 600M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "600",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "High-resolution text-to-image synthesis, photorealistic image generation at 256x256 resolution",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling text-to-image models to higher resolutions while preserving photorealism and text alignment.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 1024x1024",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 1024x1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen's 1024x1024 variant further scales images to 1024x1024 resolution using a super-resolution architecture, maintaining high fidelity and text alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Combination of internal datasets and Laion dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1024X1024, 400M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU (as inferred from typical large-scale training requirements)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "High-resolution text-to-image synthesis, photorealistic image generation at 1024x1024 resolution",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling text-to-image models to very high resolutions while preserving photorealism and text alignment.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 64x64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 64x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen introduces a text-to-image model with a large text encoder (T5-XXL) and a diffusion model architecture, enabling high fidelity and alignment with text prompts. It uses a classifier-free guidance mechanism to improve image-text alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Combination of internal datasets and Laion dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "2000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image synthesis, photorealistic image generation, caption-guided image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Improving text-to-image synthesis for photorealism and alignment with text prompts.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 4.6B (T5-XXL)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 4.6B (T5-XXL)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen uses a large, frozen T5-XXL text encoder to achieve state-of-the-art text-to-image alignment and fidelity, demonstrating that scaling the text encoder size is more impactful than scaling the U-Net.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "4600",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "N/A (not mentioned)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image synthesis, image generation with text guidance",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-to-image generation with high fidelity and alignment to text prompts",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

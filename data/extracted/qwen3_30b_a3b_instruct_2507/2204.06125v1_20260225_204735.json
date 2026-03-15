@@ -1,0 +1,651 @@
+{
+  "arxiv_id": "2204.06125v1",
+  "status": "started",
+  "timestamp": "2026-02-25T20:46:52.799578",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2204.06125",
+    "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents",
+    "authors": [
+      "Aditya Ramesh",
+      "Prafulla Dhariwal",
+      "Alex Nichol",
+      "Casey Chu",
+      "Mark Chen"
+    ],
+    "abstract": "Contrastive models like CLIP have been shown to learn robust representations of images that capture both semantics and style. To leverage these representations for image generation, we propose a two-stage model: a prior that generates a CLIP image embedding given a text caption, and a decoder that generates an image conditioned on the image embedding. We show that explicitly generating image representations improves image diversity with minimal loss in photorealism and caption similarity. Our decoders conditioned on image representations can also produce variations of an image that preserve both its semantics and style, while varying the non-essential details absent from the image representation. Moreover, the joint embedding space of CLIP enables language-guided image manipulations in a zero-shot fashion. We use diffusion models for the decoder and experiment with both autoregressive and diffusion models for the prior, finding that the latter are computationally more efficient and produce higher-quality samples.",
+    "published": "2022-04-13T01:10:33+00:00",
+    "updated": "2022-04-13T01:10:33+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2204.06125v1",
+    "entry_id": "http://arxiv.org/abs/2204.06125v1",
+    "pdf_path": "data\\papers\\2204.06125.pdf"
+  },
+  "text_length": 49978,
+  "word_count": 2216,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "unCLIP",
+      "parameters": "SMALL, 1.5B",
+      "parameters_millions": 1500,
+      "model_family": "unCLIP",
+      "date_created": "2022-12",
+      "organization": "OpenAI",
+      "innovation": "Proposes unCLIP, a hierarchical text-conditional image generation model that leverages CLIP's joint text-image embedding space by training a prior to generate CLIP image embeddings from text and a diffusion decoder to reconstruct images from those embeddings, enabling high diversity and zero-shot semantic editing.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image generation via CLIP latent space",
+      "pretraining_corpus": "Large-scale captioned image dataset (implied from CLIP training, not explicitly named)",
+      "finetuning_task": "Text-conditional image generation",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Uses a two-stage architecture: a prior model generates CLIP image embeddings from text, and a diffusion decoder reconstructs images from those embeddings, enabling zero-shot image manipulation and semantic variation.",
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "High-fidelity text-to-image generation with semantic consistency and diversity",
+      "application": "Image generation from text, semantic image editing, zero-shot image manipulation, variation generation",
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (AR prior)",
+      "model_family": "unCLIP",
+      "date_created": "2022-06",
+      "organization": "OpenAI",
+      "innovation": "Introduces a hierarchical text-conditional image generation framework using a masked autoregressive (AR) prior conditioned on CLIP latents, enabling high-quality image synthesis from text prompts.",
+      "pretraining_corpus": "CLIP and DALL-E datasets (approx. 650M images total)",
+      "parameters": "1B",
+      "parameters_millions": 1000,
+      "application": "Text-to-image generation, image synthesis, creative design",
+      "license": "closed source",
+      "research_problem": "Text-to-image generation with high fidelity and semantic alignment",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image generation with CLIP latents",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-conditional image generation",
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β=0.9",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a masked autoregressive prior with CLIP latents to improve image quality and semantic consistency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (diffusion prior)",
+      "model_family": "unCLIP",
+      "date_created": "2022-06",
+      "organization": "OpenAI",
+      "innovation": "Employs a diffusion prior conditioned on CLIP latents, enabling high-resolution image generation with improved sample diversity and quality.",
+      "pretraining_corpus": "DALL-E dataset (approx. 250M images)",
+      "parameters": "3.5B",
+      "parameters_millions": 3500,
+      "application": "Text-to-image generation, image synthesis, creative design",
+      "license": "closed source",
+      "research_problem": "Text-to-image generation with high fidelity and semantic alignment",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image generation with CLIP latents",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-conditional image generation",
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β=0.9",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a diffusion prior with analytic DPM sampling and learned sigma, trained on CLIP latents for improved image quality.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (diffusion prior, 700M)",
+      "model_family": "unCLIP",
+      "date_created": "2022-06",
+      "organization": "OpenAI",
+      "innovation": "Introduces a lightweight diffusion prior variant with 700M parameters, enabling efficient text-conditional image generation with reduced computational cost.",
+      "pretraining_corpus": "DALL-E dataset (approx. 250M images)",
+      "parameters": "700M",
+      "parameters_millions": 700,
+      "application": "Text-to-image generation, image synthesis, real-time applications",
+      "license": "closed source",
+      "research_problem": "Efficient text-to-image generation with high quality",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image generation with CLIP latents",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-conditional image generation",
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β=0.9",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a smaller diffusion prior with 700M parameters and DDIM sampling for faster inference.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (diffusion prior, 300M)",
+      "model_family": "unCLIP",
+      "date_created": "2022-06",
+      "organization": "OpenAI",
+      "innovation": "Introduces a compact diffusion prior with 300M parameters, optimized for low-resource deployment while maintaining strong image generation quality.",
+      "pretraining_corpus": "DALL-E dataset (approx. 250M images)",
+      "parameters": "300M",
+      "parameters_millions": 300,
+      "application": "Text-to-image generation, image synthesis, mobile and edge applications",
+      "license": "closed source",
+      "research_problem": "Efficient text-to-image generation with high quality",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image generation with CLIP latents",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-conditional image generation",
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β=0.9",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a minimal diffusion prior with 300M parameters and DDIM sampling for ultra-fast inference.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 5,
+  "contributions": [
+    {
+      "label": "unCLIP",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-12",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Proposes unCLIP, a hierarchical text-conditional image generation model that leverages CLIP's joint text-image embedding space by training a prior to generate CLIP image embeddings from text and a diffusion decoder to reconstruct images from those embeddings, enabling high diversity and zero-shot semantic editing.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation via CLIP latent space",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale captioned image dataset (implied from CLIP training, not explicitly named)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "SMALL, 1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1500",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image generation from text, semantic image editing, zero-shot image manipulation, variation generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "High-fidelity text-to-image generation with semantic consistency and diversity",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (AR prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (AR prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a hierarchical text-conditional image generation framework using a masked autoregressive (AR) prior conditioned on CLIP latents, enabling high-quality image synthesis from text prompts.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation with CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CLIP and DALL-E datasets (approx. 650M images total)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β=0.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image synthesis, creative design",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-to-image generation with high fidelity and semantic alignment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (diffusion prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (diffusion prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Employs a diffusion prior conditioned on CLIP latents, enabling high-resolution image generation with improved sample diversity and quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation with CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (approx. 250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β=0.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "3500",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image synthesis, creative design",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-to-image generation with high fidelity and semantic alignment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (diffusion prior, 700M)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (diffusion prior, 700M)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a lightweight diffusion prior variant with 700M parameters, enabling efficient text-conditional image generation with reduced computational cost.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation with CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (approx. 250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β=0.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "700M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "700",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image synthesis, real-time applications",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient text-to-image generation with high quality",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (diffusion prior, 300M)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (diffusion prior, 300M)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "unCLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a compact diffusion prior with 300M parameters, optimized for low-resource deployment while maintaining strong image generation quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation with CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (approx. 250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β=0.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "300M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image synthesis, mobile and edge applications",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient text-to-image generation with high quality",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

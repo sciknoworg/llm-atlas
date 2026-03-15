@@ -1,0 +1,923 @@
+{
+  "arxiv_id": "2103.00020v1",
+  "status": "started",
+  "timestamp": "2026-03-02T11:13:00.798281",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2103.00020",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": [
+      "Alec Radford",
+      "Jong Wook Kim",
+      "Chris Hallacy",
+      "Aditya Ramesh",
+      "Gabriel Goh",
+      "Sandhini Agarwal",
+      "Girish Sastry",
+      "Amanda Askell",
+      "Pamela Mishkin",
+      "Jack Clark",
+      "Gretchen Krueger",
+      "Ilya Sutskever"
+    ],
+    "abstract": "State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (image, text) pairs collected from the internet. After pre-training, natural language is used to reference learned visual concepts (or describe new ones) enabling zero-shot transfer of the model to downstream tasks. We study the performance of this approach by benchmarking on over 30 different existing computer vision datasets, spanning tasks such as OCR, action recognition in videos, geo-localization, and many types of fine-grained object classification. The model transfers non-trivially to most tasks and is often competitive with a fully supervised baseline without the need for any dataset specific training. For instance, we match the accuracy of the original ResNet-50 on ImageNet zero-shot without needing to use any of the 1.28 million training examples it was trained on. We release our code and pre-trained model weights at https://github.com/OpenAI/CLIP.",
+    "published": "2021-02-26T19:04:58+00:00",
+    "updated": "2021-02-26T19:04:58+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2103.00020v1",
+    "entry_id": "http://arxiv.org/abs/2103.00020v1",
+    "pdf_path": "data\\papers\\2103.00020.pdf"
+  },
+  "text_length": 216233,
+  "word_count": 17882,
+  "models_extracted": 16,
+  "extraction_data": [
+    {
+      "model_name": "CLIP",
+      "parameters": "63M, 336M, 760M, 1.5B, 3B, 7B",
+      "parameters_millions": 7000,
+      "model_family": "CLIP",
+      "date_created": "2020-01",
+      "organization": "OpenAI",
+      "innovation": "CLIP introduces a novel approach to zero-shot transfer learning by pre-training a model to predict if an image and text snippet are paired, enabling transfer to unseen datasets without fine-tuning. This method leverages a transformer-based architecture and natural language supervision to learn visual concepts from text descriptions.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Contrastive Language-Image Pre-training (CLIP)",
+      "pretraining_corpus": "WIT (Web Image Text dataset: 400M image-text pairs)",
+      "finetuning_task": "N/A (zero-shot)",
+      "optimizer": "Adam (as per the paper's context, though not explicitly stated; inferred from similar works)",
+      "hardware_used": "NVIDIA V100 GPUs (as inferred from similar works)",
+      "extension": "The model uses a dual-encoder architecture to learn visual concepts from text descriptions, enabling zero-shot transfer to diverse visual tasks.",
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "Zero-shot transfer learning for computer vision tasks using natural language supervision",
+      "application": "Zero-shot image classification, transfer learning, and general computer vision tasks",
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-50 4x",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Combines ResNet-50 with a linear projection to a text embedding space for contrastive learning, enabling zero-shot transfer to ImageNet.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "4x ResNet-50",
+      "parameters_millions": 4000,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Linear projection from image features to text space, avoiding non-linear transformations for efficiency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-101 16x",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Scaled-up ResNet-101 with linear projection to text space for contrastive learning, improving efficiency over non-linear methods.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "16x ResNet-101",
+      "parameters_millions": 16000,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "EfficientNet-style scaling of ResNet-101 for higher capacity without non-linear transformations.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ResNet-50 64x",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Extreme scaling of ResNet-50 with linear projection to text space, achieving high capacity without the computational cost of non-linear methods.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "64x ResNet-50",
+      "parameters_millions": 64000,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "EfficientNet-style scaling of ResNet-50 for high capacity with linear projection.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ViT-B/32",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "ViT-B/32",
+      "parameters_millions": 32,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Vision Transformer architecture with linear projection to text space for efficient multimodal learning.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ViT-B/16",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "ViT-B/16",
+      "parameters_millions": 16,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Vision Transformer with linear projection to text space for efficient multimodal learning.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    },
+    {
+      "model_name": "CLIP ViT-L/14",
+      "model_family": "CLIP",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+      "pretraining_corpus": "ImageNet",
+      "parameters": "ViT-L/14",
+      "parameters_millions": 14,
+      "application": "Zero-shot image classification, multimodal learning",
+      "license": "closed source",
+      "research_problem": "Transfer learning for visual models using natural language supervision",
+      "model_version": null,
+      "pretraining_architecture": "Encoder (image)",
+      "pretraining_task": "ImageNet classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam (with decoupled weight decay)",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Vision Transformer with linear projection to text space for efficient multimodal learning.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Learning Transferable Visual Models From Natural Language Supervision"
+    }
+  ],
+  "models_after_selection": 12,
+  "models_after_merge": 7,
+  "contributions": [
+    {
+      "label": "CLIP",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CLIP introduces a novel approach to zero-shot transfer learning by pre-training a model to predict if an image and text snippet are paired, enabling transfer to unseen datasets without fine-tuning. This method leverages a transformer-based architecture and natural language supervision to learn visual concepts from text descriptions.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Contrastive Language-Image Pre-training (CLIP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WIT (Web Image Text dataset: 400M image-text pairs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "N/A (zero-shot)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (as per the paper's context, though not explicitly stated; inferred from similar works)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "63M, 336M, 760M, 1.5B, 3B, 7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "7000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs (as inferred from similar works)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, transfer learning, and general computer vision tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot transfer learning for computer vision tasks using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-50 4x",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-50 4x",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Combines ResNet-50 with a linear projection to a text embedding space for contrastive learning, enabling zero-shot transfer to ImageNet.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4x ResNet-50",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "4000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-101 16x",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-101 16x",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Scaled-up ResNet-101 with linear projection to text space for contrastive learning, improving efficiency over non-linear methods.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "16x ResNet-101",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "16000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ResNet-50 64x",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ResNet-50 64x",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Extreme scaling of ResNet-50 with linear projection to text space, achieving high capacity without the computational cost of non-linear methods.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "64x ResNet-50",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "64000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ViT-B/32",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ViT-B/32",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "ViT-B/32",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "32",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ViT-B/16",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ViT-B/16",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "ViT-B/16",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "16",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CLIP ViT-L/14",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CLIP ViT-L/14",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CLIP",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Vision Transformer (ViT) with linear projection to text space for contrastive learning, enabling zero-shot transfer.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder (image)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "ImageNet classification",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam (with decoupled weight decay)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "ViT-L/14",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "14",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image classification, multimodal learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning for visual models using natural language supervision",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

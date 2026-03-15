@@ -1,0 +1,404 @@
+{
+  "arxiv_id": "2007.14062v2",
+  "status": "started",
+  "timestamp": "2026-02-25T20:11:13.602246",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2007.14062",
+    "title": "Big Bird: Transformers for Longer Sequences",
+    "authors": [
+      "Manzil Zaheer",
+      "Guru Guruganesh",
+      "Avinava Dubey",
+      "Joshua Ainslie",
+      "Chris Alberti",
+      "Santiago Ontanon",
+      "Philip Pham",
+      "Anirudh Ravula",
+      "Qifan Wang",
+      "Li Yang",
+      "Amr Ahmed"
+    ],
+    "abstract": "Transformers-based models, such as BERT, have been one of the most successful deep learning models for NLP. Unfortunately, one of their core limitations is the quadratic dependency (mainly in terms of memory) on the sequence length due to their full attention mechanism. To remedy this, we propose, BigBird, a sparse attention mechanism that reduces this quadratic dependency to linear. We show that BigBird is a universal approximator of sequence functions and is Turing complete, thereby preserving these properties of the quadratic, full attention model. Along the way, our theoretical analysis reveals some of the benefits of having $O(1)$ global tokens (such as CLS), that attend to the entire sequence as part of the sparse attention mechanism. The proposed sparse attention can handle sequences of length up to 8x of what was previously possible using similar hardware. As a consequence of the capability to handle longer context, BigBird drastically improves performance on various NLP tasks such as question answering and summarization. We also propose novel applications to genomics data.",
+    "published": "2020-07-28T08:34:04+00:00",
+    "updated": "2021-01-08T07:41:50+00:00",
+    "doi": null,
+    "primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.CL",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2007.14062v2",
+    "entry_id": "http://arxiv.org/abs/2007.14062v2",
+    "pdf_path": "data\\papers\\2007.14062.pdf"
+  },
+  "text_length": 121412,
+  "word_count": 9890,
+  "models_extracted": 10,
+  "extraction_data": [
+    {
+      "model_name": "BIGBIRD-ITC",
+      "parameters": "24 LAYERS, 16 HEADS, HIDDEN SIZE 1024, BASE, 34M, 117M",
+      "parameters_millions": 117,
+      "model_family": "BIGBIRD",
+      "date_created": "2020-12",
+      "organization": "Google",
+      "innovation": "Introduces a sparse attention mechanism based on a star graph and global tokens, enabling efficient modeling of long sequences while maintaining universal approximation and Turing completeness. This allows the model to handle longer input sequences effectively compared to standard Transformers.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "pretraining_corpus": "Not explicitly stated in the provided text",
+      "finetuning_task": "Question Answering with supporting evidence",
+      "optimizer": "Adam",
+      "hardware_used": "4×4 TPUv3",
+      "extension": "Uses a combination of global, windowed, and random attention heads to enable efficient long-range modeling, reducing quadratic complexity of full attention.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Long sequence modeling in natural language processing",
+      "application": "Question Answering (TriviaQA, HotpotQA, WikiHop), Document Classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), GLUE benchmark tasks",
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BigBird",
+      "parameters": "LARGE, BASE-SIZED, BASE",
+      "parameters_millions": 340,
+      "model_family": "BigBird",
+      "date_created": "2020-12",
+      "organization": "Google",
+      "innovation": "BigBird introduces a sparse attention mechanism with global tokens, local tokens, and random tokens, enabling efficient modeling of long sequences while maintaining quadratic complexity only on a small subset of tokens. This allows the model to handle longer sequences effectively compared to standard Transformers.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "pretraining_corpus": "Human reference genome (GRCh37), Saccharomyces Genome Database",
+      "finetuning_task": "Promoter region prediction, Chromatin-profile prediction",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Long sequence modeling in natural language processing and genomics",
+      "application": "Long document classification, question answering, promoter region prediction, chromatin-profile prediction",
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-Pegasus",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-12",
+      "organization": "Google",
+      "innovation": "Introduces Big Bird, a sparse attention mechanism that enables efficient modeling of long sequences by combining global, windowed, and random attention patterns. This allows the model to scale to sequences up to 4096 tokens while maintaining performance comparable to full attention models.",
+      "pretraining_corpus": "Human reference GRCh37 (genomic DNA), converted into documents with sentences of 500–1000 base pairs; tokenized using SentencePiece with 32k vocabulary",
+      "parameters": "Large",
+      "parameters_millions": 1024,
+      "application": "Text summarization, genomic sequence analysis, long-document understanding",
+      "license": "open source",
+      "research_problem": "Long sequence modeling in Transformers",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked Language Modeling (MLM), Next Sentence Prediction (NSP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Summarization (encoder-decoder fine-tuning with shared weights)",
+      "finetuning_data": null,
+      "optimizer": "Adafactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "4×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a combination of global, windowed, and random attention heads to enable efficient long-range modeling, reducing quadratic complexity of full attention.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    }
+  ],
+  "models_after_selection": 8,
+  "models_after_merge": 3,
+  "contributions": [
+    {
+      "label": "BIGBIRD-ITC",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BIGBIRD-ITC",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BIGBIRD",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-12",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a sparse attention mechanism based on a star graph and global tokens, enabling efficient modeling of long sequences while maintaining universal approximation and Turing completeness. This allows the model to handle longer input sequences effectively compared to standard Transformers.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Not explicitly stated in the provided text",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Question Answering with supporting evidence",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "24 LAYERS, 16 HEADS, HIDDEN SIZE 1024, BASE, 34M, 117M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "117",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "4×4 TPUv3",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question Answering (TriviaQA, HotpotQA, WikiHop), Document Classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), GLUE benchmark tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long sequence modeling in natural language processing",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BigBird",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BigBird",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BigBird",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-12",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "BigBird introduces a sparse attention mechanism with global tokens, local tokens, and random tokens, enabling efficient modeling of long sequences while maintaining quadratic complexity only on a small subset of tokens. This allows the model to handle longer sequences effectively compared to standard Transformers.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Human reference genome (GRCh37), Saccharomyces Genome Database",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Promoter region prediction, Chromatin-profile prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "LARGE, BASE-SIZED, BASE",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "340",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long document classification, question answering, promoter region prediction, chromatin-profile prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long sequence modeling in natural language processing and genomics",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BIGBIRD-Pegasus",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BIGBIRD-Pegasus",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BIGBIRD",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-12",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces Big Bird, a sparse attention mechanism that enables efficient modeling of long sequences by combining global, windowed, and random attention patterns. This allows the model to scale to sequences up to 4096 tokens while maintaining performance comparable to full attention models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM), Next Sentence Prediction (NSP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Human reference GRCh37 (genomic DNA), converted into documents with sentences of 500–1000 base pairs; tokenized using SentencePiece with 32k vocabulary",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Summarization (encoder-decoder fine-tuning with shared weights)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "Large",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "4×8 TPUv3",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text summarization, genomic sequence analysis, long-document understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long sequence modeling in Transformers",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

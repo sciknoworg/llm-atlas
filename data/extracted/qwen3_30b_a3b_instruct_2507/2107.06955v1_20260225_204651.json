@@ -1,0 +1,150 @@
+{
+  "arxiv_id": "2107.06955v1",
+  "status": "started",
+  "timestamp": "2026-02-25T20:46:25.760806",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2107.06955",
+    "title": "HTLM: Hyper-Text Pre-Training and Prompting of Language Models",
+    "authors": [
+      "Armen Aghajanyan",
+      "Dmytro Okhonko",
+      "Mike Lewis",
+      "Mandar Joshi",
+      "Hu Xu",
+      "Gargi Ghosh",
+      "Luke Zettlemoyer"
+    ],
+    "abstract": "We introduce HTLM, a hyper-text language model trained on a large-scale web crawl. Modeling hyper-text has a number of advantages: (1) it is easily gathered at scale, (2) it provides rich document-level and end-task-adjacent supervision (e.g. class and id attributes often encode document category information), and (3) it allows for new structured prompting that follows the established semantics of HTML (e.g. to do zero-shot summarization by infilling title tags for a webpage that contains the input text). We show that pretraining with a BART-style denoising loss directly on simplified HTML provides highly effective transfer for a wide range of end tasks and supervision levels. HTLM matches or exceeds the performance of comparably sized text-only LMs for zero-shot prompting and fine-tuning for classification benchmarks, while also setting new state-of-the-art performance levels for zero-shot summarization. We also find that hyper-text prompts provide more value to HTLM, in terms of data efficiency, than plain text prompts do for existing LMs, and that HTLM is highly effective at auto-prompting itself, by simply generating the most likely hyper-text formatting for any available training data. We will release all code and models to support future HTLM research.",
+    "published": "2021-07-14T19:39:31+00:00",
+    "updated": "2021-07-14T19:39:31+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2107.06955v1",
+    "entry_id": "http://arxiv.org/abs/2107.06955v1",
+    "pdf_path": "data\\papers\\2107.06955.pdf"
+  },
+  "text_length": 44688,
+  "word_count": 5500,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "HTLM",
+      "parameters": "117M, 400M",
+      "parameters_millions": 400,
+      "model_family": "HTLM",
+      "date_created": "2024-07",
+      "organization": "Meta",
+      "innovation": "HTLM is the first hyper-text language model trained on 23TB of simplified HTML from Common Crawl, using a BART-style denoising objective with span masking and size hints. This enables effective transfer to diverse tasks and structured prompting via HTML semantics.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding with span masking and size hints",
+      "pretraining_corpus": "Gigaword, CNN/Dailymail, Reddit TIFU, XSum, E2E, WebNLG, DART, RTE, BoolQ, Winogrande, HellaSwag",
+      "finetuning_task": "Zero-shot prompting, fine-tuning for classification, zero-shot summarization",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Introduces a size hint scheme where each mask is associated with an integer indicating the approximate size of the masked text, enabling more fine-grained task-specific length priors during reconstruction.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Zero-shot natural language generation and classification with controlled output length and structure",
+      "application": "Zero-shot summarization, classification, structured prompting, auto-prompting, few-shot learning for table-to-text generation",
+      "paper_title": "HTLM: Hyper-Text Pre-Training and Prompting of Language Models"
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "contributions": [
+    {
+      "label": "HTLM",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "HTLM",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "HTLM",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "HTLM is the first hyper-text language model trained on 23TB of simplified HTML from Common Crawl, using a BART-style denoising objective with span masking and size hints. This enables effective transfer to diverse tasks and structured prompting via HTML semantics.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding with span masking and size hints",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Gigaword, CNN/Dailymail, Reddit TIFU, XSum, E2E, WebNLG, DART, RTE, BoolQ, Winogrande, HellaSwag",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot prompting, fine-tuning for classification, zero-shot summarization",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "117M, 400M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "400",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot summarization, classification, structured prompting, auto-prompting, few-shot learning for table-to-text generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot natural language generation and classification with controlled output length and structure",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

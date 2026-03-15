@@ -1,0 +1,1293 @@
+{
+  "arxiv_id": "2204.06125v1",
+  "status": "started",
+  "timestamp": "2026-02-26T03:21:38.306227",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2204.06125",
+    "title": "Hierarchical Text-Conditional Image Generation with CLIP Latents",
+    "authors": [
+      "Aditya Ramesh",
+      "Prafulla Dhariwal",
+      "Alex Nichol",
+      "Casey Chu",
+      "Mark Chen"
+    ],
+    "abstract": "Contrastive models like CLIP have been shown to learn robust representations of images that capture both semantics and style. To leverage these representations for image generation, we propose a two-stage model: a prior that generates a CLIP image embedding given a text caption, and a decoder that generates an image conditioned on the image embedding. We show that explicitly generating image representations improves image diversity with minimal loss in photorealism and caption similarity. Our decoders conditioned on image representations can also produce variations of an image that preserve both its semantics and style, while varying the non-essential details absent from the image representation. Moreover, the joint embedding space of CLIP enables language-guided image manipulations in a zero-shot fashion. We use diffusion models for the decoder and experiment with both autoregressive and diffusion models for the prior, finding that the latter are computationally more efficient and produce higher-quality samples.",
+    "published": "2022-04-13T01:10:33+00:00",
+    "updated": "2022-04-13T01:10:33+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2204.06125v1",
+    "entry_id": "http://arxiv.org/abs/2204.06125v1",
+    "pdf_path": "data\\papers\\2204.06125.pdf"
+  },
+  "text_length": 49978,
+  "word_count": 2216,
+  "models_extracted": 17,
+  "extraction_data": [
+    {
+      "model_name": "unCLIP (prior: diffusion)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Introduces a diffusion-based prior model to generate CLIP image embeddings from text captions, improving computational efficiency and sample quality compared to autoregressive priors. The model leverages the joint embedding space of CLIP for zero-shot language-guided image manipulations.",
+      "pretraining_corpus": "Pairs of images and corresponding captions",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text-to-image generation, image variation, language-guided image manipulation, high-resolution image synthesis (64x64 to 1024x1024)",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation",
+      "model_version": null,
+      "pretraining_architecture": null,
+      "pretraining_task": "Diffusion-based prior for generating CLIP image embeddings from text captions",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Diffusion priors trained in latent space achieve comparable performance to autoregressive priors while being more compute-efficient. The model uses classifier-free guidance by randomly dropping conditioning information during training.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (prior: autoregressive)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Introduces an autoregressive prior model that converts CLIP image embeddings into discrete codes and predicts them conditioned on text captions. This enables hierarchical text-conditional image generation but is less compute-efficient than the diffusion prior variant.",
+      "pretraining_corpus": "Pairs of images and corresponding captions",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text-to-image generation, image variation, language-guided image manipulation",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation",
+      "model_version": null,
+      "pretraining_architecture": null,
+      "pretraining_task": "Autoregressive prior for generating CLIP image embeddings from text captions",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The autoregressive prior converts CLIP image embeddings into a sequence of discrete codes for prediction, enabling hierarchical generation but with higher computational cost compared to diffusion priors.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (decoder)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "A diffusion-based decoder that inverts CLIP image embeddings to generate images, enabling non-deterministic image variations while preserving semantics and style. The decoder supports classifier-free guidance for improved sample quality.",
+      "pretraining_corpus": "Pairs of images and corresponding captions",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image variation, text-to-image generation, high-resolution image synthesis (64x64 to 1024x1024), semantic image manipulation",
+      "license": "closed source",
+      "research_problem": "Image generation from latent representations",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based image generation conditioned on CLIP image embeddings and optionally text captions",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The decoder conditions on CLIP embeddings and optionally text captions, using classifier-free guidance and diffusion upsamplers to generate high-resolution images. It introduces corruption techniques (e.g., Gaussian blur, BSR degradation) during training to improve upsampler robustness.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (upsampler 64x64 to 256x256)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "A diffusion upsampler model that increases image resolution from 64x64 to 256x256, trained with Gaussian blur corruption to improve robustness and generalization.",
+      "pretraining_corpus": "High-resolution images with conditioning on lower-resolution inputs",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image super-resolution, text-to-image generation",
+      "license": "closed source",
+      "research_problem": "High-resolution image synthesis",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based upsampling from 64x64 to 256x256 resolution",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The upsampler uses Gaussian blur corruption during training to improve robustness and is trained on random crops of images to reduce computational cost while generalizing to full resolution at inference.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (upsampler 256x256 to 1024x1024)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "A diffusion upsampler model that increases image resolution from 256x256 to 1024x1024, trained with BSR degradation to improve robustness and generalization.",
+      "pretraining_corpus": "High-resolution images with conditioning on lower-resolution inputs",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image super-resolution, text-to-image generation",
+      "license": "closed source",
+      "research_problem": "High-resolution image synthesis",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based upsampling from 256x256 to 1024x1024 resolution",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The upsampler uses BSR degradation during training to improve robustness and is trained on random crops of images to reduce computational cost while generalizing to full resolution at inference.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "DALL-E (AR prior)",
+      "model_family": "DALL-E",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Autoregressive (AR) prior model that converts CLIP image embeddings into a sequence of discrete codes, conditioned on text captions and CLIP text embeddings, with PCA-based dimensionality reduction for efficiency and classifier-free guidance for improved sample quality.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image generation from text captions, image variations, interpolations, and text-guided image manipulations",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Autoregressive prediction of discrete CLIP image embeddings",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Principal Component Analysis (PCA) reduces CLIP image embedding dimensionality from 1,024 to 319 principal components, preserving nearly all information while improving training stability and inference efficiency. The model also conditions on the quantized dot product between text and image embeddings to favor higher text-image alignment.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "DALL-E (Diffusion prior)",
+      "model_family": "DALL-E",
+      "date_created": "2021-01",
+      "organization": "OpenAI",
+      "innovation": "Diffusion prior model that directly predicts unnoised CLIP image embeddings using a decoder-only Transformer, conditioned on text captions and CLIP text embeddings, with classifier-free guidance for improved sample quality.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image generation from text captions, image variations, interpolations, and text-guided image manipulations",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Gaussian diffusion modeling of continuous CLIP image embeddings",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The diffusion prior uses a decoder-only Transformer trained to predict the unnoised CLIP image embedding directly (instead of epsilon prediction), with mean-squared error loss. During sampling, two samples are generated, and the one with the higher dot product with the text embedding is selected for better alignment.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (AR prior)",
+      "parameters": "1B",
+      "parameters_millions": 1000,
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Hierarchical text-conditional image generation using CLIP latents, with an autoregressive (AR) prior to model the distribution of CLIP image embeddings given a caption, enabling high-quality image synthesis with improved semantic alignment and diversity.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based image generation conditioned on CLIP latents",
+      "pretraining_corpus": "DALL-E dataset (250M images)",
+      "finetuning_task": null,
+      "optimizer": "Adam with corrected weight decay and momentum β1=0.9",
+      "hardware_used": null,
+      "extension": "The AR prior explicitly predicts principal components of CLIP image embeddings in a specific order, enabling progressive reconstruction of semantic information from coarse to fine-grained details.",
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation with improved photorealism, caption similarity, and sample diversity",
+      "application": "Text-to-image generation, image reconstruction from CLIP latents, visualization of CLIP embedding space",
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP (Diffusion prior)",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Hierarchical text-conditional image generation using a diffusion-based prior to model CLIP image embeddings, outperforming the AR prior in photorealism, caption similarity, and diversity while requiring less training compute.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text-to-image generation, image reconstruction from CLIP latents, visualization of CLIP embedding space",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation with improved photorealism, caption similarity, and sample diversity",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based image generation conditioned on CLIP latents",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The diffusion prior models the distribution of CLIP image embeddings using a diffusion process, enabling more efficient and higher-quality generation compared to the autoregressive prior.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP decoder",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Diffusion-based decoder for generating high-resolution images from CLIP latents, improving photorealism and caption similarity over prior models like GLIDE.",
+      "pretraining_corpus": "DALL-E dataset (250M images)",
+      "parameters": "3.5B",
+      "parameters_millions": 3500,
+      "application": "Image generation from text prompts, inpainting, aesthetic-quality image synthesis",
+      "license": "closed source",
+      "research_problem": "Text-conditional image generation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based image generation",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β1=0.999",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "GLIDE-based architecture with learned sigma and 250 strided sampling steps for high-quality image synthesis.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP 64→256 upsampler",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Diffusion-based upsampler for increasing image resolution from 64x64 to 256x256, using cosine noise schedule and Gaussian blur for improved image quality.",
+      "pretraining_corpus": "DALL-E dataset (250M images)",
+      "parameters": "700M",
+      "parameters_millions": 700,
+      "application": "High-resolution image generation from low-resolution inputs",
+      "license": "closed source",
+      "research_problem": "Image super-resolution and enhancement",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based upsampling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β1=0.999",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "ADMNet-based architecture with 320 channels, 3 resblocks per resolution, and Gaussian blur for artifact reduction.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    },
+    {
+      "model_name": "unCLIP 256→1024 upsampler",
+      "model_family": "DALL-E",
+      "date_created": "2022-04",
+      "organization": "OpenAI",
+      "innovation": "Diffusion-based upsampler for increasing image resolution from 256x256 to 1024x1024, using linear noise schedule and BSR degradation for improved image quality.",
+      "pretraining_corpus": "DALL-E dataset (250M images)",
+      "parameters": "300M",
+      "parameters_millions": 300,
+      "application": "High-resolution image generation from low-resolution inputs",
+      "license": "closed source",
+      "research_problem": "Image super-resolution and enhancement",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion-based upsampling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam with corrected weight decay and momentum β1=0.999",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "ADMNet-based architecture with 192 channels, 2 resblocks per resolution, and BSR degradation for artifact reduction.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Hierarchical Text-Conditional Image Generation with CLIP Latents"
+    }
+  ],
+  "models_after_selection": 13,
+  "models_after_merge": 12,
+  "contributions": [
+    {
+      "label": "unCLIP (prior: diffusion)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (prior: diffusion)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a diffusion-based prior model to generate CLIP image embeddings from text captions, improving computational efficiency and sample quality compared to autoregressive priors. The model leverages the joint embedding space of CLIP for zero-shot language-guided image manipulations.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based prior for generating CLIP image embeddings from text captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pairs of images and corresponding captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image variation, language-guided image manipulation, high-resolution image synthesis (64x64 to 1024x1024)",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (prior: autoregressive)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (prior: autoregressive)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces an autoregressive prior model that converts CLIP image embeddings into discrete codes and predicts them conditioned on text captions. This enables hierarchical text-conditional image generation but is less compute-efficient than the diffusion prior variant.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Autoregressive prior for generating CLIP image embeddings from text captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pairs of images and corresponding captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image variation, language-guided image manipulation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (decoder)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (decoder)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "A diffusion-based decoder that inverts CLIP image embeddings to generate images, enabling non-deterministic image variations while preserving semantics and style. The decoder supports classifier-free guidance for improved sample quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based image generation conditioned on CLIP image embeddings and optionally text captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pairs of images and corresponding captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image variation, text-to-image generation, high-resolution image synthesis (64x64 to 1024x1024), semantic image manipulation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Image generation from latent representations",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (upsampler 64x64 to 256x256)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (upsampler 64x64 to 256x256)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "A diffusion upsampler model that increases image resolution from 64x64 to 256x256, trained with Gaussian blur corruption to improve robustness and generalization.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based upsampling from 64x64 to 256x256 resolution",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "High-resolution images with conditioning on lower-resolution inputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image super-resolution, text-to-image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "High-resolution image synthesis",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (upsampler 256x256 to 1024x1024)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (upsampler 256x256 to 1024x1024)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "A diffusion upsampler model that increases image resolution from 256x256 to 1024x1024, trained with BSR degradation to improve robustness and generalization.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based upsampling from 256x256 to 1024x1024 resolution",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "High-resolution images with conditioning on lower-resolution inputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image super-resolution, text-to-image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "High-resolution image synthesis",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "DALL-E (AR prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "DALL-E (AR prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Autoregressive (AR) prior model that converts CLIP image embeddings into a sequence of discrete codes, conditioned on text captions and CLIP text embeddings, with PCA-based dimensionality reduction for efficiency and classifier-free guidance for improved sample quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Autoregressive prediction of discrete CLIP image embeddings",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image generation from text captions, image variations, interpolations, and text-guided image manipulations",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "DALL-E (Diffusion prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "DALL-E (Diffusion prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion prior model that directly predicts unnoised CLIP image embeddings using a decoder-only Transformer, conditioned on text captions and CLIP text embeddings, with classifier-free guidance for improved sample quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Gaussian diffusion modeling of continuous CLIP image embeddings",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image generation from text captions, image variations, interpolations, and text-guided image manipulations",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (AR prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (AR prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hierarchical text-conditional image generation using CLIP latents, with an autoregressive (AR) prior to model the distribution of CLIP image embeddings given a caption, enabling high-quality image synthesis with improved semantic alignment and diversity.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based image generation conditioned on CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β1=0.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image reconstruction from CLIP latents, visualization of CLIP embedding space",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation with improved photorealism, caption similarity, and sample diversity",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP (Diffusion prior)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP (Diffusion prior)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hierarchical text-conditional image generation using a diffusion-based prior to model CLIP image embeddings, outperforming the AR prior in photorealism, caption similarity, and diversity while requiring less training compute.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based image generation conditioned on CLIP latents",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, image reconstruction from CLIP latents, visualization of CLIP embedding space",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation with improved photorealism, caption similarity, and sample diversity",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP decoder",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion-based decoder for generating high-resolution images from CLIP latents, improving photorealism and caption similarity over prior models like GLIDE.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β1=0.999",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "3500",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image generation from text prompts, inpainting, aesthetic-quality image synthesis",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-conditional image generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP 64→256 upsampler",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP 64→256 upsampler",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion-based upsampler for increasing image resolution from 64x64 to 256x256, using cosine noise schedule and Gaussian blur for improved image quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based upsampling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β1=0.999",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "700M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "700",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "High-resolution image generation from low-resolution inputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Image super-resolution and enhancement",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "unCLIP 256→1024 upsampler",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "unCLIP 256→1024 upsampler",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "DALL-E",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion-based upsampler for increasing image resolution from 256x256 to 1024x1024, using linear noise schedule and BSR degradation for improved image quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion-based upsampling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DALL-E dataset (250M images)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam with corrected weight decay and momentum β1=0.999",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "300M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "High-resolution image generation from low-resolution inputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Image super-resolution and enhancement",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

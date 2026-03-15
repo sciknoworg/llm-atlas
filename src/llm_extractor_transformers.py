@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import Mistral3ForConditionalGeneration
 
 from src.llm_extractor import MultiModelResponse
 
@@ -85,12 +86,22 @@ class LLMExtractorTransformers:
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.float16 if self.device.type == "cuda" else torch.float32,
-            trust_remote_code=True,
-            attn_implementation="sdpa",  # Use efficient SDPA attention to reduce memory usage
-        ).to(self.device)
+        # All Ministral-3 models (3B/8B Instruct and Reasoning, 2512 series) use Mistral3Config
+        # which AutoModelForCausalLM does not yet support in transformers 5.3.0.
+        _is_ministral3 = "ministral-3-" in model_name.lower()
+        if _is_ministral3:
+            self.model = Mistral3ForConditionalGeneration.from_pretrained(
+                model_name,
+                torch_dtype=torch.bfloat16 if self.device.type == "cuda" else torch.float32,
+                attn_implementation="sdpa",
+            ).to(self.device)
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                torch_dtype=torch.float16 if self.device.type == "cuda" else torch.float32,
+                trust_remote_code=True,
+                attn_implementation="sdpa",  # Use efficient SDPA attention to reduce memory usage
+            ).to(self.device)
 
         logger.info(f"Model loaded successfully on {self.device}")
 
@@ -133,9 +144,10 @@ class LLMExtractorTransformers:
 
                 # FEW-SHOT LEARNING WITH COMPREHENSIVE EXAMPLES
                 # Full examples to teach model to extract ALL fields.
+                # Kept in sync with llm_extractor.py (KISSKI pipeline).
 
                 # Example 1: BERT
-                example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer."  # noqa: E501
+                example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus."  # noqa: E501
                 example1_output = {
                     "models": [
                         {
@@ -144,19 +156,22 @@ class LLMExtractorTransformers:
                             "paper_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",  # noqa: E501
                             "organization": "Google",
                             "parameters": "340M",
+                            "parameters_millions": 340,
                             "date_created": "2018-10",
                             "pretraining_architecture": "Encoder",
                             "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
+                            "pretraining_corpus": "English Wikipedia, BookCorpus",
                             "optimizer": "Adam",
                             "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",  # noqa: E501
                             "research_problem": "Language Understanding",
+                            "application": "Natural language understanding, question answering, text classification",  # noqa: E501
+                            "license": "Apache 2.0",
                         }
                     ]
                 }
 
                 # Example 2: GPT-2
-                example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective."  # noqa: E501
-                # Example 2: GPT-2
+                example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on WebText dataset."  # noqa: E501
                 example2_output = {
                     "models": [
                         {
@@ -165,18 +180,21 @@ class LLMExtractorTransformers:
                             "paper_title": "Language Models are Unsupervised Multitask Learners",
                             "organization": "OpenAI",
                             "parameters": "1.5B",
+                            "parameters_millions": 1500,
                             "date_created": "2019-02",
                             "pretraining_architecture": "Decoder",
                             "pretraining_task": "Causal language modeling",
+                            "pretraining_corpus": "WebText",
                             "innovation": "Zero-shot task transfer via large-scale unsupervised learning",  # noqa: E501
-                            "introduction_date": "2019",
+                            "research_problem": "Large Language Models",
+                            "application": "Text generation, language modeling, zero-shot task transfer",  # noqa: E501
+                            "license": "Modified MIT License",
                         }
                     ]
                 }
 
-                # Example 3: GPT-1 (Targeting the user's specific case)
-                example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer."  # noqa: E501
                 # Example 3: GPT-1
+                example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset."  # noqa: E501
                 example3_output = {
                     "models": [
                         {
@@ -185,20 +203,23 @@ class LLMExtractorTransformers:
                             "paper_title": "Improving Language Understanding by Generative Pre-Training",  # noqa: E501
                             "organization": "OpenAI",
                             "parameters": "117M",
+                            "parameters_millions": 117,
                             "date_created": "2018-06",
                             "pretraining_architecture": "Decoder",
                             "pretraining_task": "Causal language modeling",
+                            "pretraining_corpus": "BooksCorpus",
                             "finetuning_task": "Supervised discriminative fine-tuning",
                             "optimizer": "Adam",
                             "innovation": "Generative pre-training followed by discriminative fine-tuning",  # noqa: E501
                             "license": "closed source",
                             "research_problem": "Language Understanding",
+                            "application": "Natural language understanding, text classification, question answering",  # noqa: E501
                         }
                     ]
                 }
 
                 # Example 4: Multiple model versions (Llama 3.1 with different sizes)
-                example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task."  # noqa: E501
+                example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. Released under Llama 3.1 Community License."  # noqa: E501
                 example4_output = {
                     "models": [
                         {
@@ -209,9 +230,13 @@ class LLMExtractorTransformers:
                             "parameters": "8B",
                             "parameters_millions": 8000,
                             "date_created": "2024-07",
-                            "pretraining_architecture": "Transformer",
+                            "pretraining_architecture": "Decoder",
                             "pretraining_task": "Next-token prediction",
+                            "pretraining_corpus": "Large-scale text corpus",
                             "innovation": "Large-scale language models",
+                            "research_problem": "Large Language Models",
+                            "application": "Chat, instruction following, general language tasks",
+                            "license": "Llama 3.1 Community License",
                         },
                         {
                             "model_name": "Llama 3.1 70B",
@@ -221,9 +246,13 @@ class LLMExtractorTransformers:
                             "parameters": "70B",
                             "parameters_millions": 70000,
                             "date_created": "2024-07",
-                            "pretraining_architecture": "Transformer",
+                            "pretraining_architecture": "Decoder",
                             "pretraining_task": "Next-token prediction",
+                            "pretraining_corpus": "Large-scale text corpus",
                             "innovation": "Large-scale language models",
+                            "research_problem": "Large Language Models",
+                            "application": "Chat, instruction following, general language tasks",
+                            "license": "Llama 3.1 Community License",
                         },
                         {
                             "model_name": "Llama 3.1 405B",
@@ -233,9 +262,13 @@ class LLMExtractorTransformers:
                             "parameters": "405B",
                             "parameters_millions": 405000,
                             "date_created": "2024-07",
-                            "pretraining_architecture": "Transformer",
+                            "pretraining_architecture": "Decoder",
                             "pretraining_task": "Next-token prediction",
+                            "pretraining_corpus": "Large-scale text corpus",
                             "innovation": "Large-scale language models",
+                            "research_problem": "Large Language Models",
+                            "application": "Chat, instruction following, general language tasks",
+                            "license": "Llama 3.1 Community License",
                         },
                     ],
                     "paper_describes_multiple_models": True,
@@ -245,35 +278,41 @@ class LLMExtractorTransformers:
                     {
                         "role": "system",
                         "content": (
-                            "You are an expert AI researcher. Extract DETAILED information about "
-                            "ALL MODEL VERSIONS/VARIANTS introduced in the paper. CRITICAL RULES:\n"
-                            "1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign "
-                            "it to 'paper_title'.\n"
-                            "2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as "
-                            "SEPARATE entries. If a paper describes multiple model sizes (e.g., "
-                            "8B, 70B, 405B), versions (e.g., 3.1, 3.2, 3.3), or variants (e.g., "
-                            "Base, Large, XL), create a separate entry for EACH one.\n"
-                            "3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or "
-                            "'B'. Extract parameter sizes for each variant.\n"
-                            "4. DATES: Priority 1: Metadata. Priority 2: Header/footer dates. "
-                            "Priority 3: Latest citation year.\n"
-                            "5. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if "  # noqa: E501
-                            "the paper describes multiple distinct models, versions, or size "
-                            "variants.\n"
-                            "6. CONTEXT VARIANTS: Do NOT create separate entries for context-window "  # noqa: E501
-                            "variants of the same model (e.g. 'Llama 3 8K' and 'Llama 3 128K' are "
-                            "ONE entry 'Llama 3'). Record context length in context_length field.\n"
-                            "7. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs "  # noqa: E501
-                            "post-trained variants (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 "
-                            "(post-trained)' are ONE entry 'Llama 3'). Describe both stages in "
-                            "innovation or finetuning_task.\n"
-                            "Fields: model_name, model_family, paper_title, organization, "
-                            "parameters, date_created, pretraining_architecture, pretraining_task, "
-                            "finetuning_task, optimizer, extension, innovation (use paper's terms, 1-2 sentences), license, hardware_used.\n"  # noqa: E501
-                            "OPTIMIZER: Use optimizer ONLY when the paper explicitly names an optimizer (e.g. Adam, AdamW). "  # noqa: E501
-                            "If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n"  # noqa: E501
-                            'EXTENSION: Use extension ONLY when the paper explicitly describes a technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding or technique). One sentence. Example: "Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model." If not mentioned, use null; do NOT guess or infer from other papers.\n'  # noqa: E501
-                            'PRETRAINING_ARCHITECTURE: Must be exactly one of "Encoder", "Decoder", or "Encoder-Decoder" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n'  # noqa: E501
+                            "You are an expert AI researcher extracting information according to "
+                            "ORKG template R609825. Extract DETAILED information about ALL MODEL "
+                            "VERSIONS/VARIANTS introduced in the paper.\n\n"
+                            "REQUIRED FIELDS (must extract for each model):\n"
+                            "- model_name (required): Exact model name with version/size\n"
+                            "- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n"
+                            "- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n"
+                            "- organization (required): Organization/company\n"
+                            "- innovation (required): Key innovation or contribution. Prefer the paper's own framing: name the main technique or method and how it differs from prior work. One or two sentences.\n"  # noqa: E501
+                            "- pretraining_corpus (required): Training dataset/corpus\n"
+                            "- research_problem (required): Research problem addressed\n"
+                            "- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n"  # noqa: E501
+                            "- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n"  # noqa: E501
+                            "- application (required): Use cases/applications\n"
+                            "- license (required): License type\n\n"
+                            "MUST EXTRACT WHEN MENTIONED (use null only if not stated):\n"
+                            "- pretraining_architecture: MUST be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\". Determine from the paper; use null only if not stated.\n"  # noqa: E501
+                            "- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n"  # noqa: E501
+                            "- finetuning_task (e.g. Supervised discriminative fine-tuning)\n"
+                            "- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n"  # noqa: E501
+                            "- extension: ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding or technique that extends the model beyond a baseline). One sentence. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If not mentioned, use null; do NOT guess or infer from other papers.\n"  # noqa: E501
+                            "- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. \"Nvidia V100 GPU\", \"TPUv3\"). Use the paper's wording. If not mentioned, use null; do NOT guess or infer.\n\n"  # noqa: E501
+                            "CRITICAL RULES:\n"
+                            "1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n"  # noqa: E501
+                            "2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n"  # noqa: E501
+                            "3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B=7000, 117M=117).\n"  # noqa: E501
+                            "4. DATES: Prefer YYYY-MM. Priority: metadata > header/footer > citation year.\n"
+                            "5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta).\n"
+                            "6. PARAMETERS: For multiple sizes use comma-separated (e.g. \"110M, 340M\").\n"
+                            "7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n"  # noqa: E501
+                            "8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null.\n"  # noqa: E501
+                            "9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, use these tables as the primary source for model names, metrics, parameter counts, and dataset names.\n"  # noqa: E501
+                            "10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants (e.g. 'Llama 3 8K' and 'Llama 3 128K' are ONE entry 'Llama 3'). Record context length in context_length field.\n"  # noqa: E501
+                            "11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained variants (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 (post-trained)' are ONE entry 'Llama 3'). Describe both stages in innovation or finetuning_task.\n\n"  # noqa: E501
+                            "FORMAT: date_created=YYYY-MM; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; hardware_used=exact phrase from paper or null if not stated.\n\n"  # noqa: E501
                             "Return JSON only."
                         ),
                     },
@@ -311,37 +350,64 @@ class LLMExtractorTransformers:
                     {"role": "assistant", "content": json.dumps(example4_output)},
                     {
                         "role": "user",
-                        "content": f"""Extract ALL model versions, variants, and sizes:
+                        "content": f"""Extract ALL model versions, variants, and sizes (ORKG R609825):
 
 {paper_snippet}
 
+REQUIRED FIELDS (must extract for each model):
+1. model_name (required): Exact model name with version/size if mentioned
+2. model_family (required): Model family/series (e.g., GPT, BERT, Llama)
+3. date_created (required): Publication date from paper (YYYY-MM-DD or YYYY)
+4. organization (required): Organization/company that created the model
+5. innovation (required): Key innovation or contribution. Use the paper's own terms for the main \
+method (e.g. MLM, Cloze, bidirectional) and keep to 1-2 sentences.
+6. pretraining_corpus (required): Training dataset/corpus mentioned
+7. research_problem (required): Research problem addressed
+8. parameters (required): Number of parameters as text (e.g., "7B", "175B", "117M")
+9. parameters_millions (required): Parameters in millions (e.g., 7000 for 7B, 117 for 117M)
+10. application (required): Use cases/applications mentioned
+11. license (required): License (e.g., "open source", "closed source", "Apache 2.0")
+
 CRITICAL INSTRUCTIONS:
-- Extract ALL model versions/variants (e.g. Llama 3.1 8B/70B/405B -> 3 entries)
-- Extract ALL model sizes (different param counts = different entries)
-- Extract ALL versions (3.1, 3.2, 3.3 = separate entries)
-- Extract ALL architectural variants (Base, Large, XL = separate entries)
-- Each distinct size/version/variant = SEPARATE entry in models array
+- Extract ALL model versions/variants (e.g. "Llama 3.1 8B/70B/405B" -> 3 entries)
+- Extract ALL model sizes mentioned (different parameter counts = different entries)
+- Extract ALL model versions mentioned (3.1, 3.2, 3.3 = separate entries)
+- Extract ALL architectural variants (Base, Large, XL, etc. = separate entries)
+- Each distinct model size/version/variant = SEPARATE entry in models array
 - Extract models THIS paper introduces (main contributions)
-- NOT related work or comparisons
+- NOT models mentioned as related work or comparisons
 - Focus on PRIMARY model contributions intended as standalone released models.
 - Do NOT create separate entries for auxiliary artifacts such as tools, guards,
   safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules
-  when main model contributions are present.
-- If auxiliary artifacts are mentioned, include them in innovation/extension fields
-  of the related primary model instead of adding standalone model entries.
+  when the paper also contains main model contributions.
+- If auxiliary artifacts are mentioned, capture them inside innovation/extension fields
+  of the relevant primary model instead of as standalone models.
 - Do NOT create separate entries for context-window variants of the same model
   (e.g. "Llama 3 8K" and "Llama 3 128K context" are ONE entry "Llama 3"; put the
   context length in the context_length field).
 - Do NOT create separate entries for pre-trained vs post-trained variants of the same
   model (e.g. "Llama 3 (pre-trained)" and "Llama 3 (post-trained)" are ONE entry
   "Llama 3"; describe both stages in innovation or finetuning_task).
-- pretraining_architecture: exactly one of Encoder, Decoder, or Encoder-Decoder (determine from the paper); null if not stated.  # noqa: E501
-- innovation: Use the paper's own terms for the main method (e.g. MLM, Cloze, bidirectional); keep to 1-2 sentences.
-- Model name include version/size if mentioned (e.g. "Llama 3.1 8B")
-- Model name is NOT architecture (e.g. "GPT" not "Transformer")
+- Model name include version/size if mentioned (e.g. "Llama 3.1 8B" not just "Llama")
+- Model name is NOT the architecture (e.g. "GPT" not "Transformer")
 - If multiple models, set "paper_describes_multiple_models": true
-- optimizer: Extract ONLY when the paper explicitly mentions it; if the paper does not mention the optimizer, use null and do NOT guess or infer from other papers.  # noqa: E501
-- extension: Extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding that extends the model vs a baseline). One sentence. If not mentioned, use null; do not infer from other papers.  # noqa: E501
+- parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500
+- Extract ALL required fields. Use null if not in paper; \
+infer when possible.
+- pretraining_architecture: use exactly one of Encoder, Decoder, or Encoder-Decoder \
+(determine from the paper); null if not stated.
+- Always extract pretraining_architecture, pretraining_task, finetuning_task when stated. \
+For optimizer: extract ONLY when the paper explicitly mentions it; if the paper does not \
+mention the optimizer, use null and do NOT guess or infer from other papers. For extension: \
+extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a \
+specific encoding or technique that extends the model vs a baseline); one sentence; if not \
+mentioned, use null; do not infer from other papers.
+- FORMAT: date_created use YYYY-MM when possible; organization use canonical name \
+(Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, \
+otherwise null; extension = one-sentence technical detail when stated, otherwise null; \
+hardware_used = paper's wording (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.
+- JSON STRING VALUES: Never include a bare double-quote character inside a string value. \
+If a value contains a double quote, escape it as \\\" (e.g. write \\"tokens\\" not "tokens").
 
 Output JSON:""",
                     },
@@ -374,7 +440,7 @@ Output JSON:""",
                             "research_problem": "Research problem",
                             "architecture": "General architecture",
                             "innovation": "Key innovation",
-                            "hardware_used": "Hardware type or null",
+                            "hardware_used": "e.g. Nvidia V100 GPU, TPUv3, or null if not stated",
                         }
                     ],
                     "paper_describes_multiple_models": False,
@@ -427,7 +493,7 @@ REQUIRED FIELDS TO EXTRACT (from the paper text only):
 - research_problem: e.g. Large Language Models, NLU
 - architecture: e.g. Transformer
 - innovation: Key innovation; use paper's terms (e.g. MLM, Cloze), 1-2 sentences
-- hardware_used: Hardware (e.g. "GPU", "TPU", or null if not mentioned)
+- hardware_used: Training/inference hardware ONLY when the paper explicitly states it. Use the paper's wording. Examples: "Nvidia V100 GPU", "TPUv3", "A100-80GB GPU", "Cloud TPUv3", "NVIDIA A100 GPU", "Tesla V100 (32GB) GPU". If NOT mentioned in the paper, use null; do NOT guess or infer.
 
 CRITICAL RULES:
 1. Extract ONLY from the paper text - do NOT use your training data
@@ -555,110 +621,144 @@ JSON:
                 )
                 return None
 
-            # === ENHANCED CLEANING FOR LLAMA 3.1 ===
-
-            # Remove dots before field names (e.g., ."field_name" -> "field_name")
-            response_text = re.sub(r'\.\s*"', '"', response_text)
-
-            # Fix missing opening quotes for field names (handles spaces/hyphens too)
-            response_text = _quote_unquoted_keys(response_text)
-
-            # Fix missing closing quotes (e.g., "field":"value, -> "field":"value",)
-            # Look for unquoted values before comma/brace/bracket
-            response_text = re.sub(r':\s*([^",}\]]+?)(\s*[,}\]])', r': "\1"\2', response_text)
-
-            # Fix cases like "short_description:"", -> "short_description":"",
-            response_text = re.sub(r':\s*"",', r': "",', response_text)
-
-            # Fix double quotes (e.g., ""value"" -> "value")
-            response_text = re.sub(r'""([^"]+)""', r'"\1"', response_text)
-            response_text = re.sub(r'""+', '"', response_text)
-
-            # Fix empty comma patterns (e.g., ", ," or ",  ,")
-            response_text = re.sub(r",\s*,", ",", response_text)
-
-            # Fix field names with trailing spaces (e.g., "field_name " -> "field_name")
-            response_text = re.sub(r'"(\w+)\s+":', r'"\1":', response_text)
-
-            # Insert missing commas between objects in arrays (e.g., "} {")
-            response_text = re.sub(r"}\s*{", "},{", response_text)
-
-            # Insert missing commas between values and the next key (e.g., "value" "next_key":)
-            response_text = re.sub(
-                r'(?<=[0-9"\]}])\s+(?="[^"]+"\s*:)',
-                ",",
-                response_text,
-            )
-
-            # Remove control characters (newlines, tabs, etc.) that break JSON parsing
-            # JSON doesn't allow unescaped control characters in strings
-            response_text = re.sub(r"[\x00-\x1f\x7f-\x9f]", "", response_text)
-
-            # Remove JSON comments (// and /* */)
-            response_text = re.sub(r"//.*?$", "", response_text, flags=re.MULTILINE)
-            response_text = re.sub(r"/\*.*?\*/", "", response_text, flags=re.DOTALL)
-
-            # Remove placeholder text like "Add more models here..."
-            response_text = re.sub(
-                r",?\s*//.*?Add more.*?$", "", response_text, flags=re.MULTILINE | re.IGNORECASE
-            )
-
-            # Remove trailing commas before } or ]
-            response_text = re.sub(r",\s*}", "}", response_text)
-            response_text = re.sub(r",\s*]", "]", response_text)
-
-            # Fix leading commas after { or [
-            response_text = re.sub(r"{\s*,", "{", response_text)
-            response_text = re.sub(r"\[\s*,", "[", response_text)
-
-            # Remove any text after the JSON (like "Note - ...")
-            # Find the last } and truncate
-            last_brace = response_text.rfind("}")
-            if last_brace > 0:
-                response_text = response_text[: last_brace + 1]
-
-            # Balance brackets/braces if the JSON is truncated
-            response_text = _balance_json_brackets(response_text)
-
-            if not response_text.strip():
-                logger.error("Response became empty after cleaning")
-                logger.debug(f"Original response: {original_response[:500]}")
-                return None
-
-            # Try to parse JSON - if it fails, attempt repair
+            # === PARSE-FIRST: try minimal parse before aggressive cleaning ===
+            parsed = None
             try:
                 parsed = json.loads(response_text)
-            except json.JSONDecodeError as parse_error:
-                logger.warning(f"Initial JSON parse failed: {parse_error}. Attempting repair...")
+            except json.JSONDecodeError:
+                # Parsing failed — apply cleaning and then retry
 
-                # Attempt to repair common issues
-                # Fix incomplete strings (e.g., "value, -> "value",)
+                # Remove dots before field names (e.g., ."field_name" -> "field_name")
+                response_text = re.sub(r'\.\s*"', '"', response_text)
+
+                # Fix missing opening quotes for field names (handles spaces/hyphens too)
+                response_text = _quote_unquoted_keys(response_text)
+
+                # Fix missing closing quotes for UNQUOTED VALUES only (not arrays/objects)
+                # Exclude [ and { so we don't mangle lists/dicts
                 response_text = re.sub(
-                    r':\s*"([^"]*?)([,}\]])',
-                    lambda m: (
-                        f': "{m.group(1)}"{m.group(2)}'
-                        if not m.group(1).endswith('"')
-                        else f": {m.group(1)}{m.group(2)}"
-                    ),
+                    r':\s*([^",}\[\{][^",}\]]*?)(\s*[,}\]])', r': "\1"\2', response_text
+                )
+
+                # Fix cases like "short_description:"", -> "short_description":"",
+                response_text = re.sub(r':\s*"",', r': "",', response_text)
+
+                # Fix double quotes (e.g., ""value"" -> "value")
+                response_text = re.sub(r'""([^"]+)""', r'"\1"', response_text)
+                response_text = re.sub(r'""+', '"', response_text)
+
+                # Fix empty comma patterns (e.g., ", ," or ",  ,")
+                response_text = re.sub(r",\s*,", ",", response_text)
+
+                # Fix field names with trailing spaces
+                response_text = re.sub(r'"(\w+)\s+":', r'"\1":', response_text)
+
+                # Insert missing commas between objects in arrays (e.g., "} {")
+                response_text = re.sub(r"}\s*{", "},{", response_text)
+
+                # Insert missing commas between values and the next key
+                response_text = re.sub(
+                    r'(?<=[0-9"\]}])\s+(?="[^"]+"\s*:)',
+                    ",",
                     response_text,
                 )
 
-                # Fix unclosed strings at end of object
-                response_text = re.sub(r':\s*"([^"]*?)(\s*[}\]])', r': "\1"\2', response_text)
+                # Remove control characters that break JSON parsing
+                response_text = re.sub(r"[\x00-\x1f\x7f-\x9f]", "", response_text)
 
-                # Try parsing again
+                # Remove JSON comments
+                response_text = re.sub(r"//.*?$", "", response_text, flags=re.MULTILINE)
+                response_text = re.sub(r"/\*.*?\*/", "", response_text, flags=re.DOTALL)
+
+                # Remove placeholder text like "Add more models here..."
+                response_text = re.sub(
+                    r",?\s*//.*?Add more.*?$", "", response_text, flags=re.MULTILINE | re.IGNORECASE
+                )
+
+                # Remove trailing commas before } or ]
+                response_text = re.sub(r",\s*}", "}", response_text)
+                response_text = re.sub(r",\s*]", "]", response_text)
+
+                # Fix leading commas after { or [
+                response_text = re.sub(r"{\s*,", "{", response_text)
+                response_text = re.sub(r"\[\s*,", "[", response_text)
+
+                # Remove any text after the JSON
+                last_brace = response_text.rfind("}")
+                if last_brace > 0:
+                    response_text = response_text[: last_brace + 1]
+
+                # Balance brackets/braces if the JSON is truncated
+                response_text = _balance_json_brackets(response_text)
+
+                if not response_text.strip():
+                    logger.error("Response became empty after cleaning")
+                    logger.debug(f"Original response: {original_response[:500]}")
+                    return None
+
+                # Second parse attempt after cleaning
                 try:
                     parsed = json.loads(response_text)
-                    logger.info("JSON repair successful")
-                except json.JSONDecodeError as repair_error:
-                    logger.error(f"JSON repair also failed: {repair_error}")
-                    logger.error(f"Response length: {len(original_response)}")
-                    logger.error(f"Response preview (first 500 chars): {original_response[:500]}")
-                    logger.error(
-                        "Cleaned response (first 500 chars): "
-                        f"{response_text[:500] if response_text else 'EMPTY'}"
-                    )
-                    return None
+                    logger.info("JSON parse succeeded after cleaning")
+                except json.JSONDecodeError as parse_error:
+                    logger.warning(f"Parse failed after cleaning: {parse_error}. Attempting targeted repair...")
+
+                    # --- Targeted repair: unescaped double quote inside a string value ---
+                    # Small models (e.g. Ministral-3-3B) often emit:
+                    #   "pretraining_corpus": "...tokens", ~10% Python code)"
+                    # The quote after "tokens" closes the string prematurely.
+                    # Fix: scan backwards from the error position for the stray quote.
+                    if "Expecting property name" in str(parse_error):
+                        err_pos = parse_error.pos
+                        fixed_text = response_text
+                        for look_back in range(2, min(600, err_pos)):
+                            cand = err_pos - look_back
+                            if fixed_text[cand] == '"' and (cand == 0 or fixed_text[cand - 1] != "\\"):
+                                after = fixed_text[cand + 1: cand + 4]
+                                if after.startswith(", ") or after.startswith(",\n"):
+                                    candidate = fixed_text[:cand] + '\\"' + fixed_text[cand + 1:]
+                                    try:
+                                        parsed = json.loads(candidate)
+                                        logger.info(
+                                            "Unescaped-quote repair succeeded at offset -%d from error pos %d",
+                                            look_back, err_pos,
+                                        )
+                                        response_text = candidate
+                                        break
+                                    except json.JSONDecodeError:
+                                        continue
+
+                    if parsed is None:
+                        # General string repair passes as last resort
+                        response_text = re.sub(
+                            r':\s*"([^"]*?)([,}\]])',
+                            lambda m: (
+                                f': "{m.group(1)}"{m.group(2)}'
+                                if not m.group(1).endswith('"')
+                                else f": {m.group(1)}{m.group(2)}"
+                            ),
+                            response_text,
+                        )
+                        response_text = re.sub(
+                            r':\s*"([^"]*?)(\s*[}\]])', r': "\1"\2', response_text
+                        )
+                        try:
+                            parsed = json.loads(response_text)
+                            logger.info("JSON repair successful (general string pass)")
+                        except json.JSONDecodeError as repair_error:
+                            logger.error(f"JSON repair also failed: {repair_error}")
+                            logger.error(f"Response length: {len(original_response)}")
+                            logger.error(
+                                f"Response preview (first 500 chars): {original_response[:500]}"
+                            )
+                            logger.error(
+                                "Cleaned response (first 500 chars): "
+                                f"{response_text[:500] if response_text else 'EMPTY'}"
+                            )
+                            return None
+
+            if parsed is None:
+                return None
 
             # Normalize field names in the parsed JSON
             parsed = self._normalize_field_names(parsed)
@@ -796,6 +896,12 @@ JSON:
             # This leaves room for prompt and generated response
             max_length = 32768
 
+            # Safely compute model vocab size; some configs (e.g. Mistral3Config) don't define it
+            cfg = getattr(self.model, "config", None)
+            model_vocab_size = (
+                cfg.vocab_size if cfg is not None and hasattr(cfg, "vocab_size") else None
+            )
+
             # #region agent log
             _debug_log(
                 "B",
@@ -804,9 +910,7 @@ JSON:
                 {
                     "max_length": max_length,
                     "vocab_size": len(self.tokenizer),
-                    "model_vocab_size": (
-                        self.model.config.vocab_size if hasattr(self.model, "config") else None
-                    ),
+                    "model_vocab_size": model_vocab_size,
                     "pad_token_id": self.tokenizer.pad_token_id,
                     "eos_token_id": self.tokenizer.eos_token_id,
                     "bos_token_id": getattr(self.tokenizer, "bos_token_id", None),
@@ -826,9 +930,6 @@ JSON:
             # #region agent log
             input_ids = inputs["input_ids"]
             attention_mask = inputs.get("attention_mask")
-            model_vocab_size = (
-                self.model.config.vocab_size if hasattr(self.model, "config") else None
-            )
             tokenizer_vocab_size = len(self.tokenizer)
             input_ids_min = int(input_ids.min().item())
             input_ids_max = int(input_ids.max().item())
@@ -906,10 +1007,7 @@ JSON:
 
             with torch.no_grad():
                 # Ensure pad_token_id and eos_token_id are set correctly and valid
-                model_vocab_size = (
-                    self.model.config.vocab_size if hasattr(self.model, "config") else None
-                )
-
+                # (model_vocab_size already set at start of extract(); safe for Mistral3Config)
                 pad_token_id = (
                     self.tokenizer.pad_token_id
                     if self.tokenizer.pad_token_id is not None

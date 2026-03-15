@@ -1,0 +1,823 @@
+{
+  "arxiv_id": "2206.11309v1",
+  "status": "started",
+  "timestamp": "2026-02-26T03:19:19.385509",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2206.11309",
+    "title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog",
+    "authors": [
+      "Baolin Peng",
+      "Michel Galley",
+      "Pengcheng He",
+      "Chris Brockett",
+      "Lars Liden",
+      "Elnaz Nouri",
+      "Zhou Yu",
+      "Bill Dolan",
+      "Jianfeng Gao"
+    ],
+    "abstract": "We introduce GODEL (Grounded Open Dialogue Language Model), a large pre-trained language model for dialog. In contrast with earlier models such as DialoGPT, GODEL leverages a new phase of grounded pre-training designed to better support adapting GODEL to a wide range of downstream dialog tasks that require information external to the current conversation (e.g., a database or document) to produce good responses. Experiments against an array of benchmarks that encompass task-oriented dialog, conversational QA, and grounded open-domain dialog show that GODEL outperforms state-of-the-art pre-trained dialog models in few-shot fine-tuning setups, in terms of both human and automatic evaluation. A novel feature of our evaluation methodology is the introduction of a notion of utility that assesses the usefulness of responses (extrinsic evaluation) in addition to their communicative features (intrinsic evaluation). We show that extrinsic evaluation offers improved inter-annotator agreement and correlation with automated metrics. Code and data processing scripts are publicly available.",
+    "published": "2022-06-22T18:19:32+00:00",
+    "updated": "2022-06-22T18:19:32+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2206.11309v1",
+    "entry_id": "http://arxiv.org/abs/2206.11309v1",
+    "pdf_path": "data\\papers\\2206.11309.pdf"
+  },
+  "text_length": 48562,
+  "word_count": 4675,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "GODEL_B",
+      "parameters": "T5-BASE EQUIVALENT, 220M",
+      "parameters_millions": 220,
+      "model_family": "GODEL",
+      "date_created": "2022-01",
+      "organization": "Microsoft",
+      "innovation": "GODEL introduces a three-phase pre-training strategy that incorporates web text, dialog corpora, and grounded dialog datasets to improve utility in goal-directed dialog tasks. It leverages external information (e.g., retrieved documents) to generate contextually grounded responses, enabling better adaptation to downstream tasks requiring external knowledge.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Grounded pre-training with web text, dialog corpora, and grounded dialog datasets",
+      "pretraining_corpus": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+      "finetuning_task": "Few-shot fine-tuning on goal-directed dialog tasks (e.g., MultiWOZ, CoQA, Wizard of Wikipedia, Wizard of the Internet)",
+      "optimizer": null,
+      "hardware_used": "16 Nvidia V100 GPUs",
+      "extension": "Three-phase pre-training: (1) linguistic pre-training on web documents, (2) dialog pre-training on Reddit comment chains, and (3) grounded dialog pre-training on knowledge-grounded and task-oriented datasets.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Goal-directed dialog generation with grounding in external knowledge or environment",
+      "application": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL_GPT-J",
+      "parameters": "6B, 6B (GPT-J EQUIVALENT)",
+      "parameters_millions": 6000,
+      "model_family": "GODEL",
+      "date_created": "2022-01",
+      "organization": "Microsoft",
+      "innovation": "GODEL introduces a three-phase pre-training strategy that incorporates web text, dialog corpora, and grounded dialog datasets to improve utility in goal-directed dialog tasks. It leverages external information (e.g., retrieved documents) to generate contextually grounded responses, enabling better adaptation to downstream tasks requiring external knowledge.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Grounded pre-training with web text, dialog corpora, and grounded dialog datasets",
+      "pretraining_corpus": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+      "finetuning_task": "Few-shot fine-tuning on goal-directed dialog tasks (e.g., MultiWOZ, CoQA, Wizard of Wikipedia, Wizard of the Internet)",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Three-phase pre-training: (1) linguistic pre-training on web documents, (2) dialog pre-training on Reddit comment chains, and (3) grounded dialog pre-training on knowledge-grounded and task-oriented datasets. Released as a substitute for GODEL_XL due to licensing restrictions.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Goal-directed dialog generation with grounding in external knowledge or environment",
+      "application": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL_L",
+      "model_family": "GODEL",
+      "date_created": "2022-01",
+      "organization": "Microsoft",
+      "innovation": "GODEL introduces a three-phase pre-training approach for goal-directed dialog, combining linguistic pre-training, dialog pre-training, and grounded dialog pre-training to enable responses that are grounded in external knowledge or world state, improving Utility in conversations.",
+      "pretraining_corpus": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+      "parameters": "770M",
+      "parameters_millions": 770,
+      "application": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+      "license": null,
+      "research_problem": "Goal-directed dialog generation with grounding in external knowledge or environment",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Sequence-to-sequence language modeling with grounding",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Goal-directed dialog fine-tuning (knowledge-grounded response generation, task-oriented dialog, conversational QA)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "16 Nvidia V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Three-phase pre-training: (1) linguistic pre-training on web documents, (2) dialog pre-training on Reddit comment chains, and (3) grounded dialog pre-training on knowledge-grounded and task-oriented datasets.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL",
+      "parameters": "222M, 3B, 175B",
+      "parameters_millions": 175000,
+      "model_family": "GODEL",
+      "date_created": "2022-01",
+      "organization": "Microsoft",
+      "innovation": "GODEL introduces a three-phase pre-training approach for goal-directed dialog, combining linguistic pre-training, dialog pre-training, and grounded dialog pre-training to enable responses that are grounded in external knowledge or world state, improving Utility in conversations.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with grounding",
+      "pretraining_corpus": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+      "finetuning_task": "Goal-directed dialog fine-tuning (knowledge-grounded response generation, task-oriented dialog, conversational QA)",
+      "optimizer": null,
+      "hardware_used": "128 Nvidia V100 GPUs",
+      "extension": "Three-phase pre-training: (1) linguistic pre-training on web documents, (2) dialog pre-training on Reddit comment chains, and (3) grounded dialog pre-training on knowledge-grounded and task-oriented datasets. Initialized from GPT-3 but not released due to licensing restrictions.",
+      "blog_post": null,
+      "license": "closed source (due to GPT-3 initialization)",
+      "research_problem": "Goal-directed dialog generation with grounding in external knowledge or environment",
+      "application": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL Base (GODELB)",
+      "model_family": "GODEL",
+      "date_created": "2022-06",
+      "organization": "Microsoft",
+      "innovation": "GODEL introduces a grounded pre-training approach for goal-directed dialog, combining conversational pre-training with knowledge-grounded generation to improve utility and task performance in dialog systems.",
+      "pretraining_corpus": "Large-scale text corpus including dialog data and external knowledge sources",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+      "license": null,
+      "research_problem": "Goal-directed dialog and knowledge-grounded text generation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Grounded text generation with goal-directed dialog pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL Large (GODELL)",
+      "model_family": "GODEL",
+      "date_created": "2022-06",
+      "organization": "Microsoft",
+      "innovation": "Scaled-up version of GODEL Base, demonstrating improved performance on utility and BLEU scores in few-shot fine-tuning settings for goal-directed dialog tasks.",
+      "pretraining_corpus": "Large-scale text corpus including dialog data and external knowledge sources",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+      "license": null,
+      "research_problem": "Goal-directed dialog and knowledge-grounded text generation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Grounded text generation with goal-directed dialog pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    },
+    {
+      "model_name": "GODEL XL (GODELXL)",
+      "model_family": "GODEL",
+      "date_created": "2022-06",
+      "organization": "Microsoft",
+      "innovation": "Largest variant of GODEL, initialized from GPT-3 and further pre-trained with grounded dialog objectives, outperforming GPT-3 on goal-directed dialog tasks by a large margin.",
+      "pretraining_corpus": "Large-scale text corpus including dialog data and external knowledge sources",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+      "license": null,
+      "research_problem": "Goal-directed dialog and knowledge-grounded text generation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Grounded text generation with goal-directed dialog pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Initialized from GPT-3 and extended with grounded pre-training for dialog tasks, enabling better performance on extrinsic and intrinsic evaluations.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "GODEL: Large-Scale Pre-Training for Goal-Directed Dialog"
+    }
+  ],
+  "models_after_selection": 12,
+  "models_after_merge": 7,
+  "contributions": [
+    {
+      "label": "GODEL_B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL_B",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GODEL introduces a three-phase pre-training strategy that incorporates web text, dialog corpora, and grounded dialog datasets to improve utility in goal-directed dialog tasks. It leverages external information (e.g., retrieved documents) to generate contextually grounded responses, enabling better adaptation to downstream tasks requiring external knowledge.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Grounded pre-training with web text, dialog corpora, and grounded dialog datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Few-shot fine-tuning on goal-directed dialog tasks (e.g., MultiWOZ, CoQA, Wizard of Wikipedia, Wizard of the Internet)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "T5-BASE EQUIVALENT, 220M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "220",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "16 Nvidia V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog generation with grounding in external knowledge or environment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL_GPT-J",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL_GPT-J",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GODEL introduces a three-phase pre-training strategy that incorporates web text, dialog corpora, and grounded dialog datasets to improve utility in goal-directed dialog tasks. It leverages external information (e.g., retrieved documents) to generate contextually grounded responses, enabling better adaptation to downstream tasks requiring external knowledge.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Grounded pre-training with web text, dialog corpora, and grounded dialog datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Few-shot fine-tuning on goal-directed dialog tasks (e.g., MultiWOZ, CoQA, Wizard of Wikipedia, Wizard of the Internet)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "6B, 6B (GPT-J EQUIVALENT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "6000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog generation with grounding in external knowledge or environment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL_L",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL_L",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GODEL introduces a three-phase pre-training approach for goal-directed dialog, combining linguistic pre-training, dialog pre-training, and grounded dialog pre-training to enable responses that are grounded in external knowledge or world state, improving Utility in conversations.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Sequence-to-sequence language modeling with grounding",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Goal-directed dialog fine-tuning (knowledge-grounded response generation, task-oriented dialog, conversational QA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "770M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "770",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "16 Nvidia V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog generation with grounding in external knowledge or environment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GODEL introduces a three-phase pre-training approach for goal-directed dialog, combining linguistic pre-training, dialog pre-training, and grounded dialog pre-training to enable responses that are grounded in external knowledge or world state, improving Utility in conversations.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling with grounding",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web documents (public web text), Reddit comment chains (DialoGPT), DSTC7 Task2, MS MARCO, UnifiedQA, Schema-Guided Dialog",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Goal-directed dialog fine-tuning (knowledge-grounded response generation, task-oriented dialog, conversational QA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "222M, 3B, 175B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "175000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "128 Nvidia V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge-grounded response generation, task-oriented dialog, conversational question answering, chat",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog generation with grounding in external knowledge or environment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL Base (GODELB)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL Base (GODELB)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "GODEL introduces a grounded pre-training approach for goal-directed dialog, combining conversational pre-training with knowledge-grounded generation to improve utility and task performance in dialog systems.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Grounded text generation with goal-directed dialog pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus including dialog data and external knowledge sources",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog and knowledge-grounded text generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL Large (GODELL)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL Large (GODELL)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Scaled-up version of GODEL Base, demonstrating improved performance on utility and BLEU scores in few-shot fine-tuning settings for goal-directed dialog tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Grounded text generation with goal-directed dialog pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus including dialog data and external knowledge sources",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog and knowledge-grounded text generation",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GODEL XL (GODELXL)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GODEL XL (GODELXL)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GODEL",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Largest variant of GODEL, initialized from GPT-3 and further pre-trained with grounded dialog objectives, outperforming GPT-3 on goal-directed dialog tasks by a large margin.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Grounded text generation with goal-directed dialog pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text corpus including dialog data and external knowledge sources",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Few-shot fine-tuning on task-specific datasets (e.g., MultiWOZ, WoW, WoI, CoQA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Task-oriented dialog, knowledge-grounded response generation, question answering, chatbots",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Goal-directed dialog and knowledge-grounded text generation",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

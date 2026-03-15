@@ -1,0 +1,158 @@
+{
+  "arxiv_id": "1910.13461v1",
+  "status": "started",
+  "timestamp": "2026-02-26T02:06:49.425179",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "1910.13461",
+    "title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+    "authors": [
+      "Mike Lewis",
+      "Yinhan Liu",
+      "Naman Goyal",
+      "Marjan Ghazvininejad",
+      "Abdelrahman Mohamed",
+      "Omer Levy",
+      "Ves Stoyanov",
+      "Luke Zettlemoyer"
+    ],
+    "abstract": "We present BART, a denoising autoencoder for pretraining sequence-to-sequence models. BART is trained by (1) corrupting text with an arbitrary noising function, and (2) learning a model to reconstruct the original text. It uses a standard Tranformer-based neural machine translation architecture which, despite its simplicity, can be seen as generalizing BERT (due to the bidirectional encoder), GPT (with the left-to-right decoder), and many other more recent pretraining schemes. We evaluate a number of noising approaches, finding the best performance by both randomly shuffling the order of the original sentences and using a novel in-filling scheme, where spans of text are replaced with a single mask token. BART is particularly effective when fine tuned for text generation but also works well for comprehension tasks. It matches the performance of RoBERTa with comparable training resources on GLUE and SQuAD, achieves new state-of-the-art results on a range of abstractive dialogue, question answering, and summarization tasks, with gains of up to 6 ROUGE. BART also provides a 1.1 BLEU increase over a back-translation system for machine translation, with only target language pretraining. We also report ablation experiments that replicate other pretraining schemes within the BART framework, to better measure which factors most influence end-task performance.",
+    "published": "2019-10-29T18:01:00+00:00",
+    "updated": "2019-10-29T18:01:00+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1910.13461v1",
+    "entry_id": "http://arxiv.org/abs/1910.13461v1",
+    "pdf_path": "data\\papers\\1910.13461.pdf"
+  },
+  "text_length": 39356,
+  "word_count": 4132,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "BART",
+      "parameters": "BASE (6 ENCODER/DECODER LAYERS, HIDDEN SIZE 768), 140M, 400M",
+      "parameters_millions": 400,
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "BART introduces a denoising sequence-to-sequence pre-training objective that corrupts text with an arbitrary noising function and trains the model to reconstruct the original text. This reduces the mismatch between pre-training and generation tasks by ensuring the decoder is always trained on uncorrupted context, enabling strong performance on both generative and discriminative tasks.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoder (reconstruction of corrupted text)",
+      "pretraining_corpus": "Combination of datasets (exact corpus not specified, but includes BookCorpus, Wikipedia, and others)",
+      "finetuning_task": "Sequence-to-sequence fine-tuning for generation, comprehension, and translation tasks",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": "The model uses a novel in-filling scheme where spans of text are replaced with a single mask token, forcing the model to reason about overall sentence structure and long-range dependencies. The large variant uses 12 encoder and decoder layers, with cross-attention in the decoder.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension",
+      "application": "Text generation, machine translation, abstractive summarization, dialogue, question answering, and comprehension tasks",
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "contributions": [
+    {
+      "label": "BART",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "BART introduces a denoising sequence-to-sequence pre-training objective that corrupts text with an arbitrary noising function and trains the model to reconstruct the original text. This reduces the mismatch between pre-training and generation tasks by ensuring the decoder is always trained on uncorrupted context, enabling strong performance on both generative and discriminative tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoder (reconstruction of corrupted text)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Combination of datasets (exact corpus not specified, but includes BookCorpus, Wikipedia, and others)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Sequence-to-sequence fine-tuning for generation, comprehension, and translation tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "BASE (6 ENCODER/DECODER LAYERS, HIDDEN SIZE 768), 140M, 400M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "400",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation, machine translation, abstractive summarization, dialogue, question answering, and comprehension tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

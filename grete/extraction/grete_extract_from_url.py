@@ -6,6 +6,7 @@ Usage:
     python grete_extract_from_url.py <pdf_url> [paper_title]
 """
 
+import os
 import sys
 import json
 import torch
@@ -13,7 +14,9 @@ import requests
 from pathlib import Path
 from datetime import datetime
 
-sys.path.insert(0, str(Path(__file__).parent))
+# Project root (llm-extraction) so that "src" is importable when run from any cwd
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.pdf_parser import PDFParser
 from src.llm_extractor_transformers import LLMExtractorTransformers
@@ -39,12 +42,24 @@ def download_pdf(url: str, output_path: Path) -> bool:
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python grete_extract_from_url.py <pdf_url> [paper_title]")
+    import argparse
+    parser_args = argparse.ArgumentParser(description="Extract LLM information from a PDF URL on Grete GPU")
+    parser_args.add_argument("pdf_url", help="URL to the PDF")
+    parser_args.add_argument("paper_title", nargs="?", default="", help="Optional paper title")
+    parser_args.add_argument(
+        "--model",
+        type=str,
+        default=os.environ.get("GRETE_EXTRACT_MODEL", "meta-llama/Meta-Llama-3.1-8B-Instruct"),
+        help="HuggingFace model ID (default: meta-llama/Meta-Llama-3.1-8B-Instruct or GRETE_EXTRACT_MODEL env var)",
+    )
+    args = parser_args.parse_args()
+
+    if not args.pdf_url:
+        print("Usage: python grete_extract_from_url.py <pdf_url> [paper_title] [--model MODEL_ID]")
         sys.exit(1)
     
     # Clean and validate URL - remove newlines, extra whitespace, and truncate at first invalid character
-    pdf_url = sys.argv[1].strip()
+    pdf_url = args.pdf_url.strip()
     # Remove any newlines or control characters
     pdf_url = ''.join(c for c in pdf_url if c.isprintable() or c in ['\n', '\r'])
     # Split on newline and take first line (in case command was accidentally included)
@@ -54,15 +69,16 @@ def main():
         pdf_url = pdf_url.split('sbatch')[0].strip()
     if 'grete_extract' in pdf_url.lower():
         pdf_url = pdf_url.split('grete_extract')[0].strip()
-    
+
     # Validate URL format
     if not pdf_url.startswith(('http://', 'https://')):
         print(f"✗ Invalid URL format: {pdf_url[:100]}")
         print("URL must start with http:// or https://")
         sys.exit(1)
-    
-    raw_title = sys.argv[2].strip() if len(sys.argv) > 2 else ""
+
+    raw_title = args.paper_title.strip() if args.paper_title else ""
     paper_title = raw_title if raw_title else "Unknown Paper"
+    model_name = args.model
     
     # Create filename from URL
     url_parts = pdf_url.split('/')
@@ -76,16 +92,17 @@ def main():
     if len(pdf_url) > 100:
         print(f"URL (full): {pdf_url[:100]}...")
     print(f"Title: {paper_title}")
+    print(f"Model: {model_name}")
     print(f"Device: {'GPU' if torch.cuda.is_available() else 'CPU'}")
     if torch.cuda.is_available():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
     print("=" * 70)
-    
+
     # Initialize components
     print("\n[1/5] Initializing components...")
     parser = PDFParser(method="pdfplumber")
     extractor = LLMExtractorTransformers(
-        model_name="meta-llama/Meta-Llama-3.1-8B-Instruct",  # 8B model with 128K context window
+        model_name=model_name,
         temperature=0.3,
         max_new_tokens=1500
     )

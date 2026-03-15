@@ -1,0 +1,270 @@
+{
+  "arxiv_id": "2201.07520v1",
+  "status": "started",
+  "timestamp": "2026-02-25T20:14:36.541509",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2201.07520",
+    "title": "CM3: A Causal Masked Multimodal Model of the Internet",
+    "authors": [
+      "Armen Aghajanyan",
+      "Bernie Huang",
+      "Candace Ross",
+      "Vladimir Karpukhin",
+      "Hu Xu",
+      "Naman Goyal",
+      "Dmytro Okhonko",
+      "Mandar Joshi",
+      "Gargi Ghosh",
+      "Mike Lewis",
+      "Luke Zettlemoyer"
+    ],
+    "abstract": "We introduce CM3, a family of causally masked generative models trained over a large corpus of structured multi-modal documents that can contain both text and image tokens. Our new causally masked approach generates tokens left to right while also masking out a small number of long token spans that are generated at the end of the string, instead of their original positions. The casual masking object provides a type of hybrid of the more common causal and masked language models, by enabling full generative modeling while also providing bidirectional context when generating the masked spans. We train causally masked language-image models on large-scale web and Wikipedia articles, where each document contains all of the text, hypertext markup, hyperlinks, and image tokens (from a VQVAE-GAN), provided in the order they appear in the original HTML source (before masking). The resulting CM3 models can generate rich structured, multi-modal outputs while conditioning on arbitrary masked document contexts, and thereby implicitly learn a wide range of text, image, and cross modal tasks. They can be prompted to recover, in a zero-shot fashion, the functionality of models such as DALL-E, GENRE, and HTLM. We set the new state-of-the-art in zero-shot summarization, entity linking, and entity disambiguation while maintaining competitive performance in the fine-tuning setting. We can generate images unconditionally, conditioned on text (like DALL-E) and do captioning all in a zero-shot setting with a single model.",
+    "published": "2022-01-19T10:45:38+00:00",
+    "updated": "2022-01-19T10:45:38+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2201.07520v1",
+    "entry_id": "http://arxiv.org/abs/2201.07520v1",
+    "pdf_path": "data\\papers\\2201.07520.pdf"
+  },
+  "text_length": 52534,
+  "word_count": 4295,
+  "models_extracted": 7,
+  "extraction_data": [
+    {
+      "model_name": "CM3",
+      "parameters": "LARGE, 800M, 2.7B, 5.1B, 13B",
+      "parameters_millions": 13000,
+      "model_family": "CM3",
+      "date_created": "2024-07",
+      "organization": "Meta",
+      "innovation": "CM3 introduces a causal masked multimodal model that leverages masked modeling in a decoder-only architecture to jointly learn from text and image data, enabling zero-shot and few-shot transfer to downstream tasks. The model uses a unified VQ-VAE-GAN tokenization scheme for images, ensuring uniformity in token usage.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal masked language modeling",
+      "pretraining_corpus": "Close to a terabyte of web-based data from Common Crawl, extended with image tokens via VQVAE-GAN and hyperlinks",
+      "finetuning_task": "Supervised discriminative fine-tuning",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": "Causal masked language modeling enables conditioning on contiguous image regions using masked tokens, allowing for context-aware image in-filling and generation.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal language modeling, zero-shot image generation and captioning, image in-filling",
+      "application": "Zero-shot image generation, text captioning, document summarization, entity linking, entity disambiguation, cross-modal inference, structured document generation",
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    },
+    {
+      "model_name": "CM3-X",
+      "parameters": "125M, 1.3B",
+      "parameters_millions": 1300,
+      "model_family": "CM3",
+      "date_created": "2021-08",
+      "organization": "Meta",
+      "innovation": "CM3 introduces a causal masked multimodal model that leverages masked modeling in a decoder-only architecture to jointly learn from text and image data, enabling zero-shot and few-shot transfer to downstream tasks. The model uses a unified VQ-VAE-GAN tokenization scheme for images, ensuring uniformity in token usage.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal masked language modeling",
+      "pretraining_corpus": "Internet-scale multimodal dataset (unspecified, but inferred from context as large-scale web data)",
+      "finetuning_task": "Zero-shot prompting, few-shot prompting",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": "Introduces a causally masked language modeling objective with a single mask, enabling modeling of full document structure including images and hypertext links.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal understanding and zero-shot transfer in large-scale internet-scale data",
+      "application": "Multimodal reasoning, text-to-image understanding, zero-shot and few-shot task transfer, GLUE benchmark tasks",
+      "paper_title": "CM3: A Causal Masked Multimodal Model of the Internet"
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 2,
+  "contributions": [
+    {
+      "label": "CM3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-07",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CM3 introduces a causal masked multimodal model that leverages masked modeling in a decoder-only architecture to jointly learn from text and image data, enabling zero-shot and few-shot transfer to downstream tasks. The model uses a unified VQ-VAE-GAN tokenization scheme for images, ensuring uniformity in token usage.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal masked language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Close to a terabyte of web-based data from Common Crawl, extended with image tokens via VQVAE-GAN and hyperlinks",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised discriminative fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "LARGE, 800M, 2.7B, 5.1B, 13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "13000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot image generation, text captioning, document summarization, entity linking, entity disambiguation, cross-modal inference, structured document generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language modeling, zero-shot image generation and captioning, image in-filling",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "CM3-X",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "CM3-X",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "CM3",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-08",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CM3 introduces a causal masked multimodal model that leverages masked modeling in a decoder-only architecture to jointly learn from text and image data, enabling zero-shot and few-shot transfer to downstream tasks. The model uses a unified VQ-VAE-GAN tokenization scheme for images, ensuring uniformity in token usage.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal masked language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Internet-scale multimodal dataset (unspecified, but inferred from context as large-scale web data)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Zero-shot prompting, few-shot prompting",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "125M, 1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal reasoning, text-to-image understanding, zero-shot and few-shot task transfer, GLUE benchmark tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal understanding and zero-shot transfer in large-scale internet-scale data",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

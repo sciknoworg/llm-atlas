@@ -1,0 +1,917 @@
+{
+  "arxiv_id": "2203.13224v2",
+  "status": "started",
+  "timestamp": "2026-02-25T21:01:01.280863",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2203.13224",
+    "title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion",
+    "authors": [
+      "Kurt Shuster",
+      "Mojtaba Komeili",
+      "Leonard Adolphs",
+      "Stephen Roller",
+      "Arthur Szlam",
+      "Jason Weston"
+    ],
+    "abstract": "Language models (LMs) have recently been shown to generate more factual responses by employing modularity (Zhou et al., 2021) in combination with retrieval (Adolphs et al., 2021). We extend the recent approach of Adolphs et al. (2021) to include internet search as a module. Our SeeKeR (Search engine->Knowledge->Response) method thus applies a single LM to three modular tasks in succession: search, generating knowledge, and generating a final response. We show that, when using SeeKeR as a dialogue model, it outperforms the state-of-the-art model BlenderBot 2 (Chen et al., 2021) on open-domain knowledge-grounded conversations for the same number of parameters, in terms of consistency, knowledge and per-turn engagingness. SeeKeR applied to topical prompt completions as a standard language model outperforms GPT2 (Radford et al., 2019) and GPT3 (Brown et al., 2020) in terms of factuality and topicality, despite GPT3 being a vastly larger model. Our code and models are made publicly available.",
+    "published": "2022-03-24T17:31:26+00:00",
+    "updated": "2022-03-29T18:03:46+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2203.13224v2",
+    "entry_id": "http://arxiv.org/abs/2203.13224v2",
+    "pdf_path": "data\\papers\\2203.13224.pdf"
+  },
+  "text_length": 66836,
+  "word_count": 6329,
+  "models_extracted": 14,
+  "extraction_data": [
+    {
+      "model_name": "SeeKeR",
+      "parameters": "117M, 345M, 3B",
+      "parameters_millions": 3000,
+      "model_family": "SeeKeR",
+      "date_created": "2022-01",
+      "organization": "Meta",
+      "innovation": "SeeKeR introduces a modular architecture that combines a search module with a generative response module, enabling language models to retrieve relevant knowledge and generate contextually appropriate responses. The model uses a dual-path mechanism where knowledge is retrieved from external sources (e.g., Bing search or gold documents) and integrated into the response generation process.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Common Crawl, Wikipedia, BooksCorpus",
+      "finetuning_task": "Supervised fine-tuning on knowledge-intensive datasets",
+      "optimizer": "Adam",
+      "hardware_used": "32 V100 GPUs",
+      "extension": "The model uses a single transformer architecture iteratively across three modules—search, knowledge generation, and response generation—where the output of each module is passed as input to the next, along with the original context, enabling modular, sequential reasoning.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Factual accuracy, topicality, and up-to-date knowledge in language models",
+      "application": "Open-domain dialogue, conversational AI, knowledge retrieval, prompt completion",
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR Large (GPT2)",
+      "model_family": "SeeKeR",
+      "date_created": "2024-04",
+      "organization": "Meta",
+      "innovation": "SeeKeR Large (GPT2) extends the modular framework to a larger GPT2-based model, improving performance in knowledge-grounded dialogue and prompt completion tasks.",
+      "pretraining_corpus": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+      "parameters": "762M",
+      "parameters_millions": 762,
+      "application": "Dialogue systems, prompt completion, factually accurate language generation",
+      "license": "open source",
+      "research_problem": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "BART denoising objective",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "32 V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Fine-tuned on GPT2 base model with modular search and knowledge generation components.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR XL (GPT2)",
+      "model_family": "SeeKeR",
+      "date_created": "2024-04",
+      "organization": "Meta",
+      "innovation": "SeeKeR XL (GPT2) leverages a larger GPT2-based architecture with modular search and knowledge generation, achieving strong performance in knowledge-grounded dialogue and prompt completion.",
+      "pretraining_corpus": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+      "parameters": "1.5B",
+      "parameters_millions": 1500,
+      "application": "Dialogue systems, prompt completion, factually accurate language generation",
+      "license": "open source",
+      "research_problem": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "BART denoising objective",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "32 V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Fine-tuned on GPT2 base model with modular search and knowledge generation components.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR Medium x3",
+      "model_family": "SeeKeR",
+      "date_created": "2023-06",
+      "organization": "Meta",
+      "innovation": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+      "pretraining_corpus": "Common Crawl",
+      "parameters": "345M x3",
+      "parameters_millions": 1035,
+      "application": "Dialogue systems, prompt completion, knowledge-augmented generation",
+      "license": "open source",
+      "research_problem": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Prompt completion, dialogue generation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The model uses three independently trained BART-based modules (search, knowledge, response) with a total of 3×345M parameters, enabling specialized task performance and improved factual consistency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR Large x3",
+      "model_family": "SeeKeR",
+      "date_created": "2023-06",
+      "organization": "Meta",
+      "innovation": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+      "pretraining_corpus": "Common Crawl",
+      "parameters": "762M x3",
+      "parameters_millions": 2286,
+      "application": "Dialogue systems, prompt completion, knowledge-augmented generation",
+      "license": "open source",
+      "research_problem": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Prompt completion, dialogue generation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The model uses three independently trained BART-based modules (search, knowledge, response) with a total of 3×762M parameters, enabling specialized task performance and improved factual consistency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR XL x3",
+      "model_family": "SeeKeR",
+      "date_created": "2023-06",
+      "organization": "Meta",
+      "innovation": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+      "pretraining_corpus": "Common Crawl",
+      "parameters": "1.5B x3",
+      "parameters_millions": 4500,
+      "application": "Dialogue systems, prompt completion, knowledge-augmented generation",
+      "license": "open source",
+      "research_problem": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Prompt completion, dialogue generation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "The model uses three independently trained BART-based modules (search, knowledge, response) with a total of 3×1.5B parameters, enabling specialized task performance and improved factual consistency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    },
+    {
+      "model_name": "SeeKeR 2.7B R2C2",
+      "model_family": "SeeKeR",
+      "date_created": "2024-04",
+      "organization": "Meta",
+      "innovation": "SeeKeR introduces a modular framework that integrates search, knowledge retrieval, and response generation in a unified Transformer-based encoder-decoder architecture, enabling factually grounded dialogue and prompt completion.",
+      "pretraining_corpus": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+      "parameters": "2.7B",
+      "parameters_millions": 2700,
+      "application": "Dialogue systems, prompt completion, factually accurate language generation",
+      "license": "open source",
+      "research_problem": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "BART denoising objective",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "128 V100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Modular architecture with separate search, knowledge, and dialogue generation modules enables knowledge-grounded dialogue and prompt completion.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Language Models that Seek for Knowledge: Modular Search & Generation for Dialogue and Prompt Completion"
+    }
+  ],
+  "models_after_selection": 9,
+  "models_after_merge": 7,
+  "contributions": [
+    {
+      "label": "SeeKeR",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR introduces a modular architecture that combines a search module with a generative response module, enabling language models to retrieve relevant knowledge and generate contextually appropriate responses. The model uses a dual-path mechanism where knowledge is retrieved from external sources (e.g., Bing search or gold documents) and integrated into the response generation process.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl, Wikipedia, BooksCorpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on knowledge-intensive datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "117M, 345M, 3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "3000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "32 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain dialogue, conversational AI, knowledge retrieval, prompt completion",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factual accuracy, topicality, and up-to-date knowledge in language models",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR Large (GPT2)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR Large (GPT2)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR Large (GPT2) extends the modular framework to a larger GPT2-based model, improving performance in knowledge-grounded dialogue and prompt completion tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "BART denoising objective",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "762M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "762",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "32 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, factually accurate language generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR XL (GPT2)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR XL (GPT2)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR XL (GPT2) leverages a larger GPT2-based architecture with modular search and knowledge generation, achieving strong performance in knowledge-grounded dialogue and prompt completion.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "BART denoising objective",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1500",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "32 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, factually accurate language generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR Medium x3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR Medium x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Prompt completion, dialogue generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "345M x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1035",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, knowledge-augmented generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR Large x3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR Large x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Prompt completion, dialogue generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "762M x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "2286",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, knowledge-augmented generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR XL x3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR XL x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR introduces a modular architecture with separate transformer modules for search, knowledge retrieval, and response generation, enabling language models to dynamically integrate external knowledge during generation. This modular design improves factual accuracy and topical relevance compared to monolithic models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Prompt completion, dialogue generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.5B x3",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "4500",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, knowledge-augmented generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factual accuracy in language generation, knowledge integration in dialogue systems",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "SeeKeR 2.7B R2C2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SeeKeR 2.7B R2C2",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SeeKeR",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SeeKeR introduces a modular framework that integrates search, knowledge retrieval, and response generation in a unified Transformer-based encoder-decoder architecture, enabling factually grounded dialogue and prompt completion.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "BART denoising objective",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "128 V100 GPUs for 25 days (no specific corpus mentioned)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Simultaneous fine-tuning on search, knowledge, and dialogue response tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "2700",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "128 V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue systems, prompt completion, factually accurate language generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Knowledge-grounded dialogue and prompt completion with factual consistency",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,520 @@
+{
+  "arxiv_id": "2101.03961v3",
+  "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+  "extracted_at": "20260310_073413",
+  "device": "cuda",
+  "model_used": "Qwen/Qwen3-4B-Instruct-2507",
+  "models_found": 4,
+  "raw_extraction": [
+    {
+      "model_name": "Switch-Base",
+      "model_family": "Switch Transformer",
+      "date_created": "2022-04",
+      "organization": "Google",
+      "innovation": "Introduces the Switch Transformer architecture, a simplified and efficient Mixture-of-Experts (MoE) model that routes each token to a single expert, reducing routing complexity, computation, and communication costs while maintaining model quality",
+      "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+      "license": "CC-BY 4.0",
+      "research_problem": "Efficient scaling of large language models with sparse computation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Masked language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+      "finetuning_data": null,
+      "optimizer": "null",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses selective precision training with float32 in the router and bfloat16 elsewhere to stabilize training without sacrificing speed",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity"
+    },
+    {
+      "model_name": "Switch-Large",
+      "model_family": "Switch Transformer",
+      "date_created": "2022-04",
+      "organization": "Google",
+      "innovation": "Extends Switch Transformer with larger model dimensions and more parameters, achieving superior scaling and performance while maintaining the same FLOPs per token as the base model",
+      "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+      "parameters": "26B",
+      "parameters_millions": 26000,
+      "application": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+      "license": "CC-BY 4.0",
+      "research_problem": "Efficient scaling of large language models with sparse computation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Masked language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+      "finetuning_data": null,
+      "optimizer": "null",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "FLOP-matched to T5-Large, with expanded hidden dimensions and FFN layers using GEGLU activation",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity"
+    },
+    {
+      "model_name": "Switch-XXL",
+      "model_family": "Switch Transformer",
+      "date_created": "2022-04",
+      "organization": "Google",
+      "innovation": "Achieves up to a trillion-parameter scale with efficient sparse routing, demonstrating 4x speedup over T5-XXL in pre-training and superior sample efficiency across tasks",
+      "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+      "parameters": "395B",
+      "parameters_millions": 395000,
+      "application": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+      "license": "CC-BY 4.0",
+      "research_problem": "Efficient scaling of large language models with sparse computation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Masked language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+      "finetuning_data": null,
+      "optimizer": "null",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "FLOP-matched to T5-XXL, with larger dimensions (d_model=4096, d_ff=10240) and 64 heads, enabling high-capacity modeling despite increased communication costs from model parallelism",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity"
+    },
+    {
+      "model_name": "Switch-C",
+      "model_family": "Switch Transformer",
+      "date_created": "2022-04",
+      "organization": "Google",
+      "innovation": "Designed with only expert-parallelism and no model parallelism, achieving 4x faster pre-training than T5-XXL with the same compute budget and superior scalability",
+      "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+      "parameters": "1571B",
+      "parameters_millions": 1571000,
+      "application": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+      "license": "CC-BY 4.0",
+      "research_problem": "Efficient scaling of large language models with sparse computation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Masked language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+      "finetuning_data": null,
+      "optimizer": "null",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Utilizes only expert-parallelism with 2048 experts and 15 layers, minimizing communication overhead while maximizing parameter count",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "Switch-Base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Switch-Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Switch Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces the Switch Transformer architecture, a simplified and efficient Mixture-of-Experts (MoE) model that routes each token to a single expert, reducing routing complexity, computation, and communication costs while maintaining model quality",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Colossal Clean Crawled Corpus (C4)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "7B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "7000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling of large language models with sparse computation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Switch-Large",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Switch-Large",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Switch Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Extends Switch Transformer with larger model dimensions and more parameters, achieving superior scaling and performance while maintaining the same FLOPs per token as the base model",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Colossal Clean Crawled Corpus (C4)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "26B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "26000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling of large language models with sparse computation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Switch-XXL",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Switch-XXL",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Switch Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Achieves up to a trillion-parameter scale with efficient sparse routing, demonstrating 4x speedup over T5-XXL in pre-training and superior sample efficiency across tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Colossal Clean Crawled Corpus (C4)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "395B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "395000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling of large language models with sparse computation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Switch-C",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Switch-C",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Switch Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Designed with only expert-parallelism and no model parallelism, achieving 4x faster pre-training than T5-XXL with the same compute budget and superior scalability",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Colossal Clean Crawled Corpus (C4)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Fine-tuning on downstream NLP tasks including question answering, summarization, and knowledge-based tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "1571B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "1571000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Natural language processing, pre-training, downstream fine-tuning, multilingual learning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling of large language models with sparse computation",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 4
+  }
+}

@@ -1,0 +1,549 @@
+{
+  "arxiv_id": "1910.10683v4",
+  "status": "started",
+  "timestamp": "2026-02-26T02:35:44.518818",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "1910.10683",
+    "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+    "authors": [
+      "Colin Raffel",
+      "Noam Shazeer",
+      "Adam Roberts",
+      "Katherine Lee",
+      "Sharan Narang",
+      "Michael Matena",
+      "Yanqi Zhou",
+      "Wei Li",
+      "Peter J. Liu"
+    ],
+    "abstract": "Transfer learning, where a model is first pre-trained on a data-rich task before being fine-tuned on a downstream task, has emerged as a powerful technique in natural language processing (NLP). The effectiveness of transfer learning has given rise to a diversity of approaches, methodology, and practice. In this paper, we explore the landscape of transfer learning techniques for NLP by introducing a unified framework that converts all text-based language problems into a text-to-text format. Our systematic study compares pre-training objectives, architectures, unlabeled data sets, transfer approaches, and other factors on dozens of language understanding tasks. By combining the insights from our exploration with scale and our new ``Colossal Clean Crawled Corpus'', we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more. To facilitate future work on transfer learning for NLP, we release our data set, pre-trained models, and code.",
+    "published": "2019-10-23T17:37:36+00:00",
+    "updated": "2023-09-19T15:14:48+00:00",
+    "doi": null,
+    "primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.CL",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1910.10683v4",
+    "entry_id": "http://arxiv.org/abs/1910.10683v4",
+    "pdf_path": "data\\papers\\1910.10683.pdf"
+  },
+  "text_length": 205765,
+  "word_count": 32054,
+  "models_extracted": 8,
+  "extraction_data": [
+    {
+      "model_name": "T5",
+      "parameters": "60M, 220M, 3B, 11B",
+      "parameters_millions": 11000,
+      "model_family": "T5",
+      "date_created": "2020-06",
+      "organization": "Google",
+      "innovation": "Unified text-to-text framework where all NLP tasks are framed as sequence-to-sequence problems, enabling transfer learning across diverse tasks. Introduces span corruption as a pretraining objective, replacing traditional masked language modeling with contiguous spans of masked tokens.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Text-to-text transfer learning (span corruption, denoising)",
+      "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+      "finetuning_task": "Supervised fine-tuning on downstream tasks (e.g., translation, summarization, classification)",
+      "optimizer": "AdaFactor",
+      "hardware_used": "Cloud TPU Pods (TPU v3 chips)",
+      "extension": "Span corruption pre-training objective, where random spans of text are replaced with sentinel tokens and the model is trained to reconstruct the original text.",
+      "blog_post": null,
+      "license": "CC-BY 4.0",
+      "research_problem": "Transfer learning and generalization in NLP across diverse tasks",
+      "application": "Machine translation, question answering, abstractive summarization, text classification, natural language inference",
+      "paper_title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer"
+    },
+    {
+      "model_name": "T5 (Text-to-Text Transfer Transformer)",
+      "model_family": "T5",
+      "date_created": "2019-10",
+      "organization": "Google",
+      "innovation": "Unified text-to-text framework that reformulates all NLP tasks into a single text-to-text format, enabling transfer learning across diverse tasks. Uses span corruption as a denoising pretraining objective, differing from prior work by masking contiguous spans rather than individual tokens.",
+      "pretraining_corpus": "C4 (Colossal Clean Crawled Corpus)",
+      "parameters": "770M",
+      "parameters_millions": 770,
+      "application": "Text classification, summarization, translation, question answering, and other NLP tasks",
+      "license": "CC-BY 4.0",
+      "research_problem": "Transfer learning and multitask learning in NLP",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising (span corruption)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning on downstream tasks (e.g., translation, summarization, classification)",
+      "finetuning_data": null,
+      "optimizer": "AdaFactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "Cloud TPU Pods (TPU v3 chips)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Span corruption replaces masked tokens with a single sentinel token, enabling the model to predict entire spans of missing text rather than individual tokens.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer"
+    },
+    {
+      "model_name": "T5-Base (2x size)",
+      "model_family": "T5",
+      "date_created": "2019-10",
+      "organization": "Google",
+      "innovation": "Scaling study variant to explore the impact of increased model size on performance while keeping computational budget constant.",
+      "pretraining_corpus": "C4 (Colossal Clean Crawled Corpus)",
+      "parameters": "440M",
+      "parameters_millions": 440,
+      "application": "Text classification, summarization, question answering, translation, and other NLP tasks",
+      "license": null,
+      "research_problem": "Scaling laws in transfer learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Span corruption (masked language modeling variant)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Task-specific fine-tuning using text-to-text format",
+      "finetuning_data": null,
+      "optimizer": "AdaFactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Doubled model size (16 layers in encoder/decoder) to study scaling trade-offs between model size and training time.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer"
+    },
+    {
+      "model_name": "T5-Base (4x size)",
+      "model_family": "T5",
+      "date_created": "2019-10",
+      "organization": "Google",
+      "innovation": "Scaling study variant to explore the impact of increased model size on performance while keeping computational budget constant.",
+      "pretraining_corpus": "C4 (Colossal Clean Crawled Corpus)",
+      "parameters": "880M",
+      "parameters_millions": 880,
+      "application": "Text classification, summarization, question answering, translation, and other NLP tasks",
+      "license": null,
+      "research_problem": "Scaling laws in transfer learning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Span corruption (masked language modeling variant)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Task-specific fine-tuning using text-to-text format",
+      "finetuning_data": null,
+      "optimizer": "AdaFactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Quadrupled model size (32 layers in encoder/decoder) to study the limits of scaling model parameters within a fixed computational budget.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer"
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 4,
+  "contributions": [
+    {
+      "label": "T5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "T5",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "T5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-06",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified text-to-text framework where all NLP tasks are framed as sequence-to-sequence problems, enabling transfer learning across diverse tasks. Introduces span corruption as a pretraining objective, replacing traditional masked language modeling with contiguous spans of masked tokens.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-text transfer learning (span corruption, denoising)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Colossal Clean Crawled Corpus (C4)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on downstream tasks (e.g., translation, summarization, classification)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdaFactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "60M, 220M, 3B, 11B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "11000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Cloud TPU Pods (TPU v3 chips)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine translation, question answering, abstractive summarization, text classification, natural language inference",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning and generalization in NLP across diverse tasks",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "T5 (Text-to-Text Transfer Transformer)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "T5 (Text-to-Text Transfer Transformer)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "T5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified text-to-text framework that reformulates all NLP tasks into a single text-to-text format, enabling transfer learning across diverse tasks. Uses span corruption as a denoising pretraining objective, differing from prior work by masking contiguous spans rather than individual tokens.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising (span corruption)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "C4 (Colossal Clean Crawled Corpus)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on downstream tasks (e.g., translation, summarization, classification)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdaFactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "770M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "770",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Cloud TPU Pods (TPU v3 chips)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification, summarization, translation, question answering, and other NLP tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Transfer learning and multitask learning in NLP",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "T5-Base (2x size)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "T5-Base (2x size)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "T5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Scaling study variant to explore the impact of increased model size on performance while keeping computational budget constant.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Span corruption (masked language modeling variant)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "C4 (Colossal Clean Crawled Corpus)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Task-specific fine-tuning using text-to-text format",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdaFactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "440M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "440",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification, summarization, question answering, translation, and other NLP tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling laws in transfer learning",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "T5-Base (4x size)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "T5-Base (4x size)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "T5",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Scaling study variant to explore the impact of increased model size on performance while keeping computational budget constant.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Span corruption (masked language modeling variant)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "C4 (Colossal Clean Crawled Corpus)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Task-specific fine-tuning using text-to-text format",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdaFactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "880M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "880",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification, summarization, question answering, translation, and other NLP tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling laws in transfer learning",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

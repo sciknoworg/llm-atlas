@@ -11,7 +11,9 @@ import torch
 from pathlib import Path
 from datetime import datetime
 
-sys.path.insert(0, str(Path(__file__).parent))
+# Project root (llm-extraction) so that "src" is importable when run from any cwd
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser

@@ -1,0 +1,402 @@
+{
+  "arxiv_id": "2205.05131v3",
+  "status": "started",
+  "timestamp": "2026-02-26T04:59:13.499151",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2205.05131",
+    "title": "UL2: Unifying Language Learning Paradigms",
+    "authors": [
+      "Yi Tay",
+      "Mostafa Dehghani",
+      "Vinh Q. Tran",
+      "Xavier Garcia",
+      "Jason Wei",
+      "Xuezhi Wang",
+      "Hyung Won Chung",
+      "Siamak Shakeri",
+      "Dara Bahri",
+      "Tal Schuster",
+      "Huaixiu Steven Zheng",
+      "Denny Zhou",
+      "Neil Houlsby",
+      "Donald Metzler"
+    ],
+    "abstract": "Existing pre-trained models are generally geared towards a particular class of problems. To date, there seems to be still no consensus on what the right architecture and pre-training setup should be. This paper presents a unified framework for pre-training models that are universally effective across datasets and setups. We begin by disentangling architectural archetypes with pre-training objectives -- two concepts that are commonly conflated. Next, we present a generalized & unified perspective for self-supervision in NLP and show how different pre-training objectives can be cast as one another and how interpolating between different objectives can be effective. We then propose Mixture-of-Denoisers (MoD), a pre-training objective that combines diverse pre-training paradigms together. We furthermore introduce a notion of mode switching, wherein downstream fine-tuning is associated with specific pre-training schemes. We conduct extensive ablative experiments to compare multiple pre-training objectives and find that our method pushes the Pareto-frontier by outperforming T5 & GPT-like models across multiple diverse setups. By scaling our model up to 20B parameters, we achieve SOTA performance on 50 well-established supervised finetuning based NLP tasks. Our model also achieve strong results at in-context learning, outperforming 175B GPT-3 on zero-shot SuperGLUE and tripling the performance of T5-XXL on one-shot summarization. On 0-shot MMLU, UL2 20B outperforms T0 and T5 models. UL2 20B also works well with chain-of-thought prompting and reasoning, making it an appealing choice for research into reasoning at a small to medium scale of 20B parameters. Finally, we apply FLAN instruction tuning to the UL2 20B model, achieving MMLU and Big-Bench scores competitive to FLAN-PaLM 62B. We release Flax-based T5X checkpoints for the UL2 20B & Flan-UL2 20B.",
+    "published": "2022-05-10T19:32:20+00:00",
+    "updated": "2023-02-28T17:20:36+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2205.05131v3",
+    "entry_id": "http://arxiv.org/abs/2205.05131v3",
+    "pdf_path": "data\\papers\\2205.05131.pdf"
+  },
+  "text_length": 114177,
+  "word_count": 8034,
+  "models_extracted": 8,
+  "extraction_data": [
+    {
+      "model_name": "UL2",
+      "parameters": "0.5B, 1B, 20B",
+      "parameters_millions": 20000,
+      "model_family": "UL2",
+      "date_created": "2022-05",
+      "organization": "Google",
+      "innovation": "Unifies different language learning paradigms (e.g., autoregressive, masked language modeling) via a Mixture-of-Denoisers (MoD) objective, enabling both fine-tuning and in-context learning capabilities. The MoD objective combines short-span, long-span, and extreme denoising to improve performance across diverse tasks.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Mixture-of-Denoisers (MoD)",
+      "pretraining_corpus": "English text corpus (32K SentencePiece vocabulary)",
+      "finetuning_task": "Supervised fine-tuning, instruction tuning (FLAN)",
+      "optimizer": "Adafactor",
+      "hardware_used": "512 TPUv4 chips",
+      "extension": "Mixture of denoisers enables flexible corruption rates and span lengths, allowing the model to handle both short-span and extreme denoising tasks, improving sample efficiency and generalization.",
+      "blog_post": null,
+      "license": "open source (Flax-based T5X model checkpoints released)",
+      "research_problem": "Unifying diverse language learning paradigms (e.g., autoregressive, masked language modeling) into a single pretraining framework to improve generalization and performance across tasks.",
+      "application": "Language generation, language understanding, text classification, question answering, commonsense reasoning, long-text reasoning, structured knowledge grounding, information retrieval, in-context learning, chain-of-thought prompting",
+      "paper_title": "UL2: Unifying Language Learning Paradigms"
+    },
+    {
+      "model_name": "UL2 Decoder",
+      "model_family": "UL2",
+      "date_created": "2022-05",
+      "organization": "Google",
+      "innovation": "Decoder-only variant of UL2 that leverages the same mixture-of-denoisers framework to unify language learning paradigms, enabling efficient text generation and understanding tasks.",
+      "pretraining_corpus": "English text corpus (32K SentencePiece vocabulary)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text generation, language understanding, few-shot learning",
+      "license": null,
+      "research_problem": "Unifying language learning paradigms in a decoder-only architecture for efficient and generalizable language modeling.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Mixture of denoisers (R-Denoiser, S-Denoiser, X-Denoiser)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "GLU layers and T5-style relative position embeddings for improved performance and efficiency in decoder-only architecture.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "UL2: Unifying Language Learning Paradigms"
+    },
+    {
+      "model_name": "UL2 167M (Decoder)",
+      "model_family": "UL2",
+      "date_created": "2022-05",
+      "organization": "Google",
+      "innovation": "Unifies multiple pre-training paradigms (causal LM, prefix LM, span corruption) into a single model using a mixture-of-denoisers objective, enabling better generalization across diverse tasks.",
+      "pretraining_corpus": "C4",
+      "parameters": "167M",
+      "parameters_millions": 167,
+      "application": "Language understanding, text generation, few-shot learning, supervised fine-tuning",
+      "license": null,
+      "research_problem": "Unifying diverse language learning paradigms (e.g., autoregressive, bidirectional, and sequence-to-sequence) into a single pre-training framework",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Mixture of denoising objectives (Span Corruption, PrefixLM, Causal LM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning, prompt-based one-shot learning",
+      "finetuning_data": null,
+      "optimizer": "Adafactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPUv4 (64 to 128 chips)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses SwiGLU layers and T5-style relative attention to enhance the Transformer backbone.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "UL2: Unifying Language Learning Paradigms"
+    }
+  ],
+  "models_after_selection": 6,
+  "models_after_merge": 3,
+  "contributions": [
+    {
+      "label": "UL2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "UL2",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "UL2",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-05",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unifies different language learning paradigms (e.g., autoregressive, masked language modeling) via a Mixture-of-Denoisers (MoD) objective, enabling both fine-tuning and in-context learning capabilities. The MoD objective combines short-span, long-span, and extreme denoising to improve performance across diverse tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Mixture-of-Denoisers (MoD)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "English text corpus (32K SentencePiece vocabulary)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning, instruction tuning (FLAN)",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.5B, 1B, 20B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "20000",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "512 TPUv4 chips",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language generation, language understanding, text classification, question answering, commonsense reasoning, long-text reasoning, structured knowledge grounding, information retrieval, in-context learning, chain-of-thought prompting",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Unifying diverse language learning paradigms (e.g., autoregressive, masked language modeling) into a single pretraining framework to improve generalization and performance across tasks.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "UL2 Decoder",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "UL2 Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "UL2",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-05",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoder-only variant of UL2 that leverages the same mixture-of-denoisers framework to unify language learning paradigms, enabling efficient text generation and understanding tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Mixture of denoisers (R-Denoiser, S-Denoiser, X-Denoiser)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "English text corpus (32K SentencePiece vocabulary)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation, language understanding, few-shot learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Unifying language learning paradigms in a decoder-only architecture for efficient and generalizable language modeling.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "UL2 167M (Decoder)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "UL2 167M (Decoder)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "UL2",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-05",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unifies multiple pre-training paradigms (causal LM, prefix LM, span corruption) into a single model using a mixture-of-denoisers objective, enabling better generalization across diverse tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Mixture of denoising objectives (Span Corruption, PrefixLM, Causal LM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "C4",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning, prompt-based one-shot learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "167M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "167",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPUv4 (64 to 128 chips)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language understanding, text generation, few-shot learning, supervised fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Unifying diverse language learning paradigms (e.g., autoregressive, bidirectional, and sequence-to-sequence) into a single pre-training framework",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

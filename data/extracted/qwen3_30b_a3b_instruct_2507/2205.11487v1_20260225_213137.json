@@ -1,0 +1,415 @@
+{
+  "arxiv_id": "2205.11487v1",
+  "status": "started",
+  "timestamp": "2026-02-25T21:30:34.090383",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2205.11487",
+    "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+    "authors": [
+      "Chitwan Saharia",
+      "William Chan",
+      "Saurabh Saxena",
+      "Lala Li",
+      "Jay Whang",
+      "Emily Denton",
+      "Seyed Kamyar Seyed Ghasemipour",
+      "Burcu Karagol Ayan",
+      "S. Sara Mahdavi",
+      "Rapha Gontijo Lopes",
+      "Tim Salimans",
+      "Jonathan Ho",
+      "David J Fleet",
+      "Mohammad Norouzi"
+    ],
+    "abstract": "We present Imagen, a text-to-image diffusion model with an unprecedented degree of photorealism and a deep level of language understanding. Imagen builds on the power of large transformer language models in understanding text and hinges on the strength of diffusion models in high-fidelity image generation. Our key discovery is that generic large language models (e.g. T5), pretrained on text-only corpora, are surprisingly effective at encoding text for image synthesis: increasing the size of the language model in Imagen boosts both sample fidelity and image-text alignment much more than increasing the size of the image diffusion model. Imagen achieves a new state-of-the-art FID score of 7.27 on the COCO dataset, without ever training on COCO, and human raters find Imagen samples to be on par with the COCO data itself in image-text alignment. To assess text-to-image models in greater depth, we introduce DrawBench, a comprehensive and challenging benchmark for text-to-image models. With DrawBench, we compare Imagen with recent methods including VQ-GAN+CLIP, Latent Diffusion Models, and DALL-E 2, and find that human raters prefer Imagen over other models in side-by-side comparisons, both in terms of sample quality and image-text alignment. See https://imagen.research.google/ for an overview of the results.",
+    "published": "2022-05-23T17:42:53+00:00",
+    "updated": "2022-05-23T17:42:53+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2205.11487v1",
+    "entry_id": "http://arxiv.org/abs/2205.11487v1",
+    "pdf_path": "data\\papers\\2205.11487.pdf"
+  },
+  "text_length": 81900,
+  "word_count": 4804,
+  "models_extracted": 11,
+  "extraction_data": [
+    {
+      "model_name": "Imagen",
+      "parameters": "T5-XXL, 400M, 500M, 600M, 1.1B, 1.5B, 2B, 4.6B",
+      "parameters_millions": 11000,
+      "model_family": "Imagen",
+      "date_created": "2022-10",
+      "organization": "Google",
+      "innovation": "Imagen introduces a two-stage diffusion model architecture: a frozen text encoder (from CLIP) generates text embeddings, which are then used by a conditional diffusion model to generate 64×64 images, followed by a series of text-conditioned super-resolution diffusion models to upsample to 256×256 and then 1024×1024. This approach enables photorealistic image generation with deep language understanding.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Text-to-image generation using frozen large language model encodings",
+      "pretraining_corpus": "Several pre-existing datasets of image and English alt-text pairs (subset filtered for noise and undesirable content)",
+      "finetuning_task": "Conditional image generation via diffusion models",
+      "optimizer": "Adafactor",
+      "hardware_used": null,
+      "extension": "Dynamic thresholding enables the use of high guidance weights without sample quality degradation, resulting in more photorealistic and detailed images. EfficientU-Net is introduced as a simpler, faster-converging, and memory-efficient U-Net variant for diffusion models.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "High-fidelity, photorealistic text-to-image generation with strong image-text alignment",
+      "application": "Text-to-image synthesis, high-fidelity image generation, image-text alignment, creative content generation",
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 64×64",
+      "model_family": "Imagen",
+      "date_created": "2022-10",
+      "organization": "Google",
+      "innovation": "Imagen introduces a text-to-image diffusion model that leverages deep language understanding via pre-trained text encoders (BERT, T5, CLIP) to generate photorealistic images from text prompts. The model uses a diffusion process conditioned on text embeddings to achieve high-fidelity image generation with strong alignment to complex textual descriptions.",
+      "pretraining_corpus": "Not explicitly stated in the provided text",
+      "parameters": "300M",
+      "parameters_millions": 300,
+      "application": "Text-to-image generation, photorealistic image synthesis, fine-grained visual control via text prompts",
+      "license": "closed source",
+      "research_problem": "High-fidelity, photorealistic text-to-image generation with strong semantic alignment",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Text-to-image diffusion modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-conditioned image generation",
+      "finetuning_data": null,
+      "optimizer": "Adafactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a novel Efficient U-Net architecture with shifted model parameters to lower-resolution blocks, scaled skip connections by 1/√2, and reversed downsampling/upsampling order to improve memory efficiency and forward pass speed.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    },
+    {
+      "model_name": "Imagen 64x64",
+      "model_family": "Imagen",
+      "date_created": "2022-10",
+      "organization": "Google",
+      "innovation": "Scaling the U-Net model to 1B parameters improves the trade-off between image fidelity and text alignment, especially when combined with large guidance weights and dynamic thresholding.",
+      "pretraining_corpus": "Large-scale text-image dataset (implied from context; not explicitly named)",
+      "parameters": "1B",
+      "parameters_millions": 1000,
+      "application": "Photorealistic image generation, text-to-image synthesis, complex prompt understanding",
+      "license": "closed source",
+      "research_problem": "Text-to-image generation with high photorealism and accurate alignment to complex textual descriptions",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Text-to-image diffusion modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Text-to-image generation with high fidelity and alignment",
+      "finetuning_data": null,
+      "optimizer": "Adafactor",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Employs dynamic thresholding and classifier-free guidance with large guidance weights to improve image quality and text alignment.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding"
+    }
+  ],
+  "models_after_selection": 10,
+  "models_after_merge": 3,
+  "contributions": [
+    {
+      "label": "Imagen",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen introduces a two-stage diffusion model architecture: a frozen text encoder (from CLIP) generates text embeddings, which are then used by a conditional diffusion model to generate 64×64 images, followed by a series of text-conditioned super-resolution diffusion models to upsample to 256×256 and then 1024×1024. This approach enables photorealistic image generation with deep language understanding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image generation using frozen large language model encodings",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Several pre-existing datasets of image and English alt-text pairs (subset filtered for noise and undesirable content)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Conditional image generation via diffusion models",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "T5-XXL, 400M, 500M, 600M, 1.1B, 1.5B, 2B, 4.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "11000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image synthesis, high-fidelity image generation, image-text alignment, creative content generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "High-fidelity, photorealistic text-to-image generation with strong image-text alignment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 64×64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 64×64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Imagen introduces a text-to-image diffusion model that leverages deep language understanding via pre-trained text encoders (BERT, T5, CLIP) to generate photorealistic images from text prompts. The model uses a diffusion process conditioned on text embeddings to achieve high-fidelity image generation with strong alignment to complex textual descriptions.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image diffusion modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Not explicitly stated in the provided text",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-conditioned image generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "300M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "300",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image generation, photorealistic image synthesis, fine-grained visual control via text prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "High-fidelity, photorealistic text-to-image generation with strong semantic alignment",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Imagen 64x64",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Imagen 64x64",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Imagen",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Scaling the U-Net model to 1B parameters improves the trade-off between image fidelity and text alignment, especially when combined with large guidance weights and dynamic thresholding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Text-to-image diffusion modeling",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale text-image dataset (implied from context; not explicitly named)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Text-to-image generation with high fidelity and alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adafactor",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "1000",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Photorealistic image generation, text-to-image synthesis, complex prompt understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text-to-image generation with high photorealism and accurate alignment to complex textual descriptions",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

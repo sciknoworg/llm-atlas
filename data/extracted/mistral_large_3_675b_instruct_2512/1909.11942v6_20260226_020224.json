@@ -1,0 +1,866 @@
+{
+  "arxiv_id": "1909.11942v6",
+  "status": "started",
+  "timestamp": "2026-02-26T02:00:17.112053",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "1909.11942",
+    "title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations",
+    "authors": [
+      "Zhenzhong Lan",
+      "Mingda Chen",
+      "Sebastian Goodman",
+      "Kevin Gimpel",
+      "Piyush Sharma",
+      "Radu Soricut"
+    ],
+    "abstract": "Increasing model size when pretraining natural language representations often results in improved performance on downstream tasks. However, at some point further model increases become harder due to GPU/TPU memory limitations and longer training times. To address these problems, we present two parameter-reduction techniques to lower memory consumption and increase the training speed of BERT. Comprehensive empirical evidence shows that our proposed methods lead to models that scale much better compared to the original BERT. We also use a self-supervised loss that focuses on modeling inter-sentence coherence, and show it consistently helps downstream tasks with multi-sentence inputs. As a result, our best model establishes new state-of-the-art results on the GLUE, RACE, and \\squad benchmarks while having fewer parameters compared to BERT-large. The code and the pretrained models are available at https://github.com/google-research/ALBERT.",
+    "published": "2019-09-26T07:06:13+00:00",
+    "updated": "2020-02-09T03:00:18+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1909.11942v6",
+    "entry_id": "http://arxiv.org/abs/1909.11942v6",
+    "pdf_path": "data\\papers\\1909.11942.pdf"
+  },
+  "text_length": 55045,
+  "word_count": 4281,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "ALBERT",
+      "parameters": "11M, 18M, 60M, 235M, 11M, 12M, 18M, 60M, 225M, 499M, 12M, 18M",
+      "parameters_millions": 18,
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces two parameter-reduction techniques: factorized embedding parameterization (decomposing the large vocabulary embedding matrix into two smaller matrices) and cross-layer parameter sharing (preventing parameter growth with network depth). It also replaces BERT's Next Sentence Prediction (NSP) with Sentence-Order Prediction (SOP) to improve inter-sentence coherence modeling.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+      "pretraining_corpus": "Same as BERT (BooksCorpus and English Wikipedia)",
+      "finetuning_task": "Task-specific fine-tuning",
+      "optimizer": "Adam",
+      "hardware_used": "Cloud TPU V3",
+      "extension": "Factorized embedding parameterization reduces embedding parameters from O(V × H) to O(V × E + E × H), and cross-layer parameter sharing stabilizes network parameters across layers.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+      "application": "Natural language understanding, text classification, question answering, and other downstream NLP tasks",
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT-x",
+      "parameters": "59M, 60M",
+      "parameters_millions": 60,
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed, alongside Sentence Order Prediction (SOP) as a self-supervised loss to improve inter-sentence coherence over Next Sentence Prediction (NSP).",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+      "pretraining_corpus": "Same as BERT (BooksCorpus and English Wikipedia)",
+      "finetuning_task": "Task-specific fine-tuning",
+      "optimizer": "Adam",
+      "hardware_used": "Cloud TPU V3",
+      "extension": "Factorized embedding parameterization and cross-layer parameter sharing to reduce memory consumption and increase training speed without significantly impacting performance.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+      "application": "Natural language understanding, reading comprehension, text classification, question answering",
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT-xx",
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT-xxlarge is the largest variant, achieving the best performance on benchmarks like GLUE (89.4), RACE (89.4), and SQuAD 2.0 (F1 92.2) while still having fewer parameters than BERT-large due to its parameter-efficient design.",
+      "pretraining_corpus": "Same as BERT (BooksCorpus and English Wikipedia)",
+      "parameters": "235M",
+      "parameters_millions": 235,
+      "application": "Natural language understanding, reading comprehension, text classification, question answering",
+      "license": "open source",
+      "research_problem": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Task-specific fine-tuning",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "Cloud TPU V3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Factorized embedding parameterization and cross-layer parameter sharing to reduce memory consumption and increase training speed without significantly impacting performance.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT (base)",
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+      "pretraining_corpus": "BooksCorpus, English Wikipedia",
+      "parameters": "11M, 18M, 31M, 57M, 108M, 312M",
+      "parameters_millions": 11,
+      "application": "Natural language understanding, question answering, text classification, reading comprehension",
+      "license": "open source",
+      "research_problem": "Efficient language representation learning with reduced parameter size and improved scalability",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT (large)",
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+      "pretraining_corpus": "BooksCorpus, English Wikipedia",
+      "parameters": "18M, 83M, 312M",
+      "parameters_millions": 18,
+      "application": "Natural language understanding, question answering, text classification, reading comprehension",
+      "license": "open source",
+      "research_problem": "Efficient language representation learning with reduced parameter size and improved scalability",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT (xlarge)",
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+      "pretraining_corpus": "BooksCorpus, English Wikipedia",
+      "parameters": "57M, 108M, 312M",
+      "parameters_millions": 57,
+      "application": "Natural language understanding, question answering, text classification, reading comprehension",
+      "license": "open source",
+      "research_problem": "Efficient language representation learning with reduced parameter size and improved scalability",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    },
+    {
+      "model_name": "ALBERT (xxlarge)",
+      "model_family": "ALBERT",
+      "date_created": "2020-04",
+      "organization": "Google",
+      "innovation": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+      "pretraining_corpus": "BooksCorpus, English Wikipedia",
+      "parameters": "108M, 223M, 312M",
+      "parameters_millions": 108,
+      "application": "Natural language understanding, question answering, text classification, reading comprehension",
+      "license": "open source",
+      "research_problem": "Efficient language representation learning with reduced parameter size and improved scalability",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
+    }
+  ],
+  "models_after_selection": 12,
+  "models_after_merge": 7,
+  "contributions": [
+    {
+      "label": "ALBERT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces two parameter-reduction techniques: factorized embedding parameterization (decomposing the large vocabulary embedding matrix into two smaller matrices) and cross-layer parameter sharing (preventing parameter growth with network depth). It also replaces BERT's Next Sentence Prediction (NSP) with Sentence-Order Prediction (SOP) to improve inter-sentence coherence modeling.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Same as BERT (BooksCorpus and English Wikipedia)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Task-specific fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "11M, 18M, 60M, 235M, 11M, 12M, 18M, 60M, 225M, 499M, 12M, 18M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "18",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Cloud TPU V3",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, text classification, question answering, and other downstream NLP tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT-x",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT-x",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed, alongside Sentence Order Prediction (SOP) as a self-supervised loss to improve inter-sentence coherence over Next Sentence Prediction (NSP).",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Same as BERT (BooksCorpus and English Wikipedia)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Task-specific fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "59M, 60M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "60",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Cloud TPU V3",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, reading comprehension, text classification, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT-xx",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT-xx",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT-xxlarge is the largest variant, achieving the best performance on benchmarks like GLUE (89.4), RACE (89.4), and SQuAD 2.0 (F1 92.2) while still having fewer parameters than BERT-large due to its parameter-efficient design.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked LM (MLM), Sentence-Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Same as BERT (BooksCorpus and English Wikipedia)",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Task-specific fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "235M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "235",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Cloud TPU V3",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, reading comprehension, text classification, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling pre-trained language models efficiently by reducing memory consumption and training time while maintaining or improving performance on downstream tasks.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT (base)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT (base)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BooksCorpus, English Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "11M, 18M, 31M, 57M, 108M, 312M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "11",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, question answering, text classification, reading comprehension",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient language representation learning with reduced parameter size and improved scalability",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT (large)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT (large)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BooksCorpus, English Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "18M, 83M, 312M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "18",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, question answering, text classification, reading comprehension",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient language representation learning with reduced parameter size and improved scalability",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT (xlarge)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT (xlarge)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BooksCorpus, English Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "57M, 108M, 312M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "57",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, question answering, text classification, reading comprehension",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient language representation learning with reduced parameter size and improved scalability",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALBERT (xxlarge)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALBERT (xxlarge)",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ALBERT introduces parameter-reduction techniques (factorized embedding parameterization and cross-layer parameter sharing) to lower memory consumption and increase training speed while maintaining performance. It also replaces Next Sentence Prediction (NSP) with Sentence Order Prediction (SOP) for improved inter-sentence coherence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Language Modeling (MLM), Sentence Order Prediction (SOP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BooksCorpus, English Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "108M, 223M, 312M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "108",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding, question answering, text classification, reading comprehension",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient language representation learning with reduced parameter size and improved scalability",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}

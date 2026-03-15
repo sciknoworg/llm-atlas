@@ -1,0 +1,764 @@
+{
+  "arxiv_id": "1910.13461v1",
+  "status": "started",
+  "timestamp": "2026-02-20T07:16:10.659356",
+  "steps": {
+    "fetch": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "1910.13461",
+    "title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension",
+    "authors": [
+      "Mike Lewis",
+      "Yinhan Liu",
+      "Naman Goyal",
+      "Marjan Ghazvininejad",
+      "Abdelrahman Mohamed",
+      "Omer Levy",
+      "Ves Stoyanov",
+      "Luke Zettlemoyer"
+    ],
+    "abstract": "We present BART, a denoising autoencoder for pretraining sequence-to-sequence models. BART is trained by (1) corrupting text with an arbitrary noising function, and (2) learning a model to reconstruct the original text. It uses a standard Tranformer-based neural machine translation architecture which, despite its simplicity, can be seen as generalizing BERT (due to the bidirectional encoder), GPT (with the left-to-right decoder), and many other more recent pretraining schemes. We evaluate a number of noising approaches, finding the best performance by both randomly shuffling the order of the original sentences and using a novel in-filling scheme, where spans of text are replaced with a single mask token. BART is particularly effective when fine tuned for text generation but also works well for comprehension tasks. It matches the performance of RoBERTa with comparable training resources on GLUE and SQuAD, achieves new state-of-the-art results on a range of abstractive dialogue, question answering, and summarization tasks, with gains of up to 6 ROUGE. BART also provides a 1.1 BLEU increase over a back-translation system for machine translation, with only target language pretraining. We also report ablation experiments that replicate other pretraining schemes within the BART framework, to better measure which factors most influence end-task performance.",
+    "published": "2019-10-29T18:01:00+00:00",
+    "updated": "2019-10-29T18:01:00+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG",
+      "stat.ML"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/1910.13461v1",
+    "entry_id": "http://arxiv.org/abs/1910.13461v1",
+    "pdf_path": "data\\papers\\1910.13461.pdf"
+  },
+  "text_length": 39356,
+  "word_count": 4132,
+  "models_extracted": 9,
+  "extraction_data": [
+    {
+      "model_name": "BART",
+      "parameters": "140M, 400M",
+      "parameters_millions": 400,
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "A denoising autoencoder that combines a bidirectional encoder with a left‑to‑right autoregressive decoder, enabling a single seq2seq model to excel at generation, translation, and comprehension tasks.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (reconstruct original text from corrupted input)",
+      "pretraining_corpus": "large‑scale text corpus",
+      "finetuning_task": "Supervised fine‑tuning for downstream tasks such as sequence classification, token classification, and sequence generation",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Introduces a denoising objective that corrupts input text with token masking and sentence shuffling, extending standard seq2seq pretraining.",
+      "blog_post": null,
+      "license": "MIT License",
+      "research_problem": "Sequence‑to‑Sequence pre‑training for natural language generation, translation, and comprehension",
+      "application": "Text generation, machine translation, summarization, question answering, and other language understanding tasks.",
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/TokenMasking",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Denoising sequence-to-sequence pre‑training that masks random tokens and trains the model to reconstruct them, enabling strong generation performance.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (token masking)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Applies a token‑masking noise function during pre‑training.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/TokenDeletion",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Denoising sequence-to-sequence pre‑training that deletes random tokens and asks the model to fill the gaps, improving generation quality.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (token deletion)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses token‑deletion as the denoising objective.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/TextInfilling",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Denoising sequence-to-sequence pre‑training that masks contiguous spans of tokens (text infilling) and trains the model to reconstruct them, yielding the most consistent performance across tasks.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (text infilling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Applies span‑masking (text infilling) as the denoising objective.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/DocumentRotation",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Denoising sequence-to-sequence pre‑training that rotates whole documents as a noise function, though it performs poorly in isolation.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (document rotation)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Introduces document‑rotation as a denoising transformation.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/SentenceShuffling",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Denoising sequence-to-sequence pre‑training that shuffles sentence order and trains the model to restore the original order.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (sentence shuffling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses sentence‑shuffling as a denoising objective.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    },
+    {
+      "model_name": "BARTBase w/TextInfilling+SentenceShuffling",
+      "model_family": "BART",
+      "date_created": "2019-10",
+      "organization": "Meta",
+      "innovation": "Combines text‑infilling and sentence‑shuffling denoising objectives to achieve the strongest overall performance across tasks.",
+      "pretraining_corpus": "books and Wikipedia",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "text generation, summarization, translation, question answering",
+      "license": null,
+      "research_problem": "Natural language generation, translation, and comprehension",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Denoising autoencoding (text infilling + sentence shuffling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Integrates both span‑masking and sentence‑shuffling noise functions.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension"
+    }
+  ],
+  "models_after_selection": 9,
+  "models_after_merge": 7,
+  "contributions": [
+    {
+      "label": "BART",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "A denoising autoencoder that combines a bidirectional encoder with a left‑to‑right autoregressive decoder, enabling a single seq2seq model to excel at generation, translation, and comprehension tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (reconstruct original text from corrupted input)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "large‑scale text corpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine‑tuning for downstream tasks such as sequence classification, token classification, and sequence generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "140M, 400M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": "400",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation, machine translation, summarization, question answering, and other language understanding tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Sequence‑to‑Sequence pre‑training for natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/TokenMasking",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/TokenMasking",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Denoising sequence-to-sequence pre‑training that masks random tokens and trains the model to reconstruct them, enabling strong generation performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (token masking)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/TokenDeletion",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/TokenDeletion",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Denoising sequence-to-sequence pre‑training that deletes random tokens and asks the model to fill the gaps, improving generation quality.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (token deletion)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/TextInfilling",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/TextInfilling",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Denoising sequence-to-sequence pre‑training that masks contiguous spans of tokens (text infilling) and trains the model to reconstruct them, yielding the most consistent performance across tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (text infilling)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/DocumentRotation",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/DocumentRotation",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Denoising sequence-to-sequence pre‑training that rotates whole documents as a noise function, though it performs poorly in isolation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (document rotation)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/SentenceShuffling",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/SentenceShuffling",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Denoising sequence-to-sequence pre‑training that shuffles sentence order and trains the model to restore the original order.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (sentence shuffling)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BARTBase w/TextInfilling+SentenceShuffling",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BARTBase w/TextInfilling+SentenceShuffling",
+          "datatype": "string"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BART",
+          "datatype": "string"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2019-10",
+          "datatype": "string"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Combines text‑infilling and sentence‑shuffling denoising objectives to achieve the strongest overall performance across tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Denoising autoencoding (text infilling + sentence shuffling)",
+          "datatype": "string"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "books and Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "text generation, summarization, translation, question answering",
+          "datatype": "string"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Natural language generation, translation, and comprehension",
+          "datatype": "string"
+        }
+      ]
+    }
+  ]
+}
