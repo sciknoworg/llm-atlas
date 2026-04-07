@@ -125,9 +125,7 @@ class LLMExtractor:
 
         # Disable the OpenAI client's built-in retries — we handle retries
         # ourselves with escalating timeouts and exponential backoff.
-        self.client = OpenAI(
-            api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0
-        )
+        self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0)
 
         logger.info(f"Initialized KISSKI extractor with model: {model}")
         logger.info(f"API endpoint: {base_url}")
@@ -303,7 +301,7 @@ class LLMExtractor:
         messages = [
             {
                 "role": "system",
-                "content": "You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation or contribution. Prefer the paper's own framing: name the main technique or method (e.g. \"masked language model\", \"Cloze\") and how it differs from prior work (e.g. \"enabling bidirectional context\"). One or two sentences.\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture: MUST be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n- extension: ONLY when the paper explicitly describes an additional technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding, module, or technique that enables a capability compared to prior work). One sentence, factual. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If the paper does NOT mention such an extension, use null; do NOT guess or infer from other papers.\n- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. \"Nvidia V100 GPU\", \"TPUv3\", \"A100-80GB GPU\", \"Cloud TPUv3\", \"NVIDIA A100 GPU\"). Use the paper's wording when possible. If the paper does NOT mention hardware, use null; do NOT guess or infer.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not \"Google AI Language\").\n6. PARAMETERS: For multiple sizes use comma-separated (e.g. \"110M, 340M\").\n7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.\n10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants of the same model (e.g. 'Llama 3 8K' and 'Llama 3 128K-context' are the SAME model as 'Llama 3'). Record the context length in the context_length field of that single entry instead.\n11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained (instruction-tuned) variants of the same model (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 (post-trained)' are ONE entry 'Llama 3'). Mention both stages in the innovation or finetuning_task fields.\n\nFORMAT: date_created=YYYY-MM; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; hardware_used=exact phrase from paper (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.\n\nReturn JSON only.",  # noqa: E501
+                "content": 'You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation or contribution. Prefer the paper\'s own framing: name the main technique or method (e.g. "masked language model", "Cloze") and how it differs from prior work (e.g. "enabling bidirectional context"). One or two sentences.\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., "7B", "175B")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture: MUST be exactly one of "Encoder", "Decoder", or "Encoder-Decoder" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n- extension: ONLY when the paper explicitly describes an additional technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding, module, or technique that enables a capability compared to prior work). One sentence, factual. Example: "Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model." If the paper does NOT mention such an extension, use null; do NOT guess or infer from other papers.\n- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. "Nvidia V100 GPU", "TPUv3", "A100-80GB GPU", "Cloud TPUv3", "NVIDIA A100 GPU"). Use the paper\'s wording when possible. If the paper does NOT mention hardware, use null; do NOT guess or infer.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to \'paper_title\'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for \'Our model\' or \'Proposed\'. Look for \'M\' or \'B\'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not "Google AI Language").\n6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").\n7. MULTIPLE MODELS: Set \'paper_describes_multiple_models\' to true if the paper describes multiple distinct models, versions, or size variants.\n8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.\n10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants of the same model (e.g. \'Llama 3 8K\' and \'Llama 3 128K-context\' are the SAME model as \'Llama 3\'). Record the context length in the context_length field of that single entry instead.\n11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained (instruction-tuned) variants of the same model (e.g. \'Llama 3 (pre-trained)\' and \'Llama 3 (post-trained)\' are ONE entry \'Llama 3\'). Mention both stages in the innovation or finetuning_task fields.\n\nFORMAT: date_created=YYYY-MM; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; hardware_used=exact phrase from paper (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.\n\nReturn JSON only.',  # noqa: E501
             },
             {
                 "role": "user",
@@ -390,9 +388,7 @@ Output JSON:""",
 
         return messages
 
-    def _call_api_with_retry(
-        self, messages: List[Dict[str, str]]
-    ) -> Optional[Any]:
+    def _call_api_with_retry(self, messages: List[Dict[str, str]]) -> Optional[Any]:
         """
         Call KISSKI API with retry logic, exponential backoff, and escalating
         timeouts.  Handles transient errors (timeouts, connection drops, server
@@ -458,7 +454,7 @@ Output JSON:""",
             except RateLimitError as exc:
                 last_exception = exc
                 if attempt < self.retry_attempts:
-                    wait = max(self.retry_delay * (2 ** attempt), 10) + random.uniform(0, 5)
+                    wait = max(self.retry_delay * (2**attempt), 10) + random.uniform(0, 5)
                     logger.warning(
                         "Rate limited on attempt %d/%d. Retrying in %.1fs...",
                         attempt,
@@ -491,7 +487,9 @@ Output JSON:""",
                         exc,
                     )
 
-        logger.error("All %d retry attempts exhausted. Last error: %s", self.retry_attempts, last_exception)
+        logger.error(
+            "All %d retry attempts exhausted. Last error: %s", self.retry_attempts, last_exception
+        )
         return None
 
     def extract(
@@ -886,9 +884,7 @@ Output JSON:""",
         failed = 0
 
         for i, chunk in enumerate(text_chunks):
-            logger.info(
-                "Processing chunk %d/%d (%d chars)", i + 1, len(text_chunks), len(chunk)
-            )
+            logger.info("Processing chunk %d/%d (%d chars)", i + 1, len(text_chunks), len(chunk))
             result = self.extract(chunk, paper_metadata)
 
             if result and result.models:
@@ -922,31 +918,31 @@ Output JSON:""",
     def _deduplicate_models(self, models: List[LLMProperties]) -> List[LLMProperties]:
         """
         Deduplicate models: merge variants that refer to the same model version.
-        
+
         CRITICAL: Preserves version distinctions (e.g., Llama 3, 3.1, 3.2, 3.3 stay separate)
         by including version token in the deduplication key.
-        
+
         Grouping key: (model_family, version_token, parameters)
         - model_family: e.g., "Llama", "GPT", "BERT"
         - version_token: e.g., "3", "3.1", "3.2" (extracted from model_name)
         - parameters: e.g., "8B", "70B", "405B"
-        
+
         This ensures:
         - "Llama 3 8B" and "Llama 3 70B" merge → "Llama 3" (same version, different sizes)
         - "Llama 3.1 8B" and "Llama 3.2 8B" stay separate (different versions)
         """
         groups: Dict[tuple, List[LLMProperties]] = {}
-        
+
         for m in models:
             # Extract components for grouping key
             fam = (m.model_family or "").strip() or ""
             params = (m.parameters or "").strip() or ""
             params_m = m.parameters_millions
             model_name = (m.model_name or "").strip()
-            
+
             # Extract version token from model_name (e.g., "Llama 3.1 8B" → "3.1")
             version_token = self._extract_version_from_name(model_name)
-            
+
             # Build deduplication key
             # Priority 1: Use (family, version, params) if we have family and version
             # Priority 2: Use full model_name if family/version missing (conservative fallback)
@@ -961,7 +957,7 @@ Output JSON:""",
             else:
                 # Fallback: use full model_name to avoid over-merging
                 key = (model_name, m.model_version or "", m.parameters or "")
-            
+
             if key not in groups:
                 groups[key] = []
             groups[key].append(m)
@@ -982,7 +978,7 @@ Output JSON:""",
                 if fam and f"{fam}-" in n and any(c.isdigit() for c in n.split(f"{fam}-")[-1][:4]):
                     s += 3  # e.g. GPT-1, BERT-Large
                 # Prefer names with version numbers (e.g., "Llama 3.1" over "Llama 8B")
-                if re.search(r'\d+(?:\.\d+)?(?:\s|$)', n):
+                if re.search(r"\d+(?:\.\d+)?(?:\s|$)", n):
                     s += 2
                 if any(c.isdigit() for c in n) and ("m" in n or "b" in n or "k" in n):
                     s += 1
@@ -1002,41 +998,41 @@ Output JSON:""",
             result.append(representative)
 
         return result
-    
+
     def _extract_version_from_name(self, model_name: str) -> str:
         """
         Extract version token from model name for deduplication.
-        
+
         This must match the logic in model_variant_merger._extract_version_token()
         to ensure consistent version handling across extraction and merging.
-        
+
         Args:
             model_name: Model name string (e.g., "Llama 3.1 8B")
-            
+
         Returns:
             Version token (e.g., "3.1") or empty string if no version found
         """
         if not model_name:
             return ""
-        
+
         # Pattern: model_family + version_number + (space/dash/underscore/end)
         # MUST MATCH model_variant_merger._extract_version_token() logic
         version_patterns = [
             # Pattern 1: "Model 3.1 ..." or "Model 3" (space separator)
-            r'(?:^|\s)([A-Za-z][\w-]*?)\s+([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+            r"(?:^|\s)([A-Za-z][\w-]*?)\s+([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)",
             # Pattern 2: "Model-3.1" or "Model_3.1" (dash/underscore separator)
-            r'(?:^|\s)([A-Za-z][\w-]*?)[-_]([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+            r"(?:^|\s)([A-Za-z][\w-]*?)[-_]([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)",
         ]
-        
+
         for pattern in version_patterns:
             match = re.search(pattern, model_name)
             if match:
                 version = match.group(2)
                 # Strip optional 'v' or 'V' prefix
-                if version.lower().startswith('v'):
+                if version.lower().startswith("v"):
                     version = version[1:]
                 return version
-        
+
         return ""
 
     def _extract_organization(self, authors: List[str]) -> Optional[str]:

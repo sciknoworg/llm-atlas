@@ -93,10 +93,10 @@ def _validate_version_preservation(
 ) -> None:
     """
     Validate that version diversity is preserved after grouping.
-    
+
     Warns if multiple distinct version numbers were found in extraction but
     collapsed to fewer groups (indicating potential over-merging).
-    
+
     Args:
         original_models: Original extracted models
         groups: Grouped models by canonical name (keys are canonical names)
@@ -110,11 +110,11 @@ def _validate_version_preservation(
             family = (model.get("model_family") or "").strip().lower()
             if family:
                 version_patterns.add((family, version))
-    
+
     # If no versions detected in extraction, skip validation
     if not version_patterns:
         return
-    
+
     # Count unique (family, version) pairs in canonical group names
     # The canonical names SHOULD contain version tokens if preservation worked
     group_versions = set()
@@ -124,11 +124,11 @@ def _validate_version_preservation(
         if version:
             # Extract family from canonical name - should be the first word before version
             # e.g., "Llama 3.1" → family="Llama", version="3.1"
-            family_match = re.match(r'^([A-Za-z][\w-]*)', canonical_name)
+            family_match = re.match(r"^([A-Za-z][\w-]*)", canonical_name)
             if family_match:
                 family = family_match.group(1).lower()
                 group_versions.add((family, version))
-    
+
     # Warn if versions were lost during grouping
     if len(version_patterns) > len(group_versions):
         lost_versions = version_patterns - group_versions
@@ -138,9 +138,7 @@ def _validate_version_preservation(
         )
         if lost_versions:
             logger.warning(f"  Potentially lost versions: {sorted(lost_versions)}")
-        logger.warning(
-            "  Check that _get_canonical_name() properly preserves version tokens."
-        )
+        logger.warning("  Check that _get_canonical_name() properly preserves version tokens.")
 
 
 def _get_canonical_name(model_name: str) -> str:
@@ -227,16 +225,16 @@ def _get_canonical_name(model_name: str) -> str:
 def _extract_version_token(model_name: str) -> Optional[str]:
     """
     Extract version token from model name (e.g., "3", "3.1", "3.2", "v2", "2.0").
-    
+
     This function identifies and extracts version-like patterns that should be
     preserved to differentiate model releases (e.g., Llama 3 vs 3.1 vs 3.2).
-    
+
     Args:
         model_name: Model name string
-        
+
     Returns:
         Version token string (e.g., "3.1") or None if no version found
-        
+
     Examples:
         "Llama 3"         → "3"
         "Llama 3 8B"      → "3"
@@ -247,7 +245,7 @@ def _extract_version_token(model_name: str) -> Optional[str]:
     """
     if not model_name:
         return None
-    
+
     # Pattern: model_family + version_number + (space/dash/underscore/end)
     # Matches patterns like:
     # - "Llama 3" → version "3"
@@ -256,46 +254,46 @@ def _extract_version_token(model_name: str) -> Optional[str]:
     # - "GPT-3.5 Turbo" → version "3.5"
     # - "Claude-2.1" → version "2.1"
     # - "Gemini 1.5 Pro" → version "1.5"
-    
+
     # Look for version pattern: space/dash followed by digits with optional decimal
     # Can be followed by space, dash, end of string, or nothing
     version_patterns = [
         # Pattern 1: "Model 3.1 ..." or "Model 3" (space separator)
-        r'(?:^|\s)([A-Za-z][\w-]*?)\s+([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+        r"(?:^|\s)([A-Za-z][\w-]*?)\s+([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)",
         # Pattern 2: "Model-3.1" or "Model_3.1" (dash/underscore separator)
-        r'(?:^|\s)([A-Za-z][\w-]*?)[-_]([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+        r"(?:^|\s)([A-Za-z][\w-]*?)[-_]([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)",
     ]
-    
+
     for pattern in version_patterns:
         match = re.search(pattern, model_name)
         if match:
             version = match.group(2)
             # Strip optional 'v' or 'V' prefix
-            if version.lower().startswith('v'):
+            if version.lower().startswith("v"):
                 version = version[1:]
             return version
-    
+
     return None
 
 
 def _restore_version_token(base_name: str, version_token: str) -> str:
     """
     Restore version token to base model name if it was stripped.
-    
+
     Args:
         base_name: Model name after stripping (e.g., "Llama")
         version_token: Version to restore (e.g., "3.1")
-        
+
     Returns:
         Model name with version restored (e.g., "Llama 3.1")
     """
     if not version_token:
         return base_name
-    
+
     # Check if version is already present (case-insensitive)
     if version_token.lower() in base_name.lower():
         return base_name
-    
+
     # Append version with space separator
     return f"{base_name} {version_token}"
 

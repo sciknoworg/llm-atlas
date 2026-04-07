@@ -10,8 +10,7 @@ import os
 from typing import Any, Dict, List, Optional
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import Mistral3ForConditionalGeneration
+from transformers import AutoModelForCausalLM, AutoTokenizer, Mistral3ForConditionalGeneration
 
 from src.llm_extractor import MultiModelResponse
 
@@ -283,30 +282,30 @@ class LLMExtractorTransformers:
                             "VERSIONS/VARIANTS introduced in the paper.\n\n"
                             "REQUIRED FIELDS (must extract for each model):\n"
                             "- model_name (required): Exact model name with version/size\n"
-                            "- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n"
+                            "- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n"  # noqa: E501
                             "- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n"
                             "- organization (required): Organization/company\n"
                             "- innovation (required): Key innovation or contribution. Prefer the paper's own framing: name the main technique or method and how it differs from prior work. One or two sentences.\n"  # noqa: E501
                             "- pretraining_corpus (required): Training dataset/corpus\n"
                             "- research_problem (required): Research problem addressed\n"
-                            "- parameters (required): Number of parameters as text (e.g., \"7B\", \"175B\")\n"  # noqa: E501
+                            '- parameters (required): Number of parameters as text (e.g., "7B", "175B")\n'  # noqa: E501
                             "- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n"  # noqa: E501
                             "- application (required): Use cases/applications\n"
                             "- license (required): License type\n\n"
                             "MUST EXTRACT WHEN MENTIONED (use null only if not stated):\n"
-                            "- pretraining_architecture: MUST be exactly one of \"Encoder\", \"Decoder\", or \"Encoder-Decoder\". Determine from the paper; use null only if not stated.\n"  # noqa: E501
+                            '- pretraining_architecture: MUST be exactly one of "Encoder", "Decoder", or "Encoder-Decoder". Determine from the paper; use null only if not stated.\n'  # noqa: E501
                             "- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n"  # noqa: E501
                             "- finetuning_task (e.g. Supervised discriminative fine-tuning)\n"
                             "- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n"  # noqa: E501
-                            "- extension: ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding or technique that extends the model beyond a baseline). One sentence. Example: \"Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model.\" If not mentioned, use null; do NOT guess or infer from other papers.\n"  # noqa: E501
-                            "- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. \"Nvidia V100 GPU\", \"TPUv3\"). Use the paper's wording. If not mentioned, use null; do NOT guess or infer.\n\n"  # noqa: E501
+                            '- extension: ONLY when the paper explicitly states a technical extension or mechanism (e.g. a specific encoding or technique that extends the model beyond a baseline). One sentence. Example: "Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model." If not mentioned, use null; do NOT guess or infer from other papers.\n'  # noqa: E501
+                            '- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. "Nvidia V100 GPU", "TPUv3"). Use the paper\'s wording. If not mentioned, use null; do NOT guess or infer.\n\n'  # noqa: E501
                             "CRITICAL RULES:\n"
                             "1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n"  # noqa: E501
                             "2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n"  # noqa: E501
                             "3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B=7000, 117M=117).\n"  # noqa: E501
-                            "4. DATES: Prefer YYYY-MM. Priority: metadata > header/footer > citation year.\n"
+                            "4. DATES: Prefer YYYY-MM. Priority: metadata > header/footer > citation year.\n"  # noqa: E501
                             "5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta).\n"
-                            "6. PARAMETERS: For multiple sizes use comma-separated (e.g. \"110M, 340M\").\n"
+                            '6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").\n'  # noqa: E501
                             "7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n"  # noqa: E501
                             "8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null.\n"  # noqa: E501
                             "9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, use these tables as the primary source for model names, metrics, parameter counts, and dataset names.\n"  # noqa: E501
@@ -350,7 +349,7 @@ class LLMExtractorTransformers:
                     {"role": "assistant", "content": json.dumps(example4_output)},
                     {
                         "role": "user",
-                        "content": f"""Extract ALL model versions, variants, and sizes (ORKG R609825):
+                        "content": f"""Extract ALL model versions, variants, and sizes (ORKG R609825):  # noqa: E501
 
 {paper_snippet}
 
@@ -701,7 +700,9 @@ JSON:
                     parsed = json.loads(response_text)
                     logger.info("JSON parse succeeded after cleaning")
                 except json.JSONDecodeError as parse_error:
-                    logger.warning(f"Parse failed after cleaning: {parse_error}. Attempting targeted repair...")
+                    logger.warning(
+                        f"Parse failed after cleaning: {parse_error}. Attempting targeted repair..."
+                    )
 
                     # --- Targeted repair: unescaped double quote inside a string value ---
                     # Small models (e.g. Ministral-3-3B) often emit:
@@ -713,15 +714,19 @@ JSON:
                         fixed_text = response_text
                         for look_back in range(2, min(600, err_pos)):
                             cand = err_pos - look_back
-                            if fixed_text[cand] == '"' and (cand == 0 or fixed_text[cand - 1] != "\\"):
-                                after = fixed_text[cand + 1: cand + 4]
+                            if fixed_text[cand] == '"' and (
+                                cand == 0 or fixed_text[cand - 1] != "\\"
+                            ):
+                                after = fixed_text[cand + 1 : cand + 4]
                                 if after.startswith(", ") or after.startswith(",\n"):
-                                    candidate = fixed_text[:cand] + '\\"' + fixed_text[cand + 1:]
+                                    candidate = fixed_text[:cand] + '\\"' + fixed_text[cand + 1 :]
                                     try:
                                         parsed = json.loads(candidate)
                                         logger.info(
-                                            "Unescaped-quote repair succeeded at offset -%d from error pos %d",
-                                            look_back, err_pos,
+                                            "Unescaped-quote repair succeeded at offset "
+                                            "-%d from error pos %d",
+                                            look_back,
+                                            err_pos,
                                         )
                                         response_text = candidate
                                         break
