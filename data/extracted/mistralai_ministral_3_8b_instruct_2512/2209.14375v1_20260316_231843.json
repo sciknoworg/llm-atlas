@@ -1,0 +1,778 @@
+{
+  "arxiv_id": "2209.14375v1",
+  "paper_title": "Improving alignment of dialogue agents via targeted human judgements",
+  "extracted_at": "20260316_231843",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 7,
+  "raw_extraction": [
+    {
+      "model_name": "Sparrow",
+      "model_family": "Custom Dialogue Agent",
+      "date_created": "2022-09-20",
+      "organization": "DeepMind",
+      "innovation": "Introduces **targeted human judgment** for rule-based alignment via decomposed rules (e.g., helpfulness, correctness, harmlessness) and **inline evidence retrieval** for fact-checking, improving factual accuracy and verifiability. Uses **multi-objective RLHF** to balance preference scores and rule violations, reducing adversarial rule-breaking to 8%.",
+      "pretraining_corpus": "Unspecified (built upon Chinchilla-70B)",
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "application": "Information-seeking dialogue systems, fact-checked conversational agents, adversarially robust alignment testing.",
+      "license": "Closed source (DeepMind proprietary)",
+      "research_problem": "Aligning dialogue agents to be helpful, correct, and harmless via targeted human feedback and evidence-grounded responses.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (via Chinchilla-70B)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reinforcement Learning from Human Feedback (RLHF) with targeted rule-based judgments and multi-objective optimization (preference + rule adherence)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Rule-conditional reward models** enable granular feedback on specific behavioral rules (e.g., avoiding stereotypes, misinformation), enhancing interpretability and efficiency of human annotations.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "Chinchilla",
+      "model_family": "Chinchilla",
+      "date_created": "2023-06",
+      "organization": "DeepMind",
+      "innovation": "Fine-tuning of Chinchilla 70B for dialogue tasks using instruction tuning, with partial freezing of lower layers for efficiency.",
+      "pretraining_corpus": null,
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "application": "Dialogue systems, conversational AI, rule-compliant response generation, evidence-based reasoning",
+      "license": "Closed source",
+      "research_problem": "Alignment of dialogue agents with human values and preferences, including rule compliance and helpfulness.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Instruction tuning (fine-tuning last 16 layers of Chinchilla)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "DPC (Dialogue Prompted Chinchilla)",
+      "model_family": "Chinchilla",
+      "date_created": "2023-06",
+      "organization": "DeepMind",
+      "innovation": "Initial dialogue-focused fine-tuning of Chinchilla 70B, serving as a baseline for evaluating Sparrow's improvements.",
+      "pretraining_corpus": null,
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "application": "Reference model for evaluating Sparrow's advancements in alignment and rule compliance.",
+      "license": "Closed source",
+      "research_problem": "Baseline for comparative analysis of alignment techniques in dialogue agents.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Dialogue-specific fine-tuning (baseline for Sparrow development)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "Sparrow",
+      "model_family": "Custom Dialogue Agent",
+      "date_created": "2023-10",
+      "organization": "DeepMind",
+      "innovation": "Combines supervised fine-tuning with reinforcement learning (RL) using targeted human judgments, red-team language model-generated adversarial data, and self-play data augmentation to optimize dialogue agents for alignment, preference, and rule compliance.",
+      "pretraining_corpus": "Unspecified (initialized from Chinchilla/SFT model)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Information-seeking dialogue systems, conversational AI, rule-compliant responses, evidence-grounded answers, and adversarial robustness.",
+      "license": "Closed source",
+      "research_problem": "Aligning dialogue agents with human preferences and reducing harmful outputs via targeted human judgments and adversarial probing.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction (via Chinchilla initialization)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reinforcement Learning (A2C) with human feedback, red-team LM-generated adversarial data, and self-play data collection",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses a multi-headed hydra model architecture sharing pretrained parameters across reward models, policy, and teacher models to mitigate memory requirements during RL training.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "Chinchilla (Teacher Model)",
+      "model_family": "Chinchilla",
+      "date_created": "2023-10",
+      "organization": "DeepMind",
+      "innovation": "Used as the initialization backbone for Sparrow's teacher model, leveraged for generating adversarial red-team data and self-play interactions.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": null,
+      "license": null,
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "Chinchilla",
+      "model_family": "Chinchilla",
+      "date_created": "2022-07",
+      "organization": "DeepMind",
+      "innovation": "Used as initialization for preference reward models and rule reward models, incorporating Bradley-Terry (Elo) models for ranking dialogue responses and classifying evidence plausibility.",
+      "pretraining_corpus": "Unspecified large-scale text corpus (likely proprietary)",
+      "parameters": "null",
+      "parameters_millions": null,
+      "application": "Dialogue systems, conversational AI, fact-checking, evidence-based reasoning, safety-aligned responses",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Alignment of dialogue agents with human preferences and safety constraints through targeted human judgments and reward modeling",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Instruction tuning, preference modeling (via RLHF-like methods)",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Preference reward models combine Elo-based ranking with classification of evidence plausibility, augmented with distractor samples and tie-breaking mechanisms.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    },
+    {
+      "model_name": "Sparrow",
+      "model_family": "Sparrow",
+      "date_created": "2022-07",
+      "organization": "Google",
+      "innovation": "Designed for respectful, polite, inclusive, and truthful dialogue with selective evidence retrieval capabilities. Uses dynamic decision-making for when to retrieve external evidence (e.g., Google Search) versus responding without it.",
+      "pretraining_corpus": "Unspecified large-scale text corpus (likely proprietary)",
+      "parameters": "null",
+      "parameters_millions": null,
+      "application": "Conversational AI assistants, Q&A systems, educational chatbots, fact-checking support",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Creating aligned, safe, and factually grounded conversational AI agents capable of dynamic evidence retrieval",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (presumably based on prior Google models like LaMDA)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Dialogue-specific fine-tuning with targeted human feedback, evidence retrieval integration, and selective evidence generation",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Dynamic evidence selection via log-likelihood comparison between Search Query and Sparrow response roles, conditioned on dialogue history and prompt templates.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Improving alignment of dialogue agents via targeted human judgements"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "Sparrow",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Sparrow",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Custom Dialogue Agent",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-09-20",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **targeted human judgment** for rule-based alignment via decomposed rules (e.g., helpfulness, correctness, harmlessness) and **inline evidence retrieval** for fact-checking, improving factual accuracy and verifiability. Uses **multi-objective RLHF** to balance preference scores and rule violations, reducing adversarial rule-breaking to 8%.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (via Chinchilla-70B)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (built upon Chinchilla-70B)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reinforcement Learning from Human Feedback (RLHF) with targeted rule-based judgments and multi-objective optimization (preference + rule adherence)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "70B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "70000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Information-seeking dialogue systems, fact-checked conversational agents, adversarially robust alignment testing.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Aligning dialogue agents to be helpful, correct, and harmless via targeted human feedback and evidence-grounded responses.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Fine-tuning of Chinchilla 70B for dialogue tasks using instruction tuning, with partial freezing of lower layers for efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Instruction tuning (fine-tuning last 16 layers of Chinchilla)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "70B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "70000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Dialogue systems, conversational AI, rule-compliant response generation, evidence-based reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Alignment of dialogue agents with human values and preferences, including rule compliance and helpfulness.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "DPC (Dialogue Prompted Chinchilla)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "DPC (Dialogue Prompted Chinchilla)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Initial dialogue-focused fine-tuning of Chinchilla 70B, serving as a baseline for evaluating Sparrow's improvements.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Dialogue-specific fine-tuning (baseline for Sparrow development)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "70B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "70000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Reference model for evaluating Sparrow's advancements in alignment and rule compliance.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Baseline for comparative analysis of alignment techniques in dialogue agents.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Sparrow",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Sparrow",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Custom Dialogue Agent",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-10",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Combines supervised fine-tuning with reinforcement learning (RL) using targeted human judgments, red-team language model-generated adversarial data, and self-play data augmentation to optimize dialogue agents for alignment, preference, and rule compliance.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction (via Chinchilla initialization)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (initialized from Chinchilla/SFT model)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reinforcement Learning (A2C) with human feedback, red-team LM-generated adversarial data, and self-play data collection",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Information-seeking dialogue systems, conversational AI, rule-compliant responses, evidence-grounded answers, and adversarial robustness.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Aligning dialogue agents with human preferences and reducing harmful outputs via targeted human judgments and adversarial probing.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla (Teacher Model)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla (Teacher Model)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-10",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Used as the initialization backbone for Sparrow's teacher model, leveraged for generating adversarial red-team data and self-play interactions.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-07",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Used as initialization for preference reward models and rule reward models, incorporating Bradley-Terry (Elo) models for ranking dialogue responses and classifying evidence plausibility.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpus (likely proprietary)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Instruction tuning, preference modeling (via RLHF-like methods)",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Dialogue systems, conversational AI, fact-checking, evidence-based reasoning, safety-aligned responses",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Alignment of dialogue agents with human preferences and safety constraints through targeted human judgments and reward modeling",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Sparrow",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Sparrow",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Sparrow",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-07",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Designed for respectful, polite, inclusive, and truthful dialogue with selective evidence retrieval capabilities. Uses dynamic decision-making for when to retrieve external evidence (e.g., Google Search) versus responding without it.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (presumably based on prior Google models like LaMDA)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpus (likely proprietary)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Dialogue-specific fine-tuning with targeted human feedback, evidence retrieval integration, and selective evidence generation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Conversational AI assistants, Q&A systems, educational chatbots, fact-checking support",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Creating aligned, safe, and factually grounded conversational AI agents capable of dynamic evidence retrieval",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 7
+  }
+}

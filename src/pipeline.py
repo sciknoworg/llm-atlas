@@ -77,10 +77,13 @@ class ExtractionPipeline:
                     "temperature": 0.0,
                     "max_tokens": 4000,
                     "base_url": "https://chat-ai.academiccloud.de/v1",
+                    "timeout": 180,
                     "rate_limit_delay": 2.0,
+                    "retry_attempts": 5,
+                    "retry_delay": 3.0,
                 },
                 "arxiv": {"max_results": 10, "download_dir": "data/papers"},
-                "extraction": {"max_chunk_size": 8000, "multi_model_extraction": True},
+                "extraction": {"max_chunk_size": 6000, "multi_model_extraction": True},
             }
 
     def _initialize_components(self):
@@ -116,8 +119,10 @@ class ExtractionPipeline:
                 model=self.config["kisski"]["model"],
                 temperature=self.config["kisski"]["temperature"],
                 max_tokens=self.config["kisski"]["max_tokens"],
-                timeout=self.config["kisski"].get("timeout", 60),
+                timeout=self.config["kisski"].get("timeout", 180),
                 rate_limit_delay=self.config["kisski"].get("rate_limit_delay", 2.0),
+                retry_attempts=self.config["kisski"].get("retry_attempts", 5),
+                retry_delay=self.config["kisski"].get("retry_delay", 3.0),
             )
             logger.info(
                 f"Initialized KISSKI API extractor (model: {self.config['kisski']['model']})"
@@ -604,9 +609,12 @@ class ExtractionPipeline:
         self, extraction_data: List[Dict[str, Any]], paper_metadata: Optional[Dict[str, Any]]
     ) -> None:
         """
-        Set date_created for all models from paper published date when available.
+        Prefer date_created from paper metadata when available.
+        If metadata has no usable published date, keep extracted date_created as fallback.
         Mutates extraction_data in place. Format: YYYY-MM (e.g. 2022-05).
         """
+        if not extraction_data:
+            return
         if not paper_metadata:
             return
         published = paper_metadata.get("published")
@@ -617,16 +625,16 @@ class ExtractionPipeline:
             return
         month = self._extract_month(published)
         date_created = f"{year}-{month:02d}" if month else f"{year}-01"
-        injected = 0
+        replaced = 0
         for model in extraction_data:
             current = model.get("date_created")
-            if current in (None, "", "null", "None"):
+            if current != date_created:
                 model["date_created"] = date_created
-                injected += 1
-        if injected:
+                replaced += 1
+        if replaced:
             logger.info(
-                "Set missing date_created from paper metadata for %s model(s): %s",
-                injected,
+                "Set date_created from paper metadata for %s model(s): %s",
+                replaced,
                 date_created,
             )
 

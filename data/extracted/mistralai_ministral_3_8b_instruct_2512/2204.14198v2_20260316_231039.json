@@ -1,0 +1,1486 @@
+{
+  "arxiv_id": "2204.14198v2",
+  "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "extracted_at": "20260316_231039",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 12,
+  "raw_extraction": [
+    {
+      "model_name": "Flamingo-3B",
+      "model_family": "Flamingo",
+      "date_created": "2022-11",
+      "organization": "DeepMind",
+      "innovation": "Introduces a novel architecture bridging pretrained vision (NFNet-F6) and language (Chinchilla) models via Perceiver Resampler and gated cross-attention dense blocks (GATED XATTN-DENSE) to handle interleaved visual/text sequences for few-shot multimodal tasks.",
+      "pretraining_corpus": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+      "parameters": "3B",
+      "parameters_millions": 3000,
+      "application": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with interleaved visual/text sequences",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "In-context few-shot learning via interleaved visual/text prompts",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": "Variable-length (8-frame clips during training, linearly interpolated to 30 frames at inference)",
+      "supported_language": null,
+      "hardware_used": "1536 TPU chips for largest runs (15 days)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Perceiver Resampler reduces variable-sized visual feature maps to a fixed number of visual tokens, enabling efficient cross-modal attention.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo-9B",
+      "model_family": "Flamingo",
+      "date_created": "2022-11",
+      "organization": "DeepMind",
+      "innovation": "Scaled-up version of Flamingo-3B leveraging larger Chinchilla LM backbone while maintaining the same vision encoder and Perceiver Resampler architecture for improved multimodal reasoning capabilities.",
+      "pretraining_corpus": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+      "parameters": "9B",
+      "parameters_millions": 9000,
+      "application": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with interleaved visual/text sequences",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "In-context few-shot learning via interleaved visual/text prompts",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": "Variable-length (8-frame clips during training, linearly interpolated to 30 frames at inference)",
+      "supported_language": null,
+      "hardware_used": "TPUv4 instances",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Gated cross-attention dense blocks (GATED XATTN-DENSE) ensure stable initialization by gradually incorporating visual information into the LM.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo-80B",
+      "model_family": "Flamingo",
+      "date_created": "2022-11",
+      "organization": "DeepMind",
+      "innovation": "Largest Flamingo variant built upon the 70B Chinchilla LM backbone, retaining the same vision encoder and Perceiver Resampler design to achieve state-of-the-art few-shot performance across 16 multimodal benchmarks.",
+      "pretraining_corpus": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+      "parameters": "80B",
+      "parameters_millions": 80000,
+      "application": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning, zero-shot adaptation to novel tasks",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with interleaved visual/text sequences",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "In-context few-shot learning via interleaved visual/text prompts",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": "Variable-length (8-frame clips during training, linearly interpolated to 30 frames at inference)",
+      "supported_language": null,
+      "hardware_used": "TPUv4 instances (1536 chips, sharded across 16 devices)",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Single-image cross-attention masking enables seamless generalization to arbitrary numbers of visual inputs during evaluation.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo (base)",
+      "model_family": "Flamingo",
+      "date_created": "2022-09",
+      "organization": "DeepMind",
+      "innovation": "General-purpose vision-language model combining a frozen Chinchilla 70B LM with a powerful vision backbone (NFNet-F6) and gated cross-attention conditioning, achieving state-of-the-art few-shot performance across 16 benchmarks without task-specific fine-tuning.",
+      "pretraining_corpus": "Interleaved image-text pairs (M3W), paired video-text datasets, and web-scraped multimodal webpages containing interleaved images and text",
+      "parameters": "80B",
+      "parameters_millions": 80000,
+      "application": "Few-shot image/video understanding, visual question answering, video question answering, visual dialogue, multi-modal reasoning, open-ended multimodal generation, and fine-tuned downstream applications",
+      "license": "Closed source (restricted access)",
+      "research_problem": "General-purpose multimodal understanding and generation with minimal task-specific training data",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Autoregressive next-token prediction on interleaved image/text/video data",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "In-context few-shot learning (no gradient updates) and fine-tuning for downstream tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Gated cross-attention blocks (GATEDXATTN-DENSE) inserted every seventh layer to balance performance and computational efficiency, combined with a Perceiver resampler for efficient vision feature processing.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo-9B",
+      "model_family": "Flamingo",
+      "date_created": "2022-11",
+      "organization": "DeepMind",
+      "innovation": "Scaled-up version of Flamingo-3B with a larger frozen language model (7B params) and increased density of GATEDXATTN-DENSE layers (every 4th transformer block) while maintaining the same vision encoder and resampler architecture.",
+      "pretraining_corpus": "Mixture of M3W (interleaved text + images/videos), LTIP (Long Text & Image Pairs), VTP (Video & Text Pairs), ALIGN (image-alt-text pairs)",
+      "parameters": "9.3B",
+      "parameters_millions": 9300,
+      "application": "Multimodal few-shot learning, visual question answering, image captioning, open-ended multimodal generation",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Few-shot multimodal learning (vision + language) with improved scalability",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Interleaved visual-language next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo-32shots",
+      "model_family": "Flamingo",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "**Finetuning variant**: Demonstrates zero/few-shot generalization via in-context learning (e.g., 32-shot prompts) without gradient updates, leveraging the pretrained model's ability to adapt to new tasks through prompt engineering alone.",
+      "pretraining_corpus": "M3W+ITP+VTP, LAION400M, CLIP, MassiveText",
+      "parameters": "3B",
+      "parameters_millions": 3000,
+      "application": "Few-shot image-text generation, visual question answering, dialogue with interleaved images/text, zero-shot image-text retrieval",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Scalable few-shot adaptation of multimodal models without task-specific fine-tuning",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Contrastive pretraining + next-token prediction (interleaved image-text)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "In-context learning (few-shot prompting)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "FlamingoFine-tuned",
+      "model_family": "Flamingo",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "**Finetuning variant**: Task-specific fine-tuning of the Resampler and projection layers while keeping the frozen LM and vision encoder. Achieves higher performance than zero-shot/in-context methods but retains few-shot capabilities.",
+      "pretraining_corpus": "M3W+ITP+VTP, LAION400M, CLIP, MassiveText",
+      "parameters": "3B",
+      "parameters_millions": 3000,
+      "application": "High-performance multimodal tasks (e.g., image captioning, visual QA) with minimal labeled data",
+      "license": "Closed source (restricted access)",
+      "research_problem": "Balancing few-shot generalization with task-specific optimization",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Contrastive pretraining + next-token prediction (interleaved image-text)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Task-specific supervised fine-tuning (discriminative)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo",
+      "model_family": "Flamingo",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "**Key innovation**: Introduces a **cross-attention mechanism** between a frozen vision encoder (ViT/G) and a frozen language model (Chinchilla), enabling zero/few-shot multimodal reasoning without gradient updates. Achieves strong few-shot generalization across diverse vision-language tasks.",
+      "pretraining_corpus": "Unspecified large-scale multimodal corpus (combining text and image/video data)",
+      "parameters": "80B",
+      "parameters_millions": 80000,
+      "application": "Visual question answering, image/video captioning, open-ended visual dialogue, classification, and rare-event detection in low-data regimes",
+      "license": "Closed source (research-only release)",
+      "research_problem": "Multimodal few-shot learning and zero-shot adaptation in vision-language models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Next-token prediction conditioned on visual features via cross-modal attention",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot learning via in-context examples (no gradient-based fine-tuning)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Cross-modal attention layers bridge frozen vision and language representations, avoiding full retraining while enabling multimodal reasoning.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo (80B)",
+      "model_family": "Flamingo",
+      "date_created": "2022-09",
+      "organization": "DeepMind",
+      "innovation": "Introduces **cross-modal gated attention** (GATED XATTN-DENSE) that dynamically blends visual and textual features via learnable gating parameters (α_xattn, α_dense), combined with a **Perceiver-style resampling module** to efficiently process high-dimensional visual inputs while maintaining alignment with language representations.",
+      "pretraining_corpus": "M3W (43.3M interleaved documents with 185M images and 182GB text), LTIP (312M image-text pairs), VTP (27M video-text pairs)",
+      "parameters": "80B",
+      "parameters_millions": 80000,
+      "application": "Few-shot visual question answering, visual dialog, image/video captioning, open-ended multimodal reasoning, and cross-modal retrieval.",
+      "license": "Closed-source (restricted access via DeepMind partnerships)",
+      "research_problem": "Few-shot learning across multimodal tasks (visual question answering, visual dialog, captioning, etc.) without task-specific fine-tuning.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Interleaved visual-text next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot learning via prompt tuning (no additional supervised fine-tuning)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Cross-modal gated attention** enables dynamic weighting of visual and textual modalities during processing, improving adaptability to diverse multimodal tasks.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo 3.1B",
+      "model_family": "Flamingo",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Introduces gated cross-attention mechanisms (GATED-XATTN-DENSE) between frozen vision encoders and language decoders, enabling efficient multimodal pretraining.",
+      "pretraining_corpus": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+      "parameters": "3.1B",
+      "parameters_millions": 3100,
+      "application": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+      "license": "Closed source",
+      "research_problem": "Few-shot learning in multimodal (vision + language) tasks",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked cross-attention between vision and language modalities",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot learning across vision-language tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses trainable resamplers to project high-dimensional visual features into lower-dimensional spaces for cross-modal attention.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo 3.2B",
+      "model_family": "Flamingo",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Scaled-up version of Flamingo 3.1B with improved performance on multimodal benchmarks through deeper transformer layers and larger parameter capacity.",
+      "pretraining_corpus": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+      "parameters": "3.2B",
+      "parameters_millions": 3200,
+      "application": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+      "license": "Closed source",
+      "research_problem": "Few-shot learning in multimodal (vision + language) tasks",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked cross-attention between vision and language modalities",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot learning across vision-language tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Incorporates more sophisticated resampling strategies for handling higher-resolution visual inputs while maintaining computational efficiency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    },
+    {
+      "model_name": "Flamingo 3.4B",
+      "model_family": "Flamingo",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Optimized version of Flamingo with enhanced training stability and performance improvements, particularly in long-form multimodal reasoning tasks.",
+      "pretraining_corpus": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+      "parameters": "3.4B",
+      "parameters_millions": 3400,
+      "application": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+      "license": "Closed source",
+      "research_problem": "Few-shot learning in multimodal (vision + language) tasks",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked cross-attention between vision and language modalities",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Few-shot learning across vision-language tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Utilizes refined resampler configurations to balance memory usage and feature representation quality.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "Flamingo-3B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo-3B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-11",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces a novel architecture bridging pretrained vision (NFNet-F6) and language (Chinchilla) models via Perceiver Resampler and gated cross-attention dense blocks (GATED XATTN-DENSE) to handle interleaved visual/text sequences for few-shot multimodal tasks.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling with interleaved visual/text sequences",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "In-context few-shot learning via interleaved visual/text prompts",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "1536 TPU chips for largest runs (15 days)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo-9B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo-9B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-11",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Scaled-up version of Flamingo-3B leveraging larger Chinchilla LM backbone while maintaining the same vision encoder and Perceiver Resampler architecture for improved multimodal reasoning capabilities.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling with interleaved visual/text sequences",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "In-context few-shot learning via interleaved visual/text prompts",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "9B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "9000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUv4 instances",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo-80B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo-80B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-11",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Largest Flamingo variant built upon the 70B Chinchilla LM backbone, retaining the same vision encoder and Perceiver Resampler design to achieve state-of-the-art few-shot performance across 16 multimodal benchmarks.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling with interleaved visual/text sequences",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MultiModal Massive Web (M3W), Long Text&ImagePairs (LTIP), Video&TextPairs (VTP)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "In-context few-shot learning via interleaved visual/text prompts",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "80B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "80000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUv4 instances (1536 chips, sharded across 16 devices)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Multimodal few-shot learning, visual question answering, image/video captioning, visual dialogue, open-ended multimodal reasoning, zero-shot adaptation to novel tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning across open-ended multimodal tasks (e.g., visual question answering, captioning, video understanding) without task-specific fine-tuning.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo (base)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo (base)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-09",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "General-purpose vision-language model combining a frozen Chinchilla 70B LM with a powerful vision backbone (NFNet-F6) and gated cross-attention conditioning, achieving state-of-the-art few-shot performance across 16 benchmarks without task-specific fine-tuning.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Autoregressive next-token prediction on interleaved image/text/video data",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Interleaved image-text pairs (M3W), paired video-text datasets, and web-scraped multimodal webpages containing interleaved images and text",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "In-context few-shot learning (no gradient updates) and fine-tuning for downstream tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "80B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "80000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Few-shot image/video understanding, visual question answering, video question answering, visual dialogue, multi-modal reasoning, open-ended multimodal generation, and fine-tuned downstream applications",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "General-purpose multimodal understanding and generation with minimal task-specific training data",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo-9B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo-9B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-11",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Scaled-up version of Flamingo-3B with a larger frozen language model (7B params) and increased density of GATEDXATTN-DENSE layers (every 4th transformer block) while maintaining the same vision encoder and resampler architecture.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Interleaved visual-language next-token prediction",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Mixture of M3W (interleaved text + images/videos), LTIP (Long Text & Image Pairs), VTP (Video & Text Pairs), ALIGN (image-alt-text pairs)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "9.3B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "9300",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Multimodal few-shot learning, visual question answering, image captioning, open-ended multimodal generation",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot multimodal learning (vision + language) with improved scalability",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo-32shots",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo-32shots",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Finetuning variant**: Demonstrates zero/few-shot generalization via in-context learning (e.g., 32-shot prompts) without gradient updates, leveraging the pretrained model's ability to adapt to new tasks through prompt engineering alone.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Contrastive pretraining + next-token prediction (interleaved image-text)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "M3W+ITP+VTP, LAION400M, CLIP, MassiveText",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "In-context learning (few-shot prompting)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Few-shot image-text generation, visual question answering, dialogue with interleaved images/text, zero-shot image-text retrieval",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable few-shot adaptation of multimodal models without task-specific fine-tuning",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "FlamingoFine-tuned",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "FlamingoFine-tuned",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Finetuning variant**: Task-specific fine-tuning of the Resampler and projection layers while keeping the frozen LM and vision encoder. Achieves higher performance than zero-shot/in-context methods but retains few-shot capabilities.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Contrastive pretraining + next-token prediction (interleaved image-text)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "M3W+ITP+VTP, LAION400M, CLIP, MassiveText",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Task-specific supervised fine-tuning (discriminative)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "High-performance multimodal tasks (e.g., image captioning, visual QA) with minimal labeled data",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Balancing few-shot generalization with task-specific optimization",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Key innovation**: Introduces a **cross-attention mechanism** between a frozen vision encoder (ViT/G) and a frozen language model (Chinchilla), enabling zero/few-shot multimodal reasoning without gradient updates. Achieves strong few-shot generalization across diverse vision-language tasks.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction conditioned on visual features via cross-modal attention",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale multimodal corpus (combining text and image/video data)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Few-shot learning via in-context examples (no gradient-based fine-tuning)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "80B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "80000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Visual question answering, image/video captioning, open-ended visual dialogue, classification, and rare-event detection in low-data regimes",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Multimodal few-shot learning and zero-shot adaptation in vision-language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo (80B)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo (80B)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-09",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **cross-modal gated attention** (GATED XATTN-DENSE) that dynamically blends visual and textual features via learnable gating parameters (α_xattn, α_dense), combined with a **Perceiver-style resampling module** to efficiently process high-dimensional visual inputs while maintaining alignment with language representations.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Interleaved visual-text next-token prediction",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "M3W (43.3M interleaved documents with 185M images and 182GB text), LTIP (312M image-text pairs), VTP (27M video-text pairs)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Few-shot learning via prompt tuning (no additional supervised fine-tuning)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "80B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "80000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Few-shot visual question answering, visual dialog, image/video captioning, open-ended multimodal reasoning, and cross-modal retrieval.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning across multimodal tasks (visual question answering, visual dialog, captioning, etc.) without task-specific fine-tuning.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo 3.1B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo 3.1B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces gated cross-attention mechanisms (GATED-XATTN-DENSE) between frozen vision encoders and language decoders, enabling efficient multimodal pretraining.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked cross-attention between vision and language modalities",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Few-shot learning across vision-language tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3.1B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3100",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning in multimodal (vision + language) tasks",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo 3.2B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo 3.2B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Scaled-up version of Flamingo 3.1B with improved performance on multimodal benchmarks through deeper transformer layers and larger parameter capacity.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked cross-attention between vision and language modalities",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Few-shot learning across vision-language tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3.2B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3200",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning in multimodal (vision + language) tasks",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Flamingo 3.4B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Flamingo 3.4B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Flamingo",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimized version of Flamingo with enhanced training stability and performance improvements, particularly in long-form multimodal reasoning tasks.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked cross-attention between vision and language modalities",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Image-Text Pairs dataset, Video-Text Pairs dataset, Multi-Modal Massive Web (M3W)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Few-shot learning across vision-language tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "3.4B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "3400",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Vision-to-text tasks, Visual Question Answering, Image captioning, multimodal reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Few-shot learning in multimodal (vision + language) tasks",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 12
+  }
+}

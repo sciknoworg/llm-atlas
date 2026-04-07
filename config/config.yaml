@@ -12,8 +12,10 @@ kisski:
   model: qwen3-235b-a22b
   temperature: 0.0  # 0.0 = deterministic, higher = more creative
   max_tokens: 4000  # Maximum tokens for response
-  timeout: 60  # API timeout in seconds
+  timeout: 180  # Base timeout per API call (escalates +30s per retry attempt)
   rate_limit_delay: 2.0  # Delay between requests (seconds) - DO NOT reduce below 2.0
+  retry_attempts: 5  # Retries per API call with exponential backoff
+  retry_delay: 3.0  # Base delay between retries (doubles each attempt)
 
 # ArXiv Configuration
 arxiv:
@@ -40,8 +42,8 @@ extraction:
     - license
     - model_type
   
-  # Chunk size for processing long papers
-  max_chunk_size: 8000
+  # Chunk size for processing long papers (smaller = faster inference = fewer timeouts)
+  max_chunk_size: 6000
   
   # Enable extraction of multiple models from single paper
   multi_model_extraction: true

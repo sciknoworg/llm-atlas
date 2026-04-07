@@ -1,0 +1,952 @@
+{
+  "arxiv_id": "2203.11147v1",
+  "paper_title": "Teaching language models to support answers with verified quotes",
+  "extracted_at": "20260316_233712",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 8,
+  "raw_extraction": [
+    {
+      "model_name": "GopherCite",
+      "model_family": "Gopher",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Introduces **Inline Evidence** syntax for generating answers alongside verbatim quotes from retrieved documents, combined with RLHP to align outputs with human preferences for plausibility and supportedness.",
+      "pretraining_corpus": "Unspecified (inherited from Gopher base model, likely proprietary)",
+      "parameters": "280B",
+      "parameters_millions": 280000,
+      "application": "Fact-seeking and explanation-seeking question answering with citable evidence, open-book QA systems, and trustworthy conversational agents.",
+      "license": "Closed source (DeepMind internal use, no public release mentioned)",
+      "research_problem": "Enabling language models to provide answers grounded in verifiable evidence while maintaining plausibility and trustworthiness.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reinforcement Learning from Human Preferences (RLHP) + Supervised Fine-Tuning (SFT) for Self-Supported Question Answering (SQA)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses **verbatim quote constraints** during autoregressive generation to ensure evidence matches retrieved documents exactly, combined with **round-robin document conditioning** for robust evidence selection.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "Gopher 280B",
+      "model_family": "Gopher",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Serves as the base model for GopherCite, finetuned using a **bootstrapping pipeline** combining human-preference alignment (RLHP) and **inline evidence generation** for self-supported QA.",
+      "pretraining_corpus": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+      "parameters": "280B",
+      "parameters_millions": 280000,
+      "application": "Foundation model for GopherCite; used for bootstrapping training data via few-shot prompting.",
+      "license": "Closed source",
+      "research_problem": "Scaling large language models for grounded, explainable question answering with external evidence.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Bootstrapped few-shot prompting → Supervised Fine-Tuning (SFT) → Reward Model (RM) training → Reinforcement Learning (RL) optimization",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "Gopher 1.4B",
+      "model_family": "Gopher",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Smaller variant of Gopher used for ablation studies to evaluate scaling effects in inline evidence generation and human preference alignment.",
+      "pretraining_corpus": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+      "parameters": "1.4B",
+      "parameters_millions": 1400,
+      "application": "Research benchmarking for GopherCite development.",
+      "license": "Closed source",
+      "research_problem": "Assessing the impact of model scale on evidence-grounded question answering.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Ablation study for Self-Supported QA (SFT + RLHP)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "Gopher 7B",
+      "model_family": "Gopher",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Mid-sized variant of Gopher evaluated for evidence-grounded QA capabilities, demonstrating trade-offs between efficiency and performance.",
+      "pretraining_corpus": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "Research benchmarking for GopherCite development.",
+      "license": "Closed source",
+      "research_problem": "Evaluating model capacity requirements for inline evidence generation.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Ablation study for Self-Supported QA (SFT + RLHP)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "GopherCite",
+      "model_family": "Gopher",
+      "date_created": "2023-06",
+      "organization": "DeepMind",
+      "innovation": "Introduces **Self-Supported Question Answering (SQA)** by fine-tuning a language model to generate answers paired with inline evidence snippets from search results, using a **super-rater** pipeline to bootstrap training data and a **reward model** for preference-based ranking.",
+      "pretraining_corpus": "Unspecified large-scale text corpus (likely proprietary)",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "Self-Supported Question Answering (SQA), fact-checking, evidence-backed conversational agents, selective abstention (declining to answer low-confidence queries).",
+      "license": "Closed source",
+      "research_problem": "Enabling language models to provide answers supported by verifiable, inline-quoted evidence from external sources while maintaining plausibility and avoiding hallucinations.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning (SFT) on bootstrapped Rated-Good samples with inline evidence syntax, followed by Reinforcement Learning from Human Preferences (RLHF) with reward-model reranking and A2C optimization",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses **truncated document regions** surrounding retrieved snippets to ensure quoted evidence remains intact within a 4096-token context window during inference.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "Gopher",
+      "model_family": "Gopher",
+      "date_created": "2021-12",
+      "organization": "DeepMind",
+      "innovation": "Introduces **GopherCite**, a system combining **inline evidence generation** (special syntax for verifiable quotes) with **human preference-based reward modeling** to improve factual accuracy and confidence calibration.",
+      "pretraining_corpus": "Large-scale text corpus (including proprietary datasets)",
+      "parameters": "280B",
+      "parameters_millions": 280000,
+      "application": "Fact-checked question answering, evidence-backed reasoning, and trustworthy AI responses",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Mitigating hallucinations in language models by requiring supported answers with verifiable quotes and controlled abstention.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reward modeling using human preferences for inline evidence generation and abstention",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "Gopher",
+      "model_family": "Gopher",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Introduces **self-supported question answering** (SQA) where models generate answers paired with verbatim evidence from provided documents, using **constrained sampling** during generation to enforce exact quote extraction.",
+      "pretraining_corpus": "Large-scale text corpus including uncategorized long documents",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Fact-checking, educational Q&A systems, trustworthy AI assistants, and self-explanatory question answering.",
+      "license": "Closed source",
+      "research_problem": "Enabling language models to produce answers backed by verifiable, verbatim evidence from source documents while maintaining plausibility and reducing user verification burden.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Self-supervised fine-tuning with constrained sampling for evidence extraction",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Inline Evidence Syntax** enables constrained sampling to mask logits for non-contiguous subsequences, ensuring verbatim quotes via a finite-state machine that transitions between claim and evidence states based on special tokens (%<, %>, %[, %]).",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    },
+    {
+      "model_name": "GopherCite",
+      "model_family": "Gopher",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "**Reward-model-based abstention mechanism** allows selective refusal of low-confidence questions, improving reliability by trading off question coverage for higher-quality responses. Incorporates **source trustworthiness evaluation** and **debatelike alignment** for safer evidence citation.",
+      "pretraining_corpus": "Large-scale text corpus including uncategorized long documents",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "High-stakes Q&A domains requiring evidence transparency (e.g., healthcare, legal, education), automated fact-checking, and debiasing AI-generated content.",
+      "license": "Closed source",
+      "research_problem": "Balancing answer quality and coverage in question-answering systems by leveraging reward models to filter unreliable or misleading citations.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reinforcement Learning (RL) fine-tuning with reward-model-guided abstention and evidence selection",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Reward-model scoring** (RM) guides sampling to prioritize supported/plausible answers, enabling dynamic abstention policies (e.g., declining 30% of questions to focus on high-confidence responses).",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Teaching language models to support answers with verified quotes"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "GopherCite",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "GopherCite",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **Inline Evidence** syntax for generating answers alongside verbatim quotes from retrieved documents, combined with RLHP to align outputs with human preferences for plausibility and supportedness.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (next-token prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (inherited from Gopher base model, likely proprietary)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reinforcement Learning from Human Preferences (RLHP) + Supervised Fine-Tuning (SFT) for Self-Supported Question Answering (SQA)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "280B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "280000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Fact-seeking and explanation-seeking question answering with citable evidence, open-book QA systems, and trustworthy conversational agents.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Enabling language models to provide answers grounded in verifiable evidence while maintaining plausibility and trustworthiness.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher 280B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher 280B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Serves as the base model for GopherCite, finetuned using a **bootstrapping pipeline** combining human-preference alignment (RLHP) and **inline evidence generation** for self-supported QA.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (next-token prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Bootstrapped few-shot prompting → Supervised Fine-Tuning (SFT) → Reward Model (RM) training → Reinforcement Learning (RL) optimization",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "280B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "280000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Foundation model for GopherCite; used for bootstrapping training data via few-shot prompting.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling large language models for grounded, explainable question answering with external evidence.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher 1.4B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher 1.4B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Smaller variant of Gopher used for ablation studies to evaluate scaling effects in inline evidence generation and human preference alignment.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (next-token prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Ablation study for Self-Supported QA (SFT + RLHP)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "1.4B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "1400",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research benchmarking for GopherCite development.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Assessing the impact of model scale on evidence-grounded question answering.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher 7B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher 7B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Mid-sized variant of Gopher evaluated for evidence-grounded QA capabilities, demonstrating trade-offs between efficiency and performance.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (next-token prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified (proprietary, referenced in Rae et al. 2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Ablation study for Self-Supported QA (SFT + RLHP)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "7B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "7000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research benchmarking for GopherCite development.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Evaluating model capacity requirements for inline evidence generation.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "GopherCite",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "GopherCite",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **Self-Supported Question Answering (SQA)** by fine-tuning a language model to generate answers paired with inline evidence snippets from search results, using a **super-rater** pipeline to bootstrap training data and a **reward model** for preference-based ranking.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpus (likely proprietary)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Supervised fine-tuning (SFT) on bootstrapped Rated-Good samples with inline evidence syntax, followed by Reinforcement Learning from Human Preferences (RLHF) with reward-model reranking and A2C optimization",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "7B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "7000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Self-Supported Question Answering (SQA), fact-checking, evidence-backed conversational agents, selective abstention (declining to answer low-confidence queries).",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Enabling language models to provide answers supported by verifiable, inline-quoted evidence from external sources while maintaining plausibility and avoiding hallucinations.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2021-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **GopherCite**, a system combining **inline evidence generation** (special syntax for verifiable quotes) with **human preference-based reward modeling** to improve factual accuracy and confidence calibration.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Large-scale text corpus (including proprietary datasets)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reward modeling using human preferences for inline evidence generation and abstention",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "280B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "280000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Fact-checked question answering, evidence-backed reasoning, and trustworthy AI responses",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Mitigating hallucinations in language models by requiring supported answers with verifiable quotes and controlled abstention.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **self-supported question answering** (SQA) where models generate answers paired with verbatim evidence from provided documents, using **constrained sampling** during generation to enforce exact quote extraction.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Large-scale text corpus including uncategorized long documents",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Self-supervised fine-tuning with constrained sampling for evidence extraction",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Fact-checking, educational Q&A systems, trustworthy AI assistants, and self-explanatory question answering.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Enabling language models to produce answers backed by verifiable, verbatim evidence from source documents while maintaining plausibility and reducing user verification burden.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "GopherCite",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "GopherCite",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Reward-model-based abstention mechanism** allows selective refusal of low-confidence questions, improving reliability by trading off question coverage for higher-quality responses. Incorporates **source trustworthiness evaluation** and **debatelike alignment** for safer evidence citation.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Large-scale text corpus including uncategorized long documents",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reinforcement Learning (RL) fine-tuning with reward-model-guided abstention and evidence selection",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "High-stakes Q&A domains requiring evidence transparency (e.g., healthcare, legal, education), automated fact-checking, and debiasing AI-generated content.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Balancing answer quality and coverage in question-answering systems by leveraging reward models to filter unreliable or misleading citations.",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 8
+  }
+}

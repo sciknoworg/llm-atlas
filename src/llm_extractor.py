@@ -9,10 +9,18 @@ The KISSKI API is OpenAI-compatible and hosted by GWDG Academic Cloud.
 
 import json
 import logging
+import random
+import re
 import time
 from typing import Any, Dict, List, Optional
 
-from openai import OpenAI
+from openai import (
+    APIConnectionError,
+    APITimeoutError,
+    InternalServerError,
+    OpenAI,
+    RateLimitError,
+)
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
@@ -74,8 +82,10 @@ class LLMExtractor:
         model: str = "meta-llama-3.1-8b-instruct",
         temperature: float = 0.0,
         max_tokens: int = 4000,
-        timeout: int = 60,
+        timeout: int = 180,
         rate_limit_delay: float = 2.0,
+        retry_attempts: int = 5,
+        retry_delay: float = 3.0,
     ):
         """
         Initialize KISSKI API extractor.
@@ -91,8 +101,10 @@ class LLMExtractor:
                    - deepseek-r1-0528 (reasoning tasks)
             temperature: Sampling temperature (0.0 = deterministic)
             max_tokens: Maximum tokens in response
-            timeout: Request timeout in seconds
+            timeout: Base request timeout in seconds (escalates on retries)
             rate_limit_delay: Delay between requests in seconds (default: 2.0)
+            retry_attempts: Max retries per API call on transient errors
+            retry_delay: Base delay between retries in seconds (exponential backoff applied)
 
         Note:
             KISSKI API is OpenAI-compatible. Rate limits:
@@ -107,14 +119,19 @@ class LLMExtractor:
         self.max_tokens = max_tokens
         self.timeout = timeout
         self.rate_limit_delay = rate_limit_delay
+        self.retry_attempts = retry_attempts
+        self.retry_delay = retry_delay
         self.last_request_time = 0
 
-        # Initialize OpenAI client configured for KISSKI
-        self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout)
+        # Disable the OpenAI client's built-in retries — we handle retries
+        # ourselves with escalating timeouts and exponential backoff.
+        self.client = OpenAI(
+            api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0
+        )
 
         logger.info(f"Initialized KISSKI extractor with model: {model}")
         logger.info(f"API endpoint: {base_url}")
-        logger.info(f"Rate limit: {rate_limit_delay}s between requests")
+        logger.info(f"Timeout: {timeout}s, retries: {retry_attempts}, backoff base: {retry_delay}s")
 
     def _enforce_rate_limit(self):
         """
@@ -373,6 +390,110 @@ Output JSON:""",
 
         return messages
 
+    def _call_api_with_retry(
+        self, messages: List[Dict[str, str]]
+    ) -> Optional[Any]:
+        """
+        Call KISSKI API with retry logic, exponential backoff, and escalating
+        timeouts.  Handles transient errors (timeouts, connection drops, server
+        errors, rate limits) so that individual chunk failures don't silently
+        kill the whole extraction.
+
+        Returns the API response object, or ``None`` when all retries are
+        exhausted.
+        """
+        last_exception: Optional[Exception] = None
+
+        for attempt in range(1, self.retry_attempts + 1):
+            try:
+                self._enforce_rate_limit()
+
+                # Escalate timeout: +30 s per retry so slow-but-alive backends
+                # eventually get enough headroom.
+                attempt_timeout = self.timeout + (attempt - 1) * 30
+
+                logger.info(
+                    "API call attempt %d/%d (timeout=%ds, model=%s)",
+                    attempt,
+                    self.retry_attempts,
+                    attempt_timeout,
+                    self.model_name,
+                )
+
+                response = self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=messages,
+                    temperature=self.temperature,
+                    max_tokens=self.max_tokens,
+                    timeout=attempt_timeout,
+                )
+
+                if attempt > 1:
+                    logger.info("API call succeeded on attempt %d", attempt)
+
+                return response
+
+            except (APITimeoutError, APIConnectionError) as exc:
+                last_exception = exc
+                if attempt < self.retry_attempts:
+                    wait = self.retry_delay * (2 ** (attempt - 1)) + random.uniform(0, 2)
+                    logger.warning(
+                        "Transient error on attempt %d/%d: %s. "
+                        "Retrying in %.1fs (next timeout=%ds)...",
+                        attempt,
+                        self.retry_attempts,
+                        type(exc).__name__,
+                        wait,
+                        self.timeout + attempt * 30,
+                    )
+                    time.sleep(wait)
+                else:
+                    logger.error(
+                        "API call failed after %d attempts: %s: %s",
+                        self.retry_attempts,
+                        type(exc).__name__,
+                        exc,
+                    )
+
+            except RateLimitError as exc:
+                last_exception = exc
+                if attempt < self.retry_attempts:
+                    wait = max(self.retry_delay * (2 ** attempt), 10) + random.uniform(0, 5)
+                    logger.warning(
+                        "Rate limited on attempt %d/%d. Retrying in %.1fs...",
+                        attempt,
+                        self.retry_attempts,
+                        wait,
+                    )
+                    time.sleep(wait)
+                else:
+                    logger.error(
+                        "Rate limit exceeded after %d attempts",
+                        self.retry_attempts,
+                    )
+
+            except InternalServerError as exc:
+                last_exception = exc
+                if attempt < self.retry_attempts:
+                    wait = self.retry_delay * (2 ** (attempt - 1)) + random.uniform(0, 2)
+                    logger.warning(
+                        "Server error (HTTP %s) on attempt %d/%d. Retrying in %.1fs...",
+                        getattr(exc, "status_code", "5xx"),
+                        attempt,
+                        self.retry_attempts,
+                        wait,
+                    )
+                    time.sleep(wait)
+                else:
+                    logger.error(
+                        "Server error persisted after %d attempts: %s",
+                        self.retry_attempts,
+                        exc,
+                    )
+
+        logger.error("All %d retry attempts exhausted. Last error: %s", self.retry_attempts, last_exception)
+        return None
+
     def extract(
         self, paper_text: str, paper_metadata: Optional[Dict[str, Any]] = None
     ) -> Optional[MultiModelResponse]:
@@ -389,21 +510,12 @@ Output JSON:""",
         try:
             logger.info("Extracting LLM information using KISSKI API")
 
-            # Enforce rate limiting
-            self._enforce_rate_limit()
-
-            # Create messages with few-shot examples (matching Grete approach)
             messages = self._create_extraction_messages(paper_text, paper_metadata)
 
-            # Call KISSKI API (OpenAI-compatible)
-            logger.debug(f"Sending request to KISSKI API (model: {self.model_name})")
+            response = self._call_api_with_retry(messages)
 
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=messages,
-                temperature=self.temperature,
-                max_tokens=self.max_tokens,
-            )
+            if response is None:
+                return None
 
             # Extract response text
             if not response.choices or len(response.choices) == 0:
@@ -430,7 +542,6 @@ Output JSON:""",
             # Ensure required fields have defaults
             if "models" in json_data:
                 for model_data in json_data["models"]:
-                    # Set None for missing required fields
                     if not model_data.get("organization"):
                         model_data["organization"] = None
                     if not model_data.get("parameters"):
@@ -771,13 +882,30 @@ Output JSON:""",
             MultiModelResponse with deduplicated models
         """
         all_models = []
+        succeeded = 0
+        failed = 0
 
         for i, chunk in enumerate(text_chunks):
-            logger.info(f"Processing chunk {i+1}/{len(text_chunks)}")
+            logger.info(
+                "Processing chunk %d/%d (%d chars)", i + 1, len(text_chunks), len(chunk)
+            )
             result = self.extract(chunk, paper_metadata)
 
             if result and result.models:
                 all_models.extend(result.models)
+                succeeded += 1
+            else:
+                failed += 1
+                logger.warning("Chunk %d/%d produced no models", i + 1, len(text_chunks))
+
+        logger.info(
+            "Chunk processing complete: %d/%d succeeded, %d/%d failed, %d total models extracted",
+            succeeded,
+            len(text_chunks),
+            failed,
+            len(text_chunks),
+            len(all_models),
+        )
 
         if not all_models:
             logger.warning("No models extracted from any chunk")
@@ -793,20 +921,47 @@ Output JSON:""",
 
     def _deduplicate_models(self, models: List[LLMProperties]) -> List[LLMProperties]:
         """
-        Deduplicate models: merge variants that refer to the same model
-        (same model_family + parameters). Prefer the most specific/canonical
-        model_name (e.g. GPT-1 over GPT 117M) and merge non-null fields.
+        Deduplicate models: merge variants that refer to the same model version.
+        
+        CRITICAL: Preserves version distinctions (e.g., Llama 3, 3.1, 3.2, 3.3 stay separate)
+        by including version token in the deduplication key.
+        
+        Grouping key: (model_family, version_token, parameters)
+        - model_family: e.g., "Llama", "GPT", "BERT"
+        - version_token: e.g., "3", "3.1", "3.2" (extracted from model_name)
+        - parameters: e.g., "8B", "70B", "405B"
+        
+        This ensures:
+        - "Llama 3 8B" and "Llama 3 70B" merge → "Llama 3" (same version, different sizes)
+        - "Llama 3.1 8B" and "Llama 3.2 8B" stay separate (different versions)
         """
-        # Group by (model_family, parameters). Fallback to (model_name, model_version, parameters).
         groups: Dict[tuple, List[LLMProperties]] = {}
+        
         for m in models:
+            # Extract components for grouping key
             fam = (m.model_family or "").strip() or ""
             params = (m.parameters or "").strip() or ""
             params_m = m.parameters_millions
-            if fam and (params or params_m is not None):
-                key = (fam, params or str(params_m) if params_m is not None else "")
+            model_name = (m.model_name or "").strip()
+            
+            # Extract version token from model_name (e.g., "Llama 3.1 8B" → "3.1")
+            version_token = self._extract_version_from_name(model_name)
+            
+            # Build deduplication key
+            # Priority 1: Use (family, version, params) if we have family and version
+            # Priority 2: Use full model_name if family/version missing (conservative fallback)
+            if fam and version_token:
+                # Group by family + version + params
+                # This keeps "Llama 3.1 8B" and "Llama 3.1 70B" together
+                # but separates "Llama 3.1" from "Llama 3.2"
+                key = (fam, version_token, params or str(params_m) if params_m is not None else "")
+            elif fam and (params or params_m is not None):
+                # No version token, group by family + params (legacy behavior)
+                key = (fam, "", params or str(params_m) if params_m is not None else "")
             else:
-                key = (m.model_name or "", m.model_version or "", m.parameters or "")
+                # Fallback: use full model_name to avoid over-merging
+                key = (model_name, m.model_version or "", m.parameters or "")
+            
             if key not in groups:
                 groups[key] = []
             groups[key].append(m)
@@ -826,6 +981,9 @@ Output JSON:""",
                     s += 2
                 if fam and f"{fam}-" in n and any(c.isdigit() for c in n.split(f"{fam}-")[-1][:4]):
                     s += 3  # e.g. GPT-1, BERT-Large
+                # Prefer names with version numbers (e.g., "Llama 3.1" over "Llama 8B")
+                if re.search(r'\d+(?:\.\d+)?(?:\s|$)', n):
+                    s += 2
                 if any(c.isdigit() for c in n) and ("m" in n or "b" in n or "k" in n):
                     s += 1
                 return s
@@ -844,6 +1002,42 @@ Output JSON:""",
             result.append(representative)
 
         return result
+    
+    def _extract_version_from_name(self, model_name: str) -> str:
+        """
+        Extract version token from model name for deduplication.
+        
+        This must match the logic in model_variant_merger._extract_version_token()
+        to ensure consistent version handling across extraction and merging.
+        
+        Args:
+            model_name: Model name string (e.g., "Llama 3.1 8B")
+            
+        Returns:
+            Version token (e.g., "3.1") or empty string if no version found
+        """
+        if not model_name:
+            return ""
+        
+        # Pattern: model_family + version_number + (space/dash/underscore/end)
+        # MUST MATCH model_variant_merger._extract_version_token() logic
+        version_patterns = [
+            # Pattern 1: "Model 3.1 ..." or "Model 3" (space separator)
+            r'(?:^|\s)([A-Za-z][\w-]*?)\s+([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+            # Pattern 2: "Model-3.1" or "Model_3.1" (dash/underscore separator)
+            r'(?:^|\s)([A-Za-z][\w-]*?)[-_]([vV]?\d+(?:\.\d+)?)(?:\s|[-_]|$)',
+        ]
+        
+        for pattern in version_patterns:
+            match = re.search(pattern, model_name)
+            if match:
+                version = match.group(2)
+                # Strip optional 'v' or 'V' prefix
+                if version.lower().startswith('v'):
+                    version = version[1:]
+                return version
+        
+        return ""
 
     def _extract_organization(self, authors: List[str]) -> Optional[str]:
         """

@@ -1,0 +1,1678 @@
+{
+  "arxiv_id": "2007.14062v2",
+  "paper_title": "Big Bird: Transformers for Longer Sequences",
+  "extracted_at": "20260316_230051",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 14,
+  "raw_extraction": [
+    {
+      "model_name": "BIGBIRD",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-11",
+      "organization": "Google",
+      "innovation": "Introduces a sparse attention mechanism called BIGBIRD that reduces quadratic complexity to linear by combining random, local window, and global attention patterns, preserving theoretical properties like universal approximation and Turing completeness.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Question answering, document summarization, genomics data processing (promoter region/chromatin profile prediction)",
+      "license": null,
+      "research_problem": "Scaling Transformers to longer sequences without quadratic memory/compute constraints",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Combines random attention, sliding window attention, and global tokens (either internal or extended) into a unified sparse attention mechanism.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-Base",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-04",
+      "organization": "Google AI Language",
+      "innovation": "**BIGBIRD** introduces a sparse attention mechanism called **Block-sparse Global Context Attention**, which enables linear scalability with sequence length while preserving expressive power through extra global tokens. This contrasts with standard Transformers by replacing dense attention with a structured sparsity pattern.",
+      "pretraining_corpus": "Standard datasets (listed in Appendix E.1, Table 9), including Wikipedia, BooksCorpus, and others; warm-started from public RoBERTa checkpoint",
+      "parameters": "Base",
+      "parameters_millions": null,
+      "application": "Natural Language Processing (NLP) tasks requiring long contexts (e.g., long document classification, multi-hop reasoning, genomics), Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop), Document Summarization, Genomics (DNA sequence analysis)",
+      "license": "Closed source (no explicit license mentioned in paper)",
+      "research_problem": "Scaling Transformer architectures to handle long sequences efficiently without quadratic complexity",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Discriminative fine-tuning (cross-entropy loss on [CLS] token for classification tasks)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses **expanded global tokens** to preserve expressiveness while maintaining linear complexity",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-Large",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-04",
+      "organization": "Google AI Language",
+      "innovation": "**BIGBIRD-Large** extends the sparse attention mechanism to encoder-decoder architectures for long-document summarization, leveraging **Pegasus-style pretraining** for better performance on generative tasks. It combines sparse attention in the encoder with full attention in the decoder for efficiency.",
+      "pretraining_corpus": "Long document datasets (Arxiv, PubMed, BigPatent) + human reference genome (GRCh37) for genomics; warm-started from Pegasus for summarization",
+      "parameters": "Large",
+      "parameters_millions": null,
+      "application": "Abstractive summarization of long documents (Arxiv, PubMed, patents), DNA sequence analysis (promoter prediction, chromatin profile prediction)",
+      "license": "Closed source (no explicit license mentioned in paper)",
+      "research_problem": "Handling long-document summarization and genomics tasks with sparse attention mechanisms",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder (for summarization tasks)",
+      "pretraining_task": "Masked Language Modeling (MLM) + Summarization-specific pretraining (Pegasus)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Generative fine-tuning for summarization tasks (e.g., abstractive summarization)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Combines **sparse attention in encoder + full attention in decoder** for efficient long-document processing",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ITC (Iterative Token Context)",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-04",
+      "organization": "Google AI Language",
+      "innovation": "**BIGBIRD-ITC** implements an iterative token context mechanism where each token attends to previous tokens iteratively, improving long-range dependencies. This variant focuses on **iterative sparse attention** for enhanced reasoning capabilities.",
+      "pretraining_corpus": "Same as BIGBIRD-Base",
+      "parameters": "Base (same as BIGBIRD-Base)",
+      "parameters_millions": null,
+      "application": "Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop)",
+      "license": "Closed source (no explicit license mentioned in paper)",
+      "research_problem": "Improving long-range dependency modeling in QA tasks with iterative sparse attention",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Discriminative fine-tuning for QA tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Iterative token context attention** enables progressive refinement of token representations",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ETC (Expanded Token Context)",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-04",
+      "organization": "Google AI Language",
+      "innovation": "**BIGBIRD-ETC** introduces expanded token context by incorporating **additional global tokens** into the sparse attention mechanism, enhancing the model’s ability to capture distant dependencies. This variant achieves state-of-the-art performance across multiple benchmarks.",
+      "pretraining_corpus": "Same as BIGBIRD-Base",
+      "parameters": "Base (same as BIGBIRD-Base)",
+      "parameters_millions": null,
+      "application": "Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop), Long Document Classification, Abstractive Summarization, Genomics (DNA sequence analysis)",
+      "license": "Closed source (no explicit license mentioned in paper)",
+      "research_problem": "Enabling long-range dependency modeling in NLP tasks with expanded token context",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Discriminative fine-tuning for QA and classification tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Global token expansion** preserves long-range dependencies while maintaining linear complexity",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BigBird Base",
+      "model_family": "BigBird",
+      "date_created": "2020-06",
+      "organization": "DeepMind (Google)",
+      "innovation": "**Block-Sparse Attention Mechanism**: Introduces a novel sparse attention pattern called *Block-Sparse Attention* to efficiently handle long sequences by partitioning input into blocks and selectively attending within and across blocks, reducing quadratic complexity.",
+      "pretraining_corpus": "Unspecified large-scale text corpus (not explicitly named in abstract but referenced in appendix)",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "application": "Long-document understanding, reading comprehension, and tasks requiring extended context windows",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Scaling transformer models to longer input sequences while maintaining computational efficiency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "*Random Dropout*: Uses randomized dropout patterns to further improve sparsity and robustness.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BigBird Large",
+      "model_family": "BigBird",
+      "date_created": "2020-06",
+      "organization": "DeepMind (Google)",
+      "innovation": "**Block-Sparse Attention Mechanism**: Introduces a novel sparse attention pattern called *Block-Sparse Attention* to efficiently handle long sequences by partitioning input into blocks and selectively attending within and across blocks, reducing quadratic complexity.",
+      "pretraining_corpus": "Unspecified large-scale text corpus (not explicitly named in abstract but referenced in appendix)",
+      "parameters": "270M",
+      "parameters_millions": 270,
+      "application": "Long-document understanding, reading comprehension, and tasks requiring extended context windows",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Scaling transformer models to longer input sequences while maintaining computational efficiency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "*Random Dropout*: Uses randomized dropout patterns to further improve sparsity and robustness.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BigBird",
+      "model_family": "BigBird",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "Introduces **sparse attention patterns** (BigBird blocks) to efficiently process long sequences without quadratic complexity, leveraging selective shift operators and structured sparsity graphs.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Long-document processing, sequence modeling, Turing-complete simulations via sparse attention mechanisms",
+      "license": "null (likely proprietary; not specified)",
+      "research_problem": "Scaling Transformer architectures to handle long sequences efficiently without quadratic memory/compute overhead.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling with sparse attention mechanisms",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Structured sparsity graphs** enable long-range dependencies via localized attention patterns, reducing computational cost while preserving performance on long sequences.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ITC-base",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+      "pretraining_corpus": "BooksCorpus, CC-News, Stories, Wikipedia",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "application": "Long-document processing, question answering, masked language modeling",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Question Answering, Contrastive Predictive Coding",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "8×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Intermediate Token Compression (ITC)** reduces memory overhead by selectively attending to intermediate tokens during training, improving scalability without sacrificing performance.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ETC-base",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+      "pretraining_corpus": "BooksCorpus, CC-News, Stories, Wikipedia",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "application": "Long-document processing, question answering, masked language modeling",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Question Answering, Relative Position Encoding",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "8×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Explicit Token Compression (ETC)** replaces positional embeddings with relative position encoding to improve long-range dependency modeling in sparse attention settings.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-large",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+      "pretraining_corpus": "BooksCorpus, CC-News, Stories, Wikipedia",
+      "parameters": "350M",
+      "parameters_millions": 350,
+      "application": "Long-document processing, question answering, masked language modeling",
+      "license": "Closed source (proprietary)",
+      "research_problem": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "8×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "**Increased hidden dimension (1024) and larger batch size (2048) for improved performance.** Uses blockified attention for optimized GPU/TPU computation.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ITC",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "**Global-local attention with sparse connections** enables efficient long-range dependencies without quadratic complexity, using a combination of global tokens (fixed positions) and local windows with random connections. The ITC variant uses fixed global tokens for initial segments (e.g., CLS, question, or paragraph-level tokens)",
+      "pretraining_corpus": "Unspecified large-scale text corpora (general domain), TriviaQA, HotpotQA, Natural Questions, WikiHop, Genomic datasets (GRCh37)",
+      "parameters": "117M",
+      "parameters_millions": 117,
+      "application": "Question answering (TriviaQA, HotpotQA, Natural Questions), document classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), summarization (CNN/DailyMail, XSUM), genomic sequence analysis (promoter region prediction, chromatin profile prediction), GLUE benchmark tasks",
+      "license": "Closed source (not explicitly stated, inferred from Google AI practices)",
+      "research_problem": "Scalable transformer architectures for long-sequence processing while maintaining efficiency",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Question Answering, Document Classification, Summarization, Genomic Tasks",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": "4×4 TPUv3, 4×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Random token connections enhance sparsity and improve generalization over purely windowed or global-only attention",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-ETC",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "**Event-time coding (ETC)** dynamically assigns global tokens based on semantic structure (e.g., per-paragraph or per-candidate answer), reducing fixed overhead while preserving contextual awareness. This variant outperforms ITC in structured inputs like multi-hop reasoning tasks",
+      "pretraining_corpus": "Unspecified large-scale text corpora (general domain), TriviaQA, HotpotQA, Natural Questions, WikiHop, Genomic datasets (GRCh37)",
+      "parameters": "117M",
+      "parameters_millions": 117,
+      "application": "Question answering (HotpotQA, WikiHop), document classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), summarization (BBC-XSUM, CNN/DailyMail), genomic tasks (promoter region prediction, chromatin profile prediction), GLUE benchmark tasks",
+      "license": "Closed source (not explicitly stated, inferred from Google AI practices)",
+      "research_problem": "Scalable transformer architectures for long-sequence processing with dynamic global attention allocation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Question Answering, Document Classification, Summarization, Genomic Tasks",
+      "finetuning_data": null,
+      "optimizer": "Adam/LAMB",
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": "4×4 TPUv3, 4×8 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Dynamic global token selection via event-time coding reduces computational overhead for variable-length structures",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    },
+    {
+      "model_name": "BIGBIRD-RoBERTa (Base)",
+      "model_family": "BIGBIRD",
+      "date_created": "2020-05",
+      "organization": "Google",
+      "innovation": "**Hybrid sparse attention** combines BIGBIRD’s global-local mechanism with RoBERTa’s pretrained weights, enabling long-document summarization without truncation. Warm-started from RoBERTa checkpoints for faster convergence",
+      "pretraining_corpus": "General text corpora (aligned with RoBERTa pretraining)",
+      "parameters": "117M",
+      "parameters_millions": 117,
+      "application": "Abstractive summarization (CNN/DailyMail, XSUM), GLUE benchmark tasks",
+      "license": "Closed source (not explicitly stated, inferred from Google AI practices)",
+      "research_problem": "Long-document summarization with minimal truncation loss",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked Language Modeling (MLM)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Summarization (encoder-decoder fine-tuning)",
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": "4096",
+      "supported_language": null,
+      "hardware_used": "4×4 TPUv3",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Shared query/key/value matrices between encoder and decoder layers for efficient warm-starting",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Big Bird: Transformers for Longer Sequences"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "BIGBIRD",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-11",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces a sparse attention mechanism called BIGBIRD that reduces quadratic complexity to linear by combining random, local window, and global attention patterns, preserving theoretical properties like universal approximation and Turing completeness.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Question answering, document summarization, genomics data processing (promoter region/chromatin profile prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling Transformers to longer sequences without quadratic memory/compute constraints",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-Base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google AI Language",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**BIGBIRD** introduces a sparse attention mechanism called **Block-sparse Global Context Attention**, which enables linear scalability with sequence length while preserving expressive power through extra global tokens. This contrasts with standard Transformers by replacing dense attention with a structured sparsity pattern.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Standard datasets (listed in Appendix E.1, Table 9), including Wikipedia, BooksCorpus, and others; warm-started from public RoBERTa checkpoint",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Discriminative fine-tuning (cross-entropy loss on [CLS] token for classification tasks)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Natural Language Processing (NLP) tasks requiring long contexts (e.g., long document classification, multi-hop reasoning, genomics), Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop), Document Summarization, Genomics (DNA sequence analysis)",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling Transformer architectures to handle long sequences efficiently without quadratic complexity",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-Large",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-Large",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google AI Language",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**BIGBIRD-Large** extends the sparse attention mechanism to encoder-decoder architectures for long-document summarization, leveraging **Pegasus-style pretraining** for better performance on generative tasks. It combines sparse attention in the encoder with full attention in the decoder for efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder (for summarization tasks)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM) + Summarization-specific pretraining (Pegasus)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Long document datasets (Arxiv, PubMed, BigPatent) + human reference genome (GRCh37) for genomics; warm-started from Pegasus for summarization",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Generative fine-tuning for summarization tasks (e.g., abstractive summarization)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Large",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Abstractive summarization of long documents (Arxiv, PubMed, patents), DNA sequence analysis (promoter prediction, chromatin profile prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Handling long-document summarization and genomics tasks with sparse attention mechanisms",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ITC (Iterative Token Context)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ITC (Iterative Token Context)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google AI Language",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**BIGBIRD-ITC** implements an iterative token context mechanism where each token attends to previous tokens iteratively, improving long-range dependencies. This variant focuses on **iterative sparse attention** for enhanced reasoning capabilities.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same as BIGBIRD-Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Discriminative fine-tuning for QA tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Base (same as BIGBIRD-Base)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop)",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Improving long-range dependency modeling in QA tasks with iterative sparse attention",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ETC (Expanded Token Context)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ETC (Expanded Token Context)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-04",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google AI Language",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**BIGBIRD-ETC** introduces expanded token context by incorporating **additional global tokens** into the sparse attention mechanism, enhancing the model’s ability to capture distant dependencies. This variant achieves state-of-the-art performance across multiple benchmarks.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same as BIGBIRD-Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Discriminative fine-tuning for QA and classification tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Base (same as BIGBIRD-Base)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Question Answering (HotpotQA, NaturalQuestions, TriviaQA, WikiHop), Long Document Classification, Abstractive Summarization, Genomics (DNA sequence analysis)",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Enabling long-range dependency modeling in NLP tasks with expanded token context",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BigBird Base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BigBird Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BigBird",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind (Google)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Block-Sparse Attention Mechanism**: Introduces a novel sparse attention pattern called *Block-Sparse Attention* to efficiently handle long sequences by partitioning input into blocks and selectively attending within and across blocks, reducing quadratic complexity.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpus (not explicitly named in abstract but referenced in appendix)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "110M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "110",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document understanding, reading comprehension, and tasks requiring extended context windows",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling transformer models to longer input sequences while maintaining computational efficiency",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BigBird Large",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BigBird Large",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BigBird",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind (Google)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Block-Sparse Attention Mechanism**: Introduces a novel sparse attention pattern called *Block-Sparse Attention* to efficiently handle long sequences by partitioning input into blocks and selectively attending within and across blocks, reducing quadratic complexity.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpus (not explicitly named in abstract but referenced in appendix)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "270M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "270",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document understanding, reading comprehension, and tasks requiring extended context windows",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling transformer models to longer input sequences while maintaining computational efficiency",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BigBird",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BigBird",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BigBird",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **sparse attention patterns** (BigBird blocks) to efficiently process long sequences without quadratic complexity, leveraging selective shift operators and structured sparsity graphs.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling with sparse attention mechanisms",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document processing, sequence modeling, Turing-complete simulations via sparse attention mechanisms",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling Transformer architectures to handle long sequences efficiently without quadratic memory/compute overhead.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ITC-base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ITC-base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "BooksCorpus, CC-News, Stories, Wikipedia",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Question Answering, Contrastive Predictive Coding",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "110M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "110",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "8×8 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document processing, question answering, masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ETC-base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ETC-base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "BooksCorpus, CC-News, Stories, Wikipedia",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Question Answering, Relative Position Encoding",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "110M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "110",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "8×8 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document processing, question answering, masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-large",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-large",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces **Block-Attention** mechanism combining random, window-local, and global attention to efficiently scale transformer models to long sequences while maintaining computational efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "BooksCorpus, CC-News, Stories, Wikipedia",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "350M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "350",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "8×8 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Long-document processing, question answering, masked language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scaling transformer models to handle long sequences efficiently while preserving accuracy and reducing computational costs.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ITC",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ITC",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Global-local attention with sparse connections** enables efficient long-range dependencies without quadratic complexity, using a combination of global tokens (fixed positions) and local windows with random connections. The ITC variant uses fixed global tokens for initial segments (e.g., CLS, question, or paragraph-level tokens)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpora (general domain), TriviaQA, HotpotQA, Natural Questions, WikiHop, Genomic datasets (GRCh37)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Question Answering, Document Classification, Summarization, Genomic Tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "117M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "117",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "4×4 TPUv3, 4×8 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Question answering (TriviaQA, HotpotQA, Natural Questions), document classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), summarization (CNN/DailyMail, XSUM), genomic sequence analysis (promoter region prediction, chromatin profile prediction), GLUE benchmark tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable transformer architectures for long-sequence processing while maintaining efficiency",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-ETC",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-ETC",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Event-time coding (ETC)** dynamically assigns global tokens based on semantic structure (e.g., per-paragraph or per-candidate answer), reducing fixed overhead while preserving contextual awareness. This variant outperforms ITC in structured inputs like multi-hop reasoning tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Unspecified large-scale text corpora (general domain), TriviaQA, HotpotQA, Natural Questions, WikiHop, Genomic datasets (GRCh37)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Question Answering, Document Classification, Summarization, Genomic Tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam/LAMB",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "117M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "117",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "4×4 TPUv3, 4×8 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Question answering (HotpotQA, WikiHop), document classification (IMDb, Yelp-5, Arxiv, Patents, Hyperpartisan), summarization (BBC-XSUM, CNN/DailyMail), genomic tasks (promoter region prediction, chromatin profile prediction), GLUE benchmark tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable transformer architectures for long-sequence processing with dynamic global attention allocation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "BIGBIRD-RoBERTa (Base)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "BIGBIRD-RoBERTa (Base)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "BIGBIRD",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "Google",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Hybrid sparse attention** combines BIGBIRD’s global-local mechanism with RoBERTa’s pretrained weights, enabling long-document summarization without truncation. Warm-started from RoBERTa checkpoints for faster convergence",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked Language Modeling (MLM)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "General text corpora (aligned with RoBERTa pretraining)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Summarization (encoder-decoder fine-tuning)",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "117M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "117",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "4×4 TPUv3",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Abstractive summarization (CNN/DailyMail, XSUM), GLUE benchmark tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Long-document summarization with minimal truncation loss",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 14
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "arxiv_id": "2106.01345v2",
+  "paper_title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+  "extracted_at": "20260316_230453",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 3,
+  "raw_extraction": [
+    {
+      "model_name": "Decision Transformer",
+      "model_family": "Decision Transformer",
+      "date_created": "2022-07",
+      "organization": "UC Berkeley, Facebook AI Research, Google Brain",
+      "innovation": "Decision Transformer casts reinforcement learning as conditional sequence modeling, using a causal Transformer to predict future actions given past states, actions, and desired return-to-go. This avoids bootstrapping and credit assignment challenges inherent in traditional RL methods.",
+      "pretraining_corpus": "Offline RL datasets (Atari, OpenAI Gym, Key-to-Door)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Offline RL benchmarks (Atari, OpenAI Gym, Key-to-Door), trajectory generation, sparse/reward settings, long-term credit assignment",
+      "license": "Closed source (code available at https://github.com/facebookresearch/Decision-Transformer)",
+      "research_problem": "Offline reinforcement learning and policy optimization without dynamic programming or value pessimism",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Autoregressive sequence modeling of (return-to-go, state, action) tuples",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Offline reinforcement learning via supervised sequence modeling conditioned on target returns",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Uses modality-specific linear embeddings for returns-to-go, states, and actions, combined with learned episode timestep embeddings instead of standard positional embeddings.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Decision Transformer: Reinforcement Learning via Sequence Modeling"
+    },
+    {
+      "model_name": "Decision Transformer",
+      "model_family": "GPT",
+      "date_created": "2020-05",
+      "organization": "UC Berkeley / Meta AI",
+      "innovation": "**Key innovation**: Frame offline RL as a **sequence modeling problem**, treating trajectories as sequences of (state, action, return-to-go) tuples and predicting future returns-to-go conditioned on past states/actions. This avoids explicit credit assignment and enables scalable offline RL via standard language-modeling techniques.",
+      "pretraining_corpus": "Offline datasets (Atari, MuJoCo, custom graph shortest-path task)",
+      "parameters": "Not explicitly specified (architectural hyperparameters given)",
+      "parameters_millions": null,
+      "application": "Offline RL in robotics (MuJoCo), Atari games, graph shortest-path problems",
+      "license": "Closed source (no explicit license mentioned; code available via supplementary materials)",
+      "research_problem": "Scalable offline reinforcement learning without exploration or environment interaction",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction (causal language modeling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Offline reinforcement learning via sequence modeling (predicting returns-to-go, state-action pairs)",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": "Variable (50 for Atari, 20 for OpenAI Gym)",
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Linear decoder head projects encoded (state, action, return-to-go) embeddings into next-token prediction space, enabling joint modeling of returns-to-go and actions.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Decision Transformer: Reinforcement Learning via Sequence Modeling"
+    },
+    {
+      "model_name": "Decision Transformer",
+      "model_family": "Decision Transformer",
+      "date_created": "2022-05",
+      "organization": "UC Berkeley / DeepMind",
+      "innovation": "Framework for reinforcement learning using a sequence model (Transformer) to predict cumulative rewards (returns) conditioned on state-action histories, eliminating the need for direct policy optimization.",
+      "pretraining_corpus": "Training dataset generated via random walks on graph-structured environments (e.g., MuJoCo, AntMaze, Adroit)",
+      "parameters": "null (not specified)",
+      "parameters_millions": null,
+      "application": "Robotics control, autonomous navigation, decision-making in sequential environments",
+      "license": "Not explicitly stated (likely open-source based on academic publication)",
+      "research_problem": "Scalable reinforcement learning without direct policy gradients or reward signals",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Sequence modeling over (return, state, action) tuples",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Reinforcement Learning via sequence-to-sequence prediction of future returns given state-action trajectories",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Decision Transformer: Reinforcement Learning via Sequence Modeling"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "Decision Transformer",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Decision Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Decision Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-07",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "UC Berkeley, Facebook AI Research, Google Brain",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Decision Transformer casts reinforcement learning as conditional sequence modeling, using a causal Transformer to predict future actions given past states, actions, and desired return-to-go. This avoids bootstrapping and credit assignment challenges inherent in traditional RL methods.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Autoregressive sequence modeling of (return-to-go, state, action) tuples",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Offline RL datasets (Atari, OpenAI Gym, Key-to-Door)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Offline reinforcement learning via supervised sequence modeling conditioned on target returns",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Offline RL benchmarks (Atari, OpenAI Gym, Key-to-Door), trajectory generation, sparse/reward settings, long-term credit assignment",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Offline reinforcement learning and policy optimization without dynamic programming or value pessimism",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Decision Transformer",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Decision Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "GPT",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2020-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "UC Berkeley / Meta AI",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "**Key innovation**: Frame offline RL as a **sequence modeling problem**, treating trajectories as sequences of (state, action, return-to-go) tuples and predicting future returns-to-go conditioned on past states/actions. This avoids explicit credit assignment and enables scalable offline RL via standard language-modeling techniques.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction (causal language modeling)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Offline datasets (Atari, MuJoCo, custom graph shortest-path task)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Offline reinforcement learning via sequence modeling (predicting returns-to-go, state-action pairs)",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Not explicitly specified (architectural hyperparameters given)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Offline RL in robotics (MuJoCo), Atari games, graph shortest-path problems",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable offline reinforcement learning without exploration or environment interaction",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Decision Transformer",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Decision Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Decision Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "UC Berkeley / DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Framework for reinforcement learning using a sequence model (Transformer) to predict cumulative rewards (returns) conditioned on state-action histories, eliminating the need for direct policy optimization.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Sequence modeling over (return, state, action) tuples",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Training dataset generated via random walks on graph-structured environments (e.g., MuJoCo, AntMaze, Adroit)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Reinforcement Learning via sequence-to-sequence prediction of future returns given state-action trajectories",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "null (not specified)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Robotics control, autonomous navigation, decision-making in sequential environments",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable reinforcement learning without direct policy gradients or reward signals",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 3
+  }
+}

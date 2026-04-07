@@ -1,0 +1,1504 @@
+{
+  "arxiv_id": "2203.15556v1",
+  "paper_title": "Training Compute-Optimal Large Language Models",
+  "extracted_at": "20260316_233947",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-8B-Instruct-2512",
+  "models_found": 12,
+  "raw_extraction": [
+    {
+      "model_name": "Gopher",
+      "model_family": "Gopher",
+      "date_created": "2022-09",
+      "organization": "DeepMind",
+      "innovation": "Represents a baseline model for compute-optimal scaling analysis, trained on a fixed compute budget (6e20 FLOPs) with 1.4 trillion tokens.",
+      "pretraining_corpus": "MassiveText (subset)",
+      "parameters": "280B",
+      "parameters_millions": 280000,
+      "application": "General-purpose language modeling, downstream task transfer, language understanding",
+      "license": "Closed source",
+      "research_problem": "Determining compute-optimal model scaling laws for large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPUv3/TPUv4",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla",
+      "model_family": "Gopher",
+      "date_created": "2022-09",
+      "organization": "DeepMind",
+      "innovation": "Optimized for compute-efficiency by reducing model size (70B vs. Gopher's 280B) while increasing training tokens (1.4T) within the same compute budget (~6e20 FLOPs). Uses a modified SentencePiece tokenizer without NFKC normalization for improved math/chemistry representation.",
+      "pretraining_corpus": "MassiveText (larger subset than Gopher)",
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "application": "General-purpose language modeling, downstream task transfer, language understanding, reading comprehension, question answering, common sense reasoning",
+      "license": "Closed source",
+      "research_problem": "Empirical validation of compute-optimal scaling laws via a smaller, data-rich model trained on the same compute budget as Gopher.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPUv3/TPUv4",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Modified SentencePiece tokenizer without NFKC normalization enhances tokenization for specialized domains like mathematics and chemistry.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Gopher",
+      "model_family": "Gopher",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Used as a baseline model to demonstrate the inefficiency of oversized models (137B) compared to Chinchilla's compute-optimal design, highlighting the importance of balanced scaling laws.",
+      "pretraining_corpus": "Large-scale text corpus (similar to Chinchilla)",
+      "parameters": "137B",
+      "parameters_millions": 137000,
+      "application": "General-purpose language modeling, closed-book question answering, zero-shot and few-shot learning",
+      "license": "Closed source (not explicitly stated, inferred from DeepMind's typical practices)",
+      "research_problem": "Comparison model to illustrate the inefficiencies of overly large models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla",
+      "model_family": "Custom (Compute-Optimal)",
+      "date_created": "2022-05",
+      "organization": "DeepMind",
+      "innovation": "Introduces compute-optimal scaling laws for large language models, balancing model size and training data to minimize loss per FLOP. Proposes a parametric loss decomposition to derive optimal parameter and data scaling coefficients.",
+      "pretraining_corpus": "MassiveText (MassiveWeb, Books, C4, News, GitHub, Wikipedia)",
+      "parameters": "1.4T tokens (compute-optimal frontier)",
+      "parameters_millions": 1,
+      "application": "General-purpose language modeling, text generation, and downstream NLP tasks optimized for efficiency.",
+      "license": "Closed source (internal research release)",
+      "research_problem": "Determining the optimal allocation of computational resources (parameters vs. training data) to achieve minimal loss per FLOP in large language models.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction (causal language modeling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Optimal Frontier Models (Approach 1)",
+      "model_family": "Custom (Scaling Law Derived)",
+      "date_created": "2022-05",
+      "organization": "DeepMind",
+      "innovation": "Derives theoretical compute-optimal model sizes and training data quantities using parametric loss decomposition (Equation 2). Predicts optimal configurations for various FLOP budgets without explicit training.",
+      "pretraining_corpus": "MassiveText (MassiveWeb, Books, C4, News, GitHub, Wikipedia)",
+      "parameters": "Varies (derived from compute-optimal scaling laws)",
+      "parameters_millions": null,
+      "application": "Guides the design of new large language models by estimating optimal parameter and data requirements.",
+      "license": "Closed source (methodology)",
+      "research_problem": "Predicting optimal model configurations for arbitrary compute budgets using scaling laws.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction (causal language modeling)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 73M",
+      "model_family": "Chinchilla",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+      "pretraining_corpus": "Same dataset as Rae et al. (2021)",
+      "parameters": "73M",
+      "parameters_millions": 73,
+      "application": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+      "license": "Closed source",
+      "research_problem": "Compute-optimal training of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "null",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "High-precision copy of weights stored in the sharded optimizer state for numerical stability",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 305M",
+      "model_family": "Chinchilla",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+      "pretraining_corpus": "Same dataset as Rae et al. (2021)",
+      "parameters": "305M",
+      "parameters_millions": 305,
+      "application": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+      "license": "Closed source",
+      "research_problem": "Compute-optimal training of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "null",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "High-precision copy of weights stored in the sharded optimizer state for numerical stability",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 552M",
+      "model_family": "Chinchilla",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+      "pretraining_corpus": "Same dataset as Rae et al. (2021)",
+      "parameters": "552M",
+      "parameters_millions": 552,
+      "application": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+      "license": "Closed source",
+      "research_problem": "Compute-optimal training of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "null",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "High-precision copy of weights stored in the sharded optimizer state for numerical stability",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 1.1B",
+      "model_family": "Chinchilla",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+      "pretraining_corpus": "Same dataset as Rae et al. (2021)",
+      "parameters": "1.1B",
+      "parameters_millions": 1100,
+      "application": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+      "license": "Closed source",
+      "research_problem": "Compute-optimal training of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "null",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "High-precision copy of weights stored in the sharded optimizer state for numerical stability",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 1.6B",
+      "model_family": "Chinchilla",
+      "date_created": "2022-03",
+      "organization": "DeepMind",
+      "innovation": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+      "pretraining_corpus": "Same dataset as Rae et al. (2021)",
+      "parameters": "1.6B",
+      "parameters_millions": 1600,
+      "application": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+      "license": "Closed source",
+      "research_problem": "Compute-optimal training of large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "null",
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "High-precision copy of weights stored in the sharded optimizer state for numerical stability",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 73B",
+      "model_family": "Chinchilla",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Introduces compute-optimal training regime balancing model size, data scale, and compute budget to achieve optimal performance per compute dollar.",
+      "pretraining_corpus": "Diverse web corpora (including Common Crawl)",
+      "parameters": "73B",
+      "parameters_millions": 73000,
+      "application": "General-purpose language modeling, text generation, and downstream task adaptation",
+      "license": "Closed source",
+      "research_problem": "Efficient scaling laws for large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    },
+    {
+      "model_name": "Chinchilla 59B",
+      "model_family": "Chinchilla",
+      "date_created": "2022-06",
+      "organization": "DeepMind",
+      "innovation": "Smaller variant of the Chinchilla model designed to fit within tighter compute constraints while maintaining efficiency.",
+      "pretraining_corpus": "Diverse web corpora (including Common Crawl)",
+      "parameters": "59B",
+      "parameters_millions": 59000,
+      "application": "General-purpose language modeling, text generation, and downstream task adaptation",
+      "license": "Closed source",
+      "research_problem": "Efficient scaling laws for large language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "TPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Training Compute-Optimal Large Language Models"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "Gopher",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-09",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Represents a baseline model for compute-optimal scaling analysis, trained on a fixed compute budget (6e20 FLOPs) with 1.4 trillion tokens.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MassiveText (subset)",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "Adam",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "280B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "280000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUv3/TPUv4",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, downstream task transfer, language understanding",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Determining compute-optimal model scaling laws for large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-09",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimized for compute-efficiency by reducing model size (70B vs. Gopher's 280B) while increasing training tokens (1.4T) within the same compute budget (~6e20 FLOPs). Uses a modified SentencePiece tokenizer without NFKC normalization for improved math/chemistry representation.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MassiveText (larger subset than Gopher)",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "70B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "70000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUv3/TPUv4",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, downstream task transfer, language understanding, reading comprehension, question answering, common sense reasoning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Empirical validation of compute-optimal scaling laws via a smaller, data-rich model trained on the same compute budget as Gopher.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Gopher",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Gopher",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Used as a baseline model to demonstrate the inefficiency of oversized models (137B) compared to Chinchilla's compute-optimal design, highlighting the importance of balanced scaling laws.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Large-scale text corpus (similar to Chinchilla)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "137B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "137000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, closed-book question answering, zero-shot and few-shot learning",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Comparison model to illustrate the inefficiencies of overly large models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Custom (Compute-Optimal)",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces compute-optimal scaling laws for large language models, balancing model size and training data to minimize loss per FLOP. Proposes a parametric loss decomposition to derive optimal parameter and data scaling coefficients.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction (causal language modeling)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MassiveText (MassiveWeb, Books, C4, News, GitHub, Wikipedia)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "1.4T tokens (compute-optimal frontier)",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "1",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, text generation, and downstream NLP tasks optimized for efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Determining the optimal allocation of computational resources (parameters vs. training data) to achieve minimal loss per FLOP in large language models.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Optimal Frontier Models (Approach 1)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Optimal Frontier Models (Approach 1)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Custom (Scaling Law Derived)",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-05",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Derives theoretical compute-optimal model sizes and training data quantities using parametric loss decomposition (Equation 2). Predicts optimal configurations for various FLOP budgets without explicit training.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Next-token prediction (causal language modeling)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "MassiveText (MassiveWeb, Books, C4, News, GitHub, Wikipedia)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "Varies (derived from compute-optimal scaling laws)",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Guides the design of new large language models by estimating optimal parameter and data requirements.",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Predicting optimal model configurations for arbitrary compute budgets using scaling laws.",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 73M",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 73M",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same dataset as Rae et al. (2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "73M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "73",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Compute-optimal training of large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 305M",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 305M",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same dataset as Rae et al. (2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "305M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "305",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Compute-optimal training of large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 552M",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 552M",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same dataset as Rae et al. (2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "552M",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "552",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Compute-optimal training of large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 1.1B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 1.1B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same dataset as Rae et al. (2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "1.1B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "1100",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Compute-optimal training of large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 1.6B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 1.6B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-03",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Optimization of compute efficiency through precise FLOP calculations and training regime based on optimal compute allocation",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Same dataset as Rae et al. (2021)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P105017",
+            "label": "optimizer",
+            "value": "AdamW",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "1.6B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "1600",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Research on language model scaling behavior, language modeling, and downstream task generalization",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Compute-optimal training of large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 73B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 73B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces compute-optimal training regime balancing model size, data scale, and compute budget to achieve optimal performance per compute dollar.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Diverse web corpora (including Common Crawl)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "73B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "73000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUs",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, text generation, and downstream task adaptation",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling laws for large language models",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "Chinchilla 59B",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "Chinchilla 59B",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Chinchilla",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2022-06",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "DeepMind",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Smaller variant of the Chinchilla model designed to fit within tighter compute constraints while maintaining efficiency.",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Diverse web corpora (including Common Crawl)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "59B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "59000",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "TPUs",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "General-purpose language modeling, text generation, and downstream task adaptation",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Efficient scaling laws for large language models",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 12
+  }
+}

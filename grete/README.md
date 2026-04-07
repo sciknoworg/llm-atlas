@@ -60,10 +60,7 @@ ls -la ../data/extracted/
 
 ## Documentation
 
-For detailed setup instructions and troubleshooting, see:
-- [`docs/deployment/grete-setup.md`](../docs/deployment/grete-setup.md)
-- [`docs/deployment/verify-jobs.md`](../docs/deployment/verify-jobs.md)
-- [`docs/troubleshooting/`](../docs/troubleshooting/)
+For local API-based extraction and environment setup, see the repository root [README.md](../README.md) and [KISSKI_SETUP.md](../KISSKI_SETUP.md). This folder documents Grete-specific GPU extraction and SLURM jobs only.
 
 ## Key Differences from Local Execution
 

@@ -29,15 +29,6 @@ Bachelor-Arbeit-NLP/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                    # GitHub Actions CI/CD
-├── docs/
-│   ├── deployment/
-│   │   ├── grete-setup.md           # HPC cluster setup guide
-│   │   └── verify-jobs.md           # Job verification guide
-│   ├── troubleshooting/
-│   │   ├── phi3-cache-issues.md     # Phi-3 troubleshooting
-│   │   └── distilgpt2-issues.md     # DistilGPT2 troubleshooting
-│   └── archive/
-│       └── cleanup-summary-2025-12.md
 ├── grete/                            # HPC cluster deployment
 │   ├── extraction/
 │   │   ├── grete_extract_paper.py
@@ -60,12 +51,11 @@ Bachelor-Arbeit-NLP/
 │   ├── pipeline.py                   # Main orchestration
 │   └── template_mapper.py            # ORKG template mapping
 ├── scripts/
-│   ├── append_to_paper.py            # Production utilities
-│   ├── sandbox_upload.py
-│   └── debug/                        # Debug/testing scripts
-│       ├── add_to_orkg_manual.py
-│       ├── export_to_csv.py
-│       └── force_new_paper_upload.py
+│   ├── evaluation/                   # Evaluation scripts and README
+│   ├── batch_extract_all_papers.py
+│   └── ...                           # Other utilities
+├── results/                          # Aggregated evaluation tables (CSV/JSON)
+├── finetuning/                       # Optional fine-tuning workflow
 ├── tests/                            # Unit tests
 │   ├── __init__.py
 │   ├── test_llm_extractor.py
@@ -206,7 +196,7 @@ python scripts/evaluation/evaluate_extraction_strict.py \
 
 ### Documentation
 
-- **Methodology**: [docs/EVALUATION_METHODOLOGY.md](docs/EVALUATION_METHODOLOGY.md)
+- **Evaluation overview**: [scripts/evaluation/README.md](scripts/evaluation/README.md)
 - **Implementation details**: [scripts/evaluation/evaluate_extraction_strict.py](scripts/evaluation/evaluate_extraction_strict.py)
 
 ## Testing
@@ -251,7 +241,7 @@ See [Usage](#usage) section above for examples.
 
 Uses local transformers on GPU. No API costs, unlimited processing, but requires HPC setup.
 
-**Full deployment guide**: [docs/deployment/grete-setup.md](docs/deployment/grete-setup.md)
+**Full deployment guide**: [grete/README.md](grete/README.md) and [KISSKI_SETUP.md](KISSKI_SETUP.md)
 
 **Quick start**:
 1. Upload code to Grete cluster
@@ -261,15 +251,14 @@ Uses local transformers on GPU. No API costs, unlimited processing, but requires
    sbatch grete/jobs/grete_extract_job.sh 2302.13971
    ```
 
-**Monitoring**: [docs/deployment/verify-jobs.md](docs/deployment/verify-jobs.md)
+**Monitoring**: See job scripts and logs on the cluster; details in [grete/README.md](grete/README.md).
 
 ## Troubleshooting
 
 Common issues and solutions:
 
-- **Phi-3 cache compatibility**: [docs/troubleshooting/phi3-cache-issues.md](docs/troubleshooting/phi3-cache-issues.md)
-- **DistilGPT2 JSON errors**: [docs/troubleshooting/distilgpt2-issues.md](docs/troubleshooting/distilgpt2-issues.md)
-- **Job verification**: [docs/deployment/verify-jobs.md](docs/deployment/verify-jobs.md)
+- **KISSKI / API setup**: [KISSKI_SETUP.md](KISSKI_SETUP.md)
+- **Grete / GPU extraction**: [grete/README.md](grete/README.md)
 
 ## Development
 
@@ -295,8 +284,9 @@ isort src/
 - **`tests/`**: Unit tests
 - **`scripts/`**: Utility scripts
 - **`grete/`**: HPC cluster deployment files
-- **`docs/`**: Documentation
 - **`examples/`**: Usage examples
+- **`results/`**: Evaluation aggregation outputs
+- **`finetuning/`**: Optional LoRA fine-tuning workflow
 - **`notebooks/`**: Jupyter notebooks for exploration
 
 ### Contributing

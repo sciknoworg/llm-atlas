@@ -1,0 +1,610 @@
+{
+  "arxiv_id": "2305.06161v2",
+  "paper_title": "StarCoder: may the source be with you!",
+  "extracted_at": "20260315_174213",
+  "device": "cuda",
+  "model_used": "mistralai/Ministral-3-3B-Instruct-2512",
+  "models_found": 5,
+  "raw_extraction": [
+    {
+      "model_name": "StarCoderBase",
+      "model_family": "Code LLM",
+      "date_created": "2023-12",
+      "organization": "BigCode (co-stewarded by ServiceNow Research, Hugging Face, Northeastern University, Carnegie Mellon University, etc.)",
+      "innovation": "Introduces a 15.5B-parameter open-access Code LLM with advanced architectural features—8K token context length, infilling capabilities via Fill-in-the-Middle (FIM), and Multi-Query Attention (MQA)—designed for broad multilingual code support and responsible development practices",
+      "pretraining_corpus": "The Stack v1.2 (1 trillion tokens from 80+ programming languages, GitHub repos, issues, commits, Jupyter notebooks)",
+      "parameters": "15.5B",
+      "parameters_millions": 15500,
+      "application": "Multilingual code generation, infilling, large-batch inference, cross-language code comprehension",
+      "license": "Open RAIL-M License (royalty-free access with use restrictions)",
+      "research_problem": "Developing open-access, multilingual, high-performance Code LLMs with ethical considerations around copyright, privacy, and transparency",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (next-token prediction)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Fine-tuned on a 35B-token subset of Python-specific code for improved domain specialization",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Multi-Query Attention (MQA) enables efficient large-batch inference, while Fill-in-the-Middle (FIM) provides infilling capabilities",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "StarCoder: may the source be with you!"
+    },
+    {
+      "model_name": "StarCoder",
+      "model_family": "Code LLM",
+      "date_created": "2023-12",
+      "organization": "BigCode (co-stewarded by ServiceNow Research, Hugging Face, Northeastern University, Carnegie Mellon University, etc.)",
+      "innovation": "Fine-tunes StarCoderBase on 35B Python tokens to specialize in Python code while retaining strong multilingual capabilities, achieving superior Python-focused performance without sacrificing cross-language proficiency. Includes enhanced PII redaction and attribution tracing tools",
+      "pretraining_corpus": "The Stack v1.2 (1T tokens) + additional 35B Python tokens from fine-tuning",
+      "parameters": "15.5B",
+      "parameters_millions": 15500,
+      "application": "Python code generation, cross-language code completion, responsible deployment with attribution and PII protection",
+      "license": "Open RAIL-M License",
+      "research_problem": "Specialized multilingual code generation with domain-specific fine-tuning and ethical safeguards",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling (base: 1T tokens; fine-tuned on 35B Python tokens)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Discriminative fine-tuning on Python-specific tasks",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "null",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Enhanced PII redaction pipeline (fine-tuned StarEncoder model) and attribution tracing via lightweight membership checks + BM25 indexing",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "StarCoder: may the source be with you!"
+    },
+    {
+      "model_name": "StarCoder (Python-focused)",
+      "model_family": "Code Transformer",
+      "date_created": "2023-12",
+      "organization": "GitHub (Meta Research)",
+      "innovation": "StarCoderBase fine-tuned on 35B Python tokens for specialized code comprehension, achieving state-of-the-art performance on Python benchmarks (HumanEval, MBPP, DS-1000) while maintaining the original 15.5B parameter architecture",
+      "pretraining_corpus": "Curated dataset (1T tokens) + 35B tokens of Python-specific code from GitHub repositories",
+      "parameters": "15.5B",
+      "parameters_millions": 15500,
+      "application": "Advanced Python code generation, debugging, and domain-specific task adaptation",
+      "license": "Open-source (gated access)",
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with FIM transformations",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning on 7,878+ annotated Python code samples (7,878 training + 4,000 test split)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "StarCoder: may the source be with you!"
+    },
+    {
+      "model_name": "StarCoder Base",
+      "model_family": "Code Transformer",
+      "date_created": "2023-12",
+      "organization": "BigScience / Meta (co-led by authors)",
+      "innovation": "StarCoder represents the largest open-source code language model to date, combining unified pre-training for both program understanding and generation. Its architecture leverages a transformer-based encoder-decoder design optimized for code, significantly advancing the state-of-the-art in code generation and comprehension",
+      "pretraining_corpus": "Subset of The Stack v1.2 (filtered for permissively licensed source code)",
+      "parameters": "15.5B",
+      "parameters_millions": 15500,
+      "application": "Automated code completion, debugging assistance, low-code application development, and educational tools for programming",
+      "license": "OpenRAIL-M (includes use restrictions for harmful content)",
+      "research_problem": "Developing advanced code language models for improved program understanding and generation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Program understanding and generation (unified pre-training)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "StarCoder: may the source be with you!"
+    },
+    {
+      "model_name": "StarCoder",
+      "model_family": "Code Transformer",
+      "date_created": "2023-12",
+      "organization": "GitHub/Codescape (co-authored by Meta, Microsoft, and others)",
+      "innovation": "StarCoder represents a foundational code language model trained on over 150GB of diverse source code across 15 programming languages, leveraging a hybrid architecture combining transformer encoders and decoders for improved code generation and understanding. Its training incorporates extensive cross-lingual and multi-task learning approaches to enhance robustness",
+      "pretraining_corpus": "Stack (3TB permissively licensed source code) + The Stack (3TB curated code corpus) + additional datasets including Pile, CodeSearchNet, CodeXGLUE, Hugging Face datasets",
+      "parameters": "15B",
+      "parameters_millions": 15000,
+      "application": "Programming assistance, code completion, debugging, automated testing, and general-purpose code generation across diverse programming languages",
+      "license": "Apache 2.0",
+      "research_problem": "Scalable, high-quality code generation and understanding using large language models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked code modeling (similar to BLOOM but focused on code)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "StarCoder: may the source be with you!"
+    }
+  ],
+  "mapped_to_orkg": {
+    "contributions": [
+      {
+        "label": "StarCoderBase",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "StarCoderBase",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Code LLM",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "BigCode (co-stewarded by ServiceNow Research, Hugging Face, Northeastern University, Carnegie Mellon University, etc.)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Introduces a 15.5B-parameter open-access Code LLM with advanced architectural features—8K token context length, infilling capabilities via Fill-in-the-Middle (FIM), and Multi-Query Attention (MQA)—designed for broad multilingual code support and responsible development practices",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (next-token prediction)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "The Stack v1.2 (1 trillion tokens from 80+ programming languages, GitHub repos, issues, commits, Jupyter notebooks)",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Fine-tuned on a 35B-token subset of Python-specific code for improved domain specialization",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "15.5B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "15500",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Multilingual code generation, infilling, large-batch inference, cross-language code comprehension",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Developing open-access, multilingual, high-performance Code LLMs with ethical considerations around copyright, privacy, and transparency",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "StarCoder",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "StarCoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Code LLM",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "BigCode (co-stewarded by ServiceNow Research, Hugging Face, Northeastern University, Carnegie Mellon University, etc.)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "Fine-tunes StarCoderBase on 35B Python tokens to specialize in Python code while retaining strong multilingual capabilities, achieving superior Python-focused performance without sacrificing cross-language proficiency. Includes enhanced PII redaction and attribution tracing tools",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling (base: 1T tokens; fine-tuned on 35B Python tokens)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "The Stack v1.2 (1T tokens) + additional 35B Python tokens from fine-tuning",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Discriminative fine-tuning on Python-specific tasks",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "15.5B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "15500",
+            "datatype": "string"
+          },
+          {
+            "property": "P119138",
+            "label": "hardware_used",
+            "value": "null",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Python code generation, cross-language code completion, responsible deployment with attribution and PII protection",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Specialized multilingual code generation with domain-specific fine-tuning and ethical safeguards",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "StarCoder (Python-focused)",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "StarCoder (Python-focused)",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Code Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "GitHub (Meta Research)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "StarCoderBase fine-tuned on 35B Python tokens for specialized code comprehension, achieving state-of-the-art performance on Python benchmarks (HumanEval, MBPP, DS-1000) while maintaining the original 15.5B parameter architecture",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Causal language modeling with FIM transformations",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Curated dataset (1T tokens) + 35B tokens of Python-specific code from GitHub repositories",
+            "datatype": "string"
+          },
+          {
+            "property": "P116000",
+            "label": "finetuning_task",
+            "value": "Supervised fine-tuning on 7,878+ annotated Python code samples (7,878 training + 4,000 test split)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "15.5B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "15500",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Advanced Python code generation, debugging, and domain-specific task adaptation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "StarCoder Base",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "StarCoder Base",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Code Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "BigScience / Meta (co-led by authors)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "StarCoder represents the largest open-source code language model to date, combining unified pre-training for both program understanding and generation. Its architecture leverages a transformer-based encoder-decoder design optimized for code, significantly advancing the state-of-the-art in code generation and comprehension",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Program understanding and generation (unified pre-training)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Subset of The Stack v1.2 (filtered for permissively licensed source code)",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "15.5B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "15500",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Automated code completion, debugging assistance, low-code application development, and educational tools for programming",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Developing advanced code language models for improved program understanding and generation",
+            "datatype": "string"
+          }
+        ]
+      },
+      {
+        "label": "StarCoder",
+        "template": "R609825",
+        "properties": [
+          {
+            "property": "HAS_MODEL",
+            "label": "model_name",
+            "value": "StarCoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P7121",
+            "label": "model_family",
+            "value": "Code Transformer",
+            "datatype": "string"
+          },
+          {
+            "property": "P49020",
+            "label": "date_created",
+            "value": "2023-12",
+            "datatype": "string"
+          },
+          {
+            "property": "P18097",
+            "label": "organization",
+            "value": "GitHub/Codescape (co-authored by Meta, Microsoft, and others)",
+            "datatype": "string"
+          },
+          {
+            "property": "P15156",
+            "label": "innovation",
+            "value": "StarCoder represents a foundational code language model trained on over 150GB of diverse source code across 15 programming languages, leveraging a hybrid architecture combining transformer encoders and decoders for improved code generation and understanding. Its training incorporates extensive cross-lingual and multi-task learning approaches to enhance robustness",
+            "datatype": "string"
+          },
+          {
+            "property": "P103000",
+            "label": "pretraining_architecture",
+            "value": "Encoder-Decoder",
+            "datatype": "string"
+          },
+          {
+            "property": "P103001",
+            "label": "pretraining_task",
+            "value": "Masked code modeling (similar to BLOOM but focused on code)",
+            "datatype": "string"
+          },
+          {
+            "property": "P41655",
+            "label": "pretraining_corpus",
+            "value": "Stack (3TB permissively licensed source code) + The Stack (3TB curated code corpus) + additional datasets including Pile, CodeSearchNet, CodeXGLUE, Hugging Face datasets",
+            "datatype": "string"
+          },
+          {
+            "property": "P103002",
+            "label": "parameters",
+            "value": "15B",
+            "datatype": "string"
+          },
+          {
+            "property": "P110076",
+            "label": "parameters_millions",
+            "value": "15000",
+            "datatype": "string"
+          },
+          {
+            "property": "P37544",
+            "label": "application",
+            "value": "Programming assistance, code completion, debugging, automated testing, and general-purpose code generation across diverse programming languages",
+            "datatype": "string"
+          },
+          {
+            "property": "P32",
+            "label": "research_problem",
+            "value": "Scalable, high-quality code generation and understanding using large language models",
+            "datatype": "string"
+          }
+        ]
+      }
+    ],
+    "multiple_models": true,
+    "count": 5
+  }
+}
