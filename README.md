@@ -1,26 +1,29 @@
 # Bachelor Thesis: Automated Knowledge Extraction for Large-Scale Generative AI Models Catalog
 
-[![CI](https://github.com/yourusername/Bachelor-Arbeit-NLP/workflows/CI/badge.svg)](https://github.com/yourusername/Bachelor-Arbeit-NLP/actions)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
-This project implements a Python-based NLP workflow that automatically extracts key information from Large Language Model (LLM) research papers and populates the ORKG comparison "Generative AI Model Landscape".
+This project implements a Python-based NLP pipeline that automatically extracts structured metadata from Large Language Model (LLM) research papers and populates the ORKG comparison [Generative AI Model Landscape](https://orkg.org/comparisons/R1364660).
 
-The pipeline supports both **API-based** extraction (using KISSKI Chat AI API) and **HPC cluster** deployment (using GPU-based transformers on GWDG Grete).
+The pipeline fetches papers from ArXiv, parses their PDFs, extracts key properties via an LLM (KISSKI Chat AI API), normalises and merges the results, and uploads them to ORKG — all in a single command.
+
+It also supports **HPC cluster** deployment (GPU-based transformers on GWDG Grete) for large-scale batch extraction without API costs.
 
 ## Features
 
-- **Automated paper fetching** from ArXiv
-- **PDF parsing** and text extraction with fallback mechanisms
-- **Dual extraction modes**:
-  - API-based using KISSKI Chat AI API (free for thesis work)
-  - GPU-based using Hugging Face transformers on HPC cluster
-- **Structured data mapping** to ORKG templates
-- **Automatic ORKG updates** with duplicate detection
-- **Multi-model extraction** from single papers
-- **Batch processing** support for HPC environments
+- **Automated paper fetching** from ArXiv (by ID or search query)
+- **PDF parsing** with fallback mechanisms (`pdfplumber`)
+- **LLM-based extraction** via KISSKI Chat AI API (OpenAI-compatible)
+- **HPC / GPU extraction** using Hugging Face Transformers on GWDG Grete
+- **Extraction normalisation** — canonical date, organisation, and parameter formats
+- **Model variant merging** — groups size variants (e.g. 7B/13B/70B) into one entry
+- **Primary contribution selection** — filters auxiliary artefacts, keeps main models
+- **Structured mapping** to ORKG template [R609825](https://orkg.org/templates/R609825)
+- **Automatic ORKG upload** with duplicate detection
+- **Strict evaluation framework** — match-based F1 + BERTScore for semantic fields
+- **Batch processing** for HPC environments
 
 ## Project Structure
 
@@ -28,73 +31,95 @@ The pipeline supports both **API-based** extraction (using KISSKI Chat AI API) a
 Bachelor-Arbeit-NLP/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                    # GitHub Actions CI/CD
-├── grete/                            # HPC cluster deployment
+│       └── ci.yml                          # GitHub Actions CI
+├── grete/                                  # HPC cluster deployment
 │   ├── extraction/
 │   │   ├── grete_extract_paper.py
 │   │   ├── grete_extract_from_url.py
 │   │   └── grete_extract_paper_distilgpt2.py
 │   ├── jobs/
-│   │   ├── grete_extract_job.sh     # SLURM single job
-│   │   ├── grete_extract_batch.sh   # SLURM batch array
+│   │   ├── grete_extract_job.sh            # SLURM single job
+│   │   ├── grete_extract_batch.sh          # SLURM batch array
 │   │   └── grete_extract_url_job.sh
-│   └── README.md                     # Grete-specific documentation
-├── src/                              # Core pipeline
+│   └── README.md
+├── src/                                    # Core pipeline
 │   ├── __init__.py
-│   ├── comparison_updater.py         # Update ORKG comparisons
-│   ├── llm_extractor.py              # KISSKI API extraction
-│   ├── llm_extractor_transformers.py # GPU-based extraction
-│   ├── orkg_client.py                # ORKG API wrapper
-│   ├── orkg_manager.py               # ORKG management
-│   ├── paper_fetcher.py              # ArXiv paper fetching
-│   ├── pdf_parser.py                 # PDF text extraction
-│   ├── pipeline.py                   # Main orchestration
-│   └── template_mapper.py            # ORKG template mapping
+│   ├── pipeline.py                         # Main orchestration
+│   ├── llm_extractor.py                    # KISSKI API extraction
+│   ├── llm_extractor_transformers.py       # GPU-based extraction (Grete)
+│   ├── pdf_parser.py                       # PDF text extraction
+│   ├── paper_fetcher.py                    # ArXiv paper fetching
+│   ├── template_mapper.py                  # ORKG template mapping
+│   ├── orkg_client.py                      # ORKG API wrapper
+│   ├── orkg_manager.py                     # ORKG paper/contribution management
+│   ├── extraction_normalizer.py            # Canonical format normalisation
+│   ├── model_variant_merger.py             # Size-variant merging
+│   ├── model_contribution_selector.py      # Primary model selection
+│   ├── baseline_filter.py                  # Baseline/comparison model filter
+│   └── comparison_updater.py              # Legacy comparison updater
 ├── scripts/
-│   ├── evaluation/                   # Evaluation scripts and README
+│   ├── evaluation/                         # Evaluation scripts and README
+│   │   ├── evaluate_extraction_strict.py   # Strict evaluator (thesis metrics)
+│   │   ├── evaluate_extraction.py          # Relaxed evaluator
+│   │   ├── convert_gold_standard.py        # ORKG CSV → gold JSON converter
+│   │   └── README.md
 │   ├── batch_extract_all_papers.py
-│   └── ...                           # Other utilities
-├── results/                          # Aggregated evaluation tables (CSV/JSON)
-├── finetuning/                       # Optional fine-tuning workflow
-├── tests/                            # Unit tests
-│   ├── __init__.py
+│   ├── build_results_table.py
+│   └── import_extracted_to_model_folders.py
+├── finetuning/                             # Optional LoRA fine-tuning workflow
+├── tests/                                  # Unit tests
+│   ├── test_pipeline.py
 │   ├── test_llm_extractor.py
-│   ├── test_orkg_append.py
 │   ├── test_orkg_client.py
-│   ├── test_pdf_parser.py
-│   └── test_pipeline.py
-├── examples/
-│   └── example_usage.py              # Usage examples
+│   ├── test_orkg_append.py
+│   └── test_pdf_parser.py
 ├── data/
-│   ├── papers/                       # Downloaded PDFs
-│   ├── extracted/                    # Extracted JSON data
-│   └── logs/                         # Processing logs
-├── notebooks/
-│   └── validate_extraction.ipynb     # Validation notebook
+│   ├── papers/                             # Downloaded PDFs (gitignored)
+│   ├── extracted/                          # Extraction results (gitignored)
+│   ├── gold_standard/                      # Gold-standard evaluation data
+│   └── logs/                              # Pipeline logs (gitignored)
+├── results/                                # Aggregated evaluation tables (CSV/JSON)
 ├── config/
-│   └── config.yaml                   # Configuration
-├── .env.example                      # Environment variables template
+│   └── config.yaml                         # Pipeline configuration
+├── .env.example                            # Environment variables template
 ├── .gitignore
-├── LICENSE                           # MIT License
-├── pyproject.toml                    # Modern Python packaging
-├── README.md
-├── requirements.txt                  # Production dependencies
-└── requirements-dev.txt              # Development dependencies
+├── LICENSE
+├── pyproject.toml                          # Python packaging and tool config
+├── requirements.txt                        # Runtime dependencies
+└── requirements-dev.txt                    # Development dependencies
 ```
 
 ## Installation
 
-1. Clone the repository
-2. Create a virtual environment:
+### Prerequisites
+
+- Python 3.9 or higher
+- A KISSKI API key (provided by GWDG for thesis work)
+- An ORKG account at [sandbox.orkg.org](https://sandbox.orkg.org/) or [orkg.org](https://orkg.org/)
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd Bachelor-Arbeit-NLP
+   ```
+
+2. Create and activate a virtual environment:
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   # Windows
+   venv\Scripts\activate
+   # Linux / macOS
+   source venv/bin/activate
    ```
+
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-4. Copy `.env.example` to `.env` and fill in your credentials:
+
+4. Copy the environment template and fill in your credentials:
    ```bash
    cp .env.example .env
    ```
@@ -103,54 +128,94 @@ Bachelor-Arbeit-NLP/
 
 ### Environment Variables (`.env`)
 
-Required variables:
 ```env
+# ORKG credentials
 ORKG_EMAIL=your.email@example.com
 ORKG_PASSWORD=your_password_here
-ORKG_HOST=sandbox  # or 'production'
+
+# KISSKI Chat AI API (SAIA platform, OpenAI-compatible)
 KISSKI_API_KEY=your_kisski_api_key_here
-KISSKI_API_ENDPOINT=https://kisski.de/api/chat
+KISSKI_BASE_URL=https://chat-ai.academiccloud.de/v1
 ```
+
+> For Grete HPC users: `KISSKI_API_KEY` is not required when running GPU-based extraction. See [grete/README.md](grete/README.md).
 
 ### Pipeline Configuration (`config/config.yaml`)
 
-Customize the extraction pipeline:
-- **ORKG settings**: host, template ID, comparison ID
-- **KISSKI API**: endpoint, model, temperature, max tokens, rate limiting
-- **ArXiv settings**: categories, download directory
-- **Extraction fields**: which fields to extract
-- **Logging**: level, format, output files
+Key settings:
+
+| Section | Key | Description |
+|---|---|---|
+| `orkg` | `host` | `sandbox` (testing) or `production` |
+| `orkg` | `template_id` | ORKG LLM template (`R609825`) |
+| `orkg` | `comparison_id` | Target comparison (`R2147679`) |
+| `kisski` | `model` | LLM model name (e.g. `qwen3-235b-a22b`) |
+| `kisski` | `temperature` | `0.0` for deterministic extraction |
+| `extraction` | `max_chunk_size` | Max characters per PDF chunk (default: 6000) |
 
 ## Usage
 
-### Basic Usage
-
-```python
-from src.pipeline import ExtractionPipeline
-
-pipeline = ExtractionPipeline()
-pipeline.process_paper("2302.13971")  # ArXiv ID for Llama paper
-```
-
-### Command Line
+### Process a Single Paper (ArXiv ID)
 
 ```bash
 python -m src.pipeline --arxiv-id 2302.13971
 ```
 
-## Evaluation
-
-The project includes a comprehensive evaluation framework combining match-based metrics and semantic similarity (BERTScore) for assessing extraction quality.
-
-### Quick Start
+### Process a Paper from PDF URL
 
 ```bash
-# Evaluate extraction against gold standard
+python -m src.pipeline --pdf-url https://example.org/paper.pdf --paper-title "Paper Title"
+```
+
+### Upload an Existing Extraction JSON to ORKG
+
+```bash
+python -m src.pipeline --json-file data/extracted/2302.13971_20260101_120000.json
+```
+
+### Skip ORKG Upload (Extraction Only)
+
+```bash
+python -m src.pipeline --arxiv-id 2302.13971 --no-update
+```
+
+### Skip Evaluation After Extraction
+
+```bash
+python -m src.pipeline --arxiv-id 2302.13971 --no-evaluate
+```
+
+### Test Connections
+
+```bash
+python -m src.pipeline --test
+```
+
+### Python API
+
+```python
+from src.pipeline import ExtractionPipeline
+
+pipeline = ExtractionPipeline()
+result = pipeline.process_paper("2302.13971")
+print(result["extraction_data"])
+```
+
+## Evaluation
+
+The evaluation framework measures extraction quality against a gold standard derived from the ORKG comparison [R1364660](https://orkg.org/comparisons/R1364660).
+
+### Run Strict Evaluation
+
+```bash
 python scripts/evaluation/evaluate_extraction_strict.py \
     --gold data/gold_standard/R1364660.json \
     --prediction data/extracted/your_extraction.json
+```
 
-# Save evaluation report
+### Save Evaluation Report
+
+```bash
 python scripts/evaluation/evaluate_extraction_strict.py \
     --gold data/gold_standard/R1364660.json \
     --prediction data/extracted/your_extraction.json \
@@ -159,189 +224,61 @@ python scripts/evaluation/evaluate_extraction_strict.py \
 
 ### Evaluation Metrics
 
-**1. Match-Based Metrics (All Fields)**
-- Precision, Recall, F1-Score for each field
-- Overall F1 across all fields
-- Per-field breakdown showing strengths/weaknesses
+**Structured fields** (model name, parameters, date, organisation, etc.) are evaluated with **match-based F1**:
 
-**2. BERTScore (Semantic Fields)**
-- Token-level semantic similarity using RoBERTa embeddings
-- Per-field scores for: innovation, extension, application, research_problem, pretraining_corpus
-- BERTScore aggregate (mean over semantic fields)
+| Metric | Description |
+|---|---|
+| Precision | Of all extracted values, how many are correct? |
+| Recall | Of all gold values, how many were found? |
+| F1-Score | Harmonic mean of precision and recall |
 
-### Why BERTScore?
+**Semantic fields** (innovation, extension, application, research\_problem, pretraining\_corpus) are evaluated with **BERTScore** (token-level contextual similarity using RoBERTa-large embeddings), which captures paraphrases that exact matching would penalise.
 
-Traditional exact matching fails for long-text fields where the same meaning can be expressed differently:
-
-**Gold**: "Introduces a new mixture-of-experts architecture with dynamic routing"  
-**Prediction**: "Presents MoE with dynamic expert routing"
-
-BERTScore captures this semantic similarity through contextual embeddings, making it ideal for evaluating context-rich fields.
-
-### Configuration
-
-```bash
-# Use different BERTScore model
-python scripts/evaluation/evaluate_extraction_strict.py \
-    --bert-score-model bert-base-uncased \
-    --gold data/gold_standard/R1364660.json \
-    --prediction data/extracted/your_extraction.json
-
-# Adjust matching threshold
-python scripts/evaluation/evaluate_extraction_strict.py \
-    --fuzzy-threshold 0.85 \
-    --gold data/gold_standard/R1364660.json \
-    --prediction data/extracted/your_extraction.json
-```
-
-### Documentation
-
-- **Evaluation overview**: [scripts/evaluation/README.md](scripts/evaluation/README.md)
-- **Implementation details**: [scripts/evaluation/evaluate_extraction_strict.py](scripts/evaluation/evaluate_extraction_strict.py)
+Field-specific matching rules (date year tolerance, organisation aliases, parameter set F1, etc.) are documented in [`scripts/evaluation/README.md`](scripts/evaluation/README.md).
 
 ## Testing
 
-### Run All Tests
-
 ```bash
+# Run all unit tests
 pytest tests/ -v
+
+# Run with coverage report
+pytest tests/ -v --cov=src --cov-report=term-missing
 ```
 
-### Run with Coverage
+## HPC Cluster (Grete)
+
+For large-scale extraction without API limits, the pipeline can run on GWDG Grete using local GPU-based transformers.
 
 ```bash
-pytest tests/ -v --cov=src --cov-report=html
+# Submit a single extraction job
+sbatch grete/jobs/grete_extract_job.sh 2302.13971
+
+# Submit batch array job
+sbatch grete/jobs/grete_extract_batch.sh
 ```
 
-### Run Specific Test File
-
-```bash
-pytest tests/test_pipeline.py -v
-```
-
-### Continuous Integration
-
-The project uses GitHub Actions for automated testing. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for the CI configuration.
-
-Tests run automatically on:
-- Push to `main` or `develop` branches
-- Pull requests to `main` or `develop`
-
-## Deployment
-
-### Local Extraction (API-based)
-
-Uses KISSKI Chat AI API for extraction. Fast and reliable, free for thesis work.
-
-**Prerequisites**: KISSKI API key from your professor
-
-See [Usage](#usage) section above for examples.
-
-### HPC Cluster (GPU-based)
-
-Uses local transformers on GPU. No API costs, unlimited processing, but requires HPC setup.
-
-**Full deployment guide**: [grete/README.md](grete/README.md) and [KISSKI_SETUP.md](KISSKI_SETUP.md)
-
-**Quick start**:
-1. Upload code to Grete cluster
-2. Set up conda environment with PyTorch + transformers
-3. Submit SLURM jobs:
-   ```bash
-   sbatch grete/jobs/grete_extract_job.sh 2302.13971
-   ```
-
-**Monitoring**: See job scripts and logs on the cluster; details in [grete/README.md](grete/README.md).
-
-## Troubleshooting
-
-Common issues and solutions:
-
-- **KISSKI / API setup**: [KISSKI_SETUP.md](KISSKI_SETUP.md)
-- **Grete / GPU extraction**: [grete/README.md](grete/README.md)
-
-## Development
-
-### Code Quality
-
-```bash
-# Format code
-black src/
-
-# Lint code
-flake8 src/
-
-# Type checking
-mypy src/
-
-# Sort imports
-isort src/
-```
-
-### Project Structure
-
-- **`src/`**: Core pipeline code
-- **`tests/`**: Unit tests
-- **`scripts/`**: Utility scripts
-- **`grete/`**: HPC cluster deployment files
-- **`examples/`**: Usage examples
-- **`results/`**: Evaluation aggregation outputs
-- **`finetuning/`**: Optional LoRA fine-tuning workflow
-- **`notebooks/`**: Jupyter notebooks for exploration
-
-### Contributing
-
-1. Create a feature branch
-2. Make your changes
-3. Run tests: `pytest tests/`
-4. Run linters: `black src/ && flake8 src/`
-5. Submit a pull request
+Full setup guide: [grete/README.md](grete/README.md) and [KISSKI_SETUP.md](KISSKI_SETUP.md).
 
 ## Resources
 
-### ORKG
-
-- **Platform**: https://orkg.org/
-- **Sandbox**: https://sandbox.orkg.org/
-- **Python Client**: https://orkg.readthedocs.io/en/latest/
-- **LLM Template**: https://orkg.org/templates/R609825
-- **Target Comparison**: https://orkg.org/comparisons/R1364660
-
-### APIs
-
-- **KISSKI Chat AI API**: Provided by university for thesis work
-- **ArXiv API**: https://info.arxiv.org/help/api/
-
-### HPC
-
-- **GWDG Grete**: https://info.gwdg.de/docs/doku.php?id=en:services:application_services:high_performance_computing:grete
-
-## Citation
-
-If you use this code for your research, please cite:
-
-```bibtex
-@thesis{bachelor2025llm,
-  title={Automated Knowledge Extraction for Large-Scale Generative AI Models Catalog},
-  author={Your Name},
-  year={2025},
-  school={Your University},
-  type={Bachelor's Thesis}
-}
-```
+| Resource | Link |
+|---|---|
+| ORKG Platform | https://orkg.org/ |
+| ORKG Sandbox | https://sandbox.orkg.org/ |
+| ORKG Python Client | https://orkg.readthedocs.io/en/latest/ |
+| LLM Template (R609825) | https://orkg.org/templates/R609825 |
+| Target Comparison (R1364660) | https://orkg.org/comparisons/R1364660 |
+| KISSKI Chat AI API | https://chat-ai.academiccloud.de |
+| ArXiv API | https://info.arxiv.org/help/api/ |
+| GWDG Grete HPC | https://info.gwdg.de/docs/doku.php?id=en:services:application_services:high_performance_computing:grete |
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Developed as part of a Bachelor thesis project
-- ORKG platform for knowledge graph infrastructure
-- GWDG for providing HPC resources and KISSKI API access
+- ORKG platform ([orkg.org](https://orkg.org/)) for knowledge graph infrastructure
+- GWDG for providing HPC resources (Grete cluster) and KISSKI API access
 - SAIA platform for Chat AI API services
-
-## Contact
-
-For questions or issues, please open an issue on GitHub or contact alakefi02@gmail.com
-
