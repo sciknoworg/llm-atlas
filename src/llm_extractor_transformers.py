@@ -580,6 +580,12 @@ JSON:
             if "<|assistant|>" in response_text:
                 response_text = response_text.split("<|assistant|>")[-1]
 
+            # Strip reasoning-model thinking blocks (Qwen3, DeepSeek-R1, etc.)
+            if "<think>" in response_text:
+                response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text)
+                if "<think>" in response_text:
+                    response_text = response_text[: response_text.index("<think>")]
+
             # Remove markdown code blocks
             if "```json" in response_text:
                 response_text = response_text.split("```json")[1].split("```")[0].strip()

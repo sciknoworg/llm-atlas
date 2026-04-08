@@ -630,6 +630,15 @@ Output JSON:""",
             if "<|assistant|>" in response_text:
                 response_text = response_text.split("<|assistant|>")[-1]
 
+            # Strip reasoning-model thinking blocks (Qwen3, DeepSeek-R1, etc.)
+            # Handles both closed <think>...</think> and unclosed <think>...
+            if "<think>" in response_text:
+                response_text = re.sub(r"<think>[\s\S]*?</think>", "", response_text)
+                # Unclosed <think> (model hit token limit while thinking):
+                # drop everything from <think> to end, keep anything before it
+                if "<think>" in response_text:
+                    response_text = response_text[: response_text.index("<think>")]
+
             # Remove markdown code blocks
             if "```json" in response_text:
                 response_text = response_text.split("```json")[1].split("```")[0].strip()
@@ -915,6 +924,13 @@ Output JSON:""",
             models=unique_models, paper_describes_multiple_models=len(unique_models) > 1
         )
 
+    @staticmethod
+    def _normalize_name_spacing(name: str) -> str:
+        """Normalize whitespace between letters and digits (e.g. Nano1 → Nano 1)."""
+        if not name:
+            return name
+        return re.sub(r"([A-Za-z])(\d)", r"\1 \2", name).strip()
+
     def _deduplicate_models(self, models: List[LLMProperties]) -> List[LLMProperties]:
         """
         Deduplicate models: merge variants that refer to the same model version.
@@ -931,31 +947,62 @@ Output JSON:""",
         - "Llama 3 8B" and "Llama 3 70B" merge → "Llama 3" (same version, different sizes)
         - "Llama 3.1 8B" and "Llama 3.2 8B" stay separate (different versions)
         """
+        # Quality gate: drop truncated / near-empty extractions early
+        _MIN_NAME_LEN = 3
+        _MIN_FIELDS = 3
+        _CHECK_FIELDS = [
+            "model_name",
+            "model_family",
+            "organization",
+            "innovation",
+            "parameters",
+            "pretraining_architecture",
+            "pretraining_task",
+            "pretraining_corpus",
+            "license",
+            "research_problem",
+            "application",
+        ]
+        filtered: List[LLMProperties] = []
+        for m in models:
+            name = (m.model_name or "").strip()
+            if len(name) < _MIN_NAME_LEN:
+                logger.warning(
+                    "Dedup quality gate: dropping model with short name %r (len=%d < %d)",
+                    name,
+                    len(name),
+                    _MIN_NAME_LEN,
+                )
+                continue
+            filled = sum(
+                1 for f in _CHECK_FIELDS if getattr(m, f, None) not in (None, "", "null", "None")
+            )
+            if filled < _MIN_FIELDS:
+                logger.info(
+                    "Dedup quality gate: dropping %r (%d/%d fields)",
+                    name,
+                    filled,
+                    len(_CHECK_FIELDS),
+                )
+                continue
+            filtered.append(m)
+        models = filtered
+
         groups: Dict[tuple, List[LLMProperties]] = {}
 
         for m in models:
-            # Extract components for grouping key
             fam = (m.model_family or "").strip() or ""
             params = (m.parameters or "").strip() or ""
             params_m = m.parameters_millions
-            model_name = (m.model_name or "").strip()
+            model_name = self._normalize_name_spacing((m.model_name or "").strip())
 
-            # Extract version token from model_name (e.g., "Llama 3.1 8B" → "3.1")
             version_token = self._extract_version_from_name(model_name)
 
-            # Build deduplication key
-            # Priority 1: Use (family, version, params) if we have family and version
-            # Priority 2: Use full model_name if family/version missing (conservative fallback)
             if fam and version_token:
-                # Group by family + version + params
-                # This keeps "Llama 3.1 8B" and "Llama 3.1 70B" together
-                # but separates "Llama 3.1" from "Llama 3.2"
                 key = (fam, version_token, params or str(params_m) if params_m is not None else "")
             elif fam and (params or params_m is not None):
-                # No version token, group by family + params (legacy behavior)
                 key = (fam, "", params or str(params_m) if params_m is not None else "")
             else:
-                # Fallback: use full model_name to avoid over-merging
                 key = (model_name, m.model_version or "", m.parameters or "")
 
             if key not in groups:

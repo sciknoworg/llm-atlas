@@ -51,13 +51,32 @@ def merge_model_variants(
 
     logger.info(f"Merging model variants: {len(models)} extracted model(s)")
 
+    # Pre-filter: remove junk / truncated extractions that have almost no data
+    models = _filter_low_quality_models(models)
+    if not models:
+        logger.warning("All models filtered by quality gate – nothing to merge")
+        return []
+
+    # Normalize model_name spacing before grouping so "Nano1" and "Nano 1" match
+    for i, model in enumerate(models):
+        original = model.get("model_name", "")
+        normalised = _normalize_model_name_spacing(original)
+        if normalised != original:
+            model = dict(model)
+            model["model_name"] = normalised
+            models[i] = model
+
     # Group by canonical model name (with version preserved)
-    groups = {}
+    groups: Dict[str, List[Dict[str, Any]]] = {}
     for model in models:
-        canonical = _get_canonical_name(model.get("model_name", ""))
+        canonical = _get_canonical_name(_normalize_model_name_spacing(model.get("model_name", "")))
         if canonical not in groups:
             groups[canonical] = []
         groups[canonical].append(model)
+
+    # Absorb bare-family groups into versioned groups of the same family
+    # e.g. "Gemini" (no version) gets folded into "Gemini 1.0"
+    groups = _absorb_bare_family_groups(groups)
 
     # Validate version diversity (warn if versions might be lost)
     _validate_version_preservation(models, groups)
@@ -67,12 +86,8 @@ def merge_model_variants(
     for canonical_name, group in groups.items():
         if len(group) == 1:
             model = group[0]
-            # Always normalise model_name to the canonical form even when there
-            # is only one variant.  This ensures that a name like "Llama 3.1 405B"
-            # becomes "Llama 3.1" (with "405B" already recorded in `parameters`),
-            # matching the gold-standard convention of keeping size out of the name.
             if canonical_name and model.get("model_name", "") != canonical_name:
-                model = dict(model)  # shallow copy – avoid mutating caller's data
+                model = dict(model)
                 model["model_name"] = canonical_name
             merged.append(model)
             logger.info(f"  {canonical_name}: 1 variant (name normalised)")
@@ -86,6 +101,122 @@ def merge_model_variants(
 
     logger.info(f"Result: {len(merged)} unique model(s) after merging")
     return merged
+
+
+_QUALITY_MIN_NAME_LENGTH = 3
+_QUALITY_MIN_FIELDS = 3
+_QUALITY_FIELDS = [
+    "model_name",
+    "model_family",
+    "organization",
+    "innovation",
+    "parameters",
+    "pretraining_architecture",
+    "pretraining_task",
+    "pretraining_corpus",
+    "license",
+    "research_problem",
+    "application",
+]
+
+
+def _filter_low_quality_models(
+    models: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Remove extractions that are clearly junk: truncated names or near-empty
+    field sets that arise from chunk-boundary noise.
+
+    Keeps a model only when its name has at least ``_QUALITY_MIN_NAME_LENGTH``
+    characters **and** it has at least ``_QUALITY_MIN_FIELDS`` non-null
+    substantive fields.
+    """
+    kept: List[Dict[str, Any]] = []
+    for model in models:
+        name = (model.get("model_name") or "").strip()
+        if len(name) < _QUALITY_MIN_NAME_LENGTH:
+            logger.warning(
+                "Quality gate: dropping model with short name %r (len=%d < %d)",
+                name,
+                len(name),
+                _QUALITY_MIN_NAME_LENGTH,
+            )
+            continue
+        filled = sum(1 for f in _QUALITY_FIELDS if model.get(f) not in (None, "", "null", "None"))
+        if filled < _QUALITY_MIN_FIELDS:
+            logger.info(
+                "Quality gate: dropping %r (only %d/%d fields populated)",
+                name,
+                filled,
+                len(_QUALITY_FIELDS),
+            )
+            continue
+        kept.append(model)
+    if len(kept) < len(models):
+        logger.info("Quality gate: kept %d / %d models", len(kept), len(models))
+    return kept
+
+
+def _normalize_model_name_spacing(name: str) -> str:
+    """
+    Normalize whitespace around digits in compound model names so that
+    chunk-boundary variants map to the same canonical form.
+
+    Examples:
+        "Gemini Nano1"  → "Gemini Nano 1"
+        "Gemini Nano2"  → "Gemini Nano 2"
+        "Llama3"        → "Llama 3"
+        "Llama 3"       → "Llama 3"       (no change)
+        "GPT-4"         → "GPT-4"         (dash-separated – no change)
+    """
+    if not name:
+        return name
+    # Insert a space between a letter and a digit that are directly adjacent,
+    # but only when they are NOT separated by a dash/underscore (those are
+    # intentional separators like "GPT-4").
+    return re.sub(r"([A-Za-z])(\d)", r"\1 \2", name).strip()
+
+
+def _absorb_bare_family_groups(
+    groups: Dict[str, List[Dict[str, Any]]],
+) -> Dict[str, List[Dict[str, Any]]]:
+    """
+    Fold bare-family groups into the best versioned group of the same family.
+
+    When extraction produces both "Gemini" (no version, no params) and
+    "Gemini 1.0" (versioned), the bare entry is redundant. This pass detects
+    bare groups and merges their models into the most-populated versioned
+    group of the same family, preventing duplicate contributions.
+    """
+    bare_keys: List[str] = []
+    versioned_by_family: Dict[str, List[str]] = {}
+
+    for canonical_name in groups:
+        version = _extract_version_token(canonical_name)
+        family_match = re.match(r"^([A-Za-z][\w-]*)", canonical_name)
+        family = family_match.group(1).lower() if family_match else ""
+        if version:
+            versioned_by_family.setdefault(family, []).append(canonical_name)
+        elif family and canonical_name.strip().lower() == family:
+            bare_keys.append(canonical_name)
+
+    for bare_key in bare_keys:
+        family_match = re.match(r"^([A-Za-z][\w-]*)", bare_key)
+        if not family_match:
+            continue
+        family = family_match.group(1).lower()
+        targets = versioned_by_family.get(family, [])
+        if not targets:
+            continue
+        best_target = max(targets, key=lambda k: len(groups.get(k, [])))
+        logger.info(
+            "Bare-family absorption: merging %r into %r",
+            bare_key,
+            best_target,
+        )
+        groups[best_target].extend(groups.pop(bare_key))
+
+    return groups
 
 
 def _validate_version_preservation(
@@ -173,7 +304,7 @@ def _get_canonical_name(model_name: str) -> str:
     if not model_name:
         return ""
 
-    name = model_name.strip()
+    name = _normalize_model_name_spacing(model_name.strip())
 
     # CRITICAL: Extract and preserve version token BEFORE stripping other suffixes
     # This ensures "Llama 3.1 8B" → preserve "3.1" → strip "8B" → result "Llama 3.1"
