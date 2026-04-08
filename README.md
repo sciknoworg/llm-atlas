@@ -122,6 +122,9 @@ Bachelor-Arbeit-NLP/
 
 4. Copy the environment template and fill in your credentials:
    ```bash
+   # Windows (PowerShell)
+   Copy-Item .env.example .env
+   # Linux / macOS
    cp .env.example .env
    ```
 
@@ -228,18 +231,26 @@ The evaluation framework measures extraction quality against a gold standard der
 ### Run Strict Evaluation
 
 ```bash
+# PowerShell (recommended): one line
+python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/R1364660.json --prediction data/extracted/your_extraction.json
+
+# Linux / macOS (multiline)
 python scripts/evaluation/evaluate_extraction_strict.py \
-    --gold data/gold_standard/R1364660.json \
-    --prediction data/extracted/your_extraction.json
+  --gold data/gold_standard/R1364660.json \
+  --prediction data/extracted/your_extraction.json
 ```
 
 ### Save Evaluation Report
 
 ```bash
+# PowerShell (recommended): one line
+python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/R1364660.json --prediction data/extracted/your_extraction.json --output results/evaluation_report.json
+
+# Linux / macOS (multiline)
 python scripts/evaluation/evaluate_extraction_strict.py \
-    --gold data/gold_standard/R1364660.json \
-    --prediction data/extracted/your_extraction.json \
-    --output results/evaluation_report.json
+  --gold data/gold_standard/R1364660.json \
+  --prediction data/extracted/your_extraction.json \
+  --output results/evaluation_report.json
 ```
 
 ### Evaluation Metrics
