@@ -68,6 +68,7 @@ Bachelor-Arbeit-NLP/
 │   └── import_extracted_to_model_folders.py
 ├── finetuning/                             # Optional LoRA fine-tuning workflow
 ├── tests/                                  # Unit tests
+│   ├── __init__.py
 │   ├── test_pipeline.py
 │   ├── test_llm_extractor.py
 │   ├── test_orkg_client.py
@@ -101,8 +102,8 @@ Bachelor-Arbeit-NLP/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd Bachelor-Arbeit-NLP
+   git clone https://github.com/sciknoworg/llm-atlas.git
+   cd llm-atlas
    ```
 
 2. Create and activate a virtual environment:
@@ -132,6 +133,7 @@ Bachelor-Arbeit-NLP/
 # ORKG credentials
 ORKG_EMAIL=your.email@example.com
 ORKG_PASSWORD=your_password_here
+ORKG_HOST=sandbox  # Options: sandbox, incubating, production
 
 # KISSKI Chat AI API (SAIA platform, OpenAI-compatible)
 KISSKI_API_KEY=your_kisski_api_key_here
@@ -185,10 +187,28 @@ python -m src.pipeline --arxiv-id 2302.13971 --no-update
 python -m src.pipeline --arxiv-id 2302.13971 --no-evaluate
 ```
 
+### Show Pipeline Status
+
+```bash
+python -m src.pipeline --status
+```
+
 ### Test Connections
 
 ```bash
 python -m src.pipeline --test
+```
+
+### Search ArXiv and Process Results
+
+```bash
+python -m src.pipeline --search "large language model" --max-results 5
+```
+
+### Specify Custom Gold Standard for Auto-Evaluation
+
+```bash
+python -m src.pipeline --arxiv-id 2302.13971 --gold data/gold_standard/R1364660.json
 ```
 
 ### Python API
