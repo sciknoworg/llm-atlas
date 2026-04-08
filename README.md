@@ -17,12 +17,12 @@ It also supports **HPC cluster** deployment (GPU-based transformers on GWDG Gret
 - **PDF parsing** with fallback mechanisms (`pdfplumber`)
 - **LLM-based extraction** via KISSKI Chat AI API (OpenAI-compatible)
 - **HPC / GPU extraction** using Hugging Face Transformers on GWDG Grete
-- **Extraction normalisation** — canonical date, organisation, and parameter formats
-- **Model variant merging** — groups size variants (e.g. 7B/13B/70B) into one entry
-- **Primary contribution selection** — filters auxiliary artefacts, keeps main models
+- **Extraction normalisation** canonical date, organisation, and parameter formats
+- **Model variant merging** groups size variants (e.g. 7B/13B/70B) into one entry
+- **Primary contribution selection** filters auxiliary artefacts, keeps main models
 - **Structured mapping** to ORKG template [R609825](https://orkg.org/templates/R609825)
 - **Automatic ORKG upload** with duplicate detection
-- **Strict evaluation framework** — match-based F1 + BERTScore for semantic fields
+- **Strict evaluation framework** match-based F1 + BERTScore for semantic fields
 - **Batch processing** for HPC environments
 
 ## Project Structure
