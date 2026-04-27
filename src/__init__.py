@@ -8,15 +8,6 @@ LLM research papers and populating the ORKG comparison database.
 __version__ = "0.1.0"
 __author__ = "Bachelor Thesis Project"
 
-from src.comparison_updater import ComparisonUpdater  # Deprecated: use ORKGPaperManager
-from src.llm_extractor import LLMExtractor
-from src.orkg_client import ORKGClient
-from src.orkg_manager import ORKGPaperManager
-from src.paper_fetcher import PaperFetcher
-from src.pdf_parser import PDFParser
-from src.pipeline import ExtractionPipeline
-from src.template_mapper import TemplateMapper
-
 __all__ = [
     "ORKGClient",
     "PaperFetcher",
@@ -27,3 +18,26 @@ __all__ = [
     "ComparisonUpdater",  # Deprecated
     "ExtractionPipeline",
 ]
+
+_LAZY_IMPORTS = {
+    "ORKGClient": ("src.orkg_client", "ORKGClient"),
+    "PaperFetcher": ("src.paper_fetcher", "PaperFetcher"),
+    "PDFParser": ("src.pdf_parser", "PDFParser"),
+    "LLMExtractor": ("src.llm_extractor", "LLMExtractor"),
+    "TemplateMapper": ("src.template_mapper", "TemplateMapper"),
+    "ORKGPaperManager": ("src.orkg_manager", "ORKGPaperManager"),
+    "ComparisonUpdater": ("src.comparison_updater", "ComparisonUpdater"),
+    "ExtractionPipeline": ("src.pipeline", "ExtractionPipeline"),
+}
+
+
+def __getattr__(name):
+    """Lazily expose package classes without importing CLI modules eagerly."""
+    if name not in _LAZY_IMPORTS:
+        raise AttributeError(f"module 'src' has no attribute {name!r}")
+
+    module_name, attribute_name = _LAZY_IMPORTS[name]
+    module = __import__(module_name, fromlist=[attribute_name])
+    value = getattr(module, attribute_name)
+    globals()[name] = value
+    return value

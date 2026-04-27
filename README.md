@@ -136,12 +136,16 @@ Bachelor-Arbeit-NLP/
 # ORKG credentials
 ORKG_EMAIL=your.email@example.com
 ORKG_PASSWORD=your_password_here
-ORKG_HOST=sandbox  # Options: sandbox, incubating, production
+ORKG_ENDPOINT_URL=https://sandbox.orkg.org/
 
 # KISSKI Chat AI API (SAIA platform, OpenAI-compatible)
 KISSKI_API_KEY=your_kisski_api_key_here
 KISSKI_BASE_URL=https://chat-ai.academiccloud.de/v1
 ```
+
+Use `https://sandbox.orkg.org/` for testing and `https://orkg.org/` for production uploads.
+The legacy values `sandbox`, `incubating`, and `production` are still accepted by the code,
+but the explicit endpoint URL is recommended for clarity.
 
 > For Grete HPC users: `KISSKI_API_KEY` is not required when running GPU-based extraction. See [grete/README.md](grete/README.md).
 
@@ -151,7 +155,7 @@ Key settings:
 
 | Section | Key | Description |
 |---|---|---|
-| `orkg` | `host` | `sandbox` (testing) or `production` |
+| `orkg` | `host` | Fallback ORKG host (`sandbox` or `production`) if `ORKG_ENDPOINT_URL` is not set |
 | `orkg` | `template_id` | ORKG LLM template (`R609825`) |
 | `orkg` | `comparison_id` | Target comparison (`R2147679`) |
 | `kisski` | `model` | LLM model name (e.g. `qwen3-235b-a22b`) |
@@ -161,6 +165,8 @@ Key settings:
 ## Usage
 
 ### Process a Single Paper (ArXiv ID)
+
+The default CLI workflow extracts one paper and uploads the result to ORKG. Evaluation is not run unless requested with `--evaluate`.
 
 ```bash
 python -m src.pipeline --arxiv-id 2302.13971
@@ -184,10 +190,28 @@ python -m src.pipeline --json-file data/extracted/2302.13971_20260101_120000.jso
 python -m src.pipeline --arxiv-id 2302.13971 --no-update
 ```
 
-### Skip Evaluation After Extraction
+### Run Evaluation Metrics After Extraction
 
 ```bash
-python -m src.pipeline --arxiv-id 2302.13971 --no-evaluate
+python -m src.pipeline --arxiv-id 2302.13971 --evaluate all
+python -m src.pipeline --arxiv-id 2302.13971 --evaluate structured
+python -m src.pipeline --arxiv-id 2302.13971 --evaluate bertscore
+```
+
+`--evaluate all` reports structured match-based metrics plus BERTScore semantic metrics.
+`--evaluate structured` skips BERTScore and reports match-based metrics only.
+`--evaluate bertscore` focuses the report on semantic BERTScore metrics.
+
+### Select the KISSKI Model from the CLI
+
+```bash
+python -m src.pipeline --arxiv-id 2302.13971 --model llama-3.3-70b-instruct
+```
+
+### Select the ORKG Endpoint from the CLI
+
+```bash
+python -m src.pipeline --arxiv-id 2302.13971 --orkg-endpoint-url https://sandbox.orkg.org/
 ```
 
 ### Show Pipeline Status
@@ -211,7 +235,7 @@ python -m src.pipeline --search "large language model" --max-results 5
 ### Specify Custom Gold Standard for Auto-Evaluation
 
 ```bash
-python -m src.pipeline --arxiv-id 2302.13971 --gold data/gold_standard/R1364660.json
+python -m src.pipeline --arxiv-id 2302.13971 --evaluate all --gold data/gold_standard/R1364660.json
 ```
 
 ### Python API

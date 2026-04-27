@@ -21,7 +21,7 @@ from src.extraction_normalizer import normalize_extraction
 from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
 from src.model_contribution_selector import select_primary_model_contributions
 from src.model_variant_merger import merge_model_variants
-from src.orkg_client import ORKGClient
+from src.orkg_client import ORKGClient, normalize_orkg_host, orkg_frontend_url
 from src.orkg_manager import ORKGPaperManager
 from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser
@@ -43,17 +43,25 @@ logger = logging.getLogger(__name__)
 class ExtractionPipeline:
     """Main pipeline for extracting LLM information and updating ORKG."""
 
-    def __init__(self, config_path: str = "config/config.yaml"):
+    def __init__(
+        self,
+        config_path: str = "config/config.yaml",
+        model_name: Optional[str] = None,
+        orkg_endpoint_url: Optional[str] = None,
+    ):
         """
         Initialize extraction pipeline.
 
         Args:
             config_path: Path to configuration file
+            model_name: Optional KISSKI model override for this run
+            orkg_endpoint_url: Optional ORKG endpoint URL override for this run
         """
         logger.info("Initializing ExtractionPipeline")
 
         # Load configuration
         self.config = self._load_config(config_path)
+        self._apply_runtime_overrides(model_name, orkg_endpoint_url)
 
         # Initialize components
         self._initialize_components()
@@ -85,6 +93,24 @@ class ExtractionPipeline:
                 "arxiv": {"max_results": 10, "download_dir": "data/papers"},
                 "extraction": {"max_chunk_size": 6000, "multi_model_extraction": True},
             }
+
+    def _apply_runtime_overrides(
+        self, model_name: Optional[str] = None, orkg_endpoint_url: Optional[str] = None
+    ) -> None:
+        """Apply CLI and environment overrides before components are created."""
+        if model_name:
+            self.config.setdefault("kisski", {})["model"] = model_name
+
+        configured_endpoint = (
+            orkg_endpoint_url
+            or os.getenv("ORKG_ENDPOINT_URL")
+            or os.getenv("ORKG_HOST")
+            or self.config.get("orkg", {}).get("endpoint_url")
+            or self.config.get("orkg", {}).get("host", "sandbox")
+        )
+        orkg_host = normalize_orkg_host(configured_endpoint)
+        self.config.setdefault("orkg", {})["host"] = orkg_host
+        self.config["orkg"]["endpoint_url"] = orkg_frontend_url(orkg_host)
 
     def _initialize_components(self):
         """Initialize all pipeline components."""
@@ -680,6 +706,7 @@ class ExtractionPipeline:
         """
         return {
             "orkg_host": self.config["orkg"]["host"],
+            "orkg_endpoint_url": self.config["orkg"]["endpoint_url"],
             "template_id": self.config["orkg"]["template_id"],
             "comparison_id": self.config["orkg"]["comparison_id"],
             "llm_model": self.config["kisski"]["model"],
@@ -687,7 +714,12 @@ class ExtractionPipeline:
         }
 
 
-def _run_evaluation(prediction_path: str, gold_path: str) -> bool:
+def _run_evaluation(
+    prediction_path: str,
+    gold_path: str,
+    metrics: str = "all",
+    bert_score_model: str = "roberta-large",
+) -> bool:
     """
     Run strict evaluation script after successful extraction.
     Returns True if evaluation ran successfully (exit code 0).
@@ -703,19 +735,69 @@ def _run_evaluation(prediction_path: str, gold_path: str) -> bool:
     if not gold.exists():
         logger.warning("Gold standard not found: %s", gold)
         return False
-    cmd = [sys.executable, str(script), "--prediction", prediction_path, "--gold", str(gold)]
+    cmd = [
+        sys.executable,
+        str(script),
+        "--prediction",
+        prediction_path,
+        "--gold",
+        str(gold),
+        "--metrics",
+        metrics,
+        "--bert-score-model",
+        bert_score_model,
+    ]
     print("\n" + "=" * 80)
-    print("EVALUATION (strict)")
+    print(f"EVALUATION (metrics: {metrics})")
     print("=" * 80)
     r = subprocess.run(cmd)
     return r.returncode == 0
+
+
+def _print_run_configuration(
+    pipeline: ExtractionPipeline,
+    upload_to_orkg: bool,
+    evaluation_metrics: Optional[str],
+) -> None:
+    """Print CLI choices that affect user-visible workflow behavior."""
+    print("\nRun configuration:")
+    print(f"  KISSKI model:    {pipeline.config['kisski']['model']}")
+    print(f"  ORKG endpoint:   {pipeline.config['orkg']['endpoint_url']}")
+    print(f"  ORKG upload:     {'enabled' if upload_to_orkg else 'disabled (--no-update)'}")
+    print(f"  Evaluation:      {evaluation_metrics or 'disabled'}")
+
+
+def _maybe_run_evaluation(
+    saved_path: Optional[str],
+    metrics: Optional[str],
+    gold_path: str,
+    bert_score_model: str,
+) -> None:
+    """Run evaluation only when explicitly requested by the CLI."""
+    if not metrics:
+        print("\nEvaluation skipped (pass --evaluate all|structured|bertscore to run metrics).")
+        return
+    if not saved_path:
+        print("\nEvaluation requested but no saved extraction JSON is available.")
+        return
+    _run_evaluation(saved_path, gold_path, metrics=metrics, bert_score_model=bert_score_model)
 
 
 def main():
     """Main entry point for command-line usage."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="LLM Extraction Pipeline")
+    parser = argparse.ArgumentParser(
+        description="LLM extraction pipeline for adding papers to ORKG",
+        epilog=(
+            "Examples:\n"
+            "  python -m src.pipeline --arxiv-id 2302.13971\n"
+            "  python -m src.pipeline --arxiv-id 2302.13971 --no-update\n"
+            "  python -m src.pipeline --arxiv-id 2302.13971 --evaluate all\n"
+            "  python -m src.pipeline --arxiv-id 2302.13971 --model llama-3.3-70b-instruct"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument("--arxiv-id", help="ArXiv ID to process")
     parser.add_argument(
         "--pdf-url", help="PDF URL (for papers not on ArXiv). Use with --paper-title."
@@ -727,24 +809,56 @@ def main():
     parser.add_argument("--json-file", help="Upload existing extraction JSON file to ORKG")
     parser.add_argument("--search", help="Search query")
     parser.add_argument("--max-results", type=int, default=10, help="Max search results")
-    parser.add_argument("--no-update", action="store_true", help="Don't update ORKG")
     parser.add_argument(
-        "--no-evaluate",
+        "--no-update",
         action="store_true",
-        help="Skip evaluation after extraction (default: run strict evaluation when successful)",
+        help="Do not upload/update data in ORKG; extraction/evaluation only",
     )
+    parser.add_argument(
+        "--evaluate",
+        choices=["all", "structured", "bertscore"],
+        nargs="?",
+        const="all",
+        default=None,
+        help=(
+            "Run evaluation metrics after extraction. Default is no evaluation. "
+            "'all' runs structured metrics and BERTScore; 'structured' skips "
+            "BERTScore; 'bertscore' reports semantic BERTScore metrics."
+        ),
+    )
+    parser.add_argument("--no-evaluate", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument(
         "--gold",
         default="data/gold_standard/R1364660.json",
-        help="Gold-standard JSON for evaluation (default: R1364660.json)",
+        help="Gold-standard JSON for evaluation (used only with --evaluate)",
+    )
+    parser.add_argument(
+        "--bert-score-model",
+        default="roberta-large",
+        help="BERTScore backbone model when --evaluate uses BERTScore (default: roberta-large)",
+    )
+    parser.add_argument(
+        "--model",
+        help="KISSKI model name for this extraction run (overrides config/config.yaml)",
+    )
+    parser.add_argument(
+        "--orkg-endpoint-url",
+        help=(
+            "ORKG endpoint URL for this run, e.g. https://sandbox.orkg.org/ "
+            "or https://orkg.org/ (overrides .env/config)"
+        ),
     )
     parser.add_argument("--test", action="store_true", help="Test connections")
     parser.add_argument("--status", action="store_true", help="Show pipeline status")
 
     args = parser.parse_args()
+    if args.no_evaluate:
+        logger.warning("--no-evaluate is deprecated; evaluation is disabled by default.")
+    if args.evaluate and args.search:
+        parser.error("--evaluate is supported for --arxiv-id, --pdf-url, or --json-file only")
 
     # Initialize pipeline
-    pipeline = ExtractionPipeline()
+    pipeline = ExtractionPipeline(model_name=args.model, orkg_endpoint_url=args.orkg_endpoint_url)
 
     if args.test:
         # Test connections
@@ -766,8 +880,15 @@ def main():
             print(f"✗ ERROR: File not found: {args.json_file}")
             sys.exit(1)
 
+        _print_run_configuration(
+            pipeline, upload_to_orkg=not args.no_update, evaluation_metrics=args.evaluate
+        )
         print("=" * 80)
-        print("Uploading Extraction JSON to ORKG")
+        print(
+            "Uploading Extraction JSON to ORKG"
+            if not args.no_update
+            else "Loading Extraction JSON (ORKG upload disabled)"
+        )
         print("=" * 80)
         print(f"JSON file: {args.json_file}")
 
@@ -784,12 +905,32 @@ def main():
             "extraction_data", extraction_data.get("raw_extraction", [])
         )
 
+        # Apply the same post-processing steps as the full pipeline
+        # so that size variants of the same version are merged into a
+        # single contribution (matching the thesis specification).
+        pre_merge_count = len(models_list)
+        if models_list:
+            models_list = normalize_extraction(models_list)
+            models_list = select_primary_model_contributions(
+                models_list, extraction_data.get("paper_metadata")
+            )
+            models_list = merge_model_variants(
+                models_list, extraction_data.get("paper_metadata")
+            )
+            logger.info(
+                "Post-processing (--json-file): %d raw -> %d merged contributions",
+                pre_merge_count,
+                len(models_list),
+            )
+
         print(f"\n{'=' * 80}")
         print("EXTRACTION DATA FROM JSON FILE")
         print("=" * 80)
         print(f"Research Paper: {extraction_data.get('paper_title', 'Unknown')}")
         print(f"ArXiv ID: {extraction_data.get('arxiv_id', 'N/A')}")
-        print(f"Models extracted: {len(models_list)}")
+        print(
+            f"Models: {pre_merge_count} raw -> {len(models_list)} merged contributions"
+        )
 
         # Display key fields for each model version
         if models_list:
@@ -849,6 +990,13 @@ def main():
                 "url": extraction_data.get("paper_url"),
             }
 
+        if args.no_update:
+            print("\nORKG upload skipped (--no-update).")
+            _maybe_run_evaluation(
+                str(json_path), args.evaluate, args.gold, args.bert_score_model
+            )
+            return
+
         print("\nUploading to ORKG (using model family grouping)...")
 
         # Transform data to match ORKGPaperManager's expected format
@@ -878,24 +1026,28 @@ def main():
             print(f"\nPaper ID: {paper_id}")
             print(f"Contributions: {len(contrib_ids)}")
             print("\nPaper URL:")
-            print(f"https://sandbox.orkg.org/paper/{paper_id}")
+            print(f"{pipeline.config['orkg']['endpoint_url']}/paper/{paper_id}")
 
             if contrib_ids:
                 print("\nContribution URLs:")
                 for i, cid in enumerate(contrib_ids[:5], 1):
-                    print(f"  {i}. https://sandbox.orkg.org/resource/{cid}")
+                    print(f"  {i}. {pipeline.config['orkg']['endpoint_url']}/resource/{cid}")
                 if len(contrib_ids) > 5:
                     print(f"  ... and {len(contrib_ids) - 5} more")
         else:
             print("✗ FAILED: Upload to ORKG failed")
             if result:
                 print(json.dumps(result, indent=2))
+        _maybe_run_evaluation(str(json_path), args.evaluate, args.gold, args.bert_score_model)
 
     elif args.pdf_url:
         if not args.paper_title:
             print("✗ ERROR: --paper-title is required when using --pdf-url")
             print("  Use the exact gold-standard paper title for evaluation matching.")
             sys.exit(1)
+        _print_run_configuration(
+            pipeline, upload_to_orkg=not args.no_update, evaluation_metrics=args.evaluate
+        )
         result = pipeline.process_paper_from_pdf_url(
             args.pdf_url, args.paper_title, save_intermediate=True, update_orkg=not args.no_update
         )
@@ -919,19 +1071,12 @@ def main():
                 if orkg_result.get("paper_id"):
                     print(f"  Paper ID: {orkg_result.get('paper_id')}")
                     print(
-                        f"  Paper URL: https://sandbox.orkg.org/paper/{orkg_result.get('paper_id')}"
+                        f"  Paper URL: {pipeline.config['orkg']['endpoint_url']}/paper/{orkg_result.get('paper_id')}"
                     )
                     print(f"  Contributions: {len(orkg_result.get('contribution_ids', []))}")
                 else:
                     print("  Status: Failed")
-            if saved and not args.no_evaluate:
-                _run_evaluation(saved, args.gold)
-            elif saved and args.no_evaluate:
-                print("\nRun evaluation manually:")
-                print(
-                    "  python scripts/evaluation/evaluate_extraction_strict.py "
-                    f'--prediction "{saved}" --gold {args.gold}'
-                )
+            _maybe_run_evaluation(saved, args.evaluate, args.gold, args.bert_score_model)
         else:
             print(f"[FAIL] Status: {result.get('status', 'unknown')}")
             if result.get("error"):
@@ -941,6 +1086,9 @@ def main():
 
     elif args.arxiv_id:
         # Process single paper
+        _print_run_configuration(
+            pipeline, upload_to_orkg=not args.no_update, evaluation_metrics=args.evaluate
+        )
         result = pipeline.process_paper(args.arxiv_id, update_orkg=not args.no_update)
 
         print("\n" + "=" * 80)
@@ -995,11 +1143,14 @@ def main():
                 if orkg_result.get("paper_id"):
                     print(f"  Paper ID: {orkg_result.get('paper_id')}")
                     print(
-                        f"  Paper URL: https://sandbox.orkg.org/paper/{orkg_result.get('paper_id')}"
+                        f"  Paper URL: {pipeline.config['orkg']['endpoint_url']}/paper/{orkg_result.get('paper_id')}"
                     )
                     print(f"  Contributions: {len(orkg_result.get('contribution_ids', []))}")
                 else:
                     print("  Status: Failed")
+            _maybe_run_evaluation(
+                result.get("saved_path"), args.evaluate, args.gold, args.bert_score_model
+            )
         else:
             print(f"✗ Status: {result.get('status', 'unknown')}")
             if result.get("error"):
@@ -1009,6 +1160,9 @@ def main():
 
     elif args.search:
         # Search and process
+        _print_run_configuration(
+            pipeline, upload_to_orkg=not args.no_update, evaluation_metrics=None
+        )
         results = pipeline.search_and_process(
             args.search, max_results=args.max_results, update_orkg=not args.no_update
         )

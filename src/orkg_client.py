@@ -7,10 +7,42 @@ interaction with the ORKG API, including template and comparison operations.
 
 import logging
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
 from orkg import ORKG, Hosts
 
 logger = logging.getLogger(__name__)
+
+ORKG_HOST_URLS = {
+    "sandbox": "https://sandbox.orkg.org",
+    "incubating": "https://incubating.orkg.org",
+    "production": "https://orkg.org",
+}
+
+
+def normalize_orkg_host(host_or_url: str) -> str:
+    """Map ORKG host names or public URLs to the ORKG client host key."""
+    value = (host_or_url or "sandbox").strip().rstrip("/")
+    parsed = urlparse(value if "://" in value else f"https://{value}")
+    hostname = (parsed.hostname or value).lower()
+
+    if hostname == "sandbox.orkg.org":
+        return "sandbox"
+    if hostname == "incubating.orkg.org":
+        return "incubating"
+    if hostname == "orkg.org":
+        return "production"
+    if hostname in ORKG_HOST_URLS:
+        return hostname
+
+    logger.warning("Unknown ORKG host/URL '%s'; falling back to sandbox", host_or_url)
+    return "sandbox"
+
+
+def orkg_frontend_url(host_or_url: str) -> str:
+    """Return the public ORKG frontend URL for a configured host or endpoint URL."""
+    host = normalize_orkg_host(host_or_url)
+    return ORKG_HOST_URLS.get(host, ORKG_HOST_URLS["sandbox"])
 
 
 class ORKGClient:
@@ -27,11 +59,13 @@ class ORKGClient:
         Initialize ORKG client.
 
         Args:
-            host: ORKG host (sandbox, incubating, or production)
+            host: ORKG host (sandbox, incubating, production) or public URL
             email: ORKG account email (optional)
             password: ORKG account password (optional)
             timeout: API timeout in seconds
         """
+        host = normalize_orkg_host(host)
+
         # Map host string to Hosts enum
         host_mapping = {
             "sandbox": Hosts.SANDBOX,

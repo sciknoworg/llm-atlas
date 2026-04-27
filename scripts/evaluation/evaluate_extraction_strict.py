@@ -120,7 +120,8 @@ class StrictExtractionEvaluator:
         self,
         fuzzy_threshold: float = 0.8,
         use_semantic: bool = True,
-        bert_score_model: str = "roberta-large"
+        bert_score_model: str = "roberta-large",
+        include_bert_score: bool = True,
     ):
         """
         Initialize strict evaluator.
@@ -132,10 +133,12 @@ class StrictExtractionEvaluator:
                           Default True. Falls back to fuzzy if unavailable.
             bert_score_model: Model for BERTScore computation (default: roberta-large).
                              Options: roberta-large, bert-base-uncased, etc.
+            include_bert_score: Compute/report BERTScore metrics for semantic fields.
         """
         self.fuzzy_threshold = fuzzy_threshold
         self.use_semantic = use_semantic
         self.bert_score_model = bert_score_model
+        self.include_bert_score = include_bert_score
         self.results = {}
         
     def normalize_value(self, value: Any) -> str:
@@ -681,7 +684,7 @@ class StrictExtractionEvaluator:
         # BERTScore-based match for license, pretraining_task, research_problem (before metrics)
         # Updates field_level_results so match/similarity come from BERTScore F1 instead of exact match
         bert_score_match_cache = {}
-        if matched_count > 0:
+        if self.include_bert_score and matched_count > 0:
             for field in self.BERTSCORE_MATCH_FIELDS:
                 if field not in field_level_results or not field_level_results[field]:
                     continue
@@ -730,7 +733,7 @@ class StrictExtractionEvaluator:
         # BERTScore evaluation for semantic fields (reporting)
         # Reuse scores from BERTScore match pass when field is in BERTSCORE_MATCH_FIELDS
         bert_score_per_field = {}
-        if self.use_semantic and matched_count > 0:
+        if self.include_bert_score and self.use_semantic and matched_count > 0:
             logger.info("Computing BERTScore for semantic fields...")
             for field in self.SEMANTIC_FIELDS:
                 if field not in field_level_results or not field_level_results[field]:
@@ -790,7 +793,7 @@ class StrictExtractionEvaluator:
             "missing_models": missing_models
         }
     
-    def print_report(self, evaluation: Dict[str, Any]) -> None:
+    def print_report(self, evaluation: Dict[str, Any], metrics: str = "all") -> None:
         """Print formatted evaluation report."""
         print("\n" + "=" * 80)
         print("STRICT EXTRACTION EVALUATION REPORT")
@@ -805,60 +808,66 @@ class StrictExtractionEvaluator:
         print(f"  Unmatched predictions:   {summary['unmatched_predictions']}")
         print(f"  Missing models:          {summary['missing_models']}")
         
-        # Overall metrics
-        overall = evaluation["overall_metrics"]
-        print(f"\n{'=' * 80}")
-        print("OVERALL METRICS (Structured Fields Only - Match-Based)")
-        print("=" * 80)
-        print("  Semantic fields (innovation, extension, etc.) are evaluated via BERTScore below.")
-        print(f"  Accuracy:        {overall['accuracy']:.2%}")
-        print(f"  Precision:       {overall['precision']:.2%}")
-        print(f"  Recall:          {overall['recall']:.2%}")
-        print(f"  F1-Score:        {overall['f1_score']:.2%}")
-        print(f"\n  True Positives:  {overall['true_positives']}")
-        print(f"  False Positives: {overall['false_positives']}")
-        print(f"  False Negatives: {overall['false_negatives']}")
-        print(f"  True Negatives:  {overall['true_negatives']}")
-        
-        # Per-field metrics
-        print(f"\n{'=' * 80}")
-        print("PER-FIELD METRICS")
-        print("=" * 80)
-        print(f"{'Field':<30} {'Accuracy':<12} {'Precision':<12} {'Recall':<12} {'F1-Score':<12}")
-        print("-" * 80)
-        
         field_metrics = evaluation["field_metrics"]
-        for field in self.EVALUATION_FIELDS:
-            if field in field_metrics:
-                metrics = field_metrics[field]
-                print(f"{field:<30} {metrics['accuracy']:<12.2%} {metrics['precision']:<12.2%} "
-                      f"{metrics['recall']:<12.2%} {metrics['f1_score']:<12.2%}")
-        
-        # Top performing fields
-        print(f"\n{'=' * 80}")
-        print("TOP 5 PERFORMING FIELDS (by F1-Score)")
-        print("=" * 80)
-        sorted_fields = sorted(
-            [(field, metrics["f1_score"]) for field, metrics in field_metrics.items()],
-            key=lambda x: x[1],
-            reverse=True
-        )[:5]
-        for i, (field, f1) in enumerate(sorted_fields, 1):
-            print(f"{i}. {field:<30} F1: {f1:.2%}")
-        
-        # Bottom performing fields
-        print(f"\n{'=' * 80}")
-        print("BOTTOM 5 PERFORMING FIELDS (by F1-Score)")
-        print("=" * 80)
-        sorted_fields_bottom = sorted(
-            [(field, metrics["f1_score"]) for field, metrics in field_metrics.items()],
-            key=lambda x: x[1]
-        )[:5]
-        for i, (field, f1) in enumerate(sorted_fields_bottom, 1):
-            print(f"{i}. {field:<30} F1: {f1:.2%}")
+        if metrics in {"all", "structured"}:
+            # Overall metrics
+            overall = evaluation["overall_metrics"]
+            print(f"\n{'=' * 80}")
+            print("OVERALL METRICS (Structured Fields Only - Match-Based)")
+            print("=" * 80)
+            if metrics == "all":
+                print("  Semantic fields (innovation, extension, etc.) are evaluated via BERTScore below.")
+            print(f"  Accuracy:        {overall['accuracy']:.2%}")
+            print(f"  Precision:       {overall['precision']:.2%}")
+            print(f"  Recall:          {overall['recall']:.2%}")
+            print(f"  F1-Score:        {overall['f1_score']:.2%}")
+            print(f"\n  True Positives:  {overall['true_positives']}")
+            print(f"  False Positives: {overall['false_positives']}")
+            print(f"  False Negatives: {overall['false_negatives']}")
+            print(f"  True Negatives:  {overall['true_negatives']}")
+            
+            # Per-field metrics
+            print(f"\n{'=' * 80}")
+            print("PER-FIELD METRICS")
+            print("=" * 80)
+            print(f"{'Field':<30} {'Accuracy':<12} {'Precision':<12} {'Recall':<12} {'F1-Score':<12}")
+            print("-" * 80)
+            
+            for field in self.EVALUATION_FIELDS:
+                if field in field_metrics:
+                    field_result = field_metrics[field]
+                    print(
+                        f"{field:<30} {field_result['accuracy']:<12.2%} "
+                        f"{field_result['precision']:<12.2%} "
+                        f"{field_result['recall']:<12.2%} "
+                        f"{field_result['f1_score']:<12.2%}"
+                    )
+            
+            # Top performing fields
+            print(f"\n{'=' * 80}")
+            print("TOP 5 PERFORMING FIELDS (by F1-Score)")
+            print("=" * 80)
+            sorted_fields = sorted(
+                [(field, values["f1_score"]) for field, values in field_metrics.items()],
+                key=lambda x: x[1],
+                reverse=True
+            )[:5]
+            for i, (field, f1) in enumerate(sorted_fields, 1):
+                print(f"{i}. {field:<30} F1: {f1:.2%}")
+            
+            # Bottom performing fields
+            print(f"\n{'=' * 80}")
+            print("BOTTOM 5 PERFORMING FIELDS (by F1-Score)")
+            print("=" * 80)
+            sorted_fields_bottom = sorted(
+                [(field, values["f1_score"]) for field, values in field_metrics.items()],
+                key=lambda x: x[1]
+            )[:5]
+            for i, (field, f1) in enumerate(sorted_fields_bottom, 1):
+                print(f"{i}. {field:<30} F1: {f1:.2%}")
         
         # BERTScore metrics (semantic fields)
-        if "bert_score_per_field" in evaluation and evaluation["bert_score_per_field"]:
+        if metrics in {"all", "bertscore"} and evaluation.get("bert_score_per_field"):
             print(f"\n{'=' * 80}")
             print("BERTSCORE METRICS (Semantic Fields - Token-Level Similarity)")
             print("=" * 80)
@@ -882,6 +891,8 @@ class StrictExtractionEvaluator:
                 print("\nInterpretation:")
                 print("  - BERTScore: Primary metric for semantic fields (innovation, extension, etc.); token-level similarity.")
                 print("  - Overall F1: Match-based accuracy for structured fields only (model_name, parameters, etc.).")
+        elif metrics == "bertscore":
+            print("\nBERTScore metrics were requested but no BERTScore values were computed.")
         
         # Unmatched/missing
         if evaluation["unmatched_predictions"]:
@@ -931,7 +942,16 @@ def main():
     parser.add_argument(
         "--no-semantic",
         action="store_true",
-        help="Disable semantic similarity (embeddings); use only fuzzy matching (SequenceMatcher)"
+        help="Disable semantic similarity and BERTScore; use only fuzzy matching (SequenceMatcher)"
+    )
+    parser.add_argument(
+        "--metrics",
+        choices=["all", "structured", "bertscore"],
+        default="all",
+        help=(
+            "Metric set to report: 'all' = structured metrics + BERTScore, "
+            "'structured' = match-based metrics only, 'bertscore' = semantic BERTScore report"
+        )
     )
     parser.add_argument(
         "--output",
@@ -951,6 +971,8 @@ def main():
     )
     
     args = parser.parse_args()
+    if args.metrics == "bertscore" and args.no_semantic:
+        parser.error("--metrics bertscore cannot be combined with --no-semantic")
     
     # Load data
     project_root = Path(__file__).parent.parent.parent
@@ -999,15 +1021,19 @@ def main():
         logger.info(f"Using paper title for filtering: {paper_title}")
     
     # Evaluate with STRICT matching (semantic similarity enabled by default)
+    use_semantic = not args.no_semantic and args.metrics != "structured"
+    include_bert_score = not args.no_semantic and args.metrics in {"all", "bertscore"}
+
     evaluator = StrictExtractionEvaluator(
         fuzzy_threshold=args.fuzzy_threshold,
-        use_semantic=not args.no_semantic,
-        bert_score_model=args.bert_score_model
+        use_semantic=use_semantic,
+        bert_score_model=args.bert_score_model,
+        include_bert_score=include_bert_score,
     )
     evaluation = evaluator.evaluate_dataset(gold_data, pred_data, paper_title=paper_title)
     
     # Print report
-    evaluator.print_report(evaluation)
+    evaluator.print_report(evaluation, metrics=args.metrics)
     
     # Save report if requested
     if args.output:
@@ -1017,19 +1043,25 @@ def main():
             json.dump(evaluation, f, indent=2, ensure_ascii=False)
         logger.info(f"\nEvaluation report saved to: {output_path}")
     
-    # Return exit code based on F1 score
-    f1 = evaluation["overall_metrics"]["f1_score"]
+    # Return exit code based on the selected primary metric
+    if args.metrics == "bertscore" and evaluation.get("bert_score_aggregate") is not None:
+        f1 = evaluation["bert_score_aggregate"]
+        metric_name = "BERTScore"
+    else:
+        f1 = evaluation["overall_metrics"]["f1_score"]
+        metric_name = "F1-Score"
+
     if f1 >= 0.8:
-        print(f"\n[OK] EXCELLENT: F1-Score {f1:.2%} >= 80%")
+        print(f"\n[OK] EXCELLENT: {metric_name} {f1:.2%} >= 80%")
         return 0
     elif f1 >= 0.6:
-        print(f"\n[OK] GOOD: F1-Score {f1:.2%} >= 60%")
+        print(f"\n[OK] GOOD: {metric_name} {f1:.2%} >= 60%")
         return 0
     elif f1 >= 0.4:
-        print(f"\n[~] FAIR: F1-Score {f1:.2%} >= 40%")
+        print(f"\n[~] FAIR: {metric_name} {f1:.2%} >= 40%")
         return 1
     else:
-        print(f"\n[FAIL] POOR: F1-Score {f1:.2%} < 40%")
+        print(f"\n[FAIL] POOR: {metric_name} {f1:.2%} < 40%")
         return 1
 
 
