@@ -29,6 +29,7 @@ class PaperFetcher:
         """
         self.download_dir = Path(download_dir)
         self.download_dir.mkdir(parents=True, exist_ok=True)
+        self.arxiv_client = arxiv.Client()
         logger.info(f"Initialized PaperFetcher with download_dir: {download_dir}")
 
     def fetch_paper_metadata(self, arxiv_id: str) -> Optional[Dict[str, Any]]:
@@ -49,7 +50,7 @@ class PaperFetcher:
 
             # Search for paper
             search = arxiv.Search(id_list=[clean_id])
-            paper = next(search.results())
+            paper = next(self.arxiv_client.results(search))
 
             metadata = {
                 "arxiv_id": clean_id,
@@ -241,7 +242,7 @@ class PaperFetcher:
             )
 
             papers = []
-            for paper in search.results():
+            for paper in self.arxiv_client.results(search):
                 metadata = {
                     "arxiv_id": paper.get_short_id(),
                     "title": paper.title,
