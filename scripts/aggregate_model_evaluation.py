@@ -174,7 +174,7 @@ def main():
     parser.add_argument(
         "--gold",
         type=str,
-        default="data/gold_standard/R1364660.json",
+        default="data/gold_standard/gold_standard_set.json",
         help="Path to gold standard"
     )
     parser.add_argument(

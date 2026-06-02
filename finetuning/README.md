@@ -29,7 +29,7 @@ finetuning/
 python -m finetuning.prepare_dataset
 ```
 
-This reads the gold standard (`data/gold_standard/R1364660.json`), parses each paper PDF, chunks the text, and produces train/val/test JSONL files with no data leakage (split by paper).
+This reads the gold standard (`data/gold_standard/gold_standard_set.json`), parses each paper PDF, chunks the text, and produces train/val/test JSONL files with no data leakage (split by paper).
 
 ### 2. Train
 

@@ -19,6 +19,7 @@ from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser
 from src.llm_extractor_transformers import LLMExtractorTransformers
 from src.template_mapper import TemplateMapper
+from grete.extraction.path_config import get_arxiv_download_dir, get_pipeline_extraction_output_dir
 
 
 def main():
@@ -35,7 +36,7 @@ def main():
     
     # Initialize components
     print("\n[1/5] Initializing components...")
-    fetcher = PaperFetcher(download_dir="data/papers")
+    fetcher = PaperFetcher(download_dir=str(get_arxiv_download_dir()))
     parser = PDFParser(method="pdfplumber")
     
     # Use distilgpt2 - from official GWDG documentation
@@ -93,7 +94,7 @@ def main():
     print(f"✓ Mapped {len(mapped.get('contributions', []))} contribution(s)")
     
     # Save results
-    output_dir = Path("data/extracted")
+    output_dir = get_pipeline_extraction_output_dir()
     output_dir.mkdir(parents=True, exist_ok=True)
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

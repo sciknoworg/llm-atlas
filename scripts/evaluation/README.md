@@ -12,8 +12,8 @@ Converts ORKG comparison CSV exports to gold-standard JSON datasets.
 python scripts/evaluation/convert_gold_standard.py
 ```
 
-**Input:** `data/gold_standard/R1364660.csv` (ORKG comparison export)  
-**Output:** `data/gold_standard/R1364660.json` (Gold-standard dataset)
+**Input:** `data/gold_standard/gold_standard_export.csv` (ORKG comparison export)  
+**Output:** `data/gold_standard/gold_standard_set.json` (Gold-standard dataset)
 
 ### 2. `evaluate_extraction.py`
 Evaluates extraction quality by comparing predictions against gold-standard dataset.
@@ -21,12 +21,12 @@ Evaluates extraction quality by comparing predictions against gold-standard data
 **Usage:**
 ```bash
 python scripts/evaluation/evaluate_extraction.py \
-    --gold data/gold_standard/R1364660.json \
-    --prediction data/extracted/2401.02385_20251207_223913.json
+    --gold data/gold_standard/gold_standard_set.json \
+    --prediction results/extracted/2401.02385_20251207_223913.json
 ```
 
 **Options:**
-- `--gold`: Path to gold-standard JSON (default: `data/gold_standard/R1364660.json`)
+- `--gold`: Path to gold-standard JSON (default: `data/gold_standard/gold_standard_set.json`)
 - `--prediction`: Path to extraction result JSON (required)
 - `--fuzzy-threshold`: Similarity threshold for text matching (default: 0.8)
 - `--output`: Optional path to save evaluation report as JSON
@@ -79,7 +79,7 @@ parameters                     85.20%       87.50%       83.00%       85.20%
 1. **Prepare Gold-Standard Dataset**
    ```bash
    # Export ORKG comparison R1364660 as CSV
-   # Place CSV in data/gold_standard/R1364660.csv
+   # Place CSV in data/gold_standard/gold_standard_export.csv
    
    # Convert to JSON
    python scripts/evaluation/convert_gold_standard.py
@@ -91,13 +91,13 @@ parameters                     85.20%       87.50%       83.00%       85.20%
    python -m src.pipeline --arxiv-id 2401.02385
    
    # Or use existing extraction
-   # Results in: data/extracted/2401.02385_YYYYMMDD_HHMMSS.json
+   # Results in: results/extracted/2401.02385_YYYYMMDD_HHMMSS.json
    ```
 
 3. **Evaluate Extraction Quality**
    ```bash
    python scripts/evaluation/evaluate_extraction.py \
-       --prediction data/extracted/2401.02385_20251207_223913.json \
+       --prediction results/extracted/2401.02385_20251207_223913.json \
        --output data/evaluation_reports/report_20260126.json
    ```
 

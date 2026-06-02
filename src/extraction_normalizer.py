@@ -7,7 +7,8 @@ so stored data and evaluation are more reliable. Used after extraction, before m
 
 import logging
 import re
-from typing import Any, Dict, List
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -29,25 +30,67 @@ ORGANIZATION_ALIASES = {
 }
 
 
+def format_published_date_from_metadata(published: Any) -> Optional[str]:
+    """
+    Format an arXiv (or ISO) published timestamp as YYYY-MM-DD.
+
+    Examples:
+        "2023-06-14T18:00:00+00:00" -> "2023-06-14"
+        "2023-06-14" -> "2023-06-14"
+    """
+    if published is None or (isinstance(published, str) and not published.strip()):
+        return None
+
+    s = str(published).strip()
+
+    # Fast path: leading YYYY-MM-DD (optionally followed by time / timezone)
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})", s)
+    if m:
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if 1 <= month <= 12 and 1 <= day <= 31:
+            return f"{year:04d}-{month:02d}-{day:02d}"
+
+    try:
+        normalized = s.replace("Z", "+00:00")
+        if "T" in normalized:
+            dt = datetime.fromisoformat(normalized)
+        else:
+            dt = datetime.strptime(normalized[:10], "%Y-%m-%d")
+        return dt.date().isoformat()
+    except (ValueError, TypeError):
+        logger.debug("Could not parse published date from metadata: %r", published)
+        return None
+
+
 def normalize_date_created(value: Any) -> Any:
     """
-    Normalize date_created to YYYY-MM when possible.
-    - "2018" -> "2018-01"
-    - "2018-10" -> "2018-10"
-    - "2018-10-01" -> "2018-10"
+    Normalize date_created to a consistent ISO-like string without dropping the day.
+
+    - "2018-10-01" -> "2018-10-01"  (day preserved)
+    - "2018-10" -> "2018-10"        (month only when day unknown)
+    - "2018" -> "2018-01-01"        (year only -> first of year)
     - Invalid or empty -> return as-is
     """
     if value is None or (isinstance(value, str) and not value.strip()):
         return value
     s = str(value).strip()
-    # Already YYYY-MM or YYYY-MM-DD
-    m = re.match(r"^(\d{4})-(\d{2})(?:-\d{2})?$", s)
+
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", s)
     if m:
-        return f"{m.group(1)}-{m.group(2)}"
-    # Year only
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if 1 <= month <= 12 and 1 <= day <= 31:
+            return f"{year:04d}-{month:02d}-{day:02d}"
+
+    m = re.match(r"^(\d{4})-(\d{2})$", s)
+    if m:
+        year, month = int(m.group(1)), int(m.group(2))
+        if 1 <= month <= 12:
+            return f"{year:04d}-{month:02d}"
+
     m = re.match(r"^(\d{4})$", s)
     if m:
-        return f"{m.group(1)}-01"
+        return f"{int(m.group(1)):04d}-01-01"
+
     return value
 
 

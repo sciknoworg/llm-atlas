@@ -6,12 +6,67 @@ interaction with the ORKG API, including template and comparison operations.
 """
 
 import logging
+import re
 from typing import Any, Dict, List, Optional
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 from orkg import ORKG, Hosts
 
 logger = logging.getLogger(__name__)
+
+_ORKG_RESOURCE_ID_RE = re.compile(r"(R\d+)$")
+_ORKG_DEFAULT_API_BASE = "https://sandbox.orkg.org"
+
+
+def normalize_orkg_location_url(url: str, api_base: str = _ORKG_DEFAULT_API_BASE) -> str:
+    """
+    Fix malformed Location headers from the ORKG API (e.g. https://host:80/...).
+
+    The official client follows the Location header with requests.get(); when the
+    server returns https on port 80, TLS fails with SSL WRONG_VERSION_NUMBER.
+    """
+    if not url:
+        return url
+
+    if url.startswith("/"):
+        return f"{api_base.rstrip('/')}{url}"
+
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+    if not host.endswith("orkg.org"):
+        return url
+
+    scheme = parsed.scheme
+    port = parsed.port
+
+    # https://sandbox.orkg.org:80/... -> https://sandbox.orkg.org/...
+    if scheme == "https" and port == 80:
+        scheme = "https"
+        port = None
+    elif scheme == "http":
+        # ORKG frontends/APIs are served over HTTPS
+        scheme = "https"
+        if port == 80:
+            port = None
+
+    if port and port != 443:
+        netloc = f"{parsed.hostname}:{port}"
+    else:
+        netloc = parsed.hostname or ""
+
+    return urlunparse(
+        (scheme, netloc, parsed.path, parsed.params, parsed.query, parsed.fragment)
+    )
+
+
+def parse_orkg_resource_id(url: str) -> Optional[str]:
+    """Extract ORKG resource id (e.g. R2166359) from a Location or API URL."""
+    if not url:
+        return None
+    path = urlparse(url).path.rstrip("/")
+    match = _ORKG_RESOURCE_ID_RE.search(path)
+    return match.group(1) if match else None
+
 
 ORKG_HOST_URLS = {
     "sandbox": "https://sandbox.orkg.org",
@@ -74,13 +129,17 @@ class ORKGClient:
         }
 
         orkg_host = host_mapping.get(host.lower(), Hosts.SANDBOX)
+        self._api_base = ORKG_HOST_URLS.get(host, ORKG_HOST_URLS["sandbox"])
 
-        # Initialize ORKG client
+        # Disable automatic Location follow: sandbox returns https://host:80 URLs
+        # which break TLS (SSL WRONG_VERSION_NUMBER). We resolve paper IDs ourselves.
+        client_kwargs = {"follow_location": False, "timeout": timeout}
+
         if email and password:
-            self.orkg = ORKG(host=orkg_host, creds=(email, password))
+            self.orkg = ORKG(host=orkg_host, creds=(email, password), **client_kwargs)
             logger.info(f"Initialized ORKG client with authentication for {host}")
         else:
-            self.orkg = ORKG(host=orkg_host)
+            self.orkg = ORKG(host=orkg_host, **client_kwargs)
             logger.info(f"Initialized ORKG client without authentication for {host}")
 
         self.host = host
@@ -366,6 +425,24 @@ class ORKGClient:
                         c.get("id") for c in paper_data["contributions"] if isinstance(c, dict)
                     ]
 
+                location_url = normalize_orkg_location_url(
+                    response.url or "", api_base=self._api_base
+                )
+                if not paper_id and location_url:
+                    paper_id = parse_orkg_resource_id(location_url)
+                    if paper_id:
+                        logger.info(
+                            "Resolved paper id %s from Location header (follow_location=False)",
+                            paper_id,
+                        )
+                        fetched = self.get_paper(paper_id)
+                        if isinstance(fetched, dict) and fetched.get("contributions"):
+                            contribution_ids = [
+                                c.get("id")
+                                for c in fetched["contributions"]
+                                if isinstance(c, dict) and c.get("id")
+                            ]
+
                 logger.info(
                     f"Successfully created paper: {paper_id} "
                     f"with {len(contribution_ids)} contributions"
@@ -373,7 +450,7 @@ class ORKGClient:
                 return {
                     "paper_id": paper_id,
                     "contribution_ids": contribution_ids,
-                    "url": response.url,
+                    "url": location_url,
                 }
             else:
                 error_msg = (

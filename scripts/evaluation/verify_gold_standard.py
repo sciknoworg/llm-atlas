@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-json_path = Path(__file__).parent.parent.parent / "data" / "gold_standard" / "R1364660.json"
+json_path = Path(__file__).parent.parent.parent / "data" / "gold_standard" / "gold_standard_set.json"
 
 with open(json_path, 'r', encoding='utf-8') as f:
     data = json.load(f)

@@ -1,6 +1,6 @@
 """Tests for the extraction pipeline."""
 
-import pytest
+from pathlib import Path
 from unittest.mock import Mock, patch
 
 from src.pipeline import ExtractionPipeline
@@ -19,7 +19,8 @@ class TestExtractionPipeline:
             assert pipeline.orkg_client is not None
             assert pipeline.paper_fetcher is not None
             assert pipeline.pdf_parser is not None
-            assert pipeline.template_mapper is not None
+            assert isinstance(pipeline.extraction_output_dir, Path)
+            assert pipeline.extraction_output_dir.is_absolute()
     
     @patch('src.pipeline.ORKGClient')
     @patch('src.pipeline.LLMExtractor')
@@ -47,5 +48,5 @@ class TestExtractionPipeline:
             assert 'orkg_host' in status
             assert 'template_id' in status
             assert 'comparison_id' in status
-            assert 'connections' in status
+            assert 'extraction_output_dir' in status
 

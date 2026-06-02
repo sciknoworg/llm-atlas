@@ -14,7 +14,7 @@ from typing import List
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-GOLD_STANDARD_PATH = PROJECT_ROOT / "data" / "gold_standard" / "R1364660.json"
+GOLD_STANDARD_PATH = PROJECT_ROOT / "data" / "gold_standard" / "gold_standard_set.json"
 PAPERS_LIST_PATH = PROJECT_ROOT / "data" / "gold_standard" / "papers_list.json"
 PAPERS_DIR = PROJECT_ROOT / "data" / "papers"
 

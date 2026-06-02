@@ -8,7 +8,7 @@
 #   - Submits 8 SLURM array jobs (one per model)
 #   - Each array job has 71 tasks (one per paper)
 #   - Total: 8 × 71 = 568 GPU jobs
-#   - Outputs: data/extracted/<arxiv_id>_<timestamp>.json (each JSON has "model_used" field)
+#   - Outputs: <pipeline.extraction_output_dir>/<arxiv_id>_<timestamp>.json (each JSON has "model_used" field)
 #   - Logs:    all_papers_<JOBID>_<TASK>.log / .err
 
 MODELS=(
@@ -34,4 +34,4 @@ echo ""
 echo "All jobs submitted."
 echo "Monitor with:  squeue -u \$USER"
 echo "Logs:          all_papers_<JOBID>_<TASK>.log / .err"
-echo "Results:       data/extracted/*.json"
+echo "Results:       <pipeline.extraction_output_dir>/*.json (see config/config.yaml)"

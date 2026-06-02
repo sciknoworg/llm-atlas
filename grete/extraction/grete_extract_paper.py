@@ -29,6 +29,7 @@ from src.paper_fetcher import PaperFetcher
 from src.pdf_parser import PDFParser
 from src.llm_extractor_transformers import LLMExtractorTransformers
 from src.template_mapper import TemplateMapper
+from grete.extraction.path_config import get_arxiv_download_dir, get_pipeline_extraction_output_dir
 
 
 def main():
@@ -57,7 +58,7 @@ def main():
     
     # Initialize components
     print("\n[1/5] Initializing components...")
-    fetcher = PaperFetcher(download_dir="data/papers")
+    fetcher = PaperFetcher(download_dir=str(get_arxiv_download_dir()))
     parser = PDFParser(method="pdfplumber")
     extractor = LLMExtractorTransformers(
         model_name=model_name,
@@ -122,9 +123,9 @@ def main():
     mapped = mapper.map_extraction_result(result)
     print(f"✓ Mapped {len(mapped.get('contributions', []))} contribution(s)")
     
-    # Save results under data/extracted/<model_slug>/
+    # Save results under configured extraction output dir / <model_slug>/
     model_slug = slugify(extractor.model_name)
-    output_dir = PROJECT_ROOT / "data" / "extracted" / model_slug
+    output_dir = get_pipeline_extraction_output_dir() / model_slug
     output_dir.mkdir(parents=True, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

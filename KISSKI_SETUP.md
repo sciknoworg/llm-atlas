@@ -31,7 +31,7 @@ Create or edit your `.env` file:
 
 ```env
 # KISSKI Chat AI API (SAIA Platform)
-KISSKI_API_KEY=8810b4c60127bfed5655b1e66f3d291a
+KISSKI_API_KEY=your_kisski_api_key_here
 KISSKI_BASE_URL=https://chat-ai.academiccloud.de/v1
 ```
 
@@ -185,7 +185,7 @@ pipeline = ExtractionPipeline()
 # Extract a paper
 result = pipeline.process_paper("2307.09288")
 
-# Results saved to data/extracted/
+# Results saved to pipeline.extraction_output_dir (default: results/extracted/)
 ```
 
 ### Command Line
@@ -195,7 +195,7 @@ result = pipeline.process_paper("2307.09288")
 python -m src.pipeline --arxiv-id 2307.09288
 
 # Extract from existing JSON
-python -m src.pipeline --json-file data/extracted/my_file.json
+python -m src.pipeline --json-file results/extracted/my_file.json
 
 # Test connections
 python -m src.pipeline --test
@@ -378,7 +378,7 @@ for chunk in stream:
 
 1. ✅ Test API: `python test_kisski_api.py`
 2. ✅ Extract a paper: `python -m src.pipeline --arxiv-id 2307.09288`
-3. ✅ Verify results: Check `data/extracted/`
+3. ✅ Verify results: Check `results/extracted/` (or your configured `pipeline.extraction_output_dir`)
 4. ✅ Monitor logs: Check `data/logs/pipeline.log`
 5. ✅ Adjust model: Try different models in `config/config.yaml`
 

@@ -2,7 +2,7 @@
 Build papers list with PDF URLs/ArXiv IDs from ORKG and ArXiv.
 
 This script:
-1. Reads the gold standard (R1364660.json) to get unique papers
+1. Reads the gold standard (gold_standard_set.json) to get unique papers
 2. Fetches paper URLs from ORKG comparison R1364660
 3. For missing papers, searches ArXiv by title
 4. Outputs a papers list (paper_title, pdf_url, arxiv_id, source)
@@ -247,7 +247,7 @@ def main():
     parser.add_argument(
         "--gold",
         type=str,
-        default="data/gold_standard/R1364660.json",
+        default="data/gold_standard/gold_standard_set.json",
         help="Path to gold standard JSON"
     )
     parser.add_argument(

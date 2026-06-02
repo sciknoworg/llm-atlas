@@ -9,7 +9,7 @@ from the normalized string for consistency.
 Usage:
     python scripts/evaluation/normalize_gold_standard_parameters.py
 
-Reads/writes: data/gold_standard/R1364660.json
+Reads/writes: data/gold_standard/gold_standard_set.json
 """
 
 import json
@@ -82,7 +82,7 @@ def parameters_millions_from_normalized(normalized: Optional[str]) -> Optional[i
 
 def main():
     project_root = Path(__file__).resolve().parent.parent.parent
-    json_path = project_root / "data" / "gold_standard" / "R1364660.json"
+    json_path = project_root / "data" / "gold_standard" / "gold_standard_set.json"
 
     if not json_path.exists():
         logger.error("Gold standard not found: %s", json_path)

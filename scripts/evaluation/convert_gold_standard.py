@@ -8,10 +8,10 @@ Usage:
     python scripts/evaluation/convert_gold_standard.py
     
 Input:
-    data/gold_standard/R1364660.csv (ORKG comparison export)
+    data/gold_standard/gold_standard_export.csv (ORKG comparison export)
     
 Output:
-    data/gold_standard/R1364660.json (Gold-standard dataset)
+    data/gold_standard/gold_standard_set.json (Gold-standard dataset)
 """
 
 import csv
@@ -242,13 +242,16 @@ def main():
     """Main entry point."""
     # Define paths
     project_root = Path(__file__).parent.parent.parent
-    csv_path = project_root / "data" / "gold_standard" / "R1364660.csv"
-    json_path = project_root / "data" / "gold_standard" / "R1364660.json"
+    csv_path = project_root / "data" / "gold_standard" / "gold_standard_export.csv"
+    json_path = project_root / "data" / "gold_standard" / "gold_standard_set.json"
     
     # Validate CSV exists
     if not csv_path.exists():
         logger.error(f"CSV file not found: {csv_path}")
-        logger.error("Please export the ORKG comparison R1364660 as CSV and place it in data/gold_standard/")
+        logger.error(
+            "Please export the ORKG comparison R1364660 as CSV and save it as "
+            "data/gold_standard/gold_standard_export.csv"
+        )
         return
     
     # Create output directory if needed
