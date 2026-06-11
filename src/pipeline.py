@@ -256,11 +256,17 @@ class ExtractionPipeline:
         try:
             # Step 1: Fetch paper from ArXiv
             logger.info("Step 1: Fetching paper from ArXiv")
-            paper_metadata = self.paper_fetcher.fetch_paper(arxiv_id, download_pdf=True)
-
-            if not paper_metadata:
+            try: 
+                paper_metadata = self.paper_fetcher.fetch_paper(arxiv_id, download_pdf=True)
+                
+            except Exception as e:
                 result["status"] = "failed"
-                result["error"] = "Failed to fetch paper"
+                result["error"] = str(e)
+                return result
+            
+            except ValueError as e:
+                result["status"] = "failed"
+                result["error"] = str(e)
                 return result
 
             result["steps"]["fetch"] = "success"

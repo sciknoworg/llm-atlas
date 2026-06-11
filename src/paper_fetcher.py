@@ -180,7 +180,7 @@ class PaperFetcher:
 
         except StopIteration:
             logger.error(f"Paper not found: {arxiv_id}")
-            return None
+            raise ValueError(f"Paper not found: {arxiv_id}")
         except Exception as e:
             # Graceful fallback chain on transient errors (e.g. HTTP 429):
             #   1. previously cached metadata on disk
@@ -205,7 +205,7 @@ class PaperFetcher:
                 return html_metadata
 
             logger.error(f"Error fetching metadata for {arxiv_id}: {e}")
-            return None
+            raise RuntimeError(f"Failed to fetch metadata for {arxiv_id}: {e}")
 
     def download_pdf(
         self, arxiv_id: str, filename: Optional[str] = None, force: bool = False
