@@ -915,6 +915,13 @@ def main():
         logger.warning("--no-evaluate is deprecated; evaluation is disabled by default.")
     if args.evaluate and args.search:
         parser.error("--evaluate is supported for --arxiv-id, --pdf-url, or --json-file only")
+    if not any(
+        [args.test, args.status, args.json_file, args.pdf_url, args.arxiv_id, args.search]
+    ):
+        parser.error(
+            "one of the following arguments is required: "
+            "--arxiv-id, --pdf-url, --json-file, --search, --test, --status"
+        )
 
     # Initialize pipeline
     pipeline = ExtractionPipeline(
