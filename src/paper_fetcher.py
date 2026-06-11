@@ -30,6 +30,7 @@ class PaperFetcher:
         """
         self.download_dir = Path(download_dir)
         self.download_dir.mkdir(parents=True, exist_ok=True)
+        self.arxiv_client = arxiv.Client()
         logger.info(f"Initialized PaperFetcher with download_dir: {download_dir}")
 
     def _metadata_cache_path(self, arxiv_id: str) -> Path:
@@ -157,7 +158,7 @@ class PaperFetcher:
             logger.info(f"Fetching metadata for ArXiv ID: {clean_id}")
 
             search = arxiv.Search(id_list=[clean_id])
-            paper = next(search.results())
+            paper = next(self.arxiv_client.results(search))
 
             metadata = {
                 "arxiv_id": clean_id,
@@ -179,7 +180,7 @@ class PaperFetcher:
 
         except StopIteration:
             logger.error(f"Paper not found: {arxiv_id}")
-            return None
+            raise ValueError(f"Paper not found: {arxiv_id}")
         except Exception as e:
             # Graceful fallback chain on transient errors (e.g. HTTP 429):
             #   1. previously cached metadata on disk
@@ -204,7 +205,7 @@ class PaperFetcher:
                 return html_metadata
 
             logger.error(f"Error fetching metadata for {arxiv_id}: {e}")
-            return None
+            raise RuntimeError(f"Failed to fetch metadata for {arxiv_id}: {e}")
 
     def download_pdf(
         self, arxiv_id: str, filename: Optional[str] = None, force: bool = False
@@ -372,7 +373,7 @@ class PaperFetcher:
             )
 
             papers = []
-            for paper in search.results():
+            for paper in self.arxiv_client.results(search):
                 metadata = {
                     "arxiv_id": paper.get_short_id(),
                     "title": paper.title,
