@@ -256,15 +256,15 @@ class ExtractionPipeline:
         try:
             # Step 1: Fetch paper from ArXiv
             logger.info("Step 1: Fetching paper from ArXiv")
-            try: 
+            try:
                 paper_metadata = self.paper_fetcher.fetch_paper(arxiv_id, download_pdf=True)
-                
-            except Exception as e:
-                result["status"] = "failed"
+
+            except ValueError as e:
+                result["status"] = "not_found"
                 result["error"] = str(e)
                 return result
-            
-            except ValueError as e:
+
+            except Exception as e:
                 result["status"] = "failed"
                 result["error"] = str(e)
                 return result
@@ -847,7 +847,7 @@ def main():
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--arxiv-id", type=non_empty_string, required=True, help="ArXiv ID to process")
+    parser.add_argument("--arxiv-id", type=non_empty_string, help="ArXiv ID to process")
     parser.add_argument(
         "--pdf-url", help="PDF URL (for papers not on ArXiv). Use with --paper-title."
     )
