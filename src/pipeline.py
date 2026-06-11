@@ -13,9 +13,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-
 import yaml
 from dotenv import load_dotenv
+import argparse
 
 from src.extraction_normalizer import format_published_date_from_metadata, normalize_extraction
 from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
@@ -827,10 +827,13 @@ def _maybe_run_evaluation(
         return
     _run_evaluation(saved_path, gold_path, metrics=metrics, bert_score_model=bert_score_model)
 
+def non_empty_string(value):
+    if not value or not value.strip():
+        raise argparse.ArgumentTypeError("--arxiv-id cannot be an empty string")
+    return value.strip()
 
 def main():
     """Main entry point for command-line usage."""
-    import argparse
 
     parser = argparse.ArgumentParser(
         description="LLM extraction pipeline for adding papers to ORKG",
@@ -844,7 +847,7 @@ def main():
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--arxiv-id", help="ArXiv ID to process")
+    parser.add_argument("--arxiv-id", type=non_empty_string, required=True, help="ArXiv ID to process")
     parser.add_argument(
         "--pdf-url", help="PDF URL (for papers not on ArXiv). Use with --paper-title."
     )
