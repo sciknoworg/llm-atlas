@@ -8,7 +8,7 @@ For relaxed evaluation (better UX), use evaluate_extraction.py instead.
 
 Usage:
     python scripts/evaluation/evaluate_extraction_strict.py \\
-        --gold data/gold_standard/R1364660.json \\
+        --gold data/gold_standard/gold_standard_set.json \\
         --prediction data/extracted/2401.02385_20251207_223913.json
         
 Output:
@@ -244,38 +244,43 @@ class StrictExtractionEvaluator:
             return []
     
     @staticmethod
-    def _extract_year_month(value: Any) -> Tuple[Optional[int], Optional[int]]:
-        """Extract (year, month) from date string. Month is 1-12 or None."""
+    def _extract_year_month_day(value: Any) -> Tuple[Optional[int], Optional[int], Optional[int]]:
+        """Extract (year, month, day) from date string. Month/day are None when absent."""
         if value is None or (isinstance(value, str) and not value.strip()):
-            return None, None
+            return None, None, None
         s = str(value).strip()
-        # YYYY-MM-DD or YYYY-MM
-        m = re.match(r"^(\d{4})-(\d{2})(?:-\d{2})?$", s)
+        m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", s)
         if m:
-            return int(m.group(1)), int(m.group(2))
-        # YYYY only
+            return int(m.group(1)), int(m.group(2)), int(m.group(3))
+        m = re.match(r"^(\d{4})-(\d{2})$", s)
+        if m:
+            return int(m.group(1)), int(m.group(2)), None
         m = re.match(r"^(\d{4})$", s)
         if m:
-            return int(m.group(1)), None
-        return None, None
+            return int(m.group(1)), None, None
+        return None, None, None
 
     def compare_date(self, gold_value: Any, pred_value: Any) -> Tuple[bool, float]:
         """
-        Compare date_created: match if same year; if both have month, also require same month.
-        Returns (is_match, similarity). Same year => at least 0.5; same year+month => 1.0.
+        Compare date_created: same year required; month required when both have month;
+        day required when both have a full YYYY-MM-DD date.
+        Returns (is_match, similarity).
         """
-        gy, gm = self._extract_year_month(gold_value)
-        py, pm = self._extract_year_month(pred_value)
+        gy, gm, gd = self._extract_year_month_day(gold_value)
+        py, pm, pd = self._extract_year_month_day(pred_value)
         if gy is None and py is None:
             return True, 1.0
         if gy is None or py is None:
             return False, 0.0
         if gy != py:
             return False, 0.0
-        # Same year
         if gm is not None and pm is not None:
-            return (gm == pm, 1.0) if gm == pm else (False, 0.5)
-        return True, 0.9  # same year, month missing in one
+            if gm != pm:
+                return False, 0.5
+            if gd is not None and pd is not None:
+                return ((gd == pd), 1.0) if gd == pd else (False, 0.75)
+            return True, 0.9
+        return True, 0.9
 
     # Known organization aliases for flexible matching (lowercase)
     _ORG_ALIASES = [
@@ -924,7 +929,7 @@ def main():
     parser.add_argument(
         "--gold",
         type=str,
-        default="data/gold_standard/R1364660.json",
+        default="data/gold_standard/gold_standard_set.json",
         help="Path to gold-standard JSON file"
     )
     parser.add_argument(

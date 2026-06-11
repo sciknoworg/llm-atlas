@@ -6,7 +6,7 @@ instruction / input / output JSONL files ready for SFTTrainer.
 
 Pipeline
 --------
-1. Load gold-standard models from ``R1364660.json``.
+1. Load gold-standard models from ``gold_standard_set.json``.
 2. Group gold entries by ``paper_title``.
 3. For each paper, locate the PDF in ``data/papers/`` and parse it.
 4. Chunk the parsed text using the same strategy as the baseline

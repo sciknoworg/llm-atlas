@@ -54,8 +54,8 @@ squeue -u YOUR_USERNAME
 # View logs
 tail -f extract_*.log
 
-# Check results
-ls -la ../data/extracted/
+# Check results (uses pipeline.extraction_output_dir from config/config.yaml)
+ls -la ../results/extracted/
 ```
 
 ## Documentation
@@ -77,4 +77,4 @@ For local API-based extraction and environment setup, see the repository root [R
 - These scripts are optimized for the Grete cluster environment
 - Extraction scripts use GPU-based transformers instead of API calls
 - SLURM job scripts include resource allocation for GPU nodes
-- Results are saved to `../data/extracted/`
+- Results are saved to the directory configured by `pipeline.extraction_output_dir` (default: `../results/extracted/`)

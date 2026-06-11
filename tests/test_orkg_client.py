@@ -2,7 +2,29 @@
 
 import pytest
 from unittest.mock import Mock, patch
-from src.orkg_client import ORKGClient
+from src.orkg_client import ORKGClient, normalize_orkg_location_url, parse_orkg_resource_id
+
+
+class TestOrkgUrlHelpers:
+    """Tests for ORKG Location URL normalization."""
+
+    def test_normalize_https_port_80(self):
+        url = "https://sandbox.orkg.org:80/api/papers/R2166359"
+        assert normalize_orkg_location_url(url) == "https://sandbox.orkg.org/api/papers/R2166359"
+
+    def test_normalize_http_to_https(self):
+        url = "http://sandbox.orkg.org/api/papers/R2166359"
+        assert normalize_orkg_location_url(url) == "https://sandbox.orkg.org/api/papers/R2166359"
+
+    def test_parse_resource_id(self):
+        assert parse_orkg_resource_id("https://sandbox.orkg.org/api/papers/R2166359") == "R2166359"
+
+    def test_normalize_relative_location(self):
+        url = "/api/papers/R2166359"
+        assert (
+            normalize_orkg_location_url(url)
+            == "https://sandbox.orkg.org/api/papers/R2166359"
+        )
 
 
 class TestORKGClient:

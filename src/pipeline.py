@@ -17,24 +17,29 @@ from typing import Any, Dict, List, Optional
 import yaml
 from dotenv import load_dotenv
 
-from src.extraction_normalizer import normalize_extraction
+from src.extraction_normalizer import format_published_date_from_metadata, normalize_extraction
 from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
 from src.model_contribution_selector import select_primary_model_contributions
 from src.model_variant_merger import merge_model_variants
 from src.orkg_client import ORKGClient, normalize_orkg_host, orkg_frontend_url
 from src.orkg_manager import ORKGPaperManager
 from src.paper_fetcher import PaperFetcher
+from src.path_utils import PROJECT_ROOT, resolve_project_path
 from src.pdf_parser import PDFParser
 from src.template_mapper import TemplateMapper
 
 # Load environment variables
 load_dotenv()
 
+# ASCII-safe CLI markers (Windows cp1252 consoles cannot print ✓/✗)
+_CLI_OK = "[OK]"
+_CLI_FAIL = "[FAIL]"
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler(sys.stdout), logging.FileHandler("data/logs/pipeline.log")],
+    handlers=[logging.StreamHandler(sys.stdout)],
 )
 
 logger = logging.getLogger(__name__)
@@ -48,6 +53,7 @@ class ExtractionPipeline:
         config_path: str = "config/config.yaml",
         model_name: Optional[str] = None,
         orkg_endpoint_url: Optional[str] = None,
+        extraction_output_dir: Optional[str] = None,
     ):
         """
         Initialize extraction pipeline.
@@ -56,43 +62,74 @@ class ExtractionPipeline:
             config_path: Path to configuration file
             model_name: Optional KISSKI model override for this run
             orkg_endpoint_url: Optional ORKG endpoint URL override for this run
+            extraction_output_dir: Optional override for where extraction JSON files are written
+                (relative to project root unless absolute); defaults to pipeline.extraction_output_dir
+                in config.
         """
         logger.info("Initializing ExtractionPipeline")
 
         # Load configuration
         self.config = self._load_config(config_path)
+        self._configure_file_logging()
         self._apply_runtime_overrides(model_name, orkg_endpoint_url)
+
+        pipe_cfg = self.config.setdefault("pipeline", {})
+        path_raw = extraction_output_dir if extraction_output_dir is not None else pipe_cfg.get(
+            "extraction_output_dir"
+        )
+        if path_raw is None or not str(path_raw).strip():
+            raise ValueError(
+                "Missing pipeline.extraction_output_dir in config/config.yaml. "
+                "Set this path or pass --extracted-output-dir."
+            )
+        self.extraction_output_dir = resolve_project_path(str(path_raw))
 
         # Initialize components
         self._initialize_components()
 
         logger.info("ExtractionPipeline initialized successfully")
+        logger.info("Extraction JSON directory: %s", self.extraction_output_dir)
 
     def _load_config(self, config_path: str) -> Dict[str, Any]:
         """Load configuration from YAML file."""
         try:
-            with open(config_path, "r") as f:
+            resolved_config = resolve_project_path(config_path)
+            with open(resolved_config, "r", encoding="utf-8") as f:
                 config = yaml.safe_load(f)
-            logger.info(f"Loaded configuration from {config_path}")
+            if not isinstance(config, dict):
+                raise ValueError("Configuration file must contain a YAML mapping/object.")
+            logger.info(f"Loaded configuration from {resolved_config}")
             return config
         except Exception as e:
-            logger.error(f"Error loading configuration: {e}")
-            # Return default configuration
-            return {
-                "orkg": {"host": "sandbox", "template_id": "R609825", "comparison_id": "R1364660"},
-                "kisski": {
-                    "model": "openai-gpt-oss-120b",
-                    "temperature": 0.0,
-                    "max_tokens": 4000,
-                    "base_url": "https://chat-ai.academiccloud.de/v1",
-                    "timeout": 180,
-                    "rate_limit_delay": 2.0,
-                    "retry_attempts": 5,
-                    "retry_delay": 3.0,
-                },
-                "arxiv": {"max_results": 10, "download_dir": "data/papers"},
-                "extraction": {"max_chunk_size": 6000, "multi_model_extraction": True},
-            }
+            logger.error("Error loading configuration from %s: %s", config_path, e)
+            raise RuntimeError(
+                f"Failed to load configuration file '{config_path}'. "
+                "Please verify the path and YAML content."
+            ) from e
+
+    def _configure_file_logging(self) -> None:
+        """
+        Add file logging handler from config.logging.file if not already attached.
+        """
+        raw_log_file = (self.config.get("logging") or {}).get("file")
+        if not raw_log_file or not str(raw_log_file).strip():
+            logger.warning("logging.file not configured; file logging disabled.")
+            return
+
+        log_path = resolve_project_path(str(raw_log_file))
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+
+        root_logger = logging.getLogger()
+        for handler in root_logger.handlers:
+            if isinstance(handler, logging.FileHandler) and Path(handler.baseFilename) == log_path:
+                return
+
+        file_handler = logging.FileHandler(log_path, encoding="utf-8")
+        file_handler.setLevel(root_logger.level)
+        file_handler.setFormatter(
+            logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        )
+        root_logger.addHandler(file_handler)
 
     def _apply_runtime_overrides(
         self, model_name: Optional[str] = None, orkg_endpoint_url: Optional[str] = None
@@ -377,7 +414,7 @@ class ExtractionPipeline:
         Args:
             pdf_url: URL of the PDF (e.g. OpenAI CDN, conference page).
             paper_title: Paper title (must match gold standard if evaluating).
-            save_intermediate: Save extraction JSON to data/extracted/.
+            save_intermediate: Save extraction JSON under pipeline extraction_output_dir (config/CLI).
             update_orkg: Whether to upload to ORKG.
 
         Returns:
@@ -533,7 +570,7 @@ class ExtractionPipeline:
         self, slug: str, result: Dict[str, Any]
     ) -> Optional[Path]:
         """Save extraction result for a PDF-URL paper (slug-based filename)."""
-        output_dir = Path("data/extracted")
+        output_dir = self.extraction_output_dir
         output_dir.mkdir(parents=True, exist_ok=True)
         filename = f"{slug}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         filepath = output_dir / filename
@@ -616,7 +653,7 @@ class ExtractionPipeline:
 
     def _save_intermediate_results(self, arxiv_id: str, result: Dict[str, Any]):
         """Save intermediate results to JSON file. Returns path if saved, None otherwise."""
-        output_dir = Path("data/extracted")
+        output_dir = self.extraction_output_dir
         output_dir.mkdir(parents=True, exist_ok=True)
 
         filename = f"{arxiv_id.replace('/', '_')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
@@ -637,20 +674,16 @@ class ExtractionPipeline:
         """
         Prefer date_created from paper metadata when available.
         If metadata has no usable published date, keep extracted date_created as fallback.
-        Mutates extraction_data in place. Format: YYYY-MM (e.g. 2022-05).
+        Mutates extraction_data in place. Format: YYYY-MM-DD from arXiv (e.g. 2022-05-17).
         """
         if not extraction_data:
             return
         if not paper_metadata:
             return
         published = paper_metadata.get("published")
-        if not published:
+        date_created = format_published_date_from_metadata(published)
+        if not date_created:
             return
-        year = self._extract_year(published)
-        if year is None:
-            return
-        month = self._extract_month(published)
-        date_created = f"{year}-{month:02d}" if month else f"{year}-01"
         replaced = 0
         for model in extraction_data:
             current = model.get("date_created")
@@ -710,6 +743,7 @@ class ExtractionPipeline:
             "template_id": self.config["orkg"]["template_id"],
             "comparison_id": self.config["orkg"]["comparison_id"],
             "llm_model": self.config["kisski"]["model"],
+            "extraction_output_dir": str(self.extraction_output_dir),
             "connections": self.test_connection(),
         }
 
@@ -724,14 +758,13 @@ def _run_evaluation(
     Run strict evaluation script after successful extraction.
     Returns True if evaluation ran successfully (exit code 0).
     """
-    project_root = Path(__file__).resolve().parent.parent
-    script = project_root / "scripts" / "evaluation" / "evaluate_extraction_strict.py"
+    script = PROJECT_ROOT / "scripts" / "evaluation" / "evaluate_extraction_strict.py"
     if not script.exists():
         logger.warning("Evaluation script not found: %s", script)
         return False
     gold = Path(gold_path)
     if not gold.is_absolute():
-        gold = project_root / gold_path
+        gold = PROJECT_ROOT / gold_path
     if not gold.exists():
         logger.warning("Gold standard not found: %s", gold)
         return False
@@ -765,6 +798,12 @@ def _print_run_configuration(
     print(f"  ORKG endpoint:   {pipeline.config['orkg']['endpoint_url']}")
     print(f"  ORKG upload:     {'enabled' if upload_to_orkg else 'disabled (--no-update)'}")
     print(f"  Evaluation:      {evaluation_metrics or 'disabled'}")
+    try:
+        rel_out = pipeline.extraction_output_dir.relative_to(PROJECT_ROOT)
+        out_display = str(rel_out).replace("\\", "/")
+    except ValueError:
+        out_display = str(pipeline.extraction_output_dir)
+    print(f"  Extraction out:  {out_display}")
 
 
 def _maybe_run_evaluation(
@@ -794,6 +833,7 @@ def main():
             "  python -m src.pipeline --arxiv-id 2302.13971\n"
             "  python -m src.pipeline --arxiv-id 2302.13971 --no-update\n"
             "  python -m src.pipeline --arxiv-id 2302.13971 --evaluate all\n"
+            "  python -m src.pipeline --arxiv-id 2302.13971 --extracted-output-dir runs/exp1\n"
             "  python -m src.pipeline --arxiv-id 2302.13971 --model llama-3.3-70b-instruct"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -829,7 +869,7 @@ def main():
     parser.add_argument("--no-evaluate", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument(
         "--gold",
-        default="data/gold_standard/R1364660.json",
+        default="data/gold_standard/gold_standard_set.json",
         help="Gold-standard JSON for evaluation (used only with --evaluate)",
     )
     parser.add_argument(
@@ -848,6 +888,16 @@ def main():
             "or https://orkg.org/ (overrides .env/config)"
         ),
     )
+    parser.add_argument(
+        "--extracted-output-dir",
+        default=None,
+        metavar="DIR",
+        help=(
+            "Directory for intermediate extraction JSON files "
+            "(relative to project root unless absolute). "
+            "Overrides pipeline.extraction_output_dir in config/config.yaml."
+        ),
+    )
     parser.add_argument("--test", action="store_true", help="Test connections")
     parser.add_argument("--status", action="store_true", help="Show pipeline status")
 
@@ -858,14 +908,18 @@ def main():
         parser.error("--evaluate is supported for --arxiv-id, --pdf-url, or --json-file only")
 
     # Initialize pipeline
-    pipeline = ExtractionPipeline(model_name=args.model, orkg_endpoint_url=args.orkg_endpoint_url)
+    pipeline = ExtractionPipeline(
+        model_name=args.model,
+        orkg_endpoint_url=args.orkg_endpoint_url,
+        extraction_output_dir=args.extracted_output_dir,
+    )
 
     if args.test:
         # Test connections
         results = pipeline.test_connection()
         print("\nConnection Test Results:")
         for service, status in results.items():
-            print(f"  {service}: {'✓' if status else '✗'}")
+            print(f"  {service}: {_CLI_OK if status else _CLI_FAIL}")
 
     elif args.status:
         # Show status
@@ -877,7 +931,7 @@ def main():
         # Upload existing extraction JSON to ORKG
         json_path = Path(args.json_file)
         if not json_path.exists():
-            print(f"✗ ERROR: File not found: {args.json_file}")
+            print(f"{_CLI_FAIL} ERROR: File not found: {args.json_file}")
             sys.exit(1)
 
         _print_run_configuration(
@@ -897,7 +951,7 @@ def main():
             with open(json_path, "r", encoding="utf-8") as f:
                 extraction_data = json.load(f)
         except Exception as e:
-            print(f"✗ ERROR: Failed to load JSON file: {e}")
+            print(f"{_CLI_FAIL} ERROR: Failed to load JSON file: {e}")
             sys.exit(1)
 
         # Use ORKGPaperManager (same as Grete pipeline)
@@ -1022,7 +1076,7 @@ def main():
             paper_id = result.get("paper_id")
             contrib_ids = result.get("contribution_ids", [])
 
-            print("✓ SUCCESS: Uploaded to ORKG")
+            print(f"{_CLI_OK} SUCCESS: Uploaded to ORKG")
             print(f"\nPaper ID: {paper_id}")
             print(f"Contributions: {len(contrib_ids)}")
             print("\nPaper URL:")
@@ -1035,14 +1089,14 @@ def main():
                 if len(contrib_ids) > 5:
                     print(f"  ... and {len(contrib_ids) - 5} more")
         else:
-            print("✗ FAILED: Upload to ORKG failed")
+            print(f"{_CLI_FAIL} FAILED: Upload to ORKG failed")
             if result:
                 print(json.dumps(result, indent=2))
         _maybe_run_evaluation(str(json_path), args.evaluate, args.gold, args.bert_score_model)
 
     elif args.pdf_url:
         if not args.paper_title:
-            print("✗ ERROR: --paper-title is required when using --pdf-url")
+            print(f"{_CLI_FAIL} ERROR: --paper-title is required when using --pdf-url")
             print("  Use the exact gold-standard paper title for evaluation matching.")
             sys.exit(1)
         _print_run_configuration(
@@ -1097,12 +1151,12 @@ def main():
 
         # Show extraction summary
         if result.get("status") == "completed":
-            print(f"✓ Status: {result.get('status')}")
-            print(f"✓ Models extracted: {result.get('models_extracted', 0)}")
+            print(f"{_CLI_OK} Status: {result.get('status')}")
+            print(f"{_CLI_OK} Models extracted: {result.get('models_extracted', 0)}")
             if result.get("models_after_selection") is not None:
-                print(f"✓ Models after selection: {result.get('models_after_selection')}")
+                print(f"{_CLI_OK} Models after selection: {result.get('models_after_selection')}")
             if result.get("models_after_merge") is not None:
-                print(f"✓ Models after merge: {result.get('models_after_merge')}")
+                print(f"{_CLI_OK} Models after merge: {result.get('models_after_merge')}")
 
             # Show extraction data with key fields for each model version
             if result.get("extraction_data"):
@@ -1152,7 +1206,7 @@ def main():
                 result.get("saved_path"), args.evaluate, args.gold, args.bert_score_model
             )
         else:
-            print(f"✗ Status: {result.get('status', 'unknown')}")
+            print(f"{_CLI_FAIL} Status: {result.get('status', 'unknown')}")
             if result.get("error"):
                 print(f"  Error: {result.get('error')}")
             print("\nFull result:")

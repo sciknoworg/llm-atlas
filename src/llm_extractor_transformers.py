@@ -303,7 +303,8 @@ class LLMExtractorTransformers:
                             "1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.\n"  # noqa: E501
                             "2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n"  # noqa: E501
                             "3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B=7000, 117M=117).\n"  # noqa: E501
-                            "4. DATES: Prefer YYYY-MM. Priority: metadata > header/footer > citation year.\n"  # noqa: E501
+                            "4. DATES: Prefer YYYY-MM-DD when the full date is known; else YYYY-MM. "
+                            "Priority: metadata > header/footer > citation year.\n"
                             "5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta).\n"
                             '6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").\n'  # noqa: E501
                             "7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.\n"  # noqa: E501
@@ -311,7 +312,9 @@ class LLMExtractorTransformers:
                             "9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, use these tables as the primary source for model names, metrics, parameter counts, and dataset names.\n"  # noqa: E501
                             "10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants (e.g. 'Llama 3 8K' and 'Llama 3 128K' are ONE entry 'Llama 3'). Record context length in context_length field.\n"  # noqa: E501
                             "11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained variants (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 (post-trained)' are ONE entry 'Llama 3'). Describe both stages in innovation or finetuning_task.\n\n"  # noqa: E501
-                            "FORMAT: date_created=YYYY-MM; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; hardware_used=exact phrase from paper or null if not stated.\n\n"  # noqa: E501
+                            "FORMAT: date_created=YYYY-MM-DD when known; organization=canonical name "
+                            "(Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; "
+                            "hardware_used=exact phrase from paper or null if not stated.\n\n"
                             "Return JSON only."
                         ),
                     },
@@ -401,7 +404,8 @@ mention the optimizer, use null and do NOT guess or infer from other papers. For
 extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a \
 specific encoding or technique that extends the model vs a baseline); one sentence; if not \
 mentioned, use null; do not infer from other papers.
-- FORMAT: date_created use YYYY-MM when possible; organization use canonical name \
+- FORMAT: date_created use YYYY-MM-DD when the full date is known; otherwise YYYY-MM; \
+organization use canonical name \
 (Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, \
 otherwise null; extension = one-sentence technical detail when stated, otherwise null; \
 hardware_used = paper's wording (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.
@@ -1318,6 +1322,20 @@ JSON:
             # 2. Standardize model fields (organization, parameters, etc.)
             if "models" in json_data:
                 for model_data in json_data["models"]:
+                    # Normalize common placeholder strings to None so they do not
+                    # propagate into ORKG (e.g., "UNKNOWN", "not specified").
+                    for key, value in list(model_data.items()):
+                        if isinstance(value, str) and value.strip().lower() in (
+                            "null",
+                            "none",
+                            "n/a",
+                            "unknown",
+                            "not specified",
+                            "unspecified",
+                            "not available",
+                        ):
+                            model_data[key] = None
+
                     # Ensure basic fields exist at least as None
                     for field in ["organization", "parameters", "license"]:
                         if field not in model_data:

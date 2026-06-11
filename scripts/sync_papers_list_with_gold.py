@@ -1,7 +1,7 @@
 """
 Sync papers_list.json with the cleaned gold standard.
 
-Keeps only papers that appear in R1364660.json extraction_data, preserving
+Keeps only papers that appear in gold_standard_set.json extraction_data, preserving
 existing pdf_url, arxiv_id, doi, source for each paper. Removes invalid
 entries (e.g. continuation-line titles).
 
@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-GOLD_PATH = PROJECT_ROOT / "data" / "gold_standard" / "R1364660.json"
+GOLD_PATH = PROJECT_ROOT / "data" / "gold_standard" / "gold_standard_set.json"
 PAPERS_LIST_PATH = PROJECT_ROOT / "data" / "gold_standard" / "papers_list.json"
 
 

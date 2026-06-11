@@ -9,7 +9,7 @@ This script compares extracted data against gold-standard dataset and calculates
 
 Usage:
     python scripts/evaluation/evaluate_extraction.py \\
-        --gold data/gold_standard/R1364660.json \\
+        --gold data/gold_standard/gold_standard_set.json \\
         --prediction data/extracted/2401.02385_20251207_223913.json
         
 Output:
@@ -492,7 +492,7 @@ def main():
     parser.add_argument(
         "--gold",
         type=str,
-        default="data/gold_standard/R1364660.json",
+        default="data/gold_standard/gold_standard_set.json",
         help="Path to gold-standard JSON file"
     )
     parser.add_argument(

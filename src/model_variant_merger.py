@@ -496,7 +496,16 @@ def _normalize_parameter_string(param_str: str) -> Optional[str]:
     Normalize a parameter size string (e.g., "124M" → "124M", "1.5B" → "1.5B").
     """
     param_str = param_str.strip().upper()
-    if not param_str or param_str in ["", "NULL", "NONE", "N/A"]:
+    if not param_str or param_str in [
+        "",
+        "NULL",
+        "NONE",
+        "N/A",
+        "UNKNOWN",
+        "NOT SPECIFIED",
+        "UNSPECIFIED",
+        "NOT AVAILABLE",
+    ]:
         return None
 
     # Extract numeric + unit (M, B, T)

@@ -76,7 +76,7 @@ Bachelor-Arbeit-NLP/
 │   └── test_pdf_parser.py
 ├── data/
 │   ├── papers/                             # Downloaded PDFs (gitignored)
-│   ├── extracted/                          # Extraction results (gitignored)
+│   ├── extracted/                          # Legacy extraction folder (optional)
 │   ├── gold_standard/                      # Gold-standard evaluation data
 │   └── logs/                              # Pipeline logs (gitignored)
 ├── results/                                # Aggregated evaluation tables (CSV/JSON)
@@ -161,6 +161,7 @@ Key settings:
 | `kisski` | `model` | LLM model name (e.g. `qwen3-235b-a22b`) |
 | `kisski` | `temperature` | `0.0` for deterministic extraction |
 | `extraction` | `max_chunk_size` | Max characters per PDF chunk (default: 6000) |
+| `pipeline` | `extraction_output_dir` | Directory for intermediate extraction JSONs (default: `results/extracted`) |
 
 ## Usage
 
@@ -181,7 +182,7 @@ python -m src.pipeline --pdf-url https://example.org/paper.pdf --paper-title "Pa
 ### Upload an Existing Extraction JSON to ORKG
 
 ```bash
-python -m src.pipeline --json-file data/extracted/2302.13971_20260101_120000.json
+python -m src.pipeline --json-file results/extracted/2302.13971_20260101_120000.json
 ```
 
 ### Skip ORKG Upload (Extraction Only)
@@ -235,7 +236,7 @@ python -m src.pipeline --search "large language model" --max-results 5
 ### Specify Custom Gold Standard for Auto-Evaluation
 
 ```bash
-python -m src.pipeline --arxiv-id 2302.13971 --evaluate all --gold data/gold_standard/R1364660.json
+python -m src.pipeline --arxiv-id 2302.13971 --evaluate all --gold data/gold_standard/gold_standard_set.json
 ```
 
 ### Python API
@@ -256,24 +257,24 @@ The evaluation framework measures extraction quality against a gold standard der
 
 ```bash
 # PowerShell (recommended): one line
-python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/R1364660.json --prediction data/extracted/your_extraction.json
+python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/gold_standard_set.json --prediction results/extracted/your_extraction.json
 
 # Linux / macOS (multiline)
 python scripts/evaluation/evaluate_extraction_strict.py \
-  --gold data/gold_standard/R1364660.json \
-  --prediction data/extracted/your_extraction.json
+  --gold data/gold_standard/gold_standard_set.json \
+  --prediction results/extracted/your_extraction.json
 ```
 
 ### Save Evaluation Report
 
 ```bash
 # PowerShell (recommended): one line
-python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/R1364660.json --prediction data/extracted/your_extraction.json --output results/evaluation_report.json
+python scripts/evaluation/evaluate_extraction_strict.py --gold data/gold_standard/gold_standard_set.json --prediction results/extracted/your_extraction.json --output results/evaluation_report.json
 
 # Linux / macOS (multiline)
 python scripts/evaluation/evaluate_extraction_strict.py \
-  --gold data/gold_standard/R1364660.json \
-  --prediction data/extracted/your_extraction.json \
+  --gold data/gold_standard/gold_standard_set.json \
+  --prediction results/extracted/your_extraction.json \
   --output results/evaluation_report.json
 ```
 

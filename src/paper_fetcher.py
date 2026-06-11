@@ -4,6 +4,7 @@ ArXiv Paper Fetcher
 This module handles fetching research papers from ArXiv and downloading PDFs.
 """
 
+import json
 import logging
 import re
 from datetime import datetime as _datetime
@@ -32,23 +33,130 @@ class PaperFetcher:
         self.arxiv_client = arxiv.Client()
         logger.info(f"Initialized PaperFetcher with download_dir: {download_dir}")
 
-    def fetch_paper_metadata(self, arxiv_id: str) -> Optional[Dict[str, Any]]:
+    def _metadata_cache_path(self, arxiv_id: str) -> Path:
+        """Return the JSON cache path for a given arXiv id (versionless)."""
+        clean_id = arxiv_id.split("v")[0]
+        return self.download_dir / f"{clean_id.replace('/', '_')}.metadata.json"
+
+    def _load_cached_metadata(self, arxiv_id: str) -> Optional[Dict[str, Any]]:
+        path = self._metadata_cache_path(arxiv_id)
+        if not path.exists():
+            return None
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (OSError, json.JSONDecodeError) as exc:
+            logger.warning("Failed to read metadata cache %s: %s", path, exc)
+            return None
+
+    def _save_cached_metadata(self, arxiv_id: str, metadata: Dict[str, Any]) -> None:
+        path = self._metadata_cache_path(arxiv_id)
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(metadata, f, ensure_ascii=False, indent=2)
+            logger.debug("Cached arXiv metadata at %s", path)
+        except OSError as exc:
+            logger.warning("Failed to write metadata cache %s: %s", path, exc)
+
+    def _fetch_metadata_via_html(self, arxiv_id: str) -> Optional[Dict[str, Any]]:
         """
-        Fetch paper metadata from ArXiv.
+        Fallback metadata fetch using the public abstract page (HTML).
+
+        The HTML endpoint (https://arxiv.org/abs/<id>) is served from a
+        different infrastructure than the Atom API and is not subject to the
+        same per-IP throttle, so it is usable when the API returns HTTP 429.
+        Extracts the fields needed downstream (title, authors, published date,
+        primary_category, pdf_url).
+        """
+        clean_id = arxiv_id.split("v")[0]
+        url = f"https://arxiv.org/abs/{clean_id}"
+        try:
+            response = requests.get(
+                url,
+                timeout=30,
+                headers={"User-Agent": "BachelorArbeitNLP/1.0 (+arxiv-fallback)"},
+            )
+            response.raise_for_status()
+            html = response.text
+        except requests.RequestException as exc:
+            logger.debug("HTML fallback failed for %s: %s", clean_id, exc)
+            return None
+
+        def _meta_all(name: str) -> List[str]:
+            return re.findall(
+                rf'<meta[^>]+name="{re.escape(name)}"[^>]+content="([^"]*)"',
+                html,
+            )
+
+        def _meta_first(name: str) -> Optional[str]:
+            values = _meta_all(name)
+            return values[0] if values else None
+
+        title = _meta_first("citation_title")
+        if not title:
+            return None
+
+        date_raw = _meta_first("citation_date")
+        published: Optional[str] = None
+        if date_raw:
+            normalized = date_raw.replace("/", "-")
+            m = re.match(r"^(\d{4})-(\d{1,2})-(\d{1,2})$", normalized)
+            if m:
+                y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+                published = f"{y:04d}-{mo:02d}-{d:02d}T00:00:00+00:00"
+
+        authors = _meta_all("citation_author")
+        pdf_url = _meta_first("citation_pdf_url") or f"https://arxiv.org/pdf/{clean_id}"
+
+        metadata: Dict[str, Any] = {
+            "arxiv_id": clean_id,
+            "title": title,
+            "authors": authors,
+            "abstract": "",
+            "published": published,
+            "updated": published,
+            "doi": None,
+            "primary_category": None,
+            "categories": [],
+            "pdf_url": pdf_url,
+            "entry_id": url,
+            "source": "arxiv-html-fallback",
+        }
+        logger.info(
+            "Fetched metadata for %s via HTML fallback (published=%s)",
+            clean_id,
+            published,
+        )
+        return metadata
+
+    def fetch_paper_metadata(
+        self, arxiv_id: str, force_refresh: bool = False
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Fetch paper metadata from ArXiv (cached on disk to avoid HTTP 429).
 
         Args:
             arxiv_id: ArXiv paper ID (e.g., "2307.09288")
+            force_refresh: If True, ignore on-disk cache and re-query arXiv.
 
         Returns:
             Dictionary with paper metadata, or None if error
         """
+        clean_id = arxiv_id.split("v")[0]
+
+        if not force_refresh:
+            cached = self._load_cached_metadata(clean_id)
+            if cached:
+                logger.info(
+                    "Using cached metadata for ArXiv ID %s (delete %s to refresh)",
+                    clean_id,
+                    self._metadata_cache_path(clean_id).name,
+                )
+                return cached
+
         try:
-            logger.info(f"Fetching metadata for ArXiv ID: {arxiv_id}")
+            logger.info(f"Fetching metadata for ArXiv ID: {clean_id}")
 
-            # Clean arxiv_id (remove version if present)
-            clean_id = arxiv_id.split("v")[0]
-
-            # Search for paper
             search = arxiv.Search(id_list=[clean_id])
             paper = next(self.arxiv_client.results(search))
 
@@ -66,6 +174,7 @@ class PaperFetcher:
                 "entry_id": paper.entry_id,
             }
 
+            self._save_cached_metadata(clean_id, metadata)
             logger.info(f"Successfully fetched metadata: {metadata['title']}")
             return metadata
 
@@ -73,6 +182,28 @@ class PaperFetcher:
             logger.error(f"Paper not found: {arxiv_id}")
             return None
         except Exception as e:
+            # Graceful fallback chain on transient errors (e.g. HTTP 429):
+            #   1. previously cached metadata on disk
+            #   2. live scrape of the public HTML abstract page
+            fallback = self._load_cached_metadata(clean_id)
+            if fallback:
+                logger.warning(
+                    "ArXiv API fetch for %s failed (%s); using cached metadata.",
+                    clean_id,
+                    e,
+                )
+                return fallback
+
+            html_metadata = self._fetch_metadata_via_html(clean_id)
+            if html_metadata:
+                logger.warning(
+                    "ArXiv API fetch for %s failed (%s); using HTML fallback.",
+                    clean_id,
+                    e,
+                )
+                self._save_cached_metadata(clean_id, html_metadata)
+                return html_metadata
+
             logger.error(f"Error fetching metadata for {arxiv_id}: {e}")
             return None
 

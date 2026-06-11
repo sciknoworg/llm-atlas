@@ -16,8 +16,9 @@ Usage:
     python scripts/batch_extract_all_papers.py --skip-existing
 
 Output:
-    Extraction JSONs saved to data/extracted/<model_name>/
-    Log saved to data/logs/batch_extraction_<model>_<timestamp>.log
+    Extraction JSON snapshots go to the pipeline output directory (see
+    pipeline.extraction_output_dir in config/config.yaml), then copies are
+    placed under that directory / <model_slug>/ for aggregation scripts.
 """
 
 import argparse
@@ -42,6 +43,7 @@ try:
 except ImportError:
     pass
 
+from src.path_utils import resolve_project_path
 from src.pipeline import ExtractionPipeline
 
 # Setup logging
@@ -70,10 +72,24 @@ def slugify(text: str) -> str:
 def get_model_name_from_config() -> str:
     """Get current KISSKI model from config."""
     import yaml
+
     config_path = PROJECT_ROOT / "config" / "config.yaml"
-    with open(config_path, 'r') as f:
+    with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
     return config.get("kisski", {}).get("model", "unknown_model")
+
+
+def get_pipeline_extraction_root_from_config() -> Path:
+    """Base directory for extraction JSON (pipeline.extraction_output_dir)."""
+    import yaml
+
+    config_path = PROJECT_ROOT / "config" / "config.yaml"
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f) or {}
+    raw = (config.get("pipeline") or {}).get("extraction_output_dir")
+    if not raw:
+        raise ValueError("Missing pipeline.extraction_output_dir in config/config.yaml")
+    return resolve_project_path(str(raw))
 
 
 def main():
@@ -88,7 +104,7 @@ def main():
         "--output-dir",
         type=str,
         default=None,
-        help="Output directory (default: data/extracted/<model_name>/)"
+        help="Output directory for per-model copies (default: <pipeline.extraction_output_dir>/<model_slug>/)",
     )
     parser.add_argument(
         "--dry-run",
@@ -130,10 +146,10 @@ def main():
     
     # Setup output directory
     if args.output_dir:
-        output_dir = PROJECT_ROOT / args.output_dir
+        output_dir = resolve_project_path(args.output_dir)
     else:
         model_slug = slugify(current_model)
-        output_dir = PROJECT_ROOT / "data" / "extracted" / model_slug
+        output_dir = get_pipeline_extraction_root_from_config() / model_slug
     
     output_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"Output directory: {output_dir}")
