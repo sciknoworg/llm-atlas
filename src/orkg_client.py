@@ -144,6 +144,8 @@ class ORKGClient:
 
         self.host = host
         self.timeout = timeout
+        # Session-level cache: resource label → ORKG resource ID (positive hits only)
+        self._resource_cache: Dict[str, str] = {}
 
     def ping(self) -> bool:
         """
@@ -285,6 +287,42 @@ class ORKGClient:
             logger.error(f"Error fetching paper {paper_id}: {e}")
             return None
 
+    def _find_resource_by_label(self, label: str) -> Optional[str]:
+        """
+        Look up an existing ORKG resource by exact label.
+
+        Uses a session-level cache so repeated lookups for the same label
+        (e.g. "Google" across many contributions) cost only one API call.
+        Misses are not cached so that resources created later in the same
+        batch run can still be found on a subsequent paper.
+
+        Args:
+            label: Exact label to search for
+
+        Returns:
+            ORKG resource ID (e.g. "R186195") if found, None otherwise
+        """
+        if label in self._resource_cache:
+            logger.debug("Resource cache hit for '%s': %s", label, self._resource_cache[label])
+            return self._resource_cache[label]
+
+        try:
+            response = self.orkg.resources.get(q=label, exact=True, size=1)
+            if response.succeeded:
+                content = response.content
+                if isinstance(content, list) and content:
+                    resource_id = content[0].get("id")
+                    if resource_id:
+                        self._resource_cache[label] = resource_id
+                        logger.info(
+                            "Reusing existing ORKG resource '%s' → %s", label, resource_id
+                        )
+                        return resource_id
+        except Exception as exc:
+            logger.warning("Resource lookup failed for '%s': %s", label, exc)
+
+        return None
+
     def create_paper_with_contributions(
         self,
         title: str,
@@ -325,7 +363,9 @@ class ORKGClient:
             # Prepare contributions for the paper structure
             orkg_contributions = []
             orkg_literals = {}
+            orkg_resources = {}
             literal_counter = 0
+            resource_counter = 0
 
             for contrib_data in contributions_data:
                 contrib_label = contrib_data.get("label", "Unnamed Contribution")
@@ -336,18 +376,15 @@ class ORKGClient:
                     value = prop.get("value")
                     datatype = prop.get("datatype", "string")
 
-                    # Skip properties with no ID, None values, or empty/whitespace-only values
                     if not prop_id:
                         continue
                     if value is None:
                         continue
-                    # For strings, skip empty strings or strings with only whitespace
                     if isinstance(value, str) and (
                         not value.strip() or value.strip().lower() == "none"
                     ):
                         logger.debug(f"Skipping property {prop_id} with empty/whitespace value")
                         continue
-                    # For other types, ensure they have valid values
                     if value == "":
                         logger.debug(f"Skipping property {prop_id} with empty string value")
                         continue
@@ -355,20 +392,32 @@ class ORKGClient:
                     if prop_id not in statements:
                         statements[prop_id] = []
 
-                    # Format based on datatype per ORKG documentation
-                    # Per https://orkg.readthedocs.io/en/latest/client/papers.html example
-                    # Use "id" (not "@id") for all references
-                    if datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
-                        # URI values - reference existing resource or create inline
+                    if datatype == "resource":
+                        label = str(value)
+                        existing_id = self._find_resource_by_label(label)
+                        if existing_id:
+                            # Reuse the existing resource by its real ORKG ID
+                            statements[prop_id].append({"id": existing_id})
+                        else:
+                            # Not found — declare inline; papers.add creates it server-side
+                            inline_id = f"#resource_{resource_counter}"
+                            orkg_resources[inline_id] = {"label": label, "classes": []}
+                            statements[prop_id].append({"id": inline_id})
+                            resource_counter += 1
+                    elif datatype == "URI" or (
+                        isinstance(value, str) and value.startswith("http")
+                    ):
+                        # HTTP URL → reference an existing resource directly
                         statements[prop_id].append({"id": str(value)})
-                    elif datatype in ["Date", "date"]:
-                        # Create literal reference for dates
+                    elif datatype in ("date", "Date"):
                         literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {"label": str(value), "data_type": "xsd:date"}
+                        orkg_literals[literal_id] = {
+                            "label": str(value),
+                            "data_type": "xsd:date",
+                        }
                         statements[prop_id].append({"id": literal_id})
                         literal_counter += 1
-                    elif datatype in ["Integer", "integer"] or isinstance(value, (int, float)):
-                        # Create literal reference for integers
+                    elif datatype in ("integer", "Integer") or isinstance(value, (int, float)):
                         literal_id = f"#literal_{literal_counter}"
                         orkg_literals[literal_id] = {
                             "label": str(value),
@@ -377,9 +426,12 @@ class ORKGClient:
                         statements[prop_id].append({"id": literal_id})
                         literal_counter += 1
                     else:
-                        # Text values - create as literals and reference them
+                        # Free-form text → xsd:string literal
                         literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {"label": str(value), "data_type": "xsd:string"}
+                        orkg_literals[literal_id] = {
+                            "label": str(value),
+                            "data_type": "xsd:string",
+                        }
                         statements[prop_id].append({"id": literal_id})
                         literal_counter += 1
 
@@ -390,6 +442,13 @@ class ORKGClient:
                         "statements": statements,
                     }
                 )
+
+            logger.info(
+                "Prepared %d contributions, %d resource(s), %d literal(s)",
+                len(orkg_contributions),
+                resource_counter,
+                literal_counter,
+            )
 
             # Build paper params according to ORKG documentation structure
             paper_params = {
@@ -404,6 +463,7 @@ class ORKGClient:
                 "authors": authors,
                 "contents": {
                     "contributions": orkg_contributions,
+                    "resources": orkg_resources,
                     "literals": orkg_literals,
                 },
                 "observatories": observatories if observatories else [],
@@ -496,17 +556,15 @@ class ORKGClient:
                     statements[prop_id] = []
 
                 # Format statement based on datatype
-                if datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
-                    # URI/literal resource
+                if datatype == "resource":
+                    statements[prop_id].append({"label": str(value)})
+                elif datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
                     statements[prop_id].append({"id": value})
-                elif datatype in ["Date", "date"]:
-                    # Date literal
+                elif datatype in ("date", "Date"):
                     statements[prop_id].append({"label": str(value), "datatype": "Date"})
-                elif datatype == "Integer" or isinstance(value, int):
-                    # Integer literal
+                elif datatype in ("integer", "Integer") or isinstance(value, int):
                     statements[prop_id].append({"label": str(value), "datatype": "Integer"})
                 else:
-                    # Text/string literal
                     statements[prop_id].append({"label": str(value)})
 
         return statements
