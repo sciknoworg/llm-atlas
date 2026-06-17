@@ -186,6 +186,7 @@ def main():
         "completed": 0,
         "failed": 0,
         "skipped": 0,
+        "rejected": 0,
         "start_time": datetime.now().isoformat(),
         "papers": []
     }
@@ -265,11 +266,16 @@ def main():
                     result_entry["output_file"] = str(saved_path) if saved_path else ""
                     results["completed"] += 1
                     logger.info("  [OK] Success: %s", saved_path or "extraction completed")
+            elif result and result.get("status") == "invalid_paper":
+                result_entry["status"] = "rejected"
+                result_entry["error"] = result.get("error", "out-of-scope paper")
+                results["rejected"] += 1
+                logger.info("  [SKIP] Rejected (not LLM/VLM): %s", result.get("error", ""))
             else:
                 result_entry["status"] = "failed"
-                result_entry["error"] = "No result or saved_path"
+                result_entry["error"] = result.get("error", "no result") if result else "no result"
                 results["failed"] += 1
-                logger.warning("  [FAIL] No result or saved_path")
+                logger.warning("  [FAIL] %s", result_entry["error"])
         
         except Exception as e:
             result_entry["status"] = "error"
@@ -296,6 +302,7 @@ def main():
     print(f"Model:      {current_model}")
     print(f"Total:      {results['total_papers']}")
     print(f"Completed:  {results['completed']}")
+    print(f"Rejected:   {results['rejected']}")
     print(f"Failed:     {results['failed']}")
     print(f"Skipped:    {results['skipped']}")
     print("=" * 70)

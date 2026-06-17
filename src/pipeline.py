@@ -19,6 +19,7 @@ import argparse
 
 from src.extraction_normalizer import format_published_date_from_metadata, normalize_extraction
 from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
+from src.paper_classifier import PaperClassifier
 from src.model_contribution_selector import select_primary_model_contributions
 from src.model_variant_merger import merge_model_variants
 from src.orkg_client import ORKGClient, normalize_orkg_host, orkg_frontend_url
@@ -194,6 +195,22 @@ class ExtractionPipeline:
             self.llm_extractor = None
             logger.warning("LLM extractor not initialized (missing KISSKI_API_KEY)")
 
+        # Initialize paper classifier (reuses the OpenAI client from the extractor)
+        if self.llm_extractor:
+            classifier_model = (
+                self.config.get("classifier", {}).get("model")
+                or self.config["kisski"]["model"]
+            )
+            self.paper_classifier = PaperClassifier(
+                llm_client=self.llm_extractor.client,
+                model_name=classifier_model,
+                timeout=self.config["kisski"].get("timeout", 30),
+            )
+            logger.info("Initialized PaperClassifier (model: %s)", classifier_model)
+        else:
+            self.paper_classifier = None
+            logger.warning("PaperClassifier not initialized (no LLM extractor available)")
+
         # Initialize template mapper
         self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"])
 
@@ -271,6 +288,22 @@ class ExtractionPipeline:
 
             result["steps"]["fetch"] = "success"
             result["paper_metadata"] = paper_metadata
+
+            # Step 1.5: Classify paper domain before expensive PDF parsing/extraction
+            logger.info("Step 1.5: Classifying paper domain")
+            if self.paper_classifier:
+                classification = self.paper_classifier.classify(paper_metadata)
+                result["classification"] = {
+                    "is_valid": classification.is_valid,
+                    "reason": classification.reason,
+                }
+                if not classification.is_valid:
+                    result["status"] = "invalid_paper"
+                    result["error"] = f"Paper rejected: {classification.reason}"
+                    logger.info("Paper %s rejected (not LLM/VLM): %s", arxiv_id, classification.reason)
+                    return result
+                result["steps"]["classify"] = "success"
+                logger.info("Paper %s accepted: %s", arxiv_id, classification.reason)
 
             # Step 2: Parse PDF
             logger.info("Step 2: Parsing PDF")
@@ -458,6 +491,21 @@ class ExtractionPipeline:
                 "pdf_url": pdf_url,
                 "doi": None,
             }
+
+            # Step 1.5: Classify paper domain (title-only; no abstract available for PDF-URL papers)
+            logger.info("Step 1.5: Classifying paper domain")
+            if self.paper_classifier:
+                classification = self.paper_classifier.classify(paper_metadata)
+                result["classification"] = {
+                    "is_valid": classification.is_valid,
+                    "reason": classification.reason,
+                }
+                if not classification.is_valid:
+                    result["status"] = "invalid_paper"
+                    result["error"] = f"Paper rejected: {classification.reason}"
+                    logger.info("PDF-URL paper rejected (not LLM/VLM): %s", classification.reason)
+                    return result
+                result["steps"]["classify"] = "success"
 
             # Step 2: Parse PDF
             logger.info("Step 2: Parsing PDF")

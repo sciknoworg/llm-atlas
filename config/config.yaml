@@ -55,6 +55,14 @@ logging:
   file: data/logs/pipeline.log
   console: true
 
+# Paper Classifier Configuration
+classifier:
+  # Dedicated model for the classify step. Use a fast non-reasoning model here;
+  # the task is a simple YES/NO.
+  model: meta-llama-3.1-8b-instruct
+  # Set to false to skip domain classification and always proceed to extraction.
+  enabled: true
+
 # Pipeline Configuration
 pipeline:
   retry_attempts: 3
