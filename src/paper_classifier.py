@@ -4,32 +4,45 @@ Paper Classifier
 Uses an LLM call on the paper's title and abstract to determine whether
 a paper is an LLM/VLM paper suitable for extraction into the ORKG catalog.
 """
+import json
 import logging
+import re
 from dataclasses import dataclass
 from typing import Any, Dict
 
 logger = logging.getLogger(__name__)
 
-_CLASSIFICATION_PROMPT = """\
-Does this paper introduce, study, or significantly advance a large language \
-model (LLM) or vision-language model (VLM)?
+_CLASSIFICATION_PROMPT ="""You are an expert research-paper classifier specializing in machine learning and natural language processing literature. Your task is to decide whether a paper's PRIMARY contribution is to large language models (LLMs) or vision-language models (VLMs).
 
-A paper QUALIFIES if it:
-- Proposes or trains a new LLM, VLM, or foundation language model
-- Studies training methods, architectures, or alignment for LLMs/VLMs \
-(e.g. RLHF, instruction tuning, pretraining)
-- Presents fine-tuning or evaluation frameworks specifically for LLMs/VLMs
-- Extends language models for multimodal or cross-modal tasks
+# Definitions
+- LLM: a large neural model trained primarily on text to generate or understand natural language (e.g. GPT, Llama, Mistral).
+- VLM: a model that jointly processes vision and language (e.g. image+text input/output).
 
-A paper does NOT qualify if it:
-- Only uses an existing LLM as a tool (e.g. GPT-4 applied to ecology or biology)
-- Is about computer architecture, robotics, biology, physics, or other non-NLP domains
-- Studies non-language machine learning (tabular data, image recognition without language)
+# Decision rubric
+Classify as IN_DOMAIN if the paper's CORE contribution does any of the following:
+- Proposes, trains, or releases a new LLM, VLM, or foundation language model
+- Advances training methods, architectures, or alignment for LLMs/VLMs (e.g. pretraining, instruction tuning, RLHF, RLAIF, distillation)
+- Introduces fine-tuning, prompting, evaluation, or benchmarking frameworks SPECIFICALLY for LLMs/VLMs
+- Extends language models to multimodal or cross-modal tasks
 
+Classify as OUT_OF_DOMAIN if the paper:
+- Only USES an existing LLM/VLM as a tool to solve a problem in another field (e.g. GPT-4 applied to ecology, medicine, law, finance)
+- Belongs to a non-NLP domain (computer architecture, robotics, biology, physics, chemistry, pure systems work, etc.)
+- Concerns non-language ML (tabular data, image classification without language, time series, RL on control tasks)
+
+# Key disambiguation
+The test is the paper's PRIMARY contribution, not mere mention or use. "We use an LLM to analyze X" is OUT_OF_DOMAIN. "We improve how LLMs do X" is IN_DOMAIN. If genuinely ambiguous, lean on where the novelty lies.
+
+# Paper
 Title: {title}
 Abstract: {abstract}
 
-Answer with exactly one word: YES or NO."""
+# Output
+Respond with ONLY a JSON object, no other text:
+{{
+  "label": "IN_DOMAIN" | "OUT_OF_DOMAIN",
+  "primary_domain": "<short domain name, e.g. 'LLM training', 'biology', 'robotics'>"
+}}"""
 
 
 @dataclass
@@ -51,6 +64,41 @@ class PaperClassifier:
         self.client = llm_client
         self.model_name = model_name
         self.timeout = timeout
+
+    @staticmethod
+    def _parse_label(raw: str) -> tuple:
+        """
+        Extract (label, primary_domain) from a (possibly messy) model response.
+
+        Tries strict JSON first, then falls back to scanning the text for the
+        label keyword so a missing/extra wrapper does not break classification.
+        Returns ("OUT_OF_DOMAIN", ...) when no label can be found, so unparseable
+        responses are treated as invalid rather than silently accepted.
+        """
+        label = None
+        primary_domain = "unknown"
+
+        # Try to locate and parse a JSON object anywhere in the response.
+        match = re.search(r"\{[\s\S]*\}", raw)
+        if match:
+            try:
+                data = json.loads(match.group(0))
+                label = str(data.get("label", "")).strip().upper() or None
+                primary_domain = str(data.get("primary_domain", "unknown")).strip() or "unknown"
+            except (json.JSONDecodeError, AttributeError):
+                pass
+
+        # Fall back to keyword scanning if JSON parsing didn't yield a label.
+        if label not in ("IN_DOMAIN", "OUT_OF_DOMAIN"):
+            upper = raw.upper()
+            if "OUT_OF_DOMAIN" in upper:
+                label = "OUT_OF_DOMAIN"
+            elif "IN_DOMAIN" in upper:
+                label = "IN_DOMAIN"
+            else:
+                label = "OUT_OF_DOMAIN"
+
+        return label, primary_domain
 
     def classify(self, paper_metadata: Dict[str, Any]) -> ClassificationResult:
         """
@@ -83,7 +131,10 @@ class PaperClassifier:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You classify research papers. Answer only YES or NO.",
+                        "content": (
+                            "You classify research papers. Respond with ONLY a JSON "
+                            "object as specified, no other text."
+                        ),
                     },
                     {"role": "user", "content": prompt},
                 ],
@@ -94,18 +145,21 @@ class PaperClassifier:
             raw = (response.choices[0].message.content or "").strip()
 
             # Strip <think>...</think> reasoning blocks emitted by Qwen3 / DeepSeek-R1
-            import re
             raw = re.sub(r"<think>[\s\S]*?</think>", "", raw)
             if "<think>" in raw:
                 raw = raw[: raw.index("<think>")]
 
-            answer = raw.strip().upper()
-            # Accept YES/NO anywhere in the response in case the model adds punctuation
-            is_valid = bool(re.search(r"\bYES\b", answer))
-            logger.info("Paper classifier: '%s...' → %s", title[:60], answer)
+            label, primary_domain = self._parse_label(raw)
+            is_valid = label == "IN_DOMAIN"
+            logger.info(
+                "Paper classifier: '%s...' → %s (%s)",
+                title[:60],
+                label,
+                primary_domain,
+            )
             return ClassificationResult(
                 is_valid=is_valid,
-                reason=f"LLM classification: {answer}",
+                reason=f"LLM classification: {label} (domain: {primary_domain})",
             )
         except Exception as exc:
             # On failure default to valid to avoid silently dropping papers
