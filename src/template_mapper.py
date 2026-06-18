@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 # (not string literals) so they can be linked and reused across papers.
 _RESOURCE_FIELDS = {
     "model_family",
+    "model_name",
     "organization",
     "pretraining_architecture",
     "pretraining_task",
@@ -22,8 +23,8 @@ _RESOURCE_FIELDS = {
     "finetuning_task",
     "optimizer",
     "tokenizer",
-    "application",
     "research_problem",
+    "license",
     "hardware_used",
 }
 
