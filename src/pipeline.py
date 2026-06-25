@@ -196,9 +196,10 @@ class ExtractionPipeline:
             logger.warning("LLM extractor not initialized (missing KISSKI_API_KEY)")
 
         # Initialize paper classifier (reuses the OpenAI client from the extractor)
-        if self.llm_extractor:
+        classifier_cfg = self.config.get("classifier", {})
+        if self.llm_extractor and classifier_cfg.get("enabled", True):
             classifier_model = (
-                self.config.get("classifier", {}).get("model")
+                classifier_cfg.get("model")
                 or self.config["kisski"]["model"]
             )
             self.paper_classifier = PaperClassifier(
@@ -209,7 +210,10 @@ class ExtractionPipeline:
             logger.info("Initialized PaperClassifier (model: %s)", classifier_model)
         else:
             self.paper_classifier = None
-            logger.warning("PaperClassifier not initialized (no LLM extractor available)")
+            if self.llm_extractor:
+                logger.info("PaperClassifier disabled via config")
+            else:
+                logger.warning("PaperClassifier not initialized (no LLM extractor available)")
 
         # Initialize template mapper
         self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"])
