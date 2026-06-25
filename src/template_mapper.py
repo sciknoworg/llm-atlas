@@ -11,6 +11,23 @@ from src.llm_extractor import LLMProperties, MultiModelResponse
 
 logger = logging.getLogger(__name__)
 
+# Fields whose values represent named entities that should be stored as ORKG Resources
+# (not string literals) so they can be linked and reused across papers.
+_RESOURCE_FIELDS = {
+    "model_family",
+    "model_name",
+    "organization",
+    "pretraining_architecture",
+    "pretraining_task",
+    "pretraining_corpus",
+    "finetuning_task",
+    "optimizer",
+    "tokenizer",
+    "research_problem",
+    "license",
+    "hardware_used",
+}
+
 
 class TemplateMapper:
     """Maps extracted LLM data to ORKG template format."""
@@ -96,42 +113,75 @@ class TemplateMapper:
         self, property_id: str, property_name: str, value: Any
     ) -> Optional[Dict[str, Any]]:
         """
-        Create ORKG property from value.
+        Create ORKG property from value, assigning the correct datatype so the
+        client can route the value to either the resources or literals bucket.
 
-        Args:
-            property_id: ORKG property ID
-            property_name: Property name
-            value: Property value
-
-        Returns:
-            ORKG property dictionary
+        Datatype routing:
+          "resource"  → ORKG Resource node (named entity, reusable across papers)
+          "integer"   → xsd:integer literal
+          "date"      → xsd:date literal
+          "URI"       → reference to an existing resource by URL
+          "string"    → xsd:string literal (free-form text)
         """
         if value is None:
             return None
 
-        # Handle different value types
         if isinstance(value, dict):
-            # For complex objects like performance_metrics
             return {
                 "property": property_id,
                 "label": property_name,
                 "value": self._format_dict_value(value),
-                "datatype": "object",
+                "datatype": "string",
             }
-        elif isinstance(value, list):
+
+        if isinstance(value, list):
             return {
                 "property": property_id,
                 "label": property_name,
                 "value": ", ".join(str(v) for v in value),
-                "datatype": "list",
+                "datatype": "string",
             }
-        else:
+
+        if property_name in _RESOURCE_FIELDS:
             return {
                 "property": property_id,
                 "label": property_name,
                 "value": str(value),
-                "datatype": "string",
+                "datatype": "resource",
             }
+
+        if isinstance(value, int) or property_name == "parameters_millions":
+            return {
+                "property": property_id,
+                "label": property_name,
+                "value": int(value),
+                "datatype": "integer",
+            }
+
+        if property_name == "date_created":
+            return {
+                "property": property_id,
+                "label": property_name,
+                "value": str(value),
+                "datatype": "date",
+            }
+
+        if property_name in ("source_code", "blog_post") or (
+            isinstance(value, str) and value.startswith("http")
+        ):
+            return {
+                "property": property_id,
+                "label": property_name,
+                "value": str(value),
+                "datatype": "URI",
+            }
+
+        return {
+            "property": property_id,
+            "label": property_name,
+            "value": str(value),
+            "datatype": "string",
+        }
 
     def _format_dict_value(self, value_dict: Dict[str, Any]) -> str:
         """
