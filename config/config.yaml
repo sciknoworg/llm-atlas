@@ -9,7 +9,7 @@ orkg:
 # API is OpenAI-compatible, hosted by GWDG Academic Cloud
 kisski:
   base_url: https://chat-ai.academiccloud.de/v1  # KISSKI API base URL
-  model: qwen3.5-122b-a10b
+  model: qwen3.6-35b-a3b
   temperature: 0.0  # 0.0 = deterministic, higher = more creative
   max_tokens: 4000  # Maximum tokens for response
   timeout: 180  # Base timeout per API call (escalates +30s per retry attempt)
@@ -57,11 +57,10 @@ logging:
 
 # Paper Classifier Configuration
 classifier:
-  # Dedicated model for the classify step. Use a fast non-reasoning model here;
-  # the task is a simple YES/NO.
-  model: meta-llama-3.1-8b-instruct
-  # Set to false to skip domain classification and always proceed to extraction.
-  enabled: true
+  # Dedicated model for the classify step.
+  model: meta-llama-3.1-8b-instruct 
+  temperature: 0.0
+  max_tokens: 512
 
 # Pipeline Configuration
 pipeline:

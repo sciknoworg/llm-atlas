@@ -53,6 +53,7 @@ class ExtractionPipeline:
         self,
         config_path: str = "config/config.yaml",
         model_name: Optional[str] = None,
+        classifier_model: Optional[str] = None,
         orkg_endpoint_url: Optional[str] = None,
         extraction_output_dir: Optional[str] = None,
     ):
@@ -62,6 +63,7 @@ class ExtractionPipeline:
         Args:
             config_path: Path to configuration file
             model_name: Optional KISSKI model override for this run
+            classifier_model: Optional classifier model override for this run
             orkg_endpoint_url: Optional ORKG endpoint URL override for this run
             extraction_output_dir: Optional override for where extraction JSON files are written
                 (relative to project root unless absolute); defaults to pipeline.extraction_output_dir
@@ -72,7 +74,7 @@ class ExtractionPipeline:
         # Load configuration
         self.config = self._load_config(config_path)
         self._configure_file_logging()
-        self._apply_runtime_overrides(model_name, orkg_endpoint_url)
+        self._apply_runtime_overrides(model_name,classifier_model, orkg_endpoint_url)
 
         pipe_cfg = self.config.setdefault("pipeline", {})
         path_raw = extraction_output_dir if extraction_output_dir is not None else pipe_cfg.get(
@@ -133,11 +135,13 @@ class ExtractionPipeline:
         root_logger.addHandler(file_handler)
 
     def _apply_runtime_overrides(
-        self, model_name: Optional[str] = None, orkg_endpoint_url: Optional[str] = None
+        self, model_name: Optional[str] = None, classifier_model: Optional[str] = None, orkg_endpoint_url: Optional[str] = None
     ) -> None:
         """Apply CLI and environment overrides before components are created."""
         if model_name:
             self.config.setdefault("kisski", {})["model"] = model_name
+        if classifier_model:
+            self.config.setdefault("classifier", {})["model"] = classifier_model
 
         configured_endpoint = (
             orkg_endpoint_url
@@ -195,9 +199,9 @@ class ExtractionPipeline:
             self.llm_extractor = None
             logger.warning("LLM extractor not initialized (missing KISSKI_API_KEY)")
 
-        # Initialize paper classifier (reuses the OpenAI client from the extractor)
+        # Initialize paper classifier (reuses the OpenAI client from the extractor) -->>
         classifier_cfg = self.config.get("classifier", {})
-        if self.llm_extractor and classifier_cfg.get("enabled", True):
+        if self.llm_extractor:
             classifier_model = (
                 classifier_cfg.get("model")
                 or self.config["kisski"]["model"]
@@ -206,15 +210,14 @@ class ExtractionPipeline:
                 llm_client=self.llm_extractor.client,
                 model_name=classifier_model,
                 timeout=self.config["kisski"].get("timeout", 30),
+                temperature=classifier_cfg.get("temperature", 0.0),
+                max_tokens=classifier_cfg.get("max_tokens", 512),
             )
             logger.info("Initialized PaperClassifier (model: %s)", classifier_model)
         else:
-            self.paper_classifier = None
-            if self.llm_extractor:
-                logger.info("PaperClassifier disabled via config")
-            else:
-                logger.warning("PaperClassifier not initialized (no LLM extractor available)")
-
+              self.paper_classifier = None
+              logger.warning("PaperClassifier not initialized (no LLM model available)")
+              
         # Initialize template mapper
         self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"])
 
@@ -293,14 +296,19 @@ class ExtractionPipeline:
             result["steps"]["fetch"] = "success"
             result["paper_metadata"] = paper_metadata
 
-            # Step 1.5: Classify paper domain before expensive PDF parsing/extraction
-            logger.info("Step 1.5: Classifying paper domain")
+            # Step 2: Classify paper domain before expensive PDF parsing/extraction -->
+            logger.info("Step 2: Classifying paper domain")
             if self.paper_classifier:
                 classification = self.paper_classifier.classify(paper_metadata)
                 result["classification"] = {
                     "is_valid": classification.is_valid,
                     "reason": classification.reason,
                 }
+                if classification.error:
+                    result["status"] = "failed"
+                    result["error"] = f"Classification failed: {classification.reason}"
+                    logger.error("Paper %s: classification aborted: %s", arxiv_id, classification.reason)
+                    return result
                 if not classification.is_valid:
                     result["status"] = "invalid_paper"
                     result["error"] = f"Paper rejected: {classification.reason}"
@@ -309,8 +317,8 @@ class ExtractionPipeline:
                 result["steps"]["classify"] = "success"
                 logger.info("Paper %s accepted: %s", arxiv_id, classification.reason)
 
-            # Step 2: Parse PDF
-            logger.info("Step 2: Parsing PDF")
+            # Step 3: Parse PDF
+            logger.info("Step 3: Parsing PDF")
             pdf_path = Path(paper_metadata["pdf_path"])
             parsed_data = self.pdf_parser.parse(pdf_path)
 
@@ -323,8 +331,8 @@ class ExtractionPipeline:
             result["text_length"] = parsed_data["text_length"]
             result["word_count"] = parsed_data["word_count"]
 
-            # Step 3: Extract information with LLM
-            logger.info("Step 3: Extracting information with LLM")
+            # Step 4: Extract information with LLM
+            logger.info("Step 4: Extracting information with LLM")
 
             if not self.llm_extractor:
                 result["status"] = "failed"
@@ -364,8 +372,8 @@ class ExtractionPipeline:
                 result["models_after_selection"],
             )
 
-            # Step 3.5: Merge size variants (align with gold-standard structure)
-            logger.info("Step 3.5: Merging size variants (gold-standard alignment)")
+            # Step 5: Merge size variants (align with gold-standard structure)
+            logger.info("Step 5: Merging size variants (gold-standard alignment)")
             result["extraction_data"] = merge_model_variants(
                 result["extraction_data"], paper_metadata
             )
@@ -375,8 +383,8 @@ class ExtractionPipeline:
                 f"{result['models_after_merge']}"
             )
 
-            # Step 4: Map to ORKG template (use merged models for downstream alignment)
-            logger.info("Step 4: Mapping to ORKG template")
+            # Step 6: Map to ORKG template (use merged models for downstream alignment)
+            logger.info("Step 6: Mapping to ORKG template")
             merged_response = MultiModelResponse(
                 models=[LLMProperties(**model) for model in result["extraction_data"]],
                 paper_describes_multiple_models=(len(result["extraction_data"]) > 1),
@@ -391,9 +399,9 @@ class ExtractionPipeline:
                 saved_path = self._save_intermediate_results(arxiv_id, result)
                 result["saved_path"] = str(saved_path) if saved_path else None
 
-            # Step 5: Upload to ORKG (uses model family grouping)
+            # Step 7: Upload to ORKG (uses model family grouping)
             if update_orkg:
-                logger.info("Step 5: Uploading to ORKG (grouping by model family)")
+                logger.info("Step 7: Uploading to ORKG (grouping by model family)")
 
                 # Prepare extraction data for ORKGPaperManager
                 extraction_data = {
@@ -852,7 +860,8 @@ def _print_run_configuration(
 ) -> None:
     """Print CLI choices that affect user-visible workflow behavior."""
     print("\nRun configuration:")
-    print(f"  KISSKI model:    {pipeline.config['kisski']['model']}")
+    print(f"  Extractor model: {pipeline.config['kisski']['model']}")
+    print(f"  Classifier model:{pipeline.config['classifier']['model']}")
     print(f"  ORKG endpoint:   {pipeline.config['orkg']['endpoint_url']}")
     print(f"  ORKG upload:     {'enabled' if upload_to_orkg else 'disabled (--no-update)'}")
     print(f"  Evaluation:      {evaluation_metrics or 'disabled'}")
@@ -943,6 +952,10 @@ def main():
         help="KISSKI model name for this extraction run (overrides config/config.yaml)",
     )
     parser.add_argument(
+        "--classifier-model",
+        help="KISSKI Model name for the paper classifier step (overrides config/config.yaml)",
+    )
+    parser.add_argument(
         "--orkg-endpoint-url",
         help=(
             "ORKG endpoint URL for this run, e.g. https://sandbox.orkg.org/ "
@@ -978,6 +991,7 @@ def main():
     # Initialize pipeline
     pipeline = ExtractionPipeline(
         model_name=args.model,
+        classifier_model=args.classifier_model,
         orkg_endpoint_url=args.orkg_endpoint_url,
         extraction_output_dir=args.extracted_output_dir,
     )
