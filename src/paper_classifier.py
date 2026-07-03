@@ -167,14 +167,6 @@ class PaperClassifier:
         )
 
         try:
-            #TODO: Remove the log before the demo:
-            logger.info(
-              "Classifier prompt for '%s...' (model: %s)\nabstract:\n%s\nPrompt:\n%s",
-              title[:60],
-              self.model_name,
-              abstract[:100],
-              prompt,
-            )
             # call the LLM to classify the paper ->>
             response = self.client.chat.completions.create(
                 model=self.model_name,
@@ -193,12 +185,6 @@ class PaperClassifier:
                 timeout=self.timeout,
             )
             raw = (response.choices[0].message.content or "").strip()
-            # log the raw response for debugging --> 
-            logger.info(
-                  "Classifier raw response for '%s...':\n%s",
-                  title[:60],
-                  raw,
-              )
             # Strip <think>...</think> reasoning blocks emitted by Qwen3 / DeepSeek-R1
             raw = re.sub(r"<think>[\s\S]*?</think>", "", raw)
             if "<think>" in raw:
