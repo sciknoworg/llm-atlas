@@ -25,7 +25,16 @@ _RESOURCE_FIELDS = {
     "tokenizer",
     "research_problem",
     "license",
-    "hardware_used",
+    "application",
+    "hardware_used"
+}
+
+_MULTI_VALUED_FIELDS = {
+      "research_problem",
+      "parameters",
+      "application",
+      "finetuning_task",
+      "pretraining_corpus",
 }
 
 
@@ -97,17 +106,89 @@ class TemplateMapper:
         if paper_id:
             contribution["paper_id"] = paper_id
 
-        # Map each field to ORKG property
+       # Map each field to ORKG property (multi-valued fields expand into
+          # one property per value, all sharing the same predicate ID)
         for field_name, property_id in self.field_mapping.items():
             value = getattr(model, field_name, None)
 
             if value is not None:
-                prop = self._create_property(property_id, field_name, value)
-                if prop:
-                    contribution["properties"].append(prop)
+                props = self._create_properties(property_id, field_name, value)
+                if props:
+                    contribution["properties"].extend(props)
 
         logger.info(f"Mapped {len(contribution['properties'])} properties")
         return contribution
+    
+    @staticmethod #TODO: Capitalize first letter of each new row
+    def _capitalize_first(value: str) -> str:
+          """
+          Uppercase only the first character of a value, preserving the rest.                                                                                                                                                           
+
+          Uses slicing rather than str.capitalize() so acronyms and mixed-case
+          tokens stay intact (e.g. "gpt-4 model" -> "Gpt-4 model", not "Gpt-4 model"
+          being lowercased elsewhere).
+          """
+          value = value.strip()
+          if not value:
+              return value
+          return value[0].upper() + value[1:]
+    
+    
+    def _split_values(self, property_name: str, value: Any) -> List[Any]:
+          """
+          Break a field value into the individual parts that should each become a
+          separate ORKG statement (row).
+
+          - List values are always expanded into their elements.
+          - String values are split on commas only for fields in _MULTI_VALUED_FIELDS.
+          - Everything else is returned as a single-element list unchanged.
+
+          String parts are stripped and empty parts dropped; duplicates are removed
+          while preserving first-seen order. Non-string/unhashable parts pass through.
+          """
+          if isinstance(value, list):
+              raw_parts: List[Any] = value
+          elif property_name in _MULTI_VALUED_FIELDS and isinstance(value, str):
+              raw_parts = value.split(",")
+          else:
+              raw_parts = [value]
+
+          cleaned: List[Any] = []
+          seen = set()
+          for part in raw_parts:
+              if isinstance(part, str):
+                  part = part.strip()
+                  if not part:
+                      continue
+              try:
+                  if part in seen:
+                      continue
+                  seen.add(part)
+              except TypeError:
+                  pass  # unhashable (e.g. dict) — keep without de-duping
+              cleaned.append(part)
+          return cleaned
+
+    def _create_properties(
+          self, property_id: str, property_name: str, value: Any
+      ) -> List[Dict[str, Any]]:
+          """
+          Create one or more ORKG property dicts from a single field value.
+  
+          Multi-valued fields (and list values) are split into separate property
+          dicts that share the same predicate ID, so the ORKG client emits each as
+          its own statement row. Works identically for literals and resources
+          because the split happens before datatype routing.
+          """
+          if value is None:
+              return []
+
+          props: List[Dict[str, Any]] = []
+          for part in self._split_values(property_name, value):
+              prop = self._create_property(property_id, property_name, part)
+              if prop:
+                  props.append(prop)
+          return props
 
     def _create_property(
         self, property_id: str, property_name: str, value: Any
@@ -146,7 +227,7 @@ class TemplateMapper:
             return {
                 "property": property_id,
                 "label": property_name,
-                "value": str(value),
+                "value": self._capitalize_first(str(value)),
                 "datatype": "resource",
             }
 
@@ -179,7 +260,7 @@ class TemplateMapper:
         return {
             "property": property_id,
             "label": property_name,
-            "value": str(value),
+            "value": self._capitalize_first(str(value)),
             "datatype": "string",
         }
 

@@ -21,7 +21,7 @@ from openai import (
     OpenAI,
     RateLimitError,
 )
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 logger = logging.getLogger(__name__)
 
@@ -64,12 +64,59 @@ class LLMProperties(BaseModel):
     model_type: Optional[str] = None
     paper_title: Optional[str] = None
 
+    @model_validator(mode="before")
+    @classmethod
+    def _normalize_list_values(cls, data: Any) -> Any:
+        """
+        Coerce multi-valued shapes the LLM emits for scalar fields.
+
+        Papers describing several model sizes return parameters_millions as a
+        list ([8000, 70000]) or a comma-string ('8000, 70000, 405000').
+        - Integer fields collapse to their max (predicate P110076 is
+          "max params in million").
+        - Other scalar fields that arrive as lists are joined into a comma
+          string, which the ORKG template mapper later splits into one row each.
+        """
+        if not isinstance(data, dict):
+            return data
+
+        int_fields = {"parameters_millions"}
+        for field, value in list(data.items()):
+            if field in int_fields:
+                nums = cls._to_int_list(value)
+                if nums is not None:
+                    data[field] = max(nums) if nums else None
+            elif isinstance(value, list):
+                parts = [str(v).strip() for v in value if v is not None and str(v).strip()]
+                data[field] = ", ".join(parts) if parts else None
+        return data
+
+    @staticmethod
+    def _to_int_list(value: Any) -> Optional[List[int]]:
+        """Parse an int field that may arrive as an int, list, or comma string."""
+        if value is None or isinstance(value, bool):
+            return None
+        if isinstance(value, (int, float)):
+            return [int(value)]
+        if isinstance(value, str):
+            items: List[Any] = value.split(",")
+        elif isinstance(value, list):
+            items = value
+        else:
+            return None
+        nums: List[int] = []
+        for v in items:
+            try:
+                nums.append(int(float(str(v).strip())))
+            except (TypeError, ValueError):
+                continue
+        return nums
 
 class MultiModelResponse(BaseModel):
     """Response containing multiple extracted models."""
 
     models: List[LLMProperties]
-    paper_describes_multiple_models: bool
+    paper_describes_multiple_models: bool = False
 
 
 class LLMExtractor:
@@ -547,6 +594,10 @@ Output JSON:""",
                         model_data["parameters"] = None
                     if not model_data.get("license"):
                         model_data["license"] = None
+                        
+            # Derive the multiple-models flag if the LLM omitted it
+            if "models" in json_data and "paper_describes_multiple_models" not in json_data:
+                json_data["paper_describes_multiple_models"] = len(json_data["models"]) > 1
 
             # Validate against schema
             result = MultiModelResponse(**json_data)
@@ -669,16 +720,12 @@ Output JSON:""",
                         break
 
             if end <= start:
-                # Fallback to simple rfind
-                end = response_text.rfind("}") + 1
+                  # Braces never balanced — the response is truncated. Keep everything
+                  # from the first "{" so the repair/balancer below can salvage any
+                  # complete objects and close the open brackets.
+                  end = len(response_text)
 
-            if end > start:
-                response_text = response_text[start:end]
-            else:
-                logger.error(
-                    f"No valid JSON object found. Response preview: {original_response[:200]}"
-                )
-                return None
+            response_text = response_text[start:end]
 
             # BEST PRACTICE: Try parsing the minimally cleaned JSON first
             # Only apply aggressive repair if standard parsing fails
