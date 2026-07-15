@@ -30,12 +30,12 @@ _RESOURCE_FIELDS = {
 }
 
 _MULTI_VALUED_FIELDS = {
-      "research_problem",
-      "parameters",
-      "application",
-      "finetuning_task",
-      "pretraining_corpus",
-}
+      "research_problem": ",",
+      "parameters": ",",
+      "application": ",",
+      "finetuning_task": ",",
+      "innovation": ";",   # innovation text contains commas internally; split on ";"
+  }
 
 
 class TemplateMapper:
@@ -64,16 +64,16 @@ class TemplateMapper:
             "pretraining_architecture": "P103000",  # pretraining architecture
             "pretraining_task": "P103001",  # pretraining task
             "pretraining_corpus": "P41655",  # pretraining corpus (required)
-            # "training_corpus_size": "P163013",  # DISABLED: not found in sandbox
-            # "knowledge_cutoff_date": "P163011",  # DISABLED: not found in sandbox
+            # "training_corpus_size": "P163013",  # DISABLED: not found in sandbox  -> ID on Sandbox: "P202273"
+            # "knowledge_cutoff_date": "P163011",  # DISABLED: not found in sandbox  -> ID on Sandbox: "P202274"
             "finetuning_task": "P116000",  # fine-tuning task
-            # "finetuning_data": "P163012",  # DISABLED: not found in sandbox
+            # "finetuning_data": "P163012",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202276"
             "optimizer": "P105017",  # optimizer
             "tokenizer": "P43065",  # tokenizer
             "parameters": "P103002",  # number of parameters (required, text)
             "parameters_millions": "P110076",  # max params in million (required, int)
-            # "context_length": "P163009",  # DISABLED: not found in sandbox
-            # "supported_language": "P163010",  # DISABLED: not found in sandbox
+            # "context_length": "P163009",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202277"
+            # "supported_language": "P163010",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202278"
             "hardware_used": "P119138",  # hardware used
             "hardware_description": "P119137",  # hardware description
             "carbon_emitted": "P119142",  # carbon emitted (tCO2eq)
@@ -148,16 +148,21 @@ class TemplateMapper:
           """
           if isinstance(value, list):
               raw_parts: List[Any] = value
+              did_split = False
           elif property_name in _MULTI_VALUED_FIELDS and isinstance(value, str):
-              raw_parts = value.split(",")
+              raw_parts = value.split(_MULTI_VALUED_FIELDS[property_name])
+              did_split = True
           else:
               raw_parts = [value]
+              did_split = False
 
           cleaned: List[Any] = []
           seen = set()
           for part in raw_parts:
               if isinstance(part, str):
                   part = part.strip()
+                  if did_split and part.lower().startswith("and "):
+                      part = part[4:].strip()
                   if not part:
                       continue
               try:
