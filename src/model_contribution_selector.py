@@ -16,6 +16,12 @@ logger = logging.getLogger(__name__)
 # Generic auxiliary terms that are usually not standalone model contributions
 # in comparison-style extractions.
 _AUXILIARY_KEYWORDS = {
+    "vision", 
+    "speech", 
+    "audio", 
+    "image", 
+    "multimodal", 
+    "visual",
     "adapter",
     "chat",
     "classifier",

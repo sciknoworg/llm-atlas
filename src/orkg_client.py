@@ -407,8 +407,17 @@ class ORKGClient:
                     elif datatype == "URI" or (
                         isinstance(value, str) and value.startswith("http")
                     ):
-                        # HTTP URL → reference an existing resource directly
-                        statements[prop_id].append({"id": str(value)})
+                        # HTTP URL → xsd:string literal holding the URL.
+                        # Do NOT emit {"id": url}: ORKG treats "id" as a
+                        # reference to an existing resource, and a URL is not a
+                        # resolvable resource id — that makes papers.add 500.
+                        literal_id = f"#literal_{literal_counter}"
+                        orkg_literals[literal_id] = {
+                            "label": str(value),
+                            "data_type": "xsd:string",
+                        }
+                        statements[prop_id].append({"id": literal_id})
+                        literal_counter += 1
                     elif datatype in ("date", "Date"):
                         literal_id = f"#literal_{literal_counter}"
                         orkg_literals[literal_id] = {
@@ -559,7 +568,8 @@ class ORKGClient:
                 if datatype == "resource":
                     statements[prop_id].append({"label": str(value)})
                 elif datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
-                    statements[prop_id].append({"id": value})
+                    # URL as a literal, not {"id": url} (that is a resource ref).
+                    statements[prop_id].append({"label": str(value)})
                 elif datatype in ("date", "Date"):
                     statements[prop_id].append({"label": str(value), "datatype": "Date"})
                 elif datatype in ("integer", "Integer") or isinstance(value, int):
@@ -670,7 +680,8 @@ class ORKGClient:
                     # Format value object based on type
                     value_obj = {}
                     if datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
-                        value_obj["@id"] = str(value)
+                        # URL as a literal, not {"@id": url} (that is a resource ref).
+                        value_obj["text"] = str(value)
                     elif datatype in ["Date", "date"]:
                         value_obj["text"] = str(value)
                         value_obj["datatype"] = "xsd:date"

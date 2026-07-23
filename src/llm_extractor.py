@@ -25,6 +25,108 @@ from pydantic import BaseModel, model_validator
 
 logger = logging.getLogger(__name__)
 
+EXTRACTION_SYSTEM_PROMPT = """<Role>
+  You are an expert AI researcher extracting structured metadata about language models from research papers, following ORKG template R609825.
+  </Role>
+
+  <Task-Description>
+  A user will give you the text of a research paper (optionally prefixed with metadata and extracted tables). Extract DETAILED information about ALL model versions, sizes, and variants that THIS paper introduces as its own contribution. Ignore models mentioned only as
+  related work, baselines, or comparisons. Return one entry per distinct model in a "models" array.
+  </Task-Description>
+
+  <Required-Fields>
+  Extract these for every model. If a required field is genuinely absent, use null, but prioritise finding it in the text.
+  - model_name: Exact name including version/size (e.g. "Llama 3.1 8B", not "Llama").
+  - model_family: Family/series (e.g. GPT, BERT, Llama).
+  - date_created: Publication date (YYYY-MM-DD, else YYYY-MM, else YYYY).
+  - organization: Canonical name (Google, OpenAI, Meta) — not the long form ("Google AI Language").
+  - innovation: The model's key innovation(s). For EACH distinct innovation: (a) name the technique in the paper's own terms (e.g. "masked language model", "RLHF"), (b) explain the mechanism, (c) state how it differs from or improves on prior work. Be specific; avoid
+  generic phrases. Separate distinct innovations with "; ".
+  - pretraining_corpus: Training dataset/corpus.
+  - research_problem: Research problem addressed.
+  - parameters: Parameter count as text (e.g. "7B", "175B", "117M").
+  - parameters_millions: Parameters as an integer in millions (7B -> 7000, 117M -> 117).
+  - application: Use cases/applications.
+  - license: License type (e.g. "Apache 2.0", "open source", "closed source").
+  </Required-Fields>
+
+  <Conditional-Fields>
+  Extract these ONLY when the paper explicitly states them. If not mentioned, use null — do NOT guess or infer from other papers or prior knowledge.
+  - pretraining_architecture: EXACTLY one of "Encoder", "Decoder", or "Encoder-Decoder".
+  - pretraining_task: e.g. "Causal language modeling", "Masked LM", "Next-token prediction".
+  - finetuning_task: e.g. "Supervised discriminative fine-tuning".
+  - optimizer: Optimizer name only (e.g. Adam, AdamW).
+  - extension: One factual sentence describing a mechanism that extends the model beyond a baseline.
+  - hardware_used: Training/inference hardware, in the paper's wording (e.g. "Nvidia V100 GPU", "TPUv3").
+  - training_corpus_size: Size of the pretraining corpus (e.g. "300B tokens", "570GB").
+  - finetuning_data: Dataset(s) used for fine-tuning. May be multiple — separate with commas.
+  - tokenizer: Tokenizer name/scheme (e.g. "BPE", "SentencePiece", "tiktoken").
+  - supported_language: Language(s) supported. May be multiple — separate with commas (e.g. "English, French").
+  - hardware_description: Description of the training hardware setup (e.g. "256 A100 GPUs for 21 days").
+  - carbon_emitted: Reported carbon emissions (e.g. "552 tCO2eq").
+  - source_code: URL of the source-code repository (return the bare URL only, e.g. a GitHub link).
+  - activated_parameters: [MoE models] Number of ACTIVE parameters per token, distinct from total parameters (e.g. "32B activated").
+  - moe_configuration: [MoE models] Expert setup (e.g. "1T total parameters, 32B activated"; "384 experts, 8 active, 1 shared").
+  - attention_mechanism: Attention variant (e.g. "Multi-head Latent Attention (MLA)", "Grouped-Query Attention (GQA)", "sparse attention / DSA").
+  - number_of_attention_heads: Attention head count (e.g. "64 query / 8 key-value").
+  - context_length_max: Maximum supported context window (e.g. "128K tokens", "1M tokens").
+  - context_extension_method: Technique used to extend context (e.g. "YaRN", "RoPE scaling", "DSA").
+  - base_model: Pre-existing model this one is built upon/initialized from (e.g. "Qwen2.5", "Phi-4").
+  - training_pipeline: Multi-stage training recipe (e.g. "pre-training → SFT → RL", "multi-stage post-training").
+  - optimizer_innovation: A novel optimizer or optimizer modification introduced (e.g. "MuonClip", "Muon with QK-clip").
+  - weight_clipping_mechanism: Weight/gradient/activation clipping technique for stability (e.g. "QK-clip", "gradient clipping").
+  - quantization_precision: Numerical precision for training/inference (e.g. "FP8", "BF16", "INT4").
+  - synthetic_data_generation_method: How synthetic training data is produced (e.g. "large-scale agentic data synthesis", "rejection sampling", "synthetic augmentation").
+  - rl_algorithm: Reinforcement-learning algorithm used in post-training (e.g. "GRPO", "PPO", "asynchronous agent RL").
+  - reward_mechanism: How RL rewards are defined (e.g. "verifiable rule-based rewards", "reward model").
+  - reasoning_mode: [Reasoning models] Whether/how the model reasons (e.g. "hybrid thinking/non-thinking with explicit mode tokens", "non-thinking", "chain-of-thought").
+  - tool_calling_format: Format/protocol for tool or function calling (e.g. "JSON function calling", "ReAct").
+  - training_environment_scale: Scale of the (RL) training environments (e.g. "real and synthetic environments", "tens of thousands of environments"). 
+  - post_training_infrastructure: System/infrastructure used for post-training (e.g. "asynchronous RL infrastructure decoupling generation from training").
+  - training_environment_scale is about environments; post_training_infrastructure is about the training system — keep them distinct.
+  - benchmark_result: Reported benchmark scores, verbatim, separated by "; " (e.g. "SWE-Bench Verified: 65.8; AIME 2025: 49.5"). Only real numbers stated in the paper — never invent scores.
+  - safety_evaluation_protocol: Safety evaluation method/protocol (e.g. "red-teaming", named safety benchmark).
+  - safety_defect_rate: Reported safety defect/failure rate (e.g. "0.3%").
+  - fusion_architecture: [Multimodal models] How modalities are fused (e.g. "early fusion", "cross-attention fusion").
+  - vision_encoder: [Multimodal models] Vision encoder/backbone (e.g. "ViT", "dynamic-resolution encoder", "CLIP ViT-L").
+  </Conditional-Fields>
+
+  <Critical-Rules>
+  1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.
+  2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.
+  3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).
+  4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.
+  5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not "Google AI Language").
+  6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").
+  7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.
+  8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.
+  9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.
+  10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants of the same model (e.g. 'Llama 3 8K' and 'Llama 3 128K-context' are the SAME model as 'Llama 3'). Record the context length in the context_length field of that single entry instead.
+  11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained (instruction-tuned) variants of the same model (e.g. 'Llama 3 (pre-trained)' and 'Llama 3 (post-trained)' are ONE entry 'Llama 3'). Mention both stages in the innovation or finetuning_task fields.
+
+  Additional rules:
+  - Extract ALL model versions mentioned (3.1, 3.2, 3.3 = separate entries).
+  - Extract ALL architectural variants (Base, Large, XL, etc. = separate entries).
+  - Extract models THIS paper introduces (main contributions), NOT models mentioned as related work or comparisons.
+  - Focus on PRIMARY model contributions intended as standalone released models.
+  - Do NOT create separate entries for auxiliary artifacts such as tools, guards, safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules when the paper also contains main model contributions.
+  - If auxiliary artifacts are mentioned, capture them inside innovation/extension fields of the relevant primary model instead of as standalone models.
+  - Model name should include version/size if mentioned (e.g. "Llama 3.1 8B" not just "Llama"); model name is NOT the architecture (e.g. "GPT" not "Transformer").
+  - parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500.
+  </Critical-Rules>
+
+  <Default>
+  For required fields, use null only after genuinely failing to find the value. For conditional fields, always prefer null over guessing when the paper does not state the value.
+  </Default>
+
+  <Response-Format>
+  Return JSON only, no prose:
+  {
+    "models": [ { "model_name": "...", "...": "..." } ],
+    "paper_describes_multiple_models": true | false
+  }
+  </Response-Format>"""
+
 
 class LLMProperties(BaseModel):
     """Properties of an LLM model following ORKG template R609825."""
@@ -63,6 +165,29 @@ class LLMProperties(BaseModel):
     release_date: Optional[str] = None
     model_type: Optional[str] = None
     paper_title: Optional[str] = None
+    activated_parameters: Optional[str] = None
+    attention_mechanism: Optional[str] = None
+    context_length_max: Optional[str] = None
+    context_extension_method: Optional[str] = None
+    training_pipeline: Optional[str] = None
+    reasoning_mode: Optional[str] = None
+    moe_configuration: Optional[str] = None
+    quantization_precision: Optional[str] = None
+    synthetic_data_generation_method: Optional[str] = None
+    rl_algorithm: Optional[str] = None
+    reward_mechanism: Optional[str] = None
+    tool_calling_format: Optional[str] = None
+    training_environment_scale: Optional[str] = None
+    safety_evaluation_protocol: Optional[str] = None
+    safety_defect_rate: Optional[str] = None
+    fusion_architecture: Optional[str] = None
+    vision_encoder: Optional[str] = None
+    base_model: Optional[str] = None
+    optimizer_innovation: Optional[str] = None
+    benchmark_result: Optional[str] = None
+    weight_clipping_mechanism: Optional[str] = None
+    number_of_attention_heads: Optional[str] = None
+    post_training_infrastructure: Optional[str] = None 
 
     @model_validator(mode="before")
     @classmethod
@@ -217,7 +342,7 @@ class LLMExtractor:
 
         # Few-shot examples (matching Grete approach)
         # Example 1: BERT (with all ORKG R609825 required fields)
-        example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus."  # noqa: E501
+        example1_input = "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Google AI Language. We introduce BERT with 110M, 340M parameters. It uses a Transformer encoder architecture trained on Masked LM and Next Sentence Prediction tasks. It achieves state-of-the-art on GLUE. We use Adam optimizer. Trained on English Wikipedia and BookCorpus, totaling 3.3 billion words. We use a WordPiece tokenizer and train on 16 Cloud TPUs (64 TPU chips). The model supports English. Code is available at https://github.com/google-research/bert."  # noqa: E501
         example1_output = {
             "models": [
                 {
@@ -232,16 +357,33 @@ class LLMExtractor:
                     "pretraining_task": "Masked LM (MLM), Next Sentence Prediction (NSP)",
                     "pretraining_corpus": "English Wikipedia, BookCorpus",
                     "optimizer": "Adam",
-                    "innovation": "BERT's primary innovation is the masked language model (MLM) approach, inspired by the Cloze task. This method masks random tokens and trains the model to predict them, enabling bidirectional context understanding.",  # noqa: E501
+                    "tokenizer": "WordPiece (Wu et al., 2016), 30,000 token vocabulary; special tokens [CLS], [SEP], [MASK]",
+                    "hardware_used": "Cloud TPU",
+                    "hardware_description": "BERT_BASE: 4 Cloud TPUs in Pod configuration (16 TPU chips); BERT_LARGE: 16 Cloud TPUs (64 TPU chips); each pre-training run took 4 days. Fine-tuning replicable in ≤1 hour on a single Cloud TPU.",
+                    "innovation": "Masked language model (MLM): randomly masks input tokens and trains the model to predict them, enabling deep bidirectional context rather than left-to-right conditioning; Next Sentence Prediction (NSP): jointly pre-trains on sentence-pair coherence so the model captures inter-sentence relationships for tasks like QA and NLI.",
                     "research_problem": "Language Understanding",
                     "application": "Natural language understanding, question answering, text classification",  # noqa: E501
                     "license": "Apache 2.0",
+                    "training_corpus_size": "3.3 billion words",
+                    "tokenizer": "WordPiece",
+                    "hardware_used": "Cloud TPU",
+                    "hardware_description": "16 Cloud TPUs (64 TPU chips)",
+                    "supported_language": "English",
+                    "finetuning_data": "GLUE datasets (MNLI 392k, QQP 363k, QNLI 108k, SST-2 67k, CoLA 8.5k, STS-B 5.7k, MRPC 3.5k, RTE 2.5k), SQuAD v1.1 (100k QA pairs), SQuAD v2.0, SWAG (113k), CoNLL-2003 NER; optional TriviaQA augmentation for SQuAD",
+                    "context_length": 512,
+                    "activated_parameters": "110M (BASE) / 340M (LARGE) — dense, all parameters active",
+                    "attention_mechanism": "Bidirectional (unmasked) multi-head self-attention; A=12 (BASE), A=16 (LARGE)",
+                    "training_pipeline": "Two-stage: unsupervised pre-training (MLM + NSP) followed by supervised end-to-end fine-tuning per downstream task; alternatively feature-based extraction of frozen activations",
+                    "training_environment_scale": "Batch size 256 sequences (128,000 tokens/batch) for 1,000,000 steps ≈ 40 epochs over 3.3B-word corpus",
+                    "benchmark_result": "GLUE average 82.1 (LARGE) / 79.6 (BASE), official leaderboard score 80.5 (+7.7 abs); MNLI-m/mm 86.7/85.9; QQP 72.1; QNLI 92.7; SST-2 94.9; CoLA 60.5; STS-B 86.5; MRPC 89.3; RTE 70.1; SQuAD v1.1 Test EM/F1 87.4/93.2 (ensemble+TriviaQA), single 85.1/91.8; SQuAD v2.0 Test EM/F1 80.0/83.1; SWAG Test 86.3; CoNLL-2003 NER Test F1 92.8",
+                    "number_of_attention_heads": "12 (BERT_BASE), 16 (BERT_LARGE)",
+                    "source_code": "https://github.com/google-research/bert",
                 }
             ]
         }
 
         # Example 2: GPT-2 (with all ORKG R609825 required fields)
-        example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on WebText dataset."  # noqa: E501
+        example2_input = "Language Models are Unsupervised Multitask Learners. OpenAI. We trained a 1.5 billion parameter Transformer decoder language model. It demonstrates zero-shot task transfer. We assume a causal language modeling objective. Trained on the WebText dataset, 40GB of English text. The model uses a byte-level BPE tokenizer. Code: https://github.com/openai/gpt-2."  # noqa: E501
         example2_output = {
             "models": [
                 {
@@ -249,22 +391,34 @@ class LLMExtractor:
                     "model_family": "GPT",
                     "paper_title": "Language Models are Unsupervised Multitask Learners",
                     "organization": "OpenAI",
+                    "base_model": "OpenAI GPT (Radford et al., 2018) architecture",
                     "parameters": "1.5B",
                     "parameters_millions": 1500,
                     "date_created": "2019-02",
                     "pretraining_architecture": "Decoder",
                     "pretraining_task": "Causal language modeling",
                     "pretraining_corpus": "WebText",
-                    "innovation": "Zero-shot task transfer via large-scale unsupervised learning",
+                    "innovation": "Demonstrates that a large causal-LM Transformer trained on diverse web text (WebText) can perform many NLP tasks zero-shot — without task-specific training data or fine-tuning — by conditioning on natural-language task prompts, in contrast to prior approaches that require supervised fine-tuning per task.",
                     "research_problem": "Large Language Models",
                     "application": "Text generation, language modeling, zero-shot task transfer",  # noqa: E501
                     "license": "Modified MIT License",
+                    "training_corpus_size": "40GB of text",
+                    "tokenizer": "Byte-level BPE",
+                    "supported_language": "English",
+                    "context_length": 1024,
+                    "supported_language": "English (primarily; non-English pages filtered, ~10MB French detected)",
+                    "activated_parameters": "1,542,000,000 (dense, all parameters active)",
+                    "attention_mechanism": "Masked (causal) multi-head self-attention",
+                    "training_pipeline": "Single-stage unsupervised pretraining only; no supervised fine-tuning or RLHF",
+                    "optimizer_innovation": "Residual layer weights scaled at initialization by 1/sqrt(N), N = number of residual layers",
+                    "benchmark_result": "SOTA on 7 of 8 LM datasets zero-shot: LAMBADA 8.63 PPL / 63.24 percent acc, CBT-CN 93.30%, CBT-NE 89.05%, WikiText2 18.34 PPL, PTB 35.76 PPL, enwik8 0.93 BPB, text8 0.98 BPC, WikiText103 17.48 PPL, 1BW 42.16 PPL (not SOTA); CoQA 55 F1; Winograd 70.70%; CNN/DM ROUGE-AVG 21.40; WMT-14 En-Fr 5 BLEU, Fr-En 11.5 BLEU; Natural Questions 4.1 percent exact match",
+                    "source_code": "https://github.com/openai/gpt-2",
                 }
             ]
         }
 
         # Example 3: GPT-1 (with all ORKG R609825 required fields)
-        example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset."  # noqa: E501
+        example3_input = "Improving Language Understanding by Generative Pre-Training. Alec Radford, OpenAI. We demonstrate that large gains on these tasks can be realized by generative pre-training of a language model on a diverse corpus of unlabeled text, followed by discriminative fine-tuning on each specific task. Our approach employs a Transformer-based architecture with 117M parameters. We use the Adam optimizer. Trained on BooksCorpus dataset using a bytepair encoding (BPE) tokenizer, then fine-tuned on downstream datasets including SNLI and MultiNLI. Code available at https://github.com/openai/finetune-transformer-lm."  # noqa: E501
         example3_output = {
             "models": [
                 {
@@ -280,16 +434,28 @@ class LLMExtractor:
                     "pretraining_corpus": "BooksCorpus",
                     "finetuning_task": "Supervised discriminative fine-tuning",
                     "optimizer": "Adam",
-                    "innovation": "Generative pre-training followed by discriminative fine-tuning",
+                    "innovation": "Introduces a two-stage semi-supervised recipe: generative pre-training of a Transformer language model on a large unlabeled corpus (BooksCorpus), followed by discriminative fine-tuning on each downstream task via task-aware input transformations, ing one pre-trained model transfer across diverse tasks with minimal architecture changes rather than training task-specific models from scratch.",
                     "license": "closed source",
                     "research_problem": "Language Understanding",
                     "application": "Natural language understanding, text classification, question answering",  # noqa: E501
+                    "tokenizer": "Bytepair encoding (BPE)",
+                    "finetuning_data": "SNLI, MultiNLI",
+                    "context_length": 512,
+                    "supported_language": "English",
+                    "activated_parameters": "~117M (dense, all parameters active)",
+                    "attention_mechanism": "Masked (causal) multi-head self-attention, 12 heads",
+                    "training_pipeline": "Two-stage: unsupervised generative pre-training (LM objective) → supervised discriminative fine-tuning with auxiliary LM objective (L3 = L2 + λ·L1, λ=0.5); task-specific input transformations instead of task-specific architectures",
+                    "training_environment_scale": "100 epochs on minibatches of 64 randomly sampled contiguous sequences of 512 tokens; fine-tuning batch size 32, lr 6.25e-5, 3 epochs, linear decay with warmup over 0.2 percent of training",
+                    "optimizer_innovation": "Decoupled/modified L2 regularization (Loshchilov & Hutter) with w=0.01 on non-bias/gain weights; cosine-annealed LR with linear warmup",
+                    "benchmark_result": "SOTA on 9 of 12 datasets. GLUE 72.8 (prev. best 68.9); MNLI-m/mm 82.1/81.4; SNLI 89.9; SciTail 88.3; QNLI 88.1; RTE 56.0; Story Cloze 86.5 (+8.9); RACE 59.0 (RACE-m 62.9, RACE-h 57.4, +5.7); CoLA 45.4 mc (prev. 35.0); SST-2 91.3; MRPC 82.3 F1; STS-B 82.0 pc; QQP 70.3 F1. Ablations: w/o pre-training avg 59.9 vs 74.7 full; LSTM w/ aux LM 69.1",
+                    "number_of_attention_heads": 12,
+                    "source_code": "https://github.com/openai/finetune-transformer-lm",
                 }
             ]
         }
 
         # Example 4: Multiple model versions (Llama 3.1 - all ORKG R609825 required fields)
-        example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. Released under Llama 3.1 Community License."  # noqa: E501
+        example4_input = "The Llama 3.1 Herd of Models. Meta AI. We introduce Llama 3.1 with three model sizes: 8B, 70B, and 405B parameters. All models use Transformer decoder architecture. The 8B model has 8 billion parameters, the 70B model has 70 billion parameters, and the 405B model has 405 billion parameters. All models are trained on the same pretraining task. Trained on large-scale text corpus. Applications include chat, instruction following, and general language tasks. All models were pretrained on approximately 15 trillion tokens with a 128K-vocabulary BPE tokenizer, on up to 16,000 NVIDIA H100 GPUs, emitting an estimated 11,390 tCO2eq. The models support English, German, French, Italian, Portuguese, Hindi, Spanish, and Thai. Released under Llama 3.1 Community License."  # noqa: E501
         example4_output = {
             "models": [
                 {
@@ -299,13 +465,36 @@ class LLMExtractor:
                     "organization": "Meta",
                     "parameters": "8B",
                     "parameters_millions": 8000,
+                    "activated_parameters": "8B (dense — all parameters active)",
+                    "attention_mechanism": "Grouped Query Attention (GQA) with 8 key-value heads; cross-document attention masking",
                     "date_created": "2024-07",
+                    "context_length_max": "128K tokens",
+                    "training_corpus_size": "15 trillion tokens",
+                    "optimizer": "AdamW",
+                    "tokenizer": "128K-vocabulary BPE",
+                    "training_pipeline": "Pre-training → long-context pre-training → annealing → post-training (6 rounds of RM → rejection sampling → SFT → DPO)",
+                    "hardware_used": "NVIDIA H100 GPU",
+                    "hardware_description": "Up to 16,000 H100 GPUs",
+                    "reasoning_mode": "Chain-of-thought prompting; interleaved code+text reasoning with execution feedback",
+                    "moe_configuration": "None — dense architecture chosen over MoE for training stability",
+                    "quantization_precison": "BF16 training; int8 quantized Llama Guard 3 variant (>40 percent size reduction)",
+                    "rl_algorithm": "Direct Preference Optimization (DPO); PPO explored but rejected",
+                    "reward_mechanism": "Reward model on pre-trained checkpoint, Llama 2 objective minus margin term; edited > chosen > rejected rankings; outcome + step-wise reward models",
+                    "tool_calling_format": "Python objects/functions with signature+docstring; JSON conversion for web APIs; multi-message chat protocol with header/termination tokens",
+                    "carbon_emitted": "11,390 tCO2eq",
+                    "supported_language": "English, German, French, Italian, Portuguese, Hindi, Spanish, Thai",
                     "pretraining_architecture": "Transformer",
                     "pretraining_task": "Next-token prediction",
                     "pretraining_corpus": "Large-scale text corpus",
-                    "innovation": "Large-scale language models",
+                    "finetuning_data": "Human-annotated preference data (81.99 percent general English, 6.93 percent coding, 5.19% multilingual, 5.89 percent reasoning/tools); SFT mix of rejection-sampled, synthetic, and human-curated data",
+                    "innovation": "A family of decoder-only Transformer language models sharing one architecture and next-token-prediction training recipe, scaled across 8B, 70B, and 405B parameters on a large-scale text corpus to support chat and instruction following.",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
+                    "supported_language": "English, German, French, Italian, Portuguese, Hindi, Spanish, Thai",
+                    "safety_evaluation_protocol": "Violation Rate / False Refusal Rate on >4,000 prompts per capability; red teaming; CyberSecEval; ML Commons hazard taxonomy",
+                    "benchmark_results": "MMLU 69.4 (5-shot); MMLU 0-shot CoT 73.0; HumanEval 72.6; GSM8K 84.5; MATH 51.9; IFEval 80.4; MGSM 68.9; BFCL 76.1; GPQA 32.8; ARC-C 83.4",
+                    "number_of_attention_heads": 32,
+                    "post_training_infrastructure": "PagedAttention for rejection sampling (>2x throughput); 6 iterative post-training rounds",
                     "license": "Llama 3.1 Community License",
                 },
                 {
@@ -316,13 +505,36 @@ class LLMExtractor:
                     "parameters": "70B",
                     "parameters_millions": 70000,
                     "date_created": "2024-07",
+                    "training_corpus_size": "15 trillion tokens",
+                    "tokenizer": "128K-vocabulary BPE",
+                    "hardware_used": "NVIDIA H100 GPU",
+                    "hardware_description": "Up to 16,000 H100 GPUs",
+                    "carbon_emitted": "11,390 tCO2eq",
+                    "supported_language": "English, German, French, Italian, Portuguese, Hindi, Spanish, Thai",
                     "pretraining_architecture": "Transformer",
                     "pretraining_task": "Next-token prediction",
                     "pretraining_corpus": "Large-scale text corpus",
-                    "innovation": "Large-scale language models",
+                    "innovation": "A family of decoder-only Transformer language models sharing one architecture and next-token-prediction training recipe, scaled across 8B, 70B, and 405B parameters on a large-scale text corpus to support chat and instruction following.",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
                     "license": "Llama 3.1 Community License",
+                    "finetuning_data": "Same preference and SFT mixes as the herd; capability-specific expert models (code expert trained on 1T token mix of >85p code; multilingual expert trained on 90% multilingual tokens)",
+                    "context_length": 128000,
+                    "activated_parameters": "70B (dense, all parameters active)",
+                    "attention_mechanism": "Grouped Query Attention (GQA) with 8 key-value heads",
+                    "training_pipeline": "Pre-training -> long-context pre-training -> annealing -> 6 rounds of reward modeling, SFT and DPO with model averaging",
+                    "reasoning_mode": "Chain-of-thought; code-interleaved reasoning; self-verification of reasoning traces",
+                    "moe_configuration": "None (dense architecture)",
+                    "quantization_precision": "BF16",
+                    "rl_algorithm": "Direct Preference Optimization (DPO), learning rate 1e-5, beta = 0.1",
+                    "reward_mechanism": "Reward model trained on human preference pairs with a third edited response giving edited > chosen > rejected rankings",
+                    "tool_calling_format": "Brave Search, Python interpreter and Wolfram Alpha as core tools; zero-shot function calling including nested and parallel calls",
+                    "training_environment_scale": "Up to 16K H100 GPUs",
+                    "safety_evaluation_protocol": "Violation Rate / False Refusal Rate benchmarks, Llama Guard 3 system-level safety, red teaming, CyberSecEval 2",
+                    "safety_defect_rate": "Verbatim memorization 0.60% (English, 50-gram), 0.55% (all, 50-gram), 3.56% (all, 1000-gram); code interpreter abuse compliance 3.8%; spear-phishing attempts judged successful 24p of the time",
+                    "benchmark_result": "MMLU 83.6; MMLU 0-shot CoT 86.0; MMLU-Pro 66.4; IFEval 87.5; HumanEval 80.5; MBPP EvalPlus 86.0; GSM8K 95.1; MATH 68.0; ARC-Challenge 94.8; GPQA 46.7; BFCL 84.8; Nexus 56.7; MGSM 86.9; Multilingual MMLU 78.2",
+                    "number_of_attention_heads": 64,
+                    "post_training_infrastructure": "PagedAttention-accelerated rejection sampling; 6 iterative post-training rounds"
                 },
                 {
                     "model_name": "Llama 3.1 405B",
@@ -332,106 +544,177 @@ class LLMExtractor:
                     "parameters": "405B",
                     "parameters_millions": 405000,
                     "date_created": "2024-07",
+                    "training_corpus_size": "15 trillion tokens",
+                    "tokenizer": "128K-vocabulary BPE",
+                    "hardware_used": "NVIDIA H100 GPU",
+                    "hardware_description": "Up to 16,000 H100 GPUs",
+                    "carbon_emitted": "11,390 tCO2eq",
+                    "supported_language": "English, German, French, Italian, Portuguese, Hindi, Spanish, Thai",
                     "pretraining_architecture": "Transformer",
                     "pretraining_task": "Next-token prediction",
                     "pretraining_corpus": "Large-scale text corpus",
-                    "innovation": "Large-scale language models",
+                    "innovation": "A family of decoder-only Transformer language models sharing one architecture and next-token-prediction training recipe, scaled across 8B, 70B, and 405B parameters on a large-scale text corpus to support chat and instruction following.",
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
+                    "finetuning_data": "Preference data (Table 6) plus SFT mix (Table 7: 52.66p general English, 21.19p reasoning and tools, 14.89p code, 8.14p exam-like, 3.01% multilingual, 0.11p long context); over 2.7M synthetic coding examples",
+                    "context_length": 128000,
+                    "activated_parameters": "405B (dense, all parameters active)",
+                    "attention_mechanism": "Grouped Query Attention (GQA) with 8 key-value heads; document-boundary attention masking, important for continued pre-training on very long sequences",
+                    "training_pipeline": "Initial pre-training (1,200,000 steps, batch size ramping 4M -> 8M -> 16M tokens) -> long-context pre-training -> annealing with Polyak averaging -> 6 post-training rounds of reward modeling, rejection sampling, SFT, DPO and model averaging",
+                    "reasoning_mode": "Chain-of-thought; step-wise reasoning traces with self-verification; Monte Carlo Tree Search with learned step-wise reward models; interleaved code and text execution",
+                    "quantization_precision": "BF16 training; FP8 row-wise inference quantization applied to feedforward network layers (roughly 50p of inference compute), excluding the first and last Transformer layers and self-attention layers; dynamic scaling factors capped at 1200",
+                    "rl_algorithm": "Direct Preference Optimization (DPO)",
+                    "reward_mechanism": "Reward model on the pre-trained checkpoint with the margin term removed; multiple responses concatenated per row with random shuffling; edited > chosen > rejected rankings; outcome and step-wise reward models used to filter math reasoning traces",
+                    "tool_calling_format": "Core tools as Python objects (Brave Search, Python interpreter, Wolfram Alpha API); JSON format for web API calls; zero-shot function calling from signature and docstring; single, nested, parallel and multi-turn calls",
+                    "safety_evaluation_protocol": "Violation Rate and False Refusal Rate internal benchmarks (over 4,000 prompts per capability or language), DocQA and Many-shot long-context safety benchmarks, red teaming including PAIR-style multi-turn automation, CyberSecEval, and CBRNE plus cyber uplift studies with 62 internal volunteers",
+                    "benchmark_result": "MMLU 87.3; MMLU 0-shot CoT 88.6; MMLU-Pro 73.3; IFEval 88.6; HumanEval 89.0; MBPP EvalPlus 88.6; GSM8K 96.8; MATH 73.8; ARC-Challenge 96.9; GPQA 51.1; BFCL 88.5; Nexus 58.7; MGSM 91.6; Multilingual MMLU 83.2; ZeroSCROLLS/QuALITY 95.2; InfiniteBench En.MC 83.4; NIH/Multi-needle 98.1",
+                    "number_of_attention_heads": 128,
+                    "post_training_infrastructure": "PagedAttention for rejection sampling (over 2x throughput); inference pipeline parallelism with micro-batching and FP8 quantization (up to 50% prefill throughput improvement); 6 iterative post-training rounds",
                     "license": "Llama 3.1 Community License",
                 },
             ],
             "paper_describes_multiple_models": True,
         }
+        # Example 5: Kimi K2 (MoE, optimizer innovation, agentic RL, non-thinking)
+        example5_input = "Kimi K2: Open Agentic Intelligence. Moonshot AI. We introduce Kimi K2, a Mixture-of-Experts (MoE) large language model with 32 billion activated parameters and 1 trillion total parameters. We propose the MuonClip optimizer, which improves upon Muon with a novel QK-clip technique to address training instability while enjoying the advanced token efficiency of Muon. Based on MuonClip, K2 was pre-trained on 15.5 trillion tokens with zero loss spike. During post-training, K2 undergoes a multi-stage post-training process, highlighted by a large-scale agentic data synthesis pipeline and a joint reinforcement learning (RL) stage, where the model improves its capabilities through interactions with real and synthetic environments. Kimi K2 achieves state-of-the-art performance among open-source non-thinking models, obtaining 66.1 on Tau2-Bench, 76.5 on ACEBench (En), 65.8 on SWE-Bench Verified, 47.3 on SWE-Bench Multilingual, 53.7 on LiveCodeBench v6, 49.5 on AIME 2025, 75.1 on GPQA-Diamond and 27.1 on OJBench, all without extended thinking.We release our base and post-trained model checkpoints."  
+        example5_output = {
+            "models": [
+                {
+                      "model_name": "Kimi K2",
+                      "model_family": "Kimi",
+                      "paper_title": "Kimi K2: Open Agentic Intelligence",
+                      "organization": "Moonshot AI",
+                      "date_created": "2026-02",
+                      "base_model": "Kimi-K2-Base (trained from scratch); builds on K1.5 methodology",
+                      "pretraining_architecture": "Ultra-sparse Mixture-of-Experts transformer with Multi-head Latent Attention (MLA), 61 layers, hidden dim 716 MoE expert hidden dim 2048",
+                      "pretraining_task": "Autoregressive language modeling (next-token prediction)",
+                      "pretraining_corpus": "15.5T high-quality tokens spanning Web Text, Code, Mathematics, Knowledge; rephrasing-based synthetic augmentation",
+                      "parameters": "1.04T",
+                      "parameters_millions": 1040000,
+                      "activated_parameters": "32B",
+                      "number_of_attention_heads": 64,
+                      "supported_language": "English, Chinese (bilingual; multilingual coding)",
+                      "hardware_used": "NVIDIA H800 GPUs",
+                      "hardware_description": "H800 cluster; nodes with 2TB RAM + 8 GPUs via NVLink/NVSwitch; 8x400 Gbps RoCE inter-node; node counts in multiples of 32",
+                      "moe_configuration": "1T total parameters, 32B activated",
+                      "post_training_infrastructure": "Hybrid colocated train/inference architecture; distributed checkpoint engine (<30s full 1T param update); Gym-like RL framework; partial rollout for long-horizon agentic tasks",
+                      "optimizer": "MuonClip",
+                      "optimizer_innovation": "MuonClip — improves the Muon optimizer with a novel QK-clip technique to address training instability while retaining Muon's token efficiency", 
+                      "weight_clipping_mechanism": "QK-clip",
+                      "training_corpus_size": "15.5 trillion tokens",
+                      "training_pipeline": "Pre-training with MuonClip, then multi-stage post-training: large-scale agentic data synthesis followed by a joint reinforcement learning (RL) stage",  
+                      "synthetic_data_generation_method": "Chunk-wise autoregressive rephrasing (knowledge), learning-note rewriting (math), three-stage agentic pipeline: tool spec, agent/task, trajectory generation with LLM judge filtering",
+                      "rl_algorithm": "Joint reinforcement learning (RL)",
+                      "attention_mechanism": "Multi-head Latent Attention (MLA)",
+                      "context_length_max": "128K",
+                      "context_extension_method": "YaRN",
+                      "training_pipeline": "Pretraining (WSD schedule, 15.5T); annealing; long-context activation; SFT; joint RL (RLVR + self-critique rubric reward)",
+                      "tool_calling_format": "Custom token template: tool_declare / tool_call_section with TypeScript (and JSON) tool declarations; constrained decoding enforcer",
+                      "safety_evaluation_protocol": "Promptfoo automated red-teaming (Harmful, Criminal, Misinformation, Privacy, Security plugins x Basic, Base64, Prompt Injection, Iterative Jailbreak, Crescendo) with human review",
+                      "training_environment_scale": "Kubernetes sandbox infrastructure supporting 10,000+ concurrent instances",
+                      "reasoning_mode": "Non-thinking (no extended thinking)",
+                      "reward_mechanism": "Verifiable rewards (RLVR) + Self-Critique Rubric Reward with core/prescriptive/human-annotated rubrics; closed-loop critic refinement",
+                      "quantization_precision": "BF16 params, FP32 gradient buffers; FP8-E4M3 storage for MoE up-projection/SwiGLU activations (not compute)",
+                      "benchmark_result": "Tau2-Bench: 66.1; ACEBench (En): 76.5; SWE-Bench Verified: 65.8; SWE-Bench Multilingual: 47.3; LiveCodeBench v6: 53.7; AIME 2025: 49.5; GPQA-Diamond: 75.1; OJBench: 27.1",  
+                      "innovation": "MuonClip optimizer (Muon + QK-clip) enables stable, token-efficient pre-training of a 1T-parameter MoE model on 15.5T tokens with zero loss spikes; a large-scale agentic data-synthesis pipeline plus joint RL in real and synthetic environments produce strong agentic and software-engineering ability in a non-thinking model.", 
+                      "research_problem": "Open agentic intelligence with large language models",
+                      "application": "Agentic tasks, software engineering, coding, mathematics, reasoning",
+                      "license": "open source",
+                      "source_code": "https://huggingface.co/moonshotai/Kimi-K2-Instruct"
+                }
+              ]
+          }
+        # Example 6: Phi-4-reasoning-vision-15B (multimodal, vision encoder, hybrid reasoning mode)
+        example6_input = "Phi-4-reasoning-vision-15B. Microsoft. We present Phi-4-reasoning-vision-15B, a compact open-weight multimodal reasoning model that is good at common vision and language tasks and excels at scientific and mathematical reasoning and understanding user interfaces. Careful architecture choices and rigorous data curation enable smaller, open-weight multimodal models to achieve competitive performance with significantly less training and inference-time compute. The most substantial improvements come from systematic filtering, error correction, and synthetic augmentation. Systematic ablations show that high-resolution, dynamic-resolution encoders yield consistent improvements, as accurate perception is a prerequisite for high-quality reasoning. Finally, a hybrid mix of reasoning and non-reasoning data with explicit mode tokens allows a single model to deliver fast direct answers for simpler tasks and chain-of-thought reasoning for complex problems." 
+        example6_output = {
+            "models": [
+                {
+                      "model_name": "Phi-4-reasoning-vision-15B",
+                      "model_family": "Phi",
+                      "paper_title": "Phi-4-reasoning-vision-15B Technical Report",
+                      "base_model": "Phi-4-Reasoning (itself built on Phi-4)",
+                      "organization": "Microsoft",
+                      "date_created": "2026-03",
+                      "parameters": "15B",
+                      "parameters_millions": 15000,
+                      "pretraining_architecture": "Mid-fusion VLM: SigLIP-2 vision encoder + MLP cross-modality projector + Phi-4-Reasoning LLM backbone",
+                      "pretraining_task": "Stage 1: image-text alignment (MLP only, frozen encoder/LLM)",
+                      "pretraining_corpus": "200B tokens of multimodal data; backbone Phi-4-Reasoning (16B tokens) on Phi-4 (400B unique tokens); Bunny for Stage 1 alignment",
+                      "finetuning_data": "Stage 2: 62.8M samples / 188.5B tokens; Stage 3: 3.2M samples / 12B tokens; sources incl. LLaVA-OneVision, Pixmo, Docmatix, CoSyn, NuminaMath, AGUVis, PhiGround, SeeClick, Open Images, WildGuard, VLGuard",
+                      "finetuning_task": "Single-image visual instruction tuning (VQA, math/science reasoning, grounding, captioning, OCR, computer-use); Stage 3 long-context, multi-image, RAI",
+                      "optimizer": "AdamW",
+                      "context_length": "2048 (Stage 1), 8192 (Stage 2), 16384 (Stage 3)",
+                      "supported_language": "English",
+                      "activated_parameters": "15B (dense, all active)",
+                      "attention_mechanism": "Standard dense transformer attention (Phi-4-Reasoning backbone); vision via SigLIP-2 NaFlex dynamic resolution",
+                      "context_length_max": "16,384 (training); 4096 max output tokens at eval",
+                      "training_pipeline": "3 stages: (1) MLP pretraining, (2) full-model instruction tuning, (3) long-context + multi-image + RAI; SFT only (no RL)",
+                      "hardware_used": "NVIDIA H100 GPUs (used for timing/eval)",
+                      "hardware_description": "H100 GPUs, single thread, no concurrency, batch size 1 for latency measurement (Eureka ML Insights)",
+                      "training_corpus_size": "~201.9B training tokens total (1.4B + 188.5B + 12B); 68M samples",
+                      "vision_encoder": "High-resolution, dynamic-resolution vision encoder",
+                      "fusion_architecture": "Mid-fusion",
+                      "moe_configuration": "Dense model (no MoE); all 15B parameters active",
+                      "quantization_precision": "bf16 mixed precision",
+                      "rl_algorithm": "None (SFT only)",
+                      "reward_mechanism": "None (SFT only)",
+                      "post_training_infrastructure": "DeepSpeed ZeRO-1; evaluation via Eureka ML Insights and VLMEvalKit",
+                      "safety_evaluation_protocol": "Automated red teaming on Azure across disallowed content (sexual, violent, hateful, self-harm), copyright/IP, jailbreak susceptibility; RAI training data (Hateful Memes, VLGuard, Think-in-Safety, WildGuard)",
+                      "safety_defect_rate": "Text-to-Text 1.4%; Image-to-Text 4.5%",
+                      "reasoning_mode": "Hybrid/mixed — default learned switching, with explicit <think> / <nothink> override tokens; ~20 percent reasoning data",
+                      "synthetic_data_generation_method": "Systematic filtering, error correction, and synthetic augmentation", 
+                      "innovation": "Compact multimodal reasoning model achieving competitive accuracy at far lower compute/token cost; hybrid reasoning/non-reasoning training with explicit <think>/<nothink> mode tokens; systematic data filtering, error correction, and synthetic augmentation",
+                      "research_problem": "Building smaller, efficient multimodal reasoning models that push the accuracy-vs-compute Pareto frontier, including when to reason vs. answer directly",
+                      "application": "General vision-language tasks, math and science multimodal reasoning, document/chart understanding, OCR, GUI grounding and computer-using agents (CUA)",
+                      "benchmark_result": "AI2D 84.8, ChartQA 83.3, HallusionBench 64.4, MathVerse-MINI 44.9, MathVision-MINI 36.2, MathVista-MINI 75.2, MMMU-VAL 54.3, MMStar 64.5, OCRBench 76, ScreenSpot-v2 88.2",
+                      "license": "open weight",
+                      "source_code": "https://github.com/microsoft/Phi-4-reasoning-vision-15B ; https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B"
+                }
+              ]
+          }
+        
 
         # Build messages with few-shot examples
         messages = [
-            {
-                "role": "system",
-                "content": 'You are an expert AI researcher extracting information according to ORKG template R609825. Extract DETAILED information about ALL MODEL VERSIONS/VARIANTS introduced in the paper.\n\nREQUIRED FIELDS (must extract for each model):\n- model_name (required): Exact model name with version/size\n- model_family (required): Model family/series (e.g., GPT, BERT, Llama)\n- date_created (required): Publication date (YYYY-MM-DD or YYYY)\n- organization (required): Organization/company\n- innovation (required): Key innovation or contribution. Prefer the paper\'s own framing: name the main technique or method (e.g. "masked language model", "Cloze") and how it differs from prior work (e.g. "enabling bidirectional context"). One or two sentences.\n- pretraining_corpus (required): Training dataset/corpus\n- research_problem (required): Research problem addressed\n- parameters (required): Number of parameters as text (e.g., "7B", "175B")\n- parameters_millions (required): Parameters as integer in millions (e.g., 7000 for 7B)\n- application (required): Use cases/applications\n- license (required): License type\n\nMUST EXTRACT WHEN MENTIONED (use null only if not stated):\n- pretraining_architecture: MUST be exactly one of "Encoder", "Decoder", or "Encoder-Decoder" (encoder-only, decoder-only, or both). Determine from the paper; use null only if not stated.\n- pretraining_task (e.g. Causal language modeling, Masked LM, Next-token prediction)\n- finetuning_task (e.g. Supervised discriminative fine-tuning)\n- optimizer: ONLY if the paper explicitly names an optimizer (e.g. Adam, AdamW). If the paper does NOT mention the optimizer, you MUST use null. Do NOT guess or infer from other papers or prior knowledge.\n- extension: ONLY when the paper explicitly describes an additional technical detail or mechanism that extends the model beyond a baseline (e.g. a specific encoding, module, or technique that enables a capability compared to prior work). One sentence, factual. Example: "Relative positioned embeddings enable longer-context attention when compared to vanilla Transformer model." If the paper does NOT mention such an extension, use null; do NOT guess or infer from other papers.\n- hardware_used: Training or inference hardware ONLY when the paper explicitly states it (e.g. "Nvidia V100 GPU", "TPUv3", "A100-80GB GPU", "Cloud TPUv3", "NVIDIA A100 GPU"). Use the paper\'s wording when possible. If the paper does NOT mention hardware, use null; do NOT guess or infer.\n\nCRITICAL RULES:\n1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to \'paper_title\'.\n2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.\n3. PARAMETERS: Search for \'Our model\' or \'Proposed\'. Look for \'M\' or \'B\'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).\n4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.\n5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not "Google AI Language").\n6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").\n7. MULTIPLE MODELS: Set \'paper_describes_multiple_models\' to true if the paper describes multiple distinct models, versions, or size variants.\n8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.\n9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.\n10. CONTEXT VARIANTS: Do NOT create separate entries for context-window variants of the same model (e.g. \'Llama 3 8K\' and \'Llama 3 128K-context\' are the SAME model as \'Llama 3\'). Record the context length in the context_length field of that single entry instead.\n11. STAGE VARIANTS: Do NOT create separate entries for pre-trained vs post-trained (instruction-tuned) variants of the same model (e.g. \'Llama 3 (pre-trained)\' and \'Llama 3 (post-trained)\' are ONE entry \'Llama 3\'). Mention both stages in the innovation or finetuning_task fields.\n\nFORMAT: date_created=YYYY-MM-DD when the full date is known; organization=canonical name (Google/OpenAI/Meta); parameters=comma-separated sizes when multiple; hardware_used=exact phrase from paper (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.\n\nReturn JSON only.',  # noqa: E501
-            },
+            {   "role": "system", "content": EXTRACTION_SYSTEM_PROMPT},
             {
                 "role": "user",
                 "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example1_input}",  # noqa: E501
             },
-            {"role": "assistant", "content": json.dumps(example1_output)},
+            {   "role": "assistant", "content": json.dumps(example1_output)},
             {
                 "role": "user",
                 "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example2_input}",  # noqa: E501
             },
-            {"role": "assistant", "content": json.dumps(example2_output)},
+            {   "role": "assistant", "content": json.dumps(example2_output)},
             {
                 "role": "user",
                 "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example3_input}",  # noqa: E501
             },
-            {"role": "assistant", "content": json.dumps(example3_output)},
+            {   "role": "assistant", "content": json.dumps(example3_output)},
             {
                 "role": "user",
                 "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example4_input}",  # noqa: E501
             },
-            {"role": "assistant", "content": json.dumps(example4_output)},
+            {   "role": "assistant", "content": json.dumps(example4_output)},
             {
                 "role": "user",
-                "content": f"""Extract ALL model versions, variants, and sizes (ORKG R609825):
-
-{paper_snippet}
-
-REQUIRED FIELDS (must extract for each model):
-1. model_name (required): Exact model name with version/size if mentioned
-2. model_family (required): Model family/series (e.g., GPT, BERT, Llama)
-3. date_created (required): Publication date from paper (YYYY-MM-DD or YYYY)
-4. organization (required): Organization/company that created the model
-5. innovation (required): Key innovation or contribution. Use the paper's own terms for the main \
-method (e.g. MLM, Cloze, bidirectional) and keep to 1-2 sentences.
-6. pretraining_corpus (required): Training dataset/corpus mentioned
-7. research_problem (required): Research problem addressed
-8. parameters (required): Number of parameters as text (e.g., "7B", "175B", "117M")
-9. parameters_millions (required): Parameters in millions (e.g., 7000 for 7B, 117 for 117M)
-10. application (required): Use cases/applications mentioned
-11. license (required): License (e.g., "open source", "closed source", "Apache 2.0")
-
-CRITICAL INSTRUCTIONS:
-- Extract ALL model versions/variants (e.g. "Llama 3.1 8B/70B/405B" -> 3 entries)
-- Extract ALL model sizes mentioned (different parameter counts = different entries)
-- Extract ALL model versions mentioned (3.1, 3.2, 3.3 = separate entries)
-- Extract ALL architectural variants (Base, Large, XL, etc. = separate entries)
-- Each distinct model size/version/variant = SEPARATE entry in models array
-- Extract models THIS paper introduces (main contributions)
-- NOT models mentioned as related work or comparisons
-- Focus on PRIMARY model contributions intended as standalone released models.
-- Do NOT create separate entries for auxiliary artifacts such as tools, guards,
-  safety filters, adapters, encoders, tokenizers, pipelines, or infrastructure modules
-  when the paper also contains main model contributions.
-- If auxiliary artifacts are mentioned, capture them inside innovation/extension fields
-  of the relevant primary model instead of as standalone models.
-- Do NOT create separate entries for context-window variants of the same model
-  (e.g. "Llama 3 8K" and "Llama 3 128K context" are ONE entry "Llama 3"; put the
-  context length in the context_length field).
-- Do NOT create separate entries for pre-trained vs post-trained variants of the same
-  model (e.g. "Llama 3 (pre-trained)" and "Llama 3 (post-trained)" are ONE entry
-  "Llama 3"; describe both stages in innovation or finetuning_task).
-- Model name include version/size if mentioned (e.g. "Llama 3.1 8B" not just "Llama")
-- Model name is NOT the architecture (e.g. "GPT" not "Transformer")
-- If multiple models, set "paper_describes_multiple_models": true
-- parameters_millions: "7B"->7000, "117M"->117, "1.5B"->1500
-- Extract ALL required fields. Use null if not in paper; \
-infer when possible.
-- pretraining_architecture: use exactly one of Encoder, Decoder, or Encoder-Decoder \
-(determine from the paper); null if not stated.
-- Always extract pretraining_architecture, pretraining_task, finetuning_task when stated. \
-For optimizer: extract ONLY when the paper explicitly mentions it; if the paper does not \
-mention the optimizer, use null and do NOT guess or infer from other papers. For extension: \
-extract ONLY when the paper explicitly states a technical extension or mechanism (e.g. a \
-specific encoding or technique that extends the model vs a baseline); one sentence; if not \
-mentioned, use null; do not infer from other papers.
-- FORMAT: date_created use YYYY-MM-DD when the full date is known (e.g. from metadata); \
-otherwise YYYY-MM or YYYY; organization use canonical name \
-(Google, OpenAI, Meta); optimizer = algorithm name only when stated in the paper, \
-otherwise null; extension = one-sentence technical detail when stated, otherwise null; \
-hardware_used = paper's wording (e.g. Nvidia V100 GPU, TPUv3) or null if not stated.
-
-Output JSON:""",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example5_input}",  # noqa: E501
             },
+            {   "role": "assistant", "content": json.dumps(example5_output)},
+            {
+                "role": "user",
+                "content": f"Extract ALL model versions/variants introduced in this paper:\n\n{example6_input}",  # noqa: E501
+            },
+            {   "role": "assistant", "content": json.dumps(example6_output)},
+            {
+                  "role": "user",
+                  "content": (
+                      "Extract ALL model versions, variants, and sizes this paper "
+                      "introduces, following the ORKG R609825 rules above. Return JSON only.\n\n"
+                      f"{paper_snippet}"
+                  ),
+              },
         ]
 
         return messages

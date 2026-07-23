@@ -219,7 +219,7 @@ class ExtractionPipeline:
               logger.warning("PaperClassifier not initialized (no LLM model available)")
               
         # Initialize template mapper
-        self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"])
+        self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"], host=self.config["orkg"].get("host", "sandbox"))
 
     def _get_orkg_client(self):
         """Lazily initialize ORKG client (only when needed)."""
