@@ -52,7 +52,9 @@ _MULTI_VALUED_FIELDS = {
       "quantization_precision": ",",
       "synthetic_data_generation_method": ",",
       "rl_algorithm": ",",
-      "reward_mechanism": ","
+      "reward_mechanism": ",",
+      "source_code": ";",
+      "vision_encoder": ","
   }
 
   #ORKG predicate IDs per field, one full mapping per target instance. Kept as
@@ -222,7 +224,46 @@ class TemplateMapper:
           if not value:
               return value
           return value[0].upper() + value[1:]
-    
+    @staticmethod
+    def _split_top_level(text: str, seps) -> List[str]:
+          """
+          Split ``text`` on any separator char in ``seps`` (a single char or an
+          iterable of chars), but only when NOT inside (), [] or {} — so a
+          parenthetical group containing the separator stays one value.
+          e.g. "a, b (x, y), c" split on "," -> ["a", "b (x, y)", "c"].
+          """
+          sep_set = set(seps)
+          parts: List[str] = []
+          depth = 0
+          buf: List[str] = []
+          for ch in text:
+              if ch in "([{":
+                  depth += 1
+                  buf.append(ch)
+              elif ch in ")]}":
+                  depth = max(0, depth - 1)
+                  buf.append(ch)
+              elif ch in sep_set and depth == 0:
+                  parts.append("".join(buf))
+                  buf = []
+              else:
+                  buf.append(ch)
+          parts.append("".join(buf))
+          return parts
+
+    @staticmethod
+    def _strip_dangling_brackets(text: str) -> str:
+          """
+          Remove a leftover unbalanced leading "(" or trailing ")" (e.g. "(knowledge"
+          or "knowledge)") that an earlier/unbalanced split left behind.
+          Balanced values like "reasoning (advanced)" are left untouched.
+          """
+          opens, closes = text.count("("), text.count(")")
+          if closes > opens and text.endswith(")"):
+              text = text[:-1].rstrip()
+          elif opens > closes and text.startswith("("):
+              text = text[1:].lstrip()
+          return text
     
     def _split_values(self, property_name: str, value: Any) -> List[Any]:
           """
@@ -240,7 +281,13 @@ class TemplateMapper:
               raw_parts: List[Any] = value
               did_split = False
           elif property_name in _MULTI_VALUED_FIELDS and isinstance(value, str):
-              raw_parts = value.split(_MULTI_VALUED_FIELDS[property_name])
+              sep = _MULTI_VALUED_FIELDS[property_name]
+              # The model is inconsistent about "," vs ";". Comma-configured
+              # fields hold atomic values, so accept BOTH separators. Semicolon
+              # fields keep ";" only, because their values contain internal
+              # commas (e.g. innovation) that must not be split.
+              seps = (",", ";") if sep == "," else (";",)
+              raw_parts = self._split_top_level(value, seps)
               did_split = True
           else:
               raw_parts = [value]
@@ -252,9 +299,11 @@ class TemplateMapper:
               if isinstance(part, str):
                   part = part.strip()
                   if did_split and part.lower().startswith("and "):
-                      part = part[4:].strip()
+                    part = part[4:].strip()
+                  if did_split:
+                    part = self._strip_dangling_brackets(part)
                   if not part:
-                      continue
+                    continue
               try:
                   if part in seen:
                       continue

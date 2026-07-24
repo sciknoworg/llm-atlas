@@ -407,14 +407,15 @@ class ORKGClient:
                     elif datatype == "URI" or (
                         isinstance(value, str) and value.startswith("http")
                     ):
-                        # HTTP URL → xsd:string literal holding the URL.
-                        # Do NOT emit {"id": url}: ORKG treats "id" as a
-                        # reference to an existing resource, and a URL is not a
-                        # resolvable resource id — that makes papers.add 500.
+                        # HTTP URL → xsd:anyURI literal so ORKG renders it as a
+                          # clickable link (URL chip) instead of a plain text chip.
+                          # Do NOT emit {"id": url}: ORKG treats "id" as a
+                          # reference to an existing resource, and a URL is not a
+                          # resolvable resource id — that makes papers.add 500.
                         literal_id = f"#literal_{literal_counter}"
                         orkg_literals[literal_id] = {
                             "label": str(value),
-                            "data_type": "xsd:string",
+                            "data_type": "xsd:anyURI",
                         }
                         statements[prop_id].append({"id": literal_id})
                         literal_counter += 1

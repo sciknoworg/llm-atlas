@@ -214,6 +214,12 @@ class LLMProperties(BaseModel):
             elif isinstance(value, list):
                 parts = [str(v).strip() for v in value if v is not None and str(v).strip()]
                 data[field] = ", ".join(parts) if parts else None
+            elif isinstance(value, (int, float)) and not isinstance(value, bool):
+                # The model sometimes returns a bare number for a string-typed
+                # field (e.g. number_of_attention_heads: 64, context_length:
+                # 128000). Coerce to str so one numeric value doesn't fail
+                # validation and discard the entire extraction.
+                data[field] = str(value)
         return data
 
     @staticmethod
@@ -370,7 +376,7 @@ class LLMExtractor:
                     "hardware_description": "16 Cloud TPUs (64 TPU chips)",
                     "supported_language": "English",
                     "finetuning_data": "GLUE datasets (MNLI 392k, QQP 363k, QNLI 108k, SST-2 67k, CoLA 8.5k, STS-B 5.7k, MRPC 3.5k, RTE 2.5k), SQuAD v1.1 (100k QA pairs), SQuAD v2.0, SWAG (113k), CoNLL-2003 NER; optional TriviaQA augmentation for SQuAD",
-                    "context_length": 512,
+                    "context_length": "512",
                     "activated_parameters": "110M (BASE) / 340M (LARGE) — dense, all parameters active",
                     "attention_mechanism": "Bidirectional (unmasked) multi-head self-attention; A=12 (BASE), A=16 (LARGE)",
                     "training_pipeline": "Two-stage: unsupervised pre-training (MLM + NSP) followed by supervised end-to-end fine-tuning per downstream task; alternatively feature-based extraction of frozen activations",
@@ -405,7 +411,7 @@ class LLMExtractor:
                     "training_corpus_size": "40GB of text",
                     "tokenizer": "Byte-level BPE",
                     "supported_language": "English",
-                    "context_length": 1024,
+                    "context_length": "1024",
                     "supported_language": "English (primarily; non-English pages filtered, ~10MB French detected)",
                     "activated_parameters": "1,542,000,000 (dense, all parameters active)",
                     "attention_mechanism": "Masked (causal) multi-head self-attention",
@@ -440,7 +446,7 @@ class LLMExtractor:
                     "application": "Natural language understanding, text classification, question answering",  # noqa: E501
                     "tokenizer": "Bytepair encoding (BPE)",
                     "finetuning_data": "SNLI, MultiNLI",
-                    "context_length": 512,
+                    "context_length": "512",
                     "supported_language": "English",
                     "activated_parameters": "~117M (dense, all parameters active)",
                     "attention_mechanism": "Masked (causal) multi-head self-attention, 12 heads",
@@ -448,7 +454,7 @@ class LLMExtractor:
                     "training_environment_scale": "100 epochs on minibatches of 64 randomly sampled contiguous sequences of 512 tokens; fine-tuning batch size 32, lr 6.25e-5, 3 epochs, linear decay with warmup over 0.2 percent of training",
                     "optimizer_innovation": "Decoupled/modified L2 regularization (Loshchilov & Hutter) with w=0.01 on non-bias/gain weights; cosine-annealed LR with linear warmup",
                     "benchmark_result": "SOTA on 9 of 12 datasets. GLUE 72.8 (prev. best 68.9); MNLI-m/mm 82.1/81.4; SNLI 89.9; SciTail 88.3; QNLI 88.1; RTE 56.0; Story Cloze 86.5 (+8.9); RACE 59.0 (RACE-m 62.9, RACE-h 57.4, +5.7); CoLA 45.4 mc (prev. 35.0); SST-2 91.3; MRPC 82.3 F1; STS-B 82.0 pc; QQP 70.3 F1. Ablations: w/o pre-training avg 59.9 vs 74.7 full; LSTM w/ aux LM 69.1",
-                    "number_of_attention_heads": 12,
+                    "number_of_attention_heads": "12",
                     "source_code": "https://github.com/openai/finetune-transformer-lm",
                 }
             ]
@@ -493,7 +499,7 @@ class LLMExtractor:
                     "supported_language": "English, German, French, Italian, Portuguese, Hindi, Spanish, Thai",
                     "safety_evaluation_protocol": "Violation Rate / False Refusal Rate on >4,000 prompts per capability; red teaming; CyberSecEval; ML Commons hazard taxonomy",
                     "benchmark_results": "MMLU 69.4 (5-shot); MMLU 0-shot CoT 73.0; HumanEval 72.6; GSM8K 84.5; MATH 51.9; IFEval 80.4; MGSM 68.9; BFCL 76.1; GPQA 32.8; ARC-C 83.4",
-                    "number_of_attention_heads": 32,
+                    "number_of_attention_heads": "32",
                     "post_training_infrastructure": "PagedAttention for rejection sampling (>2x throughput); 6 iterative post-training rounds",
                     "license": "Llama 3.1 Community License",
                 },
@@ -519,7 +525,7 @@ class LLMExtractor:
                     "application": "Chat, instruction following, general language tasks",
                     "license": "Llama 3.1 Community License",
                     "finetuning_data": "Same preference and SFT mixes as the herd; capability-specific expert models (code expert trained on 1T token mix of >85p code; multilingual expert trained on 90% multilingual tokens)",
-                    "context_length": 128000,
+                    "context_length": "128000",
                     "activated_parameters": "70B (dense, all parameters active)",
                     "attention_mechanism": "Grouped Query Attention (GQA) with 8 key-value heads",
                     "training_pipeline": "Pre-training -> long-context pre-training -> annealing -> 6 rounds of reward modeling, SFT and DPO with model averaging",
@@ -533,7 +539,7 @@ class LLMExtractor:
                     "safety_evaluation_protocol": "Violation Rate / False Refusal Rate benchmarks, Llama Guard 3 system-level safety, red teaming, CyberSecEval 2",
                     "safety_defect_rate": "Verbatim memorization 0.60% (English, 50-gram), 0.55% (all, 50-gram), 3.56% (all, 1000-gram); code interpreter abuse compliance 3.8%; spear-phishing attempts judged successful 24p of the time",
                     "benchmark_result": "MMLU 83.6; MMLU 0-shot CoT 86.0; MMLU-Pro 66.4; IFEval 87.5; HumanEval 80.5; MBPP EvalPlus 86.0; GSM8K 95.1; MATH 68.0; ARC-Challenge 94.8; GPQA 46.7; BFCL 84.8; Nexus 56.7; MGSM 86.9; Multilingual MMLU 78.2",
-                    "number_of_attention_heads": 64,
+                    "number_of_attention_heads": "64",
                     "post_training_infrastructure": "PagedAttention-accelerated rejection sampling; 6 iterative post-training rounds"
                 },
                 {
@@ -557,7 +563,7 @@ class LLMExtractor:
                     "research_problem": "Large Language Models",
                     "application": "Chat, instruction following, general language tasks",
                     "finetuning_data": "Preference data (Table 6) plus SFT mix (Table 7: 52.66p general English, 21.19p reasoning and tools, 14.89p code, 8.14p exam-like, 3.01% multilingual, 0.11p long context); over 2.7M synthetic coding examples",
-                    "context_length": 128000,
+                    "context_length": "128000",
                     "activated_parameters": "405B (dense, all parameters active)",
                     "attention_mechanism": "Grouped Query Attention (GQA) with 8 key-value heads; document-boundary attention masking, important for continued pre-training on very long sequences",
                     "training_pipeline": "Initial pre-training (1,200,000 steps, batch size ramping 4M -> 8M -> 16M tokens) -> long-context pre-training -> annealing with Polyak averaging -> 6 post-training rounds of reward modeling, rejection sampling, SFT, DPO and model averaging",
@@ -568,7 +574,7 @@ class LLMExtractor:
                     "tool_calling_format": "Core tools as Python objects (Brave Search, Python interpreter, Wolfram Alpha API); JSON format for web API calls; zero-shot function calling from signature and docstring; single, nested, parallel and multi-turn calls",
                     "safety_evaluation_protocol": "Violation Rate and False Refusal Rate internal benchmarks (over 4,000 prompts per capability or language), DocQA and Many-shot long-context safety benchmarks, red teaming including PAIR-style multi-turn automation, CyberSecEval, and CBRNE plus cyber uplift studies with 62 internal volunteers",
                     "benchmark_result": "MMLU 87.3; MMLU 0-shot CoT 88.6; MMLU-Pro 73.3; IFEval 88.6; HumanEval 89.0; MBPP EvalPlus 88.6; GSM8K 96.8; MATH 73.8; ARC-Challenge 96.9; GPQA 51.1; BFCL 88.5; Nexus 58.7; MGSM 91.6; Multilingual MMLU 83.2; ZeroSCROLLS/QuALITY 95.2; InfiniteBench En.MC 83.4; NIH/Multi-needle 98.1",
-                    "number_of_attention_heads": 128,
+                    "number_of_attention_heads": "128",
                     "post_training_infrastructure": "PagedAttention for rejection sampling (over 2x throughput); inference pipeline parallelism with micro-batching and FP8 quantization (up to 50% prefill throughput improvement); 6 iterative post-training rounds",
                     "license": "Llama 3.1 Community License",
                 },
@@ -592,7 +598,7 @@ class LLMExtractor:
                       "parameters": "1.04T",
                       "parameters_millions": 1040000,
                       "activated_parameters": "32B",
-                      "number_of_attention_heads": 64,
+                      "number_of_attention_heads": "64",
                       "supported_language": "English, Chinese (bilingual; multilingual coding)",
                       "hardware_used": "NVIDIA H800 GPUs",
                       "hardware_description": "H800 cluster; nodes with 2TB RAM + 8 GPUs via NVLink/NVSwitch; 8x400 Gbps RoCE inter-node; node counts in multiples of 32",
@@ -955,6 +961,16 @@ class LLMExtractor:
                     elif ch == "]" and stack and stack[-1] == "[":
                         stack.pop()
 
+                # Truncated mid-string (model hit max_tokens): close the dangling
+                # string literal so its (cut-off) value still parses as valid JSON.
+                if in_str:
+                    text += '"'
+
+                # If truncation left a dangling '"key":' with no value, drop it.
+                text = re.sub(r',?\s*"[^"]*"\s*:\s*$', "", text)
+                # Drop a trailing comma that would otherwise yield invalid ",}".
+                text = re.sub(r",\s*$", "", text)
+
                 # Append missing closers in reverse order
                 if stack:
                     closers = {"{": "}", "[": "]"}
@@ -1019,6 +1035,51 @@ class LLMExtractor:
             except json.JSONDecodeError as initial_error:
                 # Parsing failed - apply enhanced cleaning and repair
                 logger.debug(f"Initial parse failed: {initial_error}. Applying cleaning...")
+
+                # Escape double-quotes that appear INSIDE string values — a common
+                # LLM error, e.g. '"research_problem": "models that "reason" over
+                # images"' or a value like '"MMLU "mini": 88"'.
+                # Key vs value matters: a KEY string closes on ':', a VALUE string
+                # closes on ',', '}' or ']'. Any other quote inside the string is an
+                # inner quote and gets escaped. Tracking key/value avoids mis-closing
+                # a value at an inner '"..." :' (the bug in the naive version).
+                def _escape_inner_quotes(text: str) -> str:
+                    out: List[str] = []
+                    in_str = False
+                    is_key = False
+                    last_sig = ""  # last significant char seen outside a string
+                    i, n = 0, len(text)
+                    while i < n:
+                        ch = text[i]
+                        if not in_str:
+                            out.append(ch)
+                            if ch == '"':
+                                in_str = True
+                                is_key = last_sig in "{,["
+                            elif not ch.isspace():
+                                last_sig = ch
+                        elif ch == "\\" and i + 1 < n:
+                            out.append(ch)
+                            out.append(text[i + 1])
+                            i += 2
+                            continue
+                        elif ch == '"':
+                            j = i + 1
+                            while j < n and text[j] in " \t\r\n":
+                                j += 1
+                            nxt = text[j] if j < n else ""
+                            closers = ":" if is_key else ",}]"
+                            if nxt in closers or nxt == "":
+                                out.append(ch)
+                                in_str = False
+                            else:
+                                out.append('\\"')
+                        else:
+                            out.append(ch)
+                        i += 1
+                    return "".join(out)
+
+                response_text = _escape_inner_quotes(response_text)
 
                 # Enhanced cleaning (only when needed)
                 # Remove dots before field names (e.g., ."field_name" -> "field_name")
@@ -1101,6 +1162,16 @@ class LLMExtractor:
                         "Cleaned response (first 500 chars): "
                         f"{response_text[:500] if response_text else 'EMPTY'}"
                     )
+                    # Show the actual break point so failures aren't debugged blind.
+                    pos = getattr(parse_error, "pos", None)
+                    if pos is not None and response_text:
+                        lo, hi = max(0, pos - 100), pos + 100
+                        logger.error(
+                            "Cleaned response around error (pos %d): ...%s>>><<<%s...",
+                            pos,
+                            response_text[lo:pos],
+                            response_text[pos:hi],
+                        )
                     return None
 
             # Normalize field names in the parsed JSON
