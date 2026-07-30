@@ -136,11 +136,33 @@ _PRODUCTION_FIELD_MAPPING = {
       "source_code": "HAS_SOURCE_CODE",             # URI
       "blog_post": "P103003",                        # URI
       "research_problem": "P32",                     # (required)
-      # instance-specific predicates (production IDs)
       "training_corpus_size": "P163013",
       "finetuning_data": "P163012",
       "context_length": "P163009",
       "supported_language": "P163010",
+      "activated_parameters": "P203084",
+      "attention_mechanism": "P203085",
+      "context_length_max": "P203086",
+      "context_extension_method": "P203087",
+      "training_pipeline": "P203088",
+      "reasoning_mode": "P203089",
+      "moe_configuration": "P203090",
+      "quantization_precision": "P203091",
+      "synthetic_data_generation_method": "P203092",
+      "rl_algorithm": "P203093",
+      "reward_mechanism": "P203094",
+      "tool_calling_format": "P203095",
+      "training_environment_scale": "P203096",
+      "safety_evaluation_protocol": "P203097",
+      "safety_defect_rate": "P203098",
+      "fusion_architecture": "P203099",
+      "vision_encoder": "P203100",
+      "base_model": "P203101",
+      "optimizer_innovation": "P203102",
+      "benchmark_result": "P203103",
+      "weight_clipping_mechanism": "P203104",
+      "number_of_attention_heads": "P203105",
+      "post_training_infrastructure": "P203106",
       # knowledge_cutoff_date production ID P163011 — enable when the model extracts it
   }
   
