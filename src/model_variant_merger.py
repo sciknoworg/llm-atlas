@@ -21,6 +21,7 @@ Usage:
 import logging
 import re
 from typing import Any, Dict, List, Optional
+from src.template_mapper import _MULTI_VALUED_FIELDS
 
 logger = logging.getLogger(__name__)
 
@@ -483,6 +484,39 @@ def _merge_group(models: List[Dict[str, Any]], canonical_name: str) -> Dict[str,
         "research_problem",
         "application",
         "paper_title",
+        # Conditional fields added to the extraction schema — must be listed
+        # here or they are dropped when variants are merged.
+        "training_corpus_size",
+        "finetuning_data",
+        "tokenizer",
+        "supported_language",
+        "hardware_description",
+        "carbon_emitted",
+        "source_code",
+        "context_length",
+        "activated_parameters",
+        "attention_mechanism",
+        "context_length_max",
+        "context_extension_method",
+        "training_pipeline",
+        "reasoning_mode",
+        "moe_configuration",
+        "quantization_precision",
+        "synthetic_data_generation_method",
+        "rl_algorithm",
+        "reward_mechanism",
+        "tool_calling_format",
+        "training_environment_scale",
+        "safety_evaluation_protocol",
+        "safety_defect_rate",
+        "fusion_architecture",
+        "vision_encoder",
+        "base_model",
+        "optimizer_innovation",
+        "benchmark_result",
+        "weight_clipping_mechanism",
+        "number_of_attention_heads",
+        "post_training_infrastructure",
     ]
 
     for field in fields_to_merge:
@@ -567,14 +601,20 @@ def _merge_field(models: List[Dict[str, Any]], field: str) -> Any:
     ]:
         return max(non_null, key=lambda v: len(str(v)))
 
-    # List/multi-value fields (e.g., blog_post): merge and deduplicate
-    if field == "blog_post":
-        all_links = []
+    # Multi-value fields: union and deduplicate values captured across chunks,
+      # using each field's own separator (from _MULTI_VALUED_FIELDS, the single
+      # source of truth). blog_post/source_code are URL lists that aren't in that
+      # map, so handle them explicitly with a comma.
+    sep = _MULTI_VALUED_FIELDS.get(field) or (
+          "," if field in ("blog_post", "source_code") else None
+      )
+    if sep:
+        all_parts = []
         for val in non_null:
-            links = str(val).split(",")
-            all_links.extend(link.strip() for link in links if link.strip())
-        unique_links = sorted(set(all_links))
-        return ", ".join(unique_links) if unique_links else None
+            parts = str(val).split(sep)
+            all_parts.extend(part.strip() for part in parts if part.strip())
+        unique_parts = sorted(set(all_parts))
+        return f"{sep} ".join(unique_parts) if unique_parts else None
 
     # Default: first non-null
     return non_null[0]

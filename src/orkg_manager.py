@@ -12,9 +12,26 @@ logger = logging.getLogger(__name__)
 class ORKGPaperManager:
     """Manages the creation of papers in ORKG with extracted LLM data."""
 
-    def __init__(self, orkg_client: ORKGClient, template_mapper: TemplateMapper):
+    def __init__(
+        self,
+        orkg_client: ORKGClient,
+        template_mapper: TemplateMapper,
+        comparison_id: str = "R1364660",
+        comparison_title: Optional[str] = None,
+        comparison_description: Optional[str] = None,
+    ):
         self.client = orkg_client
         self.mapper = template_mapper
+        # Comparison to attach contributions to — id AND title must match the
+        # target ORKG instance (sandbox vs live), so they come from config.
+        # Updating a comparison writes a NEW VERSION with this title, so a wrong
+        # title would rename the live comparison. Defaults are a fallback only.
+        self.comparison_id = comparison_id
+        self.comparison_title = comparison_title or "Generative AI Model Landscape"
+        self.comparison_description = (
+            comparison_description
+            or "A landscape of Generative AI Models extracted from research papers."
+        )
 
     def process_and_upload(
         self, extraction_data: Dict[str, Any], paper_metadata: Optional[Dict[str, Any]] = None
@@ -87,52 +104,66 @@ class ORKGPaperManager:
                 logger.error("Mapping failed - no valid contributions to upload")
                 return None
 
-            # 4. Check for existing paper to avoid duplicates
-            # TEMPORARILY DISABLED FOR TESTING - Always create new papers
+            # 4. On live, reuse an existing paper (dedup) and add only the
+            #    contributions that aren't already there. On sandbox/incubating we
+            #    intentionally skip the search and always create a fresh test paper
+            #    (its title carries a unique [TEST-...] suffix, so a search by the
+            #    real title wouldn't match one anyway).
             paper_id = None
             contribution_ids = []
+            is_live = getattr(self.client, "host", "sandbox") == "production"
 
-            # DISABLED: Paper search logic (for testing - always create new papers)
-            # existing_papers = self.client.search_papers(paper_title)
-            # for paper in existing_papers:
-            #     if paper.get("title", "").strip().lower() == paper_title.strip().lower():
-            #         paper_id = paper.get("id")
-            #         logger.info(f"Found existing paper in ORKG: {paper_id}")
-            #
-            #         # Fetch its contributions to check for duplicates
-            #         paper_data = self.client.get_paper(paper_id)
-            #         existing_contribs = paper_data.get('contributions', []) if paper_data else []  # noqa: E501
-            #         existing_labels = {c.get('label', '').strip().lower() for c in existing_contribs if isinstance(c, dict)}  # noqa: E501
-            #
-            #         contribution_ids = [c.get('id') for c in existing_contribs if isinstance(c, dict)]  # noqa: E501
-            #
-            #         # Add new contributions that don't exist yet
-            #         for contrib_data in mapped_data["contributions"]:
-            #             label = contrib_data.get("label", "").strip()
-            #             if label.lower() not in existing_labels:
-            #                 logger.info(f"Adding contribution '{label}' to paper {paper_id}")
-            #                 new_cid = self.client.add_contribution_to_paper(
-            #                     paper_id, contrib_data)
-            #                 if new_cid:
-            #                     contribution_ids.append(new_cid)
-            #                     existing_labels.add(label.lower())
-            #             else:
-            #                 logger.info(f"Contribution '{label}' exists, skipping")
-            #         break
+            if is_live:
+                existing_papers = self.client.search_papers(paper_title) or []
+                for paper in existing_papers:
+                    if paper.get("title", "").strip().lower() == paper_title.strip().lower():
+                        paper_id = paper.get("id")
+                        logger.info(f"Found existing paper in ORKG: {paper_id}")
 
-            # Always create new paper (for testing)
+                        # Fetch its existing contributions so we don't re-add them
+                        paper_data = self.client.get_paper(paper_id)
+                        existing_contribs = (
+                            paper_data.get("contributions", []) if paper_data else []
+                        )
+                        existing_labels = {
+                            c.get("label", "").strip().lower()
+                            for c in existing_contribs
+                            if isinstance(c, dict)
+                        }
+                        contribution_ids = [
+                            c.get("id")
+                            for c in existing_contribs
+                            if isinstance(c, dict) and c.get("id")
+                        ]
+
+                        # Add only the models not already on this paper
+                        for contrib_data in mapped_data["contributions"]:
+                            label = contrib_data.get("label", "").strip()
+                            if label.lower() in existing_labels:
+                                logger.info(f"Contribution '{label}' already exists, skipping")
+                                continue
+                            logger.info(f"Adding contribution '{label}' to paper {paper_id}")
+                            new_cid = self.client.add_contribution_to_paper(paper_id, contrib_data)
+                            if new_cid:
+                                contribution_ids.append(new_cid)
+                                existing_labels.add(label.lower())
+                        break
+
+            # Create a new paper when none matched (always, on sandbox)
             if not paper_id:
                 # 5. Create Paper with all Contributions (Step A)
-                # Add unique timestamp suffix to avoid ORKG API duplicate title rejection
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                unique_paper_title = f"{paper_title} [TEST-{timestamp}]"
-                logger.info(
-                    "TESTING MODE: Paper search disabled. Creating new paper "
-                    "in ORKG (duplicates allowed)..."
-                )
-                logger.info(f"Using unique title: {unique_paper_title}")
+                # Live: real title. Sandbox/incubating: unique [TEST-...] suffix so
+                # repeated test runs don't collide on duplicate-title rejection.
+                if is_live:
+                    paper_title_to_use = paper_title
+                    logger.info("Creating new paper in ORKG (live)...")
+                else:
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    paper_title_to_use = f"{paper_title} [TEST-{timestamp}]"
+                    logger.info("Creating new paper in ORKG (sandbox test mode, unique title)...")
+                logger.info(f"Using title: {paper_title_to_use}")
                 result = self.client.create_paper_with_contributions(
-                    title=unique_paper_title,
+                    title=paper_title_to_use,
                     authors=[
                         {"name": a} if isinstance(a, str) else a
                         for a in paper_metadata.get("authors", [])
@@ -152,17 +183,15 @@ class ORKGPaperManager:
                 paper_id = result["paper_id"]
                 contribution_ids = result.get("contribution_ids", [])
 
-            # 6. Link to Comparison Table (Step B)
-            # Use the sandbox comparison ID
-            comparison_id = "R1364660"
-
+            # 6. Link to Comparison Table (Step B) — comparison is env-specific,
+            # supplied from config (sandbox vs live).
             logger.info(
-                f"Linking {len(contribution_ids)} contributions to comparison {comparison_id}"
+                f"Linking {len(contribution_ids)} contributions to comparison {self.comparison_id}"
             )
             self.client.update_comparison_with_contributions(
-                comparison_id=comparison_id,
-                title="Generative AI Model Landscape",
-                description="A landscape of Generative AI Models extracted from research papers.",
+                comparison_id=self.comparison_id,
+                title=self.comparison_title,
+                description=self.comparison_description,
                 new_contribution_ids=contribution_ids,
                 research_fields=["R133"],
                 authors=[{"name": "Alaa Kefi"}],

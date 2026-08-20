@@ -22,11 +22,20 @@ _RESOURCE_FIELDS = {
     "pretraining_corpus",
     "finetuning_task",
     "optimizer",
-    "tokenizer",
     "research_problem",
     "license",
     "application",
-    "hardware_used"
+    "hardware_used",
+    "attention_mechanism",
+    "context_extension_method",
+    "reasoning_mode",
+    "quantization_precision",
+    "rl_algorithm",
+    "tool_calling_format",
+    "fusion_architecture",
+    "vision_encoder",
+    "base_model",
+    "weight_clipping_mechanism",
 }
 
 _MULTI_VALUED_FIELDS = {
@@ -35,56 +44,161 @@ _MULTI_VALUED_FIELDS = {
       "application": ",",
       "finetuning_task": ",",
       "innovation": ";",   # innovation text contains commas internally; split on ";"
+      "benchmark_result": ";",
+      "supported_language": ",",
+      "finetuning_data": ",",
+      "pretraining_corpus": ",",
+      "attention_mechanism": ",",
+      "quantization_precision": ",",
+      "synthetic_data_generation_method": ",",
+      "rl_algorithm": ",",
+      "reward_mechanism": ",",
+      "source_code": ";",
+      "vision_encoder": ","
   }
+
+  #ORKG predicate IDs per field, one full mapping per target instance. Kept as
+  # two complete mappings (not a base + overrides) so each environment's IDs are
+  # explicit and editable on their own. Only a few predicates actually differ
+  # between instances — training_corpus_size, finetuning_data, context_length,
+  # supported_language. The core IDs are currently assumed identical on both;
+  # verify them against production before uploading there.
+_SANDBOX_FIELD_MAPPING = {
+      "model_name": "HAS_MODEL",                    # model name (required)
+      "model_family": "P7121",                      # model family (required)
+      "date_created": "P49020",                     # date created (required)
+      "organization": "P18097",                     # organization (required)
+      "innovation": "P15156",                       # innovation (required)
+      "pretraining_architecture": "P103000",
+      "pretraining_task": "P103001",
+      "pretraining_corpus": "P41655",               # (required)
+      "finetuning_task": "P116000",
+      "optimizer": "P105017",
+      "tokenizer": "P43065",
+      "parameters": "P103002",                      # number of parameters (required)
+      "parameters_millions": "P110076",             # max params in million (required)
+      "hardware_used": "P119138",
+      "hardware_description": "P119137",
+      "carbon_emitted": "P119142",                  # tCO2eq
+      "application": "P37544",                       # (required)
+      "source_code": "HAS_SOURCE_CODE",             # URI
+      "blog_post": "P103003",                        # URI
+      "research_problem": "P32",                     # (required)
+      # instance-specific predicates (sandbox IDs)
+      "training_corpus_size": "P202273",
+      "finetuning_data": "P202276",
+      "context_length": "P202277",
+      "supported_language": "P202278",
+      # knowledge_cutoff_date sandbox ID P202274
+      "activated_parameters": "P203001",
+      "attention_mechanism": "P203008",
+      "context_length_max": "P203011",
+      "context_extension_method": "P203012",
+      "training_pipeline": "P203022",
+      "reasoning_mode": "P203018",
+      "moe_configuration": "P203014",
+      "quantization_precision": "P203016",
+      "synthetic_data_generation_method": "P203009",
+      "rl_algorithm": "P203004",
+      "reward_mechanism": "P203024",
+      "tool_calling_format": "P203017",
+      "training_environment_scale": "P203015",
+      "safety_evaluation_protocol": "P203019",
+      "safety_defect_rate": "P203023",
+      "fusion_architecture": "P203021",
+      "vision_encoder": "P203020",
+      "base_model": "P203006",
+      "optimizer_innovation": "P203002",
+      "benchmark_result": "P203003",
+      "weight_clipping_mechanism": "P203007",
+      "number_of_attention_heads": "P203010",
+      "post_training_infrastructure": "P203025",
+  }
+  
+_PRODUCTION_FIELD_MAPPING = {
+      "model_name": "HAS_MODEL",                    # model name (required)
+      "model_family": "P7121",                      # model family (required)
+      "date_created": "P49020",                     # date created (required)
+      "organization": "P18097",                     # organization (required)
+      "innovation": "P15156",                       # innovation (required)
+      "pretraining_architecture": "P103000",
+      "pretraining_task": "P103001",
+      "pretraining_corpus": "P41655",               # (required)
+      "finetuning_task": "P116000",
+      "optimizer": "P105017",
+      "tokenizer": "P43065",
+      "parameters": "P103002",                      # number of parameters (required)
+      "parameters_millions": "P110076",             # max params in million (required)
+      "hardware_used": "P119138",
+      "hardware_description": "P119137",
+      "carbon_emitted": "P119142",                  # tCO2eq
+      "application": "P37544",                       # (required)
+      "source_code": "HAS_SOURCE_CODE",             # URI
+      "blog_post": "P103003",                        # URI
+      "research_problem": "P32",                     # (required)
+      "training_corpus_size": "P163013",
+      "finetuning_data": "P163012",
+      "context_length": "P163009",
+      "supported_language": "P163010",
+      "activated_parameters": "P203084",
+      "attention_mechanism": "P203085",
+      "context_length_max": "P203086",
+      "context_extension_method": "P203087",
+      "training_pipeline": "P203088",
+      "reasoning_mode": "P203089",
+      "moe_configuration": "P203090",
+      "quantization_precision": "P203091",
+      "synthetic_data_generation_method": "P203092",
+      "rl_algorithm": "P203093",
+      "reward_mechanism": "P203094",
+      "tool_calling_format": "P203095",
+      "training_environment_scale": "P203096",
+      "safety_evaluation_protocol": "P203097",
+      "safety_defect_rate": "P203098",
+      "fusion_architecture": "P203099",
+      "vision_encoder": "P203100",
+      "base_model": "P203101",
+      "optimizer_innovation": "P203102",
+      "benchmark_result": "P203103",
+      "weight_clipping_mechanism": "P203104",
+      "number_of_attention_heads": "P203105",
+      "post_training_infrastructure": "P203106",
+      # knowledge_cutoff_date production ID P163011 — enable when the model extracts it
+  }
+  
+_FIELD_MAPPINGS = {
+      "sandbox": _SANDBOX_FIELD_MAPPING,
+      "production": _PRODUCTION_FIELD_MAPPING,
+  }
+
+  # Hosts that use the production predicate IDs; everything else
+  # (sandbox, incubating, unknown) falls back to the sandbox set.
+_PRODUCTION_HOSTS = {"production", "prod", "orkg.org", "www.orkg.org"}
 
 
 class TemplateMapper:
     """Maps extracted LLM data to ORKG template format."""
 
-    def __init__(self, template_id: str = "R609825"):
-        """
-        Initialize template mapper.
+    def __init__(self, template_id: str = "R609825", host: str = "sandbox"):
+          """
+          Initialize template mapper.
 
-        Args:
-            template_id: ORKG template ID for LLMs
-        """
-        self.template_id = template_id
-        logger.info(f"Initialized TemplateMapper with template: {template_id}")
-
-        # Define field mapping from extracted data to ORKG properties
-        # Based on actual ORKG template R609825
-        # NOTE: Some predicates may not exist in sandbox - only use core ones that are verified
-        self.field_mapping = {
-            # Core fields that exist in sandbox (verified)
-            "model_name": "HAS_MODEL",  # model name (required)
-            "model_family": "P7121",  # model family (required)
-            "date_created": "P49020",  # date created (required)
-            "organization": "P18097",  # organization (required)
-            "innovation": "P15156",  # innovation (required)
-            "pretraining_architecture": "P103000",  # pretraining architecture
-            "pretraining_task": "P103001",  # pretraining task
-            "pretraining_corpus": "P41655",  # pretraining corpus (required)
-            # "training_corpus_size": "P163013",  # DISABLED: not found in sandbox  -> ID on Sandbox: "P202273"
-            # "knowledge_cutoff_date": "P163011",  # DISABLED: not found in sandbox  -> ID on Sandbox: "P202274"
-            "finetuning_task": "P116000",  # fine-tuning task
-            # "finetuning_data": "P163012",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202276"
-            "optimizer": "P105017",  # optimizer
-            "tokenizer": "P43065",  # tokenizer
-            "parameters": "P103002",  # number of parameters (required, text)
-            "parameters_millions": "P110076",  # max params in million (required, int)
-            # "context_length": "P163009",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202277"
-            # "supported_language": "P163010",  # DISABLED: not found in sandbox -> ID on Sandbox: "P202278"
-            "hardware_used": "P119138",  # hardware used
-            "hardware_description": "P119137",  # hardware description
-            "carbon_emitted": "P119142",  # carbon emitted (tCO2eq)
-            # "extension": "extension",  # DISABLED: not a valid predicate
-            "application": "P37544",  # application (required)
-            "source_code": "HAS_SOURCE_CODE",  # source code (URI)
-            "blog_post": "P103003",  # blog post (URI)
-            # "license": "license",  # DISABLED: not a valid predicate
-            "research_problem": "P32",  # research problem (required)
-        }
-
+          Args:
+              template_id: ORKG template ID for LLMs
+              host: Target ORKG instance ("sandbox", "incubating", or
+                    "production"). Selects the matching field-to-predicate
+                    mapping, since some predicates live at different IDs per
+                    instance.
+          """
+          self.template_id = template_id
+          self.host = "production" if str(host).strip().lower() in _PRODUCTION_HOSTS else "sandbox"
+          # Copy so per-instance edits can't mutate the shared module-level dict.
+          self.field_mapping = dict(_FIELD_MAPPINGS[self.host])
+          logger.info(
+              "Initialized TemplateMapper with template: %s (host=%s -> %s predicate IDs)",
+              template_id, host, self.host,
+          )
+          
     def map_model_to_orkg(
         self, model: LLMProperties, paper_id: Optional[str] = None
     ) -> Dict[str, Any]:
@@ -132,7 +246,46 @@ class TemplateMapper:
           if not value:
               return value
           return value[0].upper() + value[1:]
-    
+    @staticmethod
+    def _split_top_level(text: str, seps) -> List[str]:
+          """
+          Split ``text`` on any separator char in ``seps`` (a single char or an
+          iterable of chars), but only when NOT inside (), [] or {} — so a
+          parenthetical group containing the separator stays one value.
+          e.g. "a, b (x, y), c" split on "," -> ["a", "b (x, y)", "c"].
+          """
+          sep_set = set(seps)
+          parts: List[str] = []
+          depth = 0
+          buf: List[str] = []
+          for ch in text:
+              if ch in "([{":
+                  depth += 1
+                  buf.append(ch)
+              elif ch in ")]}":
+                  depth = max(0, depth - 1)
+                  buf.append(ch)
+              elif ch in sep_set and depth == 0:
+                  parts.append("".join(buf))
+                  buf = []
+              else:
+                  buf.append(ch)
+          parts.append("".join(buf))
+          return parts
+
+    @staticmethod
+    def _strip_dangling_brackets(text: str) -> str:
+          """
+          Remove a leftover unbalanced leading "(" or trailing ")" (e.g. "(knowledge"
+          or "knowledge)") that an earlier/unbalanced split left behind.
+          Balanced values like "reasoning (advanced)" are left untouched.
+          """
+          opens, closes = text.count("("), text.count(")")
+          if closes > opens and text.endswith(")"):
+              text = text[:-1].rstrip()
+          elif opens > closes and text.startswith("("):
+              text = text[1:].lstrip()
+          return text
     
     def _split_values(self, property_name: str, value: Any) -> List[Any]:
           """
@@ -150,7 +303,13 @@ class TemplateMapper:
               raw_parts: List[Any] = value
               did_split = False
           elif property_name in _MULTI_VALUED_FIELDS and isinstance(value, str):
-              raw_parts = value.split(_MULTI_VALUED_FIELDS[property_name])
+              sep = _MULTI_VALUED_FIELDS[property_name]
+              # The model is inconsistent about "," vs ";". Comma-configured
+              # fields hold atomic values, so accept BOTH separators. Semicolon
+              # fields keep ";" only, because their values contain internal
+              # commas (e.g. innovation) that must not be split.
+              seps = (",", ";") if sep == "," else (";",)
+              raw_parts = self._split_top_level(value, seps)
               did_split = True
           else:
               raw_parts = [value]
@@ -162,9 +321,11 @@ class TemplateMapper:
               if isinstance(part, str):
                   part = part.strip()
                   if did_split and part.lower().startswith("and "):
-                      part = part[4:].strip()
+                    part = part[4:].strip()
+                  if did_split:
+                    part = self._strip_dangling_brackets(part)
                   if not part:
-                      continue
+                    continue
               try:
                   if part in seen:
                       continue
