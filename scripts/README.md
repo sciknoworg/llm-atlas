@@ -9,6 +9,8 @@ Scripts can be run using the command:
 python scripts/<name>.py [options]
 ```
 
+Some scripts need credentials. Where a section lists **Required in `.env`**, add
+those variables to the `.env` file at the project root before running it.
 
 ## Directory structure
 
@@ -119,6 +121,9 @@ python scripts/build_papers_list.py --no-orkg      # arXiv lookups only
 
 **Input:** the gold-standard JSON.
 
+**Required in `.env`:** `ORKG_EMAIL` and `ORKG_PASSWORD` — unless `--no-orkg`
+is passed, in which case none are needed.
+
 **Output:** `papers_list.json` — a list of `{paper_title, pdf_url, arxiv_id,
 doi, source}` records. Overwrites `--output` if it exists.
 
@@ -179,9 +184,18 @@ python scripts/batch_extract_all_papers.py --skip-existing --start-from 40
 
 **Input:** the papers list, plus PDFs downloaded to `data/papers/` as needed.
 
-**Output:** one extraction JSON per paper in the configured extraction
-directory, plus a copy under the per-model subdirectory named after the active
-model — which is what `aggregate_model_evaluation.py` then scores.
+**Required in `.env`:** `KISSKI_API_KEY`.
+
+**Outputs:**
+
+1. One extraction JSON per paper in the configured extraction directory, plus a
+   copy under the per-model subdirectory named after the active model — which is
+   what `aggregate_model_evaluation.py` then scores.
+2. `extraction_summary_<YYYYmmdd_HHMMSS>.json` in `--output-dir`, written on
+   every non-dry run. It records the model used, start and end timestamps, and
+   per-paper status, source URL, error and output path. The timestamp means
+   these **accumulate**: one summary per run, never overwritten, so clear old
+   ones out periodically.
 
 ### 5. `import_extracted_to_model_folders.py`
 
@@ -235,6 +249,8 @@ python scripts/append_to_paper.py \
 
 **Input:** one extraction JSON.
 
+**Required in `.env`:** `ORKG_EMAIL` and `ORKG_PASSWORD`.
+
 **Output:** new contributions on the named paper, posted to
 `/api/papers/{id}/contributions`. The new contribution ids are logged. Nothing
 is written to disk, and the paper itself is not modified beyond gaining tabs.
@@ -257,10 +273,19 @@ python scripts/sandbox_upload.py --file results/extracted/2302.13971.json --host
 
 **Input:** one extraction JSON.
 
-**Output:** a new ORKG paper with one contribution per extracted model; the
-paper id and URL are printed. Re-running the same file creates a **second**
-paper — there is no deduplication here, so use `append_to_paper.py` when the
-paper already exists.
+**Required in `.env`:** `ORKG_EMAIL` and `ORKG_PASSWORD`.
+
+**Output:** an ORKG paper with one contribution per extracted model; the paper
+id and URL are printed. What happens on a re-run **depends on the host**:
+
+- **sandbox / incubating** — a second paper is created. There is no
+  deduplication, so use `6. append_to_paper.py` when the paper already exists.
+- **production** — the manager first searches for an existing paper with the
+  exact same title and, if it finds one, adds only the contribution labels that
+  are missing rather than creating a duplicate.
+
+The configured comparison is **not** touched either way: this script builds the
+manager without comparison arguments, so the comparison update stays off.
 
 ---
 
@@ -317,13 +342,18 @@ python scripts/build_results_table.py --results-dir results/ --output results/ta
 
 ### 10. `evaluation/`
 
-Per-paper gold-standard evaluators, documented in their own
-[`evaluation/README.md`](evaluation/README.md) — purpose, usage, arguments,
-metric definitions and sample output for each script.
+Per-paper gold-standard evaluators. All five are documented in their own
+[`evaluation/README.md`](evaluation/README.md) — purpose, runnable command,
+options, inputs and outputs each — along with the metric definitions:
 
-```bash
-python scripts/evaluation/<name>.py [options]
-```
+| Script | Purpose |
+|---|---|
+| `convert_gold_standard.py` | ORKG comparison CSV → gold-standard JSON |
+| `evaluate_extraction.py` | Relaxed evaluator, one paper |
+| `evaluate_extraction_strict.py` | Strict evaluator + BERTScore |
+| `normalize_gold_standard_parameters.py` | Normalise the gold `parameters` field — rewrites it in place |
+| `verify_gold_standard.py` | Read-only sanity check of the gold JSON |
+
 
 ---
 
@@ -347,6 +377,9 @@ python scripts/list_kisski_models.py -q -o data/kisski_models_list.txt
 | `--quiet`, `-q` | flag | off | Print only ids, one per line, with no header or footer. |
 
 **Input:** none.
+
+**Required in `.env`:** `KISSKI_API_KEY`, `KISSKI_BASE_URL` is optional and defaults to
+`https://chat-ai.academiccloud.de/v1`.
 
 **Output:** the model list on stdout, plus the file at `--output` if given. Use
 it to check what `kisski.model` and `classifier.model` in `config/config.yaml`
