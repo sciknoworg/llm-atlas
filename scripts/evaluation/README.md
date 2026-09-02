@@ -30,6 +30,7 @@ python scripts/evaluation/evaluate_extraction.py \
 - `--prediction`: Path to extraction result JSON (required)
 - `--fuzzy-threshold`: Similarity threshold for text matching (default: 0.8)
 - `--output`: Optional path to save evaluation report as JSON
+- `--paper-title`: Gold-standard entry to score against (auto-detected from the prediction file when omitted)
 
 **Metrics Calculated:**
 - **Accuracy**: Overall correctness = (TP + TN) / Total
@@ -73,6 +74,70 @@ model_family                   88.50%       90.00%       87.00%       88.50%
 parameters                     85.20%       87.50%       83.00%       85.20%
 ...
 ```
+
+### 3. `evaluate_extraction_strict.py`
+Strict evaluator producing the full metric set: match-based scores plus optional
+BERTScore. Uses field-specific matching rules (see
+[Strict evaluator: smart matching](#strict-evaluator-smart-matching-evaluate_extraction_strictpy)
+below).
+
+**Usage:**
+```bash
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --prediction results/extracted/2401.02385_20251207_223913.json
+
+python scripts/evaluation/evaluate_extraction_strict.py \
+    --prediction results/extracted/2401.02385.json \
+    --metrics structured --no-semantic
+```
+
+**Options:**
+- `--prediction`: Path to extraction result JSON (**required**)
+- `--gold`: Path to gold-standard JSON (default: `data/gold_standard/gold_standard_set.json`)
+- `--fuzzy-threshold`: Similarity threshold for fuzzy/semantic matching, 0–1 (default: `0.8`; use `1.0` for exact matching)
+- `--metrics`: Which metric set to report — `all` (structured + BERTScore, default), `structured` (match-based only), or `bertscore` (semantic report only)
+- `--no-semantic`: Disable semantic similarity and BERTScore; fuzzy matching only
+- `--bert-score-model`: Model for BERTScore (default: `roberta-large`; also accepts e.g. `bert-base-uncased`)
+- `--output`: Optional path to save the evaluation report as JSON
+- `--paper-title`: Gold-standard entry to score against (auto-detected from the prediction file when omitted)
+
+**Input:** the prediction JSON and the gold standard.
+**Output:** the report on stdout, plus the JSON at `--output` if given.
+
+**Note:** the default `all` and `bertscore` modes download a BERTScore model on
+first use, so the first run needs network access and disk space. Pass
+`--no-semantic` or `--metrics structured` to skip that entirely.
+
+### 4. `normalize_gold_standard_parameters.py`
+Normalizes the gold standard's `parameters` field to a consistent GPT-2 style
+list — `"Base=117M, Large=360M"` becomes `"117M, 360M"`, sorted ascending with
+`M`/`B` suffixes.
+
+**Usage:**
+```bash
+python scripts/evaluation/normalize_gold_standard_parameters.py
+```
+
+**Options:** none — the path is hard-coded.
+
+**Input:** `data/gold_standard/gold_standard_set.json`
+**Output:** the same file, **rewritten in place**. There is no dry-run and no
+backup, so copy the gold standard first if you may want the original values.
+Run it once after regenerating the gold standard, not repeatedly.
+
+### 5. `verify_gold_standard.py`
+Read-only sanity check of the gold-standard JSON — reports entry counts, field
+coverage and malformed records before you evaluate against it.
+
+**Usage:**
+```bash
+python scripts/evaluation/verify_gold_standard.py
+```
+
+**Options:** none — the path is hard-coded.
+
+**Input:** `data/gold_standard/gold_standard_set.json`
+**Output:** a report on stdout. Writes nothing.
 
 ## Evaluation Workflow
 
