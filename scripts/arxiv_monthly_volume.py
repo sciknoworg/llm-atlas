@@ -67,6 +67,21 @@ def month_window(year: int, month: int) -> str:
     return f"submittedDate:[{year}{month:02d}010000 TO {year}{month:02d}{last_day}2359]"
 
 
+def series_cache_name(name: str, categories: List[str]) -> str:
+    """
+    Cache name for one series.
+
+    A plain category caches under its own name, but the union is only meaningful
+    together with the categories it spans: `union` alone would let a
+    `--categories cs.AI cs.CL` run read the three-category union written by an
+    earlier default run, reporting more distinct papers than the two categories
+    contain. Naming the set keeps every scope in its own namespace.
+    """
+    if name != UNION_KEY:
+        return name
+    return f"{UNION_KEY}({'+'.join(sorted(categories))})"
+
+
 def build_query(categories: List[str], year: int, month: int) -> str:
     """
     Compose the search_query for one cell of the table.
@@ -198,6 +213,19 @@ class CountCache:
         if enabled and path.exists():
             try:
                 self.data = json.loads(path.read_text()).get("counts", {})
+                # Entries written before the union key named its category set
+                # cannot be attributed to a scope, so they are dropped rather
+                # than risk serving one query's union to another. They are
+                # removed from the file on the next save; the affected cells
+                # are simply re-fetched once.
+                legacy = [k for k in self.data if k.startswith(f"{UNION_KEY}|")]
+                for stale in legacy:
+                    del self.data[stale]
+                if legacy:
+                    logger.warning(
+                        "Discarded %d un-scoped '%s|' cache entries — these will be re-fetched",
+                        len(legacy), UNION_KEY,
+                    )
                 logger.info("Loaded %d cached counts from %s", len(self.data), path)
             except (OSError, ValueError) as exc:
                 logger.warning("Ignoring unreadable cache %s: %s", path, exc)
@@ -266,8 +294,12 @@ def collect(
     series = list(categories) + ([UNION_KEY] if include_union and len(categories) > 1 else [])
     months = list(month_range(start, end))
 
+    # Cache names, not display names: the union's entry is scoped to the exact
+    # category set so a narrower run cannot read a wider run's answer.
+    cache_names = {s: series_cache_name(s, categories) for s in series}
+
     todo = sum(
-        1 for y, m in months for s in series if cache.get(s, y, m) is None
+        1 for y, m in months for s in series if cache.get(cache_names[s], y, m) is None
     )
     logger.info(
         "%d month(s) x %d series = %d cell(s); %d need fetching (~%.0f min at %.1fs/request)",
@@ -292,7 +324,7 @@ def collect(
             month_had_fetch = False
 
             for name in series:
-                cached = cache.get(name, year, month)
+                cached = cache.get(cache_names[name], year, month)
                 if cached is not None:
                     row[name] = cached
                     continue
@@ -310,14 +342,16 @@ def collect(
                     failed += 1
                     continue
 
-                cache.put(name, year, month, count)
+                cache.put(cache_names[name], year, month, count)
                 row[name] = count
                 logger.info("  %s %s-%02d: %d", name, year, month, count)
 
+            # A total is only meaningful when every category answered. Summing
+            # the survivors would emit a subtotal that reads as a complete
+            # figure, which is worse than an empty cell.
             counts = [row.get(c) for c in categories]
             row["sum_of_categories"] = (
-                sum(c for c in counts if c is not None) if any(c is not None for c in counts)
-                else None
+                sum(counts) if all(c is not None for c in counts) else None
             )
             rows.append(row)
 
@@ -326,7 +360,13 @@ def collect(
             if month_had_fetch:
                 cache.save()
     except KeyboardInterrupt:
+        # Re-raised so main() can skip writing the CSV: silently publishing the
+        # rows gathered so far would replace a complete file with a truncated
+        # one while still exiting successfully. The cache is saved either way,
+        # so a re-run resumes rather than restarting.
+        cache.save()
         logger.warning("Interrupted — cached counts up to this point are saved")
+        raise
     finally:
         cache.save()
 
@@ -356,12 +396,21 @@ def print_summary(rows: List[Dict], categories: List[str], include_union: bool) 
     series = list(categories) + ([UNION_KEY] if include_union and len(categories) > 1 else [])
 
     by_year: Dict[str, Dict[str, int]] = {}
+    # A failed cell makes its year's total a subtotal. Tracking which series
+    # are short lets the year be flagged rather than silently under-reported.
+    incomplete: Dict[str, set] = {}
+    collected: Dict[str, Dict[str, int]] = {}
     for row in rows:
         year = row["month"][:4]
         bucket = by_year.setdefault(year, {s: 0 for s in series})
+        incomplete.setdefault(year, set())
+        seen = collected.setdefault(year, {s: 0 for s in series})
         for s in series:
-            if row.get(s) is not None:
+            if row.get(s) is None:
+                incomplete[year].add(s)
+            else:
                 bucket[s] += row[s]
+                seen[s] += 1
 
     width = max(len(s) for s in series) + 2
     print("\nPapers per year")
@@ -369,14 +418,36 @@ def print_summary(rows: List[Dict], categories: List[str], include_union: bool) 
     print("-" * (6 + width * (len(series) + 1)))
     for year in sorted(by_year):
         bucket = by_year[year]
-        total = sum(bucket[c] for c in categories)
+        missing = incomplete[year]
+        total = (
+            sum(bucket[c] for c in categories)
+            if not (missing & set(categories))
+            else None
+        )
+        def cell(s: str) -> str:
+            if s not in missing:
+                return format(bucket[s], ",")
+            # Nothing came back for this series all year: "~0" would read as
+            # "about zero papers" rather than "no data".
+            return "n/a" if collected[year][s] == 0 else "~" + format(bucket[s], ",")
+
+        cells = "".join(f"{cell(s):>{width}}" for s in series)
+        total_cell = f"{format(total, ','):>{width}}" if total is not None else f"{'n/a':>{width}}"
+        print(f"{year}  " + cells + total_cell)
+
+    if any(incomplete.values()):
         print(
-            f"{year}  "
-            + "".join(f"{bucket[s]:>{width},}" for s in series)
-            + f"{total:>{width},}"
+            "\n~ marks a partial figure: at least one month in that series failed "
+            "and is missing from the total. Re-run to retry just those cells."
         )
 
     if include_union and len(categories) > 1:
+        if any(incomplete.values()):
+            print(
+                "\nCross-listing overlap not reported: some cells failed, so the "
+                "summed and distinct totals are not comparable."
+            )
+            return
         grand_sum = sum(sum(b[c] for c in categories) for b in by_year.values())
         grand_union = sum(b[UNION_KEY] for b in by_year.values())
         print(
@@ -426,7 +497,18 @@ def main() -> int:
     )
 
     cache = CountCache(args.cache, enabled=not args.refresh)
-    rows = collect(args.categories, args.start, end, include_union, cache, args.delay)
+    try:
+        rows = collect(args.categories, args.start, end, include_union, cache, args.delay)
+    except KeyboardInterrupt:
+        # Deliberately leaves --output untouched. Overwriting a complete CSV
+        # with the prefix gathered before the interrupt, and exiting 0, would
+        # look like a successful run that quietly lost most of its rows.
+        logger.warning(
+            "Interrupted before completion — %s was left unchanged. "
+            "Re-run to resume from the cache.", args.output,
+        )
+        return 130
+
     if not rows:
         logger.error("No data collected")
         return 1
