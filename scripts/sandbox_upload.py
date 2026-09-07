@@ -39,7 +39,10 @@ def main():
     # 2. Initialize components
     logger.info(f"Initializing ORKG components for {args.host}...")
     orkg_client = ORKGClient(host=args.host, email=email, password=password)
-    template_mapper = TemplateMapper()
+    # The host has to reach the mapper too: sandbox and production use different
+    # predicate IDs, so a default-constructed mapper would write sandbox
+    # predicates into the live graph when --host production is passed.
+    template_mapper = TemplateMapper(host=args.host)
     manager = ORKGPaperManager(orkg_client, template_mapper)
     
     # 3. Load data
