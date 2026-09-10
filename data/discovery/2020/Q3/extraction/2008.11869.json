@@ -1,0 +1,1444 @@
+{
+  "arxiv_id": "2008.11869",
+  "status": "completed",
+  "timestamp": "2026-08-24T21:13:25.771967",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2008.11869",
+    "title": "AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization",
+    "authors": [
+      "Zhang, Xinsong",
+      "Li, Pengshuai",
+      "Li, Hang"
+    ],
+    "abstract": "",
+    "published": "2020-08-27T00:00:00+00:00",
+    "updated": "2020-08-27T00:00:00+00:00",
+    "doi": null,
+    "primary_category": null,
+    "categories": [],
+    "pdf_url": "https://arxiv.org/pdf/2008.11869",
+    "entry_id": "https://arxiv.org/abs/2008.11869",
+    "source": "arxiv-html-fallback",
+    "pdf_path": "data/papers/2008.11869.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 54470,
+  "word_count": 5158,
+  "models_extracted": 6,
+  "extraction_data": [
+    {
+      "model_name": "AMBERT",
+      "parameters": "176M, 194M",
+      "parameters_millions": 194,
+      "model_family": "BERT",
+      "date_created": "2020-08-27",
+      "organization": "ByteDance",
+      "innovation": "Multi-grained tokenization: processes input text into both fine-grained and coarse-grained token sequences, processed by two parameter-sharing BERT-like encoders; pre-training jointly optimizes masked token prediction at both granularities; fine-tuning employs a regularized multi-task learning objective that combines predictions from both encoders with an agreement regularization term to force prediction consistency, improving representation quality over single-granularity models like BERT.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling (MLM)",
+      "pretraining_corpus": "Jinri Toutiao (Chinese, 57G uncompressed), Wikipedia and OpenWebText (English, 47G uncompressed)",
+      "finetuning_task": "Supervised fine-tuning for NLU tasks, Classification, machine reading comprehension, span detection, Supervised discriminative fine-tuning",
+      "optimizer": "Adam",
+      "hardware_used": "Nvidia V-100",
+      "extension": "Extends BERT by employing multi-grained tokenization and parallel learning of fine-grained and coarse-grained token representations using two encoders with shared parameters.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Natural language understanding (NLU) with improved tokenization granularity",
+      "application": "Sentiment analysis, text entailment, machine reading comprehension, text classification, text matching, text span detection",
+      "paper_title": "AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization",
+      "training_corpus_size": "47G uncompressed text",
+      "finetuning_data": "CLUE, GLUE, SQuAD, RACE, CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3), GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+      "tokenizer": "Multi-grained tokenization (fine-grained words/subwords and coarse-grained phrases/words)",
+      "supported_language": "English, Chinese",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "194M",
+      "attention_mechanism": "Multi-head self-attention",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on large corpus with MLM -> supervised fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "BERT",
+      "optimizer_innovation": null,
+      "benchmark_result": "GLUE: +2.0% over BERT; RACE: +2.5% over BERT; SQuAD: +5.1% over BERT; CLUE: +2.7% over baselines; CLUE classification average accuracy: 81.87; CLUE MRC average F1/EM: 77.47; CLUE Avg: 75.28; GLUE Avg: 82.7; CMNLI: 86.62; C3: 69.63; CoLA: 82.7; SST-2: 94.5; MNLI: 86.3/85.3",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "AMBERT-Combo",
+      "model_family": "BERT",
+      "date_created": "2020-08-27",
+      "organization": "Google",
+      "innovation": "Uses separate transformer encoders for fine-grained and coarse-grained tokenizations, combining their representations.",
+      "pretraining_corpus": "Jinri Toutiao (Chinese, 57G uncompressed), Wikipedia and OpenWebText (English, 47G uncompressed)",
+      "parameters": "280M",
+      "parameters_millions": 280,
+      "application": "Text classification, machine reading comprehension, language understanding",
+      "license": null,
+      "research_problem": "Pre-trained language models for Chinese and English",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling, Next Sentence Prediction",
+      "training_corpus_size": "104G uncompressed text (57G Chinese, 47G English)",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised discriminative fine-tuning",
+      "finetuning_data": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3), GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+      "optimizer": null,
+      "tokenizer": "WordPiece",
+      "context_length": null,
+      "supported_language": "Chinese, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "CLUE Avg: 75.26; GLUE Avg: 81.8; CMNLI: 84.64; C3: 66.70; CoLA: 81.8; SST-2: 94.5; MNLI: 84.7/84.2",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OurBERT(word)",
+      "model_family": "BERT",
+      "date_created": "2020-08-27",
+      "organization": "Google",
+      "innovation": "Baseline model using only word-level tokenization for both Chinese and English texts.",
+      "pretraining_corpus": "Jinri Toutiao (Chinese, 57G uncompressed), Wikipedia and OpenWebText (English, 47G uncompressed)",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "application": "Text classification, machine reading comprehension, language understanding",
+      "license": null,
+      "research_problem": "Pre-trained language models for Chinese and English",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling, Next Sentence Prediction",
+      "training_corpus_size": "104G uncompressed text (57G Chinese, 47G English)",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised discriminative fine-tuning",
+      "finetuning_data": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3), GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+      "optimizer": null,
+      "tokenizer": "WordPiece",
+      "context_length": null,
+      "supported_language": "Chinese, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "CLUE Avg: 65.77; GLUE Avg: 81.6; CMNLI: 80.93; C3: 66.96; CoLA: 81.6; SST-2: 93.8; MNLI: 85.0/84.5",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OurBERT(phrase)",
+      "model_family": "BERT",
+      "date_created": "2020-08-27",
+      "organization": "Google",
+      "innovation": "Baseline model using only phrase-level tokenization for English texts.",
+      "pretraining_corpus": "Jinri Toutiao (Chinese, 57G uncompressed), Wikipedia and OpenWebText (English, 47G uncompressed)",
+      "parameters": "170M",
+      "parameters_millions": 170,
+      "application": "Text classification, machine reading comprehension, language understanding",
+      "license": null,
+      "research_problem": "Pre-trained language models for Chinese and English",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling, Next Sentence Prediction",
+      "training_corpus_size": "104G uncompressed text (57G Chinese, 47G English)",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised discriminative fine-tuning",
+      "finetuning_data": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3), GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+      "optimizer": null,
+      "tokenizer": "WordPiece",
+      "context_length": null,
+      "supported_language": "Chinese, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "CLUE Avg: 85.64; GLUE Avg: 80.7; CMNLI: 80.89; C3: 66.43; CoLA: 80.7; SST-2: 93.8; MNLI: 84.1/83.8",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 6,
+  "models_after_merge": 4,
+  "validated_rows": {
+    "AMBERT": {
+      "application": [
+        "Sentiment analysis",
+        "text entailment",
+        "machine reading comprehension",
+        "text classification",
+        "text matching",
+        "text span detection"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention"
+      ],
+      "base_model": [
+        "BERT"
+      ],
+      "finetuning_data": [
+        "CLUE",
+        "GLUE",
+        "SQuAD",
+        "RACE",
+        "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+        "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)"
+      ],
+      "finetuning_task": [
+        "Classification",
+        "machine reading comprehension",
+        "span detection"
+      ],
+      "hardware_used": [
+        "Nvidia V-100"
+      ],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "AMBERT"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "ByteDance"
+      ],
+      "parameters": [
+        "176M",
+        "194M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Jinri Toutiao (Chinese, 57G uncompressed)",
+        "Wikipedia and OpenWebText (English, 47G uncompressed)"
+      ],
+      "pretraining_task": [
+        "Masked language modeling (MLM)"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ]
+    },
+    "AMBERT-Combo": {
+      "application": [
+        "Text classification",
+        "machine reading comprehension",
+        "language understanding"
+      ],
+      "finetuning_data": [
+        "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+        "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)"
+      ],
+      "finetuning_task": [],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "AMBERT-Combo"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "280M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Jinri Toutiao (Chinese, 57G uncompressed)",
+        "Wikipedia and OpenWebText (English, 47G uncompressed)"
+      ],
+      "pretraining_task": [
+        "Masked language modeling, Next Sentence Prediction"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Chinese",
+        "English"
+      ]
+    },
+    "OurBERT(word)": {
+      "application": [
+        "Text classification",
+        "machine reading comprehension",
+        "language understanding"
+      ],
+      "finetuning_data": [
+        "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+        "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)"
+      ],
+      "finetuning_task": [],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "OurBERT(word)"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "110M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Jinri Toutiao (Chinese, 57G uncompressed)",
+        "Wikipedia and OpenWebText (English, 47G uncompressed)"
+      ],
+      "pretraining_task": [
+        "Masked language modeling, Next Sentence Prediction"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Chinese",
+        "English"
+      ]
+    },
+    "OurBERT(phrase)": {
+      "application": [
+        "Text classification",
+        "machine reading comprehension",
+        "language understanding"
+      ],
+      "finetuning_data": [
+        "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+        "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)"
+      ],
+      "finetuning_task": [],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "OurBERT(phrase)"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "170M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Jinri Toutiao (Chinese, 57G uncompressed)",
+        "Wikipedia and OpenWebText (English, 47G uncompressed)"
+      ],
+      "pretraining_task": [
+        "Masked language modeling, Next Sentence Prediction"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Chinese",
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "AMBERT": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning for NLU tasks",
+            "Classification",
+            "machine reading comprehension",
+            "span detection",
+            "Supervised discriminative fine-tuning"
+          ],
+          "accepted": [
+            "Classification",
+            "machine reading comprehension",
+            "span detection"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning for NLU tasks",
+              "reason": "Describes a training method/process rather than a specific task (cached)"
+            },
+            {
+              "value": "Supervised discriminative fine-tuning",
+              "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Natural language understanding (NLU) with improved tokenization granularity"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Natural language understanding (NLU) with improved tokenization granularity",
+              "reason": "Describes a solution/method rather than just the research problem (cached)"
+            }
+          ]
+        }
+      },
+      "AMBERT-Combo": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised discriminative fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised discriminative fine-tuning",
+              "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Pre-trained language models for Chinese and English"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pre-trained language models for Chinese and English",
+              "reason": "Describes a model type or domain rather than a research problem or capability gap."
+            }
+          ]
+        }
+      },
+      "OurBERT(word)": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised discriminative fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised discriminative fine-tuning",
+              "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Pre-trained language models for Chinese and English"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pre-trained language models for Chinese and English",
+              "reason": "Describes a model type or domain rather than a research problem or capability gap."
+            }
+          ]
+        }
+      },
+      "OurBERT(phrase)": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised discriminative fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised discriminative fine-tuning",
+              "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Pre-trained language models for Chinese and English"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pre-trained language models for Chinese and English",
+              "reason": "Describes a model type or domain rather than a research problem or capability gap."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 75,
+      "dropped": 9,
+      "llm_calls": 1,
+      "values_sent_to_llm": 4
+    }
+  },
+  "contributions": [
+    {
+      "label": "AMBERT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "AMBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-08-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "ByteDance",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-grained tokenization: processes input text into both fine-grained and coarse-grained token sequences, processed by two parameter-sharing BERT-like encoders",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Pre-training jointly optimizes masked token prediction at both granularities",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Fine-tuning employs a regularized multi-task learning objective that combines predictions from both encoders with an agreement regularization term to force prediction consistency, improving representation quality over single-granularity models like BERT.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling (MLM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Jinri Toutiao (Chinese, 57G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia and OpenWebText (English, 47G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Machine reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Span detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Multi-grained tokenization (fine-grained words/subwords and coarse-grained phrases/words)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "176M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "194M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 194,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia V-100",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Sentiment analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text entailment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text matching",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text span detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "47G uncompressed text",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SQuAD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RACE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "194M",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on large corpus with MLM -> supervised fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE: +2.0% over BERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RACE: +2.5% over BERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SQuAD: +5.1% over BERT",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE: +2.7% over baselines",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE classification average accuracy: 81.87",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE MRC average F1/EM: 77.47",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE Avg: 75.28",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE Avg: 82.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMNLI: 86.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C3: 69.63",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CoLA: 82.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SST-2: 94.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MNLI: 86.3/85.3",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "AMBERT-Combo",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "AMBERT-Combo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-08-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Uses separate transformer encoders for fine-grained and coarse-grained tokenizations, combining their representations.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling, Next Sentence Prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Jinri Toutiao (Chinese, 57G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia and OpenWebText (English, 47G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "WordPiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "280M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 280,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "104G uncompressed text (57G Chinese, 47G English)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE Avg: 75.26",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE Avg: 81.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMNLI: 84.64",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C3: 66.70",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CoLA: 81.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SST-2: 94.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MNLI: 84.7/84.2",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OurBERT(word)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OurBERT(word)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-08-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Baseline model using only word-level tokenization for both Chinese and English texts.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling, Next Sentence Prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Jinri Toutiao (Chinese, 57G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia and OpenWebText (English, 47G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "WordPiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "110M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 110,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "104G uncompressed text (57G Chinese, 47G English)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE Avg: 65.77",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE Avg: 81.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMNLI: 80.93",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C3: 66.96",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CoLA: 81.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SST-2: 93.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MNLI: 85.0/84.5",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OurBERT(phrase)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OurBERT(phrase)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-08-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Baseline model using only phrase-level tokenization for English texts.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling, Next Sentence Prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Jinri Toutiao (Chinese, 57G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia and OpenWebText (English, 47G uncompressed)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "WordPiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "170M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 170,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "104G uncompressed text (57G Chinese, 47G English)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLUE datasets (TNEWS, IFLYTEK, CLUEWSC2020, AFQMC, CSL, CMNLI, CMRC2018, ChID, C3)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on multi-grained tokenized corpus -> supervised fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CLUE Avg: 85.64",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE Avg: 80.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMNLI: 80.89",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C3: 66.43",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CoLA: 80.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SST-2: 93.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MNLI: 84.1/83.8",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925329",
+    "contribution_ids": [
+      "R1925331",
+      "R1925332",
+      "R1925333",
+      "R1925334"
+    ],
+    "new_contribution_ids": [
+      "R1925331",
+      "R1925332",
+      "R1925333",
+      "R1925334"
+    ],
+    "comparison_updated": null
+  }
+}

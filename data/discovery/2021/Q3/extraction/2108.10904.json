@@ -1,0 +1,1601 @@
+{
+ "arxiv_id": "2108.10904",
+ "status": "completed",
+ "timestamp": "2026-08-25T01:29:50.105770",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2108.10904",
+  "title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+  "authors": [
+   "Zirui Wang",
+   "Jiahui Yu",
+   "Adams Wei Yu",
+   "Zihang Dai",
+   "Yulia Tsvetkov",
+   "Yuan Cao"
+  ],
+  "abstract": "With recent progress in joint modeling of visual and textual representations, Vision-Language Pretraining (VLP) has achieved impressive performance on many multimodal downstream tasks. However, the requirement for expensive annotations including clean image captions and regional labels limits the scalability of existing approaches, and complicates the pretraining procedure with the introduction of multiple dataset-specific objectives. In this work, we relax these constraints and present a minimalist pretraining framework, named Simple Visual Language Model (SimVLM). Unlike prior work, SimVLM reduces the training complexity by exploiting large-scale weak supervision, and is trained end-to-end with a single prefix language modeling objective. Without utilizing extra data or task-specific customization, the resulting model significantly outperforms previous pretraining methods and achieves new state-of-the-art results on a wide range of discriminative and generative vision-language benchmarks, including VQA (+3.74% vqa-score), NLVR2 (+1.17% accuracy), SNLI-VE (+1.37% accuracy) and image captioning tasks (+10.1% average CIDEr score). Furthermore, we demonstrate that SimVLM acquires strong generalization and transfer ability, enabling zero-shot behavior including open-ended visual question answering and cross-modality transfer.",
+  "published": "2021-08-24T18:14:00+00:00",
+  "updated": "2022-05-15T23:20:46+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2108.10904v3",
+  "entry_id": "http://arxiv.org/abs/2108.10904v3",
+  "pdf_path": "data/papers/2108.10904.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 56481,
+ "word_count": 4784,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "SimVLM",
+   "parameters": "BASE, HUGE, LARGE",
+   "parameters_millions": 0,
+   "model_family": "SimVLM",
+   "date_created": "2021-08-24",
+   "organization": "Google",
+   "innovation": "PrefixLM formulation: treats image features as a prefix sequence and applies autoregressive factorization only on the remaining text tokens, enabling bidirectional context for the prefix while performing text generation; single-pass pretraining with a single language modeling loss instead of multi-stage auxiliary objectives; convolutional visual encoder (first three blocks of ResNet) for contextualized patch extraction; 2D relative attention for image patches; elimination of modality type embeddings.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Prefix Language Modeling (PrefixLM)",
+   "pretraining_corpus": "Large-scale weakly aligned image-text pairs (Jia et al., 2021)",
+   "finetuning_task": "Discriminative and generative vision-language tasks",
+   "optimizer": "AdamW",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision-Language Pretraining (VLP)",
+   "application": "Visual question answering, natural language visual reasoning, visual entailment, image captioning, zero-shot open-ended VQA, cross-modality transfer",
+   "paper_title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+   "training_corpus_size": "800GB of web-crawled documents (C4), 1.8B noisy image-text pairs (ALIGN)",
+   "finetuning_data": "VQA v2, SNLI-VE, NLVR2, CoCo, NoCaps, Multi30k, VQAv2, CoCo captioning, SNLI, MNLI, VQA",
+   "tokenizer": "Sub-word tokens (BPE)",
+   "supported_language": "English, German",
+   "hardware_description": "512 TPUv3 chips",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "2D relative attention for image patches",
+   "context_length_max": "256",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining with PrefixLM objective -> Fine-tuning on downstream VL benchmarks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Encoder-decoder with shared parameters across visual and textual inputs",
+   "vision_encoder": "ViT, CoAtNet",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA: +3.74% vqa-score; NLVR2: +1.17% accuracy; SNLI-VE: +1.37% accuracy; image captioning: +10.1% average CIDEr score; VQA: 77.87; NLVR2: 78.14; SNLI-VE: 81.72; CoCoCaption: 81.77; NoCaps: 84.20; Multi30k: 39.0; VQA: 79.32; NLVR2: 79.56; SNLI-VE: 84.13; CoCoCaption: 84.84; NoCaps: 85.68; Multi30k: 40.3; VQA >80%; SNLI-VE dev/test: 71.35/71.02; Multi30k dev/test: 15.0/24.8; VQA dev: 75.3 (discriminative) / 71.3 (generative); ImageNet linear eval: 80.6; SNLI-VE dev/test: 72.85/72.44; Multi30k dev/test: 17.7/30.1; VQA dev: 76.7 (discriminative) / 72.5 (generative); ImageNet linear eval: 82.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "SimVLM Huge",
+   "model_family": "SimVLM",
+   "date_created": "2021-08-24",
+   "organization": "Google",
+   "innovation": "PrefixLM formulation: treats image features as a prefix sequence and applies autoregressive factorization only on the remaining text tokens, enabling bidirectional context for the prefix while performing text generation; single-pass pretraining with a single language modeling loss instead of multi-stage auxiliary objectives; convolutional visual encoder (first three blocks of ResNet) for contextualized patch extraction; 2D relative attention for image patches; elimination of modality type embeddings.",
+   "pretraining_corpus": "ALIGN (image-text pairs), Colossal Clean Crawled Corpus (C4)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Visual question answering, image captioning, visual reasoning, visual entailment, multimodal translation, zero-shot generalization",
+   "license": null,
+   "research_problem": "Visual Language Model Pretraining",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "PrefixLM (autoregressive language modeling conditioned on image prefix)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "VQAv2, SNLI-VE, NLVR2, CoCo captioning, NoCaps, Multi30k",
+   "optimizer": null,
+   "tokenizer": "Sub-word tokens (BPE)",
+   "context_length": null,
+   "supported_language": "English, German",
+   "hardware_used": "TPUv3",
+   "hardware_description": "512 TPUv3 chips",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+   "activated_parameters": null,
+   "attention_mechanism": "2D relative attention for image patches",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Single-pass PrefixLM pretraining -> supervised fine-tuning on downstream benchmarks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA: 80.03; NLVR2: 80.34; SNLI-VE: 84.53; CoCoCaption: 85.15; NoCaps: 86.21; Multi30k: 40.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "SimVLMhuge",
+   "model_family": "SimVLM",
+   "date_created": "2021-08-24",
+   "organization": "Google",
+   "innovation": "Generative pretraining with weak supervision: uses a noisy image captioning objective on real-world web corpus instead of complex masked language modeling or reinforcement learning; achieves state-of-the-art results with a simple pretraining-finetuning paradigm.",
+   "pretraining_corpus": "ALIGN, C4",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, visual question answering, visual entailment, image translation, zero-shot/few-shot transfer",
+   "license": null,
+   "research_problem": "Visual Language Model Pretraining",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Generative image captioning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "VQAv2, SNLI-VE, NLVR2, CoCo captioning, NoCaps, Multi30k",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "TPUv3",
+   "hardware_description": "512 TPUv3 chips",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining on ALIGN and C4 -> Finetuning on six vision-language benchmarks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA >80%",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "SimVLM huge",
+   "model_family": "SimVLM",
+   "date_created": "2021-08-24",
+   "organization": "Google",
+   "innovation": "Weakly supervised pretraining on web-scale image-text pairs with noisy labels; uses a simple encoder-decoder architecture with a prefix language modeling loss to generate free-form answers for open-ended VQA; enables zero-shot cross-modality transfer by fine-tuning on text-only NLI/translation data and evaluating on joint vision-language tasks, outperforming fully supervised baselines without requiring paired image-text training data.",
+   "pretraining_corpus": "Web-scale image-text pairs (e.g., LAION, Conceptual Captions)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Zero-shot cross-modality transfer, open-ended VQA, image-text matching, image captioning",
+   "license": null,
+   "research_problem": "Visual Language Model Pretraining",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image-text matching, prefix language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "SNLI-VE, Multi30k, SNLI, MNLI, VQA",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "SimVLM: Simple Visual Language Model Pretraining with Weak Supervision",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "SNLI-VE dev/test: 73.56/73.08; Multi30k dev/test: 18.2/32.6; VQA dev: 77.2 (discriminative) / 73.0 (generative); ImageNet linear eval: 83.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 10,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "SimVLM": {
+   "application": [
+    "Visual question answering",
+    "natural language visual reasoning",
+    "visual entailment",
+    "image captioning",
+    "zero-shot open-ended VQA"
+   ],
+   "attention_mechanism": [
+    "2D relative attention for image patches"
+   ],
+   "finetuning_data": [
+    "VQA v2",
+    "SNLI-VE",
+    "NLVR2",
+    "CoCo",
+    "NoCaps",
+    "Multi30k",
+    "VQAv2",
+    "CoCo captioning",
+    "SNLI",
+    "MNLI",
+    "VQA"
+   ],
+   "finetuning_task": [
+    "Discriminative and generative vision-language tasks"
+   ],
+   "fusion_architecture": [
+    "Encoder-decoder with shared parameters across visual and textual inputs"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "SimVLM"
+   ],
+   "model_name": [
+    "SimVLM"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Large-scale weakly aligned image-text pairs (Jia et al., 2021)"
+   ],
+   "pretraining_task": [
+    "Prefix Language Modeling (PrefixLM)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "German"
+   ],
+   "vision_encoder": [
+    "ViT",
+    "CoAtNet"
+   ]
+  },
+  "SimVLM Huge": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "visual entailment",
+    "multimodal translation"
+   ],
+   "attention_mechanism": [
+    "2D relative attention for image patches"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "SNLI-VE",
+    "NLVR2",
+    "CoCo captioning",
+    "NoCaps",
+    "Multi30k"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "SimVLM"
+   ],
+   "model_name": [
+    "SimVLM Huge"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "ALIGN (image-text pairs)",
+    "Colossal Clean Crawled Corpus (C4)"
+   ],
+   "pretraining_task": [
+    "PrefixLM (autoregressive language modeling conditioned on image prefix)"
+   ],
+   "research_problem": [
+    "Visual Language Model Pretraining"
+   ],
+   "supported_language": [
+    "English",
+    "German"
+   ]
+  },
+  "SimVLMhuge": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "visual entailment",
+    "image translation"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "SNLI-VE",
+    "NLVR2",
+    "CoCo captioning",
+    "NoCaps",
+    "Multi30k"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "SimVLM"
+   ],
+   "model_name": [
+    "SimVLMhuge"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "ALIGN",
+    "C4"
+   ],
+   "pretraining_task": [
+    "Generative image captioning"
+   ],
+   "research_problem": [
+    "Visual Language Model Pretraining"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "SimVLM huge": {
+   "application": [
+    "open-ended VQA",
+    "image-text matching",
+    "image captioning"
+   ],
+   "finetuning_data": [
+    "SNLI-VE",
+    "Multi30k",
+    "SNLI",
+    "MNLI",
+    "VQA"
+   ],
+   "model_family": [
+    "SimVLM"
+   ],
+   "model_name": [
+    "SimVLM huge"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Web-scale image-text pairs (e.g., LAION, Conceptual Captions)"
+   ],
+   "pretraining_task": [
+    "Image-text matching, prefix language modeling"
+   ],
+   "research_problem": [
+    "Visual Language Model Pretraining"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "SimVLM": {
+    "application": {
+     "candidates": [
+      "Visual question answering",
+      "natural language visual reasoning",
+      "visual entailment",
+      "image captioning",
+      "zero-shot open-ended VQA",
+      "cross-modality transfer"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "natural language visual reasoning",
+      "visual entailment",
+      "image captioning",
+      "zero-shot open-ended VQA"
+     ],
+     "dropped": [
+      {
+       "value": "cross-modality transfer",
+       "reason": "Describes a capability or transfer paradigm rather than a concrete application or domain. (cached)"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "BASE",
+      "HUGE",
+      "LARGE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "LARGE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "HUGE",
+       "reason": "Not a numerical count of parameters; it is a qualitative descriptor."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Vision-Language Pretraining (VLP)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-Language Pretraining (VLP)",
+       "reason": "Names a methodology/technique rather than a research problem or capability gap."
+      }
+     ]
+    }
+   },
+   "SimVLM Huge": {
+    "application": {
+     "candidates": [
+      "Visual question answering",
+      "image captioning",
+      "visual reasoning",
+      "visual entailment",
+      "multimodal translation",
+      "zero-shot generalization"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "image captioning",
+      "visual reasoning",
+      "visual entailment",
+      "multimodal translation"
+     ],
+     "dropped": [
+      {
+       "value": "zero-shot generalization",
+       "reason": "Describes a capability rather than a concrete application or domain. (cached)"
+      }
+     ]
+    }
+   },
+   "SimVLMhuge": {
+    "application": {
+     "candidates": [
+      "Image captioning",
+      "visual question answering",
+      "visual entailment",
+      "image translation",
+      "zero-shot/few-shot transfer"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual question answering",
+      "visual entailment",
+      "image translation"
+     ],
+     "dropped": [
+      {
+       "value": "zero-shot/few-shot transfer",
+       "reason": "Describes a training/evaluation paradigm rather than a concrete application. (cached)"
+      }
+     ]
+    }
+   },
+   "SimVLM huge": {
+    "application": {
+     "candidates": [
+      "Zero-shot cross-modality transfer",
+      "open-ended VQA",
+      "image-text matching",
+      "image captioning"
+     ],
+     "accepted": [
+      "open-ended VQA",
+      "image-text matching",
+      "image captioning"
+     ],
+     "dropped": [
+      {
+       "value": "Zero-shot cross-modality transfer",
+       "reason": "Describes a capability/paradigm rather than a concrete application. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 90,
+   "dropped": 8,
+   "llm_calls": 1,
+   "values_sent_to_llm": 5
+  }
+ },
+ "contributions": [
+  {
+   "label": "SimVLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "SimVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "SimVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-08-24",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "PrefixLM formulation: treats image features as a prefix sequence and applies autoregressive factorization only on the remaining text tokens, enabling bidirectional context for the prefix while performing text generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single-pass pretraining with a single language modeling loss instead of multi-stage auxiliary objectives",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Convolutional visual encoder (first three blocks of ResNet) for contextualized patch extraction",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "2D relative attention for image patches",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Elimination of modality type embeddings.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Prefix Language Modeling (PrefixLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Large-scale weakly aligned image-text pairs (Jia et al., 2021)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Discriminative and generative vision-language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Sub-word tokens (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 0,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 TPUv3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "800GB of web-crawled documents (C4), 1.8B noisy image-text pairs (ALIGN)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA v2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoCo",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoCo captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "2D relative attention for image patches",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining with PrefixLM objective -> Fine-tuning on downstream VL benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Encoder-decoder with shared parameters across visual and textual inputs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CoAtNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: +3.74% vqa-score",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: +1.17% accuracy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: +1.37% accuracy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Image captioning: +10.1% average CIDEr score",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 77.87",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 78.14",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 81.72",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoCoCaption: 81.77",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 84.20",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k: 39.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 79.32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 79.56",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 84.13",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoCoCaption: 84.84",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 85.68",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k: 40.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA >80%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE dev/test: 71.35/71.02",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k dev/test: 15.0/24.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA dev: 75.3 (discriminative) / 71.3 (generative)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet linear eval: 80.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE dev/test: 72.85/72.44",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k dev/test: 17.7/30.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA dev: 76.7 (discriminative) / 72.5 (generative)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet linear eval: 82.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "SimVLM Huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "SimVLM Huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "SimVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-08-24",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "PrefixLM formulation: treats image features as a prefix sequence and applies autoregressive factorization only on the remaining text tokens, enabling bidirectional context for the prefix while performing text generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single-pass pretraining with a single language modeling loss instead of multi-stage auxiliary objectives",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Convolutional visual encoder (first three blocks of ResNet) for contextualized patch extraction",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "2D relative attention for image patches",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Elimination of modality type embeddings.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "PrefixLM (autoregressive language modeling conditioned on image prefix)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ALIGN (image-text pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Colossal Clean Crawled Corpus (C4)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Sub-word tokens (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 TPUv3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual Language Model Pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoCo captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "2D relative attention for image patches",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Single-pass PrefixLM pretraining -> supervised fine-tuning on downstream benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 80.03",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 80.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 84.53",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoCoCaption: 85.15",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 86.21",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k: 40.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "SimVLMhuge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "SimVLMhuge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "SimVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-08-24",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Generative pretraining with weak supervision: uses a noisy image captioning objective on real-world web corpus instead of complex masked language modeling or reinforcement learning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Achieves state-of-the-art results with a simple pretraining-finetuning paradigm.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Generative image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ALIGN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 TPUv3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual Language Model Pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoCo captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining on ALIGN and C4 -> Finetuning on six vision-language benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA >80%",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "SimVLM huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "SimVLM huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "SimVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-08-24",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Weakly supervised pretraining on web-scale image-text pairs with noisy labels",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a simple encoder-decoder architecture with a prefix language modeling loss to generate free-form answers for open-ended VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables zero-shot cross-modality transfer by fine-tuning on text-only NLI/translation data and evaluating on joint vision-language tasks, outperforming fully supervised baselines without requiring paired image-text training data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text matching, prefix language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Web-scale image-text pairs (e.g., LAION, Conceptual Captions)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual Language Model Pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE dev/test: 73.56/73.08",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30k dev/test: 18.2/32.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA dev: 77.2 (discriminative) / 73.0 (generative)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet linear eval: 83.6",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467662",
+  "contribution_ids": [
+   "R467663",
+   "R467691",
+   "R467720",
+   "R1921328",
+   "R1921339",
+   "R1921345",
+   "R1921350"
+  ],
+  "new_contribution_ids": [
+   "R1921328",
+   "R1921339",
+   "R1921345",
+   "R1921350"
+  ],
+  "comparison_updated": null
+ }
+}

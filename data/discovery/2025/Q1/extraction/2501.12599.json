@@ -1,0 +1,667 @@
+{
+ "arxiv_id": "2501.12599",
+ "status": "completed",
+ "timestamp": "2026-08-29T17:26:35.449958",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2501.12599",
+  "title": "Kimi k1.5: Scaling Reinforcement Learning with LLMs",
+  "authors": [
+   " Kimi Team",
+   "Angang Du",
+   "Bofei Gao",
+   "Bowei Xing",
+   "Changjiu Jiang",
+   "Cheng Chen",
+   "Cheng Li",
+   "Chenjun Xiao",
+   "Chenzhuang Du",
+   "Chonghua Liao",
+   "Chuning Tang",
+   "Congcong Wang",
+   "Dehao Zhang",
+   "Enming Yuan",
+   "Enzhe Lu",
+   "Fengxiang Tang",
+   "Flood Sung",
+   "Guangda Wei",
+   "Guokun Lai",
+   "Haiqing Guo",
+   "Han Zhu",
+   "Hao Ding",
+   "Hao Hu",
+   "Hao Yang",
+   "Hao Zhang",
+   "Haotian Yao",
+   "Haotian Zhao",
+   "Haoyu Lu",
+   "Haoze Li",
+   "Haozhen Yu",
+   "Hongcheng Gao",
+   "Huabin Zheng",
+   "Huan Yuan",
+   "Jia Chen",
+   "Jianhang Guo",
+   "Jianlin Su",
+   "Jianzhou Wang",
+   "Jie Zhao",
+   "Jin Zhang",
+   "Jingyuan Liu",
+   "Junjie Yan",
+   "Junyan Wu",
+   "Lidong Shi",
+   "Ling Ye",
+   "Longhui Yu",
+   "Mengnan Dong",
+   "Neo Zhang",
+   "Ningchen Ma",
+   "Qiwei Pan",
+   "Qucheng Gong",
+   "Shaowei Liu",
+   "Shengling Ma",
+   "Shupeng Wei",
+   "Sihan Cao",
+   "Siying Huang",
+   "Tao Jiang",
+   "Weihao Gao",
+   "Weimin Xiong",
+   "Weiran He",
+   "Weixiao Huang",
+   "Weixin Xu",
+   "Wenhao Wu",
+   "Wenyang He",
+   "Xianghui Wei",
+   "Xianqing Jia",
+   "Xingzhe Wu",
+   "Xinran Xu",
+   "Xinxing Zu",
+   "Xinyu Zhou",
+   "Xuehai Pan",
+   "Y. Charles",
+   "Yang Li",
+   "Yangyang Hu",
+   "Yangyang Liu",
+   "Yanru Chen",
+   "Yejie Wang",
+   "Yibo Liu",
+   "Yidao Qin",
+   "Yifeng Liu",
+   "Ying Yang",
+   "Yiping Bao",
+   "Yulun Du",
+   "Yuxin Wu",
+   "Yuzhi Wang",
+   "Zaida Zhou",
+   "Zhaoji Wang",
+   "Zhaowei Li",
+   "Zhen Zhu",
+   "Zheng Zhang",
+   "Zhexu Wang",
+   "Zhilin Yang",
+   "Zhiqi Huang",
+   "Zihao Huang",
+   "Ziyao Xu",
+   "Zonghan Yang",
+   "Zongyu Lin"
+  ],
+  "abstract": "Language model pretraining with next token prediction has proved effective for scaling compute but is limited to the amount of available training data. Scaling reinforcement learning (RL) unlocks a new axis for the continued improvement of artificial intelligence, with the promise that large language models (LLMs) can scale their training data by learning to explore with rewards. However, prior published work has not produced competitive results. In light of this, we report on the training practice of Kimi k1.5, our latest multi-modal LLM trained with RL, including its RL training techniques, multi-modal data recipes, and infrastructure optimization. Long context scaling and improved policy optimization methods are key ingredients of our approach, which establishes a simplistic, effective RL framework without relying on more complex techniques such as Monte Carlo tree search, value functions, and process reward models. Notably, our system achieves state-of-the-art reasoning performance across multiple benchmarks and modalities -- e.g., 77.5 on AIME, 96.2 on MATH 500, 94-th percentile on Codeforces, 74.9 on MathVista -- matching OpenAI's o1. Moreover, we present effective long2short methods that use long-CoT techniques to improve short-CoT models, yielding state-of-the-art short-CoT reasoning results -- e.g., 60.8 on AIME, 94.6 on MATH500, 47.3 on LiveCodeBench -- outperforming existing short-CoT models such as GPT-4o and Claude Sonnet 3.5 by a large margin (up to +550%).",
+  "published": "2025-01-22T02:48:14+00:00",
+  "updated": "2025-06-03T02:14:54+00:00",
+  "doi": null,
+  "primary_category": "cs.AI",
+  "categories": [
+   "cs.AI",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2501.12599v4",
+  "entry_id": "http://arxiv.org/abs/2501.12599v4",
+  "pdf_path": "data/papers/2501.12599.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 88419,
+ "word_count": 5230,
+ "models_extracted": 1,
+ "extraction_data": [
+  {
+   "model_name": "Kimi k 1.5",
+   "model_family": "Kimi",
+   "date_created": "2025-01-22",
+   "organization": "Moonshot Ai",
+   "innovation": "Scaling RL context window to 128k using partial rollouts; variant of online mirror descent for policy optimization; long2short method using length penalty and model merging; simplistic RL framework without MCTS, value functions, or process reward models.",
+   "pretraining_corpus": "Diverse, high-quality multimodal corpus covering English, Chinese, Code, Mathematics Reasoning, and Knowledge; includes Captioning, Image-text Interleaving, OCR, Knowledge, and QA datasets",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Math, coding, vision, general reasoning, long-context reasoning",
+   "license": "closed source",
+   "research_problem": "Scaling reinforcement learning with LLMs to unlock a new axis for continued improvement beyond static datasets.",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next token prediction",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised fine-tuning (SFT), long-CoT SFT",
+   "finetuning_data": "High-quality long-CoT warmup dataset (text and image inputs); RL prompt set spanning STEM, coding, general reasoning, text-only and image-text QA",
+   "optimizer": "Online mirror descent variant",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Partial rollouts establish a fixed output token budget, capping rollout trajectory length; unfinished segments are saved to a replay buffer and continued in the next iteration, eliminating repeated rollouts and reducing computational overhead.",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Kimi k1.5: Scaling Reinforcement Learning with LLMs",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "128k",
+   "context_extension_method": "RoPE frequency scaling to 1,000,000",
+   "training_pipeline": "Pretraining -> vanilla SFT -> long-CoT SFT -> RL",
+   "reasoning_mode": "Long-CoT and short-CoT",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Automated test case generation for coding using CYaRon library and base Kimi K1.5",
+   "rl_algorithm": "Online mirror descent",
+   "reward_mechanism": "Verifiable ground truth answers; critic model provides feedback to evaluate progress and identify errors; pass rate used as proxy for prompt difficulty",
+   "tool_calling_format": null,
+   "training_environment_scale": "Kubernetes-based code sandbox supporting multi-stage assessments and consistent evaluation across programming languages",
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Interleaved image-text sequences",
+   "vision_encoder": "Visual tower trained in isolation",
+   "base_model": "Kimi K1.5 base model",
+   "optimizer_innovation": null,
+   "benchmark_result": "AIME 2024: 77.5; MATH 500: 96.2; Codeforces: 94th percentile; LiveCodeBench v5: 47.3; MathVista: 74.9; MMMU: 62.5; MMLU: 87.4; IF-Eval: 87.2; CLUEWSC: 76; C-Eval: 76.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "Large-scale RL training system with Trainer Workers, Rollout Workers, Master node, Replay Buffer, and Reward Models"
+  }
+ ],
+ "models_after_selection": 1,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Kimi k 1.5": {
+   "application": [
+    "Math",
+    "coding",
+    "general reasoning",
+    "long-context reasoning"
+   ],
+   "base_model": [
+    "Kimi K1.5 base model"
+   ],
+   "context_extension_method": [
+    "RoPE frequency scaling to 1,000,000"
+   ],
+   "finetuning_data": [
+    "High-quality long-CoT warmup dataset (text and image inputs)",
+    "RL prompt set spanning STEM"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)",
+    "long-CoT SFT"
+   ],
+   "fusion_architecture": [],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "Kimi"
+   ],
+   "model_name": [
+    "Kimi k 1.5"
+   ],
+   "optimizer": [
+    "Online mirror descent variant"
+   ],
+   "organization": [
+    "Moonshot Ai"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Next token prediction"
+   ],
+   "reasoning_mode": [
+    "Long-CoT and short-CoT"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Verifiable ground truth answers"
+   ],
+   "rl_algorithm": [
+    "Online mirror descent"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "Automated test case generation for coding using CYaRon library and base Kimi K1.5"
+   ],
+   "vision_encoder": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Kimi k 1.5": {
+    "application": {
+     "candidates": [
+      "Math",
+      "coding",
+      "vision",
+      "general reasoning",
+      "long-context reasoning"
+     ],
+     "accepted": [
+      "Math",
+      "coding",
+      "general reasoning",
+      "long-context reasoning"
+     ],
+     "dropped": [
+      {
+       "value": "vision",
+       "reason": "Refers to a modality/capability rather than a concrete task or domain of application."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "High-quality long-CoT warmup dataset (text and image inputs)",
+      "RL prompt set spanning STEM",
+      "coding",
+      "general reasoning",
+      "text-only and image-text QA"
+     ],
+     "accepted": [
+      "High-quality long-CoT warmup dataset (text and image inputs)",
+      "RL prompt set spanning STEM"
+     ],
+     "dropped": [
+      {
+       "value": "coding",
+       "reason": "Refers to a domain/task rather than a specific dataset or collection of fine-tuning data."
+      },
+      {
+       "value": "general reasoning",
+       "reason": "Refers to a capability/domain rather than a specific dataset."
+      },
+      {
+       "value": "text-only and image-text QA",
+       "reason": "Describes a data format or task type rather than a specific dataset."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Interleaved image-text sequences"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Interleaved image-text sequences",
+       "reason": "Describes a data format or training sequence structure rather than an architectural fusion method."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Diverse, high-quality multimodal corpus covering English, Chinese, Code, Mathematics Reasoning, and Knowledge",
+      "includes Captioning, Image-text Interleaving, OCR, Knowledge, and QA datasets"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Diverse, high-quality multimodal corpus covering English, Chinese, Code, Mathematics Reasoning, and Knowledge",
+       "reason": "Asserts breadth and describes composition without naming an identifiable corpus or dataset."
+      },
+      {
+       "value": "includes Captioning, Image-text Interleaving, OCR, Knowledge, and QA datasets",
+       "reason": "Sentence fragment listing dataset types rather than naming a specific corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling reinforcement learning with LLMs to unlock a new axis for continued improvement beyond static datasets."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling reinforcement learning with LLMs to unlock a new axis for continued improvement beyond static datasets.",
+       "reason": "Long descriptive sentence stating a goal or solution rather than a short noun phrase naming a research problem."
+      }
+     ]
+    },
+    "reward_mechanism": {
+     "candidates": [
+      "Verifiable ground truth answers",
+      "critic model provides feedback to evaluate progress and identify errors",
+      "pass rate used as proxy for prompt difficulty"
+     ],
+     "accepted": [
+      "Verifiable ground truth answers"
+     ],
+     "dropped": [
+      {
+       "value": "critic model provides feedback to evaluate progress and identify errors",
+       "reason": "Describes a process or component rather than naming a specific reward mechanism."
+      },
+      {
+       "value": "pass rate used as proxy for prompt difficulty",
+       "reason": "Describes a metric usage rather than a specific reward mechanism."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Visual tower trained in isolation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Visual tower trained in isolation",
+       "reason": "Describes a training setup or state rather than naming the specific vision encoder component."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 23,
+   "dropped": 11,
+   "llm_calls": 1,
+   "values_sent_to_llm": 25
+  }
+ },
+ "contributions": [
+  {
+   "label": "Kimi k 1.5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Kimi k 1.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Kimi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-01-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Moonshot Ai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling RL context window to 128k using partial rollouts",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Variant of online mirror descent for policy optimization",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Long2short method using length penalty and model merging",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Simplistic RL framework without MCTS, value functions, or process reward models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Long-CoT SFT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Online mirror descent variant",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Math",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "General reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long-context reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "High-quality long-CoT warmup dataset (text and image inputs)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RL prompt set spanning STEM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128k",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "RoPE frequency scaling to 1,000,000",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining -> vanilla SFT -> long-CoT SFT -> RL",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Long-CoT and short-CoT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Automated test case generation for coding using CYaRon library and base Kimi K1.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Online mirror descent",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Verifiable ground truth answers",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "Kubernetes-based code sandbox supporting multi-stage assessments and consistent evaluation across programming languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Kimi K1.5 base model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AIME 2024: 77.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH 500: 96.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Codeforces: 94th percentile",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveCodeBench v5: 47.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 74.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 87.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IF-Eval: 87.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC: 76",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Large-scale RL training system with Trainer Workers, Rollout Workers, Master node, Replay Buffer, and Reward Models",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1374953",
+  "contribution_ids": [
+   "R1374955",
+   "R1374956",
+   "R1924861"
+  ],
+  "new_contribution_ids": [
+   "R1924861"
+  ],
+  "comparison_updated": null
+ }
+}

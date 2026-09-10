@@ -1,0 +1,1063 @@
+{
+  "arxiv_id": "2009.09223",
+  "status": "completed",
+  "timestamp": "2026-08-24T21:28:38.458080",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2009.09223",
+    "title": "BioALBERT: A Simple and Effective Pre-trained Language Model for Biomedical Named Entity Recognition",
+    "authors": [
+      "Naseem, Usman",
+      "Khushi, Matloob",
+      "Reddy, Vinay",
+      "Rajendran, Sakthivel",
+      "Razzak, Imran",
+      "Kim, Jinman"
+    ],
+    "abstract": "",
+    "published": "2020-09-19T00:00:00+00:00",
+    "updated": "2020-09-19T00:00:00+00:00",
+    "doi": null,
+    "primary_category": null,
+    "categories": [],
+    "pdf_url": "https://arxiv.org/pdf/2009.09223",
+    "entry_id": "https://arxiv.org/abs/2009.09223",
+    "source": "arxiv-html-fallback",
+    "pdf_path": "data/papers/2009.09223.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: domain-specific LLM)"
+  },
+  "text_length": 40076,
+  "word_count": 5426,
+  "models_extracted": 7,
+  "extraction_data": [
+    {
+      "model_name": "BioALBERT 1.0",
+      "parameters": "BASE, 12M, 16M",
+      "parameters_millions": 16,
+      "model_family": "ALBERT",
+      "date_created": "2020-09-19",
+      "organization": "University Of Sydney, Deakin University",
+      "innovation": "Domain-specific pre-training on large-scale biomedical corpora: trains the model on clinical reports and health literacy documents to capture domain-specific context, improving upon general corpora which yield unsatisfactory results; Cross-layer parameter sharing: learns parameters for the first transformer block and reuses them in remaining layers, reducing memory consumption and increasing training speed compared to learning unique parameters per layer; Sentence Order Prediction (SOP): creates random pairs from different sentences to model inter-sentence coherence, providing a better measure of coherence loss than prior methods; Factorized embedding parameterization: decomposes the embedding matrix into two small matrices to separate hidden layer size from vocabulary embedding size, allowing larger hidden sizes without significantly increasing parameter count.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked LM, Sentence Order Prediction (SOP)",
+      "pretraining_corpus": "Large-scale biomedical corpora (clinical reports, health literacy documents)",
+      "finetuning_task": "Supervised fine-tuning for NER, Supervised fine-tuning for Named Entity Recognition",
+      "optimizer": "LAMB",
+      "hardware_used": "GCP TPUv3-8",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Biomedical Named Entity Recognition (BioNER)",
+      "application": "Biomedical Named Entity Recognition (BioNER), drug-to-drug interaction extraction, disease-treatment relationship extraction",
+      "paper_title": "BioALBERT: A Simple and Effective Pre-trained Language Model for Biomedical Named Entity Recognition",
+      "training_corpus_size": "4.3B words (PubMed), 18.8B words (PubMed+PMC)",
+      "finetuning_data": "NCBI Disease, BC5CDR, BC4CHEMD, BC2GN, JNLPBA, LINNAEUS, Species-800, BC2GM",
+      "tokenizer": "Sentencepiece",
+      "supported_language": "English",
+      "hardware_description": "TPUv3-8",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on default ALBERT setup followed by supervised fine-tuning on biomedical NER datasets",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "ALBERT",
+      "optimizer_innovation": null,
+      "benchmark_result": "NCBI Disease F1: 96.84; BC5CDR Disease F1: 97.62; BC5CDR Drug/Chem F1: 98.08; NCBIDisease: 97.18; BC5CDR Disease: 97.61; BC5CDR Chemical: 97.78; BC4CHEMD: 96.25; BC2GM: 96.33; JNLPBA: 84.01; LINNAEUS: 99.73; Species-800: 99.02",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "12",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "BioALBERT 1.1",
+      "parameters": "LARGE, 60M",
+      "parameters_millions": 60,
+      "model_family": "ALBERT",
+      "date_created": "2020-09-19",
+      "organization": null,
+      "innovation": "Adapts ALBERT's parameter-efficient techniques (factorized embedding parameterization, Sentence Order Prediction (SOP) loss replacing Next Sentence Prediction, and cross-layer parameter sharing) to biomedical corpora to reduce parameters and improve training efficiency for BioNER.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked LM, Sentence Order Prediction (SOP)",
+      "pretraining_corpus": "PubMed, PMC",
+      "finetuning_task": null,
+      "optimizer": "LAMB",
+      "hardware_used": "GCP TPUv3-8",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Biomedical Named Entity Recognition (BioNER)",
+      "application": "Biomedical Named Entity Recognition (BioNER)",
+      "paper_title": "BioALBERT: A Simple and Effective Pre-trained Language Model for Biomedical Named Entity Recognition",
+      "training_corpus_size": "4.3B words (PubMed), 18.8B words (PubMed+PMC)",
+      "finetuning_data": "NCBI Disease, BC5CDR, BC4CHEMD, BC2GN, JNLPBA, LINNAEUS, Species-800",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "NCBI Disease F1: 97.38; BC5CDR Disease F1: 97.61; BC5CDR Drug/Chem F1: 95.68",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "16",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "BioALBERT 1.0-base, BioALBERT 1.1",
+      "model_family": "ALBERT",
+      "date_created": "2020-09-19",
+      "organization": null,
+      "innovation": "Cross-layer parameter sharing: reduces parameters from 110M to 31M by learning parameters for the first block and reusing the block in the remaining 11 layers, differing from standard BERT by sharing weights across layers to drastically cut parameter count; Segment Order Prediction (SOP): takes two segments from consecutively appearing training corpus and constructs a random pair of segments from different documents to learn inter-sentence relationships, differing from Next Sentence Prediction by using document-level segment pairs to better capture long-range dependencies.",
+      "pretraining_corpus": "PubMed, PMC",
+      "parameters": "31M",
+      "parameters_millions": 31,
+      "application": "Biomedical named entity recognition, text mining",
+      "license": null,
+      "research_problem": "Biomedical Named Entity Recognition (BioNER)",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling, Segment Order Prediction (SOP)",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning for Named Entity Recognition",
+      "finetuning_data": "NCBIDisease, BC2GM, BC5CDR-disease, BC4CHEMD, BC5CDR-chemical, JNLPBA, LINNAEUS, Species-800",
+      "optimizer": null,
+      "tokenizer": "WordPiece",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BioALBERT: A Simple and Effective Pre-trained Language Model for Biomedical Named Entity Recognition",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 3,
+  "validated_rows": {
+    "BioALBERT 1.0": {
+      "application": [
+        "Biomedical Named Entity Recognition (BioNER)",
+        "drug-to-drug interaction extraction",
+        "disease-treatment relationship extraction"
+      ],
+      "base_model": [
+        "ALBERT"
+      ],
+      "finetuning_data": [
+        "NCBI Disease",
+        "BC5CDR",
+        "BC4CHEMD",
+        "BC2GN",
+        "JNLPBA",
+        "LINNAEUS",
+        "Species-800",
+        "BC2GM"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning for NER",
+        "Supervised fine-tuning for Named Entity Recognition"
+      ],
+      "hardware_used": [
+        "GCP TPUv3-8"
+      ],
+      "model_family": [
+        "ALBERT"
+      ],
+      "model_name": [
+        "BioALBERT 1.0"
+      ],
+      "optimizer": [
+        "LAMB"
+      ],
+      "organization": [
+        "University Of Sydney, Deakin University"
+      ],
+      "parameters": [
+        "12M",
+        "16M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Large-scale biomedical corpora (clinical reports, health literacy documents)"
+      ],
+      "pretraining_task": [
+        "Masked LM, Sentence Order Prediction (SOP)"
+      ],
+      "research_problem": [
+        "Biomedical Named Entity Recognition (BioNER)"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "BioALBERT 1.1": {
+      "application": [
+        "Biomedical Named Entity Recognition (BioNER)"
+      ],
+      "finetuning_data": [
+        "NCBI Disease",
+        "BC5CDR",
+        "BC4CHEMD",
+        "BC2GN",
+        "JNLPBA",
+        "LINNAEUS",
+        "Species-800"
+      ],
+      "hardware_used": [
+        "GCP TPUv3-8"
+      ],
+      "model_family": [
+        "ALBERT"
+      ],
+      "model_name": [
+        "BioALBERT 1.1"
+      ],
+      "optimizer": [
+        "LAMB"
+      ],
+      "parameters": [
+        "60M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "PubMed",
+        "PMC"
+      ],
+      "pretraining_task": [
+        "Masked LM, Sentence Order Prediction (SOP)"
+      ],
+      "research_problem": [
+        "Biomedical Named Entity Recognition (BioNER)"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "BioALBERT 1.0-base, BioALBERT 1.1": {
+      "application": [
+        "Biomedical named entity recognition",
+        "text mining"
+      ],
+      "finetuning_data": [
+        "NCBIDisease",
+        "BC2GM",
+        "BC5CDR-disease",
+        "BC4CHEMD",
+        "BC5CDR-chemical",
+        "JNLPBA",
+        "LINNAEUS",
+        "Species-800"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning for Named Entity Recognition"
+      ],
+      "model_family": [
+        "ALBERT"
+      ],
+      "model_name": [
+        "BioALBERT 1.0-base, BioALBERT 1.1"
+      ],
+      "parameters": [
+        "31M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "PubMed",
+        "PMC"
+      ],
+      "pretraining_task": [
+        "Masked language modeling, Segment Order Prediction (SOP)"
+      ],
+      "research_problem": [
+        "Biomedical Named Entity Recognition (BioNER)"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "BioALBERT 1.0": {
+        "parameters": {
+          "candidates": [
+            "BASE",
+            "12M",
+            "16M"
+          ],
+          "accepted": [
+            "12M",
+            "16M"
+          ],
+          "dropped": [
+            {
+              "value": "BASE",
+              "reason": "Not a numerical value representing parameter count (cached)"
+            }
+          ]
+        }
+      },
+      "BioALBERT 1.1": {
+        "parameters": {
+          "candidates": [
+            "LARGE",
+            "60M"
+          ],
+          "accepted": [
+            "60M"
+          ],
+          "dropped": [
+            {
+              "value": "LARGE",
+              "reason": "Not a numerical value representing parameter count (cached)"
+            }
+          ]
+        }
+      },
+      "BioALBERT 1.0-base, BioALBERT 1.1": {}
+    },
+    "counts": {
+      "kept": 65,
+      "dropped": 2,
+      "llm_calls": 1,
+      "values_sent_to_llm": 33
+    }
+  },
+  "contributions": [
+    {
+      "label": "BioALBERT 1.0",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BioALBERT 1.0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-09-19",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "University Of Sydney, Deakin University",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Domain-specific pre-training on large-scale biomedical corpora: trains the model on clinical reports and health literacy documents to capture domain-specific context, improving upon general corpora which yield unsatisfactory results",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cross-layer parameter sharing: learns parameters for the first transformer block and reuses them in remaining layers, reducing memory consumption and increasing training speed compared to learning unique parameters per layer",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Sentence Order Prediction (SOP): creates random pairs from different sentences to model inter-sentence coherence, providing a better measure of coherence loss than prior methods",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Factorized embedding parameterization: decomposes the embedding matrix into two small matrices to separate hidden layer size from vocabulary embedding size, allowing larger hidden sizes without significantly increasing parameter count.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked LM, Sentence Order Prediction (SOP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Large-scale biomedical corpora (clinical reports, health literacy documents)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for NER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for Named Entity Recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "LAMB",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Sentencepiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "12M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "16M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 16,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GCP TPUv3-8",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "TPUv3-8",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Biomedical Named Entity Recognition (BioNER)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Drug-to-drug interaction extraction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Disease-treatment relationship extraction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Biomedical Named Entity Recognition (BioNER)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4.3B words (PubMed), 18.8B words (PubMed+PMC)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NCBI Disease",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC5CDR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC4CHEMD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC2GN",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "JNLPBA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LINNAEUS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Species-800",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC2GM",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on default ALBERT setup followed by supervised fine-tuning on biomedical NER datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "ALBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NCBI Disease F1: 96.84",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Disease F1: 97.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Drug/Chem F1: 98.08",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NCBIDisease: 97.18",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Disease: 97.61",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Chemical: 97.78",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC4CHEMD: 96.25",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC2GM: 96.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JNLPBA: 84.01",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LINNAEUS: 99.73",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Species-800: 99.02",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "12",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BioALBERT 1.1",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BioALBERT 1.1",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-09-19",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Adapts ALBERT's parameter-efficient techniques (factorized embedding parameterization, Sentence Order Prediction (SOP) loss replacing Next Sentence Prediction, and cross-layer parameter sharing) to biomedical corpora to reduce parameters and improve training efficiency for BioNER.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked LM, Sentence Order Prediction (SOP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PubMed",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PMC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "LAMB",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "60M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 60,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GCP TPUv3-8",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Biomedical Named Entity Recognition (BioNER)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Biomedical Named Entity Recognition (BioNER)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4.3B words (PubMed), 18.8B words (PubMed+PMC)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NCBI Disease",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC5CDR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC4CHEMD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC2GN",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "JNLPBA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LINNAEUS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Species-800",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NCBI Disease F1: 97.38",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Disease F1: 97.61",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BC5CDR Drug/Chem F1: 95.68",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "16",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BioALBERT 1.0-base, BioALBERT 1.1",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BioALBERT 1.0-base, BioALBERT 1.1",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-09-19",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cross-layer parameter sharing: reduces parameters from 110M to 31M by learning parameters for the first block and reusing the block in the remaining 11 layers, differing from standard BERT by sharing weights across layers to drastically cut parameter count",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Segment Order Prediction (SOP): takes two segments from consecutively appearing training corpus and constructs a random pair of segments from different documents to learn inter-sentence relationships, differing from Next Sentence Prediction by using document-level segment pairs to better capture long-range dependencies.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling, Segment Order Prediction (SOP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PubMed",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PMC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for Named Entity Recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "WordPiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "31M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 31,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Biomedical named entity recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text mining",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Biomedical Named Entity Recognition (BioNER)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NCBIDisease",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC2GM",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC5CDR-disease",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC4CHEMD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BC5CDR-chemical",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "JNLPBA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LINNAEUS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Species-800",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925371",
+    "contribution_ids": [
+      "R1925373",
+      "R1925374",
+      "R1925375"
+    ],
+    "new_contribution_ids": [
+      "R1925373",
+      "R1925374",
+      "R1925375"
+    ],
+    "comparison_updated": null
+  }
+}

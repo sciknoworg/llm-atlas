@@ -1,0 +1,2177 @@
+{
+ "arxiv_id": "2004.06165",
+ "status": "completed",
+ "timestamp": "2026-08-24T19:45:09.127963",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2004.06165",
+  "title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+  "authors": [
+   "Xiujun Li",
+   "Xi Yin",
+   "Chunyuan Li",
+   "Pengchuan Zhang",
+   "Xiaowei Hu",
+   "Lei Zhang",
+   "Lijuan Wang",
+   "Houdong Hu",
+   "Li Dong",
+   "Furu Wei",
+   "Yejin Choi",
+   "Jianfeng Gao"
+  ],
+  "abstract": "Large-scale pre-training methods of learning cross-modal representations on image-text pairs are becoming popular for vision-language tasks. While existing methods simply concatenate image region features and text features as input to the model to be pre-trained and use self-attention to learn image-text semantic alignments in a brute force manner, in this paper, we propose a new learning method Oscar (Object-Semantics Aligned Pre-training), which uses object tags detected in images as anchor points to significantly ease the learning of alignments. Our method is motivated by the observation that the salient objects in an image can be accurately detected, and are often mentioned in the paired text. We pre-train an Oscar model on the public corpus of 6.5 million text-image pairs, and fine-tune it on downstream tasks, creating new state-of-the-arts on six well-established vision-language understanding and generation tasks.",
+  "published": "2020-04-13T19:18:10+00:00",
+  "updated": "2020-07-26T00:46:46+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.IR",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2004.06165v5",
+  "entry_id": "http://arxiv.org/abs/2004.06165v5",
+  "pdf_path": "data/papers/2004.06165.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 80769,
+ "word_count": 14701,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "Oscar",
+   "parameters": "110M, 340M",
+   "parameters_millions": 340,
+   "model_family": "Oscar",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object tags as anchor points: uses object tags detected in images to align image regions with word embeddings, defining training samples as triples (word sequence, object tags, image region features) to ease cross-modal alignment learning compared to brute-force self-attention on concatenated region and text features.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked token loss over words & tags, contrastive loss between tags and others",
+   "pretraining_corpus": "COCO, Conceptual Captions, SBU captions, flicker30k, GQA",
+   "finetuning_task": "Visual question answering, NLVR2, image-text retrieval, text-image retrieval, image captioning, novel object captioning",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Vision-Language Pre-training (VLP) / Cross-modal representation learning",
+   "application": "Image-Text Retrieval, Image Captioning, Visual Question Answering, Visual Relationship Detection, Visual Entailment, Visual Commonsense Reasoning, Visual Dialog",
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "training_corpus_size": "6.5 million pairs",
+   "finetuning_data": "COCO, Open Images, Visual Genome, VQA v2.0, GQA, NLVR2, VQA, Visual7W, SNLI-VE, VCR, VisDial",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/microsoft/Oscar",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "85",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 6.5M pairs with masked token and contrastive losses, followed by fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-modal self-attention Transformers",
+   "vision_encoder": "Faster R-CNN object detector, Image region features (linear projection)",
+   "base_model": "BERT, ResNet-50",
+   "optimizer_innovation": null,
+   "benchmark_result": "GQA +0.6% accuracy",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OscarB",
+   "model_family": "Oscar",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object-Semantics Aligned Pre-training: introduces object tags to align image regions and text tokens during pre-training, improving cross-modal semantic alignment compared to standard VLP methods.",
+   "pretraining_corpus": "6.5 million image-text pairs",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image retrieval, text retrieval, image captioning, visual question answering, natural language visual reasoning",
+   "license": null,
+   "research_problem": "Vision-Language Tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Object-text alignment, masked language modeling, image-text matching",
+   "training_corpus_size": "6.5 million pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Single-task fine-tuning",
+   "finetuning_data": "COCO, GQA, NLVR2, NoCaps, VQA, Text Retrieval datasets",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "GPU clusters",
+   "hardware_description": "GPU clusters",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 6.5M image-text pairs -> single-task fine-tuning -> optional self-critical sequence training (SCST) for captioning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Object-Text alignment with object tags",
+   "vision_encoder": "Pre-trained object detector",
+   "base_model": "BERT",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageRetrieval: 54.0; TextRetrieval: 80.8; ImageCaptioning: 88.5; NoCaps: 70.0; VQA: 91.1; NLVR2: 95.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OscarL",
+   "model_family": "Oscar",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object-Semantics Aligned Pre-training: introduces object tags to align image regions and text tokens during pre-training, improving cross-modal semantic alignment compared to standard VLP methods.",
+   "pretraining_corpus": "6.5 million image-text pairs",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image retrieval, text retrieval, image captioning, visual question answering, natural language visual reasoning",
+   "license": null,
+   "research_problem": "Vision-Language Tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Object-text alignment, masked language modeling, image-text matching",
+   "training_corpus_size": "6.5 million pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Single-task fine-tuning",
+   "finetuning_data": "COCO, GQA, NLVR2, NoCaps, VQA, Text Retrieval datasets",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "GPU clusters",
+   "hardware_description": "GPU clusters",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 6.5M image-text pairs -> single-task fine-tuning -> optional self-critical sequence training (SCST) for captioning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Object-Text alignment with object tags",
+   "vision_encoder": "Pre-trained object detector",
+   "base_model": "BERT",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageRetrieval: 57.5; TextRetrieval: 82.8; ImageCaptioning: 89.8; NoCaps: 73.5; VQA: 92.2; NLVR2: 96.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OscarVG",
+   "model_family": "Oscar",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object-tag alignment: uses predicted object tags as anchor points to align visual region features with linguistic semantic space, improving cross-modal alignment efficiency compared to learning from scratch.",
+   "pretraining_corpus": "COCO, Visual Genome, Open Images",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Visual question answering, image-text retrieval, image captioning",
+   "license": null,
+   "research_problem": "Vision-Language Pre-training",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Cross-modal alignment, masked language modeling, image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "COCO, Visual Genome, Open Images, VQA datasets",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on object tags -> fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention / shared embedding space",
+   "vision_encoder": "Faster R-CNN region features",
+   "base_model": "BERT-base",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA dev 71.70; TextRetrieval dev 88.4; ImageRetrieval dev 99.1; ImageCaptioning dev 99.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OscarOI",
+   "model_family": "Oscar",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object-tag alignment: uses predicted object tags as anchor points to align visual region features with linguistic semantic space, improving cross-modal alignment efficiency compared to learning from scratch.",
+   "pretraining_corpus": "COCO, Visual Genome, Open Images",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Visual question answering, image-text retrieval, image captioning",
+   "license": null,
+   "research_problem": "Vision-Language Pre-training",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Cross-modal alignment, masked language modeling, image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "COCO, Visual Genome, Open Images, VQA datasets",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on object tags -> fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention / shared embedding space",
+   "vision_encoder": "Faster R-CNN region features",
+   "base_model": "BERT-base",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA dev 71.15; TextRetrieval dev 85.9; ImageRetrieval dev 97.9; ImageCaptioning dev 99.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OSCAR",
+   "model_family": "OSCAR",
+   "date_created": "2020-04-13",
+   "organization": "Microsoft",
+   "innovation": "Object-Semantics Aligned Pre-training: aligns object tags from object detectors with image regions and text tokens during pre-training to improve cross-modal alignment; differs from prior vision-language pre-training by explicitly incorporating object-level semantics to bridge the gap between visual and textual representations.",
+   "pretraining_corpus": "Conceptual Captions 3M (CC3M)",
+   "parameters": "110M, 340M",
+   "parameters_millions": 340,
+   "application": "Visual question answering, image-text retrieval, visual reasoning, visual commonsense reasoning, visual sentiment analysis, visual relationship detection, visual grounding, visual dialogue, visual entailment",
+   "license": "open source",
+   "research_problem": "Vision-Language Tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image-text alignment, masked language modeling, object-tag prediction",
+   "training_corpus_size": "3.3M images",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Pair-biattention finetuning",
+   "finetuning_data": "VQA, Visual Genome, Visual7W, Visual Entailment, Visual Commonsense Reasoning, Visual Sentiment Analysis, Visual Relationship Detection, Visual Grounding, Visual Dialogue, Image-Text Retrieval",
+   "optimizer": "Adam",
+   "tokenizer": "WordPiece",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/microsoft/OSCAR",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Oscar: Object-Semantics Aligned Pre-training for Vision-Language Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 6,
+ "validated_rows": {
+  "Oscar": {
+   "application": [
+    "Image-Text Retrieval",
+    "Image Captioning",
+    "Visual Question Answering",
+    "Visual Relationship Detection",
+    "Visual Entailment",
+    "Visual Commonsense Reasoning",
+    "Visual Dialog"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "BERT, ResNet-50"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "Open Images",
+    "Visual Genome",
+    "VQA v2.0",
+    "GQA",
+    "NLVR2",
+    "VQA",
+    "Visual7W",
+    "SNLI-VE",
+    "VCR",
+    "VisDial"
+   ],
+   "finetuning_task": [
+    "Visual question answering",
+    "NLVR2",
+    "image-text retrieval",
+    "text-image retrieval",
+    "image captioning",
+    "novel object captioning"
+   ],
+   "fusion_architecture": [
+    "Cross-modal self-attention Transformers"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Oscar"
+   ],
+   "model_name": [
+    "Oscar"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Conceptual Captions",
+    "SBU captions",
+    "flicker30k",
+    "GQA"
+   ],
+   "pretraining_task": [
+    "Masked token loss over words & tags, contrastive loss between tags and others"
+   ],
+   "research_problem": [
+    "Vision-Language Pre-training (VLP) / Cross-modal representation learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Faster R-CNN object detector"
+   ]
+  },
+  "OscarB": {
+   "application": [
+    "Image retrieval",
+    "text retrieval",
+    "image captioning",
+    "visual question answering",
+    "natural language visual reasoning"
+   ],
+   "base_model": [
+    "BERT"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "GQA",
+    "NLVR2",
+    "NoCaps",
+    "VQA",
+    "Text Retrieval datasets"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Object-Text alignment with object tags"
+   ],
+   "hardware_used": [
+    "GPU clusters"
+   ],
+   "model_family": [
+    "Oscar"
+   ],
+   "model_name": [
+    "OscarB"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Object-text alignment, masked language modeling, image-text matching"
+   ],
+   "research_problem": [
+    "Vision-Language Tasks"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Pre-trained object detector"
+   ]
+  },
+  "OscarL": {
+   "application": [
+    "Image retrieval",
+    "text retrieval",
+    "image captioning",
+    "visual question answering",
+    "natural language visual reasoning"
+   ],
+   "base_model": [
+    "BERT"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "GQA",
+    "NLVR2",
+    "NoCaps",
+    "VQA",
+    "Text Retrieval datasets"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Object-Text alignment with object tags"
+   ],
+   "hardware_used": [
+    "GPU clusters"
+   ],
+   "model_family": [
+    "Oscar"
+   ],
+   "model_name": [
+    "OscarL"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Object-text alignment, masked language modeling, image-text matching"
+   ],
+   "research_problem": [
+    "Vision-Language Tasks"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Pre-trained object detector"
+   ]
+  },
+  "OscarVG": {
+   "application": [
+    "Visual question answering",
+    "image-text retrieval",
+    "image captioning"
+   ],
+   "base_model": [
+    "BERT-base"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "Visual Genome",
+    "Open Images",
+    "VQA datasets"
+   ],
+   "fusion_architecture": [
+    "Cross-attention / shared embedding space"
+   ],
+   "model_family": [
+    "Oscar"
+   ],
+   "model_name": [
+    "OscarVG"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "Open Images"
+   ],
+   "pretraining_task": [
+    "Cross-modal alignment, masked language modeling, image-text matching"
+   ],
+   "research_problem": [
+    "Vision-Language Pre-training"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": []
+  },
+  "OscarOI": {
+   "application": [
+    "Visual question answering",
+    "image-text retrieval",
+    "image captioning"
+   ],
+   "base_model": [
+    "BERT-base"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "Visual Genome",
+    "Open Images",
+    "VQA datasets"
+   ],
+   "fusion_architecture": [
+    "Cross-attention / shared embedding space"
+   ],
+   "model_family": [
+    "Oscar"
+   ],
+   "model_name": [
+    "OscarOI"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "Open Images"
+   ],
+   "pretraining_task": [
+    "Cross-modal alignment, masked language modeling, image-text matching"
+   ],
+   "research_problem": [
+    "Vision-Language Pre-training"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": []
+  },
+  "OSCAR": {
+   "application": [
+    "Visual question answering",
+    "image-text retrieval",
+    "visual reasoning",
+    "visual commonsense reasoning",
+    "visual sentiment analysis",
+    "visual relationship detection",
+    "visual grounding",
+    "visual dialogue",
+    "visual entailment"
+   ],
+   "finetuning_data": [
+    "VQA",
+    "Visual Genome",
+    "Visual7W",
+    "Visual Entailment",
+    "Visual Commonsense Reasoning",
+    "Visual Sentiment Analysis",
+    "Visual Relationship Detection",
+    "Visual Grounding",
+    "Visual Dialogue",
+    "Image-Text Retrieval"
+   ],
+   "finetuning_task": [],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "OSCAR"
+   ],
+   "model_name": [
+    "OSCAR"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions 3M (CC3M)"
+   ],
+   "pretraining_task": [
+    "Image-text alignment, masked language modeling, object-tag prediction"
+   ],
+   "research_problem": [
+    "Vision-Language Tasks"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Oscar": {
+    "vision_encoder": {
+     "candidates": [
+      "Faster R-CNN object detector",
+      "Image region features (linear projection)"
+     ],
+     "accepted": [
+      "Faster R-CNN object detector"
+     ],
+     "dropped": [
+      {
+       "value": "Image region features (linear projection)",
+       "reason": "Describes feature processing/format rather than naming the vision encoder model."
+      }
+     ]
+    }
+   },
+   "OscarB": {
+    "finetuning_task": {
+     "candidates": [
+      "Single-task fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Single-task fine-tuning",
+       "reason": "Describes a training strategy/paradigm rather than a specific task (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "6.5 million image-text pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "6.5 million image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "OscarL": {
+    "finetuning_task": {
+     "candidates": [
+      "Single-task fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Single-task fine-tuning",
+       "reason": "Describes a training strategy/paradigm rather than a specific task (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "6.5 million image-text pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "6.5 million image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "OscarVG": {
+    "vision_encoder": {
+     "candidates": [
+      "Faster R-CNN region features"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Faster R-CNN region features",
+       "reason": "Describes extracted features rather than naming the vision encoder model."
+      }
+     ]
+    }
+   },
+   "OscarOI": {
+    "vision_encoder": {
+     "candidates": [
+      "Faster R-CNN region features"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Faster R-CNN region features",
+       "reason": "Describes extracted features rather than naming the vision encoder model."
+      }
+     ]
+    }
+   },
+   "OSCAR": {
+    "finetuning_task": {
+     "candidates": [
+      "Pair-biattention finetuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Pair-biattention finetuning",
+       "reason": "Describes a fine-tuning method or architectural technique, not a specific task or objective."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 157,
+   "dropped": 8,
+   "llm_calls": 1,
+   "values_sent_to_llm": 29
+  }
+ },
+ "contributions": [
+  {
+   "label": "Oscar",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object tags as anchor points: uses object tags detected in images to align image regions with word embeddings, defining training samples as triples (word sequence, object tags, image region features) to ease cross-modal alignment learning compared to brute-force self-attention on concatenated region and text features.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked token loss over words & tags, contrastive loss between tags and others",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flicker30k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "NLVR2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-image retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Novel object captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-Text Retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image Captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Question Answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Relationship Detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Commonsense Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/Oscar",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Pre-training (VLP) / Cross-modal representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "6.5 million pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Open Images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual7W",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VisDial",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "85",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 6.5M pairs with masked token and contrastive losses, followed by fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-modal self-attention Transformers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Faster R-CNN object detector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT, ResNet-50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA +0.6% accuracy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OscarB",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OscarB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object-Semantics Aligned Pre-training: introduces object tags to align image regions and text tokens during pre-training, improving cross-modal semantic alignment compared to standard VLP methods.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Object-text alignment, masked language modeling, image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPU clusters",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "GPU clusters",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "6.5 million pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Text Retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 6.5M image-text pairs -> single-task fine-tuning -> optional self-critical sequence training (SCST) for captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Object-Text alignment with object tags",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Pre-trained object detector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageRetrieval: 54.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextRetrieval: 80.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageCaptioning: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 70.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 91.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 95.5",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OscarL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OscarL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object-Semantics Aligned Pre-training: introduces object tags to align image regions and text tokens during pre-training, improving cross-modal semantic alignment compared to standard VLP methods.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Object-text alignment, masked language modeling, image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPU clusters",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "GPU clusters",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "6.5 million pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Text Retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 6.5M image-text pairs -> single-task fine-tuning -> optional self-critical sequence training (SCST) for captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Object-Text alignment with object tags",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Pre-trained object detector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageRetrieval: 57.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextRetrieval: 82.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageCaptioning: 89.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 73.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 92.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 96.0",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OscarVG",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OscarVG",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object-tag alignment: uses predicted object tags as anchor points to align visual region features with linguistic semantic space, improving cross-modal alignment efficiency compared to learning from scratch.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Cross-modal alignment, masked language modeling, image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Open Images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Pre-training",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Open Images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on object tags -> fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention / shared embedding space",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT-base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA dev 71.70",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextRetrieval dev 88.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageRetrieval dev 99.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageCaptioning dev 99.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OscarOI",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OscarOI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Oscar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object-tag alignment: uses predicted object tags as anchor points to align visual region features with linguistic semantic space, improving cross-modal alignment efficiency compared to learning from scratch.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Cross-modal alignment, masked language modeling, image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Open Images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Pre-training",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Open Images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on object tags -> fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention / shared embedding space",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT-base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA dev 71.15",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextRetrieval dev 85.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageRetrieval dev 97.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageCaptioning dev 99.5",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OSCAR",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OSCAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OSCAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Object-Semantics Aligned Pre-training: aligns object tags from object detectors with image regions and text tokens during pre-training to improve cross-modal alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior vision-language pre-training by explicitly incorporating object-level semantics to bridge the gap between visual and textual representations.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text alignment, masked language modeling, object-tag prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions 3M (CC3M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual commonsense reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual sentiment analysis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual relationship detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/OSCAR",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.3M images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual7W",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Entailment",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Commonsense Reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Sentiment Analysis",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Relationship Detection",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Grounding",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Dialogue",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Image-Text Retrieval",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467861",
+  "contribution_ids": [
+   "R467862",
+   "R1920737",
+   "R1920756",
+   "R1920764",
+   "R1920766",
+   "R1920774",
+   "R1920776"
+  ],
+  "new_contribution_ids": [
+   "R1920737",
+   "R1920756",
+   "R1920764",
+   "R1920766",
+   "R1920774",
+   "R1920776"
+  ],
+  "comparison_updated": null
+ }
+}

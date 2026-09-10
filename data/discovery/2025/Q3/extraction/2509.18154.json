@@ -1,0 +1,939 @@
+{
+  "arxiv_id": "2509.18154",
+  "status": "completed",
+  "timestamp": "2026-08-30T04:24:25.023258",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2509.18154",
+    "title": "MiniCPM-V 4.5: Cooking Efficient MLLMs via Architecture, Data, and Training Recipe",
+    "authors": [
+      "Tianyu Yu",
+      "Zefan Wang",
+      "Chongyi Wang",
+      "Fuwei Huang",
+      "Wenshuo Ma",
+      "Zhihui He",
+      "Tianchi Cai",
+      "Weize Chen",
+      "Yuxiang Huang",
+      "Yuanqian Zhao",
+      "Bokai Xu",
+      "Junbo Cui",
+      "Yingjing Xu",
+      "Liqing Ruan",
+      "Luoyuan Zhang",
+      "Hanyu Liu",
+      "Jingkun Tang",
+      "Hongyuan Liu",
+      "Qining Guo",
+      "Wenhao Hu",
+      "Bingxiang He",
+      "Jie Zhou",
+      "Jie Cai",
+      "Ji Qi",
+      "Zonghao Guo",
+      "Chi Chen",
+      "Guoyang Zeng",
+      "Yuxuan Li",
+      "Ganqu Cui",
+      "Ning Ding",
+      "Xu Han",
+      "Yuan Yao",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "Multimodal Large Language Models (MLLMs) are undergoing rapid progress and represent the frontier of AI development. However, their training and inference efficiency have emerged as a core bottleneck in making MLLMs more accessible and scalable. To address the challenges, we present MiniCPM-V 4.5, an 8B parameter model designed for high efficiency and strong performance. We introduce three core improvements in model architecture, data strategy and training method: a unified 3D-Resampler model architecture for highly compact encoding over images and videos, a unified learning paradigm for document knowledge and text recognition without heavy data engineering, and a hybrid reinforcement learning strategy for proficiency in both short and long reasoning modes. Comprehensive experimental results in OpenCompass evaluation show that MiniCPM-V 4.5 surpasses widely used proprietary models such as GPT-4o-latest, and significantly larger open-source models such as Qwen2.5-VL 72B. Notably, the strong performance is achieved with remarkable efficiency. For example, on the widely adopted VideoMME benchmark, MiniCPM-V 4.5 achieves state-of-the-art performance among models under 30B size, using just 46.7\\% GPU memory cost and 8.7\\% inference time of Qwen2.5-VL 7B.",
+    "published": "2025-09-16T19:41:48+00:00",
+    "updated": "2025-09-16T19:41:48+00:00",
+    "doi": null,
+    "primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2509.18154v1",
+    "entry_id": "http://arxiv.org/abs/2509.18154v1",
+    "pdf_path": "data/papers/2509.18154.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+  },
+  "text_length": 69176,
+  "word_count": 5874,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "MiniCPM-V 4.5",
+      "parameters": "8B, 8.7B",
+      "parameters_millions": 8700,
+      "model_family": "MiniCPM",
+      "date_created": "2025-09-16",
+      "organization": "Google",
+      "innovation": "3D-Resampler: jointly compresses video features across spatial and temporal dimensions to reduce compute; Hybrid reasoning reinforcement learning: mixes short and long reasoning samples during training to balance analytical depth and efficiency; Probability-based reward: complements rule-verification rewards for general domain response verification; Unified learning paradigm: jointly optimizes document knowledge and text recognition.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Image captioning, OCR, document understanding, video captioning, next-token prediction",
+      "pretraining_corpus": "LAION-2B, COYO, Common Crawl, OmniCorpus, MINT-1T, WebVid, Vript, OpenVid, curated Chinese image-text pairs, synthesized OCR data, document data",
+      "finetuning_task": "Supervised fine-tuning (SFT) and hybrid Reinforcement Learning (RL) for short and long reasoning modes, Preference learning via DPO, hybrid RL, Multimodal instruction tuning",
+      "optimizer": null,
+      "hardware_used": "NVIDIA A100 GPU",
+      "extension": "Unified 3D-Resampler extends 2D-Resampler to jointly compress spatial-temporal information for videos, achieving 6x temporal compression and up to 96x overall video token compression.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Building efficient Multimodal Large Language Models (MLLMs) capable of high frame rate and long video understanding, controllable hybrid reasoning, robust OCR, and strong document parsing.",
+      "application": "STEM reasoning, document/OCR/chart understanding, hallucination evaluation, multi-image/real-world understanding, video understanding, comprehensive multimodal understanding",
+      "paper_title": "MiniCPM-V 4.5: Cooking Efficient MLLMs via Architecture, Data, and Training Recipe",
+      "training_corpus_size": "1M high-quality samples",
+      "finetuning_data": null,
+      "tokenizer": null,
+      "supported_language": "English, Chinese",
+      "hardware_description": "8 A100 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "8B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": "8192",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> SFT -> RL (hybrid short/long reasoning modes)",
+      "reasoning_mode": "Hybrid: short reasoning mode for efficient usage, long reasoning mode (step-by-step) for complex tasks; controlled via hybrid RL post-training",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Synthesized OCR data (rendering text on natural scenes and HTML sources); Capsfusion-based re-captioning for image captions",
+      "rl_algorithm": "Reinforcement Learning (RL) with hybrid short/long reasoning modes, DPO, Hybrid RL, RLAIF-V, hybrid reinforcement learning",
+      "reward_mechanism": "Probability-based reward for general reasoning data, complementing rule-only approach., Rule-based reward for simple responses, probability-based reward for complex natural language responses; standardized preference reward score via RLAIF-V with claim-level verification, Rule-verification reward combined with probability-based reward",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Unified 3D-Resampler using cross-attention with learnable queries augmented with 2D spatial positional embeddings (images) and 2D spatial + temporal positional embeddings (videos)",
+      "vision_encoder": "Lightweight visual encoder with image partitioning strategy for high-resolution images and high frame rate/long videos",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Outperforms GPT-4o-latest and Qwen2.5-VL 72B on OpenCompass; achieves equivalent performance on VideoMME using only 9.9% of inference time of prior SOTA MLLMs; uses 42.9%-68.2% inference time compared to concurrent thinking models; OpenCompass: 77.0; MMVet: 75.5; MMStar: 72.1; MME: 2500; MMBenchV1.1: 84.2; MMMU: 67.7; MathVista: 79.9; AI2D: 86.5; MathVerseMINI: 58.8; LogicVista: 57.0; EMMA: 34.8; OCRBench: 89.0; ChartQA: 87.4; TextVQA: 82.2; DocVQA: 94.7; OmniDocBench(EN): 0.175; OmniDocBench(ZH): 0.253; HallusionBench: 61.2; ObjHalBench(CHAI Rs): 9.3; ObjHalBench(CHAI Ri): 5.2; MMHal-Bench(Score): 5.0; MMHal-Bench(Rate): 19.4; Mantis: 82.5; MMT-Bench: 68.3; RealWorldQA: 72.1; MM-IFEval: 66.0; Video-MME(w/osubs): 67.9; Video-MME(w/subs): 73.5; LVBench: 50.4; MLVU(M-Avg): 75.1; LongVideoBench(val): 63.9; MotionBench: 59.7; FavorBench: 56.0; VideoMME: 73.6; LongVideoBench: 65.7; MLVU: 75.1; OCRBench: 76.5; MMMU: 51.4; AI2D: 76.5",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "MiniCPM-V 4.5": {
+      "application": [
+        "STEM reasoning",
+        "document/OCR/chart understanding",
+        "hallucination evaluation",
+        "multi-image/real-world understanding",
+        "video understanding",
+        "comprehensive multimodal understanding"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Unified 3D-Resampler using cross-attention with learnable queries augmented with 2D spatial positional embeddings (images) and 2D spatial + temporal positional embeddings (videos)"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPU"
+      ],
+      "model_family": [
+        "MiniCPM"
+      ],
+      "model_name": [
+        "MiniCPM-V 4.5"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "8B",
+        "8.7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LAION-2B",
+        "COYO",
+        "Common Crawl",
+        "OmniCorpus",
+        "MINT-1T",
+        "WebVid",
+        "Vript",
+        "OpenVid",
+        "curated Chinese image-text pairs"
+      ],
+      "pretraining_task": [
+        "Image captioning, OCR, document understanding, video captioning, next-token prediction"
+      ],
+      "reasoning_mode": [
+        "Hybrid: short reasoning mode for efficient usage, long reasoning mode (step-by-step) for complex tasks; controlled via hybrid RL post-training"
+      ],
+      "research_problem": [
+        "controllable hybrid reasoning",
+        "robust OCR",
+        "strong document parsing."
+      ],
+      "reward_mechanism": [
+        "Probability-based reward for general reasoning data",
+        "Rule-based reward for simple responses",
+        "probability-based reward for complex natural language responses",
+        "standardized preference reward score via RLAIF-V with claim-level verification",
+        "Rule-verification reward combined with probability-based reward"
+      ],
+      "rl_algorithm": [
+        "DPO",
+        "RLAIF-V"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [
+        "Synthesized OCR data (rendering text on natural scenes and HTML sources)",
+        "Capsfusion-based re-captioning for image captions"
+      ],
+      "vision_encoder": [
+        "Lightweight visual encoder with image partitioning strategy for high-resolution images and high frame rate/long videos"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiniCPM-V 4.5": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT) and hybrid Reinforcement Learning (RL) for short and long reasoning modes",
+            "Preference learning via DPO",
+            "hybrid RL",
+            "Multimodal instruction tuning"
+          ],
+          "accepted": [
+            "Multimodal instruction tuning"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning (SFT) and hybrid Reinforcement Learning (RL) for short and long reasoning modes",
+              "reason": "Describes a training process/method rather than a specific fine-tuning task or objective"
+            },
+            {
+              "value": "Preference learning via DPO",
+              "reason": "Describes a training method/algorithm rather than a specific fine-tuning task or objective"
+            },
+            {
+              "value": "hybrid RL",
+              "reason": "Describes a training method/algorithm rather than a specific fine-tuning task or objective"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "LAION-2B",
+            "COYO",
+            "Common Crawl",
+            "OmniCorpus",
+            "MINT-1T",
+            "WebVid",
+            "Vript",
+            "OpenVid",
+            "curated Chinese image-text pairs",
+            "synthesized OCR data",
+            "document data"
+          ],
+          "accepted": [
+            "LAION-2B",
+            "COYO",
+            "Common Crawl",
+            "OmniCorpus",
+            "MINT-1T",
+            "WebVid",
+            "Vript",
+            "OpenVid",
+            "curated Chinese image-text pairs"
+          ],
+          "dropped": [
+            {
+              "value": "synthesized OCR data",
+              "reason": "Describes a data type rather than an identifiable dataset or corpus"
+            },
+            {
+              "value": "document data",
+              "reason": "Asserts a broad data type rather than naming an identifiable dataset or corpus"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Building efficient Multimodal Large Language Models (MLLMs) capable of high frame rate and long video understanding",
+            "controllable hybrid reasoning",
+            "robust OCR",
+            "strong document parsing."
+          ],
+          "accepted": [
+            "controllable hybrid reasoning",
+            "robust OCR",
+            "strong document parsing."
+          ],
+          "dropped": [
+            {
+              "value": "Building efficient Multimodal Large Language Models (MLLMs) capable of high frame rate and long video understanding",
+              "reason": "Describes a development goal or action rather than a noun phrase naming the research problem"
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Probability-based reward for general reasoning data",
+            "complementing rule-only approach.",
+            "Rule-based reward for simple responses",
+            "probability-based reward for complex natural language responses",
+            "standardized preference reward score via RLAIF-V with claim-level verification",
+            "Rule-verification reward combined with probability-based reward"
+          ],
+          "accepted": [
+            "Probability-based reward for general reasoning data",
+            "Rule-based reward for simple responses",
+            "probability-based reward for complex natural language responses",
+            "standardized preference reward score via RLAIF-V with claim-level verification",
+            "Rule-verification reward combined with probability-based reward"
+          ],
+          "dropped": [
+            {
+              "value": "complementing rule-only approach.",
+              "reason": "Sentence fragment describing a methodological choice rather than naming a reward mechanism"
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Reinforcement Learning (RL) with hybrid short/long reasoning modes",
+            "DPO",
+            "Hybrid RL",
+            "RLAIF-V",
+            "hybrid reinforcement learning"
+          ],
+          "accepted": [
+            "DPO",
+            "RLAIF-V"
+          ],
+          "dropped": [
+            {
+              "value": "hybrid reinforcement learning",
+              "reason": "Category/approach rather than a specific named algorithm. (cached)"
+            },
+            {
+              "value": "Reinforcement Learning (RL) with hybrid short/long reasoning modes",
+              "reason": "Describes a general approach/category rather than a specific RL algorithm"
+            },
+            {
+              "value": "Hybrid RL",
+              "reason": "Describes a general approach/category rather than a specific RL algorithm"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 41,
+      "dropped": 10,
+      "llm_calls": 1,
+      "values_sent_to_llm": 31
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiniCPM-V 4.5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniCPM-V 4.5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniCPM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-09-16",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "3D-Resampler: jointly compresses video features across spatial and temporal dimensions to reduce compute",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid reasoning reinforcement learning: mixes short and long reasoning samples during training to balance analytical depth and efficiency",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Probability-based reward: complements rule-verification rewards for general domain response verification",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified learning paradigm: jointly optimizes document knowledge and text recognition.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image captioning, OCR, document understanding, video captioning, next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-2B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COYO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OmniCorpus",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MINT-1T",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebVid",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Vript",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OpenVid",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Curated Chinese image-text pairs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8700,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "8 A100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "STEM reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document/OCR/chart understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Hallucination evaluation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-image/real-world understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Video understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Comprehensive multimodal understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Controllable hybrid reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Robust OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Strong document parsing.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1M high-quality samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "8B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8192",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> SFT -> RL (hybrid short/long reasoning modes)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid: short reasoning mode for efficient usage, long reasoning mode (step-by-step) for complex tasks; controlled via hybrid RL post-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthesized OCR data (rendering text on natural scenes and HTML sources)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Capsfusion-based re-captioning for image captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "RLAIF-V",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Probability-based reward for general reasoning data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Rule-based reward for simple responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Probability-based reward for complex natural language responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Standardized preference reward score via RLAIF-V with claim-level verification",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Rule-verification reward combined with probability-based reward",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Unified 3D-Resampler using cross-attention with learnable queries augmented with 2D spatial positional embeddings (images) and 2D spatial + temporal positional embeddings (videos)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Lightweight visual encoder with image partitioning strategy for high-resolution images and high frame rate/long videos",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms GPT-4o-latest and Qwen2.5-VL 72B on OpenCompass",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Achieves equivalent performance on VideoMME using only 9.9% of inference time of prior SOTA MLLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Uses 42.9%-68.2% inference time compared to concurrent thinking models",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OpenCompass: 77.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMVet: 75.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 72.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 2500",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBenchV1.1: 84.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 67.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 79.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 86.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVerseMINI: 58.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LogicVista: 57.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "EMMA: 34.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 89.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 87.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 82.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 94.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OmniDocBench(EN): 0.175",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OmniDocBench(ZH): 0.253",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench: 61.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ObjHalBench(CHAI Rs): 9.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ObjHalBench(CHAI Ri): 5.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMHal-Bench(Score): 5.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMHal-Bench(Rate): 19.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Mantis: 82.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMT-Bench: 68.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 72.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-IFEval: 66.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Video-MME(w/osubs): 67.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Video-MME(w/subs): 73.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LVBench: 50.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MLVU(M-Avg): 75.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LongVideoBench(val): 63.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MotionBench: 59.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "FavorBench: 56.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoMME: 73.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LongVideoBench: 65.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MLVU: 75.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 76.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 51.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 76.5",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927042",
+    "contribution_ids": [
+      "R1927044"
+    ],
+    "new_contribution_ids": [
+      "R1927044"
+    ],
+    "comparison_updated": null
+  }
+}

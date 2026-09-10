@@ -1,0 +1,1172 @@
+{
+  "arxiv_id": "2604.19324",
+  "status": "completed",
+  "timestamp": "2026-08-30T14:37:06.796946",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2604.19324",
+    "title": "PLaMo 2.1-VL Technical Report",
+    "authors": [
+      "Tommi Kerola",
+      "Yuya Masuda",
+      "Takashi Masuko",
+      "Toshiki Nakanishi",
+      "Daisuke Nishino",
+      "Kuniyuki Takahashi",
+      "Hanqin Wang",
+      "Yoshihiro Yamada"
+    ],
+    "abstract": "We introduce PLaMo 2.1-VL, a lightweight Vision Language Model (VLM) for autonomous devices, available in 8B and 2B variants and designed for local and edge deployment with Japanese-language operation. Focusing on Visual Question Answering (VQA) and Visual Grounding as its core capabilities, we develop and evaluate the models for two real-world application scenarios: factory task analysis via tool recognition, and infrastructure anomaly detection. We also develop a large-scale synthetic data generation pipeline and comprehensive Japanese training and evaluation resources. PLaMo 2.1-VL outperforms comparable open models on Japanese and English benchmarks, achieving 61.5 ROUGE-L on JA-VG-VQA-500 and 85.2% accuracy on Japanese Ref-L4. For the two application scenarios, it achieves 53.9% zero-shot accuracy on factory task analysis, and fine-tuning on power plant data improves anomaly detection bbox + label F1-score from 39.7 to 64.9.",
+    "published": "2026-04-21T10:46:42+00:00",
+    "updated": "2026-04-21T10:46:42+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2604.19324v1",
+    "entry_id": "http://arxiv.org/abs/2604.19324v1",
+    "pdf_path": "data/papers/2604.19324.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+  },
+  "text_length": 90484,
+  "word_count": 13345,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "PLaMo 2.1-8B-VL",
+      "parameters": "2B, 8B",
+      "parameters_millions": 8000,
+      "model_family": "PLaMo",
+      "date_created": "2026-04-21",
+      "organization": "Preferred Networks",
+      "innovation": "Lightweight Vision Language Models (VLMs) designed for local/edge deployment on autonomous devices; incorporates dynamic tiling for image splitting and a large-scale synthetic data generation pipeline to balance accuracy with computational efficiency for Japanese-language operation.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Visual Question Answering, Visual Grounding",
+      "pretraining_corpus": "Synthetic multimodal data (Visual Grounding, VQA, spatial understanding, counting, tool recognition, difference detection)",
+      "finetuning_task": "Instruction tuning, synthetic data training, Supervised fine-tuning for anomaly detection (bounding box and label prediction)",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Two-pass architecture for anomaly detection",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Deploying VLMs locally on edge devices for autonomous systems while maintaining accuracy and computational efficiency, with Japanese-language support.",
+      "application": "Visual Question Answering, Visual Grounding, Factory Task Analysis, Infrastructure Anomaly Detection, Japanese and English language understanding",
+      "paper_title": "PLaMo 2.1-VL Technical Report",
+      "training_corpus_size": null,
+      "finetuning_data": "Real-world data from three power plant facilities (A, B, C); 54, 722 training samples, 5, 172 validation samples, 2, 000 evaluation samples",
+      "tokenizer": null,
+      "supported_language": "Japanese, English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "8B",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Base LLM (DPO-tuned) + SigLIP2 vision encoder + MLP adapter trained on synthetic multimodal data",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Large-scale synthetic data generation pipeline covering Visual Grounding, VQA, spatial understanding, counting, tool recognition, and difference detection, Synthetic data pipelines",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Multilayer perceptron (MLP) adapter",
+      "vision_encoder": "SigLIP2 (siglip2-so400m-patch14-384)",
+      "base_model": "PLaMo 2.1-8B, PLaMo 2.1-2B",
+      "optimizer_innovation": null,
+      "benchmark_result": "JA-VG-VQA-500: 61.5 ROUGE-L; Japanese Ref-L4: 85.2% accuracy; Factory task analysis: 53.9% zero-shot accuracy; Power plant anomaly detection: 64.9 bbox + label F1-score; JA-VG-VQA-500 ROUGE-L: 61.5; LLM-as-a-judge: 72.4; English Likert LLM judge: 4.37; Ref-L4 Japanese: 85.2; Ref-L4 English: 86.8; Factory Task Analysis: 53.9",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "PLaMo 2.1-VL",
+      "model_family": "PLaMo",
+      "date_created": "2026-04-21",
+      "organization": "Google",
+      "innovation": "Multi-stage training paradigm (Stage 1.0 vision-language alignment with frozen LLM/encoder, Stage 1.5 multimodal instruction tuning with LoRA); dynamic tiling for image splitting to handle varying resolutions/aspect ratios; MLP adapter instead of complex dynamic selectors to reduce GPU VRAM overhead and enable larger batch sizes.",
+      "pretraining_corpus": "Web-scale image-caption datasets (Japanese and English, 75:25 ratio)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Visual question answering (VQA), visual grounding, open-vocabulary object detection, anomaly detection, factory task analysis, infrastructure anomaly detection",
+      "license": null,
+      "research_problem": "Multimodal instruction tuning, visual grounding, VQA, and practical field deployment tasks (factory task analysis, infrastructure anomaly detection)",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language alignment, multimodal instruction tuning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Multimodal instruction tuning, VQA, visual grounding, open-vocabulary object detection, anomaly detection",
+      "finetuning_data": "Web-scale image-caption datasets (Japanese/English 75:25), VQA, Visual Grounding, open-vocabulary object detection, anomaly detection, factory work understanding",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "Japanese, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Dynamic tiling for image splitting; MLP adapter for vision-language mapping; LoRA for stable, memory-efficient instruction tuning",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "PLaMo 2.1-VL Technical Report",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Two-stage: Stage 1.0 (freeze LLM & SigLIP2 encoder, train MLP adapter for vision-language alignment) -> Stage 1.5 (apply LoRA to encoder, adapter, and LLM for multimodal instruction tuning and Japanese adaptation)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "General synthetic data used for training difference detection",
+      "rl_algorithm": "Direct Preference Optimization (DPO)",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP adapter mapping visual features into LLM-compatible representational space",
+      "vision_encoder": "SigLIP2 (siglip2-so400m-patch14-384)",
+      "base_model": "PLaMo 2.1",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "PLaMo 2.1-2B-VL",
+      "model_family": "PLaMo",
+      "date_created": "2026-04-21",
+      "organization": "Google",
+      "innovation": "Japanese-centric training policy and synthetic data pipelines for VQA and Visual Grounding; compact multimodal models achieving competitive performance with significantly less training and inference-time compute.",
+      "pretraining_corpus": null,
+      "parameters": "2B",
+      "parameters_millions": 2000,
+      "application": "Visual Question Answering, Visual Grounding, Factory Task Analysis, Infrastructure Anomaly Detection, Japanese and English language understanding",
+      "license": null,
+      "research_problem": "Visual Question Answering (VQA), Visual Grounding, Factory Task Analysis, Infrastructure Anomaly Detection",
+      "model_version": null,
+      "pretraining_architecture": null,
+      "pretraining_task": "Visual Question Answering (VQA), Visual Grounding",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "Japanese, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "PLaMo 2.1-VL Technical Report",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Synthetic data pipelines",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "JA-VG-VQA-500 ROUGE-L: 60.7; LLM-as-a-judge: 71.6; English Likert LLM judge: 4.41; Ref-L4 Japanese: 82.4; Ref-L4 English: 83.5; Factory Task Analysis: 40.9",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 3,
+  "validated_rows": {
+    "PLaMo 2.1-8B-VL": {
+      "application": [
+        "Visual Question Answering",
+        "Visual Grounding",
+        "Factory Task Analysis",
+        "Infrastructure Anomaly Detection",
+        "Japanese and English language understanding"
+      ],
+      "base_model": [
+        "PLaMo 2.1-8B, PLaMo 2.1-2B"
+      ],
+      "finetuning_data": [
+        "Real-world data from three power plant facilities (A, B, C)"
+      ],
+      "finetuning_task": [
+        "Instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Multilayer perceptron (MLP) adapter"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "PLaMo"
+      ],
+      "model_name": [
+        "PLaMo 2.1-8B-VL"
+      ],
+      "organization": [
+        "Preferred Networks"
+      ],
+      "parameters": [
+        "2B",
+        "8B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Synthetic multimodal data (Visual Grounding, VQA, spatial understanding, counting, tool recognition, difference detection)"
+      ],
+      "pretraining_task": [
+        "Visual Question Answering, Visual Grounding"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Japanese",
+        "English"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "SigLIP2 (siglip2-so400m-patch14-384)"
+      ]
+    },
+    "PLaMo 2.1-VL": {
+      "application": [
+        "Visual question answering (VQA)",
+        "visual grounding",
+        "open-vocabulary object detection",
+        "anomaly detection",
+        "factory task analysis",
+        "infrastructure anomaly detection"
+      ],
+      "base_model": [
+        "PLaMo 2.1"
+      ],
+      "finetuning_data": [
+        "Web-scale image-caption datasets (Japanese/English 75:25)",
+        "VQA",
+        "Visual Grounding"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning",
+        "VQA",
+        "visual grounding",
+        "open-vocabulary object detection",
+        "anomaly detection"
+      ],
+      "fusion_architecture": [],
+      "model_family": [
+        "PLaMo"
+      ],
+      "model_name": [
+        "PLaMo 2.1-VL"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Web-scale image-caption datasets (Japanese and English, 75:25 ratio)"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment, multimodal instruction tuning"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [
+        "Direct Preference Optimization (DPO)"
+      ],
+      "supported_language": [
+        "Japanese",
+        "English"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "SigLIP2 (siglip2-so400m-patch14-384)"
+      ]
+    },
+    "PLaMo 2.1-2B-VL": {
+      "application": [
+        "Visual Question Answering",
+        "Visual Grounding",
+        "Factory Task Analysis",
+        "Infrastructure Anomaly Detection",
+        "Japanese and English language understanding"
+      ],
+      "model_family": [
+        "PLaMo"
+      ],
+      "model_name": [
+        "PLaMo 2.1-2B-VL"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "2B"
+      ],
+      "pretraining_task": [
+        "Visual Question Answering (VQA), Visual Grounding"
+      ],
+      "research_problem": [
+        "Visual Question Answering (VQA)",
+        "Visual Grounding",
+        "Factory Task Analysis",
+        "Infrastructure Anomaly Detection"
+      ],
+      "supported_language": [
+        "Japanese",
+        "English"
+      ],
+      "synthetic_data_generation_method": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "PLaMo 2.1-8B-VL": {
+        "finetuning_data": {
+          "candidates": [
+            "Real-world data from three power plant facilities (A, B, C)",
+            "54",
+            "722 training samples",
+            "5",
+            "172 validation samples",
+            "2",
+            "000 evaluation samples"
+          ],
+          "accepted": [
+            "Real-world data from three power plant facilities (A, B, C)"
+          ],
+          "dropped": [
+            {
+              "value": "54",
+              "reason": "Not a dataset name; appears to be a truncated number/fragment. (cached)"
+            },
+            {
+              "value": "722 training samples",
+              "reason": "Quantity/count, not a dataset name"
+            },
+            {
+              "value": "5",
+              "reason": "Number, not a dataset"
+            },
+            {
+              "value": "172 validation samples",
+              "reason": "Quantity/count, not a dataset"
+            },
+            {
+              "value": "2",
+              "reason": "Number, not a dataset"
+            },
+            {
+              "value": "000 evaluation samples",
+              "reason": "Quantity/count, not a dataset"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Instruction tuning",
+            "synthetic data training",
+            "Supervised fine-tuning for anomaly detection (bounding box and label prediction)"
+          ],
+          "accepted": [
+            "Instruction tuning"
+          ],
+          "dropped": [
+            {
+              "value": "synthetic data training",
+              "reason": "Training method/process, not a specific task"
+            },
+            {
+              "value": "Supervised fine-tuning for anomaly detection (bounding box and label prediction)",
+              "reason": "Describes a training process, not the task itself"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Deploying VLMs locally on edge devices for autonomous systems while maintaining accuracy and computational efficiency",
+            "with Japanese-language support."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Deploying VLMs locally on edge devices for autonomous systems while maintaining accuracy and computational efficiency",
+              "reason": "Long descriptive sentence about a goal/solution, not a short noun phrase naming a problem"
+            },
+            {
+              "value": "with Japanese-language support.",
+              "reason": "Sentence fragment/trailing qualifier"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Large-scale synthetic data generation pipeline covering Visual Grounding",
+            "VQA",
+            "spatial understanding",
+            "counting",
+            "tool recognition",
+            "difference detection",
+            "Synthetic data pipelines"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Large-scale synthetic data generation pipeline covering Visual Grounding",
+              "reason": "Describes a pipeline/infrastructure, not a specific generation method"
+            },
+            {
+              "value": "VQA",
+              "reason": "Task name, not a generation method"
+            },
+            {
+              "value": "spatial understanding",
+              "reason": "Capability/Task name, not a generation method"
+            },
+            {
+              "value": "counting",
+              "reason": "Task name, not a generation method"
+            },
+            {
+              "value": "tool recognition",
+              "reason": "Task name, not a generation method"
+            },
+            {
+              "value": "difference detection",
+              "reason": "Task name, not a generation method"
+            },
+            {
+              "value": "Synthetic data pipelines",
+              "reason": "Describes a pipeline/infrastructure, not a generation method"
+            }
+          ]
+        }
+      },
+      "PLaMo 2.1-VL": {
+        "finetuning_data": {
+          "candidates": [
+            "Web-scale image-caption datasets (Japanese/English 75:25)",
+            "VQA",
+            "Visual Grounding",
+            "open-vocabulary object detection",
+            "anomaly detection",
+            "factory work understanding"
+          ],
+          "accepted": [
+            "Web-scale image-caption datasets (Japanese/English 75:25)",
+            "VQA",
+            "Visual Grounding"
+          ],
+          "dropped": [
+            {
+              "value": "open-vocabulary object detection",
+              "reason": "Task name, not a dataset"
+            },
+            {
+              "value": "anomaly detection",
+              "reason": "Task name, not a dataset"
+            },
+            {
+              "value": "factory work understanding",
+              "reason": "Task/capability name, not a dataset"
+            }
+          ]
+        },
+        "fusion_architecture": {
+          "candidates": [
+            "MLP adapter mapping visual features into LLM-compatible representational space"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "MLP adapter mapping visual features into LLM-compatible representational space",
+              "reason": "Description of function rather than the architectural name"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal instruction tuning, visual grounding, VQA, and practical field deployment tasks (factory task analysis, infrastructure anomaly detection)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal instruction tuning, visual grounding, VQA, and practical field deployment tasks (factory task analysis, infrastructure anomaly detection)",
+              "reason": "Long list of tasks/methods rather than a concise problem statement"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "General synthetic data used for training difference detection"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "General synthetic data used for training difference detection",
+              "reason": "Describes data usage rather than a generation method"
+            }
+          ]
+        }
+      },
+      "PLaMo 2.1-2B-VL": {
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Synthetic data pipelines"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Synthetic data pipelines",
+              "reason": "Describes a pipeline/infrastructure, not a generation method"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 62,
+      "dropped": 24,
+      "llm_calls": 1,
+      "values_sent_to_llm": 51
+    }
+  },
+  "contributions": [
+    {
+      "label": "PLaMo 2.1-8B-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PLaMo 2.1-8B-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PLaMo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-04-21",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Preferred Networks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Lightweight Vision Language Models (VLMs) designed for local/edge deployment on autonomous devices",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Incorporates dynamic tiling for image splitting and a large-scale synthetic data generation pipeline to balance accuracy with computational efficiency for Japanese-language operation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Visual Question Answering, Visual Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Synthetic multimodal data (Visual Grounding, VQA, spatial understanding, counting, tool recognition, difference detection)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Question Answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Factory Task Analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Infrastructure Anomaly Detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Japanese and English language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Real-world data from three power plant facilities (A, B, C)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Base LLM (DPO-tuned) + SigLIP2 vision encoder + MLP adapter trained on synthetic multimodal data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Multilayer perceptron (MLP) adapter",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2 (siglip2-so400m-patch14-384)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "PLaMo 2.1-8B, PLaMo 2.1-2B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JA-VG-VQA-500: 61.5 ROUGE-L",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Japanese Ref-L4: 85.2% accuracy",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Factory task analysis: 53.9% zero-shot accuracy",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Power plant anomaly detection: 64.9 bbox + label F1-score",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JA-VG-VQA-500 ROUGE-L: 61.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LLM-as-a-judge: 72.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "English Likert LLM judge: 4.37",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ref-L4 Japanese: 85.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ref-L4 English: 86.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Factory Task Analysis: 53.9",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "PLaMo 2.1-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PLaMo 2.1-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PLaMo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-04-21",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training paradigm (Stage 1.0 vision-language alignment with frozen LLM/encoder, Stage 1.5 multimodal instruction tuning with LoRA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamic tiling for image splitting to handle varying resolutions/aspect ratios",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "MLP adapter instead of complex dynamic selectors to reduce GPU VRAM overhead and enable larger batch sizes.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment, multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Web-scale image-caption datasets (Japanese and English, 75:25 ratio)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Open-vocabulary object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Anomaly detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering (VQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-vocabulary object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Anomaly detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Factory task analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Infrastructure anomaly detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Web-scale image-caption datasets (Japanese/English 75:25)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual Grounding",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Two-stage: Stage 1.0 (freeze LLM & SigLIP2 encoder, train MLP adapter for vision-language alignment) -> Stage 1.5 (apply LoRA to encoder, adapter, and LLM for multimodal instruction tuning and Japanese adaptation)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2 (siglip2-so400m-patch14-384)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "PLaMo 2.1",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "PLaMo 2.1-2B-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PLaMo 2.1-2B-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PLaMo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-04-21",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Japanese-centric training policy and synthetic data pipelines for VQA and Visual Grounding",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Compact multimodal models achieving competitive performance with significantly less training and inference-time compute.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Visual Question Answering (VQA), Visual Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 2000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Question Answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Factory Task Analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Infrastructure Anomaly Detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Japanese and English language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Visual Question Answering (VQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Visual Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factory Task Analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Infrastructure Anomaly Detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JA-VG-VQA-500 ROUGE-L: 60.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LLM-as-a-judge: 71.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "English Likert LLM judge: 4.41",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ref-L4 Japanese: 82.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ref-L4 English: 83.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Factory Task Analysis: 40.9",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927329",
+    "contribution_ids": [
+      "R1927331",
+      "R1927332",
+      "R1927333"
+    ],
+    "new_contribution_ids": [
+      "R1927331",
+      "R1927332",
+      "R1927333"
+    ],
+    "comparison_updated": null
+  }
+}

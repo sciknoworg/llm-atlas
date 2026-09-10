@@ -1,0 +1,560 @@
+{
+ "arxiv_id": "2105.13290",
+ "status": "completed",
+ "timestamp": "2026-08-25T00:41:24.977677",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2105.13290",
+  "title": "CogView: Mastering Text-to-Image Generation via Transformers",
+  "authors": [
+   "Ming Ding",
+   "Zhuoyi Yang",
+   "Wenyi Hong",
+   "Wendi Zheng",
+   "Chang Zhou",
+   "Da Yin",
+   "Junyang Lin",
+   "Xu Zou",
+   "Zhou Shao",
+   "Hongxia Yang",
+   "Jie Tang"
+  ],
+  "abstract": "Text-to-Image generation in the general domain has long been an open problem, which requires both a powerful generative model and cross-modal understanding. We propose CogView, a 4-billion-parameter Transformer with VQ-VAE tokenizer to advance this problem. We also demonstrate the finetuning strategies for various downstream tasks, e.g. style learning, super-resolution, text-image ranking and fashion design, and methods to stabilize pretraining, e.g. eliminating NaN losses. CogView achieves the state-of-the-art FID on the blurred MS COCO dataset, outperforming previous GAN-based models and a recent similar work DALL-E.",
+  "published": "2021-05-26T16:52:53+00:00",
+  "updated": "2021-11-05T06:10:15+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2105.13290v3",
+  "entry_id": "http://arxiv.org/abs/2105.13290v3",
+  "pdf_path": "data/papers/2105.13290.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 58228,
+ "word_count": 3533,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "CogView",
+   "parameters": "3B, 4B",
+   "parameters_millions": 4000,
+   "model_family": "CogView",
+   "date_created": "2021-05-26",
+   "organization": "Alibaba Group",
+   "innovation": "Three-region sparse attention: partitions the image into three regions to accelerate high-resolution autoregressive generation; PB-relax and Sandwich-LN: optimization techniques for stable training; VQVAE-based autoregressive generation: discretizes images into tokens and generates them token-by-token, enabling Transformer-based text-to-image synthesis.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Text-to-image generation (autoregressive)",
+   "pretraining_corpus": "30 million high-quality Chinese text-image pairs",
+   "finetuning_task": "Style learning, super-resolution, text-image ranking, fashion design, image captioning, self-reranking, Style-specific fine-tuning (Chinese traditional drawing, oil painting, sketch, cartoon, fashion)",
+   "optimizer": "Adam",
+   "hardware_used": "V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Text-to-image generation in the general domain",
+   "application": "Text-to-image generation, style learning, super-resolution, text-image ranking, fashion design",
+   "paper_title": "CogView: Mastering Text-to-Image Generation via Transformers",
+   "training_corpus_size": "30 million text-image pairs",
+   "finetuning_data": "~2 million images cropped to 256x256 and downsampled to 128x128 for super-resolution; 1, 000 images each for four styles (Chinese traditional drawing, oil painting, sketch, cartoon) extracted from search engines, 1, 000 images per style (Chinese traditional drawing, oil painting, sketch, cartoon); 10 million fashion-caption pairs",
+   "tokenizer": "VQ-VAE",
+   "supported_language": "Chinese, English",
+   "hardware_description": "512 V100 GPUs (32GB)",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "4B (dense, all parameters active)",
+   "attention_mechanism": "Three-region + blockwise window sparse attention, Standard Transformer attention (O(n^2) complexity), Three-region sparse attention",
+   "context_length_max": "1088",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: (1) discrete Auto-Encoder (VQ-VAE) for image tokenization; (2) GPT optimizes NLL losses by concatenating text and image tokens.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16 (O2)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "VQ-VAE encoder (maps HxWx3 to h x w x d)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "FID-0: 27.1; FID-1: 19.4; FID-2: 13.9; FID-4: 19.4; FID-8: 23.6; IS: 18.2; CapLoss: 2.43",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "40",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "CogView": {
+   "application": [
+    "Text-to-image generation",
+    "style learning",
+    "super-resolution",
+    "text-image ranking",
+    "fashion design"
+   ],
+   "attention_mechanism": [
+    "Three-region + blockwise window sparse attention",
+    "Standard Transformer attention (O(n^2) complexity)",
+    "Three-region sparse attention"
+   ],
+   "finetuning_data": [
+    "~2 million images cropped to 256x256 and downsampled to 128x128 for super-resolution",
+    "000 images each for four styles (Chinese traditional drawing, oil painting, sketch, cartoon) extracted from search engines",
+    "000 images per style (Chinese traditional drawing, oil painting, sketch, cartoon)",
+    "10 million fashion-caption pairs"
+   ],
+   "finetuning_task": [
+    "Style learning",
+    "super-resolution",
+    "text-image ranking",
+    "fashion design",
+    "image captioning",
+    "self-reranking",
+    "Style-specific fine-tuning (Chinese traditional drawing, oil painting, sketch, cartoon, fashion)"
+   ],
+   "hardware_used": [
+    "V100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "CogView"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Alibaba Group"
+   ],
+   "parameters": [
+    "3B",
+    "4B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "30 million high-quality Chinese text-image pairs"
+   ],
+   "pretraining_task": [
+    "Text-to-image generation (autoregressive)"
+   ],
+   "quantization_precision": [
+    "FP16 (O2)"
+   ],
+   "research_problem": [
+    "Text-to-image generation in the general domain"
+   ],
+   "supported_language": [
+    "Chinese",
+    "English"
+   ],
+   "vision_encoder": [
+    "VQ-VAE encoder (maps HxWx3 to h x w x d)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "CogView": {
+    "finetuning_data": {
+     "candidates": [
+      "~2 million images cropped to 256x256 and downsampled to 128x128 for super-resolution",
+      "1",
+      "000 images each for four styles (Chinese traditional drawing, oil painting, sketch, cartoon) extracted from search engines",
+      "000 images per style (Chinese traditional drawing, oil painting, sketch, cartoon)",
+      "10 million fashion-caption pairs"
+     ],
+     "accepted": [
+      "~2 million images cropped to 256x256 and downsampled to 128x128 for super-resolution",
+      "000 images each for four styles (Chinese traditional drawing, oil painting, sketch, cartoon) extracted from search engines",
+      "000 images per style (Chinese traditional drawing, oil painting, sketch, cartoon)",
+      "10 million fashion-caption pairs"
+     ],
+     "dropped": [
+      {
+       "value": "1",
+       "reason": "Not a dataset; appears to be a truncated number or extraction artifact. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "CogView"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "CogView",
+       "reason": "CogView is a specific model name, not a broader model family or lineage. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 34,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 5
+  }
+ },
+ "contributions": [
+  {
+   "label": "CogView",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CogView",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-05-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba Group",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Three-region sparse attention: partitions the image into three regions to accelerate high-resolution autoregressive generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "PB-relax and Sandwich-LN: optimization techniques for stable training",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "VQVAE-based autoregressive generation: discretizes images into tokens and generates them token-by-token, enabling Transformer-based text-to-image synthesis.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Text-to-image generation (autoregressive)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "30 million high-quality Chinese text-image pairs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Style learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Super-resolution",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-image ranking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Fashion design",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Self-reranking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Style-specific fine-tuning (Chinese traditional drawing, oil painting, sketch, cartoon, fashion)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "VQ-VAE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 4000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 V100 GPUs (32GB)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Style learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Super-resolution",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-image ranking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Fashion design",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Text-to-image generation in the general domain",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "30 million text-image pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "~2 million images cropped to 256x256 and downsampled to 128x128 for super-resolution",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "000 images each for four styles (Chinese traditional drawing, oil painting, sketch, cartoon) extracted from search engines",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "000 images per style (Chinese traditional drawing, oil painting, sketch, cartoon)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "10 million fashion-caption pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "4B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Three-region + blockwise window sparse attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard Transformer attention (O(n^2) complexity)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Three-region sparse attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1088",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: (1) discrete Auto-Encoder (VQ-VAE) for image tokenization; (2) GPT optimizes NLL losses by concatenating text and image tokens.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16 (O2)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQ-VAE encoder (maps HxWx3 to h x w x d)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-0: 27.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-1: 19.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-2: 13.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-4: 19.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-8: 23.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IS: 18.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CapLoss: 2.43",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "40",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R426555",
+  "contribution_ids": [
+   "R426556",
+   "R1921259"
+  ],
+  "new_contribution_ids": [
+   "R1921259"
+  ],
+  "comparison_updated": null
+ }
+}

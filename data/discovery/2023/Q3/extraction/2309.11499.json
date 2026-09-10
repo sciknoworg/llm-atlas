@@ -1,0 +1,510 @@
+{
+ "arxiv_id": "2309.11499",
+ "status": "completed",
+ "timestamp": "2026-08-28T08:47:03.735799",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2309.11499",
+  "title": "DreamLLM: Synergistic Multimodal Comprehension and Creation",
+  "authors": [
+   "Runpei Dong",
+   "Chunrui Han",
+   "Yuang Peng",
+   "Zekun Qi",
+   "Zheng Ge",
+   "Jinrong Yang",
+   "Liang Zhao",
+   "Jianjian Sun",
+   "Hongyu Zhou",
+   "Haoran Wei",
+   "Xiangwen Kong",
+   "Xiangyu Zhang",
+   "Kaisheng Ma",
+   "Li Yi"
+  ],
+  "abstract": "This paper presents DreamLLM, a learning framework that first achieves versatile Multimodal Large Language Models (MLLMs) empowered with frequently overlooked synergy between multimodal comprehension and creation. DreamLLM operates on two fundamental principles. The first focuses on the generative modeling of both language and image posteriors by direct sampling in the raw multimodal space. This approach circumvents the limitations and information loss inherent to external feature extractors like CLIP, and a more thorough multimodal understanding is obtained. Second, DreamLLM fosters the generation of raw, interleaved documents, modeling both text and image contents, along with unstructured layouts. This allows DreamLLM to learn all conditional, marginal, and joint multimodal distributions effectively. As a result, DreamLLM is the first MLLM capable of generating free-form interleaved content. Comprehensive experiments highlight DreamLLM's superior performance as a zero-shot multimodal generalist, reaping from the enhanced learning synergy. Project page: https://dreamllm.github.io.",
+  "published": "2023-09-20T17:58:05+00:00",
+  "updated": "2024-03-15T19:19:28+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2309.11499v2",
+  "entry_id": "http://arxiv.org/abs/2309.11499v2",
+  "pdf_path": "data/papers/2309.11499.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 133825,
+ "word_count": 10125,
+ "models_extracted": 2,
+ "extraction_data": [
+  {
+   "model_name": "DreamLLM",
+   "parameters": "7B",
+   "parameters_millions": 7000,
+   "model_family": "MLLM",
+   "date_created": "2023-09-20",
+   "organization": "MEGVII",
+   "innovation": "Dream queries (learnable embeddings): encapsulates semantics encoded by MLLMs to condition a pretrained Stable Diffusion image decoder without altering the MLLM's output space, avoiding modality-specific conflicts from explicit CLIP-MLLM alignment; Interleaved Generative Pre-Training (I-GPT): uses a unique `<dream>` token to predict image placement within text, leveraging causal generation to model joint, marginal, and conditional distributions of images and texts, enabling synergistic comprehension and creation.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal generation (text and image posteriors)",
+   "pretraining_corpus": "Internet multimodal corpora (interleaved image-text data)",
+   "finetuning_task": "Supervised fine-tuning, Supervised fine-tuning on instruction-following data",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A800 GPU",
+   "extension": "Dream queries (64 learned tokens) act as cross-attention keys/values to bridge MLLM embeddings and diffusion U-Net latents, enabling structured attention maps that capture subject and background semantics independently of text tokens.",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal comprehension and creation synergy",
+   "application": "Zero-shot multimodal generalist, interleaved document generation, visual-language comprehension, content creation",
+   "paper_title": "DreamLLM: Synergistic Multimodal Comprehension and Creation",
+   "training_corpus_size": "30M pairs (Stage I), 4M pairs (Stage II), 120K samples (Stage III)",
+   "finetuning_data": "LLaVAInstruct, InstructMMC4, LAION-COCO, Instruction-following data curated with GPT-4",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": "128x NVIDIA A800 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/thunlp/DreamLLM",
+   "context_length": null,
+   "activated_parameters": "7B (dense)",
+   "attention_mechanism": "Cross-attention between dream queries and U-Net latent features",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining on interleaved multimodal data with joint learning objective; ablation studies compare creation-only, comprehension-only, and joint-learning approaches.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "GPT-4 curated instruction data",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Unified autoregressive generation in raw multimodal space",
+   "vision_encoder": "Stable Diffusion (SD) image decoder, CLIP",
+   "base_model": "Vicuna (based on LLaMA)",
+   "optimizer_innovation": null,
+   "benchmark_result": "MM-Vet: 35.9; VQAv2: 56.6; COCO FID: 8.46; MS-COCO FID: 8.46; MMBench: 49.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "DreamLLM": {
+   "application": [
+    "interleaved document generation",
+    "visual-language comprehension",
+    "content creation"
+   ],
+   "attention_mechanism": [
+    "Cross-attention between dream queries and U-Net latent features"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "LLaVAInstruct",
+    "InstructMMC4",
+    "LAION-COCO",
+    "Instruction-following data curated with GPT-4"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Unified autoregressive generation in raw multimodal space"
+   ],
+   "hardware_used": [
+    "NVIDIA A800 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DreamLLM"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "MEGVII"
+   ],
+   "parameters": [
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Internet multimodal corpora (interleaved image-text data)"
+   ],
+   "pretraining_task": [
+    "Multimodal generation (text and image posteriors)"
+   ],
+   "research_problem": [
+    "Multimodal comprehension and creation synergy"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [],
+   "vision_encoder": [
+    "CLIP"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DreamLLM": {
+    "application": {
+     "candidates": [
+      "Zero-shot multimodal generalist",
+      "interleaved document generation",
+      "visual-language comprehension",
+      "content creation"
+     ],
+     "accepted": [
+      "interleaved document generation",
+      "visual-language comprehension",
+      "content creation"
+     ],
+     "dropped": [
+      {
+       "value": "Zero-shot multimodal generalist",
+       "reason": "Describes a model capability or type, not a concrete application or domain."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "Vicuna (based on LLaMA)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vicuna (based on LLaMA)",
+       "reason": "Vicuna is a fine-tuned model, not an original pre-trained base model."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning",
+      "Supervised fine-tuning on instruction-following data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning on instruction-following data",
+       "reason": "Describes the fine-tuning process/method rather than the specific task or objective."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "MLLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "MLLM",
+       "reason": "MLLM is a general class/category of models, not a specific model lineage or family."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "GPT-4 curated instruction data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "GPT-4 curated instruction data",
+       "reason": "Names a dataset/data type rather than the method or technique used to generate it."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Stable Diffusion (SD) image decoder",
+      "CLIP"
+     ],
+     "accepted": [
+      "CLIP"
+     ],
+     "dropped": [
+      {
+       "value": "Stable Diffusion (SD) image decoder",
+       "reason": "Describes an image decoder component, not a vision encoder."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 21,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 21
+  }
+ },
+ "contributions": [
+  {
+   "label": "DreamLLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DreamLLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-09-20",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "MEGVII",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dream queries (learnable embeddings): encapsulates semantics encoded by MLLMs to condition a pretrained Stable Diffusion image decoder without altering the MLLM's output space, avoiding modality-specific conflicts from explicit CLIP-MLLM alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved Generative Pre-Training (I-GPT): uses a unique `<dream>` token to predict image placement within text, leveraging causal generation to model joint, marginal, and conditional distributions of images and texts, enabling synergistic comprehension and creation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal generation (text and image posteriors)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Internet multimodal corpora (interleaved image-text data)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A800 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128x NVIDIA A800 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Interleaved document generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual-language comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Content creation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/thunlp/DreamLLM",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal comprehension and creation synergy",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "30M pairs (Stage I), 4M pairs (Stage II), 120K samples (Stage III)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVAInstruct",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "InstructMMC4",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LAION-COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Instruction-following data curated with GPT-4",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention between dream queries and U-Net latent features",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining on interleaved multimodal data with joint learning objective; ablation studies compare creation-only, comprehension-only, and joint-learning approaches.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Unified autoregressive generation in raw multimodal space",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 35.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 56.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO FID: 8.46",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID: 8.46",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 49.1",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1777763",
+  "contribution_ids": [
+   "R1777765",
+   "R1923783"
+  ],
+  "new_contribution_ids": [
+   "R1923783"
+  ],
+  "comparison_updated": null
+ }
+}

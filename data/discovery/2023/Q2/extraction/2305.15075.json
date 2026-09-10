@@ -1,0 +1,641 @@
+{
+  "arxiv_id": "2305.15075",
+  "status": "completed",
+  "timestamp": "2026-08-28T04:24:52.481677",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2305.15075",
+    "title": "HuatuoGPT, towards Taming Language Model to Be a Doctor",
+    "authors": [
+      "Hongbo Zhang",
+      "Junying Chen",
+      "Feng Jiang",
+      "Fei Yu",
+      "Zhihong Chen",
+      "Jianquan Li",
+      "Guiming Chen",
+      "Xiangbo Wu",
+      "Zhiyi Zhang",
+      "Qingying Xiao",
+      "Xiang Wan",
+      "Benyou Wang",
+      "Haizhou Li"
+    ],
+    "abstract": "In this paper, we present HuatuoGPT, a large language model (LLM) for medical consultation. The core recipe of HuatuoGPT is to leverage both \\textit{distilled data from ChatGPT} and \\textit{real-world data from doctors} in the supervised fine-tuned stage. The responses of ChatGPT are usually detailed, well-presented and informative while it cannot perform like a doctor in many aspects, e.g. for integrative diagnosis. We argue that real-world data from doctors would be complementary to distilled data in the sense the former could tame a distilled language model to perform like doctors. To better leverage the strengths of both data, we train a reward model to align the language model with the merits that both data bring, following an RLAIF (reinforced learning from AI feedback) fashion. To evaluate and benchmark the models, we propose a comprehensive evaluation scheme (including automatic and manual metrics). Experimental results demonstrate that HuatuoGPT achieves state-of-the-art results in performing medical consultation among open-source LLMs in GPT-4 evaluation, human evaluation, and medical benchmark datasets. It is worth noting that by using additional real-world data and RLAIF, the distilled language model (i.e., HuatuoGPT) outperforms its teacher model ChatGPT in most cases. Our code, data, and models are publicly available at \\url{https://github.com/FreedomIntelligence/HuatuoGPT}. The online demo is available at \\url{https://www.HuatuoGPT.cn/}.",
+    "published": "2023-05-24T11:56:01+00:00",
+    "updated": "2023-05-24T11:56:01+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2305.15075v1",
+    "entry_id": "http://arxiv.org/abs/2305.15075v1",
+    "pdf_path": "data/papers/2305.15075.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 59179,
+  "word_count": 3101,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "HuatuoGPT",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "model_family": "GPT",
+      "date_created": "2023-05-24",
+      "organization": "Google",
+      "innovation": "Reinforcement Learning with AI Feedback (RLAIF): replaces costly human feedback with an LLM-based reward model that scores responses on informativeness, coherence, and factual accuracy, then applies PPO with a KL penalty to align the model; Hybrid SFT Data: combines real doctor-patient conversations with LLM-refined synthetic data to enhance response quality and reduce overly colloquial outputs.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "100K UAKE-QIC questions, real-world medical consultation data, distilled medical data",
+      "finetuning_task": "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning from AI Feedback (RLAIF), Supervised fine-tuning (SFT) followed by Reinforcement Learning with AI Feedback (RLAIF), Instruction tuning, reinforcement learning with AI model feedback",
+      "optimizer": null,
+      "hardware_used": "NVIDIA A100 GPU",
+      "extension": "Two-stage training strategy: SFT with hybrid data (ChatGPT distilled + real-world doctor-patient) followed by RLAIF to mitigate weaknesses of both data sources.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Medical language understanding and doctor-patient dialogue simulation",
+      "application": "Medical question answering, doctor consultation simulation, health advice",
+      "paper_title": "HuatuoGPT, towards Taming Language Model to Be a Doctor",
+      "training_corpus_size": "54,000 biomedical examples",
+      "finetuning_data": "Distilled instructions (61,400), Real-world instructions (69,768), Distilled conversations (68,888), Real-world conversations (25,986), Huatuo-26M, cMedQA2, webMedQA, Chinese Alpaca dataset, ShareGPT, 54, 000 biomedical examples, ROCO dataset",
+      "tokenizer": null,
+      "supported_language": "Chinese",
+      "hardware_description": "8 A100 GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/FreedomIntelligence/HuatuoGPT",
+      "context_length": null,
+      "activated_parameters": "7B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": "2048",
+      "context_extension_method": null,
+      "training_pipeline": "SFT with hybrid distilled and real-world data -> RLAIF",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Self-instruct for distilled instructions; two ChatGPTs role-playing doctor and patient for distilled conversations, LLM-based refinement of real doctor-patient conversations to enhance and refine data, Model-generated dataset comprising manually filtered 54, 000 biomedical examples",
+      "rl_algorithm": "RLAIF, PPO",
+      "reward_mechanism": "AI feedback, LLM-scored reward model trained on paired responses (informativeness, coherence, preference, factual accuracy), AI model feedback",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": "Microsoft GIT model fine-tuned on ROCO",
+      "base_model": "ChatGPT (distilled)",
+      "optimizer_innovation": null,
+      "benchmark_result": "HuatuoGPT vs BenTsao: 100% win; vs DoctorGLM: 98% win (single-turn), 86% win (multi-turn); vs ChatGPT: 52% win (single-turn), 58% win (multi-turn); vs GPT-4: 10.5% win (single-turn); cMedQA2 BLEU-1: 25.37, ROUGE-1: 27.75; webMedQA BLEU-1: 24.61, ROUGE-1: 27.38; Huatuo-26M BLEU-1: 25.16, ROUGE-1: 27.76",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "HuatuoGPT": {
+      "application": [
+        "Medical question answering",
+        "doctor consultation simulation",
+        "health advice"
+      ],
+      "base_model": [
+        "ChatGPT (distilled)"
+      ],
+      "finetuning_data": [
+        "Distilled instructions (61,400)",
+        "Real-world instructions (69,768)",
+        "Distilled conversations (68,888)",
+        "Real-world conversations (25,986)",
+        "Huatuo-26M",
+        "cMedQA2",
+        "webMedQA",
+        "Chinese Alpaca dataset",
+        "ShareGPT",
+        "ROCO dataset"
+      ],
+      "finetuning_task": [
+        "Instruction tuning"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "GPT"
+      ],
+      "model_name": [
+        "HuatuoGPT"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "100K UAKE-QIC questions"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Medical language understanding and doctor-patient dialogue simulation"
+      ],
+      "reward_mechanism": [
+        "AI feedback",
+        "LLM-scored reward model trained on paired responses (informativeness, coherence, preference, factual accuracy)",
+        "AI model feedback"
+      ],
+      "rl_algorithm": [
+        "PPO"
+      ],
+      "supported_language": [
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [
+        "Self-instruct for distilled instructions",
+        "two ChatGPTs role-playing doctor and patient for distilled conversations",
+        "LLM-based refinement of real doctor-patient conversations to enhance and refine data"
+      ],
+      "vision_encoder": [
+        "Microsoft GIT model fine-tuned on ROCO"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "HuatuoGPT": {
+        "finetuning_data": {
+          "candidates": [
+            "Distilled instructions (61,400)",
+            "Real-world instructions (69,768)",
+            "Distilled conversations (68,888)",
+            "Real-world conversations (25,986)",
+            "Huatuo-26M",
+            "cMedQA2",
+            "webMedQA",
+            "Chinese Alpaca dataset",
+            "ShareGPT",
+            "54",
+            "000 biomedical examples",
+            "ROCO dataset"
+          ],
+          "accepted": [
+            "Distilled instructions (61,400)",
+            "Real-world instructions (69,768)",
+            "Distilled conversations (68,888)",
+            "Real-world conversations (25,986)",
+            "Huatuo-26M",
+            "cMedQA2",
+            "webMedQA",
+            "Chinese Alpaca dataset",
+            "ShareGPT",
+            "ROCO dataset"
+          ],
+          "dropped": [
+            {
+              "value": "54",
+              "reason": "Not a dataset name; appears to be a truncated number/fragment."
+            },
+            {
+              "value": "000 biomedical examples",
+              "reason": "Descriptive phrase/fragment rather than a named dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning from AI Feedback (RLAIF)",
+            "Supervised fine-tuning (SFT) followed by Reinforcement Learning with AI Feedback (RLAIF)",
+            "Instruction tuning",
+            "reinforcement learning with AI model feedback"
+          ],
+          "accepted": [
+            "Instruction tuning"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning from AI Feedback (RLAIF)",
+              "reason": "Describes a training pipeline/method, not a specific task or objective."
+            },
+            {
+              "value": "Supervised fine-tuning (SFT) followed by Reinforcement Learning with AI Feedback (RLAIF)",
+              "reason": "Describes a training pipeline/method, not a specific task or objective."
+            },
+            {
+              "value": "reinforcement learning with AI model feedback",
+              "reason": "Describes a training method/phase, not a specific task or objective."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "100K UAKE-QIC questions",
+            "real-world medical consultation data",
+            "distilled medical data"
+          ],
+          "accepted": [
+            "100K UAKE-QIC questions"
+          ],
+          "dropped": [
+            {
+              "value": "real-world medical consultation data",
+              "reason": "Descriptive phrase rather than a named dataset or corpus."
+            },
+            {
+              "value": "distilled medical data",
+              "reason": "Descriptive phrase rather than a named dataset or corpus."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "RLAIF",
+            "PPO"
+          ],
+          "accepted": [
+            "PPO"
+          ],
+          "dropped": [
+            {
+              "value": "RLAIF",
+              "reason": "Describes a training paradigm/method rather than a specific RL algorithm (e.g., PPO, DPO)."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Self-instruct for distilled instructions",
+            "two ChatGPTs role-playing doctor and patient for distilled conversations",
+            "LLM-based refinement of real doctor-patient conversations to enhance and refine data",
+            "Model-generated dataset comprising manually filtered 54",
+            "000 biomedical examples"
+          ],
+          "accepted": [
+            "Self-instruct for distilled instructions",
+            "two ChatGPTs role-playing doctor and patient for distilled conversations",
+            "LLM-based refinement of real doctor-patient conversations to enhance and refine data"
+          ],
+          "dropped": [
+            {
+              "value": "Model-generated dataset comprising manually filtered 54",
+              "reason": "Sentence fragment/descriptive phrase rather than a method name."
+            },
+            {
+              "value": "000 biomedical examples",
+              "reason": "Not a method; appears to be a truncated number/fragment."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 34,
+      "dropped": 10,
+      "llm_calls": 1,
+      "values_sent_to_llm": 33
+    }
+  },
+  "contributions": [
+    {
+      "label": "HuatuoGPT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "HuatuoGPT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GPT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-05-24",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Reinforcement Learning with AI Feedback (RLAIF): replaces costly human feedback with an LLM-based reward model that scores responses on informativeness, coherence, and factual accuracy, then applies PPO with a KL penalty to align the model",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid SFT Data: combines real doctor-patient conversations with LLM-refined synthetic data to enhance response quality and reduce overly colloquial outputs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "100K UAKE-QIC questions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "8 A100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Medical question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Doctor consultation simulation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Health advice",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/FreedomIntelligence/HuatuoGPT",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Medical language understanding and doctor-patient dialogue simulation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "54,000 biomedical examples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Distilled instructions (61,400)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Real-world instructions (69,768)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Distilled conversations (68,888)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Real-world conversations (25,986)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Huatuo-26M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMedQA2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WebMedQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Chinese Alpaca dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ROCO dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2048",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "SFT with hybrid distilled and real-world data -> RLAIF",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Self-instruct for distilled instructions",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Two ChatGPTs role-playing doctor and patient for distilled conversations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "LLM-based refinement of real doctor-patient conversations to enhance and refine data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "PPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "AI feedback",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "LLM-scored reward model trained on paired responses (informativeness, coherence, preference, factual accuracy)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "AI model feedback",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Microsoft GIT model fine-tuned on ROCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "ChatGPT (distilled)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HuatuoGPT vs BenTsao: 100% win",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Vs DoctorGLM: 98% win (single-turn), 86% win (multi-turn)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Vs ChatGPT: 52% win (single-turn), 58% win (multi-turn)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Vs GPT-4: 10.5% win (single-turn)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMedQA2 BLEU-1: 25.37, ROUGE-1: 27.75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WebMedQA BLEU-1: 24.61, ROUGE-1: 27.38",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Huatuo-26M BLEU-1: 25.16, ROUGE-1: 27.76",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925773",
+    "contribution_ids": [
+      "R1925775"
+    ],
+    "new_contribution_ids": [
+      "R1925775"
+    ],
+    "comparison_updated": null
+  }
+}

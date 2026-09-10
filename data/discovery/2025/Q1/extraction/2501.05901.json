@@ -1,0 +1,1194 @@
+{
+  "arxiv_id": "2501.05901",
+  "status": "completed",
+  "timestamp": "2026-08-29T17:47:16.017492",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2501.05901",
+    "title": "Valley2: Exploring Multimodal Models with Scalable Vision-Language Design",
+    "authors": [
+      "Ziheng Wu",
+      "Zhenghao Chen",
+      "Ruipu Luo",
+      "Can Zhang",
+      "Yuan Gao",
+      "Zhentao He",
+      "Xian Wang",
+      "Haoran Lin",
+      "Minghui Qiu"
+    ],
+    "abstract": "Recently, vision-language models have made remarkable progress, demonstrating outstanding capabilities in various tasks such as image captioning and video understanding. We introduce Valley2, a novel multimodal large language model designed to enhance performance across all domains and extend the boundaries of practical applications in e-commerce and short video scenarios. Notably, Valley2 achieves state-of-the-art (SOTA) performance on e-commerce benchmarks, surpassing open-source models of similar size by a large margin (79.66 vs. 72.76). Additionally, Valley2 ranks second on the OpenCompass leaderboard among models with fewer than 10B parameters, with an impressive average score of 67.4. The code and model weights are open-sourced at https://github.com/bytedance/Valley.",
+    "published": "2025-01-10T11:53:46+00:00",
+    "updated": "2025-01-13T02:34:19+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2501.05901v2",
+    "entry_id": "http://arxiv.org/abs/2501.05901v2",
+    "pdf_path": "data/papers/2501.05901.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 51380,
+  "word_count": 2800,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "Valley 2",
+      "parameters": "8B, 8.9B",
+      "parameters_millions": 8900,
+      "model_family": "Valley2",
+      "date_created": "2025-01-10",
+      "organization": null,
+      "innovation": "ConvAdapter: Replaces PixelShuffle with a lightweight convolution operation to downsample visual tokens by a factor of 2 without expanding dimensions, reducing projector parameters and improving training stability; Eagle Module: Uses a parallel vision encoder to reduce tiling-induced distortions, handle extreme aspect ratios, and dynamically adapt token counts during inference for high/low-resolution versatility; High-Resolution Tiling: Carefully designed strategy to regulate token counts across modalities efficiently.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Image-text alignment, visual instruction tuning",
+      "pretraining_corpus": "Emu2-generated captions, CC3M, Flickr30k, GRIT, BLIP3-GROUNDING-50M, BLIP3-OCR-200M, MMC4, OpenVid-1M, vript, Vision-Flan, LLaVA-158K, VQA-RAD, ST-VQA, Hateful Memes, RefCOCO, TallyQA, ShareGPT4V, CLEVR, IconQA, LLaVAR, COCO Caption, VQAv2, ScienceQA, ALLaVA Inst, Image Textualization, VizWiz, AOKVQA, LLaVA-Wild, Visual7W, VSR, CocoCaption, OKVQA, ShareGPT4o, WebSight, InterGPS, Inhouse Ecom-Data, Geo170KAlign, CLEVR-Math, Geometry3K, Super-CLEVR, GQA, RAVEN, Visual Genome, MathQA, MAVIS Data Engine, TabMW",
+      "finetuning_task": "Visual instruction tuning, multimodal reasoning, Instruction fine-tuning, chain-of-thought reasoning",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "ConvAdapter introduces a lightweight parameterized structure to compress vision tokens along the spatial dimension via a 2x2 convolution, preserving the dimension D and thereby reducing the MLP's computational cost compared to PixelShuffle.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal vision-language understanding, e-commerce and short-video domain understanding, complex problem-solving",
+      "application": "E-commerce content understanding, short-video understanding, general multimodal tasks, OCR, document understanding, visual instruction following",
+      "paper_title": "Valley2: Exploring Multimodal Models with Scalable Vision-Language Design",
+      "training_corpus_size": "15.65M samples (7.5M + 6.35M + 1.8M)",
+      "finetuning_data": "Vision-Flan, LLaVA-158K, VQA-RAD, ST-VQA, Hateful Memes, RefCOCO, TallyQA, ShareGPT4V, CLEVR, IconQA, LLaVAR, COCO Caption, VQAv2, ScienceQA, ALLaVA Inst, Image Textualization, VizWiz, AOKVQA, LLaVA-Wild, Visual7W, VSR, CocoCaption, OKVQA, ShareGPT4o, WebSight, InterGPS, Inhouse Ecom-Data, Geo170KAlign, CLEVR-Math, Geometry3K, Super-CLEVR, GQA, RAVEN, Visual Genome, MathQA, MAVIS Data Engine, TabMW, Ecom-Caption, Ecom-VQA, OpenCompass, LLaVA-CoT-100k",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "8.9B (dense)",
+      "attention_mechanism": null,
+      "context_length_max": "1,000 to 2,000 tokens for single-image inference",
+      "context_extension_method": null,
+      "training_pipeline": "Text-vision alignment -> High-Quality Knowledge Learning -> Visual Instruction Tuning",
+      "reasoning_mode": "Chain-of-thought (CoT) reasoning, activated via 'Please think step by step' prompt",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Emu2-generated text-vision aligning data",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP projector with ConvAdapter connecting vision encoder to LLM backbone",
+      "vision_encoder": "SigLIP, Eagle Module (parallel vision encoder), Qwen2VL (Eagle version); standard vision encoder (Standard version), Standard vision encoder",
+      "base_model": "Qwen2.5",
+      "optimizer_innovation": null,
+      "benchmark_result": "Ecom-Caption: 37.45; Ecom-VQA: 79.66; OpenCompass: 66.11; Ecom-Caption: 36.97; Ecom-VQA: 74.44; OpenCompass: 63.15",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Valley 2": {
+      "application": [
+        "E-commerce content understanding",
+        "short-video understanding",
+        "OCR",
+        "document understanding",
+        "visual instruction following"
+      ],
+      "base_model": [
+        "Qwen2.5"
+      ],
+      "finetuning_data": [
+        "Vision-Flan",
+        "LLaVA-158K",
+        "VQA-RAD",
+        "ST-VQA",
+        "Hateful Memes",
+        "RefCOCO",
+        "TallyQA",
+        "ShareGPT4V",
+        "CLEVR",
+        "IconQA",
+        "LLaVAR",
+        "COCO Caption",
+        "VQAv2",
+        "ScienceQA",
+        "ALLaVA Inst",
+        "Image Textualization",
+        "VizWiz",
+        "AOKVQA",
+        "LLaVA-Wild",
+        "Visual7W",
+        "VSR",
+        "CocoCaption",
+        "OKVQA",
+        "ShareGPT4o",
+        "WebSight",
+        "InterGPS",
+        "Inhouse Ecom-Data",
+        "Geo170KAlign",
+        "CLEVR-Math",
+        "Geometry3K",
+        "Super-CLEVR",
+        "GQA",
+        "RAVEN",
+        "Visual Genome",
+        "MathQA",
+        "MAVIS Data Engine",
+        "TabMW",
+        "Ecom-Caption",
+        "Ecom-VQA",
+        "LLaVA-CoT-100k"
+      ],
+      "finetuning_task": [
+        "Visual instruction tuning",
+        "multimodal reasoning",
+        "Instruction fine-tuning",
+        "chain-of-thought reasoning"
+      ],
+      "fusion_architecture": [
+        "MLP projector with ConvAdapter connecting vision encoder to LLM backbone"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [],
+      "model_name": [
+        "Valley 2"
+      ],
+      "parameters": [
+        "8B",
+        "8.9B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Emu2-generated captions",
+        "CC3M",
+        "Flickr30k",
+        "GRIT",
+        "BLIP3-GROUNDING-50M",
+        "BLIP3-OCR-200M",
+        "MMC4",
+        "OpenVid-1M",
+        "vript",
+        "Vision-Flan",
+        "LLaVA-158K",
+        "VQA-RAD",
+        "ST-VQA",
+        "Hateful Memes",
+        "RefCOCO",
+        "TallyQA",
+        "ShareGPT4V",
+        "CLEVR",
+        "IconQA",
+        "LLaVAR",
+        "COCO Caption",
+        "VQAv2",
+        "ScienceQA",
+        "ALLaVA Inst",
+        "Image Textualization",
+        "VizWiz",
+        "AOKVQA",
+        "LLaVA-Wild",
+        "Visual7W",
+        "VSR",
+        "CocoCaption",
+        "OKVQA",
+        "ShareGPT4o",
+        "WebSight",
+        "InterGPS",
+        "Inhouse Ecom-Data",
+        "Geo170KAlign",
+        "CLEVR-Math",
+        "Geometry3K",
+        "Super-CLEVR",
+        "GQA",
+        "RAVEN",
+        "Visual Genome",
+        "MathQA",
+        "MAVIS Data Engine",
+        "TabMW"
+      ],
+      "pretraining_task": [
+        "Image-text alignment, visual instruction tuning"
+      ],
+      "reasoning_mode": [
+        "Chain-of-thought (CoT) reasoning, activated via 'Please think step by step' prompt"
+      ],
+      "research_problem": [
+        "Multimodal vision-language understanding",
+        "e-commerce and short-video domain understanding",
+        "complex problem-solving"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "SigLIP",
+        "Eagle Module (parallel vision encoder)",
+        "standard vision encoder (Standard version)",
+        "Standard vision encoder"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Valley 2": {
+        "application": {
+          "candidates": [
+            "E-commerce content understanding",
+            "short-video understanding",
+            "general multimodal tasks",
+            "OCR",
+            "document understanding",
+            "visual instruction following"
+          ],
+          "accepted": [
+            "E-commerce content understanding",
+            "short-video understanding",
+            "OCR",
+            "document understanding",
+            "visual instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "general multimodal tasks",
+              "reason": "Vague placeholder, not a concrete task or domain. (cached)"
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Vision-Flan",
+            "LLaVA-158K",
+            "VQA-RAD",
+            "ST-VQA",
+            "Hateful Memes",
+            "RefCOCO",
+            "TallyQA",
+            "ShareGPT4V",
+            "CLEVR",
+            "IconQA",
+            "LLaVAR",
+            "COCO Caption",
+            "VQAv2",
+            "ScienceQA",
+            "ALLaVA Inst",
+            "Image Textualization",
+            "VizWiz",
+            "AOKVQA",
+            "LLaVA-Wild",
+            "Visual7W",
+            "VSR",
+            "CocoCaption",
+            "OKVQA",
+            "ShareGPT4o",
+            "WebSight",
+            "InterGPS",
+            "Inhouse Ecom-Data",
+            "Geo170KAlign",
+            "CLEVR-Math",
+            "Geometry3K",
+            "Super-CLEVR",
+            "GQA",
+            "RAVEN",
+            "Visual Genome",
+            "MathQA",
+            "MAVIS Data Engine",
+            "TabMW",
+            "Ecom-Caption",
+            "Ecom-VQA",
+            "OpenCompass",
+            "LLaVA-CoT-100k"
+          ],
+          "accepted": [
+            "Vision-Flan",
+            "LLaVA-158K",
+            "VQA-RAD",
+            "ST-VQA",
+            "Hateful Memes",
+            "RefCOCO",
+            "TallyQA",
+            "ShareGPT4V",
+            "CLEVR",
+            "IconQA",
+            "LLaVAR",
+            "COCO Caption",
+            "VQAv2",
+            "ScienceQA",
+            "ALLaVA Inst",
+            "Image Textualization",
+            "VizWiz",
+            "AOKVQA",
+            "LLaVA-Wild",
+            "Visual7W",
+            "VSR",
+            "CocoCaption",
+            "OKVQA",
+            "ShareGPT4o",
+            "WebSight",
+            "InterGPS",
+            "Inhouse Ecom-Data",
+            "Geo170KAlign",
+            "CLEVR-Math",
+            "Geometry3K",
+            "Super-CLEVR",
+            "GQA",
+            "RAVEN",
+            "Visual Genome",
+            "MathQA",
+            "MAVIS Data Engine",
+            "TabMW",
+            "Ecom-Caption",
+            "Ecom-VQA",
+            "LLaVA-CoT-100k"
+          ],
+          "dropped": [
+            {
+              "value": "OpenCompass",
+              "reason": "It is an evaluation benchmark, not a fine-tuning dataset."
+            }
+          ]
+        },
+        "model_family": {
+          "candidates": [
+            "Valley2"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Valley2",
+              "reason": "It is a specific model name, not a broader model lineage or category."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Emu2-generated text-vision aligning data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Emu2-generated text-vision aligning data",
+              "reason": "Describes the generated data itself rather than the generation method or technique."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "SigLIP",
+            "Eagle Module (parallel vision encoder)",
+            "Qwen2VL (Eagle version)",
+            "standard vision encoder (Standard version)",
+            "Standard vision encoder"
+          ],
+          "accepted": [
+            "SigLIP",
+            "Eagle Module (parallel vision encoder)",
+            "standard vision encoder (Standard version)",
+            "Standard vision encoder"
+          ],
+          "dropped": [
+            {
+              "value": "Qwen2VL (Eagle version)",
+              "reason": "It refers to a full model rather than a specific vision encoder component."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 111,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 54
+    }
+  },
+  "contributions": [
+    {
+      "label": "Valley 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Valley 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-01-10",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "ConvAdapter: Replaces PixelShuffle with a lightweight convolution operation to downsample visual tokens by a factor of 2 without expanding dimensions, reducing projector parameters and improving training stability",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Eagle Module: Uses a parallel vision encoder to reduce tiling-induced distortions, handle extreme aspect ratios, and dynamically adapt token counts during inference for high/low-resolution versatility",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "High-Resolution Tiling: Carefully designed strategy to regulate token counts across modalities efficiently.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text alignment, visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Emu2-generated captions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC3M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "GRIT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BLIP3-GROUNDING-50M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BLIP3-OCR-200M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MMC4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OpenVid-1M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Vript",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Vision-Flan",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-158K",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQA-RAD",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ST-VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Hateful Memes",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "TallyQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGPT4V",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CLEVR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "IconQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVAR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO Caption",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQAv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ScienceQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ALLaVA Inst",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Image Textualization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VizWiz",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "AOKVQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-Wild",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual7W",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VSR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CocoCaption",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OKVQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGPT4o",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebSight",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "InterGPS",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Inhouse Ecom-Data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Geo170KAlign",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CLEVR-Math",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Geometry3K",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Super-CLEVR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "GQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RAVEN",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual Genome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MathQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MAVIS Data Engine",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "TabMW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction fine-tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Chain-of-thought reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8900,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "E-commerce content understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Short-video understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal vision-language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "E-commerce and short-video domain understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Complex problem-solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "15.65M samples (7.5M + 6.35M + 1.8M)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Vision-Flan",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-158K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA-RAD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ST-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Hateful Memes",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TallyQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLEVR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "IconQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVAR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO Caption",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ScienceQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ALLaVA Inst",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Image Textualization",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VizWiz",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AOKVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Wild",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual7W",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VSR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CocoCaption",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OKVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT4o",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WebSight",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "InterGPS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Inhouse Ecom-Data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Geo170KAlign",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLEVR-Math",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Geometry3K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Super-CLEVR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RAVEN",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual Genome",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MathQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MAVIS Data Engine",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TabMW",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Ecom-Caption",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Ecom-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-CoT-100k",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "8.9B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1,000 to 2,000 tokens for single-image inference",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Text-vision alignment -> High-Quality Knowledge Learning -> Visual Instruction Tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Chain-of-thought (CoT) reasoning, activated via 'Please think step by step' prompt",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP projector with ConvAdapter connecting vision encoder to LLM backbone",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Eagle Module (parallel vision encoder)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Standard vision encoder (Standard version)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Standard vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen2.5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ecom-Caption: 37.45",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ecom-VQA: 79.66",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OpenCompass: 66.11",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ecom-Caption: 36.97",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ecom-VQA: 74.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OpenCompass: 63.15",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926663",
+    "contribution_ids": [
+      "R1926665"
+    ],
+    "new_contribution_ids": [
+      "R1926665"
+    ],
+    "comparison_updated": null
+  }
+}

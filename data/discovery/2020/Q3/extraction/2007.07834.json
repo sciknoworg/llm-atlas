@@ -1,0 +1,1289 @@
+{
+ "arxiv_id": "2007.07834",
+ "status": "completed",
+ "timestamp": "2026-08-24T21:01:28.766154",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2007.07834",
+  "title": "InfoXLM: An Information-Theoretic Framework for Cross-Lingual Language Model Pre-Training",
+  "authors": [
+   "Zewen Chi",
+   "Li Dong",
+   "Furu Wei",
+   "Nan Yang",
+   "Saksham Singhal",
+   "Wenhui Wang",
+   "Xia Song",
+   "Xian-Ling Mao",
+   "Heyan Huang",
+   "Ming Zhou"
+  ],
+  "abstract": "In this work, we present an information-theoretic framework that formulates cross-lingual language model pre-training as maximizing mutual information between multilingual-multi-granularity texts. The unified view helps us to better understand the existing methods for learning cross-lingual representations. More importantly, inspired by the framework, we propose a new pre-training task based on contrastive learning. Specifically, we regard a bilingual sentence pair as two views of the same meaning and encourage their encoded representations to be more similar than the negative examples. By leveraging both monolingual and parallel corpora, we jointly train the pretext tasks to improve the cross-lingual transferability of pre-trained models. Experimental results on several benchmarks show that our approach achieves considerably better performance. The code and pre-trained models are available at https://aka.ms/infoxlm.",
+  "published": "2020-07-15T16:58:01+00:00",
+  "updated": "2021-04-07T13:29:07+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2007.07834v2",
+  "entry_id": "http://arxiv.org/abs/2007.07834v2",
+  "pdf_path": "data/papers/2007.07834.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 49720,
+ "word_count": 5443,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "INFOXLM",
+   "parameters": "BASE, 560M, 2.8B",
+   "parameters_millions": 2800,
+   "model_family": "XLM",
+   "date_created": "2020-07-15",
+   "organization": "Microsoft",
+   "innovation": "Cross-lingual contrast (XLCO) and Translation Language Modeling (TLM) based on an information-theoretic framework to maximize sequence-level and context-sequence mutual information; applying XLCO on a universal layer (e.g., layer 8) rather than the last layer to avoid interference with TLM and improve cross-lingual representation alignment.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Multilingual Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-lingual contrastive pre-training (XLCO)",
+   "pretraining_corpus": "CC-100, MultiUN, IIT Bombay, OPUS, WikiMatrix",
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "optimizer": "Adam",
+   "hardware_used": "Nvidia DGX-2 stations",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Cross-lingual language model pre-training",
+   "application": "Cross-lingual natural language inference, cross-lingual question answering, cross-lingual sentence retrieval",
+   "paper_title": "InfoXLM: An Information-Theoretic Framework for Cross-Lingual Language Model Pre-Training",
+   "training_corpus_size": "94 languages (CCNet)",
+   "finetuning_data": "XNLI, MLQA, Tatoeba, SQuAD v1.1",
+   "tokenizer": "XLM-R vocabulary",
+   "supported_language": "100 languages, English, Spanish, German, Arabic, Hindi, Vietnamese, Chinese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training with MMLM, TLM, and XLCO",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "XLM-R",
+   "optimizer_innovation": null,
+   "benchmark_result": "XNLI test accuracy: 86.5, 82.6, 83.0, 82.3, 81.3, 82.4, 80.6, 79.5, 78.9, 81.0, 78.9, 80.7, 77.8, 73.3, 71.6, 80.0; XNLI Avg: 76.5; XNLI Translate-Train-All Avg: 80.0; MLQA F1/EM: 67.87/49.58; XNLI: 76.45; Cross-lingual transfer gap: 15.8; Tatoeba top-1 accuracy: 68.1/49.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12 (BASE), 16 (LARGE)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InfoXLM",
+   "parameters": "270M, 550M",
+   "parameters_millions": 550,
+   "model_family": "XLM",
+   "date_created": "2020-07-15",
+   "organization": "Microsoft",
+   "innovation": "Cross-lingual contrast (XLCO): maximizes mutual information between representations of parallel sentences to enhance cross-lingual transferability, differing from prior MMLM and TLM which only maximize token-level or translation-pair mutual information; Unified information-theoretic framework: formulates cross-lingual pre-training as mutual information maximization, providing a theoretical basis for combining MMLM, TLM, and XLCO.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Multilingual Masked Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-Lingual Contrast (XLCO)",
+   "pretraining_corpus": "Monolingual corpus, parallel corpora",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Cross-lingual language model pre-training",
+   "application": "Cross-lingual transfer, multilingual natural language understanding",
+   "paper_title": "InfoXLM: An Information-Theoretic Framework for Cross-Lingual Language Model Pre-Training",
+   "training_corpus_size": null,
+   "finetuning_data": "XNLI, MLQA",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English, Chinese, Spanish, French, German, Arabic, Russian, Japanese, Korean, Portuguese, Italian, Hindi, Turkish, Vietnamese, Thai, Indonesian, Polish, Dutch, Swedish, Norwegian, Danish, Finnish, Greek, Hebrew, Czech, Romanian, Hungarian, Bulgarian, Ukrainian, Serbian, Croatian, Slovak, Slovenian, Estonian, Latvian, Lithuanian, Maltese, Irish, Welsh, Basque, Catalan, Galician, Macedonian, Albanian, Bosnian, Persian, Urdu, Bengali, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Punjabi, Nepali, Sinhala, Burmese, Khmer, Lao, Mongolian, Tibetan, Uyghur, Kazakh, Kyrgyz, Tajik, Turkmen, Uzbek, Georgian, Armenian, Azerbaijani, Belarusian",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": "512",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "INFOXLM": {
+   "application": [
+    "Cross-lingual natural language inference",
+    "cross-lingual question answering",
+    "cross-lingual sentence retrieval"
+   ],
+   "base_model": [
+    "XLM-R"
+   ],
+   "finetuning_data": [
+    "XNLI",
+    "MLQA",
+    "Tatoeba",
+    "SQuAD v1.1"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "Nvidia DGX-2 stations"
+   ],
+   "model_family": [
+    "XLM"
+   ],
+   "model_name": [
+    "INFOXLM"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "560M",
+    "2.8B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "CC-100",
+    "MultiUN",
+    "OPUS",
+    "WikiMatrix"
+   ],
+   "pretraining_task": [
+    "Masked Multilingual Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-lingual contrastive pre-training (XLCO)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Spanish",
+    "German",
+    "Arabic",
+    "Hindi",
+    "Vietnamese",
+    "Chinese"
+   ]
+  },
+  "InfoXLM": {
+   "application": [
+    "Cross-lingual transfer",
+    "multilingual natural language understanding"
+   ],
+   "finetuning_data": [
+    "XNLI",
+    "MLQA"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "XLM"
+   ],
+   "model_name": [
+    "InfoXLM"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "270M",
+    "550M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multilingual Masked Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-Lingual Contrast (XLCO)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Spanish",
+    "French",
+    "German",
+    "Arabic",
+    "Russian",
+    "Japanese",
+    "Korean",
+    "Portuguese",
+    "Italian",
+    "Hindi",
+    "Turkish",
+    "Vietnamese",
+    "Thai",
+    "Indonesian",
+    "Polish",
+    "Dutch",
+    "Swedish",
+    "Norwegian",
+    "Danish",
+    "Finnish",
+    "Greek",
+    "Hebrew",
+    "Czech",
+    "Romanian",
+    "Hungarian",
+    "Bulgarian",
+    "Ukrainian",
+    "Serbian",
+    "Croatian",
+    "Slovak",
+    "Slovenian",
+    "Estonian",
+    "Latvian",
+    "Lithuanian",
+    "Maltese",
+    "Irish",
+    "Welsh",
+    "Basque",
+    "Catalan",
+    "Galician",
+    "Macedonian",
+    "Albanian",
+    "Bosnian",
+    "Persian",
+    "Urdu",
+    "Bengali",
+    "Tamil",
+    "Telugu",
+    "Kannada",
+    "Malayalam",
+    "Marathi",
+    "Gujarati",
+    "Punjabi",
+    "Nepali",
+    "Sinhala",
+    "Burmese",
+    "Khmer",
+    "Lao",
+    "Mongolian",
+    "Tibetan",
+    "Uyghur",
+    "Kazakh",
+    "Kyrgyz",
+    "Tajik",
+    "Turkmen",
+    "Uzbek",
+    "Georgian",
+    "Armenian",
+    "Azerbaijani",
+    "Belarusian"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "INFOXLM": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "BASE",
+      "560M",
+      "2.8B"
+     ],
+     "accepted": [
+      "560M",
+      "2.8B"
+     ],
+     "dropped": [
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "CC-100",
+      "MultiUN",
+      "IIT Bombay",
+      "OPUS",
+      "WikiMatrix"
+     ],
+     "accepted": [
+      "CC-100",
+      "MultiUN",
+      "OPUS",
+      "WikiMatrix"
+     ],
+     "dropped": [
+      {
+       "value": "IIT Bombay",
+       "reason": "Names an academic institution, not a dataset or corpus. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Cross-lingual language model pre-training"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-lingual language model pre-training",
+       "reason": "Describes a training method/task rather than a research problem or capability gap. (cached)"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "100 languages",
+      "English",
+      "Spanish",
+      "German",
+      "Arabic",
+      "Hindi",
+      "Vietnamese",
+      "Chinese"
+     ],
+     "accepted": [
+      "English",
+      "Spanish",
+      "German",
+      "Arabic",
+      "Hindi",
+      "Vietnamese",
+      "Chinese"
+     ],
+     "dropped": [
+      {
+       "value": "100 languages",
+       "reason": "counts languages instead of naming a specific language"
+      }
+     ]
+    }
+   },
+   "InfoXLM": {
+    "pretraining_corpus": {
+     "candidates": [
+      "Monolingual corpus",
+      "parallel corpora"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Monolingual corpus",
+       "reason": "describes a type of corpus rather than naming an identifiable dataset"
+      },
+      {
+       "value": "parallel corpora",
+       "reason": "describes a type of data rather than naming an identifiable dataset"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Cross-lingual language model pre-training"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-lingual language model pre-training",
+       "reason": "Describes a training method/task rather than a research problem or capability gap. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 113,
+   "dropped": 8,
+   "llm_calls": 1,
+   "values_sent_to_llm": 35
+  }
+ },
+ "contributions": [
+  {
+   "label": "INFOXLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "INFOXLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "XLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cross-lingual contrast (XLCO) and Translation Language Modeling (TLM) based on an information-theoretic framework to maximize sequence-level and context-sequence mutual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Applying XLCO on a universal layer (e.g., layer 8) rather than the last layer to avoid interference with TLM and improve cross-lingual representation alignment.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Multilingual Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-lingual contrastive pre-training (XLCO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-100",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MultiUN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPUS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WikiMatrix",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "XLM-R vocabulary",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "560M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 2800,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia DGX-2 stations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual sentence retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "94 languages (CCNet)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MLQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Tatoeba",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training with MMLM, TLM, and XLCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "XLM-R",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI test accuracy: 86.5, 82.6, 83.0, 82.3, 81.3, 82.4, 80.6, 79.5, 78.9, 81.0, 78.9, 80.7, 77.8, 73.3, 71.6, 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI Avg: 76.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI Translate-Train-All Avg: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MLQA F1/EM: 67.87/49.58",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI: 76.45",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Cross-lingual transfer gap: 15.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Tatoeba top-1 accuracy: 68.1/49.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12 (BASE), 16 (LARGE)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InfoXLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InfoXLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "XLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cross-lingual contrast (XLCO): maximizes mutual information between representations of parallel sentences to enhance cross-lingual transferability, differing from prior MMLM and TLM which only maximize token-level or translation-pair mutual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified information-theoretic framework: formulates cross-lingual pre-training as mutual information maximization, providing a theoretical basis for combining MMLM, TLM, and XLCO.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multilingual Masked Language Modeling (MMLM), Translation Language Modeling (TLM), Cross-Lingual Contrast (XLCO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "270M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "550M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 550,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MLQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dutch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swedish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Norwegian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Danish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Finnish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Greek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hebrew",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hungarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ukrainian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Serbian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Croatian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovak",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovenian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Estonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Latvian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Lithuanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Maltese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Irish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Welsh",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Basque",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Catalan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Galician",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Macedonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Albanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bosnian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Persian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tamil",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Telugu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kannada",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malayalam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Marathi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Gujarati",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Punjabi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Nepali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sinhala",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Burmese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Khmer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Lao",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Mongolian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tibetan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Uyghur",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kazakh",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kyrgyz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tajik",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkmen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Uzbek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Georgian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Armenian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Azerbaijani",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Belarusian",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R510029",
+  "contribution_ids": [
+   "R510030",
+   "R1920833",
+   "R1920846"
+  ],
+  "new_contribution_ids": [
+   "R1920833",
+   "R1920846"
+  ],
+  "comparison_updated": null
+ }
+}

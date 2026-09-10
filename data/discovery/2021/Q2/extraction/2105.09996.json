@@ -1,0 +1,443 @@
+{
+ "arxiv_id": "2105.09996",
+ "status": "completed",
+ "timestamp": "2026-08-25T00:32:18.655904",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2105.09996",
+  "title": "VLM: Task-agnostic Video-Language Model Pre-training for Video Understanding",
+  "authors": [
+   "Hu Xu",
+   "Gargi Ghosh",
+   "Po-Yao Huang",
+   "Prahal Arora",
+   "Masoumeh Aminzadeh",
+   "Christoph Feichtenhofer",
+   "Florian Metze",
+   "Luke Zettlemoyer"
+  ],
+  "abstract": "We present a simplified, task-agnostic multi-modal pre-training approach that can accept either video or text input, or both for a variety of end tasks. Existing pre-training are task-specific by adopting either a single cross-modal encoder that requires both modalities, limiting their use for retrieval-style end tasks or more complex multitask learning with two unimodal encoders, limiting early cross-modal fusion. We instead introduce new pretraining masking schemes that better mix across modalities (e.g. by forcing masks for text to predict the closest video embeddings) while also maintaining separability (e.g. unimodal predictions are sometimes required, without using all the input). Experimental results show strong performance across a wider range of tasks than any previous methods, often outperforming task-specific pre-training. Code is made available at https://github.com/pytorch/fairseq/tree/main/examples/MMPT.",
+  "published": "2021-05-20T19:13:27+00:00",
+  "updated": "2021-09-30T22:43:19+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2105.09996v3",
+  "entry_id": "http://arxiv.org/abs/2105.09996v3",
+  "pdf_path": "data/papers/2105.09996.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 45405,
+ "word_count": 4140,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "VLM",
+   "parameters": "110M",
+   "parameters_millions": 110,
+   "model_family": "VLM",
+   "date_created": "2021-05-20",
+   "organization": "Meta",
+   "innovation": "Masked modality model (MMM): randomly masks an entire modality (video or text) for a portion of training examples, forcing the encoder to predict the masked modality using tokens from the other modality; single masked token loss: replaces separate video and text masked token losses with a unified loss to improve cross-modal fusion while maintaining modality separability.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked modality modeling, masked token prediction",
+   "pretraining_corpus": "HowTo100M, ActivityNet, YouCook2, MSR-VTT, MSVD",
+   "finetuning_task": "Text-video retrieval, video captioning, action step localization, video question answering",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Video-Language Model Pre-training for Video Understanding",
+   "application": "text-video retrieval, video captioning, action step localization, video question answering",
+   "paper_title": "VLM: Task-agnostic Video-Language Model Pre-training for Video Understanding",
+   "training_corpus_size": null,
+   "finetuning_data": "Youcook2, CrossTask, MSR-VTT",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/facebookresearch/fairseq/tree/main/examples/MMPT",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Self-attention with task-specific masks; cross-modal mapping in some heads",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Task-agnostic pre-training on joint video-text data -> fine-tuning with task-specific attention masks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Shared weights between video and text tokens; single masked language model",
+   "vision_encoder": "S3D",
+   "base_model": "BERT",
+   "optimizer_innovation": null,
+   "benchmark_result": "Youcook2 Video Captioning: B-3 17.78, B-4 12.27, M 18.22, R-L 41.51, CIDEr 1.3869; Youcook2 Text-based Video Retrieval: MedianR 27.05, w 56.88, m 69.38, r 4.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "VLM": {
+   "application": [
+    "text-video retrieval",
+    "video captioning",
+    "action step localization",
+    "video question answering"
+   ],
+   "attention_mechanism": [
+    "Self-attention with task-specific masks",
+    "cross-modal mapping in some heads"
+   ],
+   "base_model": [
+    "BERT"
+   ],
+   "finetuning_data": [
+    "Youcook2",
+    "CrossTask",
+    "MSR-VTT"
+   ],
+   "finetuning_task": [
+    "Text-video retrieval",
+    "video captioning",
+    "action step localization",
+    "video question answering"
+   ],
+   "fusion_architecture": [
+    "Shared weights between video and text tokens; single masked language model"
+   ],
+   "model_family": [
+    "VLM"
+   ],
+   "model_name": [],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "110M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "HowTo100M",
+    "ActivityNet",
+    "YouCook2",
+    "MSR-VTT",
+    "MSVD"
+   ],
+   "pretraining_task": [
+    "Masked modality modeling, masked token prediction"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "S3D"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "VLM": {
+    "model_name": {
+     "candidates": [
+      "VLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "VLM",
+       "reason": "Names a model category/type, not a specific model name. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Video-Language Model Pre-training for Video Understanding"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Video-Language Model Pre-training for Video Understanding",
+       "reason": "Describes a solution or methodology rather than the research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 28,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 11
+  }
+ },
+ "contributions": [
+  {
+   "label": "VLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "VLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-05-20",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Masked modality model (MMM): randomly masks an entire modality (video or text) for a portion of training examples, forcing the encoder to predict the masked modality using tokens from the other modality",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single masked token loss: replaces separate video and text masked token losses with a unified loss to improve cross-modal fusion while maintaining modality separability.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked modality modeling, masked token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HowTo100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ActivityNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YouCook2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSR-VTT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSVD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-video retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Action step localization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 110,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-video retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Action step localization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/MMPT",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Youcook2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CrossTask",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSR-VTT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention with task-specific masks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-modal mapping in some heads",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Task-agnostic pre-training on joint video-text data -> fine-tuning with task-specific attention masks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Shared weights between video and text tokens; single masked language model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "S3D",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Youcook2 Video Captioning: B-3 17.78, B-4 12.27, M 18.22, R-L 41.51, CIDEr 1.3869",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Youcook2 Text-based Video Retrieval: MedianR 27.05, w 56.88, m 69.38, r 4.0",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1747090",
+  "contribution_ids": [
+   "R1747092",
+   "R1921242"
+  ],
+  "new_contribution_ids": [
+   "R1921242"
+  ],
+  "comparison_updated": null
+ }
+}

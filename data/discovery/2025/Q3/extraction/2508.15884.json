@@ -1,0 +1,569 @@
+{
+  "arxiv_id": "2508.15884",
+  "status": "completed",
+  "timestamp": "2026-08-30T03:13:35.388741",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2508.15884",
+    "title": "Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search",
+    "authors": [
+      "Yuxian Gu",
+      "Qinghao Hu",
+      "Shang Yang",
+      "Haocheng Xi",
+      "Junyu Chen",
+      "Song Han",
+      "Han Cai"
+    ],
+    "abstract": "We present Jet-Nemotron, a new family of hybrid-architecture language models, which matches or exceeds the accuracy of leading full-attention models while significantly improving generation throughput. Jet-Nemotron is developed using Post Neural Architecture Search (PostNAS), a novel neural architecture exploration pipeline that enables efficient model design. Unlike prior approaches, PostNAS begins with a pre-trained full-attention model and freezes its MLP weights, allowing efficient exploration of attention block designs. The pipeline includes four key components: (1) learning optimal full-attention layer placement and elimination, (2) linear attention block selection, (3) designing new attention blocks, and (4) performing hardware-aware hyperparameter search. Our Jet-Nemotron-2B model achieves comparable or superior accuracy to Qwen3, Qwen2.5, Gemma3, and Llama3.2 across a comprehensive suite of benchmarks while delivering up to 53.6x generation throughput speedup and 6.1x prefilling speedup. It also achieves higher accuracy on MMLU and MMLU-Pro than recent advanced MoE full-attention models, such as DeepSeek-V3-Small and Moonlight, despite their larger scale with 15B total and 2.2B activated parameters.",
+    "published": "2025-08-21T17:59:08+00:00",
+    "updated": "2025-09-28T18:41:58+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2508.15884v3",
+    "entry_id": "http://arxiv.org/abs/2508.15884v3",
+    "pdf_path": "data/papers/2508.15884.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture and release)"
+  },
+  "text_length": 82816,
+  "word_count": 12266,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "Jet-Nemotron",
+      "parameters": "2B, 4B",
+      "parameters_millions": 4000,
+      "model_family": "Jet-Nemotron",
+      "date_created": "2025-08-21",
+      "organization": "NVIDIA",
+      "innovation": "Post Neural Architecture Search (PostNAS): begins with a pre-trained full-attention model and freezes its MLP weights to enable efficient exploration of attention block designs (optimal full-attention layer placement/elimination, linear attention block selection, new attention block design, hardware-aware hyperparameter search); differs from prior approaches by starting from a frozen pre-trained model rather than training from scratch, significantly reducing training costs while achieving O(n) generation complexity and matching SOTA full-attention accuracy.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Nemotron-CC, Redstone-QA, math and coding datasets",
+      "finetuning_task": "Distillation loss (Stage 1), full-model training (Stage 2)",
+      "optimizer": null,
+      "hardware_used": "NVIDIA H100 GPU",
+      "extension": "PostNAS pipeline freezes MLP weights of a pre-trained full-attention model and explores efficient attention block designs (full-attention layer placement/elimination, linear attention selection, new attention block design, hardware-aware hyperparameter search).",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Efficient language model design for long-context generation and reasoning, addressing O(n^2) self-attention computational complexity and large KV cache.",
+      "application": "Language modeling, retrieval, mathematical reasoning, coding, long-context tasks",
+      "paper_title": "Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search",
+      "training_corpus_size": "400B tokens",
+      "finetuning_data": "Math and coding datasets",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": "32 H100 GPUs in parallel",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "2B",
+      "attention_mechanism": "Hybrid architecture combining full attention and linear attention blocks (O(n) complexity), JetBlock (linear attention with dynamic causal convolution conditioned on input); mixed full and linear attention layers, JetBlock (linear attention with dynamic convolution); hybrid full/linear attention, JetBlock (linear attention based on Gated DeltaNet), full-attention layers, sliding window attention (SWA)",
+      "context_length_max": "64K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "PostNAS pipeline: starts from pre-trained full-attention model, freezes MLP, searches for optimal full-attention layer placement/elimination, selects/designs linear attention blocks, performs hardware-aware hyperparameter search.",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Pre-trained full-attention model",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU-Pro: higher accuracy than DeepSeek-V3-Small and Moonlight; Generation Throughput: 47x speedup (2B) and 45x speedup (4B) over baselines on H100 at 64K context; MMLU: 60.8; MMLU-Pro: 39.0; BBH: 58.3; GSM8K: 49.6; MATH: 76.2; MathQA: 23.3; GPQA: 32.1; +5.3 on MMLU, +8.4 on math, +7.8 on retrieval, +3.2 on commonsense reasoning; MMLU: 65.2; MMLU-Pro: 44.2; BBH: 65.0; GSM8K: 51.3; MATH: 78.7; MathQA: 25.2; GPQA: 34.6",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "12",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Jet-Nemotron": {
+      "application": [
+        "Language modeling",
+        "retrieval",
+        "mathematical reasoning",
+        "coding",
+        "long-context tasks"
+      ],
+      "attention_mechanism": [
+        "Hybrid architecture combining full attention and linear attention blocks (O(n) complexity)",
+        "JetBlock (linear attention with dynamic causal convolution conditioned on input)",
+        "mixed full and linear attention layers",
+        "JetBlock (linear attention with dynamic convolution)",
+        "hybrid full/linear attention",
+        "JetBlock (linear attention based on Gated DeltaNet)",
+        "full-attention layers",
+        "sliding window attention (SWA)"
+      ],
+      "base_model": [],
+      "finetuning_data": [
+        "Math and coding datasets"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "NVIDIA H100 GPU"
+      ],
+      "model_family": [
+        "Jet-Nemotron"
+      ],
+      "model_name": [
+        "Jet-Nemotron"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "2B",
+        "4B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Nemotron-CC",
+        "Redstone-QA"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Jet-Nemotron": {
+        "base_model": {
+          "candidates": [
+            "Pre-trained full-attention model"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pre-trained full-attention model",
+              "reason": "Describes a model type or category rather than a specific named base model."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Distillation loss (Stage 1)",
+            "full-model training (Stage 2)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Distillation loss (Stage 1)",
+              "reason": "Describes a training stage or optimization method, not a specific fine-tuning task."
+            },
+            {
+              "value": "full-model training (Stage 2)",
+              "reason": "Describes a training procedure rather than a specific fine-tuning task or objective."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Nemotron-CC",
+            "Redstone-QA",
+            "math and coding datasets"
+          ],
+          "accepted": [
+            "Nemotron-CC",
+            "Redstone-QA"
+          ],
+          "dropped": [
+            {
+              "value": "math and coding datasets",
+              "reason": "Describes a data type or domain rather than an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Efficient language model design for long-context generation and reasoning",
+            "addressing O(n^2) self-attention computational complexity and large KV cache."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Efficient language model design for long-context generation and reasoning",
+              "reason": "Describes a solution or design approach rather than naming the research problem directly."
+            },
+            {
+              "value": "addressing O(n^2) self-attention computational complexity and large KV cache.",
+              "reason": "Uses a verb phrase describing what is addressed rather than a noun phrase naming the problem."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 25,
+      "dropped": 6,
+      "llm_calls": 1,
+      "values_sent_to_llm": 19
+    }
+  },
+  "contributions": [
+    {
+      "label": "Jet-Nemotron",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Jet-Nemotron",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Jet-Nemotron",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-21",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Post Neural Architecture Search (PostNAS): begins with a pre-trained full-attention model and freezes its MLP weights to enable efficient exploration of attention block designs (optimal full-attention layer placement/elimination, linear attention block selection, new attention block design, hardware-aware hyperparameter search)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Differs from prior approaches by starting from a frozen pre-trained model rather than training from scratch, significantly reducing training costs while achieving O(n) generation complexity and matching SOTA full-attention accuracy.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Nemotron-CC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Redstone-QA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 4000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "32 H100 GPUs in parallel",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Coding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long-context tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "400B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Math and coding datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid architecture combining full attention and linear attention blocks (O(n) complexity)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "JetBlock (linear attention with dynamic causal convolution conditioned on input)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Mixed full and linear attention layers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "JetBlock (linear attention with dynamic convolution)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid full/linear attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "JetBlock (linear attention based on Gated DeltaNet)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Full-attention layers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Sliding window attention (SWA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "64K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "PostNAS pipeline: starts from pre-trained full-attention model, freezes MLP, searches for optimal full-attention layer placement/elimination, selects/designs linear attention blocks, performs hardware-aware hyperparameter search.",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: higher accuracy than DeepSeek-V3-Small and Moonlight",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Generation Throughput: 47x speedup (2B) and 45x speedup (4B) over baselines on H100 at 64K context",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 60.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 39.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH: 58.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 49.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 76.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathQA: 23.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 32.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "+5.3 on MMLU, +8.4 on math, +7.8 on retrieval, +3.2 on commonsense reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 65.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 44.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH: 65.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 51.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 78.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathQA: 25.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 34.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "12",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926978",
+    "contribution_ids": [
+      "R1926980"
+    ],
+    "new_contribution_ids": [
+      "R1926980"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,1252 @@
+{
+ "arxiv_id": "2203.02155",
+ "status": "completed",
+ "timestamp": "2026-08-25T05:09:41.964118",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2203.02155",
+  "title": "Training language models to follow instructions with human feedback",
+  "authors": [
+   "Long Ouyang",
+   "Jeff Wu",
+   "Xu Jiang",
+   "Diogo Almeida",
+   "Carroll L. Wainwright",
+   "Pamela Mishkin",
+   "Chong Zhang",
+   "Sandhini Agarwal",
+   "Katarina Slama",
+   "Alex Ray",
+   "John Schulman",
+   "Jacob Hilton",
+   "Fraser Kelton",
+   "Luke Miller",
+   "Maddie Simens",
+   "Amanda Askell",
+   "Peter Welinder",
+   "Paul Christiano",
+   "Jan Leike",
+   "Ryan Lowe"
+  ],
+  "abstract": "Making language models bigger does not inherently make them better at following a user's intent. For example, large language models can generate outputs that are untruthful, toxic, or simply not helpful to the user. In other words, these models are not aligned with their users. In this paper, we show an avenue for aligning language models with user intent on a wide range of tasks by fine-tuning with human feedback. Starting with a set of labeler-written prompts and prompts submitted through the OpenAI API, we collect a dataset of labeler demonstrations of the desired model behavior, which we use to fine-tune GPT-3 using supervised learning. We then collect a dataset of rankings of model outputs, which we use to further fine-tune this supervised model using reinforcement learning from human feedback. We call the resulting models InstructGPT. In human evaluations on our prompt distribution, outputs from the 1.3B parameter InstructGPT model are preferred to outputs from the 175B GPT-3, despite having 100x fewer parameters. Moreover, InstructGPT models show improvements in truthfulness and reductions in toxic output generation while having minimal performance regressions on public NLP datasets. Even though InstructGPT still makes simple mistakes, our results show that fine-tuning with human feedback is a promising direction for aligning language models with human intent.",
+  "published": "2022-03-04T07:04:42+00:00",
+  "updated": "2022-03-04T07:04:42+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2203.02155v1",
+  "entry_id": "http://arxiv.org/abs/2203.02155v1",
+  "pdf_path": "data/papers/2203.02155.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 170138,
+ "word_count": 9085,
+ "models_extracted": 17,
+ "extraction_data": [
+  {
+   "model_name": "InstructGPT",
+   "parameters": "70M, 350M, 1.3B, 1.55B, 3B, 6B, 6.7B, 6.8B, 7B, 13B, 175B",
+   "parameters_millions": 175000,
+   "model_family": "GPT",
+   "date_created": "2022-03-04",
+   "organization": "OpenAI",
+   "innovation": "Reinforcement Learning from Human Feedback (RLHF) pipeline: (1) Supervised fine-tuning (SFT) on human demonstrations to create a supervised policy; (2) Training a reward model (RM) on human preference comparisons; (3) Optimizing the policy against the RM using Proximal Policy Optimization (PPO) to align outputs with human preferences. Iterative refinement where comparison data is collected on the current best policy to train a new RM and policy.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "WebText2 (GPT-3 base), human preference data, human demonstrations",
+   "finetuning_task": "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF), Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF) using PPO, Supervised fine-tuning, Reward modeling, Reinforcement learning (PPO), Supervised fine-tuning (SFT) on instruction datasets; Reinforcement Learning from Human Feedback (RLHF) using PPO, Supervised fine-tuning on human-written demonstrations; RLHF fine-tuning, Reinforcement learning from human feedback (RLHF), Supervised fine-tuning on human demonstrations; Reinforcement learning from human feedback, Supervised fine-tuning (SFT) followed by RLHF (PPO)",
+   "optimizer": "Adam",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": "Trained via a two-stage process: supervised fine-tuning on human-written demonstrations, followed by reinforcement learning from human feedback (RLHF) using a reward model trained on human preferences.",
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Aligning language models with human intentions and improving instruction following.",
+   "application": "Instruction following, open-ended generation, brainstorming, classification, question answering, summarization, translation",
+   "paper_title": "Training language models to follow instructions with human feedback",
+   "training_corpus_size": "GPT-3 dataset (45GB text, 570B tokens)",
+   "finetuning_data": "Human demonstrations, human preference data (ranked responses), 1.3k human-written prompts, 20k API prompts, 20k human preference comparisons, SFT dataset (~13k prompts), RM dataset (~33k prompts), PPO dataset (~31k prompts), Human-labeled demonstrations and preference comparisons collected via Upwork and ScaleAI, API distribution prompts, human preference rankings, instruction-following datasets, Human-annotated instruction-following datasets, OpenAI API prompts, 17k human-written responses for SFT; 20k human comparisons for reward model",
+   "tokenizer": "Byte-Pair Encoding (BPE)",
+   "supported_language": "English",
+   "hardware_description": "4.9 petaflops/s-days for SFT, 60 petaflops/s-days for PPO-ptx",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "1.3B, 6B, 175B (dense)",
+   "attention_mechanism": "Multi-head self-attention, Standard multi-head attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning from Human Feedback (RLHF) via PPO",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "PPO (Proximal Policy Optimization), PPO, Proximal Policy Optimization (PPO)",
+   "reward_mechanism": "Reward model trained on human preference data (ranked responses) to provide dense rewards for PPO, Reward model trained on human pairwise comparisons of model outputs, Human preference rankings, Reward model trained on human preference comparisons (chosen vs rejected outputs), Reward model trained on human pairwise preferences (chosen vs rejected responses), Reward model trained on human preference rankings (chosen vs rejected completions), ranking them by helpfulness, honesty, and harmlessness, Reward model trained on human pairwise comparisons",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "RealToxicityPrompts, Winogender, CrowSPairs",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "GPT-3",
+   "optimizer_innovation": null,
+   "benchmark_result": "DROP f1 zero-shot 27.53; SQuADv2 f1 zero-shot 64.30; SST accuracy zero-shot 0.898; RTE accuracy zero-shot 0.563; WSC accuracy zero-shot 0.740; FR\u2192EN15 BLEU zero-shot 38.92; CNN/DM ROUGE-L 0.196; TLDR ROUGE-L 0.196; TruthfulQA: improved truthfulness and informativeness; RealToxicityPrompts: reduced toxicity under respectful prompts; Winogender/CrowS-Pairs: similar bias to GPT-3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "96",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GPT-3",
+   "parameters": "1.3B, 6B, 175B",
+   "parameters_millions": 175000,
+   "model_family": "GPT",
+   "date_created": "2022-03-04",
+   "organization": "OpenAI",
+   "innovation": "Instruction tuning via Supervised Fine-Tuning (SFT) on human-written prompts and responses, followed by Reinforcement Learning from Human Feedback (RLHF) using Proximal Policy Optimization (PPO) and a human-preference-trained reward model to align outputs with human intent, reducing toxicity and improving helpfulness compared to base GPT-3.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": null,
+   "finetuning_task": "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Aligning language models with human instructions and preferences",
+   "application": "Instruction following, text generation, toxicity reduction, human preference alignment",
+   "paper_title": "Training language models to follow instructions with human feedback",
+   "training_corpus_size": null,
+   "finetuning_data": "Human-written instruction/response pairs; ARC, BoolQ, CoQA, DROP, MultiNLI, OpenBookQA, QuAC, RACE, Winogrande",
+   "tokenizer": "Byte-pair encoding (BPE)",
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "SFT on human-written instruction/response pairs -> Reward Model training on human rankings -> PPO RL fine-tuning with KL penalty",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "fp16 weights and activations, with fp32 master copies",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "Proximal Policy Optimization (PPO)",
+   "reward_mechanism": "Reward model trained on human pairwise rankings of model outputs (Likert 1-7 scale, toxicity prioritized)",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "GPT-3",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 17,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "InstructGPT": {
+   "application": [
+    "Instruction following",
+    "open-ended generation",
+    "brainstorming",
+    "classification",
+    "question answering",
+    "summarization",
+    "translation"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Standard multi-head attention"
+   ],
+   "base_model": [
+    "GPT-3"
+   ],
+   "finetuning_data": [
+    "Human demonstrations",
+    "human preference data (ranked responses)",
+    "1.3k human-written prompts",
+    "20k API prompts",
+    "20k human preference comparisons",
+    "SFT dataset (~13k prompts)",
+    "RM dataset (~33k prompts)",
+    "PPO dataset (~31k prompts)",
+    "Human-labeled demonstrations and preference comparisons collected via Upwork and ScaleAI",
+    "API distribution prompts",
+    "human preference rankings",
+    "instruction-following datasets",
+    "Human-annotated instruction-following datasets",
+    "OpenAI API prompts",
+    "17k human-written responses for SFT",
+    "20k human comparisons for reward model"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+    "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF) using PPO",
+    "Reward modeling",
+    "Reinforcement learning (PPO)",
+    "Supervised fine-tuning (SFT) on instruction datasets",
+    "Reinforcement Learning from Human Feedback (RLHF) using PPO",
+    "Supervised fine-tuning on human-written demonstrations",
+    "RLHF fine-tuning",
+    "Reinforcement learning from human feedback (RLHF)",
+    "Supervised fine-tuning on human demonstrations",
+    "Reinforcement learning from human feedback",
+    "Supervised fine-tuning (SFT) followed by RLHF (PPO)"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "GPT"
+   ],
+   "model_name": [
+    "InstructGPT"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "parameters": [
+    "70M",
+    "350M",
+    "1.3B",
+    "1.55B",
+    "3B",
+    "6B",
+    "6.7B",
+    "6.8B",
+    "7B",
+    "13B",
+    "175B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "WebText2 (GPT-3 base)"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Aligning language models with human intentions and improving instruction following."
+   ],
+   "reward_mechanism": [
+    "Reward model trained on human preference data (ranked responses) to provide dense rewards for PPO",
+    "Reward model trained on human pairwise comparisons of model outputs",
+    "Human preference rankings",
+    "Reward model trained on human preference comparisons (chosen vs rejected outputs)",
+    "Reward model trained on human pairwise preferences (chosen vs rejected responses)",
+    "Reward model trained on human preference rankings (chosen vs rejected completions)",
+    "ranking them by helpfulness",
+    "honesty",
+    "harmlessness",
+    "Reward model trained on human pairwise comparisons"
+   ],
+   "rl_algorithm": [
+    "PPO (Proximal Policy Optimization)",
+    "PPO",
+    "Proximal Policy Optimization (PPO)"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "GPT-3": {
+   "application": [
+    "Instruction following",
+    "text generation",
+    "toxicity reduction",
+    "human preference alignment"
+   ],
+   "base_model": [
+    "GPT-3"
+   ],
+   "finetuning_data": [
+    "Human-written instruction/response pairs",
+    "ARC",
+    "BoolQ",
+    "CoQA",
+    "DROP",
+    "MultiNLI",
+    "OpenBookQA",
+    "QuAC",
+    "RACE",
+    "Winogrande"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "GPT"
+   ],
+   "model_name": [
+    "GPT-3"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "parameters": [
+    "1.3B",
+    "6B",
+    "175B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "fp16 weights and activations"
+   ],
+   "research_problem": [
+    "Aligning language models with human instructions and preferences"
+   ],
+   "reward_mechanism": [
+    "Reward model trained on human pairwise rankings of model outputs (Likert 1-7 scale, toxicity prioritized)"
+   ],
+   "rl_algorithm": [
+    "Proximal Policy Optimization (PPO)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "InstructGPT": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+      "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF) using PPO",
+      "Supervised fine-tuning",
+      "Reward modeling",
+      "Reinforcement learning (PPO)",
+      "Supervised fine-tuning (SFT) on instruction datasets",
+      "Reinforcement Learning from Human Feedback (RLHF) using PPO",
+      "Supervised fine-tuning on human-written demonstrations",
+      "RLHF fine-tuning",
+      "Reinforcement learning from human feedback (RLHF)",
+      "Supervised fine-tuning on human demonstrations",
+      "Reinforcement learning from human feedback",
+      "Supervised fine-tuning (SFT) followed by RLHF (PPO)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+      "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF) using PPO",
+      "Reward modeling",
+      "Reinforcement learning (PPO)",
+      "Supervised fine-tuning (SFT) on instruction datasets",
+      "Reinforcement Learning from Human Feedback (RLHF) using PPO",
+      "Supervised fine-tuning on human-written demonstrations",
+      "RLHF fine-tuning",
+      "Reinforcement learning from human feedback (RLHF)",
+      "Supervised fine-tuning on human demonstrations",
+      "Reinforcement learning from human feedback",
+      "Supervised fine-tuning (SFT) followed by RLHF (PPO)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "WebText2 (GPT-3 base)",
+      "human preference data",
+      "human demonstrations"
+     ],
+     "accepted": [
+      "WebText2 (GPT-3 base)"
+     ],
+     "dropped": [
+      {
+       "value": "human preference data",
+       "reason": "Not a pretraining text corpus; refers to SFT/RLHF data"
+      },
+      {
+       "value": "human demonstrations",
+       "reason": "Not a pretraining text corpus; refers to SFT/RLHF data"
+      }
+     ]
+    }
+   },
+   "GPT-3": {
+    "quantization_precision": {
+     "candidates": [
+      "fp16 weights and activations",
+      "with fp32 master copies"
+     ],
+     "accepted": [
+      "fp16 weights and activations"
+     ],
+     "dropped": [
+      {
+       "value": "with fp32 master copies",
+       "reason": "starts with a connective, so it is a fragment of a longer phrase rather than a quantization_precision name: 'with fp32 master copies'"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 103,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 63
+  }
+ },
+ "contributions": [
+  {
+   "label": "InstructGPT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructGPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-04",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reinforcement Learning from Human Feedback (RLHF) pipeline: (1) Supervised fine-tuning (SFT) on human demonstrations to create a supervised policy",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "(2) Training a reward model (RM) on human preference comparisons",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "(3) Optimizing the policy against the RM using Proximal Policy Optimization (PPO) to align outputs with human preferences. Iterative refinement where comparison data is collected on the current best policy to train a new RM and policy.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebText2 (GPT-3 base)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF) using PPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reward modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement learning (PPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) on instruction datasets",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement Learning from Human Feedback (RLHF) using PPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on human-written demonstrations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "RLHF fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement learning from human feedback (RLHF)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on human demonstrations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement learning from human feedback",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) followed by RLHF (PPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-Pair Encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "70M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.55B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "175B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 175000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "4.9 petaflops/s-days for SFT, 60 petaflops/s-days for PPO-ptx",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Brainstorming",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Aligning language models with human intentions and improving instruction following.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "GPT-3 dataset (45GB text, 570B tokens)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human demonstrations",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human preference data (ranked responses)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "1.3k human-written prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "20k API prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "20k human preference comparisons",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SFT dataset (~13k prompts)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RM dataset (~33k prompts)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PPO dataset (~31k prompts)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human-labeled demonstrations and preference comparisons collected via Upwork and ScaleAI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "API distribution prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human preference rankings",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Instruction-following datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human-annotated instruction-following datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenAI API prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "17k human-written responses for SFT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "20k human comparisons for reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.3B, 6B, 175B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning from Human Feedback (RLHF) via PPO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "PPO (Proximal Policy Optimization)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "PPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Proximal Policy Optimization (PPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human preference data (ranked responses) to provide dense rewards for PPO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human pairwise comparisons of model outputs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Human preference rankings",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human preference comparisons (chosen vs rejected outputs)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human pairwise preferences (chosen vs rejected responses)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human preference rankings (chosen vs rejected completions)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Ranking them by helpfulness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Honesty",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Harmlessness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human pairwise comparisons",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "RealToxicityPrompts, Winogender, CrowSPairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "GPT-3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP f1 zero-shot 27.53",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2 f1 zero-shot 64.30",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST accuracy zero-shot 0.898",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RTE accuracy zero-shot 0.563",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WSC accuracy zero-shot 0.740",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FR\u2192EN15 BLEU zero-shot 38.92",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN/DM ROUGE-L 0.196",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TLDR ROUGE-L 0.196",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: improved truthfulness and informativeness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealToxicityPrompts: reduced toxicity under respectful prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogender/CrowS-Pairs: similar bias to GPT-3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "96",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GPT-3",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GPT-3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-04",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction tuning via Supervised Fine-Tuning (SFT) on human-written prompts and responses, followed by Reinforcement Learning from Human Feedback (RLHF) using Proximal Policy Optimization (PPO) and a human-preference-trained reward model to align outputs with human intent, reducing toxicity and improving helpfulness compared to base GPT-3.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) followed by Reinforcement Learning from Human Feedback (RLHF)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "175B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 175000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Toxicity reduction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Human preference alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Aligning language models with human instructions and preferences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human-written instruction/response pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BoolQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DROP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MultiNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenBookQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QuAC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "SFT on human-written instruction/response pairs -> Reward Model training on human rankings -> PPO RL fine-tuning with KL penalty",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Fp16 weights and activations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Proximal Policy Optimization (PPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model trained on human pairwise rankings of model outputs (Likert 1-7 scale, toxicity prioritized)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "GPT-3",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370985",
+  "contribution_ids": [
+   "R1374943",
+   "R370986",
+   "R1921742",
+   "R1921767"
+  ],
+  "new_contribution_ids": [
+   "R1921742",
+   "R1921767"
+  ],
+  "comparison_updated": null
+ }
+}

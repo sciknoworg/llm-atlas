@@ -1,0 +1,759 @@
+{
+  "arxiv_id": "2412.08905",
+  "status": "completed",
+  "timestamp": "2026-08-29T15:54:47.938798",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2412.08905",
+    "title": "Phi-4 Technical Report",
+    "authors": [
+      "Marah Abdin",
+      "Jyoti Aneja",
+      "Harkirat Behl",
+      "Sébastien Bubeck",
+      "Ronen Eldan",
+      "Suriya Gunasekar",
+      "Michael Harrison",
+      "Russell J. Hewett",
+      "Mojan Javaheripi",
+      "Piero Kauffmann",
+      "James R. Lee",
+      "Yin Tat Lee",
+      "Yuanzhi Li",
+      "Weishung Liu",
+      "Caio C. T. Mendes",
+      "Anh Nguyen",
+      "Eric Price",
+      "Gustavo de Rosa",
+      "Olli Saarikivi",
+      "Adil Salim",
+      "Shital Shah",
+      "Xin Wang",
+      "Rachel Ward",
+      "Yue Wu",
+      "Dingli Yu",
+      "Cyril Zhang",
+      "Yi Zhang"
+    ],
+    "abstract": "We present phi-4, a 14-billion parameter language model developed with a training recipe that is centrally focused on data quality. Unlike most language models, where pre-training is based primarily on organic data sources such as web content or code, phi-4 strategically incorporates synthetic data throughout the training process. While previous models in the Phi family largely distill the capabilities of a teacher model (specifically GPT-4), phi-4 substantially surpasses its teacher model on STEM-focused QA capabilities, giving evidence that our data-generation and post-training techniques go beyond distillation. Despite minimal changes to the phi-3 architecture, phi-4 achieves strong performance relative to its size -- especially on reasoning-focused benchmarks -- due to improved data, training curriculum, and innovations in the post-training scheme.",
+    "published": "2024-12-12T03:37:41+00:00",
+    "updated": "2024-12-12T03:37:41+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2412.08905v1",
+    "entry_id": "http://arxiv.org/abs/2412.08905v1",
+    "pdf_path": "data/papers/2412.08905.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 96507,
+  "word_count": 14445,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "Phi-4",
+      "parameters": "3B, 14B",
+      "parameters_millions": 14000,
+      "model_family": "Phi",
+      "date_created": "2024-12-12",
+      "organization": "Microsoft",
+      "innovation": "Synthetic data generation guided by diversity, nuance, accuracy, and chain-of-thought principles; multi-stage prompting workflows to transform seeds into exercises and reasoning tasks; self-revision feedback loops where the model critiques and improves its own outputs; instruction reversal technique to generate instructions from code snippets; execution-based validation for code and scientific data to ensure correctness.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "Organic data (web content, licensed books, code repositories) and synthetic data",
+      "finetuning_task": "Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA H100 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Enhancing LLM reasoning, factual accuracy, and instruction-following capabilities",
+      "application": "Reasoning, code generation, academic problem-solving",
+      "paper_title": "Phi-4 Technical Report",
+      "training_corpus_size": "10T tokens",
+      "finetuning_data": "Synthetic refusal data, bogus question data, judge-labeled preference pairs from GPT-4o, Diverse domains (math, coding, reasoning, conversation, model identity, safety), 40 languages, pivotal token search data, judge-guided preference pairs, helpfulness and harmlessness preference datasets, multiple in-house generated datasets",
+      "tokenizer": "tiktoken",
+      "supported_language": "English",
+      "hardware_description": "1024 H100 GPUs for pre-training; 256 H100 GPUs for post-training",
+      "carbon_emitted": null,
+      "source_code": "https://huggingface.co/microsoft/phi-4",
+      "context_length": null,
+      "activated_parameters": "14B (dense)",
+      "attention_mechanism": null,
+      "context_length_max": "16384",
+      "context_extension_method": "Midtraining",
+      "training_pipeline": "Pre-training -> SFT -> DPO (incorporating Pivotal Token Search and judge-guided DPO)",
+      "reasoning_mode": "Hybrid thinking/non-thinking with explicit mode tokens",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Multi-agent prompting, self-revision workflows, instruction reversal, Pivotal Token Search (PTS) for DPO pair generation; GPT-4o/GPT-4t for judge-guided DPO responses",
+      "rl_algorithm": "DPO, Direct Preference Optimization (DPO)",
+      "reward_mechanism": "Pivotal token search for DPO pairs, GPT-4o judge scoring responses on accuracy, style, and detail; higher score labeled positive",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Red-teaming, Microsoft's RAI standards",
+      "safety_defect_rate": "Grounding: 4.619; 3P Content Harms: 0.121; Harmful Content DR3: 0.036; Harmful Content DR1: 0.102; Jailbreak DR1: 0.073",
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "phi-3",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU: 84.8; GPQA: 56.1; MATH: 80.4; HumanEval: 82.6; MGSM: 80.6; SimpleQA: 3.0; DROP: 75.5; MMLUPro: 70.4; HumanEval+: 82.8; ArenaHard: 75.4; LiveBench: 47.6; IFEval: 63.0; PhiBench: 56.2; SimpleQA: higher than Qwen-2.5-14B-Instruct; GPQA: outscores GPT-4o; MATH: outscores GPT-4o; HumanEval/HumanEval+: higher than any other open-weight model",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Phi-4": {
+      "application": [
+        "Reasoning",
+        "code generation",
+        "academic problem-solving"
+      ],
+      "base_model": [
+        "phi-3"
+      ],
+      "context_extension_method": [],
+      "finetuning_data": [
+        "Synthetic refusal data",
+        "bogus question data",
+        "judge-labeled preference pairs from GPT-4o",
+        "pivotal token search data",
+        "judge-guided preference pairs",
+        "helpfulness and harmlessness preference datasets"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)"
+      ],
+      "hardware_used": [
+        "NVIDIA H100 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Phi"
+      ],
+      "model_name": [
+        "Phi-4"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "3B",
+        "14B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "reasoning_mode": [
+        "Hybrid thinking/non-thinking with explicit mode tokens"
+      ],
+      "research_problem": [
+        "factual accuracy",
+        "instruction-following capabilities"
+      ],
+      "reward_mechanism": [
+        "GPT-4o judge scoring responses on accuracy"
+      ],
+      "rl_algorithm": [
+        "DPO",
+        "Direct Preference Optimization (DPO)"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Multi-agent prompting",
+        "self-revision workflows",
+        "instruction reversal",
+        "Pivotal Token Search (PTS) for DPO pair generation"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Phi-4": {
+        "context_extension_method": {
+          "candidates": [
+            "Midtraining"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Midtraining",
+              "reason": "Refers to a training phase rather than a specific context extension technique."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Synthetic refusal data",
+            "bogus question data",
+            "judge-labeled preference pairs from GPT-4o",
+            "Diverse domains (math, coding, reasoning, conversation, model identity, safety)",
+            "40 languages",
+            "pivotal token search data",
+            "judge-guided preference pairs",
+            "helpfulness and harmlessness preference datasets",
+            "multiple in-house generated datasets"
+          ],
+          "accepted": [
+            "Synthetic refusal data",
+            "bogus question data",
+            "judge-labeled preference pairs from GPT-4o",
+            "pivotal token search data",
+            "judge-guided preference pairs",
+            "helpfulness and harmlessness preference datasets"
+          ],
+          "dropped": [
+            {
+              "value": "Diverse domains (math, coding, reasoning, conversation, model identity, safety)",
+              "reason": "Describes the content domains rather than naming a specific dataset or data type."
+            },
+            {
+              "value": "40 languages",
+              "reason": "Describes data coverage rather than the dataset or data type itself."
+            },
+            {
+              "value": "multiple in-house generated datasets",
+              "reason": "Placeholder describing quantity/origin rather than a specific dataset or data type."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT)",
+            "Direct Preference Optimization (DPO)"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)"
+          ],
+          "dropped": [
+            {
+              "value": "Direct Preference Optimization (DPO)",
+              "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Organic data (web content, licensed books, code repositories) and synthetic data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Organic data (web content, licensed books, code repositories) and synthetic data",
+              "reason": "Describes data composition and asserts breadth rather than naming an identifiable corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Enhancing LLM reasoning",
+            "factual accuracy",
+            "instruction-following capabilities"
+          ],
+          "accepted": [
+            "factual accuracy",
+            "instruction-following capabilities"
+          ],
+          "dropped": [
+            {
+              "value": "Enhancing LLM reasoning",
+              "reason": "Describes a goal or action rather than naming a specific problem or capability gap."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Pivotal token search for DPO pairs",
+            "GPT-4o judge scoring responses on accuracy",
+            "style",
+            "detail",
+            "higher score labeled positive"
+          ],
+          "accepted": [
+            "GPT-4o judge scoring responses on accuracy"
+          ],
+          "dropped": [
+            {
+              "value": "Pivotal token search for DPO pairs",
+              "reason": "Describes a data generation method rather than a reward calculation or feedback mechanism."
+            },
+            {
+              "value": "style",
+              "reason": "Too vague; does not name a specific reward mechanism."
+            },
+            {
+              "value": "detail",
+              "reason": "Too vague; does not name a specific reward mechanism."
+            },
+            {
+              "value": "higher score labeled positive",
+              "reason": "Describes a labeling rule or outcome rather than the reward mechanism itself."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Multi-agent prompting",
+            "self-revision workflows",
+            "instruction reversal",
+            "Pivotal Token Search (PTS) for DPO pair generation",
+            "GPT-4o/GPT-4t for judge-guided DPO responses"
+          ],
+          "accepted": [
+            "Multi-agent prompting",
+            "self-revision workflows",
+            "instruction reversal",
+            "Pivotal Token Search (PTS) for DPO pair generation"
+          ],
+          "dropped": [
+            {
+              "value": "GPT-4o/GPT-4t for judge-guided DPO responses",
+              "reason": "Names the model/tool used rather than the generation method or technique itself."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 32,
+      "dropped": 12,
+      "llm_calls": 1,
+      "values_sent_to_llm": 28
+    }
+  },
+  "contributions": [
+    {
+      "label": "Phi-4",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Phi-4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Phi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-12-12",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Synthetic data generation guided by diversity, nuance, accuracy, and chain-of-thought principles",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage prompting workflows to transform seeds into exercises and reasoning tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Self-revision feedback loops where the model critiques and improves its own outputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Instruction reversal technique to generate instructions from code snippets",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Execution-based validation for code and scientific data to ensure correctness.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Tiktoken",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 14000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "1024 H100 GPUs for pre-training; 256 H100 GPUs for post-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Academic problem-solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://huggingface.co/microsoft/phi-4",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Factual accuracy",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Instruction-following capabilities",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "10T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthetic refusal data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Bogus question data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Judge-labeled preference pairs from GPT-4o",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Pivotal token search data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Judge-guided preference pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Helpfulness and harmlessness preference datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "14B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "16384",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> SFT -> DPO (incorporating Pivotal Token Search and judge-guided DPO)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid thinking/non-thinking with explicit mode tokens",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Multi-agent prompting",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Self-revision workflows",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Instruction reversal",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Pivotal Token Search (PTS) for DPO pair generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "GPT-4o judge scoring responses on accuracy",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Red-teaming, Microsoft's RAI standards",
+          "datatype": "string"
+        },
+        {
+          "property": "P203098",
+          "label": "safety_defect_rate",
+          "value": "Grounding: 4.619; 3P Content Harms: 0.121; Harmful Content DR3: 0.036; Harmful Content DR1: 0.102; Jailbreak DR1: 0.073",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Phi-3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 84.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 56.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 80.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MGSM: 80.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SimpleQA: 3.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DROP: 75.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLUPro: 70.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval+: 82.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ArenaHard: 75.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveBench: 47.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 63.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PhiBench: 56.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SimpleQA: higher than Qwen-2.5-14B-Instruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: outscores GPT-4o",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: outscores GPT-4o",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval/HumanEval+: higher than any other open-weight model",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926523",
+    "contribution_ids": [
+      "R1926525"
+    ],
+    "new_contribution_ids": [
+      "R1926525"
+    ],
+    "comparison_updated": null
+  }
+}

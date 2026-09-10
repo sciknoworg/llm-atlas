@@ -1,0 +1,630 @@
+{
+ "arxiv_id": "2003.10555",
+ "status": "completed",
+ "timestamp": "2026-08-24T18:06:27.982749",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2003.10555",
+  "title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+  "authors": [
+   "Kevin Clark",
+   "Minh-Thang Luong",
+   "Quoc V. Le",
+   "Christopher D. Manning"
+  ],
+  "abstract": "Masked language modeling (MLM) pre-training methods such as BERT corrupt the input by replacing some tokens with [MASK] and then train a model to reconstruct the original tokens. While they produce good results when transferred to downstream NLP tasks, they generally require large amounts of compute to be effective. As an alternative, we propose a more sample-efficient pre-training task called replaced token detection. Instead of masking the input, our approach corrupts it by replacing some tokens with plausible alternatives sampled from a small generator network. Then, instead of training a model that predicts the original identities of the corrupted tokens, we train a discriminative model that predicts whether each token in the corrupted input was replaced by a generator sample or not. Thorough experiments demonstrate this new pre-training task is more efficient than MLM because the task is defined over all input tokens rather than just the small subset that was masked out. As a result, the contextual representations learned by our approach substantially outperform the ones learned by BERT given the same model size, data, and compute. The gains are particularly strong for small models; for example, we train a model on one GPU for 4 days that outperforms GPT (trained using 30x more compute) on the GLUE natural language understanding benchmark. Our approach also works well at scale, where it performs comparably to RoBERTa and XLNet while using less than 1/4 of their compute and outperforms them when using the same amount of compute.",
+  "published": "2020-03-23T21:17:42+00:00",
+  "updated": "2020-03-23T21:17:42+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2003.10555v1",
+  "entry_id": "http://arxiv.org/abs/2003.10555v1",
+  "pdf_path": "data/papers/2003.10555.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 61329,
+ "word_count": 5150,
+ "models_extracted": 16,
+ "extraction_data": [
+  {
+   "model_name": "ELECTRA",
+   "parameters": "SMALL, BASE, LARGE, 14M, 18M, 24M, 110M, 170M, 330M, 335M, 340M",
+   "parameters_millions": 340,
+   "model_family": "ELECTRA",
+   "date_created": "2020-03-23",
+   "organization": "Google, Stanford",
+   "innovation": "Replaced token detection: A small generator model replaces input tokens with samples from its distribution, and a small discriminator model is trained to detect which tokens have been replaced. This allows the discriminator to be trained on all input tokens rather than just a subset (like the 15% masked in BERT), greatly improving compute efficiency and parameter efficiency, and alleviating the pre-train/fine-tune mismatch caused by [MASK] tokens.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Replaced token detection",
+   "pretraining_corpus": "Wikipedia, BookCorpus, SQuAD, WebText",
+   "finetuning_task": "Supervised fine-tuning on downstream NLP tasks, Supervised fine-tuning on downstream tasks, Supervised discriminative fine-tuning",
+   "optimizer": "Adam",
+   "hardware_used": "GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Pre-training text encoders as discriminators rather than generators to improve compute efficiency and parameter efficiency.",
+   "application": "Textual entailment, question answering, paraphrase detection, sentiment analysis, linguistic acceptability, reading comprehension",
+   "paper_title": "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators",
+   "training_corpus_size": "3.3B tokens",
+   "finetuning_data": "GLUE, SQuAD 1.1, SQuAD 2.0, SQuAD, GLUE datasets, GLUE tasks, GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE, WNLI), SQuAD 1.1/2.0",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/electra",
+   "context_length": "512",
+   "activated_parameters": "18M (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Joint pre-training of a small generator (MLM) and a discriminator (RTD), followed by discarding the generator and fine-tuning the discriminator on downstream tasks.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Outperforms GPT on GLUE; outperforms comparably small BERT by 5 points on GLUE; performs comparably to RoBERTa and XLNet; outperforms ALBERT on GLUE and sets new state-of-the-art for SQuAD2.0; GLUE 85.0; SQuAD 1.1 dev EM/F1: 84.5/90.8; SQuAD 2.0 dev EM/F1: 80.5/83.3; GLUE dev: 89.0; SQuAD 1.1 dev EM/F1: 88.7/94.2; SQuAD 2.0 dev EM/F1: 86.9/89.6; GLUE score 85.0 (ELECTRA), 84.3 (All-Tokens MLM), 82.4 (Replace MLM), 82.4 (ELECTRA 15%), 82.2 (BERT)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 16,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "ELECTRA": {
+   "application": [
+    "Textual entailment",
+    "question answering",
+    "paraphrase detection",
+    "sentiment analysis",
+    "linguistic acceptability",
+    "reading comprehension"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "finetuning_data": [
+    "GLUE",
+    "SQuAD 1.1",
+    "SQuAD 2.0",
+    "SQuAD",
+    "GLUE datasets",
+    "GLUE tasks",
+    "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE, WNLI)",
+    "SQuAD 1.1/2.0"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "ELECTRA"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google, Stanford"
+   ],
+   "parameters": [
+    "14M",
+    "18M",
+    "24M",
+    "110M",
+    "170M",
+    "330M",
+    "335M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "BookCorpus",
+    "WebText"
+   ],
+   "pretraining_task": [
+    "Replaced token detection"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ELECTRA": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on downstream NLP tasks",
+      "Supervised fine-tuning on downstream tasks",
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on downstream NLP tasks",
+       "reason": "Describes a training methodology rather than naming a specific task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning on downstream tasks",
+       "reason": "Describes a training process/method rather than naming a specific task or objective. (cached)"
+      },
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "ELECTRA"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "ELECTRA",
+       "reason": "ELECTRA is a specific model name, not a broader family or lineage."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "SMALL",
+      "BASE",
+      "LARGE",
+      "14M",
+      "18M",
+      "24M",
+      "110M",
+      "170M",
+      "330M",
+      "335M",
+      "340M"
+     ],
+     "accepted": [
+      "14M",
+      "18M",
+      "24M",
+      "110M",
+      "170M",
+      "330M",
+      "335M",
+      "340M"
+     ],
+     "dropped": [
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "LARGE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "SMALL",
+       "reason": "Not a numerical value representing parameter count."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Wikipedia",
+      "BookCorpus",
+      "SQuAD",
+      "WebText"
+     ],
+     "accepted": [
+      "Wikipedia",
+      "BookCorpus",
+      "WebText"
+     ],
+     "dropped": [
+      {
+       "value": "SQuAD",
+       "reason": "SQuAD is a fine-tuning dataset, not a pretraining corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Pre-training text encoders as discriminators rather than generators to improve compute efficiency and parameter efficiency."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Pre-training text encoders as discriminators rather than generators to improve compute efficiency and parameter efficiency.",
+       "reason": "Describes a method or solution rather than a short noun phrase naming a research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 34,
+   "dropped": 9,
+   "llm_calls": 1,
+   "values_sent_to_llm": 16
+  }
+ },
+ "contributions": [
+  {
+   "label": "ELECTRA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ELECTRA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-03-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google, Stanford",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Replaced token detection: A small generator model replaces input tokens with samples from its distribution, and a small discriminator model is trained to detect which tokens have been replaced. This allows the discriminator to be trained on all input tokens rather than just a subset (like the 15% masked in BERT), greatly improving compute efficiency and parameter efficiency, and alleviating the pre-train/fine-tune mismatch caused by [MASK] tokens.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Replaced token detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "18M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "24M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "170M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "330M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "335M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Textual entailment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Paraphrase detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Sentiment analysis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Linguistic acceptability",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/electra",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.3B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD 1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD 2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE datasets (CoLA, SST-2, MRPC, STS-B, QQP, MNLI, QNLI, RTE, WNLI)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD 1.1/2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "18M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint pre-training of a small generator (MLM) and a discriminator (RTD), followed by discarding the generator and fine-tuning the discriminator on downstream tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms GPT on GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms comparably small BERT by 5 points on GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Performs comparably to RoBERTa and XLNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms ALBERT on GLUE and sets new state-of-the-art for SQuAD2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE 85.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 1.1 dev EM/F1: 84.5/90.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 2.0 dev EM/F1: 80.5/83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE dev: 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 1.1 dev EM/F1: 88.7/94.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 2.0 dev EM/F1: 86.9/89.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE score 85.0 (ELECTRA), 84.3 (All-Tokens MLM), 82.4 (Replace MLM), 82.4 (ELECTRA 15%), 82.2 (BERT)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370890",
+  "contribution_ids": [
+   "R370891",
+   "R464917",
+   "R1920580"
+  ],
+  "new_contribution_ids": [
+   "R1920580"
+  ],
+  "comparison_updated": null
+ }
+}

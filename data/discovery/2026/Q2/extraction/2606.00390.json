@@ -1,0 +1,766 @@
+{
+  "arxiv_id": "2606.00390",
+  "status": "completed",
+  "timestamp": "2026-08-30T15:04:05.535217",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2606.00390",
+    "title": "Zamba2-VL Technical Report",
+    "authors": [
+      "Hassan Shapourian",
+      "Kasra Hejazi",
+      "Olabode M. Sule",
+      "Beren Millidge"
+    ],
+    "abstract": "We present Zamba2-VL, a suite of vision-language models built on Zamba2, a hybrid language-model architecture combining Mamba2 state-space layers with a small number of shared transformer blocks. Across a broad range of image understanding, reasoning, OCR, grounding, and counting benchmarks, Zamba2-VL is competitive with leading Transformer-based open-weight VLMs of comparable scale, including the Molmo2, Qwen3-VL, and InternVL3.5 families, and substantially outperforms prior SSM-based and hybrid VLMs such as VL-Mamba, Cobra, and mmMamba. Inheriting the near-linear prefill compute and small, near-constant recurrent state of its Zamba2 backbone, Zamba2-VL delivers roughly an order of magnitude lower time-to-first-token (TTFT) than these Transformer baselines at matched parameter scale, with the efficiency gap most pronounced at the smaller 1.2B and 2.7B scales most relevant to on-device and edge deployment. We release three models -- 1.2B, 2.7B, and 7B -- together with inference code at https://huggingface.co/collections/Zyphra/zamba2-vl.",
+    "published": "2026-05-29T22:12:40+00:00",
+    "updated": "2026-05-29T22:12:40+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2606.00390v1",
+    "entry_id": "http://arxiv.org/abs/2606.00390v1",
+    "pdf_path": "data/papers/2606.00390.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 81506,
+  "word_count": 10896,
+  "models_extracted": 10,
+  "extraction_data": [
+    {
+      "model_name": "Zamba 2-VL",
+      "parameters": "1.2B, 2.7B, 7B",
+      "parameters_millions": 7000,
+      "model_family": "Zamba2",
+      "date_created": "2026-05-29",
+      "organization": "Zamba",
+      "innovation": "Hybrid Mamba2 state-space backbone interleaved with shared transformer blocks augmented by LoRA projectors; dynamic-resolution Vision Transformer with 2D RoPE; lightweight chat template with dedicated vision-boundary tokens; three-stage training (alignment, pretraining, SFT) preserving native image resolution up to a cap; loss computed exclusively on answer tokens.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Autoregressive language modeling",
+      "pretraining_corpus": "LLaVA-ReCap-558K, heterogeneous multimodal mixture (~30B tokens) spanning image captioning, VQA, OCR, document understanding, chart/figure understanding, visual grounding; curated multimodal instruction-following data (~20B tokens)",
+      "finetuning_task": "Supervised fine-tuning on instruction-following data, Supervised fine-tuning for vision-language tasks",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Integrates a Qwen2.5-VL vision encoder and a two-layer MLP adapter into the Zamba2 hybrid SSM-Transformer LLM backbone, enabling efficient processing of high-resolution images and long multimodal contexts.",
+      "blog_post": null,
+      "license": "open weight",
+      "research_problem": "Vision-language modeling with efficiency and scalability",
+      "application": "Image captioning, visual question answering, OCR, document understanding, chart/figure understanding, visual grounding, multi-turn conversation, instruction following, pointing/grounding",
+      "paper_title": "Zamba2-VL Technical Report",
+      "training_corpus_size": "~30B tokens (pretraining), ~20B tokens (SFT)",
+      "finetuning_data": "Curated multimodal instruction-following data (~20B tokens), PixMo format for grounding, pre-training captions, instruction-tuning mixtures, task-specific annotations",
+      "tokenizer": "LLM tokenizer with two newly introduced vision-boundary tokens",
+      "supported_language": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "1.2B (dense)",
+      "attention_mechanism": "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)",
+      "context_length_max": "4K tokens",
+      "context_extension_method": "2D RoPE",
+      "training_pipeline": "Stage 1: MLP adapter alignment on low-res captioning data; Stage 2: Full-model pretraining on heterogeneous multimodal mixture; Stage 3: Full-model SFT on curated instruction-following data",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Two-layer MLP adapter pooling 2x2 patch windows into single vectors, interleaved with text tokens",
+      "vision_encoder": "Vision Transformer (from Qwen2.5-VL) with dynamic-resolution processing and 2D RoPE, Qwen2.5-VL ViT",
+      "base_model": "Zamba2 LLMs",
+      "optimizer_innovation": null,
+      "benchmark_result": "AI2D: 56.44; ChartQA: 63.9; DocVQA: 62.6; InfoVQA: 67.4; TextVQA: 25.9; RealWorldQA: 50.1",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Zamba 2",
+      "model_family": "Zamba2",
+      "date_created": "2026-05-29",
+      "organization": null,
+      "innovation": "Hybrid SSM-Transformer architecture interleaving linear-time and full-attention layers to reduce inference latency while matching pure-attention models; adoption of a dynamic-resolution vision encoder with 2D RoPE to preserve fine-grained spatial structure; training with a strict 3.4k vision token budget per image.",
+      "pretraining_corpus": "LLaVA-NeXT 790K ablation dataset",
+      "parameters": "8B",
+      "parameters_millions": 8000,
+      "application": "Image understanding, perception, document and OCR tasks",
+      "license": "Open source",
+      "research_problem": "Efficient vision-language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language pretraining",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Zamba2-VL Technical Report",
+      "activated_parameters": "8B (dense)",
+      "attention_mechanism": "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)",
+      "context_length_max": "4096 tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1 alignment, Stage 2 pretraining",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": "Qwen2.5-VL ViT",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 5,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "Zamba 2-VL": {
+      "application": [
+        "Image captioning",
+        "visual question answering",
+        "OCR",
+        "document understanding",
+        "chart/figure understanding",
+        "visual grounding",
+        "multi-turn conversation",
+        "instruction following",
+        "pointing/grounding"
+      ],
+      "attention_mechanism": [],
+      "base_model": [
+        "Zamba2 LLMs"
+      ],
+      "context_extension_method": [
+        "2D RoPE"
+      ],
+      "finetuning_data": [
+        "Curated multimodal instruction-following data (~20B tokens)",
+        "instruction-tuning mixtures",
+        "task-specific annotations"
+      ],
+      "finetuning_task": [],
+      "fusion_architecture": [
+        "Two-layer MLP adapter pooling 2x2 patch windows into single vectors, interleaved with text tokens"
+      ],
+      "license": [
+        "open weight"
+      ],
+      "model_family": [
+        "Zamba2"
+      ],
+      "model_name": [
+        "Zamba 2-VL"
+      ],
+      "organization": [],
+      "parameters": [
+        "1.2B",
+        "2.7B",
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LLaVA-ReCap-558K, heterogeneous multimodal mixture (~30B tokens) spanning image captioning, VQA, OCR, document understanding, chart/figure understanding, visual grounding",
+        "curated multimodal instruction-following data (~20B tokens)"
+      ],
+      "pretraining_task": [
+        "Autoregressive language modeling"
+      ],
+      "research_problem": [
+        "Vision-language modeling with efficiency and scalability"
+      ],
+      "vision_encoder": [
+        "Vision Transformer (from Qwen2.5-VL) with dynamic-resolution processing and 2D RoPE",
+        "Qwen2.5-VL ViT"
+      ]
+    },
+    "Zamba 2": {
+      "application": [
+        "Image understanding",
+        "perception",
+        "document and OCR tasks"
+      ],
+      "attention_mechanism": [],
+      "license": [
+        "Open source"
+      ],
+      "model_family": [
+        "Zamba2"
+      ],
+      "model_name": [
+        "Zamba 2"
+      ],
+      "parameters": [
+        "8B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LLaVA-NeXT 790K ablation dataset"
+      ],
+      "pretraining_task": [
+        "Vision-language pretraining"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "Qwen2.5-VL ViT"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Zamba 2-VL": {
+        "attention_mechanism": {
+          "candidates": [
+            "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)",
+              "reason": "Describes a model architecture/backbone, not a specific attention mechanism."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Curated multimodal instruction-following data (~20B tokens)",
+            "PixMo format for grounding",
+            "pre-training captions",
+            "instruction-tuning mixtures",
+            "task-specific annotations"
+          ],
+          "accepted": [
+            "Curated multimodal instruction-following data (~20B tokens)",
+            "instruction-tuning mixtures",
+            "task-specific annotations"
+          ],
+          "dropped": [
+            {
+              "value": "PixMo format for grounding",
+              "reason": "Describes a data format/structure rather than the dataset itself."
+            },
+            {
+              "value": "pre-training captions",
+              "reason": "Refers to pre-training data, not fine-tuning data."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning on instruction-following data",
+            "Supervised fine-tuning for vision-language tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning on instruction-following data",
+              "reason": "Describes the fine-tuning process/method rather than the specific task or objective. (cached)"
+            },
+            {
+              "value": "Supervised fine-tuning for vision-language tasks",
+              "reason": "Describes the fine-tuning process and target domain rather than naming a specific task. (cached)"
+            }
+          ]
+        },
+        "organization": {
+          "candidates": [
+            "Zamba"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Zamba",
+              "reason": "Names the model/family, not the developing organization."
+            }
+          ]
+        }
+      },
+      "Zamba 2": {
+        "attention_mechanism": {
+          "candidates": [
+            "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Hybrid SSM-Transformer (interleaving linear-time and full-attention layers)",
+              "reason": "Describes a model architecture/backbone, not a specific attention mechanism."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Efficient vision-language models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Efficient vision-language models",
+              "reason": "Names a model category/solution rather than the research problem or challenge."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 39,
+      "dropped": 8,
+      "llm_calls": 1,
+      "values_sent_to_llm": 25
+    }
+  },
+  "contributions": [
+    {
+      "label": "Zamba 2-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Zamba 2-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Zamba2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-05-29",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid Mamba2 state-space backbone interleaved with shared transformer blocks augmented by LoRA projectors",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamic-resolution Vision Transformer with 2D RoPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Lightweight chat template with dedicated vision-boundary tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Three-stage training (alignment, pretraining, SFT) preserving native image resolution up to a cap",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Loss computed exclusively on answer tokens.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Autoregressive language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-ReCap-558K, heterogeneous multimodal mixture (~30B tokens) spanning image captioning, VQA, OCR, document understanding, chart/figure understanding, visual grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Curated multimodal instruction-following data (~20B tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "LLM tokenizer with two newly introduced vision-boundary tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart/figure understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn conversation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Pointing/grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-language modeling with efficiency and scalability",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~30B tokens (pretraining), ~20B tokens (SFT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Curated multimodal instruction-following data (~20B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Instruction-tuning mixtures",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Task-specific annotations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1.2B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "2D RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: MLP adapter alignment on low-res captioning data; Stage 2: Full-model pretraining on heterogeneous multimodal mixture; Stage 3: Full-model SFT on curated instruction-following data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Two-layer MLP adapter pooling 2x2 patch windows into single vectors, interleaved with text tokens",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Vision Transformer (from Qwen2.5-VL) with dynamic-resolution processing and 2D RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Qwen2.5-VL ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Zamba2 LLMs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 56.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 63.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 62.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA: 67.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 25.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 50.1",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Zamba 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Zamba 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Zamba2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-05-29",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid SSM-Transformer architecture interleaving linear-time and full-attention layers to reduce inference latency while matching pure-attention models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Adoption of a dynamic-resolution vision encoder with 2D RoPE to preserve fine-grained spatial structure",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Training with a strict 3.4k vision token budget per image.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language pretraining",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-NeXT 790K ablation dataset",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Perception",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document and OCR tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "8B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1 alignment, Stage 2 pretraining",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Qwen2.5-VL ViT",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927417",
+    "contribution_ids": [
+      "R1927419",
+      "R1927420"
+    ],
+    "new_contribution_ids": [
+      "R1927419",
+      "R1927420"
+    ],
+    "comparison_updated": null
+  }
+}

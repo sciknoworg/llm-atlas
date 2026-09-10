@@ -1,0 +1,553 @@
+{
+ "arxiv_id": "2306.15195",
+ "status": "completed",
+ "timestamp": "2026-08-28T04:50:12.581960",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2306.15195",
+  "title": "Shikra: Unleashing Multimodal LLM's Referential Dialogue Magic",
+  "authors": [
+   "Keqin Chen",
+   "Zhao Zhang",
+   "Weili Zeng",
+   "Richong Zhang",
+   "Feng Zhu",
+   "Rui Zhao"
+  ],
+  "abstract": "In human conversations, individuals can indicate relevant regions within a scene while addressing others. In turn, the other person can then respond by referring to specific regions if necessary. This natural referential ability in dialogue remains absent in current Multimodal Large Language Models (MLLMs). To fill this gap, this paper proposes an MLLM called Shikra, which can handle spatial coordinate inputs and outputs in natural language. Its architecture consists of a vision encoder, an alignment layer, and a LLM. It is designed to be straightforward and simple, without the need for extra vocabularies, position encoder, pre-/post-detection modules, or external plug-in models. All inputs and outputs are in natural language form. Referential dialogue is a superset of various vision-language (VL) tasks. Shikra can naturally handle location-related tasks like REC and PointQA, as well as conventional VL tasks such as Image Captioning and VQA. Experimental results showcase Shikra's promising performance. Furthermore, it enables numerous exciting applications, like providing mentioned objects' coordinates in chains of thoughts and comparing user-pointed regions similarities. Our code, model and dataset are accessed at https://github.com/shikras/shikra.",
+  "published": "2023-06-27T04:31:52+00:00",
+  "updated": "2023-07-03T16:08:00+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2306.15195v2",
+  "entry_id": "http://arxiv.org/abs/2306.15195v2",
+  "pdf_path": "data/papers/2306.15195.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 61773,
+ "word_count": 5498,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "Shikra",
+   "parameters": "7B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "Shikra",
+   "date_created": "2023-06-27",
+   "organization": "Microsoft",
+   "innovation": "Formulates spatial position input/output as natural language coordinates instead of extra coordinate vocabularies; eliminates need for pre-/post-detectors or special position encoders; leverages GPT-4 to generate high-quality referential dialogue data with positional annotations.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal alignment and referential dialogue generation",
+   "pretraining_corpus": "RefCOCO, Visual Genome, Visual-7W, Flickr30K Entities, LLaVA-Instruct-150K, GPT-4 synthesized RD data",
+   "finetuning_task": "Supervised instruction tuning on meticulously collected instruction data, Supervised fine-tuning for vision-language tasks, referential dialogue, and grounding",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": "Fine-tuning a multimodal LLM to support referential dialogue with point/box grounding.",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Referential dialogue and spatial position understanding in multimodal LLMs",
+   "application": "Referential dialogue, visual question answering, image captioning, referring expression comprehension, grounding",
+   "paper_title": "Shikra: Unleashing Multimodal LLM's Referential Dialogue Magic",
+   "training_corpus_size": null,
+   "finetuning_data": "Flickr30K Entities, GPT-4 generated Q&A pairs",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": "8 NVIDIA A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/Shikras/Shikra",
+   "context_length": "2048",
+   "activated_parameters": "7B",
+   "attention_mechanism": "Multi-head self-attention (LLaMA)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Separate pre-training of ViT and LLM, followed by fine-tuning with a fully connected alignment layer and full LLM parameters",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Fully connected layer for modal alignment; visual embeddings inserted into LLM input sequence",
+   "vision_encoder": "ViT-L/14 (CLIP)",
+   "base_model": "Vicuna-7B",
+   "optimizer_innovation": null,
+   "benchmark_result": "CLEVR Q->CPointA: 93.97; RefCOCO test-A: 86.94, test-B: 70.91, val: 72.32; RefCOCO+ test-A: 81.78, test-B: 59.95, val: 72.81; RefCOCOg test-u: 73.78; RefCOCO val: 87.83; RefCOCO+ val: 82.89; RefCOCOg val-u: 82.64; GRIT refexp: 69.03; Visual-7W Pronoun: 85.33; VQAv2 val: 75.33; COCO CIDEr: 117.5; POPE Accuracy: 86.90",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Shikra": {
+   "application": [
+    "Referential dialogue",
+    "visual question answering",
+    "image captioning",
+    "referring expression comprehension",
+    "grounding"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (LLaMA)"
+   ],
+   "base_model": [
+    "Vicuna-7B"
+   ],
+   "finetuning_data": [
+    "Flickr30K Entities",
+    "GPT-4 generated Q&A pairs"
+   ],
+   "finetuning_task": [
+    "referential dialogue",
+    "grounding"
+   ],
+   "fusion_architecture": [
+    "Fully connected layer for modal alignment; visual embeddings inserted into LLM input sequence"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Shikra"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "7B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "RefCOCO",
+    "Visual Genome",
+    "Visual-7W",
+    "Flickr30K Entities",
+    "LLaVA-Instruct-150K",
+    "GPT-4 synthesized RD data"
+   ],
+   "pretraining_task": [
+    "Multimodal alignment and referential dialogue generation"
+   ],
+   "research_problem": [
+    "Referential dialogue and spatial position understanding in multimodal LLMs"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT-L/14 (CLIP)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Shikra": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised instruction tuning on meticulously collected instruction data",
+      "Supervised fine-tuning for vision-language tasks",
+      "referential dialogue",
+      "grounding"
+     ],
+     "accepted": [
+      "referential dialogue",
+      "grounding"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised instruction tuning on meticulously collected instruction data",
+       "reason": "Describes the fine-tuning process and data source rather than naming a specific task."
+      },
+      {
+       "value": "Supervised fine-tuning for vision-language tasks",
+       "reason": "Describes the fine-tuning process and target domain rather than naming a specific task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Shikra"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Shikra",
+       "reason": "Shikra is a specific model name, not a broader category or lineage."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 30,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 16
+  }
+ },
+ "contributions": [
+  {
+   "label": "Shikra",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Shikra",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-06-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Formulates spatial position input/output as natural language coordinates instead of extra coordinate vocabularies",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Eliminates need for pre-/post-detectors or special position encoders",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Leverages GPT-4 to generate high-quality referential dialogue data with positional annotations.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment and referential dialogue generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual-7W",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K Entities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA-Instruct-150K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GPT-4 synthesized RD data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Referential dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8 NVIDIA A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referential dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/Shikras/Shikra",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Referential dialogue and spatial position understanding in multimodal LLMs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K Entities",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-4 generated Q&A pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (LLaMA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Separate pre-training of ViT and LLM, followed by fine-tuning with a fully connected alignment layer and full LLM parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Fully connected layer for modal alignment; visual embeddings inserted into LLM input sequence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14 (CLIP)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Vicuna-7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLEVR Q->CPointA: 93.97",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO test-A: 86.94, test-B: 70.91, val: 72.32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ test-A: 81.78, test-B: 59.95, val: 72.81",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg test-u: 73.78",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO val: 87.83",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ val: 82.89",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg val-u: 82.64",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GRIT refexp: 69.03",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual-7W Pronoun: 85.33",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 val: 75.33",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO CIDEr: 117.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE Accuracy: 86.90",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1778894",
+  "contribution_ids": [
+   "R1778896",
+   "R1923679"
+  ],
+  "new_contribution_ids": [
+   "R1923679"
+  ],
+  "comparison_updated": null
+ }
+}

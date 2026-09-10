@@ -1,0 +1,1164 @@
+{
+ "arxiv_id": "2010.11934",
+ "status": "completed",
+ "timestamp": "2026-08-24T22:02:15.385568",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2010.11934",
+  "title": "mT5: A massively multilingual pre-trained text-to-text transformer",
+  "authors": [
+   "Linting Xue",
+   "Noah Constant",
+   "Adam Roberts",
+   "Mihir Kale",
+   "Rami Al-Rfou",
+   "Aditya Siddhant",
+   "Aditya Barua",
+   "Colin Raffel"
+  ],
+  "abstract": "The recent \"Text-to-Text Transfer Transformer\" (T5) leveraged a unified text-to-text format and scale to attain state-of-the-art results on a wide variety of English-language NLP tasks. In this paper, we introduce mT5, a multilingual variant of T5 that was pre-trained on a new Common Crawl-based dataset covering 101 languages. We detail the design and modified training of mT5 and demonstrate its state-of-the-art performance on many multilingual benchmarks. We also describe a simple technique to prevent \"accidental translation\" in the zero-shot setting, where a generative model chooses to (partially) translate its prediction into the wrong language. All of the code and model checkpoints used in this work are publicly available.",
+  "published": "2020-10-22T17:58:14+00:00",
+  "updated": "2021-03-11T18:45:13+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2010.11934v3",
+  "entry_id": "http://arxiv.org/abs/2010.11934v3",
+  "pdf_path": "data/papers/2010.11934.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 59691,
+ "word_count": 6380,
+ "models_extracted": 23,
+ "extraction_data": [
+  {
+   "model_name": "mT 5",
+   "parameters": "SMALL, BASE, LARGE, XXL, XL, 60M, 220M, 300M, 580M, 760M, 770M, 1.2B, 1.6B, 2.3B, 3B, 3.7B, 3.9B, 11B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "T5",
+   "date_created": "2020-10-22",
+   "organization": "Google",
+   "innovation": "Massively multilingual text-to-text framework trained across 101 languages using a unified span-corruption objective; employs language sampling exponent (\u03b1=0.3) to balance high- and low-resource languages; uses SentencePiece with byte-fallback and 0.99999 character coverage to handle large character sets; applies GeGLU nonlinearities and scales d_model/d_ff in larger variants.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Text-to-text (teacher-forced maximum likelihood)",
+   "pretraining_corpus": "mC4 (multilingual Common Crawl, ~750GB English text plus multilingual pages filtered by cld3 confidence \u226570%, covering 107 languages with \u226510,000 pages each)",
+   "finetuning_task": "Supervised fine-tuning on XTREME tasks (XNLI, PAWS-X, WikiAnn NER, XQuAD, MLQA, TyDi QA)",
+   "optimizer": "Adam",
+   "hardware_used": "Cloud TPU v3",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Massively multilingual pre-trained language model for text-to-text transfer across 100+ languages",
+   "application": "Cross-lingual zero-shot transfer, machine translation, named entity recognition, question answering, paraphrase identification",
+   "paper_title": "mT5: A massively multilingual pre-trained text-to-text transformer",
+   "training_corpus_size": "~750GB English (C4) plus multilingual Common Crawl pages",
+   "finetuning_data": "XNLI, PAWS-X, WikiAnn NER, XQuAD, MLQA, TyDi QA, XSum, Multi-News, XNLI-EB, XGLUE, Wikipedia, CC-100",
+   "tokenizer": "SentencePiece (with byte-fallback)",
+   "supported_language": "English, Arabic, Bulgarian, Bengali, German, Greek, Spanish, Estonian, Basque, Persian, Finnish, French, Hebrew, Hindi, Hungarian, Indonesian, Italian, Japanese, Javanese, Korean, Kurdish, Latvian, Macedonian, Malayalam, Mongolian, Burmese, Nepali, Dutch, Polish, Portuguese, Romanian, Russian, Sindhi, Sinhala, Slovak, Slovenian, Somali, Albanian, Serbian, Swedish, Swahili, Tamil, Telugu, Thai, Turkish, Ukrainian, Urdu, Vietnamese, Chinese, Marathi, Afrikaans, Catalan, Czech, Danish, Georgian, Kazakh, Malay, Norwegian, Tagalog, Yoruba",
+   "hardware_description": "TPUv3",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/mt5; https://github.com/google-research/text-to-text-transfer-transformer",
+   "context_length": null,
+   "activated_parameters": "220M, 760M, 2.3B",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Unsupervised pre-training on span-corruption objective",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5",
+   "optimizer_innovation": null,
+   "benchmark_result": "XNLI avg 90.0 (XXL), PAWS-X avg 91.5 (XXL), WMT14 avg 87.8 (XXL); SQuAD F1/EM (Table 3); XNLI zero-shot accuracy (Table 4); TyDi QA GoldP (Figure 2); XTREME classification and QA tasks; XQuAD zero-shot illegal prediction rates reduced by >70% with DPT; PAWS-X avg 66.4 (XXL); WikiAnn NER avg 82.5/66.8 (XXL); XQuAD avg 76.0/57.4 (XXL); MLQA avg 58.1/42.8 (Base); TyDiQA GoldP avg F1/EM: 87.5/78.1; XNLI avg accuracy: 87.5; XQuAD avg F1/EM: 87.7/80.5; TyDiQA GoldP avg F1/EM: 88.5/79.1; XNLI avg accuracy: 88.5; XQuAD avg F1/EM: 88.7/80.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 18,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "mT 5": {
+   "application": [
+    "machine translation",
+    "named entity recognition",
+    "question answering",
+    "paraphrase identification"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "T5"
+   ],
+   "finetuning_data": [
+    "XNLI",
+    "PAWS-X",
+    "WikiAnn NER",
+    "XQuAD",
+    "MLQA",
+    "TyDi QA",
+    "XSum",
+    "Multi-News",
+    "XNLI-EB",
+    "XGLUE",
+    "Wikipedia",
+    "CC-100"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on XTREME tasks (XNLI, PAWS-X, WikiAnn NER, XQuAD, MLQA, TyDi QA)"
+   ],
+   "hardware_used": [
+    "Cloud TPU v3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "T5"
+   ],
+   "model_name": [
+    "mT 5"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "60M",
+    "220M",
+    "300M",
+    "580M",
+    "760M",
+    "770M",
+    "1.2B",
+    "1.6B",
+    "2.3B",
+    "3B",
+    "3.7B",
+    "3.9B",
+    "11B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "mC4 (multilingual Common Crawl, ~750GB English text plus multilingual pages filtered by cld3 confidence \u226570%, covering 107 languages with \u226510,000 pages each)"
+   ],
+   "pretraining_task": [
+    "Text-to-text (teacher-forced maximum likelihood)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Arabic",
+    "Bulgarian",
+    "Bengali",
+    "German",
+    "Greek",
+    "Spanish",
+    "Estonian",
+    "Basque",
+    "Persian",
+    "Finnish",
+    "French",
+    "Hebrew",
+    "Hindi",
+    "Hungarian",
+    "Indonesian",
+    "Italian",
+    "Japanese",
+    "Javanese",
+    "Korean",
+    "Kurdish",
+    "Latvian",
+    "Macedonian",
+    "Malayalam",
+    "Mongolian",
+    "Burmese",
+    "Nepali",
+    "Dutch",
+    "Polish",
+    "Portuguese",
+    "Romanian",
+    "Russian",
+    "Sindhi",
+    "Sinhala",
+    "Slovak",
+    "Slovenian",
+    "Somali",
+    "Albanian",
+    "Serbian",
+    "Swedish",
+    "Swahili",
+    "Tamil",
+    "Telugu",
+    "Thai",
+    "Turkish",
+    "Ukrainian",
+    "Urdu",
+    "Vietnamese",
+    "Chinese",
+    "Marathi",
+    "Afrikaans",
+    "Catalan",
+    "Czech",
+    "Danish",
+    "Georgian",
+    "Kazakh",
+    "Malay",
+    "Norwegian",
+    "Tagalog",
+    "Yoruba"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "mT 5": {
+    "application": {
+     "candidates": [
+      "Cross-lingual zero-shot transfer",
+      "machine translation",
+      "named entity recognition",
+      "question answering",
+      "paraphrase identification"
+     ],
+     "accepted": [
+      "machine translation",
+      "named entity recognition",
+      "question answering",
+      "paraphrase identification"
+     ],
+     "dropped": [
+      {
+       "value": "Cross-lingual zero-shot transfer",
+       "reason": "Describes a capability or training setting rather than a concrete application or domain."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "SMALL",
+      "BASE",
+      "LARGE",
+      "XXL",
+      "XL",
+      "60M",
+      "220M",
+      "300M",
+      "580M",
+      "760M",
+      "770M",
+      "1.2B",
+      "1.6B",
+      "2.3B",
+      "3B",
+      "3.7B",
+      "3.9B",
+      "11B",
+      "13B"
+     ],
+     "accepted": [
+      "60M",
+      "220M",
+      "300M",
+      "580M",
+      "760M",
+      "770M",
+      "1.2B",
+      "1.6B",
+      "2.3B",
+      "3B",
+      "3.7B",
+      "3.9B",
+      "11B",
+      "13B"
+     ],
+     "dropped": [
+      {
+       "value": "SMALL",
+       "reason": "Not a numerical value representing parameter count. (cached)"
+      },
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "LARGE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "XXL",
+       "reason": "Not a numerical value representing parameter count."
+      },
+      {
+       "value": "XL",
+       "reason": "Not a numerical value representing parameter count."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Massively multilingual pre-trained language model for text-to-text transfer across 100+ languages"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Massively multilingual pre-trained language model for text-to-text transfer across 100+ languages",
+       "reason": "Describes the model/solution rather than naming a research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 102,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 29
+  }
+ },
+ "contributions": [
+  {
+   "label": "mT 5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MT 5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-10-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Massively multilingual text-to-text framework trained across 101 languages using a unified span-corruption objective",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs language sampling exponent (\u03b1=0.3) to balance high- and low-resource languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses SentencePiece with byte-fallback and 0.99999 character coverage to handle large character sets",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Applies GeGLU nonlinearities and scales d_model/d_ff in larger variants.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Text-to-text (teacher-forced maximum likelihood)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MC4 (multilingual Common Crawl, ~750GB English text plus multilingual pages filtered by cld3 confidence \u226570%, covering 107 languages with \u226510,000 pages each)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on XTREME tasks (XNLI, PAWS-X, WikiAnn NER, XQuAD, MLQA, TyDi QA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (with byte-fallback)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "60M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "220M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "580M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "760M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "770M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "11B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Cloud TPU v3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPUv3",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Paraphrase identification",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/mt5",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/text-to-text-transfer-transformer",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~750GB English (C4) plus multilingual Common Crawl pages",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PAWS-X",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiAnn NER",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MLQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TyDi QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi-News",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI-EB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Wikipedia",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CC-100",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Greek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Estonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Basque",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Persian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Finnish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hebrew",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hungarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Javanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kurdish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Latvian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Macedonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malayalam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Mongolian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Burmese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Nepali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dutch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sindhi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sinhala",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovak",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovenian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Somali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Albanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Serbian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swedish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tamil",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Telugu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ukrainian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Marathi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Afrikaans",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Catalan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Danish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Georgian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kazakh",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malay",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Norwegian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tagalog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Yoruba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "220M, 760M, 2.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Unsupervised pre-training on span-corruption objective",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI avg 90.0 (XXL), PAWS-X avg 91.5 (XXL), WMT14 avg 87.8 (XXL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD F1/EM (Table 3)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI zero-shot accuracy (Table 4)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TyDi QA GoldP (Figure 2)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XTREME classification and QA tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XQuAD zero-shot illegal prediction rates reduced by >70% with DPT",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PAWS-X avg 66.4 (XXL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiAnn NER avg 82.5/66.8 (XXL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XQuAD avg 76.0/57.4 (XXL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MLQA avg 58.1/42.8 (Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TyDiQA GoldP avg F1/EM: 87.5/78.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI avg accuracy: 87.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XQuAD avg F1/EM: 87.7/80.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TyDiQA GoldP avg F1/EM: 88.5/79.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI avg accuracy: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XQuAD avg F1/EM: 88.7/80.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R455896",
+  "contribution_ids": [
+   "R455897",
+   "R455928",
+   "R1920931"
+  ],
+  "new_contribution_ids": [
+   "R1920931"
+  ],
+  "comparison_updated": null
+ }
+}

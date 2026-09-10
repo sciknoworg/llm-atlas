@@ -1,0 +1,2346 @@
+{
+ "arxiv_id": "2312.14238",
+ "status": "completed",
+ "timestamp": "2026-08-28T15:47:14.731366",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2312.14238",
+  "title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+  "authors": [
+   "Zhe Chen",
+   "Jiannan Wu",
+   "Wenhai Wang",
+   "Weijie Su",
+   "Guo Chen",
+   "Sen Xing",
+   "Muyan Zhong",
+   "Qinglong Zhang",
+   "Xizhou Zhu",
+   "Lewei Lu",
+   "Bin Li",
+   "Ping Luo",
+   "Tong Lu",
+   "Yu Qiao",
+   "Jifeng Dai"
+  ],
+  "abstract": "The exponential growth of large language models (LLMs) has opened up numerous possibilities for multimodal AGI systems. However, the progress in vision and vision-language foundation models, which are also critical elements of multi-modal AGI, has not kept pace with LLMs. In this work, we design a large-scale vision-language foundation model (InternVL), which scales up the vision foundation model to 6 billion parameters and progressively aligns it with the LLM, using web-scale image-text data from various sources. This model can be broadly applied to and achieve state-of-the-art performance on 32 generic visual-linguistic benchmarks including visual perception tasks such as image-level or pixel-level recognition, vision-language tasks such as zero-shot image/video classification, zero-shot image/video-text retrieval, and link with LLMs to create multi-modal dialogue systems. It has powerful visual capabilities and can be a good alternative to the ViT-22B. We hope that our research could contribute to the development of multi-modal large models. Code and models are available at https://github.com/OpenGVLab/InternVL.",
+  "published": "2023-12-21T18:59:31+00:00",
+  "updated": "2024-01-15T15:23:55+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2312.14238v3",
+  "entry_id": "http://arxiv.org/abs/2312.14238v3",
+  "pdf_path": "data/papers/2312.14238.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 136551,
+ "word_count": 13459,
+ "models_extracted": 31,
+ "extraction_data": [
+  {
+   "model_name": "InternVL",
+   "parameters": "1B, 2B, 4B, 5.9B (VISION ENCODER), 5.9B, 6B, 7B (LLM BACKBONE), 8B, 13B, 19B, 20B, 26B, 40B, 78B",
+   "parameters_millions": 78000,
+   "model_family": "InternVL",
+   "date_created": "2023-12-21",
+   "organization": "Shanghai Ai Laboratory",
+   "innovation": "Parameter-balanced vision-language architecture: scales vision encoder to 6B parameters and aligns it with an 8B-parameter LLM middleware that acts as a 'glue' layer to reorganize visual features based on user commands; differs from prior vision-only or dual-tower designs by harmonizing representation scales. Progressive image-text alignment strategy: maximizes utilization of web-scale noisy image-text data for contrastive learning while reserving fine-grained, high-quality data for generative learning; ensures consistent representation enhancement and addresses heterogeneity/quality variations in web data.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image-text alignment, generative supervision",
+   "pretraining_corpus": "LAION-en, LAION-multi, LAION-COCO, COYO, Wukong, CC3M, SBU, CC12M, ImageNet-1K/22K, Flickr30K, COCO",
+   "finetuning_task": "Supervised fine-tuning (SFT), Supervised fine-tuning for multi-modal dialogue and VQA, Supervised instruction tuning, Supervised fine-tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "8x A100 (80G) GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "application": "Image classification, video classification, image-text retrieval, video-text retrieval, image captioning, semantic segmentation, visual question answering, multi-modal dialogue",
+   "paper_title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "training_corpus_size": "4.98 billion entries (Stage 1), 1.03 billion entries (Stage 2)",
+   "finetuning_data": "High-quality instruction data, non-dialogue datasets converted to instruction format, ~4M high-quality instruction samples, LLaVA-Instruct-158K, LLaVA-Caption-558K, LLaVA-Detail-23K, LLaVA-CC3M-Pretrain-595K, LLaVA-Wild-178K, LLaVA-Pretrain-595K, VQAv2, OKVQA, A-OKVQA, IconQA, AI2D, GQA, RefCOCO/+/g, Toloka, LLaVA-150K, SVIT, VisDial, LRV-Instruction, LLaVA-Mix-665K",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English, Chinese, Multilingual",
+   "hardware_description": "8x A100 (80G) GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/OpenGVLab/InternVL",
+   "context_length": "196\u00d7196 \u2192 224\u00d7224 resolution",
+   "activated_parameters": "6B (dense, all parameters active)",
+   "attention_mechanism": "Patch-based visual encoder (ViT-style), Standard multi-head self-attention (LLaMA backbone); vision via attention pooling, Multi-head self-attention (LLM backbone)",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Stage 1: Image-text alignment with mild filtering (4.98B data); Stage 2: Generative supervision with stringent filtering (1.03B data); Stage 3: Supervised fine-tuning (SFT)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bf16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention fusion",
+   "vision_encoder": "InternViT-6B, Scaled-up vision encoder (6B parameters)",
+   "base_model": "InternViT-6B (vision encoder), pre-trained multilingual LLaMA (LLM)",
+   "optimizer_innovation": null,
+   "benchmark_result": "IN-1K: 87.8; COCO Caption: 135.0; COCO Retrieval: 92.9/77.7; Flickr30K Retrieval: 96.6/85.9; ImageNet-1K: 88.2; ImageNet-Real: 90.4; ImageNet-V2: 79.9; ImageNet-A: 77.5; ImageNet-R: 89.8; ImageNet-Sketch: 69.1; avg: 82.5; MME 1988, MMMU 54.3, TextVQA 78.5, VQAv2 82.1; SOTA on VQAv2, GQA, TextVQA, MMMU, etc.; State-of-the-art on VQAv2, OK-VQA, TextVQA, DocVQA, ChartQA, etc.; TextVQA 78.5, DocVQA 89.1, OCRBench 76.0, MMMU 54.3, MathVista 58.5, AI2D 84.8, ChartQA 83.3, HallusionBench 64.4, MMBench 82.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "25 (vision encoder), 32 (LLaMA)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternVL-C",
+   "parameters": "~19B, ~13B, 7B, 13B, 15.5B",
+   "parameters_millions": 15500,
+   "model_family": "InternVL",
+   "date_created": "2023-12-21",
+   "organization": "Google",
+   "innovation": "Vision-language alignment using QLLaMA as a language middleware; exhibits stronger robustness to distribution shift across ImageNet variants; state-of-the-art zero-shot image-text retrieval.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image-text contrastive learning, image-text matching, image-grounded text generation",
+   "pretraining_corpus": "1.03 billion filtered high-quality image-text pairs",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Vision-Language Alignment",
+   "application": "Zero-shot image classification, visual reasoning, visual knowledge acquisition, visual commonsense, object hallucination",
+   "paper_title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "training_corpus_size": "1.03 billion pairs",
+   "finetuning_data": "Flickr30K, COCO, Flickr30K-CN, COCO-CN",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English, Chinese, Multilingual",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/OpenGVLab/InternVL",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Vision encoder pre-training -> cross-attention alignment -> instruction tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention / Mid-fusion",
+   "vision_encoder": "InternViT-6B",
+   "base_model": "QLLaMA",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet-1K: 83.2; Flickr30K: 94.7; COCO: 99.6; Flickr30K-CN: 90.3; COCO-CN: 98.8; ImageNet: 99.4; ILSVRC-CLS: 93.2; ILSVRC-DET: 80.6; ILSVRC-LOC: 89.5; Places365: 94.2; DTD: 72.0; EuroSAT: 70.7; RESISC45: 79.4; VOC2007: 56.2; VOC2012: 86.1; CUB200: 95.3; Stanford Cars: 65.5; FGVC Aircraft: 96.0; Food101: 67.9; Caltech101: 74.2; Oxford-IIIT Pet: 99.5; Oxford 102 Flowers: 80.0; Stanford Dogs: 78.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternVL-G",
+   "parameters": "~19B, 7B",
+   "parameters_millions": 7000,
+   "model_family": "InternVL",
+   "date_created": "2023-12-21",
+   "organization": "Google",
+   "innovation": "Cross-attention alignment with QLLaMA language middleware; enhances zero-shot image-text retrieval performance through additional image encoding using the language middleware.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image-text contrastive learning, image-text matching, image-grounded text generation",
+   "pretraining_corpus": "1.03 billion filtered high-quality image-text pairs",
+   "finetuning_task": null,
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Vision-Language Alignment",
+   "application": "Visual understanding, image-text retrieval, visual question answering, image captioning",
+   "paper_title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "training_corpus_size": "1.03 billion pairs",
+   "finetuning_data": "Flickr30K, COCO, Flickr30K-CN, COCO-CN",
+   "tokenizer": null,
+   "supported_language": "English, Chinese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention / Mid-fusion",
+   "vision_encoder": "InternViT-6B",
+   "base_model": "QLLaMA",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet-1K: 83.2; Flickr30K: 95.7; COCO: 99.7; Flickr30K-CN: 92.9; COCO-CN: 99.4",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)",
+   "model_family": "InternVL",
+   "date_created": "2023-12-21",
+   "organization": "Google",
+   "innovation": "Scales vision foundation model to 6B parameters; introduces QLLaMA, an LLM-initialized language middleware to align vision features with LLMs; progressive alignment using web-scale image-text data.",
+   "pretraining_corpus": "Web-scale image-text data",
+   "parameters": "6B, 7B, 13B",
+   "parameters_millions": 13000,
+   "application": "Image/video classification, retrieval, captioning, visual question answering, multi-modal dialogue",
+   "license": null,
+   "research_problem": "Vision-language foundation models for generic visual-linguistic tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive learning, Supervised fine-tuning (SFT)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "LLaVA-Mix-665K",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": "A100 GPU",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training vision encoder -> alignment with QLLaMA -> SFT on LLaVA-Mix-665K",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP middleware (QLLaMA)",
+   "vision_encoder": "InternViT-6B",
+   "base_model": "QLLaMA, Vicuna-7B/13B",
+   "optimizer_innovation": null,
+   "benchmark_result": "MME: 1298.5 (V-7B), 1317.2 (V-13B); NoCaps: 120.5, 123.1; OKVQA: 51.8, 55.5; VizWiz: 57.7, 59.5; ImageNet-1K zsIN: 66.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternViT",
+   "model_family": "InternVL",
+   "date_created": "2023-12-21",
+   "organization": "OpenGVLab",
+   "innovation": "Dynamic resolution vision encoder with high-resolution patches; scales up vision foundation models for generic visual-linguistic tasks.",
+   "pretraining_corpus": null,
+   "parameters": "5.9B",
+   "parameters_millions": 5900,
+   "application": "Visual understanding, image-text retrieval, visual question answering, image captioning",
+   "license": "open source",
+   "research_problem": "Vision-Language Models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Image-text alignment",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 22,
+ "models_after_merge": 5,
+ "validated_rows": {
+  "InternVL": {
+   "application": [
+    "Image classification",
+    "video classification",
+    "image-text retrieval",
+    "video-text retrieval",
+    "image captioning",
+    "semantic segmentation",
+    "visual question answering",
+    "multi-modal dialogue"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention (LLaMA backbone)",
+    "vision via attention pooling",
+    "Multi-head self-attention (LLM backbone)"
+   ],
+   "base_model": [
+    "InternViT-6B (vision encoder), pre-trained multilingual LLaMA (LLM)"
+   ],
+   "finetuning_data": [
+    "LLaVA-Instruct-158K",
+    "LLaVA-Caption-558K",
+    "LLaVA-Detail-23K",
+    "LLaVA-CC3M-Pretrain-595K",
+    "LLaVA-Wild-178K",
+    "LLaVA-Pretrain-595K",
+    "VQAv2",
+    "OKVQA",
+    "A-OKVQA",
+    "IconQA",
+    "AI2D",
+    "GQA",
+    "RefCOCO/+/g",
+    "Toloka",
+    "LLaVA-150K",
+    "SVIT",
+    "VisDial",
+    "LRV-Instruction",
+    "LLaVA-Mix-665K"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)",
+    "Supervised fine-tuning for multi-modal dialogue and VQA",
+    "Supervised instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Cross-attention fusion"
+   ],
+   "hardware_used": [
+    "8x A100 (80G) GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Shanghai Ai Laboratory"
+   ],
+   "parameters": [
+    "1B",
+    "2B",
+    "4B",
+    "5.9B (VISION ENCODER)",
+    "5.9B",
+    "6B",
+    "7B (LLM BACKBONE)",
+    "8B",
+    "13B",
+    "19B",
+    "20B",
+    "26B",
+    "40B",
+    "78B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-en",
+    "LAION-multi",
+    "LAION-COCO",
+    "COYO",
+    "Wukong",
+    "CC3M",
+    "SBU",
+    "CC12M",
+    "ImageNet-1K/22K",
+    "Flickr30K",
+    "COCO"
+   ],
+   "pretraining_task": [
+    "Image-text alignment, generative supervision"
+   ],
+   "quantization_precision": [
+    "bf16"
+   ],
+   "research_problem": [
+    "Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "InternViT-6B",
+    "Scaled-up vision encoder (6B parameters)"
+   ]
+  },
+  "InternVL-C": {
+   "application": [
+    "Zero-shot image classification",
+    "visual reasoning",
+    "visual knowledge acquisition",
+    "visual commonsense"
+   ],
+   "base_model": [
+    "QLLaMA"
+   ],
+   "finetuning_data": [
+    "Flickr30K",
+    "COCO",
+    "Flickr30K-CN",
+    "COCO-CN"
+   ],
+   "fusion_architecture": [
+    "Cross-attention / Mid-fusion"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL-C"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "~19B",
+    "~13B",
+    "7B",
+    "15.5B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Image-text contrastive learning, image-text matching, image-grounded text generation"
+   ],
+   "research_problem": [
+    "Vision-Language Alignment"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "InternViT-6B"
+   ]
+  },
+  "InternVL-G": {
+   "application": [
+    "Visual understanding",
+    "image-text retrieval",
+    "visual question answering",
+    "image captioning"
+   ],
+   "base_model": [
+    "QLLaMA"
+   ],
+   "finetuning_data": [
+    "Flickr30K",
+    "COCO",
+    "Flickr30K-CN",
+    "COCO-CN"
+   ],
+   "fusion_architecture": [
+    "Cross-attention / Mid-fusion"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL-G"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "~19B",
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Image-text contrastive learning, image-text matching, image-grounded text generation"
+   ],
+   "research_problem": [
+    "Vision-Language Alignment"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "InternViT-6B"
+   ]
+  },
+  "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)": {
+   "application": [
+    "Image/video classification",
+    "retrieval",
+    "captioning",
+    "visual question answering",
+    "multi-modal dialogue"
+   ],
+   "base_model": [
+    "QLLaMA, Vicuna-7B/13B"
+   ],
+   "finetuning_data": [
+    "LLaVA-Mix-665K"
+   ],
+   "fusion_architecture": [
+    "MLP middleware (QLLaMA)"
+   ],
+   "hardware_used": [
+    "A100 GPU"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "6B",
+    "7B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Contrastive learning, Supervised fine-tuning (SFT)"
+   ],
+   "research_problem": [
+    "Vision-language foundation models for generic visual-linguistic tasks"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "InternViT-6B"
+   ]
+  },
+  "InternViT": {
+   "application": [
+    "Visual understanding",
+    "image-text retrieval",
+    "visual question answering",
+    "image captioning"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternViT"
+   ],
+   "organization": [
+    "OpenGVLab"
+   ],
+   "parameters": [
+    "5.9B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Image-text alignment"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "InternVL": {
+    "attention_mechanism": {
+     "candidates": [
+      "Patch-based visual encoder (ViT-style)",
+      "Standard multi-head self-attention (LLaMA backbone)",
+      "vision via attention pooling",
+      "Multi-head self-attention (LLM backbone)"
+     ],
+     "accepted": [
+      "Standard multi-head self-attention (LLaMA backbone)",
+      "vision via attention pooling",
+      "Multi-head self-attention (LLM backbone)"
+     ],
+     "dropped": [
+      {
+       "value": "Patch-based visual encoder (ViT-style)",
+       "reason": "Describes a vision encoder architecture, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "High-quality instruction data",
+      "non-dialogue datasets converted to instruction format",
+      "~4M high-quality instruction samples",
+      "LLaVA-Instruct-158K",
+      "LLaVA-Caption-558K",
+      "LLaVA-Detail-23K",
+      "LLaVA-CC3M-Pretrain-595K",
+      "LLaVA-Wild-178K",
+      "LLaVA-Pretrain-595K",
+      "VQAv2",
+      "OKVQA",
+      "A-OKVQA",
+      "IconQA",
+      "AI2D",
+      "GQA",
+      "RefCOCO/+/g",
+      "Toloka",
+      "LLaVA-150K",
+      "SVIT",
+      "VisDial",
+      "LRV-Instruction",
+      "LLaVA-Mix-665K"
+     ],
+     "accepted": [
+      "LLaVA-Instruct-158K",
+      "LLaVA-Caption-558K",
+      "LLaVA-Detail-23K",
+      "LLaVA-CC3M-Pretrain-595K",
+      "LLaVA-Wild-178K",
+      "LLaVA-Pretrain-595K",
+      "VQAv2",
+      "OKVQA",
+      "A-OKVQA",
+      "IconQA",
+      "AI2D",
+      "GQA",
+      "RefCOCO/+/g",
+      "Toloka",
+      "LLaVA-150K",
+      "SVIT",
+      "VisDial",
+      "LRV-Instruction",
+      "LLaVA-Mix-665K"
+     ],
+     "dropped": [
+      {
+       "value": "High-quality instruction data",
+       "reason": "Vague description/placeholder rather than a specific named dataset."
+      },
+      {
+       "value": "non-dialogue datasets converted to instruction format",
+       "reason": "Describes a data processing step rather than naming a specific dataset."
+      },
+      {
+       "value": "~4M high-quality instruction samples",
+       "reason": "Describes a quantity/format rather than naming a specific dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Supervised fine-tuning for multi-modal dialogue and VQA",
+      "Supervised instruction tuning",
+      "Supervised fine-tuning"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)",
+      "Supervised fine-tuning for multi-modal dialogue and VQA",
+      "Supervised instruction tuning"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Chinese",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English",
+      "Chinese"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "InternVL-C": {
+    "application": {
+     "candidates": [
+      "Zero-shot image classification",
+      "visual reasoning",
+      "visual knowledge acquisition",
+      "visual commonsense",
+      "object hallucination"
+     ],
+     "accepted": [
+      "Zero-shot image classification",
+      "visual reasoning",
+      "visual knowledge acquisition",
+      "visual commonsense"
+     ],
+     "dropped": [
+      {
+       "value": "object hallucination",
+       "reason": "Describes a model failure mode/phenomenon, not a practical use or domain."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "1.03 billion filtered high-quality image-text pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "1.03 billion filtered high-quality image-text pairs",
+       "reason": "Describes a quantity/format rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Chinese",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English",
+      "Chinese"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "InternVL-G": {
+    "pretraining_corpus": {
+     "candidates": [
+      "1.03 billion filtered high-quality image-text pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "1.03 billion filtered high-quality image-text pairs",
+       "reason": "Describes a quantity/format rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)": {
+    "pretraining_corpus": {
+     "candidates": [
+      "Web-scale image-text data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Web-scale image-text data",
+       "reason": "Asserts scale/breadth rather than naming a specific identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "InternViT": {
+    "research_problem": {
+     "candidates": [
+      "Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-Language Models",
+       "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 154,
+   "dropped": 12,
+   "llm_calls": 1,
+   "values_sent_to_llm": 58
+  }
+ },
+ "contributions": [
+  {
+   "label": "InternVL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Shanghai Ai Laboratory",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Parameter-balanced vision-language architecture: scales vision encoder to 6B parameters and aligns it with an 8B-parameter LLM middleware that acts as a 'glue' layer to reorganize visual features based on user commands",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior vision-only or dual-tower designs by harmonizing representation scales. Progressive image-text alignment strategy: maximizes utilization of web-scale noisy image-text data for contrastive learning while reserving fine-grained, high-quality data for generative learning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Ensures consistent representation enhancement and addresses heterogeneity/quality variations in web data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text alignment, generative supervision",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-en",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-multi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COYO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wukong",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ImageNet-1K/22K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for multi-modal dialogue and VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.9B (VISION ENCODER)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B (LLM BACKBONE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "19B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "26B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "40B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 78000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "8x A100 (80G) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8x A100 (80G) GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Semantic segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/OpenGVLab/InternVL",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "4.98 billion entries (Stage 1), 1.03 billion entries (Stage 2)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Instruct-158K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Caption-558K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Detail-23K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-CC3M-Pretrain-595K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Wild-178K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Pretrain-595K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IconQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "AI2D",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO/+/g",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Toloka",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-150K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVIT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VisDial",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LRV-Instruction",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Mix-665K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "196\u00d7196 \u2192 224\u00d7224 resolution",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "6B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention (LLaMA backbone)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Vision via attention pooling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (LLM backbone)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage 1: Image-text alignment with mild filtering (4.98B data); Stage 2: Generative supervision with stringent filtering (1.03B data); Stage 3: Supervised fine-tuning (SFT)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bf16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Scaled-up vision encoder (6B parameters)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "InternViT-6B (vision encoder), pre-trained multilingual LLaMA (LLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IN-1K: 87.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Caption: 135.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Retrieval: 92.9/77.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K Retrieval: 96.6/85.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1K: 88.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-Real: 90.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-V2: 79.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-A: 77.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-R: 89.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-Sketch: 69.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Avg: 82.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME 1988, MMMU 54.3, TextVQA 78.5, VQAv2 82.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on VQAv2, GQA, TextVQA, MMMU, etc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on VQAv2, OK-VQA, TextVQA, DocVQA, ChartQA, etc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA 78.5, DocVQA 89.1, OCRBench 76.0, MMMU 54.3, MathVista 58.5, AI2D 84.8, ChartQA 83.3, HallusionBench 64.4, MMBench 82.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "25 (vision encoder), 32 (LLaMA)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternVL-C",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL-C",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vision-language alignment using QLLaMA as a language middleware",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Exhibits stronger robustness to distribution shift across ImageNet variants",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "State-of-the-art zero-shot image-text retrieval.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text contrastive learning, image-text matching, image-grounded text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "~19B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "~13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "15.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 15500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual knowledge acquisition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual commonsense",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/OpenGVLab/InternVL",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.03 billion pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Vision encoder pre-training -> cross-attention alignment -> instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention / Mid-fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "QLLaMA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1K: 83.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 94.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 99.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN: 90.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN: 98.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet: 99.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ILSVRC-CLS: 93.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ILSVRC-DET: 80.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ILSVRC-LOC: 89.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Places365: 94.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DTD: 72.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "EuroSAT: 70.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RESISC45: 79.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VOC2007: 56.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VOC2012: 86.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CUB200: 95.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Stanford Cars: 65.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FGVC Aircraft: 96.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Food101: 67.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Caltech101: 74.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Oxford-IIIT Pet: 99.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Oxford 102 Flowers: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Stanford Dogs: 78.1",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternVL-G",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL-G",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cross-attention alignment with QLLaMA language middleware",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enhances zero-shot image-text retrieval performance through additional image encoding using the language middleware.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text contrastive learning, image-text matching, image-grounded text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "~19B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.03 billion pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention / Mid-fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "QLLaMA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1K: 83.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 95.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 99.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN: 92.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN: 99.4",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL (InternViT-6B + QLLaMA + Vicuna-7B/13B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scales vision foundation model to 6B parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces QLLaMA, an LLM-initialized language middleware to align vision features with LLMs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Progressive alignment using web-scale image-text data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning, Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image/video classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language foundation models for generic visual-linguistic tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Mix-665K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training vision encoder -> alignment with QLLaMA -> SFT on LLaVA-Mix-665K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP middleware (QLLaMA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "QLLaMA, Vicuna-7B/13B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1298.5 (V-7B), 1317.2 (V-13B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 120.5, 123.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA: 51.8, 55.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 57.7, 59.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1K zsIN: 66.2",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternViT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenGVLab",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dynamic resolution vision encoder with high-resolution patches",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scales up vision foundation models for generic visual-linguistic tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 5900,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1777478",
+  "contribution_ids": [
+   "R1777480",
+   "R1777481",
+   "R1777482",
+   "R1777483",
+   "R1777484",
+   "R1777485",
+   "R1777486",
+   "R1777487",
+   "R1924156",
+   "R1924174",
+   "R1924181",
+   "R1924183",
+   "R1924190"
+  ],
+  "new_contribution_ids": [
+   "R1924156",
+   "R1924174",
+   "R1924181",
+   "R1924183",
+   "R1924190"
+  ],
+  "comparison_updated": null
+ }
+}

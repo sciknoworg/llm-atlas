@@ -1,0 +1,1635 @@
+{
+  "arxiv_id": "2004.13637",
+  "status": "completed",
+  "timestamp": "2026-08-24T18:41:02.540081",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2004.13637",
+    "title": "Recipes for building an open-domain chatbot",
+    "authors": [
+      "Stephen Roller",
+      "Emily Dinan",
+      "Naman Goyal",
+      "Da Ju",
+      "Mary Williamson",
+      "Yinhan Liu",
+      "Jing Xu",
+      "Myle Ott",
+      "Kurt Shuster",
+      "Eric M. Smith",
+      "Y-Lan Boureau",
+      "Jason Weston"
+    ],
+    "abstract": "Building open-domain chatbots is a challenging area for machine learning research. While prior work has shown that scaling neural models in the number of parameters and the size of the data they are trained on gives improved results, we show that other ingredients are important for a high-performing chatbot. Good conversation requires a number of skills that an expert conversationalist blends in a seamless way: providing engaging talking points and listening to their partners, and displaying knowledge, empathy and personality appropriately, while maintaining a consistent persona. We show that large scale models can learn these skills when given appropriate training data and choice of generation strategy. We build variants of these recipes with 90M, 2.7B and 9.4B parameter models, and make our models and code publicly available. Human evaluations show our best models are superior to existing approaches in multi-turn dialogue in terms of engagingness and humanness measurements. We then discuss the limitations of this work by analyzing failure cases of our models.",
+    "published": "2020-04-28T16:33:25+00:00",
+    "updated": "2020-04-30T15:36:52+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2004.13637v2",
+    "entry_id": "http://arxiv.org/abs/2004.13637v2",
+    "pdf_path": "data/papers/2004.13637.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 89815,
+  "word_count": 9124,
+  "models_extracted": 20,
+  "extraction_data": [
+    {
+      "model_name": "Blender",
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Fine-tuning on BlendedSkillTalk (BST) dataset to blend knowledge, empathy, and personality; systematic control of generation strategies (decoding algorithms and beam search length constraints) to manage response length and engagement; targeted fine-tuning to minimize undesirable traits like toxicity.",
+      "pretraining_corpus": null,
+      "parameters": "90M, 2.7B, 9.4B",
+      "parameters_millions": 9400,
+      "application": "Open-domain dialogue, multi-turn conversation",
+      "license": "open source",
+      "research_problem": "Open-domain chatbot building",
+      "model_version": null,
+      "pretraining_architecture": null,
+      "pretraining_task": null,
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": "BlendedSkillTalk (BST) dataset",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "activated_parameters": "90M, 2.7B, 9.4B (dense)",
+      "attention_mechanism": "Multi-head self-attention",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on large corpora -> fine-tuning on BST dataset",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Human evaluations: 75% to 25% win rate over Meena in engagingness; 65% to 35% in humanness",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Generator",
+      "parameters": "2.7B, 9.4B",
+      "parameters_millions": 9400,
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Poly-encoder: uses multiple global context representations (ncodes) attended to by each candidate response for efficient retrieval; Generator: standard Seq2Seq Transformer for response generation; Retrieve-and-Refine: combines retrieval with generation to mitigate hallucination and repetition.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "Reddit dataset from PushShift.io (July 2019)",
+      "finetuning_task": "Supervised fine-tuning on dialogue datasets",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Open-domain chatbot",
+      "application": "Open-domain dialogue, chatbot",
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "training_corpus_size": "56.8B label BPE tokens, 88.8B context tokens",
+      "finetuning_data": "ConvAI2",
+      "tokenizer": "Byte-Level BPE",
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "2.7B (dense, all parameters active)",
+      "attention_mechanism": "Multi-head self-attention",
+      "context_length_max": "128 BPE tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on dialogue data, fine-tuning on ConvAI2",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Outperforms Meena in human evaluations (75% to 25% engagingness, 65% to 35% humanness)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Blended Skill Talk model",
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Multi-task fine-tuning on blended conversational datasets (ConvAI2, Empathetic Dialogues, Wizard of Wikipedia, Blended Skill Talk) to seamlessly combine personality, empathy, and knowledge; retrieval-and-refine architecture for knowledge grounding; safety mitigation via adversarial toxic data and explicit instructions to reduce undesirable language.",
+      "pretraining_corpus": "Wikipedia, Reddit (pushshift.io)",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Open-domain conversation, chatbot",
+      "license": null,
+      "research_problem": "Open-domain chatbot",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Multi-task fine-tuning on conversational datasets",
+      "finetuning_data": "ConvAI2, Empathetic Dialogues, Wizard of Wikipedia, Blended Skill Talk",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on large-scale text (Wikipedia, Reddit) followed by multi-task fine-tuning on blended conversational datasets",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "ACUTE-Eval (human pairwise evaluation), toxicity classifier",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "90M",
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Retrieve-and-Refine (RetNRef) architecture combining a retrieval model with a generative model; safety filtering via word lists and classifiers to reduce unsafe utterances in open-domain dialogue.",
+      "pretraining_corpus": "pushshift.io Reddit",
+      "parameters": "90M",
+      "parameters_millions": 90,
+      "application": "Open-domain dialogue, chatbot",
+      "license": null,
+      "research_problem": "Open-domain dialogue / chatbot",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning on BST",
+      "finetuning_data": "ConvAI2, Wizard of Wikipedia, Empathetic Dialogues, Blended Skill Talk (BST)",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "activated_parameters": "90M",
+      "attention_mechanism": "Multi-head attention (16 heads)",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on Reddit -> fine-tuning on BST datasets",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Validation PPL on pushshift.io Reddit: 25.6; ConvAI2: 18.33; WoW: 31.18; ED: 14.44; BST: 18.09",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "BST RetNRef (256M/90M)",
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Systematic comparison of pre-training vs fine-tuning on BST; introducing persona context; comparing MLE vs Unlikelihood loss; proposing Retrieve-and-Refine (RetNRef) architecture; length-controlled beam search decoding.",
+      "pretraining_corpus": "pushshift.io Reddit, Wizard of Wikipedia",
+      "parameters": "256M/90M",
+      "parameters_millions": 9400,
+      "application": "Open-domain chat, dialogue generation",
+      "license": null,
+      "research_problem": "Building open-domain chatbots",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning on BST",
+      "finetuning_data": "BST (Blended Skill Talk)",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "ACUTE-Eval engagingness: 49% vs Meena, 37% vs human",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "BST RetNRef (622M/2.7B)",
+      "model_family": "Transformer",
+      "date_created": "2020-04-28",
+      "organization": "Meta",
+      "innovation": "Systematic comparison of pre-training vs fine-tuning on BST; introducing persona context; comparing MLE vs Unlikelihood loss; proposing Retrieve-and-Refine (RetNRef) architecture; length-controlled beam search decoding.",
+      "pretraining_corpus": "pushshift.io Reddit, Wizard of Wikipedia",
+      "parameters": "622M/2.7B",
+      "parameters_millions": 9400,
+      "application": "Open-domain chat, dialogue generation",
+      "license": null,
+      "research_problem": "Building open-domain chatbots",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning on BST",
+      "finetuning_data": "BST (Blended Skill Talk)",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Recipes for building an open-domain chatbot",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "ACUTE-Eval engagingness: 65% vs Meena, 46% vs human",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 6,
+  "validated_rows": {
+    "Blender": {
+      "application": [
+        "Open-domain dialogue",
+        "multi-turn conversation"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention"
+      ],
+      "finetuning_data": [
+        "BlendedSkillTalk (BST) dataset"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [],
+      "model_name": [
+        "Blender"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "90M",
+        "2.7B",
+        "9.4B"
+      ],
+      "research_problem": [
+        "Open-domain chatbot building"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "Generator": {
+      "application": [
+        "Open-domain dialogue",
+        "chatbot"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention"
+      ],
+      "finetuning_data": [
+        "ConvAI2"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on dialogue datasets"
+      ],
+      "model_family": [],
+      "model_name": [],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "2.7B",
+        "9.4B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Reddit dataset from PushShift.io (July 2019)"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open-domain chatbot"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "Blended Skill Talk model": {
+      "application": [
+        "Open-domain conversation",
+        "chatbot"
+      ],
+      "finetuning_data": [
+        "ConvAI2",
+        "Empathetic Dialogues",
+        "Wizard of Wikipedia",
+        "Blended Skill Talk"
+      ],
+      "finetuning_task": [
+        "Multi-task fine-tuning on conversational datasets"
+      ],
+      "model_family": [],
+      "model_name": [
+        "Blended Skill Talk model"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Wikipedia",
+        "Reddit (pushshift.io)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Open-domain chatbot"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "90M": {
+      "application": [
+        "Open-domain dialogue",
+        "chatbot"
+      ],
+      "attention_mechanism": [
+        "Multi-head attention (16 heads)"
+      ],
+      "finetuning_data": [
+        "ConvAI2",
+        "Wizard of Wikipedia",
+        "Empathetic Dialogues",
+        "Blended Skill Talk (BST)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on BST"
+      ],
+      "model_family": [],
+      "model_name": [],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "90M"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "pushshift.io Reddit"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Open-domain dialogue / chatbot"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "BST RetNRef (256M/90M)": {
+      "application": [
+        "Open-domain chat",
+        "dialogue generation"
+      ],
+      "finetuning_data": [
+        "BST (Blended Skill Talk)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on BST"
+      ],
+      "model_family": [],
+      "model_name": [
+        "BST RetNRef (256M/90M)"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "256M/90M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "pushshift.io Reddit"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Building open-domain chatbots"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "BST RetNRef (622M/2.7B)": {
+      "application": [
+        "Open-domain chat",
+        "dialogue generation"
+      ],
+      "finetuning_data": [
+        "BST (Blended Skill Talk)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on BST"
+      ],
+      "model_family": [],
+      "model_name": [
+        "BST RetNRef (622M/2.7B)"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "622M/2.7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "pushshift.io Reddit"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Building open-domain chatbots"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Blender": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        }
+      },
+      "Generator": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        },
+        "model_name": {
+          "candidates": [
+            "Generator"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Generator",
+              "reason": "Generic component name, not a specific model identifier"
+            }
+          ]
+        }
+      },
+      "Blended Skill Talk model": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        }
+      },
+      "90M": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        },
+        "model_name": {
+          "candidates": [
+            "90M"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "90M",
+              "reason": "Parameter count, not a model name"
+            }
+          ]
+        }
+      },
+      "BST RetNRef (256M/90M)": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "pushshift.io Reddit",
+            "Wizard of Wikipedia"
+          ],
+          "accepted": [
+            "pushshift.io Reddit"
+          ],
+          "dropped": [
+            {
+              "value": "Wizard of Wikipedia",
+              "reason": "Conversational dataset used for fine-tuning, not a pretraining corpus"
+            }
+          ]
+        }
+      },
+      "BST RetNRef (622M/2.7B)": {
+        "model_family": {
+          "candidates": [
+            "Transformer"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Transformer",
+              "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "pushshift.io Reddit",
+            "Wizard of Wikipedia"
+          ],
+          "accepted": [
+            "pushshift.io Reddit"
+          ],
+          "dropped": [
+            {
+              "value": "Wizard of Wikipedia",
+              "reason": "Conversational dataset used for fine-tuning, not a pretraining corpus"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 80,
+      "dropped": 10,
+      "llm_calls": 1,
+      "values_sent_to_llm": 30
+    }
+  },
+  "contributions": [
+    {
+      "label": "Blender",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Blender",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Fine-tuning on BlendedSkillTalk (BST) dataset to blend knowledge, empathy, and personality",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Systematic control of generation strategies (decoding algorithms and beam search length constraints) to manage response length and engagement",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Targeted fine-tuning to minimize undesirable traits like toxicity.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "90M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "9.4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 9400,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn conversation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open-domain chatbot building",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BlendedSkillTalk (BST) dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "90M, 2.7B, 9.4B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on large corpora -> fine-tuning on BST dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Human evaluations: 75% to 25% win rate over Meena in engagingness",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "65% to 35% in humanness",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Generator",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Poly-encoder: uses multiple global context representations (ncodes) attended to by each candidate response for efficient retrieval",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Generator: standard Seq2Seq Transformer for response generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Retrieve-and-Refine: combines retrieval with generation to mitigate hallucination and repetition.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Reddit dataset from PushShift.io (July 2019)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on dialogue datasets",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-Level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "9.4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 9400,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open-domain chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "56.8B label BPE tokens, 88.8B context tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ConvAI2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "2.7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "128 BPE tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on dialogue data, fine-tuning on ConvAI2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms Meena in human evaluations (75% to 25% engagingness, 65% to 35% humanness)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Blended Skill Talk model",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Blended Skill Talk model",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-task fine-tuning on blended conversational datasets (ConvAI2, Empathetic Dialogues, Wizard of Wikipedia, Blended Skill Talk) to seamlessly combine personality, empathy, and knowledge",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Retrieval-and-refine architecture for knowledge grounding",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Safety mitigation via adversarial toxic data and explicit instructions to reduce undesirable language.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Wikipedia",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Reddit (pushshift.io)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multi-task fine-tuning on conversational datasets",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain conversation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open-domain chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ConvAI2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Empathetic Dialogues",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Wizard of Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Blended Skill Talk",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on large-scale text (Wikipedia, Reddit) followed by multi-task fine-tuning on blended conversational datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "ACUTE-Eval (human pairwise evaluation), toxicity classifier",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "90M",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Retrieve-and-Refine (RetNRef) architecture combining a retrieval model with a generative model",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Safety filtering via word lists and classifiers to reduce unsafe utterances in open-domain dialogue.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pushshift.io Reddit",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on BST",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "90M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 90,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open-domain dialogue / chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ConvAI2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Wizard of Wikipedia",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Empathetic Dialogues",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Blended Skill Talk (BST)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "90M",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention (16 heads)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on Reddit -> fine-tuning on BST datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Validation PPL on pushshift.io Reddit: 25.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ConvAI2: 18.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WoW: 31.18",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ED: 14.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BST: 18.09",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BST RetNRef (256M/90M)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BST RetNRef (256M/90M)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Systematic comparison of pre-training vs fine-tuning on BST",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introducing persona context",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Comparing MLE vs Unlikelihood loss",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Proposing Retrieve-and-Refine (RetNRef) architecture",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Length-controlled beam search decoding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pushshift.io Reddit",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on BST",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "256M/90M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 9400,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain chat",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Building open-domain chatbots",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BST (Blended Skill Talk)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ACUTE-Eval engagingness: 49% vs Meena, 37% vs human",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BST RetNRef (622M/2.7B)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BST RetNRef (622M/2.7B)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-04-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Systematic comparison of pre-training vs fine-tuning on BST",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introducing persona context",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Comparing MLE vs Unlikelihood loss",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Proposing Retrieve-and-Refine (RetNRef) architecture",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Length-controlled beam search decoding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pushshift.io Reddit",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on BST",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "622M/2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 9400,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-domain chat",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialogue generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Building open-domain chatbots",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BST (Blended Skill Talk)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ACUTE-Eval engagingness: 65% vs Meena, 46% vs human",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925299",
+    "contribution_ids": [
+      "R1925301",
+      "R1925302",
+      "R1925303",
+      "R1925304",
+      "R1925305",
+      "R1925306"
+    ],
+    "new_contribution_ids": [
+      "R1925301",
+      "R1925302",
+      "R1925303",
+      "R1925304",
+      "R1925305",
+      "R1925306"
+    ],
+    "comparison_updated": null
+  }
+}

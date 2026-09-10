@@ -1,0 +1,2352 @@
+{
+  "arxiv_id": "2409.11402",
+  "status": "completed",
+  "timestamp": "2026-08-29T06:38:03.937060",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2409.11402",
+    "title": "NVLM: Open Frontier-Class Multimodal LLMs",
+    "authors": [
+      "Wenliang Dai",
+      "Nayeon Lee",
+      "Boxin Wang",
+      "Zhuolin Yang",
+      "Zihan Liu",
+      "Jon Barker",
+      "Tuomas Rintamaki",
+      "Mohammad Shoeybi",
+      "Bryan Catanzaro",
+      "Wei Ping"
+    ],
+    "abstract": "We introduce NVLM 1.0, a family of frontier-class multimodal large language models (LLMs) that achieve state-of-the-art results on vision-language tasks, rivaling the leading proprietary models (e.g., GPT-4o) and open-access models (e.g., Llama 3-V 405B and InternVL 2). Remarkably, NVLM 1.0 shows improved text-only performance over its LLM backbone after multimodal training. In terms of model design, we perform a comprehensive comparison between decoder-only multimodal LLMs (e.g., LLaVA) and cross-attention-based models (e.g., Flamingo). Based on the strengths and weaknesses of both approaches, we propose a novel architecture that enhances both training efficiency and multimodal reasoning capabilities. Furthermore, we introduce a 1-D tile-tagging design for tile-based dynamic high-resolution images, which significantly boosts performance on multimodal reasoning and OCR-related tasks. Regarding training data, we meticulously curate and provide detailed information on our multimodal pretraining and supervised fine-tuning datasets. Our findings indicate that dataset quality and task diversity are more important than scale, even during the pretraining phase, across all architectures. Notably, we develop production-grade multimodality for the NVLM-1.0 models, enabling them to excel in vision-language tasks while maintaining and even improving text-only performance compared to their LLM backbones. To achieve this, we craft and integrate a high-quality text-only dataset into multimodal training, alongside a substantial amount of multimodal math and reasoning data, leading to enhanced math and coding capabilities across modalities. To advance research in the field, we release the model weights at https://huggingface.co/nvidia/NVLM-D-72B and will open-source the training code for the community soon.",
+    "published": "2024-09-17T17:59:06+00:00",
+    "updated": "2024-10-22T23:13:34+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.CV",
+      "cs.LG",
+      "cs.MM"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2409.11402v2",
+    "entry_id": "http://arxiv.org/abs/2409.11402v2",
+    "pdf_path": "data/papers/2409.11402.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 130901,
+  "word_count": 12547,
+  "models_extracted": 9,
+  "extraction_data": [
+    {
+      "model_name": "NVLM-1.0-D",
+      "model_family": "NVLM",
+      "date_created": "2024-09-17",
+      "organization": "Meta",
+      "innovation": "Decoder-only architecture: uses only self-attention layers for both text and image tokens, differing from cross-attention models by unrolling all image tokens in the LLM decoder; Dynamic High-Resolution (DHR) mechanism: dynamically divides images into 1-6 tiles based on aspect ratio, processes each with a frozen vision encoder, and applies pixel-shuffle downsampling to 256 tokens to reduce compute waste on varying resolutions.",
+      "pretraining_corpus": "Image-text pairs, interleaved image-text data",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Multimodal understanding, OCR, reasoning",
+      "license": null,
+      "research_problem": "Multimodal LLMs",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Multimodal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "NVLM: Open Frontier-Class Multimodal LLMs",
+      "activated_parameters": null,
+      "attention_mechanism": "Self-attention",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pretraining on image-text pairs/interleaved data -> Supervised fine-tuning (SFT)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Self-attention (decoder-only)",
+      "vision_encoder": "InternViT-6B-448px-V1-5",
+      "base_model": "Frozen pretrained LLM",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "NVLM-D 1.0",
+      "parameters": "13B, 34B, 40B, 72B",
+      "parameters_millions": 72000,
+      "model_family": "NVLM",
+      "date_created": "2024-09-17",
+      "organization": "NVIDIA",
+      "innovation": "Novel decoder-only multimodal architecture that enhances training efficiency and reasoning; 1-D tile-tagging design for tile-based dynamic high-resolution images to boost OCR and reasoning; production-grade multimodality via integrating high-quality text-only datasets into multimodal training to maintain/improve text-only performance while excelling in vision-language tasks.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "COCO, CC3M, SBU, LAION-115M, VQAv2, VisualGenome, DVQA, Docmatix, OCR-VQA, COCO-Text, TextOCR, ReCTs, RRC-ArT, RRC-LSVT, RCTW, synthdog-en, pdfa-eng-wds, CLEVR-Math",
+      "finetuning_task": "Multimodal instruction tuning, Supervised fine-tuning, Supervised fine-tuning (SFT)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100 GPUs",
+      "extension": "Connects the LLM and vision encoder via a two-layer MLP for modality alignment.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Vision-language tasks, multimodal reasoning",
+      "application": "Visual Question Answering, Document Transcription, OCR, Grounded OCR, Referring Expression Grounding, Image Captioning, LaTeX Recognition",
+      "paper_title": "NVLM: Open Frontier-Class Multimodal LLMs",
+      "training_corpus_size": null,
+      "finetuning_data": "High-quality text-only SFT data, multimodal instruction data, Multimodal SFT data, text-only SFT data, COCO, TextCaps, ShareGPT-4o, VQAv2, VisualGenome, TallyQA, Visual7W, Vizwiz, OK-VQA, A-OKVQA, GQA, Super-CLEVR, Raven, VSR, DVQA, PlotQA, MMC-Instruction, ChartQA, InfographicVQA, FigureQA, IconQA, Chart2Text, DiagramImage2Text, WikiTableQuestions, RobuT, HiTab, DocVQA, Docmatix, DUDE, VisualMRC, TAT-DQA, UReaderIE, UReaderKG, UReaderQA, OCR-VQA, TextVQA, ST-VQA, ScreenQA, SlideQA, PDF-VQA, VQA-CD, VQAonBD, POIE, SROIE, ORAND, EST-VQA, FUNSD, SQuAD(rendering), WordArt, IAM, IIIT5K, HME100K, synthdog-en, BenthamQA, HW-SQuAD, WebSight, ChromeWriting, K12Printing, COCO-Text, TextOCR, ReCTs, pdfa-eng-wds, CLEVR-Math, GeoQA+, Geometry3K, TabMWP, GSM8K(rendering), MetaMathQA(rendering), MAVISDataEngine, MAVISManualCollection, Geo170KAlign, Geo170KQA, GeoMVerse, GEOS, UniGeo, AI2D, ScienceQA, TQA, ArXivQA, textbookdata, LRV-Instruction, LLaVA-158K, LLaVAR, SlimOrca, ShareGPT, EvolInstruct, GPTeacher, AlpacaGPT4, UltraInteract, OrcaMathWordProblems, MathInstruct, MetaMath, GlaiveCodeAssistant, Magicoder, WizardCoder",
+      "tokenizer": "BPE",
+      "supported_language": "English",
+      "hardware_description": "128 H100 GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://huggingface.co/nvidia/NVLM-D-72B; https://github.com/NVIDIA/NVLM",
+      "context_length": null,
+      "activated_parameters": "72B",
+      "attention_mechanism": "Standard self-attention, Standard dense self-attention (decoder-only), Standard decoder attention, Self-attention",
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": "Multimodal supervised fine-tuning (SFT) with unfrozen LLM backbone and high-quality text alignment data",
+      "reasoning_mode": null,
+      "moe_configuration": "Dense model (all parameters active)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP projector",
+      "vision_encoder": "SigLIP, InternViT-6B, InternViT-6B-448px-V1-5, OpenCLIP ViT-L/14",
+      "base_model": "Qwen2-72B-Instruct",
+      "optimizer_innovation": null,
+      "benchmark_result": "OCRBench: 853; VQAv2: 85.4; MMMU: 59.7; AI2D: 85.2/94.2; TextVQA: 82.1; ChartQA: 86.0; DocVQA: 92.6; Real-WorldQA: 69.7; MMLU: +4.3; GSM8K: improved; MATH: improved; HumanEval: improved; MathVista: 65.2; AI2D: 94.2; RealWorldQA: 69.7; Text (MMLU, GSM8K, Math, HumanEval): 84.1; MMMU 54.1; MathVista 59.6; AI2D 80.7; ChartQA 79.2; DocVQA 80.9; TextVQA 78.6; OCRBench 744",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Megatron-LM, Megatron-Emerald dataloader"
+    },
+    {
+      "model_name": "NVLM",
+      "model_family": "NVLM",
+      "date_created": "2024-09-17",
+      "organization": "Google",
+      "innovation": "Unified multimodal training format using `<image>` tags and ChatML template for SFT; supports diverse tasks like grounded OCR, document transcription, VQA, LaTeX recognition.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Multimodal tasks",
+      "license": "open source",
+      "research_problem": "Multimodal LLMs",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Multimodal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning (SFT)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": "ChatML template",
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "NVLM: Open Frontier-Class Multimodal LLMs",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "NVLM-X",
+      "model_family": "NVLM",
+      "date_created": "2024-09-17",
+      "organization": "NVIDIA",
+      "innovation": "Simple, scalable architecture using a frozen OpenCLIP vision encoder and frozen LLaMA-2 LLM connected by a lightweight trainable MLP projector, enabling efficient scaling to frontier-class multimodal capabilities without full end-to-end fine-tuning of the backbone.",
+      "pretraining_corpus": "Obelics, ShareGPT-4o",
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "application": "Visual question answering, document understanding, chart understanding, general multimodal tasks",
+      "license": "Apache 2.0",
+      "research_problem": "Multimodal LLMs",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": "LLaMA tokenizer",
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "NVIDIA A100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/NVIDIA/NVLM",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "NVLM: Open Frontier-Class Multimodal LLMs",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Late fusion via MLP projector",
+      "vision_encoder": "OpenCLIP ViT-L/14",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 9,
+  "models_after_merge": 4,
+  "validated_rows": {
+    "NVLM-1.0-D": {
+      "application": [
+        "Multimodal understanding",
+        "OCR",
+        "reasoning"
+      ],
+      "attention_mechanism": [
+        "Self-attention"
+      ],
+      "base_model": [],
+      "fusion_architecture": [],
+      "model_family": [
+        "NVLM"
+      ],
+      "model_name": [
+        "NVLM-1.0-D"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Multimodal language modeling"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "InternViT-6B-448px-V1-5"
+      ]
+    },
+    "NVLM-D 1.0": {
+      "application": [
+        "Visual Question Answering",
+        "Document Transcription",
+        "OCR",
+        "Grounded OCR",
+        "Referring Expression Grounding",
+        "Image Captioning",
+        "LaTeX Recognition"
+      ],
+      "attention_mechanism": [
+        "Standard self-attention",
+        "Standard dense self-attention (decoder-only)",
+        "Standard decoder attention",
+        "Self-attention"
+      ],
+      "base_model": [
+        "Qwen2-72B-Instruct"
+      ],
+      "finetuning_data": [
+        "COCO",
+        "TextCaps",
+        "ShareGPT-4o",
+        "VQAv2",
+        "VisualGenome",
+        "TallyQA",
+        "Visual7W",
+        "Vizwiz",
+        "OK-VQA",
+        "A-OKVQA",
+        "GQA",
+        "Super-CLEVR",
+        "Raven",
+        "VSR",
+        "DVQA",
+        "PlotQA",
+        "MMC-Instruction",
+        "ChartQA",
+        "InfographicVQA",
+        "FigureQA",
+        "IconQA",
+        "Chart2Text",
+        "DiagramImage2Text",
+        "WikiTableQuestions",
+        "RobuT",
+        "HiTab",
+        "DocVQA",
+        "Docmatix",
+        "DUDE",
+        "VisualMRC",
+        "TAT-DQA",
+        "UReaderIE",
+        "UReaderKG",
+        "UReaderQA",
+        "OCR-VQA",
+        "TextVQA",
+        "ST-VQA",
+        "ScreenQA",
+        "SlideQA",
+        "PDF-VQA",
+        "VQA-CD",
+        "VQAonBD",
+        "POIE",
+        "SROIE",
+        "ORAND",
+        "EST-VQA",
+        "FUNSD",
+        "SQuAD(rendering)",
+        "WordArt",
+        "IAM",
+        "IIIT5K",
+        "HME100K",
+        "synthdog-en",
+        "BenthamQA",
+        "HW-SQuAD",
+        "WebSight",
+        "ChromeWriting",
+        "K12Printing",
+        "COCO-Text",
+        "TextOCR",
+        "ReCTs",
+        "pdfa-eng-wds",
+        "CLEVR-Math",
+        "GeoQA+",
+        "Geometry3K",
+        "TabMWP",
+        "GSM8K(rendering)",
+        "MetaMathQA(rendering)",
+        "MAVISDataEngine",
+        "MAVISManualCollection",
+        "Geo170KAlign",
+        "Geo170KQA",
+        "GeoMVerse",
+        "GEOS",
+        "UniGeo",
+        "AI2D",
+        "ScienceQA",
+        "TQA",
+        "ArXivQA",
+        "textbookdata",
+        "LRV-Instruction",
+        "LLaVA-158K",
+        "LLaVAR",
+        "SlimOrca",
+        "ShareGPT",
+        "EvolInstruct",
+        "GPTeacher",
+        "AlpacaGPT4",
+        "UltraInteract",
+        "OrcaMathWordProblems",
+        "MathInstruct",
+        "MetaMath",
+        "GlaiveCodeAssistant",
+        "Magicoder",
+        "WizardCoder"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning",
+        "Supervised fine-tuning (SFT)"
+      ],
+      "fusion_architecture": [
+        "MLP projector"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "NVLM"
+      ],
+      "model_name": [
+        "NVLM-D 1.0"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "13B",
+        "34B",
+        "40B",
+        "72B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "COCO",
+        "CC3M",
+        "SBU",
+        "LAION-115M",
+        "VQAv2",
+        "VisualGenome",
+        "DVQA",
+        "Docmatix",
+        "OCR-VQA",
+        "COCO-Text",
+        "TextOCR",
+        "ReCTs",
+        "RRC-ArT",
+        "RRC-LSVT",
+        "RCTW",
+        "synthdog-en",
+        "pdfa-eng-wds",
+        "CLEVR-Math"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Vision-language tasks",
+        "multimodal reasoning"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "SigLIP",
+        "InternViT-6B",
+        "InternViT-6B-448px-V1-5",
+        "OpenCLIP ViT-L/14"
+      ]
+    },
+    "NVLM": {
+      "application": [],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "NVLM"
+      ],
+      "model_name": [
+        "NVLM"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Multimodal language modeling"
+      ],
+      "research_problem": []
+    },
+    "NVLM-X": {
+      "application": [
+        "Visual question answering",
+        "document understanding",
+        "chart understanding"
+      ],
+      "fusion_architecture": [
+        "Late fusion via MLP projector"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPUs"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "NVLM"
+      ],
+      "model_name": [
+        "NVLM-X"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "70B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Obelics",
+        "ShareGPT-4o"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "OpenCLIP ViT-L/14"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "NVLM-1.0-D": {
+        "base_model": {
+          "candidates": [
+            "Frozen pretrained LLM"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Frozen pretrained LLM",
+              "reason": "Generic description of model state, not a specific pre-trained model name."
+            }
+          ]
+        },
+        "fusion_architecture": {
+          "candidates": [
+            "Self-attention (decoder-only)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Self-attention (decoder-only)",
+              "reason": "Describes an attention mechanism, not a modality fusion architecture."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Image-text pairs",
+            "interleaved image-text data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Image-text pairs",
+              "reason": "Describes data type rather than naming an identifiable dataset or corpus (cached)"
+            },
+            {
+              "value": "interleaved image-text data",
+              "reason": "Describes data format, not a named corpus or dataset."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal LLMs"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal LLMs",
+              "reason": "Names a model type/domain, not a research problem or capability gap."
+            }
+          ]
+        }
+      },
+      "NVLM-D 1.0": {
+        "finetuning_data": {
+          "candidates": [
+            "High-quality text-only SFT data",
+            "multimodal instruction data",
+            "Multimodal SFT data",
+            "text-only SFT data",
+            "COCO",
+            "TextCaps",
+            "ShareGPT-4o",
+            "VQAv2",
+            "VisualGenome",
+            "TallyQA",
+            "Visual7W",
+            "Vizwiz",
+            "OK-VQA",
+            "A-OKVQA",
+            "GQA",
+            "Super-CLEVR",
+            "Raven",
+            "VSR",
+            "DVQA",
+            "PlotQA",
+            "MMC-Instruction",
+            "ChartQA",
+            "InfographicVQA",
+            "FigureQA",
+            "IconQA",
+            "Chart2Text",
+            "DiagramImage2Text",
+            "WikiTableQuestions",
+            "RobuT",
+            "HiTab",
+            "DocVQA",
+            "Docmatix",
+            "DUDE",
+            "VisualMRC",
+            "TAT-DQA",
+            "UReaderIE",
+            "UReaderKG",
+            "UReaderQA",
+            "OCR-VQA",
+            "TextVQA",
+            "ST-VQA",
+            "ScreenQA",
+            "SlideQA",
+            "PDF-VQA",
+            "VQA-CD",
+            "VQAonBD",
+            "POIE",
+            "SROIE",
+            "ORAND",
+            "EST-VQA",
+            "FUNSD",
+            "SQuAD(rendering)",
+            "WordArt",
+            "IAM",
+            "IIIT5K",
+            "HME100K",
+            "synthdog-en",
+            "BenthamQA",
+            "HW-SQuAD",
+            "WebSight",
+            "ChromeWriting",
+            "K12Printing",
+            "COCO-Text",
+            "TextOCR",
+            "ReCTs",
+            "pdfa-eng-wds",
+            "CLEVR-Math",
+            "GeoQA+",
+            "Geometry3K",
+            "TabMWP",
+            "GSM8K(rendering)",
+            "MetaMathQA(rendering)",
+            "MAVISDataEngine",
+            "MAVISManualCollection",
+            "Geo170KAlign",
+            "Geo170KQA",
+            "GeoMVerse",
+            "GEOS",
+            "UniGeo",
+            "AI2D",
+            "ScienceQA",
+            "TQA",
+            "ArXivQA",
+            "textbookdata",
+            "LRV-Instruction",
+            "LLaVA-158K",
+            "LLaVAR",
+            "SlimOrca",
+            "ShareGPT",
+            "EvolInstruct",
+            "GPTeacher",
+            "AlpacaGPT4",
+            "UltraInteract",
+            "OrcaMathWordProblems",
+            "MathInstruct",
+            "MetaMath",
+            "GlaiveCodeAssistant",
+            "Magicoder",
+            "WizardCoder"
+          ],
+          "accepted": [
+            "COCO",
+            "TextCaps",
+            "ShareGPT-4o",
+            "VQAv2",
+            "VisualGenome",
+            "TallyQA",
+            "Visual7W",
+            "Vizwiz",
+            "OK-VQA",
+            "A-OKVQA",
+            "GQA",
+            "Super-CLEVR",
+            "Raven",
+            "VSR",
+            "DVQA",
+            "PlotQA",
+            "MMC-Instruction",
+            "ChartQA",
+            "InfographicVQA",
+            "FigureQA",
+            "IconQA",
+            "Chart2Text",
+            "DiagramImage2Text",
+            "WikiTableQuestions",
+            "RobuT",
+            "HiTab",
+            "DocVQA",
+            "Docmatix",
+            "DUDE",
+            "VisualMRC",
+            "TAT-DQA",
+            "UReaderIE",
+            "UReaderKG",
+            "UReaderQA",
+            "OCR-VQA",
+            "TextVQA",
+            "ST-VQA",
+            "ScreenQA",
+            "SlideQA",
+            "PDF-VQA",
+            "VQA-CD",
+            "VQAonBD",
+            "POIE",
+            "SROIE",
+            "ORAND",
+            "EST-VQA",
+            "FUNSD",
+            "SQuAD(rendering)",
+            "WordArt",
+            "IAM",
+            "IIIT5K",
+            "HME100K",
+            "synthdog-en",
+            "BenthamQA",
+            "HW-SQuAD",
+            "WebSight",
+            "ChromeWriting",
+            "K12Printing",
+            "COCO-Text",
+            "TextOCR",
+            "ReCTs",
+            "pdfa-eng-wds",
+            "CLEVR-Math",
+            "GeoQA+",
+            "Geometry3K",
+            "TabMWP",
+            "GSM8K(rendering)",
+            "MetaMathQA(rendering)",
+            "MAVISDataEngine",
+            "MAVISManualCollection",
+            "Geo170KAlign",
+            "Geo170KQA",
+            "GeoMVerse",
+            "GEOS",
+            "UniGeo",
+            "AI2D",
+            "ScienceQA",
+            "TQA",
+            "ArXivQA",
+            "textbookdata",
+            "LRV-Instruction",
+            "LLaVA-158K",
+            "LLaVAR",
+            "SlimOrca",
+            "ShareGPT",
+            "EvolInstruct",
+            "GPTeacher",
+            "AlpacaGPT4",
+            "UltraInteract",
+            "OrcaMathWordProblems",
+            "MathInstruct",
+            "MetaMath",
+            "GlaiveCodeAssistant",
+            "Magicoder",
+            "WizardCoder"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality text-only SFT data",
+              "reason": "Descriptive qualifier, not a specific dataset name."
+            },
+            {
+              "value": "multimodal instruction data",
+              "reason": "Descriptive qualifier, not a specific dataset name."
+            },
+            {
+              "value": "Multimodal SFT data",
+              "reason": "Descriptive qualifier, not a specific dataset name."
+            },
+            {
+              "value": "text-only SFT data",
+              "reason": "Descriptive qualifier, not a specific dataset name."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Multimodal instruction tuning",
+            "Supervised fine-tuning",
+            "Supervised fine-tuning (SFT)"
+          ],
+          "accepted": [
+            "Multimodal instruction tuning",
+            "Supervised fine-tuning (SFT)"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        }
+      },
+      "NVLM": {
+        "application": {
+          "candidates": [
+            "Multimodal tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal tasks",
+              "reason": "Generic placeholder, not a concrete task or domain (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal LLMs"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal LLMs",
+              "reason": "Names a model type/domain, not a research problem or capability gap."
+            }
+          ]
+        }
+      },
+      "NVLM-X": {
+        "application": {
+          "candidates": [
+            "Visual question answering",
+            "document understanding",
+            "chart understanding",
+            "general multimodal tasks"
+          ],
+          "accepted": [
+            "Visual question answering",
+            "document understanding",
+            "chart understanding"
+          ],
+          "dropped": [
+            {
+              "value": "general multimodal tasks",
+              "reason": "Vague placeholder, not a concrete task or domain. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal LLMs"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal LLMs",
+              "reason": "Names a model type/domain, not a research problem or capability gap."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 180,
+      "dropped": 14,
+      "llm_calls": 1,
+      "values_sent_to_llm": 103
+    }
+  },
+  "contributions": [
+    {
+      "label": "NVLM-1.0-D",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "NVLM-1.0-D",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "NVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-17",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoder-only architecture: uses only self-attention layers for both text and image tokens, differing from cross-attention models by unrolling all image tokens in the LLM decoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamic High-Resolution (DHR) mechanism: dynamically divides images into 1-6 tiles based on aspect ratio, processes each with a frozen vision encoder, and applies pixel-shuffle downsampling to 256 tokens to reduce compute waste on varying resolutions.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pretraining on image-text pairs/interleaved data -> Supervised fine-tuning (SFT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-6B-448px-V1-5",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "NVLM-D 1.0",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "NVLM-D 1.0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "NVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-17",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Novel decoder-only multimodal architecture that enhances training efficiency and reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "1-D tile-tagging design for tile-based dynamic high-resolution images to boost OCR and reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Production-grade multimodality via integrating high-quality text-only datasets into multimodal training to maintain/improve text-only performance while excelling in vision-language tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC3M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "SBU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-115M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQAv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VisualGenome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DVQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Docmatix",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OCR-VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO-Text",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "TextOCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ReCTs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RRC-ArT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RRC-LSVT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RCTW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Synthdog-en",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pdfa-eng-wds",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CLEVR-Math",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "34B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 72000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "128 H100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Question Answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document Transcription",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounded OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring Expression Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image Captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "LaTeX Recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://huggingface.co/nvidia/NVLM-D-72B",
+          "datatype": "URI"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/NVIDIA/NVLM",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-language tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT-4o",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VisualGenome",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TallyQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual7W",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Vizwiz",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "A-OKVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Super-CLEVR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Raven",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VSR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PlotQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MMC-Instruction",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChartQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "InfographicVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FigureQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "IconQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Chart2Text",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DiagramImage2Text",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WikiTableQuestions",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RobuT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "HiTab",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DocVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Docmatix",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DUDE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VisualMRC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TAT-DQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UReaderIE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UReaderKG",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UReaderQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OCR-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ST-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ScreenQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SlideQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PDF-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA-CD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAonBD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "POIE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SROIE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ORAND",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "EST-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FUNSD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SQuAD(rendering)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WordArt",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "IAM",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "IIIT5K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "HME100K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthdog-en",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BenthamQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "HW-SQuAD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WebSight",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChromeWriting",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "K12Printing",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO-Text",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextOCR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ReCTs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Pdfa-eng-wds",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CLEVR-Math",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GeoQA+",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Geometry3K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TabMWP",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GSM8K(rendering)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MetaMathQA(rendering)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MAVISDataEngine",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MAVISManualCollection",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Geo170KAlign",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Geo170KQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GeoMVerse",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GEOS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UniGeo",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AI2D",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ScienceQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ArXivQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Textbookdata",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LRV-Instruction",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-158K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVAR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SlimOrca",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "EvolInstruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GPTeacher",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AlpacaGPT4",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UltraInteract",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OrcaMathWordProblems",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MathInstruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MetaMath",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GlaiveCodeAssistant",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Magicoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WizardCoder",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard dense self-attention (decoder-only)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard decoder attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Multimodal supervised fine-tuning (SFT) with unfrozen LLM backbone and high-quality text alignment data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Dense model (all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-6B-448px-V1-5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "OpenCLIP ViT-L/14",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen2-72B-Instruct",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 853",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 85.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 59.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 85.2/94.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 82.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 86.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 92.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Real-WorldQA: 69.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: +4.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: improved",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: improved",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: improved",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 65.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 94.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 69.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Text (MMLU, GSM8K, Math, HumanEval): 84.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU 54.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista 59.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D 80.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA 79.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA 80.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA 78.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench 744",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Megatron-LM, Megatron-Emerald dataloader",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "NVLM",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "NVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "NVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-17",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified multimodal training format using `<image>` tags and ChatML template for SFT",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Supports diverse tasks like grounded OCR, document transcription, VQA, LaTeX recognition.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "ChatML template",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "NVLM-X",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "NVLM-X",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "NVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-17",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Simple, scalable architecture using a frozen OpenCLIP vision encoder and frozen LLaMA-2 LLM connected by a lightweight trainable MLP projector, enabling efficient scaling to frontier-class multimodal capabilities without full end-to-end fine-tuning of the backbone.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Obelics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGPT-4o",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "LLaMA tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 70000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/NVIDIA/NVLM",
+          "datatype": "URI"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Late fusion via MLP projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "OpenCLIP ViT-L/14",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926307",
+    "contribution_ids": [
+      "R1926309",
+      "R1926310",
+      "R1926311",
+      "R1926312"
+    ],
+    "new_contribution_ids": [
+      "R1926309",
+      "R1926310",
+      "R1926311",
+      "R1926312"
+    ],
+    "comparison_updated": null
+  }
+}

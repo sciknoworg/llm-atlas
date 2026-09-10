@@ -1,0 +1,943 @@
+{
+ "arxiv_id": "2507.13264",
+ "status": "completed",
+ "timestamp": "2026-08-30T02:13:41.222917",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2507.13264",
+  "title": "Voxtral",
+  "authors": [
+   "Alexander H. Liu",
+   "Andy Ehrenberg",
+   "Andy Lo",
+   "Cl\u00e9ment Denoix",
+   "Corentin Barreau",
+   "Guillaume Lample",
+   "Jean-Malo Delignon",
+   "Khyathi Raghavi Chandu",
+   "Patrick von Platen",
+   "Pavankumar Reddy Muddireddy",
+   "Sanchit Gandhi",
+   "Soham Ghosh",
+   "Srijan Mishra",
+   "Thomas Foubert",
+   "Abhinav Rastogi",
+   "Adam Yang",
+   "Albert Q. Jiang",
+   "Alexandre Sablayrolles",
+   "Am\u00e9lie H\u00e9liou",
+   "Am\u00e9lie Martin",
+   "Anmol Agarwal",
+   "Antoine Roux",
+   "Arthur Darcet",
+   "Arthur Mensch",
+   "Baptiste Bout",
+   "Baptiste Rozi\u00e8re",
+   "Baudouin De Monicault",
+   "Chris Bamford",
+   "Christian Wallenwein",
+   "Christophe Renaudin",
+   "Cl\u00e9mence Lanfranchi",
+   "Darius Dabert",
+   "Devendra Singh Chaplot",
+   "Devon Mizelle",
+   "Diego de las Casas",
+   "Elliot Chane-Sane",
+   "Emilien Fugier",
+   "Emma Bou Hanna",
+   "Gabrielle Berrada",
+   "Gauthier Delerce",
+   "Gauthier Guinet",
+   "Georgii Novikov",
+   "Guillaume Martin",
+   "Himanshu Jaju",
+   "Jan Ludziejewski",
+   "Jason Rute",
+   "Jean-Hadrien Chabran",
+   "Jessica Chudnovsky",
+   "Joachim Studnia",
+   "Joep Barmentlo",
+   "Jonas Amar",
+   "Josselin Somerville Roberts",
+   "Julien Denize",
+   "Karan Saxena",
+   "Karmesh Yadav",
+   "Kartik Khandelwal",
+   "Kush Jain",
+   "L\u00e9lio Renard Lavaud",
+   "L\u00e9onard Blier",
+   "Lingxiao Zhao",
+   "Louis Martin",
+   "Lucile Saulnier",
+   "Luyu Gao",
+   "Marie Pellat",
+   "Mathilde Guillaumin",
+   "Mathis Felardos",
+   "Matthieu Dinot",
+   "Maxime Darrin",
+   "Maximilian Augustin",
+   "Micka\u00ebl Seznec",
+   "Neha Gupta",
+   "Nikhil Raghuraman",
+   "Olivier Duchenne",
+   "Patricia Wang",
+   "Patryk Saffer",
+   "Paul Jacob",
+   "Paul Wambergue",
+   "Paula Kurylowicz",
+   "Philom\u00e8ne Chagniot",
+   "Pierre Stock",
+   "Pravesh Agrawal",
+   "R\u00e9mi Delacourt",
+   "Romain Sauvestre",
+   "Roman Soletskyi",
+   "Sagar Vaze",
+   "Sandeep Subramanian",
+   "Saurabh Garg",
+   "Shashwat Dalal",
+   "Siddharth Gandhi",
+   "Sumukh Aithal",
+   "Szymon Antoniak",
+   "Teven Le Scao",
+   "Thibault Schueller",
+   "Thibaut Lavril",
+   "Thomas Robert",
+   "Thomas Wang",
+   "Timoth\u00e9e Lacroix",
+   "Tom Bewley",
+   "Valeriia Nemychnikova",
+   "Victor Paltz",
+   "Virgile Richard",
+   "Wen-Ding Li",
+   "William Marshall",
+   "Xuanyu Zhang",
+   "Yihan Wan",
+   "Yunhao Tang"
+  ],
+  "abstract": "We present Voxtral Mini and Voxtral Small, two multimodal audio chat models. Voxtral is trained to comprehend both spoken audio and text documents, achieving state-of-the-art performance across a diverse range of audio benchmarks, while preserving strong text capabilities. Voxtral Small outperforms a number of closed-source models, while being small enough to run locally. A 32K context window enables the model to handle audio files up to 40 minutes in duration and long multi-turn conversations. We also contribute three benchmarks for evaluating speech understanding models on knowledge and trivia. Both Voxtral models are released under Apache 2.0 license.",
+  "published": "2025-07-17T16:17:37+00:00",
+  "updated": "2025-07-17T16:17:37+00:00",
+  "doi": null,
+  "primary_category": "cs.SD",
+  "categories": [
+   "cs.SD",
+   "cs.AI",
+   "eess.AS"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2507.13264v1",
+  "entry_id": "http://arxiv.org/abs/2507.13264v1",
+  "pdf_path": "data/papers/2507.13264.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM/Multimodal model release)"
+ },
+ "text_length": 42730,
+ "word_count": 2090,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "Voxtral",
+   "parameters": "4.7B, 24B, 24.3B",
+   "parameters_millions": 24300,
+   "model_family": "Voxtral",
+   "date_created": "2025-07-17",
+   "organization": "Mistral AI",
+   "innovation": "transcribemode: introduces a dedicated special token to signal transcription tasks, eliminating the need for a text prompt and reducing redundancy; Online DPO: adopts an online variant of Direct Preference Optimization where two candidate responses are sampled per example and ranked using a text-based reward model on the audio transcription, improving response quality over offline DPO; Audio-adapted SFT: converts existing text SFT data (including function calling) into synthetic audio via TTS to enable audio-only input scenarios; ASR question extraction: isolates audio excerpts from long-form ASR data containing questions answerable by general world knowledge, pairing them with text answers to address speech recognition's unambiguous task nature; Speech-synthesized benchmarks: creates speech-synthesized versions of GSM8K, TriviaQA, and MMLU by filtering verbalizable prompts, rewriting math/code/symbols into speech-friendly text, and synthesizing diverse single-speaker utterances for evaluation.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal language modeling",
+   "pretraining_corpus": "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable), balanced with text pretraining data",
+   "finetuning_task": "Supervised fine-tuning, preference alignment, Supervised discriminative fine-tuning for speech understanding and instruction following, Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": "4x downsampling MLP adapter layer to reduce audio sequence length from 50Hz to 12.5Hz",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal language modeling and speech understanding",
+   "application": "Speech transcription, translation, speech QA, summarization, audio reasoning, text understanding",
+   "paper_title": "Voxtral",
+   "training_corpus_size": null,
+   "finetuning_data": "real and synthetic data, Synthetic QA, summarization, and translation data from long-form audio transcripts; manually curated user requests, function calling datasets converted to audio via TTS, long-form ASR data, synthetic summarization and translation data, speech-synthesized benchmarks (GSM8K, TriviaQA, MMLU)",
+   "tokenizer": null,
+   "supported_language": "English, French",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Bidirectional self-attention (audio encoder), chunk-wise attention",
+   "context_length_max": "32K tokens",
+   "context_extension_method": null,
+   "training_pipeline": "pretraining -> supervised finetuning -> preference alignment",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "synthetic data, Mistral Large generates QA pairs, summarization, and translation data from long-form audio transcripts; multiple candidate pairs generated per segment and sampled; manually curated user requests used to mitigate overfitting, TTS conversion of text SFT data; synthetic summarization and translation data",
+   "rl_algorithm": "DPO, Online DPO",
+   "reward_mechanism": "text-based reward model on audio transcription",
+   "tool_calling_format": "Native function calling with audio",
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Concatenation of audio and text embeddings passed through a 4x downsampling MLP adapter",
+   "vision_encoder": "Whisper large-v3, Audio encoder (baseline 50Hz, optimal 12.5Hz)",
+   "base_model": "Ministral 3B",
+   "optimizer_innovation": null,
+   "benchmark_result": "Surpasses GPT-4o mini Transcribe and Gemini 2.5 Flash across all speech translation tasks.; SOTA on English Short-Form and MCV; beats GPT-4o mini Audio on 3/7 speech understanding tasks; comparable to Mistral Small 3.1 on text benchmarks.",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Voxtral Mini Transcribe",
+   "model_family": "Voxtral",
+   "date_created": "2025-07-17",
+   "organization": "Mistral AI",
+   "innovation": "Trained exclusively on the audio-to-text repetition pattern to specialize in speech recognition, serving as a specialized variant for ASR-only tasks without cross-modal continuation.",
+   "pretraining_corpus": "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Speech recognition",
+   "license": null,
+   "research_problem": "Speech recognition",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Audio-to-text repetition",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Voxtral",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining only on audio-to-text repetition pattern",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Mistral Small 3.1 24B",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Voxtral": {
+   "application": [
+    "Speech transcription",
+    "translation",
+    "speech QA",
+    "summarization",
+    "audio reasoning",
+    "text understanding"
+   ],
+   "attention_mechanism": [
+    "Bidirectional self-attention (audio encoder)",
+    "chunk-wise attention"
+   ],
+   "base_model": [
+    "Ministral 3B"
+   ],
+   "finetuning_data": [
+    "Synthetic QA",
+    "translation data from long-form audio transcripts",
+    "manually curated user requests",
+    "function calling datasets converted to audio via TTS",
+    "long-form ASR data",
+    "synthetic summarization and translation data",
+    "speech-synthesized benchmarks (GSM8K, TriviaQA, MMLU)"
+   ],
+   "finetuning_task": [
+    "preference alignment",
+    "Supervised discriminative fine-tuning for speech understanding and instruction following",
+    "Supervised fine-tuning (SFT)"
+   ],
+   "fusion_architecture": [
+    "Concatenation of audio and text embeddings passed through a 4x downsampling MLP adapter"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Voxtral"
+   ],
+   "organization": [
+    "Mistral AI"
+   ],
+   "parameters": [
+    "4.7B",
+    "24B",
+    "24.3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)"
+   ],
+   "pretraining_task": [
+    "Multimodal language modeling"
+   ],
+   "research_problem": [
+    "Multimodal language modeling and speech understanding"
+   ],
+   "reward_mechanism": [
+    "text-based reward model on audio transcription"
+   ],
+   "rl_algorithm": [
+    "DPO",
+    "Online DPO"
+   ],
+   "supported_language": [
+    "English",
+    "French"
+   ],
+   "synthetic_data_generation_method": [
+    "Mistral Large generates QA pairs",
+    "summarization",
+    "multiple candidate pairs generated per segment and sampled",
+    "TTS conversion of text SFT data"
+   ],
+   "tool_calling_format": [
+    "Native function calling with audio"
+   ],
+   "vision_encoder": []
+  },
+  "Voxtral Mini Transcribe": {
+   "application": [
+    "Speech recognition"
+   ],
+   "base_model": [
+    "Mistral Small 3.1 24B"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Voxtral Mini Transcribe"
+   ],
+   "organization": [
+    "Mistral AI"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)"
+   ],
+   "pretraining_task": [
+    "Audio-to-text repetition"
+   ],
+   "research_problem": [
+    "Speech recognition"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Voxtral": {
+    "finetuning_data": {
+     "candidates": [
+      "real and synthetic data",
+      "Synthetic QA",
+      "summarization",
+      "translation data from long-form audio transcripts",
+      "manually curated user requests",
+      "function calling datasets converted to audio via TTS",
+      "long-form ASR data",
+      "synthetic summarization and translation data",
+      "speech-synthesized benchmarks (GSM8K, TriviaQA, MMLU)"
+     ],
+     "accepted": [
+      "Synthetic QA",
+      "translation data from long-form audio transcripts",
+      "manually curated user requests",
+      "function calling datasets converted to audio via TTS",
+      "long-form ASR data",
+      "synthetic summarization and translation data",
+      "speech-synthesized benchmarks (GSM8K, TriviaQA, MMLU)"
+     ],
+     "dropped": [
+      {
+       "value": "summarization",
+       "reason": "Names a task rather than a dataset. (cached)"
+      },
+      {
+       "value": "real and synthetic data",
+       "reason": "Vague placeholder describing data types rather than a specific dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning",
+      "preference alignment",
+      "Supervised discriminative fine-tuning for speech understanding and instruction following",
+      "Supervised fine-tuning (SFT)",
+      "Direct Preference Optimization (DPO)"
+     ],
+     "accepted": [
+      "preference alignment",
+      "Supervised discriminative fine-tuning for speech understanding and instruction following",
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Voxtral"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Voxtral",
+       "reason": "Names a specific model rather than a broader lineage or family category"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)",
+      "balanced with text pretraining data"
+     ],
+     "accepted": [
+      "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)"
+     ],
+     "dropped": [
+      {
+       "value": "balanced with text pretraining data",
+       "reason": "Sentence fragment/qualifier describing data balancing rather than naming a corpus"
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "synthetic data",
+      "Mistral Large generates QA pairs",
+      "summarization",
+      "translation data from long-form audio transcripts",
+      "multiple candidate pairs generated per segment and sampled",
+      "manually curated user requests used to mitigate overfitting",
+      "TTS conversion of text SFT data",
+      "synthetic summarization and translation data"
+     ],
+     "accepted": [
+      "Mistral Large generates QA pairs",
+      "summarization",
+      "multiple candidate pairs generated per segment and sampled",
+      "TTS conversion of text SFT data"
+     ],
+     "dropped": [
+      {
+       "value": "synthetic data",
+       "reason": "Names the data type rather than the generation method"
+      },
+      {
+       "value": "translation data from long-form audio transcripts",
+       "reason": "Describes a dataset/source rather than a generation method"
+      },
+      {
+       "value": "manually curated user requests used to mitigate overfitting",
+       "reason": "Describes data curation purpose rather than a synthetic generation technique"
+      },
+      {
+       "value": "synthetic summarization and translation data",
+       "reason": "Names the resulting data rather than the generation method"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Whisper large-v3",
+      "Audio encoder (baseline 50Hz, optimal 12.5Hz)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Whisper large-v3",
+       "reason": "Names an audio processing model, not a component for visual inputs"
+      },
+      {
+       "value": "Audio encoder (baseline 50Hz, optimal 12.5Hz)",
+       "reason": "Names an audio processing component, not a vision encoder"
+      }
+     ]
+    }
+   },
+   "Voxtral Mini Transcribe": {
+    "model_family": {
+     "candidates": [
+      "Voxtral"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Voxtral",
+       "reason": "Names a specific model rather than a broader lineage or family category"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 48,
+   "dropped": 13,
+   "llm_calls": 1,
+   "values_sent_to_llm": 40
+  }
+ },
+ "contributions": [
+  {
+   "label": "Voxtral",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Voxtral",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-07-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Mistral AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Transcribemode: introduces a dedicated special token to signal transcription tasks, eliminating the need for a text prompt and reducing redundancy",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Online DPO: adopts an online variant of Direct Preference Optimization where two candidate responses are sampled per example and ranked using a text-based reward model on the audio transcription, improving response quality over offline DPO",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Audio-adapted SFT: converts existing text SFT data (including function calling) into synthetic audio via TTS to enable audio-only input scenarios",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "ASR question extraction: isolates audio excerpts from long-form ASR data containing questions answerable by general world knowledge, pairing them with text answers to address speech recognition's unambiguous task nature",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Speech-synthesized benchmarks: creates speech-synthesized versions of GSM8K, TriviaQA, and MMLU by filtering verbalizable prompts, rewriting math/code/symbols into speech-friendly text, and synthesizing diverse single-speaker utterances for evaluation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Preference alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised discriminative fine-tuning for speech understanding and instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "24B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "24.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 24300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Speech transcription",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Speech QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Audio reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal language modeling and speech understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Synthetic QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Translation data from long-form audio transcripts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Manually curated user requests",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Function calling datasets converted to audio via TTS",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long-form ASR data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Synthetic summarization and translation data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Speech-synthesized benchmarks (GSM8K, TriviaQA, MMLU)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Bidirectional self-attention (audio encoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Chunk-wise attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "32K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining -> supervised finetuning -> preference alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Mistral Large generates QA pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Summarization",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Multiple candidate pairs generated per segment and sampled",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "TTS conversion of text SFT data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Online DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Text-based reward model on audio transcription",
+     "datatype": "string"
+    },
+    {
+     "property": "P203095",
+     "label": "tool_calling_format",
+     "value": "Native function calling with audio",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Concatenation of audio and text embeddings passed through a 4x downsampling MLP adapter",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Ministral 3B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Surpasses GPT-4o mini Transcribe and Gemini 2.5 Flash across all speech translation tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on English Short-Form and MCV",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Beats GPT-4o mini Audio on 3/7 speech understanding tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Comparable to Mistral Small 3.1 on text benchmarks.",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Voxtral Mini Transcribe",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Voxtral Mini Transcribe",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-07-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Mistral AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Trained exclusively on the audio-to-text repetition pattern to specialize in speech recognition, serving as a specialized variant for ASR-only tasks without cross-modal continuation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Audio-to-text repetition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Audio dataset with text transcriptions (pseudo-labeled via ASR if unavailable)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Speech recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Speech recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining only on audio-to-text repetition pattern",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Mistral Small 3.1 24B",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1924965",
+  "contribution_ids": [
+   "R1924967",
+   "R1924968"
+  ],
+  "new_contribution_ids": [
+   "R1924967",
+   "R1924968"
+  ],
+  "comparison_updated": null
+ }
+}

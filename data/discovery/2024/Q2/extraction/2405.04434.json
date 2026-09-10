@@ -1,0 +1,1212 @@
+{
+ "arxiv_id": "2405.04434",
+ "status": "completed",
+ "timestamp": "2026-08-29T00:52:15.679108",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2405.04434",
+  "title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+  "authors": [
+   " DeepSeek-AI",
+   "Aixin Liu",
+   "Bei Feng",
+   "Bin Wang",
+   "Bingxuan Wang",
+   "Bo Liu",
+   "Chenggang Zhao",
+   "Chengqi Dengr",
+   "Chong Ruan",
+   "Damai Dai",
+   "Daya Guo",
+   "Dejian Yang",
+   "Deli Chen",
+   "Dongjie Ji",
+   "Erhang Li",
+   "Fangyun Lin",
+   "Fuli Luo",
+   "Guangbo Hao",
+   "Guanting Chen",
+   "Guowei Li",
+   "H. Zhang",
+   "Hanwei Xu",
+   "Hao Yang",
+   "Haowei Zhang",
+   "Honghui Ding",
+   "Huajian Xin",
+   "Huazuo Gao",
+   "Hui Li",
+   "Hui Qu",
+   "J. L. Cai",
+   "Jian Liang",
+   "Jianzhong Guo",
+   "Jiaqi Ni",
+   "Jiashi Li",
+   "Jin Chen",
+   "Jingyang Yuan",
+   "Junjie Qiu",
+   "Junxiao Song",
+   "Kai Dong",
+   "Kaige Gao",
+   "Kang Guan",
+   "Lean Wang",
+   "Lecong Zhang",
+   "Lei Xu",
+   "Leyi Xia",
+   "Liang Zhao",
+   "Liyue Zhang",
+   "Meng Li",
+   "Miaojun Wang",
+   "Mingchuan Zhang",
+   "Minghua Zhang",
+   "Minghui Tang",
+   "Mingming Li",
+   "Ning Tian",
+   "Panpan Huang",
+   "Peiyi Wang",
+   "Peng Zhang",
+   "Qihao Zhu",
+   "Qinyu Chen",
+   "Qiushi Du",
+   "R. J. Chen",
+   "R. L. Jin",
+   "Ruiqi Ge",
+   "Ruizhe Pan",
+   "Runxin Xu",
+   "Ruyi Chen",
+   "S. S. Li",
+   "Shanghao Lu",
+   "Shangyan Zhou",
+   "Shanhuang Chen",
+   "Shaoqing Wu",
+   "Shengfeng Ye",
+   "Shirong Ma",
+   "Shiyu Wang",
+   "Shuang Zhou",
+   "Shuiping Yu",
+   "Shunfeng Zhou",
+   "Size Zheng",
+   "T. Wang",
+   "Tian Pei",
+   "Tian Yuan",
+   "Tianyu Sun",
+   "W. L. Xiao",
+   "Wangding Zeng",
+   "Wei An",
+   "Wen Liu",
+   "Wenfeng Liang",
+   "Wenjun Gao",
+   "Wentao Zhang",
+   "X. Q. Li",
+   "Xiangyue Jin",
+   "Xianzu Wang",
+   "Xiao Bi",
+   "Xiaodong Liu",
+   "Xiaohan Wang",
+   "Xiaojin Shen",
+   "Xiaokang Chen",
+   "Xiaosha Chen",
+   "Xiaotao Nie",
+   "Xiaowen Sun",
+   "Xiaoxiang Wang",
+   "Xin Liu",
+   "Xin Xie",
+   "Xingkai Yu",
+   "Xinnan Song",
+   "Xinyi Zhou",
+   "Xinyu Yang",
+   "Xuan Lu",
+   "Xuecheng Su",
+   "Y. Wu",
+   "Y. K. Li",
+   "Y. X. Wei",
+   "Y. X. Zhu",
+   "Yanhong Xu",
+   "Yanping Huang",
+   "Yao Li",
+   "Yao Zhao",
+   "Yaofeng Sun",
+   "Yaohui Li",
+   "Yaohui Wang",
+   "Yi Zheng",
+   "Yichao Zhang",
+   "Yiliang Xiong",
+   "Yilong Zhao",
+   "Ying He",
+   "Ying Tang",
+   "Yishi Piao",
+   "Yixin Dong",
+   "Yixuan Tan",
+   "Yiyuan Liu",
+   "Yongji Wang",
+   "Yongqiang Guo",
+   "Yuchen Zhu",
+   "Yuduan Wang",
+   "Yuheng Zou",
+   "Yukun Zha",
+   "Yunxian Ma",
+   "Yuting Yan",
+   "Yuxiang You",
+   "Yuxuan Liu",
+   "Z. Z. Ren",
+   "Zehui Ren",
+   "Zhangli Sha",
+   "Zhe Fu",
+   "Zhen Huang",
+   "Zhen Zhang",
+   "Zhenda Xie",
+   "Zhewen Hao",
+   "Zhihong Shao",
+   "Zhiniu Wen",
+   "Zhipeng Xu",
+   "Zhongyu Zhang",
+   "Zhuoshu Li",
+   "Zihan Wang",
+   "Zihui Gu",
+   "Zilin Li",
+   "Ziwei Xie"
+  ],
+  "abstract": "We present DeepSeek-V2, a strong Mixture-of-Experts (MoE) language model characterized by economical training and efficient inference. It comprises 236B total parameters, of which 21B are activated for each token, and supports a context length of 128K tokens. DeepSeek-V2 adopts innovative architectures including Multi-head Latent Attention (MLA) and DeepSeekMoE. MLA guarantees efficient inference through significantly compressing the Key-Value (KV) cache into a latent vector, while DeepSeekMoE enables training strong models at an economical cost through sparse computation. Compared with DeepSeek 67B, DeepSeek-V2 achieves significantly stronger performance, and meanwhile saves 42.5% of training costs, reduces the KV cache by 93.3%, and boosts the maximum generation throughput to 5.76 times. We pretrain DeepSeek-V2 on a high-quality and multi-source corpus consisting of 8.1T tokens, and further perform Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL) to fully unlock its potential. Evaluation results show that, even with only 21B activated parameters, DeepSeek-V2 and its chat versions still achieve top-tier performance among open-source models.",
+  "published": "2024-05-07T15:56:43+00:00",
+  "updated": "2024-06-19T06:04:17+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2405.04434v5",
+  "entry_id": "http://arxiv.org/abs/2405.04434v5",
+  "pdf_path": "data/papers/2405.04434.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 100989,
+ "word_count": 8655,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "DeepSeek-V 2",
+   "parameters": "6.9B, 15.7B, 16B, 67B, 236B",
+   "parameters_millions": 236000,
+   "model_family": "DeepSeek",
+   "date_created": "2024-05-07",
+   "organization": "DeepSeek",
+   "innovation": "Multi-head Latent Attention (MLA): employs low-rank key-value joint compression to drastically reduce the inference-time KV cache bottleneck while outperforming standard MHA; DeepSeekMoE: a high-performance Mixture-of-Experts architecture for FFNs that enables training strong models at an economical cost; Decoupled Rotary Position Embedding (RoPE): introduces additional multi-head queries and a shared key to carry RoPE, resolving the incompatibility between position-sensitive RoPE and low-rank KV compression without requiring prefix key recomputation during inference.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "8.1T tokens of high-quality, multi-source corpus",
+   "finetuning_task": "Supervised Fine-Tuning (SFT), Reinforcement Learning (RL)",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA H800 GPUs",
+   "extension": "Device-limited routing mechanism bounds MoE communication costs by restricting each token's target experts to at most M devices.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Efficient and strong language modeling, specifically addressing the inference-time KV cache bottleneck and high training costs of large language models.",
+   "application": "Language modeling, code generation, mathematical reasoning, Chinese and English benchmarks, chat/instruction following",
+   "paper_title": "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model",
+   "training_corpus_size": "8.1T tokens",
+   "finetuning_data": "1.5M conversational sessions, Code preference data (compiler-feedback), mathematical preference data (ground-truth labels), human preference data, 1.5M instruction tuning instances (1.2M helpfulness, 0.3M safety)",
+   "tokenizer": "Byte-level Byte-Pair Encoding (BBPE)",
+   "supported_language": "English, Chinese",
+   "hardware_description": "HAI-LLM framework with 16-way zero-bubble pipeline parallelism, 8-way expert parallelism, and ZeRO-1 data parallelism",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/deepseek-ai/DeepSeek-V2",
+   "context_length": null,
+   "activated_parameters": "21B",
+   "attention_mechanism": "Multi-head Latent Attention (MLA), Grouped-Query Attention (GQA), Multi-head Latent Attention (MLA) with low-rank key-value joint compression; Decoupled Rotary Position Embedding (RoPE), Multi-Head Attention (MHA)",
+   "context_length_max": "128K tokens",
+   "context_extension_method": "YaRN",
+   "training_pipeline": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning (RL)",
+   "reasoning_mode": null,
+   "moe_configuration": "236B total parameters, 21B activated per token",
+   "quantization_precision": "FP8 parameters, 6-bit KV cache",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "Group Relative Policy Optimization (GRPO)",
+   "reward_mechanism": "Multi-reward framework combining a helpful reward model, a safety reward model, and a rule-based reward model; GRPO uses group scores to estimate the baseline advantage.",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "DeepSeek 67B",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU: top-ranking; AlpacaEval 2.0: 38.9 length-controlled win rate; MT-Bench: 8.97; AlignBench: 7.91; MMLU 74.6; HumanEval 62.2; GSM8K 78.1; MATH 38.5; Codeforces 8.2; MMLU: 55.7; BBH: 48.1; TriviaQA: 65.2; NaturalQuestions: 35.5; ARC-Easy: 74.3; ARC-Challenge: 51.5; AGIEval: 42.8; HumanEval: 57.3; MBPP: 45.8; GSM8K: 72.0; MATH: 27.9; CMath: 71.7; CLUEWSC: 80.0; C-Eval: 60.1; CMMLU: 62.5; Surpasses Qwen1.5 72B Chat on English, math, and code benchmarks; outperforms Mixtral 8x22B Instruct on most benchmarks; matches LLaMA-3-70B Instruct on code/math; stronger on Chinese tasks; evaluated on MT-Bench, AlpacaEval 2.0, AlignBench, GSM8K, MATH, HumanEval.; Pile-test: 0.642 BPB; BBH: 68.7 EM; MMLU: 71.3 Acc; DROP: 69.7 F1; ARC-Easy: 95.3 Acc; ARC-Challenge: 86.4 Acc; HellaSwag: 86.3 Acc; PIQA: 83.6 Acc; WinoGrande: 84.9 Acc; RACE-Middle: 69.9 Acc; RACE-High: 50.7 Acc; TriviaQA: 78.9 EM; NaturalQuestions: 36.6 EM; AGIEval: 41.3 Acc; CRUXEval-I: 42.5 Acc; CRUXEval-O: 41.0 Acc; GSM8K: 63.4 EM; MATH: 18.7 EM; CMath: 63.0 EM; CLUEWSC: 81.0 EM; C-Eval: 66.1 Acc; CMMLU: 70.8 Acc; CMRC: 73.4 EM; C3: 75.3 Acc; CHID: 92.1 Acc; CCPM: 88.5 Acc; MMLU: 49.7; BBH: 43.1; TriviaQA: 59.5; NaturalQuestions: 32.7; ARC-Easy: 70.2; ARC-Challenge: 50.2; AGIEval: 17.6; HumanEval: 45.1; MBPP: 39.0; GSM8K: 62.6; MATH: 14.7; CMath: 66.4; CLUEWSC: 66.2; C-Eval: 44.7; CMMLU: 51.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "64 query / 8 key-value",
+   "post_training_infrastructure": "Hybrid parallel engine for training/inference, vLLM for inference acceleration, CPU/GPU offloading scheduling strategy"
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "DeepSeek-V 2": {
+   "application": [
+    "Language modeling",
+    "code generation",
+    "mathematical reasoning",
+    "chat/instruction following"
+   ],
+   "attention_mechanism": [
+    "Multi-head Latent Attention (MLA)",
+    "Grouped-Query Attention (GQA)",
+    "Multi-head Latent Attention (MLA) with low-rank key-value joint compression",
+    "Multi-Head Attention (MHA)"
+   ],
+   "base_model": [
+    "DeepSeek 67B"
+   ],
+   "context_extension_method": [
+    "YaRN"
+   ],
+   "finetuning_data": [
+    "1.5M conversational sessions",
+    "Code preference data (compiler-feedback)",
+    "mathematical preference data (ground-truth labels)",
+    "human preference data",
+    "1.5M instruction tuning instances (1.2M helpfulness, 0.3M safety)"
+   ],
+   "finetuning_task": [
+    "Supervised Fine-Tuning (SFT)"
+   ],
+   "hardware_used": [
+    "NVIDIA H800 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "DeepSeek"
+   ],
+   "model_name": [
+    "DeepSeek-V 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "DeepSeek"
+   ],
+   "parameters": [
+    "6.9B",
+    "15.7B",
+    "16B",
+    "67B",
+    "236B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "FP8 parameters",
+    "6-bit KV cache"
+   ],
+   "research_problem": [
+    "Efficient and strong language modeling"
+   ],
+   "reward_mechanism": [
+    "Multi-reward framework combining a helpful reward model",
+    "a safety reward model",
+    "a rule-based reward model"
+   ],
+   "rl_algorithm": [
+    "Group Relative Policy Optimization (GRPO)"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DeepSeek-V 2": {
+    "application": {
+     "candidates": [
+      "Language modeling",
+      "code generation",
+      "mathematical reasoning",
+      "Chinese and English benchmarks",
+      "chat/instruction following"
+     ],
+     "accepted": [
+      "Language modeling",
+      "code generation",
+      "mathematical reasoning",
+      "chat/instruction following"
+     ],
+     "dropped": [
+      {
+       "value": "Chinese and English benchmarks",
+       "reason": "Names languages and evaluation benchmarks, not a concrete task or domain of use."
+      }
+     ]
+    },
+    "attention_mechanism": {
+     "candidates": [
+      "Multi-head Latent Attention (MLA)",
+      "Grouped-Query Attention (GQA)",
+      "Multi-head Latent Attention (MLA) with low-rank key-value joint compression",
+      "Decoupled Rotary Position Embedding (RoPE)",
+      "Multi-Head Attention (MHA)"
+     ],
+     "accepted": [
+      "Multi-head Latent Attention (MLA)",
+      "Grouped-Query Attention (GQA)",
+      "Multi-head Latent Attention (MLA) with low-rank key-value joint compression",
+      "Multi-Head Attention (MHA)"
+     ],
+     "dropped": [
+      {
+       "value": "Decoupled Rotary Position Embedding (RoPE)",
+       "reason": "Names a positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised Fine-Tuning (SFT)",
+      "Reinforcement Learning (RL)"
+     ],
+     "accepted": [
+      "Supervised Fine-Tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Reinforcement Learning (RL)",
+       "reason": "Names a training paradigm/method, not a specific fine-tuning task or objective."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "8.1T tokens of high-quality",
+      "multi-source corpus"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "8.1T tokens of high-quality",
+       "reason": "Asserts token count and quality rather than naming an identifiable dataset or corpus."
+      },
+      {
+       "value": "multi-source corpus",
+       "reason": "Vague descriptor asserting breadth rather than naming a specific corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Efficient and strong language modeling",
+      "specifically addressing the inference-time KV cache bottleneck and high training costs of large language models."
+     ],
+     "accepted": [
+      "Efficient and strong language modeling"
+     ],
+     "dropped": [
+      {
+       "value": "specifically addressing the inference-time KV cache bottleneck and high training costs of large language models.",
+       "reason": "Sentence fragment describing the solution/approach rather than a short noun phrase naming the problem."
+      }
+     ]
+    },
+    "reward_mechanism": {
+     "candidates": [
+      "Multi-reward framework combining a helpful reward model",
+      "a safety reward model",
+      "a rule-based reward model",
+      "GRPO uses group scores to estimate the baseline advantage."
+     ],
+     "accepted": [
+      "Multi-reward framework combining a helpful reward model",
+      "a safety reward model",
+      "a rule-based reward model"
+     ],
+     "dropped": [
+      {
+       "value": "GRPO uses group scores to estimate the baseline advantage.",
+       "reason": "Describes an RL algorithm's operation rather than naming a reward definition method."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 38,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 26
+  }
+ },
+ "contributions": [
+  {
+   "label": "DeepSeek-V 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeepSeek-V 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "DeepSeek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-05-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-head Latent Attention (MLA): employs low-rank key-value joint compression to drastically reduce the inference-time KV cache bottleneck while outperforming standard MHA",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "DeepSeekMoE: a high-performance Mixture-of-Experts architecture for FFNs that enables training strong models at an economical cost",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Decoupled Rotary Position Embedding (RoPE): introduces additional multi-head queries and a shared key to carry RoPE, resolving the incompatibility between position-sensitive RoPE and low-rank KV compression without requiring prefix key recomputation during inference.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised Fine-Tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-level Byte-Pair Encoding (BBPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "15.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "67B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "236B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 236000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA H800 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "HAI-LLM framework with 16-way zero-bubble pipeline parallelism, 8-way expert parallelism, and ZeRO-1 data parallelism",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Mathematical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat/instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/deepseek-ai/DeepSeek-V2",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Efficient and strong language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "8.1T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "1.5M conversational sessions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Code preference data (compiler-feedback)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Mathematical preference data (ground-truth labels)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human preference data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "1.5M instruction tuning instances (1.2M helpfulness, 0.3M safety)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "21B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head Latent Attention (MLA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head Latent Attention (MLA) with low-rank key-value joint compression",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-Head Attention (MHA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "YaRN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning (RL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "236B total parameters, 21B activated per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP8 parameters",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "6-bit KV cache",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Group Relative Policy Optimization (GRPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Multi-reward framework combining a helpful reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "A safety reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "A rule-based reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "DeepSeek 67B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: top-ranking",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AlpacaEval 2.0: 38.9 length-controlled win rate",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MT-Bench: 8.97",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AlignBench: 7.91",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval 62.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K 78.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH 38.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Codeforces 8.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 55.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 48.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 65.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 35.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Easy: 74.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Challenge: 51.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AGIEval: 42.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 57.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 45.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 72.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 27.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMath: 71.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 60.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Surpasses Qwen1.5 72B Chat on English, math, and code benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms Mixtral 8x22B Instruct on most benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Matches LLaMA-3-70B Instruct on code/math",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Stronger on Chinese tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Evaluated on MT-Bench, AlpacaEval 2.0, AlignBench, GSM8K, MATH, HumanEval.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile-test: 0.642 BPB",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 68.7 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 71.3 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP: 69.7 F1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Easy: 95.3 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Challenge: 86.4 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 86.3 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 83.6 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 84.9 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-Middle: 69.9 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-High: 50.7 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 78.9 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 36.6 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AGIEval: 41.3 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CRUXEval-I: 42.5 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CRUXEval-O: 41.0 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 63.4 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 18.7 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMath: 63.0 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC: 81.0 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 66.1 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 70.8 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMRC: 73.4 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C3: 75.3 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CHID: 92.1 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CCPM: 88.5 Acc",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 49.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 43.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 59.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 32.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Easy: 70.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Challenge: 50.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AGIEval: 17.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 45.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 39.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 62.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 14.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMath: 66.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC: 66.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 44.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "64 query / 8 key-value",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Hybrid parallel engine for training/inference, vLLM for inference acceleration, CPU/GPU offloading scheduling strategy",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1374910",
+  "contribution_ids": [
+   "R1374912",
+   "R1374913",
+   "R1924505"
+  ],
+  "new_contribution_ids": [
+   "R1924505"
+  ],
+  "comparison_updated": null
+ }
+}

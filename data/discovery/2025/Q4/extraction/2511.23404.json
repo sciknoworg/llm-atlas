@@ -1,0 +1,2391 @@
+{
+  "arxiv_id": "2511.23404",
+  "status": "completed",
+  "timestamp": "2026-08-30T05:04:20.812213",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2511.23404",
+    "title": "LFM2 Technical Report",
+    "authors": [
+      "Alexander Amini",
+      "Anna Banaszak",
+      "Harold Benoit",
+      "Arthur Böök",
+      "Tarek Dakhran",
+      "Song Duong",
+      "Alfred Eng",
+      "Fernando Fernandes",
+      "Marc Härkönen",
+      "Anne Harrington",
+      "Ramin Hasani",
+      "Saniya Karwa",
+      "Yuri Khrustalev",
+      "Maxime Labonne",
+      "Mathias Lechner",
+      "Valentine Lechner",
+      "Simon Lee",
+      "Zetian Li",
+      "Noel Loo",
+      "Jacob Marks",
+      "Edoardo Mosca",
+      "Samuel J. Paech",
+      "Paul Pak",
+      "Rom N. Parnichkun",
+      "Alex Quach",
+      "Ryan Rogers",
+      "Daniela Rus",
+      "Nayan Saxena",
+      "Bettina Schlager",
+      "Tim Seyde",
+      "Jimmy T. H. Smith",
+      "Aditya Tadimeti",
+      "Neehal Tumma"
+    ],
+    "abstract": "We present LFM2, a family of Liquid Foundation Models designed for efficient on-device deployment and strong task capabilities. Using hardware-in-the-loop architecture search under edge latency and memory constraints, we obtain a compact hybrid backbone that combines gated short convolutions with a small number of grouped query attention blocks, delivering up to 2x faster prefill and decode on CPUs compared to similarly sized models. The LFM2 family covers 350M-8.3B parameters, including dense models (350M, 700M, 1.2B, 2.6B) and a mixture-of-experts variant (8.3B total, 1.5B active), all with 32K context length. LFM2's training pipeline includes a tempered, decoupled Top-K knowledge distillation objective that avoids support mismatch; curriculum learning with difficulty-ordered data; and a three-stage post-training recipe of supervised fine-tuning, length-normalized preference optimization, and model merging. Pre-trained on 10-12T tokens, LFM2 models achieve strong results across diverse benchmarks; for example, LFM2-2.6B reaches 79.56% on IFEval and 82.41% on GSM8K. We further build multimodal and retrieval variants: LFM2-VL for vision-language tasks, LFM2-Audio for speech, and LFM2-ColBERT for retrieval. LFM2-VL supports tunable accuracy-latency tradeoffs via token-efficient visual processing, while LFM2-Audio separates audio input and output pathways to enable real-time speech-to-speech interaction competitive with models 3x larger. LFM2-ColBERT provides a low-latency encoder for queries and documents, enabling high-performance retrieval across multiple languages. All models are released with open weights and deployment packages for ExecuTorch, llama.cpp, and vLLM, making LFM2 a practical base for edge applications that need fast, memory-efficient inference and strong task capabilities.",
+    "published": "2025-11-28T17:56:35+00:00",
+    "updated": "2025-11-28T17:56:35+00:00",
+    "doi": null,
+    "primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2511.23404v1",
+    "entry_id": "http://arxiv.org/abs/2511.23404v1",
+    "pdf_path": "data/papers/2511.23404.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 155866,
+  "word_count": 13390,
+  "models_extracted": 27,
+  "extraction_data": [
+    {
+      "model_name": "LFM 2",
+      "parameters": "0.35B, 350M, 700M, 0.7B, 750M, 1.2B, 1.3B, 2.6B, 8B-A1B",
+      "parameters_millions": 8000,
+      "model_family": "LFM2",
+      "date_created": "2025-11-28",
+      "organization": "LiquidAI",
+      "innovation": "Hardware-in-the-loop architecture search: Pareto optimization over quality, latency, and peak memory to select a minimal hybrid backbone; Gated short convolutions for most layers combined with a small minority of grouped-query attention (GQA) layers to recover quality deficits without additional SSMs or linear-attention operators; designed to maximize downstream quality while staying within tight device-side budgets on CPUs and heterogeneous NPUs.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "~75% English text, ~20% multilingual text (Japanese, Arabic, Korean, Spanish, French, German), ~5% code",
+      "finetuning_task": "Supervised instruction tuning, preference alignment, Supervised fine-tuning",
+      "optimizer": "AdamW",
+      "hardware_used": "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370",
+      "extension": "Augments the language backbone with a SigLIP2 vision encoder and a lightweight connector to enable flexible accuracy-latency trade-offs on device.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Small models for edge devices supporting 32K contexts, multimodal inputs, and retrieval",
+      "application": "Short-to-medium context interactions, task-oriented applications, edge deployments with tight latency and memory budgets",
+      "paper_title": "LFM2 Technical Report",
+      "training_corpus_size": "10T tokens",
+      "finetuning_data": "Open-source and proprietary instruction and preference data (~1M conversations), ~5.39M samples (dense), 9.24M samples (8B-A1B); 67/79 curated sources, Mixture of transcription, classification, TTS, and audio-chat data",
+      "tokenizer": "Byte-level BPE, 65,536-token vocabulary",
+      "supported_language": "English, Japanese, Arabic, Korean, Spanish, French, German, Chinese, Multilingual, European languages",
+      "hardware_description": "8 H100-80GB GPUs per training run",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": "1024",
+      "activated_parameters": "All parameters active",
+      "attention_mechanism": "Grouped-Query Attention (GQA) with QK-Norm; interleaved with gated short convolution blocks, Gated short convolutions + Grouped-Query Attention (GQA)",
+      "context_length_max": "32K",
+      "context_extension_method": null,
+      "training_pipeline": "Three-stage post-training pipeline including long-context mid-training and decoupled Top-K distillation objective",
+      "reasoning_mode": null,
+      "moe_configuration": "8B total parameters, 1B activated parameters",
+      "quantization_precision": "8da4w, Q4_0, 8da4w (ExecuTorch), Q4_0 (llama.cpp)",
+      "synthetic_data_generation_method": "In-house synthetic datasets generated for specialized audio chat capabilities",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP connector aligning audio encoder to LFM2 backbone",
+      "vision_encoder": "SigLIP2, SigLIP2-based",
+      "base_model": "LFM2 backbone",
+      "optimizer_innovation": null,
+      "benchmark_result": "Prefill throughput: 1,067 tokens/s (1K prompt), 657 tokens/s (4K prompt); Decode throughput: 194.1 tokens/s (1K prefix), 143.8 tokens/s (4K prefix) on Samsung Galaxy S25; MMLU: 43.43; MMLU-Pro: 15.85; GPQA: 27.46; IFEval: 65.12; IFBench: 16.41; Multi-IF: 32.85; GSM8K: 30.10; GSMPlus: 22.16; MATH500: 24.20; MATHLvl5: 5.79; MMMLU: 37.99; MGSM: 29.52; MMLU: 49.90; MMLU-Pro: 18.65; GPQA: 28.48; IFEval: 72.23; IFBench: 20.56; Multi-IF: 40.92; GSM8K: 46.40; GSMPlus: 29.99; MATH500: 31.80; MATHLvl5: 11.27; MMMLU: 43.28; MGSM: 45.36",
+      "weight_clipping_mechanism": "Gradient clipping at 1.0",
+      "number_of_attention_heads": "16 query / 8 key-value / 64 head dim",
+      "post_training_infrastructure": "ZeRO-2 sharding with strided activation checkpointing"
+    },
+    {
+      "model_name": "LFM 2-8B-A",
+      "parameters": "8B, 8.3B",
+      "parameters_millions": 8300,
+      "model_family": "LFM2",
+      "date_created": "2025-11-28",
+      "organization": "LiquidAI",
+      "innovation": "Decoupled, tempered Top-K knowledge distillation objective that avoids support mismatch by decomposing KL divergence into a binary mass-matching term and a conditional KL within the Top-K set; edge-first architecture optimized for CPU inference throughput and latency.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "60% English text, 25% multilingual text (Japanese, Arabic, Korean, Spanish, French, German, Chinese, Italian, Portuguese), 15% code",
+      "finetuning_task": "Supervised instruction tuning, preference alignment",
+      "optimizer": null,
+      "hardware_used": "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Small, on-device language models with high inference throughput and low latency",
+      "application": "On-device deployment, latency-sensitive tasks, code generation (FIM objective)",
+      "paper_title": "LFM2 Technical Report",
+      "training_corpus_size": "13T tokens",
+      "finetuning_data": null,
+      "tokenizer": "Byte-level BPE, 65,536-token vocabulary",
+      "supported_language": "English, Japanese, Arabic, Korean, Spanish, French, German, Chinese, Italian, Portuguese",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": "1024",
+      "activated_parameters": "1.5B",
+      "attention_mechanism": "Grouped Query Attention (GQA)",
+      "context_length_max": "32K",
+      "context_extension_method": null,
+      "training_pipeline": "Three-stage post-training pipeline including long-context mid-training and decoupled Top-K distillation objective",
+      "reasoning_mode": null,
+      "moe_configuration": "8.3B total parameters, 1.5B active parameters",
+      "quantization_precision": "8da4w, Q4_0",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Prefill throughput: 1,067 tokens/s (1K prompt), 657 tokens/s (4K prompt); Decode throughput: 194.1 tokens/s (1K prefix), 143.8 tokens/s (4K prefix) on Samsung Galaxy S25; MMLU-Pro: 37.42%; IFBench: 25.85%; MATH500: +10.6 over 2.6B; MATH Level 5: +8 over 2.6B",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32 query / 8 key-value / 64 head dim",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "LFM 2-VL",
+      "parameters": "0.45B, 450M, 1.6B, 3B",
+      "parameters_millions": 3000,
+      "model_family": "LFM2",
+      "date_created": "2025-11-28",
+      "organization": "Microsoft",
+      "innovation": "Liquid Foundation Model (LFM2) architecture: uses liquid neural networks/state-space models for efficient next-token prediction, enabling strong multimodal performance at small scales (<4B parameters) with significantly less training and inference-time compute compared to prior VLMs; Adaptable performance vs. latency scaling: varies the maximum number of vision tokens per image at inference by adjusting the preprocessing pipeline, allowing graceful performance degradation and on-device latency tuning without retraining; Multilingual visual understanding: surpasses Qwen2.5-VL-3B on translated MMBench and MMMB, outperforming all other open-source models under 4B parameters; Language-only tasks: maintains strong language capabilities (MMLU 62.70, MMMLU 53.37) despite multimodal optimization, closely matching larger baselines.",
+      "pretraining_architecture": "Decoder-only backbone + vision encoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "~50B tokens with diverse text-image ratios (5% to 30%)",
+      "finetuning_task": "Multimodal instruction tuning (VQA, document understanding, multi-image reasoning, conversational capabilities), Supervised fine-tuning (SFT) on multimodal instruction-following data",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Efficient on-device language and vision-language models",
+      "application": "Image understanding, multimodal reasoning, mathematical reasoning, OCR, instruction following, multilingual visual understanding, language-only tasks",
+      "paper_title": "LFM2 Technical Report",
+      "training_corpus_size": "11T tokens",
+      "finetuning_data": "Captioning datasets, interleaved image-text documents, OCR-focused data, document VQA, general VQA, translated datasets for multilingual support, Multimodal instruction-following data, document OCR data",
+      "tokenizer": null,
+      "supported_language": "Multilingual, English, Arabic, Chinese, French, German, Italian, Japanese, Korean, Portuguese, Spanish",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "4K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Connector pre-training -> Multimodal mid-training -> VLM SFT mixture",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Recaptioning existing open-source image datasets, generating additional VQA samples, translating English SFT data to target languages",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Lightweight connector (PixelUnshuffle + MLP)",
+      "vision_encoder": "SigLIP2 (Base-86M), SigLIP2 (So400M), SigLIP2",
+      "base_model": "LFM2 language-only backbone",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMStar: 49.87; MMBench(dev): 69.16; RealWorldQA: 65.75; MME: 1,757; SEEDBench: 72.00; POPE: 87.17; MMMU: 39.67; MathVista: 51.70; BLINK: 44.50; InfoVQA(val): 58.35; OCRBench: 729; MM-IFEval: 46.35; SEEDBench: 76.55; RealWorldQA: 71.37; POPE: 89.01; MMStar: 40.87; MMBench(dev): 55.76; RealWorldQA: 52.03; MME: 1,230; SEEDBench: 63.62; POPE: 83.68; MMMU: 34.44; MathVista: 45.30; BLINK: 42.61; InfoVQA(val): 44.56; OCRBench: 657; MM-IFEval: 33.09; MMStar: 57.73; MMBench(dev): 79.81; MME: 2,051; MMMU: 45.33; MathVista: 62.20; BLINK: 51.03; InfoVQA(val): 67.37; OCRBench: 822; MM-IFEval: 51.83; MMBench(dev) multilingual: 75.84; MMMB: 81.52; MMLU: 62.70; MMMLU: 53.37",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "LFM 2-ColBERT",
+      "parameters": "50M, 353M",
+      "parameters_millions": 353,
+      "model_family": "LFM2",
+      "date_created": "2025-11-28",
+      "organization": "LiquidAI",
+      "innovation": "Late interaction (ColBERT-style) architecture with a hybrid LFM2 backbone (10 convolutional + 6 attention blocks) and a linear projection head for fine-grained token-level similarity matching, trained via knowledge distillation from a powerful cross-encoder teacher using the PyLate framework.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Knowledge distillation for dense retrieval",
+      "pretraining_corpus": null,
+      "finetuning_task": null,
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA H100 GPUs",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multilingual information retrieval",
+      "application": "Information retrieval, fact verification, question answering, entity retrieval",
+      "paper_title": "LFM2 Technical Report",
+      "training_corpus_size": "25T tokens",
+      "finetuning_data": null,
+      "tokenizer": "byte-level BPE",
+      "supported_language": "English, German, Spanish, French, Arabic, Japanese, Korean",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "32,768 tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Continued pre-training of LFM2-350M to 25T tokens, followed by knowledge distillation training with 9 task-specific layers added to the backbone.",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "NanoBEIR Multilingual: English 0.661, German 0.563, Spanish 0.563, French 0.564, Arabic 0.490, Japanese 0.557, Korean 0.527",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 21,
+  "models_after_merge": 4,
+  "validated_rows": {
+    "LFM 2": {
+      "application": [],
+      "attention_mechanism": [
+        "Grouped-Query Attention (GQA) with QK-Norm",
+        "Gated short convolutions + Grouped-Query Attention (GQA)"
+      ],
+      "base_model": [
+        "LFM2 backbone"
+      ],
+      "finetuning_data": [
+        "Open-source and proprietary instruction and preference data (~1M conversations)",
+        "audio-chat data"
+      ],
+      "finetuning_task": [
+        "Supervised instruction tuning",
+        "preference alignment"
+      ],
+      "fusion_architecture": [
+        "MLP connector aligning audio encoder to LFM2 backbone"
+      ],
+      "hardware_used": [
+        "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370"
+      ],
+      "model_family": [
+        "LFM2"
+      ],
+      "model_name": [
+        "LFM 2"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "LiquidAI"
+      ],
+      "parameters": [
+        "0.35B",
+        "350M",
+        "700M",
+        "0.7B",
+        "750M",
+        "1.2B",
+        "1.3B",
+        "2.6B",
+        "8B-A1B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "quantization_precision": [
+        "8da4w",
+        "Q4_0",
+        "8da4w (ExecuTorch)",
+        "Q4_0 (llama.cpp)"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English",
+        "Japanese",
+        "Arabic",
+        "Korean",
+        "Spanish",
+        "French",
+        "German",
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "SigLIP2",
+        "SigLIP2-based"
+      ],
+      "weight_clipping_mechanism": []
+    },
+    "LFM 2-8B-A": {
+      "application": [
+        "code generation (FIM objective)"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA)"
+      ],
+      "finetuning_task": [
+        "Supervised instruction tuning",
+        "preference alignment"
+      ],
+      "hardware_used": [
+        "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370"
+      ],
+      "model_family": [
+        "LFM2"
+      ],
+      "model_name": [
+        "LFM 2-8B-A"
+      ],
+      "organization": [
+        "LiquidAI"
+      ],
+      "parameters": [
+        "8B",
+        "8.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "quantization_precision": [
+        "8da4w",
+        "Q4_0"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English",
+        "Japanese",
+        "Arabic",
+        "Korean",
+        "Spanish",
+        "French",
+        "German",
+        "Chinese",
+        "Italian",
+        "Portuguese"
+      ]
+    },
+    "LFM 2-VL": {
+      "application": [
+        "Image understanding",
+        "multimodal reasoning",
+        "mathematical reasoning",
+        "OCR",
+        "instruction following",
+        "multilingual visual understanding"
+      ],
+      "base_model": [
+        "LFM2 language-only backbone"
+      ],
+      "finetuning_data": [
+        "Captioning datasets",
+        "interleaved image-text documents",
+        "OCR-focused data",
+        "document VQA",
+        "general VQA",
+        "translated datasets for multilingual support",
+        "Multimodal instruction-following data",
+        "document OCR data"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning (VQA, document understanding, multi-image reasoning, conversational capabilities)",
+        "Supervised fine-tuning (SFT) on multimodal instruction-following data"
+      ],
+      "fusion_architecture": [
+        "Lightweight connector (PixelUnshuffle + MLP)"
+      ],
+      "model_family": [
+        "LFM2"
+      ],
+      "model_name": [
+        "LFM 2-VL"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "0.45B",
+        "450M",
+        "1.6B",
+        "3B"
+      ],
+      "pretraining_architecture": [],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English",
+        "Arabic",
+        "Chinese",
+        "French",
+        "German",
+        "Italian",
+        "Japanese",
+        "Korean",
+        "Portuguese",
+        "Spanish"
+      ],
+      "synthetic_data_generation_method": [
+        "Recaptioning existing open-source image datasets",
+        "translating English SFT data to target languages"
+      ],
+      "vision_encoder": [
+        "SigLIP2 (Base-86M)",
+        "SigLIP2 (So400M)",
+        "SigLIP2"
+      ]
+    },
+    "LFM 2-ColBERT": {
+      "application": [
+        "Information retrieval",
+        "fact verification",
+        "question answering",
+        "entity retrieval"
+      ],
+      "hardware_used": [
+        "NVIDIA H100 GPUs"
+      ],
+      "model_family": [
+        "LFM2"
+      ],
+      "model_name": [
+        "LFM 2-ColBERT"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "LiquidAI"
+      ],
+      "parameters": [
+        "50M",
+        "353M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_task": [
+        "Knowledge distillation for dense retrieval"
+      ],
+      "research_problem": [
+        "Multilingual information retrieval"
+      ],
+      "supported_language": [
+        "English",
+        "German",
+        "Spanish",
+        "French",
+        "Arabic",
+        "Japanese",
+        "Korean"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "LFM 2": {
+        "application": {
+          "candidates": [
+            "Short-to-medium context interactions",
+            "task-oriented applications",
+            "edge deployments with tight latency and memory budgets"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Short-to-medium context interactions",
+              "reason": "describes a context/setting characteristic, not a concrete task or domain"
+            },
+            {
+              "value": "task-oriented applications",
+              "reason": "vague placeholder, does not name a specific use"
+            },
+            {
+              "value": "edge deployments with tight latency and memory budgets",
+              "reason": "describes deployment constraints/environment, not a task or domain"
+            }
+          ]
+        },
+        "attention_mechanism": {
+          "candidates": [
+            "Grouped-Query Attention (GQA) with QK-Norm",
+            "interleaved with gated short convolution blocks",
+            "Gated short convolutions + Grouped-Query Attention (GQA)"
+          ],
+          "accepted": [
+            "Grouped-Query Attention (GQA) with QK-Norm",
+            "Gated short convolutions + Grouped-Query Attention (GQA)"
+          ],
+          "dropped": [
+            {
+              "value": "interleaved with gated short convolution blocks",
+              "reason": "describes architectural/modality fusion, not an attention mechanism"
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Open-source and proprietary instruction and preference data (~1M conversations)",
+            "~5.39M samples (dense)",
+            "9.24M samples (8B-A1B)",
+            "67/79 curated sources",
+            "Mixture of transcription",
+            "classification",
+            "TTS",
+            "audio-chat data"
+          ],
+          "accepted": [
+            "Open-source and proprietary instruction and preference data (~1M conversations)",
+            "audio-chat data"
+          ],
+          "dropped": [
+            {
+              "value": "~5.39M samples (dense)",
+              "reason": "states a sample count, not a dataset or data type"
+            },
+            {
+              "value": "9.24M samples (8B-A1B)",
+              "reason": "states a sample count, not a dataset or data type"
+            },
+            {
+              "value": "67/79 curated sources",
+              "reason": "states a source count, not a dataset or data type"
+            },
+            {
+              "value": "Mixture of transcription",
+              "reason": "vague description, does not name a specific dataset or data type"
+            },
+            {
+              "value": "classification",
+              "reason": "names a task, not fine-tuning data"
+            },
+            {
+              "value": "TTS",
+              "reason": "names a task, not fine-tuning data"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised instruction tuning",
+            "preference alignment",
+            "Supervised fine-tuning"
+          ],
+          "accepted": [
+            "Supervised instruction tuning",
+            "preference alignment"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "~75% English text",
+            "~20% multilingual text (Japanese, Arabic, Korean, Spanish, French, German)",
+            "~5% code"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "~75% English text",
+              "reason": "states a data proportion, not a corpus name or description"
+            },
+            {
+              "value": "~20% multilingual text (Japanese, Arabic, Korean, Spanish, French, German)",
+              "reason": "states a data proportion, not a corpus name or description"
+            },
+            {
+              "value": "~5% code",
+              "reason": "states a data proportion, not a corpus name or description"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Small models for edge devices supporting 32K contexts, multimodal inputs, and retrieval"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Small models for edge devices supporting 32K contexts, multimodal inputs, and retrieval",
+              "reason": "describes the model/solution rather than the research problem"
+            }
+          ]
+        },
+        "supported_language": {
+          "candidates": [
+            "English",
+            "Japanese",
+            "Arabic",
+            "Korean",
+            "Spanish",
+            "French",
+            "German",
+            "Chinese",
+            "Multilingual",
+            "European languages"
+          ],
+          "accepted": [
+            "English",
+            "Japanese",
+            "Arabic",
+            "Korean",
+            "Spanish",
+            "French",
+            "German",
+            "Chinese"
+          ],
+          "dropped": [
+            {
+              "value": "Multilingual",
+              "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+            },
+            {
+              "value": "European languages",
+              "reason": "Refers to a language family/group, not a specific natural language (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "In-house synthetic datasets generated for specialized audio chat capabilities"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "In-house synthetic datasets generated for specialized audio chat capabilities",
+              "reason": "describes the resulting dataset, not the generation method"
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Gradient clipping at 1.0"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Gradient clipping at 1.0",
+              "reason": "Describes gradient clipping, not weight clipping as defined. (cached)"
+            }
+          ]
+        }
+      },
+      "LFM 2-8B-A": {
+        "application": {
+          "candidates": [
+            "On-device deployment",
+            "latency-sensitive tasks",
+            "code generation (FIM objective)"
+          ],
+          "accepted": [
+            "code generation (FIM objective)"
+          ],
+          "dropped": [
+            {
+              "value": "On-device deployment",
+              "reason": "Describes a deployment method, not a practical use or domain. (cached)"
+            },
+            {
+              "value": "latency-sensitive tasks",
+              "reason": "vague placeholder"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "60% English text",
+            "25% multilingual text (Japanese, Arabic, Korean, Spanish, French, German, Chinese, Italian, Portuguese)",
+            "15% code"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "60% English text",
+              "reason": "states a data proportion, not a corpus name or description"
+            },
+            {
+              "value": "25% multilingual text (Japanese, Arabic, Korean, Spanish, French, German, Chinese, Italian, Portuguese)",
+              "reason": "states a data proportion, not a corpus name or description"
+            },
+            {
+              "value": "15% code",
+              "reason": "states a data proportion, not a corpus name or description"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Small, on-device language models with high inference throughput and low latency"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Small, on-device language models with high inference throughput and low latency",
+              "reason": "describes the model/solution rather than the research problem"
+            }
+          ]
+        }
+      },
+      "LFM 2-VL": {
+        "application": {
+          "candidates": [
+            "Image understanding",
+            "multimodal reasoning",
+            "mathematical reasoning",
+            "OCR",
+            "instruction following",
+            "multilingual visual understanding",
+            "language-only tasks"
+          ],
+          "accepted": [
+            "Image understanding",
+            "multimodal reasoning",
+            "mathematical reasoning",
+            "OCR",
+            "instruction following",
+            "multilingual visual understanding"
+          ],
+          "dropped": [
+            {
+              "value": "language-only tasks",
+              "reason": "vague placeholder"
+            }
+          ]
+        },
+        "pretraining_architecture": {
+          "candidates": [
+            "Decoder-only backbone + vision encoder"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Decoder-only backbone + vision encoder",
+              "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Decoder-only backbone + vision encoder'"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "~50B tokens with diverse text-image ratios (5% to 30%)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "~50B tokens with diverse text-image ratios (5% to 30%)",
+              "reason": "states corpus size and ratios, not a named corpus or identifiable collection"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Efficient on-device language and vision-language models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Efficient on-device language and vision-language models",
+              "reason": "describes the model/solution rather than the research problem"
+            }
+          ]
+        },
+        "supported_language": {
+          "candidates": [
+            "Multilingual",
+            "English",
+            "Arabic",
+            "Chinese",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Korean",
+            "Portuguese",
+            "Spanish"
+          ],
+          "accepted": [
+            "English",
+            "Arabic",
+            "Chinese",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Korean",
+            "Portuguese",
+            "Spanish"
+          ],
+          "dropped": [
+            {
+              "value": "Multilingual",
+              "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Recaptioning existing open-source image datasets",
+            "generating additional VQA samples",
+            "translating English SFT data to target languages"
+          ],
+          "accepted": [
+            "Recaptioning existing open-source image datasets",
+            "translating English SFT data to target languages"
+          ],
+          "dropped": [
+            {
+              "value": "generating additional VQA samples",
+              "reason": "sentence fragment describing an action, not a named method"
+            }
+          ]
+        }
+      },
+      "LFM 2-ColBERT": {}
+    },
+    "counts": {
+      "kept": 124,
+      "dropped": 31,
+      "llm_calls": 1,
+      "values_sent_to_llm": 65
+    }
+  },
+  "contributions": [
+    {
+      "label": "LFM 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "LFM 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "LFM2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-11-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "LiquidAI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hardware-in-the-loop architecture search: Pareto optimization over quality, latency, and peak memory to select a minimal hybrid backbone",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Gated short convolutions for most layers combined with a small minority of grouped-query attention (GQA) layers to recover quality deficits without additional SSMs or linear-attention operators",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Designed to maximize downstream quality while staying within tight device-side budgets on CPUs and heterogeneous NPUs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Preference alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE, 65,536-token vocabulary",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.35B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "350M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "700M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "750M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B-A1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "8 H100-80GB GPUs per training run",
+          "datatype": "string"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "10T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Open-source and proprietary instruction and preference data (~1M conversations)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Audio-chat data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163009",
+          "label": "context_length",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "All parameters active",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA) with QK-Norm",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Gated short convolutions + Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Three-stage post-training pipeline including long-context mid-training and decoupled Top-K distillation objective",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "8B total parameters, 1B activated parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8da4w",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Q4_0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8da4w (ExecuTorch)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Q4_0 (llama.cpp)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP connector aligning audio encoder to LFM2 backbone",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2-based",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LFM2 backbone",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Prefill throughput: 1,067 tokens/s (1K prompt), 657 tokens/s (4K prompt)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Decode throughput: 194.1 tokens/s (1K prefix), 143.8 tokens/s (4K prefix) on Samsung Galaxy S25",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 43.43",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 15.85",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 27.46",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 65.12",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFBench: 16.41",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Multi-IF: 32.85",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 30.10",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSMPlus: 22.16",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH500: 24.20",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATHLvl5: 5.79",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMLU: 37.99",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MGSM: 29.52",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 49.90",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 18.65",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 28.48",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 72.23",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFBench: 20.56",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Multi-IF: 40.92",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 46.40",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSMPlus: 29.99",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH500: 31.80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATHLvl5: 11.27",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMLU: 43.28",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MGSM: 45.36",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "16 query / 8 key-value / 64 head dim",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "ZeRO-2 sharding with strided activation checkpointing",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "LFM 2-8B-A",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "LFM 2-8B-A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "LFM2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-11-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "LiquidAI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoupled, tempered Top-K knowledge distillation objective that avoids support mismatch by decomposing KL divergence into a binary mass-matching term and a conditional KL within the Top-K set",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Edge-first architecture optimized for CPU inference throughput and latency.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Preference alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE, 65,536-token vocabulary",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8300,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Samsung Galaxy S24 Ultra (Snapdragon 8 Gen 3), AMD Ryzen HX 370",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation (FIM objective)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "13T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163009",
+          "label": "context_length",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Three-stage post-training pipeline including long-context mid-training and decoupled Top-K distillation objective",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "8.3B total parameters, 1.5B active parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8da4w",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Q4_0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Prefill throughput: 1,067 tokens/s (1K prompt), 657 tokens/s (4K prompt)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Decode throughput: 194.1 tokens/s (1K prefix), 143.8 tokens/s (4K prefix) on Samsung Galaxy S25",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 37.42%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFBench: 25.85%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH500: +10.6 over 2.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH Level 5: +8 over 2.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32 query / 8 key-value / 64 head dim",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "LFM 2-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "LFM 2-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "LFM2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-11-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Liquid Foundation Model (LFM2) architecture: uses liquid neural networks/state-space models for efficient next-token prediction, enabling strong multimodal performance at small scales (<4B parameters) with significantly less training and inference-time compute compared to prior VLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Adaptable performance vs. latency scaling: varies the maximum number of vision tokens per image at inference by adjusting the preprocessing pipeline, allowing graceful performance degradation and on-device latency tuning without retraining",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multilingual visual understanding: surpasses Qwen2.5-VL-3B on translated MMBench and MMMB, outperforming all other open-source models under 4B parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Language-only tasks: maintains strong language capabilities (MMLU 62.70, MMMLU 53.37) despite multimodal optimization, closely matching larger baselines.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning (VQA, document understanding, multi-image reasoning, conversational capabilities)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) on multimodal instruction-following data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.45B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "450M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 3000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multilingual visual understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "11T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Captioning datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Interleaved image-text documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OCR-focused data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Document VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "General VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Translated datasets for multilingual support",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal instruction-following data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Document OCR data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Connector pre-training -> Multimodal mid-training -> VLM SFT mixture",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Recaptioning existing open-source image datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Translating English SFT data to target languages",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Lightweight connector (PixelUnshuffle + MLP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2 (Base-86M)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2 (So400M)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LFM2 language-only backbone",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 49.87",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench(dev): 69.16",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 65.75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1,757",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEEDBench: 72.00",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 87.17",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 39.67",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 51.70",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLINK: 44.50",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA(val): 58.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 729",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-IFEval: 46.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEEDBench: 76.55",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 71.37",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 89.01",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 40.87",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench(dev): 55.76",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorldQA: 52.03",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1,230",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEEDBench: 63.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 83.68",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 34.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 45.30",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLINK: 42.61",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA(val): 44.56",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 657",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-IFEval: 33.09",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 57.73",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench(dev): 79.81",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 2,051",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 45.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 62.20",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLINK: 51.03",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA(val): 67.37",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 822",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-IFEval: 51.83",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench(dev) multilingual: 75.84",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMB: 81.52",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 62.70",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMLU: 53.37",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "LFM 2-ColBERT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "LFM 2-ColBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "LFM2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-11-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "LiquidAI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Late interaction (ColBERT-style) architecture with a hybrid LFM2 backbone (10 convolutional + 6 attention blocks) and a linear projection head for fine-grained token-level similarity matching, trained via knowledge distillation from a powerful cross-encoder teacher using the PyLate framework.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Knowledge distillation for dense retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "50M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "353M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 353,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Information retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Fact verification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Entity retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multilingual information retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "25T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32,768 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Continued pre-training of LFM2-350M to 25T tokens, followed by knowledge distillation training with 9 task-specific layers added to the backbone.",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NanoBEIR Multilingual: English 0.661, German 0.563, Spanish 0.563, French 0.564, Arabic 0.490, Japanese 0.557, Korean 0.527",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927169",
+    "contribution_ids": [
+      "R1927171",
+      "R1927172",
+      "R1927173",
+      "R1927174"
+    ],
+    "new_contribution_ids": [
+      "R1927171",
+      "R1927172",
+      "R1927173",
+      "R1927174"
+    ],
+    "comparison_updated": null
+  }
+}

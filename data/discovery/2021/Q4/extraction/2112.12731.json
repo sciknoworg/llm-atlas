@@ -1,0 +1,797 @@
+{
+  "arxiv_id": "2112.12731",
+  "status": "completed",
+  "timestamp": "2026-08-25T04:01:42.861005",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2112.12731",
+    "title": "ERNIE 3.0 Titan: Exploring Larger-scale Knowledge Enhanced Pre-training for Language Understanding and Generation",
+    "authors": [
+      "Shuohuan Wang",
+      "Yu Sun",
+      "Yang Xiang",
+      "Zhihua Wu",
+      "Siyu Ding",
+      "Weibao Gong",
+      "Shikun Feng",
+      "Junyuan Shang",
+      "Yanbin Zhao",
+      "Chao Pang",
+      "Jiaxiang Liu",
+      "Xuyi Chen",
+      "Yuxiang Lu",
+      "Weixin Liu",
+      "Xi Wang",
+      "Yangfan Bai",
+      "Qiuliang Chen",
+      "Li Zhao",
+      "Shiyong Li",
+      "Peng Sun",
+      "Dianhai Yu",
+      "Yanjun Ma",
+      "Hao Tian",
+      "Hua Wu",
+      "Tian Wu",
+      "Wei Zeng",
+      "Ge Li",
+      "Wen Gao",
+      "Haifeng Wang"
+    ],
+    "abstract": "Pre-trained language models have achieved state-of-the-art results in various Natural Language Processing (NLP) tasks. GPT-3 has shown that scaling up pre-trained language models can further exploit their enormous potential. A unified framework named ERNIE 3.0 was recently proposed for pre-training large-scale knowledge enhanced models and trained a model with 10 billion parameters. ERNIE 3.0 outperformed the state-of-the-art models on various NLP tasks. In order to explore the performance of scaling up ERNIE 3.0, we train a hundred-billion-parameter model called ERNIE 3.0 Titan with up to 260 billion parameters on the PaddlePaddle platform. Furthermore, we design a self-supervised adversarial loss and a controllable language modeling loss to make ERNIE 3.0 Titan generate credible and controllable texts. To reduce the computation overhead and carbon emission, we propose an online distillation framework for ERNIE 3.0 Titan, where the teacher model will teach students and train itself simultaneously. ERNIE 3.0 Titan is the largest Chinese dense pre-trained model so far. Empirical results show that the ERNIE 3.0 Titan outperforms the state-of-the-art models on 68 NLP datasets.",
+    "published": "2021-12-23T17:35:48+00:00",
+    "updated": "2021-12-23T17:35:48+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2112.12731v1",
+    "entry_id": "http://arxiv.org/abs/2112.12731v1",
+    "pdf_path": "data/papers/2112.12731.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 103780,
+  "word_count": 5756,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "ERNIE 3.0 Titan",
+      "parameters": "10B, 260B",
+      "parameters_millions": 260000,
+      "model_family": "ERNIE",
+      "date_created": "2021-12-23",
+      "organization": "Baidu",
+      "innovation": "Knowledge-enhanced pre-training: fuses auto-regressive and auto-encoding networks to train on large-scale plaintexts and knowledge graphs simultaneously, addressing the lack of commonsense in plaintext-only models; Auxiliary adversarial loss: trains a credibility ranker to self-rank generated text and select the most credible output, improving text veracity and coherence compared to standard generation; Online distillation framework (On-the-Fly Distillation, teacher assistants, Auxiliary Layer Distillation): teaches multiple students simultaneously during pre-training, stacks an additional student layer during distillation (discarded at fine-tuning), and uses teacher assistants to bridge representation space gaps, enabling efficient distillation of the large model into multiple small models with little additional computation cost.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Knowledge-enhanced pre-training, self-supervised adversarial learning, controllable language modeling",
+      "pretraining_corpus": "ERNIE 3.0 Corpus, ERNIE 3.0 adversarial dataset, ERNIE 3.0 controllable dataset",
+      "finetuning_task": "Supervised fine-tuning on downstream NLP tasks, Fine-tuning on task-specific representation modules",
+      "optimizer": "Adam",
+      "hardware_used": "PaddlePaddle platform",
+      "extension": "Online distillation framework (OFD and ALD) enables simultaneous training of multiple student models while the teacher trains itself, reducing computational overhead and carbon emissions.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Scaling up knowledge-enhanced pre-trained models for language understanding and generation; achieving credible and controllable text generation.",
+      "application": "Natural language understanding, language generation, machine translation, human-machine dialogue, question answering, credible text generation",
+      "paper_title": "ERNIE 3.0 Titan: Exploring Larger-scale Knowledge Enhanced Pre-training for Language Understanding and Generation",
+      "training_corpus_size": "300 billion tokens",
+      "finetuning_data": "68 NLP datasets, NLPCC-DBQA, CHIP2019, cMedQA, cMedQA2, CKBQA, WebQA, PD&CFT, CMRC2017, CMRC2019, CHID, CHID-FC, WPLC, DRCD, DuReader, C3, CMRC2018, CAIL2018-Task1, CAIL2018-Task2, DogWhistle, NLPCC2014-SC, SE-ABSA16_PHNS, SE-ABSA16_CAM, BDCI2019, COTE, FinRE, SanWen, AFQMC, LCQMC, BQ, IFLYTEK, THUCNEWS, CNSE, CNSS, FewCLUE",
+      "tokenizer": null,
+      "supported_language": "Chinese",
+      "hardware_description": "2048 Nvidia V100 GPU cards or Ascend 910 NPU clusters",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "260B (dense, all parameters active)",
+      "attention_mechanism": "Bidirectional attention, Self-attention with auxiliary recurrence memory module (Transformer-XL)",
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training with self-supervised adversarial loss and controllable language modeling loss, followed by online distillation to student models",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "ERNIE 3.0",
+      "optimizer_innovation": null,
+      "benchmark_result": "NLPCC2014-SC: 86.32; SE-ABSA16_PHNS: 94.14",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "PaddleServing for distributed inference (tensor/pipeline model parallelism, unified memory optimization, op fusion, model IO optimization, quantization-aware acceleration)."
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "ERNIE 3.0 Titan": {
+      "application": [
+        "Natural language understanding",
+        "language generation",
+        "machine translation",
+        "human-machine dialogue",
+        "question answering"
+      ],
+      "attention_mechanism": [
+        "Bidirectional attention",
+        "Self-attention with auxiliary recurrence memory module (Transformer-XL)"
+      ],
+      "base_model": [
+        "ERNIE 3.0"
+      ],
+      "finetuning_data": [
+        "NLPCC-DBQA",
+        "CHIP2019",
+        "cMedQA",
+        "cMedQA2",
+        "CKBQA",
+        "WebQA",
+        "PD&CFT",
+        "CMRC2017",
+        "CMRC2019",
+        "CHID",
+        "CHID-FC",
+        "WPLC",
+        "DRCD",
+        "DuReader",
+        "C3",
+        "CMRC2018",
+        "CAIL2018-Task1",
+        "CAIL2018-Task2",
+        "DogWhistle",
+        "NLPCC2014-SC",
+        "SE-ABSA16_PHNS",
+        "SE-ABSA16_CAM",
+        "BDCI2019",
+        "COTE",
+        "FinRE",
+        "SanWen",
+        "AFQMC",
+        "LCQMC",
+        "BQ",
+        "IFLYTEK",
+        "THUCNEWS",
+        "CNSE",
+        "CNSS",
+        "FewCLUE"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [],
+      "model_family": [
+        "ERNIE"
+      ],
+      "model_name": [
+        "ERNIE 3.0 Titan"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Baidu"
+      ],
+      "parameters": [
+        "10B",
+        "260B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "ERNIE 3.0 Corpus",
+        "ERNIE 3.0 adversarial dataset",
+        "ERNIE 3.0 controllable dataset"
+      ],
+      "pretraining_task": [
+        "Knowledge-enhanced pre-training, self-supervised adversarial learning, controllable language modeling"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Chinese"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "ERNIE 3.0 Titan": {
+        "application": {
+          "candidates": [
+            "Natural language understanding",
+            "language generation",
+            "machine translation",
+            "human-machine dialogue",
+            "question answering",
+            "credible text generation"
+          ],
+          "accepted": [
+            "Natural language understanding",
+            "language generation",
+            "machine translation",
+            "human-machine dialogue",
+            "question answering"
+          ],
+          "dropped": [
+            {
+              "value": "credible text generation",
+              "reason": "Describes a quality or goal rather than a concrete task or domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "68 NLP datasets",
+            "NLPCC-DBQA",
+            "CHIP2019",
+            "cMedQA",
+            "cMedQA2",
+            "CKBQA",
+            "WebQA",
+            "PD&CFT",
+            "CMRC2017",
+            "CMRC2019",
+            "CHID",
+            "CHID-FC",
+            "WPLC",
+            "DRCD",
+            "DuReader",
+            "C3",
+            "CMRC2018",
+            "CAIL2018-Task1",
+            "CAIL2018-Task2",
+            "DogWhistle",
+            "NLPCC2014-SC",
+            "SE-ABSA16_PHNS",
+            "SE-ABSA16_CAM",
+            "BDCI2019",
+            "COTE",
+            "FinRE",
+            "SanWen",
+            "AFQMC",
+            "LCQMC",
+            "BQ",
+            "IFLYTEK",
+            "THUCNEWS",
+            "CNSE",
+            "CNSS",
+            "FewCLUE"
+          ],
+          "accepted": [
+            "NLPCC-DBQA",
+            "CHIP2019",
+            "cMedQA",
+            "cMedQA2",
+            "CKBQA",
+            "WebQA",
+            "PD&CFT",
+            "CMRC2017",
+            "CMRC2019",
+            "CHID",
+            "CHID-FC",
+            "WPLC",
+            "DRCD",
+            "DuReader",
+            "C3",
+            "CMRC2018",
+            "CAIL2018-Task1",
+            "CAIL2018-Task2",
+            "DogWhistle",
+            "NLPCC2014-SC",
+            "SE-ABSA16_PHNS",
+            "SE-ABSA16_CAM",
+            "BDCI2019",
+            "COTE",
+            "FinRE",
+            "SanWen",
+            "AFQMC",
+            "LCQMC",
+            "BQ",
+            "IFLYTEK",
+            "THUCNEWS",
+            "CNSE",
+            "CNSS",
+            "FewCLUE"
+          ],
+          "dropped": [
+            {
+              "value": "68 NLP datasets",
+              "reason": "Placeholder describing quantity, not a specific dataset name (cached)"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning on downstream NLP tasks",
+            "Fine-tuning on task-specific representation modules"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning on downstream NLP tasks",
+              "reason": "Describes a training methodology rather than naming a specific task. (cached)"
+            },
+            {
+              "value": "Fine-tuning on task-specific representation modules",
+              "reason": "Description of a training method, not a specific task name (cached)"
+            }
+          ]
+        },
+        "hardware_used": {
+          "candidates": [
+            "PaddlePaddle platform"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "PaddlePaddle platform",
+              "reason": "Software framework, not hardware (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Scaling up knowledge-enhanced pre-trained models for language understanding and generation",
+            "achieving credible and controllable text generation."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Scaling up knowledge-enhanced pre-trained models for language understanding and generation",
+              "reason": "Describes a methodology/goal rather than a research problem (cached)"
+            },
+            {
+              "value": "achieving credible and controllable text generation.",
+              "reason": "Describes a goal/objective rather than a research problem (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 54,
+      "dropped": 7,
+      "llm_calls": 1,
+      "values_sent_to_llm": 6
+    }
+  },
+  "contributions": [
+    {
+      "label": "ERNIE 3.0 Titan",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ERNIE 3.0 Titan",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ERNIE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-12-23",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Baidu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Knowledge-enhanced pre-training: fuses auto-regressive and auto-encoding networks to train on large-scale plaintexts and knowledge graphs simultaneously, addressing the lack of commonsense in plaintext-only models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Auxiliary adversarial loss: trains a credibility ranker to self-rank generated text and select the most credible output, improving text veracity and coherence compared to standard generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Online distillation framework (On-the-Fly Distillation, teacher assistants, Auxiliary Layer Distillation): teaches multiple students simultaneously during pre-training, stacks an additional student layer during distillation (discarded at fine-tuning), and uses teacher assistants to bridge representation space gaps, enabling efficient distillation of the large model into multiple small models with little additional computation cost.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Knowledge-enhanced pre-training, self-supervised adversarial learning, controllable language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ERNIE 3.0 Corpus",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ERNIE 3.0 adversarial dataset",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ERNIE 3.0 controllable dataset",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "10B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "260B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 260000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "2048 Nvidia V100 GPU cards or Ascend 910 NPU clusters",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Machine translation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Human-machine dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "300 billion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLPCC-DBQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CHIP2019",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMedQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMedQA2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CKBQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WebQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PD&CFT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMRC2017",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMRC2019",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CHID",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CHID-FC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "WPLC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DRCD",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DuReader",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "C3",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CMRC2018",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CAIL2018-Task1",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CAIL2018-Task2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DogWhistle",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLPCC2014-SC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SE-ABSA16_PHNS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SE-ABSA16_CAM",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BDCI2019",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COTE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FinRE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SanWen",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AFQMC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LCQMC",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "BQ",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "IFLYTEK",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "THUCNEWS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CNSE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CNSS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FewCLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "260B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Bidirectional attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Self-attention with auxiliary recurrence memory module (Transformer-XL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training with self-supervised adversarial loss and controllable language modeling loss, followed by online distillation to student models",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "ERNIE 3.0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NLPCC2014-SC: 86.32",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SE-ABSA16_PHNS: 94.14",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "PaddleServing for distributed inference (tensor/pipeline model parallelism, unified memory optimization, op fusion, model IO optimization, quantization-aware acceleration).",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925614",
+    "contribution_ids": [
+      "R1925616"
+    ],
+    "new_contribution_ids": [
+      "R1925616"
+    ],
+    "comparison_updated": null
+  }
+}

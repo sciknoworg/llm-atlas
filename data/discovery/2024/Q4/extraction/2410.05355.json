@@ -1,0 +1,686 @@
+{
+ "arxiv_id": "2410.05355",
+ "status": "completed",
+ "timestamp": "2026-08-29T14:23:22.491867",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2410.05355",
+  "title": "Falcon Mamba: The First Competitive Attention-free 7B Language Model",
+  "authors": [
+   "Jingwei Zuo",
+   "Maksim Velikanov",
+   "Dhia Eddine Rhaiem",
+   "Ilyas Chahed",
+   "Younes Belkada",
+   "Guillaume Kunsch",
+   "Hakim Hacid"
+  ],
+  "abstract": "In this technical report, we present Falcon Mamba 7B, a new base large language model based on the novel Mamba architecture. Falcon Mamba 7B is trained on 5.8 trillion tokens with carefully selected data mixtures. As a pure Mamba-based model, Falcon Mamba 7B surpasses leading open-weight models based on Transformers, such as Mistral 7B, Llama3.1 8B, and Falcon2 11B. It is on par with Gemma 7B and outperforms models with different architecture designs, such as RecurrentGemma 9B and RWKV-v6 Finch 7B/14B. Currently, Falcon Mamba 7B is the best-performing Mamba model in the literature at this scale, surpassing both existing Mamba and hybrid Mamba-Transformer models, according to the Open LLM Leaderboard. Due to its architecture, Falcon Mamba 7B is significantly faster at inference and requires substantially less memory for long sequence generation. Despite recent studies suggesting that hybrid Mamba-Transformer models outperform pure architecture designs, we demonstrate that even the pure Mamba design can achieve similar, or even superior results compared to the Transformer and hybrid designs. We make the weights of our implementation of Falcon Mamba 7B publicly available on https://huggingface.co/tiiuae/falcon-mamba-7b, under a permissive license.",
+  "published": "2024-10-07T15:40:45+00:00",
+  "updated": "2024-10-07T15:40:45+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2410.05355v1",
+  "entry_id": "http://arxiv.org/abs/2410.05355v1",
+  "pdf_path": "data/papers/2410.05355.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 35549,
+ "word_count": 1824,
+ "models_extracted": 2,
+ "extraction_data": [
+  {
+   "model_name": "Falcon Mamba",
+   "model_family": "Falcon",
+   "date_created": "2024-10-07",
+   "organization": "Technology Innovation Institute",
+   "innovation": "Pure Mamba architecture (attention-free State Space Model) that maintains constant memory cost regardless of context length and provides linear scalability; untied input and output embeddings to increase model flexibility and improve performance at the 7B scale.",
+   "pretraining_corpus": null,
+   "parameters": "7.27B",
+   "parameters_millions": 7270,
+   "application": "Language modeling, long sequence generation",
+   "license": "Permissive license",
+   "research_problem": "Language Modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "training_corpus_size": "5.8 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/falcon-mamba-7b",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Falcon Mamba: The First Competitive Attention-free 7B Language Model",
+   "activated_parameters": "7.27B (dense, all parameters active)",
+   "attention_mechanism": "None (pure Mamba/SSM architecture)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training only",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "FalconMamba",
+   "model_family": "Falcon",
+   "date_created": "2024-10-07",
+   "organization": "TII",
+   "innovation": "Attention-free Mamba architecture for a 7B parameter language model; curriculum learning with progressive sequence length increase (2048 to 8192); minimal multitask instruction data during pretraining to enhance in-context retrieval without overfitting.",
+   "pretraining_corpus": "Web data filtered with FastText classifier trained on Proof-Pile-2, Fineweb-Edu, Cosmopedia, multitask instruction data",
+   "parameters": "7B",
+   "parameters_millions": 7000,
+   "application": "Instruction following, math, reasoning, problem-solving, aggregate benchmarks",
+   "license": "Falcon Mamba 7B TII License",
+   "research_problem": "Language Modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "NVIDIA A10 GPU, NVIDIA H100 GPU",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Falcon Mamba: The First Competitive Attention-free 7B Language Model",
+   "activated_parameters": "7B",
+   "attention_mechanism": "None (attention-free Mamba)",
+   "context_length_max": "8192",
+   "context_extension_method": null,
+   "training_pipeline": "Four constant learning rate stages with progressive sequence length increase (2048 to 8192), followed by a final LR decay stage with diverse/high-quality data and minimal multitask instruction data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ARC-25: 62.03; HellaSwag-10: 80.82; MMLU-5: 62.11; Winogrande-5: 73.64; TruthfulQA-0: 53.42; GSM8K-5: 52.54; Average: 64.09; IFEval-0: 33.36; BBH-3: 19.88; Math-Lvl5-4: 3.63; GPQA-0: 8.05; MuSR-0: 10.86; MMLU-PRO-5: 14.47; Average: 15.04",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Falcon Mamba": {
+   "application": [
+    "Language modeling",
+    "long sequence generation"
+   ],
+   "attention_mechanism": [
+    "None (pure Mamba/SSM architecture)"
+   ],
+   "license": [],
+   "model_family": [
+    "Falcon"
+   ],
+   "model_name": [
+    "Falcon Mamba"
+   ],
+   "organization": [
+    "Technology Innovation Institute"
+   ],
+   "parameters": [
+    "7.27B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [
+    "Language Modeling"
+   ]
+  },
+  "FalconMamba": {
+   "application": [
+    "Instruction following",
+    "math",
+    "reasoning",
+    "problem-solving"
+   ],
+   "attention_mechanism": [
+    "None (attention-free Mamba)"
+   ],
+   "hardware_used": [
+    "NVIDIA A10 GPU, NVIDIA H100 GPU"
+   ],
+   "license": [
+    "Falcon Mamba 7B TII License"
+   ],
+   "model_family": [
+    "Falcon"
+   ],
+   "model_name": [
+    "FalconMamba"
+   ],
+   "organization": [
+    "TII"
+   ],
+   "parameters": [
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Web data filtered with FastText classifier trained on Proof-Pile-2",
+    "Fineweb-Edu",
+    "Cosmopedia"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [
+    "Language Modeling"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Falcon Mamba": {
+    "license": {
+     "candidates": [
+      "Permissive license"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Permissive license",
+       "reason": "Describes a license category, not a specific license name. (cached)"
+      }
+     ]
+    }
+   },
+   "FalconMamba": {
+    "application": {
+     "candidates": [
+      "Instruction following",
+      "math",
+      "reasoning",
+      "problem-solving",
+      "aggregate benchmarks"
+     ],
+     "accepted": [
+      "Instruction following",
+      "math",
+      "reasoning",
+      "problem-solving"
+     ],
+     "dropped": [
+      {
+       "value": "aggregate benchmarks",
+       "reason": "Refers to evaluation suites, not a practical use or domain for the model."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Web data filtered with FastText classifier trained on Proof-Pile-2",
+      "Fineweb-Edu",
+      "Cosmopedia",
+      "multitask instruction data"
+     ],
+     "accepted": [
+      "Web data filtered with FastText classifier trained on Proof-Pile-2",
+      "Fineweb-Edu",
+      "Cosmopedia"
+     ],
+     "dropped": [
+      {
+       "value": "multitask instruction data",
+       "reason": "Vague description of data type, not an identifiable dataset or corpus."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 28,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "Falcon Mamba",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Falcon Mamba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Falcon",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-10-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Technology Innovation Institute",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Pure Mamba architecture (attention-free State Space Model) that maintains constant memory cost regardless of context length and provides linear scalability",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Untied input and output embeddings to increase model flexibility and improve performance at the 7B scale.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7.27B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7270,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long sequence generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/falcon-mamba-7b",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language Modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5.8 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7.27B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "None (pure Mamba/SSM architecture)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training only",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "FalconMamba",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "FalconMamba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Falcon",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-10-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "TII",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Attention-free Mamba architecture for a 7B parameter language model",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Curriculum learning with progressive sequence length increase (2048 to 8192)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Minimal multitask instruction data during pretraining to enhance in-context retrieval without overfitting.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Web data filtered with FastText classifier trained on Proof-Pile-2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Fineweb-Edu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Cosmopedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A10 GPU, NVIDIA H100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Math",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Problem-solving",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language Modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "None (attention-free Mamba)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "8192",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Four constant learning rate stages with progressive sequence length increase (2048 to 8192), followed by a final LR decay stage with diverse/high-quality data and minimal multitask instruction data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-25: 62.03",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag-10: 80.82",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-5: 62.11",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande-5: 73.64",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA-0: 53.42",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K-5: 52.54",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 64.09",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval-0: 33.36",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH-3: 19.88",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Math-Lvl5-4: 3.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA-0: 8.05",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MuSR-0: 10.86",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-PRO-5: 14.47",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 15.04",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1924695",
+  "contribution_ids": [
+   "R1924697",
+   "R1924698"
+  ],
+  "new_contribution_ids": [
+   "R1924697",
+   "R1924698"
+  ],
+  "comparison_updated": null
+ }
+}

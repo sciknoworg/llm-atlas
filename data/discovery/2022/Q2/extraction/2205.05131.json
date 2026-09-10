@@ -1,0 +1,1545 @@
+{
+ "arxiv_id": "2205.05131",
+ "status": "completed",
+ "timestamp": "2026-08-27T15:19:07.254970",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2205.05131",
+  "title": "UL2: Unifying Language Learning Paradigms",
+  "authors": [
+   "Yi Tay",
+   "Mostafa Dehghani",
+   "Vinh Q. Tran",
+   "Xavier Garcia",
+   "Jason Wei",
+   "Xuezhi Wang",
+   "Hyung Won Chung",
+   "Siamak Shakeri",
+   "Dara Bahri",
+   "Tal Schuster",
+   "Huaixiu Steven Zheng",
+   "Denny Zhou",
+   "Neil Houlsby",
+   "Donald Metzler"
+  ],
+  "abstract": "Existing pre-trained models are generally geared towards a particular class of problems. To date, there seems to be still no consensus on what the right architecture and pre-training setup should be. This paper presents a unified framework for pre-training models that are universally effective across datasets and setups. We begin by disentangling architectural archetypes with pre-training objectives -- two concepts that are commonly conflated. Next, we present a generalized & unified perspective for self-supervision in NLP and show how different pre-training objectives can be cast as one another and how interpolating between different objectives can be effective. We then propose Mixture-of-Denoisers (MoD), a pre-training objective that combines diverse pre-training paradigms together. We furthermore introduce a notion of mode switching, wherein downstream fine-tuning is associated with specific pre-training schemes. We conduct extensive ablative experiments to compare multiple pre-training objectives and find that our method pushes the Pareto-frontier by outperforming T5 & GPT-like models across multiple diverse setups. By scaling our model up to 20B parameters, we achieve SOTA performance on 50 well-established supervised finetuning based NLP tasks. Our model also achieve strong results at in-context learning, outperforming 175B GPT-3 on zero-shot SuperGLUE and tripling the performance of T5-XXL on one-shot summarization. On 0-shot MMLU, UL2 20B outperforms T0 and T5 models. UL2 20B also works well with chain-of-thought prompting and reasoning, making it an appealing choice for research into reasoning at a small to medium scale of 20B parameters. Finally, we apply FLAN instruction tuning to the UL2 20B model, achieving MMLU and Big-Bench scores competitive to FLAN-PaLM 62B. We release Flax-based T5X checkpoints for the UL2 20B & Flan-UL2 20B.",
+  "published": "2022-05-10T19:32:20+00:00",
+  "updated": "2023-02-28T17:20:36+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2205.05131v3",
+  "entry_id": "http://arxiv.org/abs/2205.05131v3",
+  "pdf_path": "data/papers/2205.05131.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 114177,
+ "word_count": 8034,
+ "models_extracted": 15,
+ "extraction_data": [
+  {
+   "model_name": "UL 2",
+   "parameters": "167M, 335M, 1B, 1.3B, 1.5B, 3B, 8B, 19.5B, 20B, 60B, 130B, 160B, 1.6T",
+   "parameters_millions": 1600000,
+   "model_family": "UL2",
+   "date_created": "2022-05-10",
+   "organization": "Google",
+   "innovation": "Unified denoising objective: Trains a single model on a mixture of span corruption and causal language modeling tasks with a unified input/output format, eliminating the need for task-specific heads or separate models; differs from prior work by unifying encoder-decoder and decoder-only training paradigms into one architecture-agnostic model. Zero/few-shot prompt-based learning: Enables direct task performance via natural language prompts without fine-tuning, contrasting with traditional supervised fine-tuning approaches.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Unified denoising and generative objective (random span masking)",
+   "pretraining_corpus": "Common Crawl, Books, Wikipedia, WebText, domain-specific corpora",
+   "finetuning_task": "Instruction tuning (FLAN mixture), Supervised fine-tuning, zero/few-shot prompt-based in-context learning, in-context few-shot learning, Supervised fine-tuning on downstream NLP tasks",
+   "optimizer": "Adafactor",
+   "hardware_used": "TPUv4",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Unifying language learning paradigms; bridging the performance gap between decoder-only and encoder-decoder models.",
+   "application": "Language generation, language understanding, text classification, question answering, commonsense reasoning, long text reasoning, structured knowledge grounding, information retrieval",
+   "paper_title": "UL2: Unifying Language Learning Paradigms",
+   "training_corpus_size": "1 trillion tokens",
+   "finetuning_data": "FLAN mixture, SuperGLUE, GEM benchmark, 50+ NLP tasks, XSUM, ToTTo, SchemaGuidedDialog, SGD, CNNDailyMail, MultiNews, SAMSum, WebNLG, E2E, CommonGen, RACE, QASC, OpenBookQA, TweetQA, QuAIL, IMDB, Agnews, DocNLI, AdversarialNLI, VitaminC, CivilComments, WikipediaToxicity, GLUE, HellaSwag, SocialIQA, PhysicalIQA, CosmosQA, AbductiveNLI, CommonsenseQA, CommonsenseQA2, GovReport, SumScr, QMSUm, QASPER, NarrativeQA, QuaLITY, ContractNLI, WikiTQ, CompWQ, FetaQA, HybridQA, WikiSQL, TabFat, Feverous, SQA, MTOP, DART, NQ",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": "512 TPUv4 chips",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/ul2",
+   "context_length": null,
+   "activated_parameters": "20B",
+   "attention_mechanism": "T5-style relative attention",
+   "context_length_max": "512 (pretraining), 1024 (FLAN fine-tuning)",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> FLAN instruction tuning",
+   "reasoning_mode": "Chain-of-thought prompting",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU 0-shot: 39.2; GSM8K CoT+calc+SC: 10.2; StrategyQA CoT+SC: 54.9; BBH: 45.3; MMLU FLAN: 55.6/56.2; SOTA on vast majority of tasks; +43.6% over T5 baseline, +76.1% over LM baseline; outperforms GPT-3 175B on zero-shot SuperGLUE; competitive with GLaM, PaLM, ST-MoE at compute-matched setup; triples performance of LM-adapted T5 XXL on one-shot summarization; Supervised SG: 65.50; XS: 28.90; SGD: 55.80; TOT: 60.39. One-shot SG: 42.30; XS: 8.01; SGD: 6.30; TOT: 5.80; Supervised SG: 73.10; XS: 31.86; SGD: 56.10; TOT: 61.50. One-shot SG: 41.30; XS: 11.51; SGD: 6.63; TOT: 6.50; SuperGLUE 83.3; XSum Rouge-1 43.3; SGD 56.5; TOTTO 62.6; In-context learning: SuperGLUE 45.4, XSum 15.4/2.5/11.1, SGD 9.6, TOTTO 7.8; CNN/DM Rouge-2: 21.9; XSUM Rouge-2: 26.6; MultiNews Rouge-2: 21.7; SAMSum Rouge-2: 29.6; CommonGen Rouge-2: 37.4; SIQA Accuracy: 83.3; PIQA Accuracy: 90.7; CSQA Accuracy: 84.9; AdversarialQA(Bert) F1: 70.1; QNLI Accuracy: 96.5; CoLA Matthews: 71.5; STSB Spearman: 92.3; IMDB Accuracy: 97.3; ScrollsChallenge Aggregate: 37.9; SumScr Rouge(Avg): 20.0; QASPER F1: 37.6; QUALITY EM: 45.8; WikiTQ Accuracy: 54.6; WikiSQL Accuracy: 87.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "UL 2 Dec",
+   "model_family": "UL2",
+   "date_created": "2022-05-10",
+   "organization": "Google",
+   "innovation": "Unifies masked language modeling and causal language modeling into a single pre-training objective (UL2) using a mixture of denoisers with span corruption and prefix language modeling, enabling a single model to handle both generative and discriminative tasks without task-specific architecture changes.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Text generation, summarization, question answering, text classification",
+   "license": null,
+   "research_problem": "Unifying language learning paradigms",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling (Prefix-LM), Masked language modeling (Span corruption)",
+   "training_corpus_size": "7B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": "WordPiece",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "UL2: Unifying Language Learning Paradigms",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "UL2 outperforms T5 by +43.4% and GPT-like CLM decoder by +76.2% (relative overall gain); 1-shot XSum: 13.2/1.4/10.8 (UL2/None), 13.5/1.5/11.1 (UL2/[R]); 1-shot SuperGLUE: 38.3 (UL2/None), 38.5 (UL2/[R])",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 12,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "UL 2": {
+   "application": [
+    "Language generation",
+    "language understanding",
+    "text classification",
+    "question answering",
+    "commonsense reasoning",
+    "long text reasoning",
+    "structured knowledge grounding",
+    "information retrieval"
+   ],
+   "attention_mechanism": [
+    "T5-style relative attention"
+   ],
+   "finetuning_data": [
+    "FLAN mixture",
+    "SuperGLUE",
+    "GEM benchmark",
+    "XSUM",
+    "ToTTo",
+    "SchemaGuidedDialog",
+    "SGD",
+    "CNNDailyMail",
+    "MultiNews",
+    "SAMSum",
+    "WebNLG",
+    "E2E",
+    "CommonGen",
+    "RACE",
+    "QASC",
+    "OpenBookQA",
+    "TweetQA",
+    "QuAIL",
+    "IMDB",
+    "Agnews",
+    "DocNLI",
+    "AdversarialNLI",
+    "VitaminC",
+    "CivilComments",
+    "WikipediaToxicity",
+    "GLUE",
+    "HellaSwag",
+    "SocialIQA",
+    "PhysicalIQA",
+    "CosmosQA",
+    "AbductiveNLI",
+    "CommonsenseQA",
+    "CommonsenseQA2",
+    "GovReport",
+    "SumScr",
+    "QMSUm",
+    "QASPER",
+    "NarrativeQA",
+    "QuaLITY",
+    "ContractNLI",
+    "WikiTQ",
+    "CompWQ",
+    "FetaQA",
+    "HybridQA",
+    "WikiSQL",
+    "TabFat",
+    "Feverous",
+    "SQA",
+    "MTOP",
+    "DART",
+    "NQ"
+   ],
+   "finetuning_task": [
+    "Instruction tuning (FLAN mixture)"
+   ],
+   "hardware_used": [
+    "TPUv4"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "UL2"
+   ],
+   "model_name": [
+    "UL 2"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "167M",
+    "335M",
+    "1B",
+    "1.3B",
+    "1.5B",
+    "3B",
+    "8B",
+    "19.5B",
+    "20B",
+    "60B",
+    "130B",
+    "160B",
+    "1.6T"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Common Crawl",
+    "Books",
+    "Wikipedia",
+    "WebText"
+   ],
+   "pretraining_task": [
+    "Unified denoising and generative objective (random span masking)"
+   ],
+   "reasoning_mode": [
+    "Chain-of-thought prompting"
+   ],
+   "research_problem": [
+    "Unifying language learning paradigms"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "UL 2 Dec": {
+   "application": [
+    "Text generation",
+    "summarization",
+    "question answering",
+    "text classification"
+   ],
+   "model_family": [
+    "UL2"
+   ],
+   "model_name": [
+    "UL 2 Dec"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Causal language modeling (Prefix-LM), Masked language modeling (Span corruption)"
+   ],
+   "research_problem": [
+    "Unifying language learning paradigms"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "UL 2": {
+    "finetuning_data": {
+     "candidates": [
+      "FLAN mixture",
+      "SuperGLUE",
+      "GEM benchmark",
+      "50+ NLP tasks",
+      "XSUM",
+      "ToTTo",
+      "SchemaGuidedDialog",
+      "SGD",
+      "CNNDailyMail",
+      "MultiNews",
+      "SAMSum",
+      "WebNLG",
+      "E2E",
+      "CommonGen",
+      "RACE",
+      "QASC",
+      "OpenBookQA",
+      "TweetQA",
+      "QuAIL",
+      "IMDB",
+      "Agnews",
+      "DocNLI",
+      "AdversarialNLI",
+      "VitaminC",
+      "CivilComments",
+      "WikipediaToxicity",
+      "GLUE",
+      "HellaSwag",
+      "SocialIQA",
+      "PhysicalIQA",
+      "CosmosQA",
+      "AbductiveNLI",
+      "CommonsenseQA",
+      "CommonsenseQA2",
+      "GovReport",
+      "SumScr",
+      "QMSUm",
+      "QASPER",
+      "NarrativeQA",
+      "QuaLITY",
+      "ContractNLI",
+      "WikiTQ",
+      "CompWQ",
+      "FetaQA",
+      "HybridQA",
+      "WikiSQL",
+      "TabFat",
+      "Feverous",
+      "SQA",
+      "MTOP",
+      "DART",
+      "NQ"
+     ],
+     "accepted": [
+      "FLAN mixture",
+      "SuperGLUE",
+      "GEM benchmark",
+      "XSUM",
+      "ToTTo",
+      "SchemaGuidedDialog",
+      "SGD",
+      "CNNDailyMail",
+      "MultiNews",
+      "SAMSum",
+      "WebNLG",
+      "E2E",
+      "CommonGen",
+      "RACE",
+      "QASC",
+      "OpenBookQA",
+      "TweetQA",
+      "QuAIL",
+      "IMDB",
+      "Agnews",
+      "DocNLI",
+      "AdversarialNLI",
+      "VitaminC",
+      "CivilComments",
+      "WikipediaToxicity",
+      "GLUE",
+      "HellaSwag",
+      "SocialIQA",
+      "PhysicalIQA",
+      "CosmosQA",
+      "AbductiveNLI",
+      "CommonsenseQA",
+      "CommonsenseQA2",
+      "GovReport",
+      "SumScr",
+      "QMSUm",
+      "QASPER",
+      "NarrativeQA",
+      "QuaLITY",
+      "ContractNLI",
+      "WikiTQ",
+      "CompWQ",
+      "FetaQA",
+      "HybridQA",
+      "WikiSQL",
+      "TabFat",
+      "Feverous",
+      "SQA",
+      "MTOP",
+      "DART",
+      "NQ"
+     ],
+     "dropped": [
+      {
+       "value": "50+ NLP tasks",
+       "reason": "describes quantity/breadth rather than naming a specific dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Instruction tuning (FLAN mixture)",
+      "Supervised fine-tuning",
+      "zero/few-shot prompt-based in-context learning",
+      "in-context few-shot learning",
+      "Supervised fine-tuning on downstream NLP tasks"
+     ],
+     "accepted": [
+      "Instruction tuning (FLAN mixture)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning on downstream NLP tasks",
+       "reason": "Describes a training methodology rather than naming a specific task. (cached)"
+      },
+      {
+       "value": "zero/few-shot prompt-based in-context learning",
+       "reason": "describes a training/evaluation paradigm rather than a fine-tuning task"
+      },
+      {
+       "value": "in-context few-shot learning",
+       "reason": "describes a training/evaluation paradigm rather than a fine-tuning task"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Common Crawl",
+      "Books",
+      "Wikipedia",
+      "WebText",
+      "domain-specific corpora"
+     ],
+     "accepted": [
+      "Common Crawl",
+      "Books",
+      "Wikipedia",
+      "WebText"
+     ],
+     "dropped": [
+      {
+       "value": "domain-specific corpora",
+       "reason": "asserts breadth/type rather than naming an identifiable dataset or corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unifying language learning paradigms",
+      "bridging the performance gap between decoder-only and encoder-decoder models."
+     ],
+     "accepted": [
+      "Unifying language learning paradigms"
+     ],
+     "dropped": [
+      {
+       "value": "bridging the performance gap between decoder-only and encoder-decoder models.",
+       "reason": "describes a solution or action rather than naming the problem itself"
+      }
+     ]
+    }
+   },
+   "UL 2 Dec": {}
+  },
+  "counts": {
+   "kept": 100,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 61
+  }
+ },
+ "contributions": [
+  {
+   "label": "UL 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "UL 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "UL2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified denoising objective: Trains a single model on a mixture of span corruption and causal language modeling tasks with a unified input/output format, eliminating the need for task-specific heads or separate models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior work by unifying encoder-decoder and decoder-only training paradigms into one architecture-agnostic model. Zero/few-shot prompt-based learning: Enables direct task performance via natural language prompts without fine-tuning, contrasting with traditional supervised fine-tuning approaches.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Unified denoising and generative objective (random span masking)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Common Crawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning (FLAN mixture)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "167M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "335M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "19.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "60B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "130B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "160B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1600000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 TPUv4 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Commonsense reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long text reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Structured knowledge grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Information retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/ul2",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unifying language learning paradigms",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLAN mixture",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GEM benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XSUM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ToTTo",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SchemaGuidedDialog",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SGD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNNDailyMail",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MultiNews",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SAMSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebNLG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "E2E",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CommonGen",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QASC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenBookQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TweetQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QuAIL",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IMDB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Agnews",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DocNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "AdversarialNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VitaminC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CivilComments",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikipediaToxicity",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HellaSwag",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SocialIQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PhysicalIQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CosmosQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "AbductiveNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CommonsenseQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CommonsenseQA2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GovReport",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SumScr",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QMSUm",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QASPER",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NarrativeQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QuaLITY",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ContractNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiTQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CompWQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FetaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HybridQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiSQL",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TabFat",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Feverous",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MTOP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DART",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "T5-style relative attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 (pretraining), 1024 (FLAN fine-tuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> FLAN instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Chain-of-thought prompting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU 0-shot: 39.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K CoT+calc+SC: 10.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "StrategyQA CoT+SC: 54.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 45.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU FLAN: 55.6/56.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on vast majority of tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "+43.6% over T5 baseline, +76.1% over LM baseline",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms GPT-3 175B on zero-shot SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Competitive with GLaM, PaLM, ST-MoE at compute-matched setup",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Triples performance of LM-adapted T5 XXL on one-shot summarization",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Supervised SG: 65.50",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XS: 28.90",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SGD: 55.80",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TOT: 60.39. One-shot SG: 42.30",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XS: 8.01",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SGD: 6.30",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TOT: 5.80",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Supervised SG: 73.10",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XS: 31.86",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SGD: 56.10",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TOT: 61.50. One-shot SG: 41.30",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XS: 11.51",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SGD: 6.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TOT: 6.50",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum Rouge-1 43.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SGD 56.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TOTTO 62.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "In-context learning: SuperGLUE 45.4, XSum 15.4/2.5/11.1, SGD 9.6, TOTTO 7.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN/DM Rouge-2: 21.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSUM Rouge-2: 26.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiNews Rouge-2: 21.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SAMSum Rouge-2: 29.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CommonGen Rouge-2: 37.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SIQA Accuracy: 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA Accuracy: 90.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CSQA Accuracy: 84.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AdversarialQA(Bert) F1: 70.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QNLI Accuracy: 96.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA Matthews: 71.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STSB Spearman: 92.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IMDB Accuracy: 97.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScrollsChallenge Aggregate: 37.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SumScr Rouge(Avg): 20.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QASPER F1: 37.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QUALITY EM: 45.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiTQ Accuracy: 54.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiSQL Accuracy: 87.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "UL 2 Dec",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "UL 2 Dec",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "UL2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unifies masked language modeling and causal language modeling into a single pre-training objective (UL2) using a mixture of denoisers with span corruption and prefix language modeling, enabling a single model to handle both generative and discriminative tasks without task-specific architecture changes.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling (Prefix-LM), Masked language modeling (Span corruption)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unifying language learning paradigms",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "7B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "UL2 outperforms T5 by +43.4% and GPT-like CLM decoder by +76.2% (relative overall gain)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "1-shot XSum: 13.2/1.4/10.8 (UL2/None), 13.5/1.5/11.1 (UL2/[R])",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "1-shot SuperGLUE: 38.3 (UL2/None), 38.5 (UL2/[R])",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R595146",
+  "contribution_ids": [
+   "R595148",
+   "R1923116",
+   "R1923126"
+  ],
+  "new_contribution_ids": [
+   "R1923116",
+   "R1923126"
+  ],
+  "comparison_updated": null
+ }
+}

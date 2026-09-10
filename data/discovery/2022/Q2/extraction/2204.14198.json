@@ -1,0 +1,1357 @@
+{
+ "arxiv_id": "2204.14198",
+ "status": "completed",
+ "timestamp": "2026-08-25T12:54:20.733904",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2204.14198",
+  "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+  "authors": [
+   "Jean-Baptiste Alayrac",
+   "Jeff Donahue",
+   "Pauline Luc",
+   "Antoine Miech",
+   "Iain Barr",
+   "Yana Hasson",
+   "Karel Lenc",
+   "Arthur Mensch",
+   "Katie Millican",
+   "Malcolm Reynolds",
+   "Roman Ring",
+   "Eliza Rutherford",
+   "Serkan Cabi",
+   "Tengda Han",
+   "Zhitao Gong",
+   "Sina Samangooei",
+   "Marianne Monteiro",
+   "Jacob Menick",
+   "Sebastian Borgeaud",
+   "Andrew Brock",
+   "Aida Nematzadeh",
+   "Sahand Sharifzadeh",
+   "Mikolaj Binkowski",
+   "Ricardo Barreira",
+   "Oriol Vinyals",
+   "Andrew Zisserman",
+   "Karen Simonyan"
+  ],
+  "abstract": "Building models that can be rapidly adapted to novel tasks using only a handful of annotated examples is an open challenge for multimodal machine learning research. We introduce Flamingo, a family of Visual Language Models (VLM) with this ability. We propose key architectural innovations to: (i) bridge powerful pretrained vision-only and language-only models, (ii) handle sequences of arbitrarily interleaved visual and textual data, and (iii) seamlessly ingest images or videos as inputs. Thanks to their flexibility, Flamingo models can be trained on large-scale multimodal web corpora containing arbitrarily interleaved text and images, which is key to endow them with in-context few-shot learning capabilities. We perform a thorough evaluation of our models, exploring and measuring their ability to rapidly adapt to a variety of image and video tasks. These include open-ended tasks such as visual question-answering, where the model is prompted with a question which it has to answer; captioning tasks, which evaluate the ability to describe a scene or an event; and close-ended tasks such as multiple-choice visual question-answering. For tasks lying anywhere on this spectrum, a single Flamingo model can achieve a new state of the art with few-shot learning, simply by prompting the model with task-specific examples. On numerous benchmarks, Flamingo outperforms models fine-tuned on thousands of times more task-specific data.",
+  "published": "2022-04-29T16:29:01+00:00",
+  "updated": "2022-11-15T23:07:37+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.AI",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2204.14198v2",
+  "entry_id": "http://arxiv.org/abs/2204.14198v2",
+  "pdf_path": "data/papers/2204.14198.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 180994,
+ "word_count": 12414,
+ "models_extracted": 20,
+ "extraction_data": [
+  {
+   "model_name": "Flamingo-8",
+   "parameters": "[LARGE], 80M, 400M, 420M, 800M, 1.2B, 1.6B, 3B, 3.2B, 4B, 8B, 9B, 9.3B, 10B, 80B",
+   "parameters_millions": 80000,
+   "model_family": "Flamingo",
+   "date_created": "2022-04-29",
+   "organization": "Google",
+   "innovation": "Gated Cross Attention (GCA) / Resampler: projects frozen vision encoder features into the language model's token space and interleaves them with text tokens, enabling few-shot visual instruction following in a single unified architecture without fine-tuning the frozen backbones; differs from prior multimodal models that require task-specific adapters or separate encoders for each modality.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling on interleaved image-text sequences",
+   "pretraining_corpus": "M3W, LAION-400M, LAION-2B (aesthetics), ImageNet, CC3M, CC12M, SBU, Conceptual Captions, COCO, Visual Genome, YFCC100M, Hateful Memes, Open Images",
+   "finetuning_task": "Few-shot learning / supervised fine-tuning, Supervised discriminative fine-tuning, Task-specific fine-tuning (unfreezing vision backbone, small learning rate), Few-shot learning via in-context demonstrations",
+   "optimizer": "AdamW",
+   "hardware_used": "TPUv3",
+   "extension": "Integrates a Perceiver Resampler and GATEDXATTN-DENSE cross-attention blocks between frozen LM layers to condition the language model on visual inputs.",
+   "blog_post": null,
+   "license": "DeepMind Research License",
+   "research_problem": "Few-shot learning for open-ended vision and language tasks",
+   "application": "Visual question answering, image captioning, video question answering, visual dialog, image-text retrieval",
+   "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+   "training_corpus_size": "100 million interleaved image-text pairs",
+   "finetuning_data": "VQAv2, VATEX, VizWiz, MSRVTTQA, HatefulMemes, ImageNet, Kinetics700, COCO, OKVQA, MSVDQA, VisDial",
+   "tokenizer": "Byte-Pair Encoding (BPE)",
+   "supported_language": "English",
+   "hardware_description": "TPUv3-128",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/deepmind/deepmind-research/tree/master/flamingo; https://github.com/mlfoundations/flamingo",
+   "context_length": "2048",
+   "activated_parameters": "Dense",
+   "attention_mechanism": "Gated cross-attention dense layers; image-causal cross-attention masking, Cross-attention layers interleaved with LM layers; Perceiver Resampler attention, Cross-attention to visual tokens via Perceiver Resampler, Cross-attention resampler, Standard multi-head self-attention in LM; GATEDXATTN-DENSE cross-attention for vision conditioning, Cross-attention between vision encoder and LM, Multi-head self-attention (LM backbone) with Gated Cross Attention (GCA), Masked cross-attention",
+   "context_length_max": "2048 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on interleaved web data; few-shot inference without fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "PerspectiveAPI toxicity score, Winogender dataset",
+   "safety_defect_rate": null,
+   "fusion_architecture": "Learnable cross-attention module between frozen vision encoder and frozen LLM",
+   "vision_encoder": "Perceiver II, ALIGN, Pre-trained vision model with Perceiver Resampler for token compression, Vision Encoder, NFNet-F6, CLIP ViT-L/14, ViT",
+   "base_model": "Chinchilla",
+   "optimizer_innovation": null,
+   "benchmark_result": "New few-shot state-of-the-art on 9 tasks; outperforms fine-tuned models on 6 of 16 tasks without fine-tuning; VQAv2, VATEX, VizWiz, MSRVTTQA, Hateful Memes (fine-tuned SOTA); 16 multimodal tasks (few-shot SOTA); COCO: 41.2, OKVQA: 49.2, VQAv2: 73.0, MSVDQA: 27.5, VATEX: 40.1; COCO: 50.6, OKVQA: 56.3, VQAv2: 84.3, MSVDQA: 35.6, VATEX: 46.7; COCO: 54.4, OKVQA: 80.2, VQAv2: 76.3, MSVDQA: 67.4, VATEX: 57.2; VQAv2 82.0, COCO 82.1, OKVQA 138.1, MSVDQA 84.2, VATEX 65.7, VizWiz 65.4, HatefulMemes 47.4, VisDial 61.8; VQAv2: 79.5; OK-VQA: 58.3; TextVQA: 63.8; VizWiz: 52.8; COCO Captioning: 118.3 CIDEr; Visual Dialog: 48.3 BLEU-4; ImageNet top1: 71.7; Kinetics700 avg top1/5: 62.7; VQAv2: 82.0% (fine-tuned); COCO CIDEr: 149.6; OK-VQA: 57.2; VQAv2: 81.4; MSVD-QA: 81.3; VATEX CIDEr: 60.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Flamingo-48",
+   "model_family": "Flamingo",
+   "date_created": "2022-04-29",
+   "organization": "Google",
+   "innovation": "First LM to ingest arbitrarily interleaved images, videos, and text; uses in-context learning with few-shot demonstrations instead of gradient-based fine-tuning; connects frozen LLM and vision encoder via learnable cross-attention",
+   "pretraining_corpus": "Multimodal webpages containing interleaved images and text",
+   "parameters": "48B",
+   "parameters_millions": 48000,
+   "application": "Image captioning, visual question answering, video question answering, visual reasoning, chat",
+   "license": "DeepMind Research License",
+   "research_problem": "Few-shot learning for vision and language tasks",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling on interleaved image-text sequences",
+   "training_corpus_size": "100 million interleaved image-text pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": "Byte-Pair Encoding (BPE)",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "2048 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on interleaved web data; few-shot inference without fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Learnable cross-attention module between frozen vision encoder and frozen LLM",
+   "vision_encoder": "Perceiver II",
+   "base_model": "Chinchilla",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 20,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Flamingo-8": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "video question answering",
+    "visual dialog",
+    "image-text retrieval"
+   ],
+   "attention_mechanism": [
+    "Gated cross-attention dense layers",
+    "image-causal cross-attention masking",
+    "Cross-attention layers interleaved with LM layers",
+    "Perceiver Resampler attention",
+    "Cross-attention to visual tokens via Perceiver Resampler",
+    "Cross-attention resampler",
+    "Standard multi-head self-attention in LM",
+    "GATEDXATTN-DENSE cross-attention for vision conditioning",
+    "Cross-attention between vision encoder and LM",
+    "Multi-head self-attention (LM backbone) with Gated Cross Attention (GCA)",
+    "Masked cross-attention"
+   ],
+   "base_model": [
+    "Chinchilla"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "VATEX",
+    "VizWiz",
+    "MSRVTTQA",
+    "HatefulMemes",
+    "ImageNet",
+    "Kinetics700",
+    "COCO",
+    "OKVQA",
+    "MSVDQA",
+    "VisDial"
+   ],
+   "finetuning_task": [
+    "Few-shot learning / supervised fine-tuning",
+    "Few-shot learning via in-context demonstrations"
+   ],
+   "fusion_architecture": [
+    "Learnable cross-attention module between frozen vision encoder and frozen LLM"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "DeepMind Research License"
+   ],
+   "model_family": [
+    "Flamingo"
+   ],
+   "model_name": [
+    "Flamingo-8"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "80M",
+    "400M",
+    "420M",
+    "800M",
+    "1.2B",
+    "1.6B",
+    "3B",
+    "3.2B",
+    "4B",
+    "8B",
+    "9B",
+    "9.3B",
+    "10B",
+    "80B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "M3W",
+    "LAION-400M",
+    "LAION-2B (aesthetics)",
+    "CC3M",
+    "CC12M",
+    "SBU",
+    "Conceptual Captions",
+    "COCO",
+    "Visual Genome",
+    "YFCC100M",
+    "Hateful Memes",
+    "Open Images"
+   ],
+   "pretraining_task": [
+    "Causal language modeling on interleaved image-text sequences"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [
+    "Few-shot learning for open-ended vision and language tasks"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Perceiver II",
+    "ALIGN",
+    "Pre-trained vision model with Perceiver Resampler for token compression",
+    "NFNet-F6",
+    "CLIP ViT-L/14",
+    "ViT"
+   ]
+  },
+  "Flamingo-48": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "video question answering",
+    "visual reasoning",
+    "chat"
+   ],
+   "base_model": [
+    "Chinchilla"
+   ],
+   "fusion_architecture": [
+    "Learnable cross-attention module between frozen vision encoder and frozen LLM"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "DeepMind Research License"
+   ],
+   "model_family": [
+    "Flamingo"
+   ],
+   "model_name": [
+    "Flamingo-48"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "48B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Multimodal webpages containing interleaved images and text"
+   ],
+   "pretraining_task": [
+    "Causal language modeling on interleaved image-text sequences"
+   ],
+   "research_problem": [
+    "Few-shot learning for vision and language tasks"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Perceiver II"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Flamingo-8": {
+    "finetuning_task": {
+     "candidates": [
+      "Few-shot learning / supervised fine-tuning",
+      "Supervised discriminative fine-tuning",
+      "Task-specific fine-tuning (unfreezing vision backbone, small learning rate)",
+      "Few-shot learning via in-context demonstrations"
+     ],
+     "accepted": [
+      "Few-shot learning / supervised fine-tuning",
+      "Few-shot learning via in-context demonstrations"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      },
+      {
+       "value": "Task-specific fine-tuning (unfreezing vision backbone, small learning rate)",
+       "reason": "Describes training strategy and hyperparameters rather than a specific task"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "[LARGE]",
+      "80M",
+      "400M",
+      "420M",
+      "800M",
+      "1.2B",
+      "1.6B",
+      "3B",
+      "3.2B",
+      "4B",
+      "8B",
+      "9B",
+      "9.3B",
+      "10B",
+      "80B"
+     ],
+     "accepted": [
+      "80M",
+      "400M",
+      "420M",
+      "800M",
+      "1.2B",
+      "1.6B",
+      "3B",
+      "3.2B",
+      "4B",
+      "8B",
+      "9B",
+      "9.3B",
+      "10B",
+      "80B"
+     ],
+     "dropped": [
+      {
+       "value": "[LARGE]",
+       "reason": "Placeholder/obfuscated value, not a concrete number"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "M3W",
+      "LAION-400M",
+      "LAION-2B (aesthetics)",
+      "ImageNet",
+      "CC3M",
+      "CC12M",
+      "SBU",
+      "Conceptual Captions",
+      "COCO",
+      "Visual Genome",
+      "YFCC100M",
+      "Hateful Memes",
+      "Open Images"
+     ],
+     "accepted": [
+      "M3W",
+      "LAION-400M",
+      "LAION-2B (aesthetics)",
+      "CC3M",
+      "CC12M",
+      "SBU",
+      "Conceptual Captions",
+      "COCO",
+      "Visual Genome",
+      "YFCC100M",
+      "Hateful Memes",
+      "Open Images"
+     ],
+     "dropped": [
+      {
+       "value": "ImageNet",
+       "reason": "Image dataset, not a text corpus (cached)"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Perceiver II",
+      "ALIGN",
+      "Pre-trained vision model with Perceiver Resampler for token compression",
+      "Vision Encoder",
+      "NFNet-F6",
+      "CLIP ViT-L/14",
+      "ViT"
+     ],
+     "accepted": [
+      "Perceiver II",
+      "ALIGN",
+      "Pre-trained vision model with Perceiver Resampler for token compression",
+      "NFNet-F6",
+      "CLIP ViT-L/14",
+      "ViT"
+     ],
+     "dropped": [
+      {
+       "value": "Vision Encoder",
+       "reason": "Generic placeholder/category rather than a specific encoder model"
+      }
+     ]
+    }
+   },
+   "Flamingo-48": {}
+  },
+  "counts": {
+   "kept": 94,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 44
+  }
+ },
+ "contributions": [
+  {
+   "label": "Flamingo-8",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Flamingo-8",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Flamingo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-04-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Gated Cross Attention (GCA) / Resampler: projects frozen vision encoder features into the language model's token space and interleaves them with text tokens, enabling few-shot visual instruction following in a single unified architecture without fine-tuning the frozen backbones",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior multimodal models that require task-specific adapters or separate encoders for each modality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling on interleaved image-text sequences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "M3W",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-2B (aesthetics)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Hateful Memes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Open Images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Few-shot learning / supervised fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Few-shot learning via in-context demonstrations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-Pair Encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "80M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "420M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "800M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "9.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "10B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "80B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 80000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPUv3-128",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/deepmind/deepmind-research/tree/master/flamingo",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/mlfoundations/flamingo",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Few-shot learning for open-ended vision and language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "100 million interleaved image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VATEX",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSRVTTQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HatefulMemes",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Kinetics700",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSVDQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VisDial",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "Dense",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Gated cross-attention dense layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Image-causal cross-attention masking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention layers interleaved with LM layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Perceiver Resampler attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention to visual tokens via Perceiver Resampler",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention resampler",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention in LM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "GATEDXATTN-DENSE cross-attention for vision conditioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention between vision encoder and LM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (LM backbone) with Gated Cross Attention (GCA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Masked cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on interleaved web data; few-shot inference without fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "PerspectiveAPI toxicity score, Winogender dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Learnable cross-attention module between frozen vision encoder and frozen LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Perceiver II",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ALIGN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Pre-trained vision model with Perceiver Resampler for token compression",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "NFNet-F6",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Chinchilla",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "New few-shot state-of-the-art on 9 tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms fine-tuned models on 6 of 16 tasks without fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2, VATEX, VizWiz, MSRVTTQA, Hateful Memes (fine-tuned SOTA)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "16 multimodal tasks (few-shot SOTA)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 41.2, OKVQA: 49.2, VQAv2: 73.0, MSVDQA: 27.5, VATEX: 40.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 50.6, OKVQA: 56.3, VQAv2: 84.3, MSVDQA: 35.6, VATEX: 46.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 54.4, OKVQA: 80.2, VQAv2: 76.3, MSVDQA: 67.4, VATEX: 57.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 82.0, COCO 82.1, OKVQA 138.1, MSVDQA 84.2, VATEX 65.7, VizWiz 65.4, HatefulMemes 47.4, VisDial 61.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 79.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA: 58.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 63.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 52.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Captioning: 118.3 CIDEr",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Dialog: 48.3 BLEU-4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top1: 71.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Kinetics700 avg top1/5: 62.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 82.0% (fine-tuned)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO CIDEr: 149.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA: 57.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 81.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD-QA: 81.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VATEX CIDEr: 60.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Flamingo-48",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Flamingo-48",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Flamingo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-04-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "First LM to ingest arbitrarily interleaved images, videos, and text",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses in-context learning with few-shot demonstrations instead of gradient-based fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Connects frozen LLM and vision encoder via learnable cross-attention",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling on interleaved image-text sequences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Multimodal webpages containing interleaved images and text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-Pair Encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "48B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 48000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Few-shot learning for vision and language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "100 million interleaved image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on interleaved web data; few-shot inference without fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Learnable cross-attention module between frozen vision encoder and frozen LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Perceiver II",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Chinchilla",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370960",
+  "contribution_ids": [
+   "R370961",
+   "R447228",
+   "R447232",
+   "R447239",
+   "R447243",
+   "R447247",
+   "R1921957",
+   "R1921987"
+  ],
+  "new_contribution_ids": [
+   "R1921957",
+   "R1921987"
+  ],
+  "comparison_updated": null
+ }
+}

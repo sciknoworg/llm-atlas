@@ -1,0 +1,1600 @@
+{
+ "arxiv_id": "2203.13474",
+ "status": "completed",
+ "timestamp": "2026-08-25T05:26:39.798926",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2203.13474",
+  "title": "CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis",
+  "authors": [
+   "Erik Nijkamp",
+   "Bo Pang",
+   "Hiroaki Hayashi",
+   "Lifu Tu",
+   "Huan Wang",
+   "Yingbo Zhou",
+   "Silvio Savarese",
+   "Caiming Xiong"
+  ],
+  "abstract": "Program synthesis strives to generate a computer program as a solution to a given problem specification, expressed with input-output examples or natural language descriptions. The prevalence of large language models advances the state-of-the-art for program synthesis, though limited training resources and data impede open access to such models. To democratize this, we train and release a family of large language models up to 16.1B parameters, called CODEGEN, on natural language and programming language data, and open source the training library JAXFORMER. We show the utility of the trained model by demonstrating that it is competitive with the previous state-of-the-art on zero-shot Python code generation on HumanEval. We further investigate the multi-step paradigm for program synthesis, where a single program is factorized into multiple prompts specifying subproblems. To this end, we construct an open benchmark, Multi-Turn Programming Benchmark (MTPB), consisting of 115 diverse problem sets that are factorized into multi-turn prompts. Our analysis on MTPB shows that the same intent provided to CODEGEN in multi-turn fashion significantly improves program synthesis over that provided as a single turn. We make the training library JAXFORMER and model checkpoints available as open source contribution: https://github.com/salesforce/CodeGen.",
+  "published": "2022-03-25T06:55:15+00:00",
+  "updated": "2023-02-27T21:26:48+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.CL",
+   "cs.PL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2203.13474v5",
+  "entry_id": "http://arxiv.org/abs/2203.13474v5",
+  "pdf_path": "data/papers/2203.13474.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 76011,
+ "word_count": 5829,
+ "models_extracted": 13,
+ "extraction_data": [
+  {
+   "model_name": "CODEGEN-MONO",
+   "parameters": "2.7B, 16.1B",
+   "parameters_millions": 16100,
+   "model_family": "CodeGen",
+   "date_created": "2022-03-25",
+   "organization": "Salesforce",
+   "innovation": "Multi-turn program synthesis approach that factorizes complicated specifications into multiple turns/steps, enabling the model to digest intent specifications more easily and achieve more accurate program synthesis compared to single-turn methods.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "The Pile",
+   "finetuning_task": null,
+   "optimizer": null,
+   "hardware_used": "TPU-v4",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Program synthesis",
+   "application": "Program synthesis, code generation",
+   "paper_title": "CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis",
+   "training_corpus_size": "406.3B tokens",
+   "finetuning_data": null,
+   "tokenizer": "BPE (extended GPT-2 vocabulary)",
+   "supported_language": "English",
+   "hardware_description": "TPU-v4 hardware with high-speed toroidal mesh interconnect; JAXFORMER library for training",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "All parameters active (dense)",
+   "attention_mechanism": "Causal multi-head self-attention with rotary position embeddings",
+   "context_length_max": "2,048 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Stage 1: Pre-training on THE PILE; Stage 2: Pre-training on BIGQUERY; Stage 3: Pre-training on BIGPYTHON",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CodeGen-Mono",
+   "parameters": "350M, 2.7B, 6.1B, 16.1B",
+   "parameters_millions": 16100,
+   "model_family": "CodeGen",
+   "date_created": "2022-03-25",
+   "organization": "Salesforce",
+   "innovation": "Multi-turn program synthesis paradigm that factorizes user specifications into multiple turns to enhance intent understanding and program synthesis capacity; trained with an autoregressive language modeling objective.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Autoregressive language modeling",
+   "pretraining_corpus": "The Pile, BigQuery, BigPython",
+   "finetuning_task": null,
+   "optimizer": null,
+   "hardware_used": "TPU-v4",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Program synthesis and multi-turn code generation",
+   "application": "Code generation, program synthesis, multi-turn programming",
+   "paper_title": "CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis",
+   "training_corpus_size": "The Pile (825.18 GiB), BigQuery, BigPython",
+   "finetuning_data": null,
+   "tokenizer": "CodeTokenizer (Byte-Pair Encoding)",
+   "supported_language": "English, C, Go, Java, JavaScript, Python",
+   "hardware_description": "TPU-v4 hardware",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/CodeGen",
+   "context_length": "2048",
+   "activated_parameters": "2.7B, 16.1B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on THE PILE -> fine-tuning on BIGQUERY (MULTI) -> fine-tuning on BIGPYTHON (MONO)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Single-Turn PPL: 13.92\u00b11.89 (350M), 11.67\u00b11.46 (2.7B), 10.58\u00b11.20 (6.1B), 10.25\u00b10.99 (16.1B); Multi-Turn PPL: 10.09\u00b10.62, 8.90\u00b10.52, 8.18\u00b10.43, 8.05\u00b10.43; Pass Rate Single-Turn: 5.75, 25.43, 28.48, 38.74; Pass Rate Multi-Turn: 16.98, 38.72, 43.52, 47.34",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CodeGen",
+   "parameters": "16M, 160M, 350M, 2B, 2.7B, 6B, 6.1B, 16B, 20B, 33B, 49B, 168B",
+   "parameters_millions": 168000,
+   "model_family": "CodeGen",
+   "date_created": "2022-03-25",
+   "organization": "Salesforce",
+   "innovation": "Multi-turn program synthesis: introduces a prompt format and training objective that enables the model to generate code across multiple turns of interaction, improving upon single-turn completion; trained on a large-scale, deduplicated code corpus (CodeGen Corpus) with a custom Byte-level BPE tokenizer optimized for code.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "THE PILE, BIGQUERY, BIGPYTHON",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT",
+   "research_problem": "Code generation and multi-turn program synthesis",
+   "application": "Code generation, program synthesis, multi-turn dialogue for code",
+   "paper_title": "CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis",
+   "training_corpus_size": "152 GB",
+   "finetuning_data": null,
+   "tokenizer": "Byte-level BPE",
+   "supported_language": "English, Python, Java, JavaScript, Go, PHP, Ruby, C, Bash, SQL, HTML, CSS, Shell, R, TypeScript, Rust, Lua, Scala, Kotlin, Dart, Swift, Perl, Objective-C, Julia, MATLAB, Racket, Assembly, Fortran, COBOL, Prolog, Pascal, Ada, Erlang, Elixir, Clojure, Haskell, OCaml, Lisp, Scheme, Common Lisp, Smalltalk, Tcl, VHDL, Verilog, SystemVerilog, ALGOL, AWK, BASIC, D, Delphi, Eiffel, F#, Forth, Groovy, Haxe, IDL, Lasso, Logo, Mathematica, Nim, Raku, Solidity, VBA, VBScript, XSLT, YAML, Zig",
+   "hardware_description": "32 NVIDIA A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/CodeGen",
+   "context_length": "2048",
+   "activated_parameters": "16M, 350M, 2.7B, 6.1B (dense)",
+   "attention_mechanism": "Causal multi-head self-attention with rotary position embeddings",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Stage 1: Pre-training on THE PILE; Stage 2: Pre-training on BIGQUERY; Stage 3: Pre-training on BIGPYTHON",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "HumanEval pass@1: 5.5 (350M), 10.4 (2.7B), 16.5 (6.1B), 28.6 (16B); APPS: 14.8 (16B); MBPP: 58.0 (16B); HumanEval pass@1: 6.7% (2.7B), 14.2% (6.1B); MBPP pass@1: 28.5% (2.7B), 38.5% (6.1B)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16, 16, 32, 48",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CodeGen-NL",
+   "model_family": "CodeGen",
+   "date_created": "2022-03-25",
+   "organization": "Salesforce",
+   "innovation": "Natural language to code generation variant trained on a mix of natural language and code data; supports multi-turn program synthesis via concatenated prompt-response sequences.",
+   "pretraining_corpus": null,
+   "parameters": "350M, 2.7B, 6.1B",
+   "parameters_millions": 16100,
+   "application": "Code generation, multi-turn program synthesis",
+   "license": null,
+   "research_problem": "Code generation and program synthesis",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MBPP pass rates: NL350M 0.96, NL2.7B 5.34, NL6.1B 8.15, NL16.1B 10.92",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 13,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "CODEGEN-MONO": {
+   "application": [
+    "Program synthesis",
+    "code generation"
+   ],
+   "attention_mechanism": [
+    "Causal multi-head self-attention with rotary position embeddings"
+   ],
+   "hardware_used": [
+    "TPU-v4"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "CodeGen"
+   ],
+   "model_name": [
+    "CODEGEN-MONO"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "2.7B",
+    "16.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "The Pile"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Program synthesis"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "CodeGen-Mono": {
+   "application": [
+    "Code generation",
+    "program synthesis",
+    "multi-turn programming"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPU-v4"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "CodeGen"
+   ],
+   "model_name": [
+    "CodeGen-Mono"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "350M",
+    "2.7B",
+    "6.1B",
+    "16.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "The Pile",
+    "BigQuery",
+    "BigPython"
+   ],
+   "pretraining_task": [
+    "Autoregressive language modeling"
+   ],
+   "research_problem": [
+    "Program synthesis and multi-turn code generation"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "CodeGen": {
+   "application": [
+    "Code generation",
+    "program synthesis",
+    "multi-turn dialogue for code"
+   ],
+   "attention_mechanism": [
+    "Causal multi-head self-attention with rotary position embeddings"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [
+    "CodeGen"
+   ],
+   "model_name": [
+    "CodeGen"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "16M",
+    "160M",
+    "350M",
+    "2B",
+    "2.7B",
+    "6B",
+    "6.1B",
+    "16B",
+    "20B",
+    "33B",
+    "49B",
+    "168B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "THE PILE",
+    "BIGQUERY",
+    "BIGPYTHON"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Code generation and multi-turn program synthesis"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "CodeGen-NL": {
+   "application": [
+    "Code generation",
+    "multi-turn program synthesis"
+   ],
+   "model_family": [
+    "CodeGen"
+   ],
+   "model_name": [
+    "CodeGen-NL"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "350M",
+    "2.7B",
+    "6.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Code generation and program synthesis"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "CODEGEN-MONO": {},
+   "CodeGen-Mono": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "C",
+      "Go",
+      "Java",
+      "JavaScript",
+      "Python"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "C",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Go",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Java",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "JavaScript",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Python",
+       "reason": "Names a programming language, not a natural language (cached)"
+      }
+     ]
+    }
+   },
+   "CodeGen": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Python",
+      "Java",
+      "JavaScript",
+      "Go",
+      "PHP",
+      "Ruby",
+      "C",
+      "Bash",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Shell",
+      "R",
+      "TypeScript",
+      "Rust",
+      "Lua",
+      "Scala",
+      "Kotlin",
+      "Dart",
+      "Swift",
+      "Perl",
+      "Objective-C",
+      "Julia",
+      "MATLAB",
+      "Racket",
+      "Assembly",
+      "Fortran",
+      "COBOL",
+      "Prolog",
+      "Pascal",
+      "Ada",
+      "Erlang",
+      "Elixir",
+      "Clojure",
+      "Haskell",
+      "OCaml",
+      "Lisp",
+      "Scheme",
+      "Common Lisp",
+      "Smalltalk",
+      "Tcl",
+      "VHDL",
+      "Verilog",
+      "SystemVerilog",
+      "ALGOL",
+      "AWK",
+      "BASIC",
+      "D",
+      "Delphi",
+      "Eiffel",
+      "F#",
+      "Forth",
+      "Groovy",
+      "Haxe",
+      "IDL",
+      "Lasso",
+      "Logo",
+      "Mathematica",
+      "Nim",
+      "Raku",
+      "Solidity",
+      "VBA",
+      "VBScript",
+      "XSLT",
+      "YAML",
+      "Zig"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Python",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Java",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "JavaScript",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Go",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "PHP",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Ruby",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "C",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Perl",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Bash",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "SQL",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "HTML",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "CSS",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Shell",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "R",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "TypeScript",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Rust",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Lua",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Scala",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Kotlin",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Dart",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Swift",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Objective-C",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Julia",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "MATLAB",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Racket",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Assembly",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Fortran",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "COBOL",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Prolog",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Pascal",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Ada",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Erlang",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Elixir",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Clojure",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Haskell",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "OCaml",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Lisp",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Scheme",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Common Lisp",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Smalltalk",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Tcl",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "VHDL",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Verilog",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "SystemVerilog",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "ALGOL",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "AWK",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "BASIC",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "D",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Delphi",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Eiffel",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "F#",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Forth",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Groovy",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Haxe",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "IDL",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Lasso",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Logo",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Mathematica",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Nim",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Raku",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Solidity",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "VBA",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "VBScript",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "XSLT",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "YAML",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      },
+      {
+       "value": "Zig",
+       "reason": "These are programming languages, not natural languages as required by the definition."
+      }
+     ]
+    }
+   },
+   "CodeGen-NL": {}
+  },
+  "counts": {
+   "kept": 75,
+   "dropped": 71,
+   "llm_calls": 1,
+   "values_sent_to_llm": 84
+  }
+ },
+ "contributions": [
+  {
+   "label": "CODEGEN-MONO",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CODEGEN-MONO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CodeGen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-25",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-turn program synthesis approach that factorizes complicated specifications into multiple turns/steps, enabling the model to digest intent specifications more easily and achieve more accurate program synthesis compared to single-turn methods.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "The Pile",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE (extended GPT-2 vocabulary)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 16100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU-v4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPU-v4 hardware with high-speed toroidal mesh interconnect; JAXFORMER library for training",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "406.3B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "All parameters active (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal multi-head self-attention with rotary position embeddings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2,048 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage 1: Pre-training on THE PILE; Stage 2: Pre-training on BIGQUERY; Stage 3: Pre-training on BIGPYTHON",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CodeGen-Mono",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CodeGen-Mono",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CodeGen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-25",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-turn program synthesis paradigm that factorizes user specifications into multiple turns to enhance intent understanding and program synthesis capacity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Trained with an autoregressive language modeling objective.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Autoregressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "The Pile",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BigQuery",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BigPython",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "CodeTokenizer (Byte-Pair Encoding)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 16100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU-v4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPU-v4 hardware",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn programming",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/CodeGen",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Program synthesis and multi-turn code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "The Pile (825.18 GiB), BigQuery, BigPython",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.7B, 16.1B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on THE PILE -> fine-tuning on BIGQUERY (MULTI) -> fine-tuning on BIGPYTHON (MONO)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Single-Turn PPL: 13.92\u00b11.89 (350M), 11.67\u00b11.46 (2.7B), 10.58\u00b11.20 (6.1B), 10.25\u00b10.99 (16.1B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Turn PPL: 10.09\u00b10.62, 8.90\u00b10.52, 8.18\u00b10.43, 8.05\u00b10.43",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pass Rate Single-Turn: 5.75, 25.43, 28.48, 38.74",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pass Rate Multi-Turn: 16.98, 38.72, 43.52, 47.34",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CodeGen",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CodeGen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CodeGen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-25",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-turn program synthesis: introduces a prompt format and training objective that enables the model to generate code across multiple turns of interaction, improving upon single-turn completion",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Trained on a large-scale, deduplicated code corpus (CodeGen Corpus) with a custom Byte-level BPE tokenizer optimized for code.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "THE PILE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BIGQUERY",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BIGPYTHON",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-level BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "160M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "49B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "168B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 168000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn dialogue for code",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/CodeGen",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Code generation and multi-turn program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "152 GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "16M, 350M, 2.7B, 6.1B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal multi-head self-attention with rotary position embeddings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage 1: Pre-training on THE PILE; Stage 2: Pre-training on BIGQUERY; Stage 3: Pre-training on BIGPYTHON",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval pass@1: 5.5 (350M), 10.4 (2.7B), 16.5 (6.1B), 28.6 (16B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "APPS: 14.8 (16B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 58.0 (16B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval pass@1: 6.7% (2.7B), 14.2% (6.1B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP pass@1: 28.5% (2.7B), 38.5% (6.1B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16, 16, 32, 48",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CodeGen-NL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CodeGen-NL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CodeGen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-03-25",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Natural language to code generation variant trained on a mix of natural language and code data",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Supports multi-turn program synthesis via concatenated prompt-response sequences.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 16100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Code generation and program synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP pass rates: NL350M 0.96, NL2.7B 5.34, NL6.1B 8.15, NL16.1B 10.92",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1385078",
+  "contribution_ids": [
+   "R1921772",
+   "R1921779",
+   "R1921784",
+   "R1921787"
+  ],
+  "new_contribution_ids": [
+   "R1921772",
+   "R1921779",
+   "R1921784",
+   "R1921787"
+  ],
+  "comparison_updated": null
+ }
+}

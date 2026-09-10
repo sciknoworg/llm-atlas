@@ -1,0 +1,655 @@
+{
+ "arxiv_id": "2312.13286",
+ "status": "completed",
+ "timestamp": "2026-08-28T15:36:18.710395",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2312.13286",
+  "title": "Generative Multimodal Models are In-Context Learners",
+  "authors": [
+   "Quan Sun",
+   "Yufeng Cui",
+   "Xiaosong Zhang",
+   "Fan Zhang",
+   "Qiying Yu",
+   "Zhengxiong Luo",
+   "Yueze Wang",
+   "Yongming Rao",
+   "Jingjing Liu",
+   "Tiejun Huang",
+   "Xinlong Wang"
+  ],
+  "abstract": "The human ability to easily solve multimodal tasks in context (i.e., with only a few demonstrations or simple instructions), is what current multimodal systems have largely struggled to imitate. In this work, we demonstrate that the task-agnostic in-context learning capabilities of large multimodal models can be significantly enhanced by effective scaling-up. We introduce Emu2, a generative multimodal model with 37 billion parameters, trained on large-scale multimodal sequences with a unified autoregressive objective. Emu2 exhibits strong multimodal in-context learning abilities, even emerging to solve tasks that require on-the-fly reasoning, such as visual prompting and object-grounded generation. The model sets a new record on multiple multimodal understanding tasks in few-shot settings. When instruction-tuned to follow specific instructions, Emu2 further achieves new state-of-the-art on challenging tasks such as question answering benchmarks for large multimodal models and open-ended subject-driven generation. These achievements demonstrate that Emu2 can serve as a base model and general-purpose interface for a wide range of multimodal tasks. Code and models are publicly available to facilitate future research.",
+  "published": "2023-12-20T18:59:58+00:00",
+  "updated": "2024-05-08T03:09:22+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2312.13286v2",
+  "entry_id": "http://arxiv.org/abs/2312.13286v2",
+  "pdf_path": "data/papers/2312.13286.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 74689,
+ "word_count": 8561,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "Emu 2",
+   "parameters": "33B, 37B",
+   "parameters_millions": 37000,
+   "model_family": "Emu",
+   "date_created": "2023-12-20",
+   "organization": "Beijing Academy Of Artificial Intelligence, Tsinghua University, Peking University",
+   "innovation": "In-context learning: Enables the model to quickly adapt to new tasks or environments with limited data by conditioning on task demonstrations, differing from prior supervised fine-tuning approaches that require extensive task-specific training data; Interleaved image/video-text data structure: Uses special tokens ([IMG], [/IMG], [VIDEO]) to embed visual frames into the autoregressive sequence, allowing the model to process mixed modalities natively; Grounded image-text pairs: Incorporates bounding box coordinates with text phrases to teach spatial understanding and grounding capabilities.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Predict-the-next-multimodal-element (unified autoregressive objective)",
+   "pretraining_corpus": "LAION-2B, CapsFusion-120M, WebVid-10M, Multimodal-C4 (MMC4), YT-Storyboard-1B, GRIT-20M, CapsFusion-grounded-100M, Pile",
+   "finetuning_task": "Instruction tuning for multimodal chat and academic tasks",
+   "optimizer": "AdamW",
+   "hardware_used": null,
+   "extension": "Simpler framework connecting Visual Encoder and Multimodal Modeling through mean pooling each image to 8x8 image patches, followed by restarting at a higher 448-pixel resolution.",
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Multimodal in-context learning and general-purpose multimodal understanding/generation",
+   "application": "Visual question answering, object grounding, visual prompting, object-grounded generation, instruction following, conversational AI, subject-driven generation",
+   "paper_title": "Generative Multimodal Models are In-Context Learners",
+   "training_corpus_size": "162M image-text, 7M video-text, 160M image-text, 3.8B tokens language-only",
+   "finetuning_data": "Conversational data, COCO Caption, TextCaps, VQAv2, OKVQA, GQA, TextVQA, M3IT, RefCOCO, RefCOCOg, LLaVA, LLaVaR, ShareGPT, Alpaca, VideoChat, analog clock reading dataset",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "37B",
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on large-scale multimodal sequences with unified autoregressive objective -> Instruction tuning with conversational data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Unified autoregressive framework handling interleaved text-image-video at both input and output",
+   "vision_encoder": "Frozen visual encoder, EVA-02-CLIP-E-plus",
+   "base_model": "SDXL-base (for Visual Decoder), Stable Diffusion 2.1 (for Video Decoder)",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 68.8; OKVQA: 57.1; VizWiz: 57.0; TextVQA: 50.3; Hateful Memes: 66.0; State-of-the-art results on visual question-answering tasks; MM-Vet: 48.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Emu 2": {
+   "application": [
+    "Visual question answering",
+    "object grounding",
+    "visual prompting",
+    "object-grounded generation",
+    "instruction following",
+    "conversational AI",
+    "subject-driven generation"
+   ],
+   "base_model": [
+    "SDXL-base (for Visual Decoder), Stable Diffusion 2.1 (for Video Decoder)"
+   ],
+   "finetuning_data": [
+    "Conversational data",
+    "COCO Caption",
+    "TextCaps",
+    "VQAv2",
+    "OKVQA",
+    "GQA",
+    "TextVQA",
+    "M3IT",
+    "RefCOCO",
+    "RefCOCOg",
+    "LLaVaR",
+    "ShareGPT",
+    "Alpaca",
+    "analog clock reading dataset"
+   ],
+   "finetuning_task": [
+    "Instruction tuning for multimodal chat and academic tasks"
+   ],
+   "fusion_architecture": [
+    "Unified autoregressive framework handling interleaved text-image-video at both input and output"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Emu 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Beijing Academy Of Artificial Intelligence, Tsinghua University, Peking University"
+   ],
+   "parameters": [
+    "33B",
+    "37B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-2B",
+    "CapsFusion-120M",
+    "WebVid-10M",
+    "Multimodal-C4 (MMC4)",
+    "YT-Storyboard-1B",
+    "GRIT-20M",
+    "CapsFusion-grounded-100M",
+    "Pile"
+   ],
+   "pretraining_task": [
+    "Predict-the-next-multimodal-element (unified autoregressive objective)"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [
+    "Multimodal in-context learning and general-purpose multimodal understanding/generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EVA-02-CLIP-E-plus"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Emu 2": {
+    "finetuning_data": {
+     "candidates": [
+      "Conversational data",
+      "COCO Caption",
+      "TextCaps",
+      "VQAv2",
+      "OKVQA",
+      "GQA",
+      "TextVQA",
+      "M3IT",
+      "RefCOCO",
+      "RefCOCOg",
+      "LLaVA",
+      "LLaVaR",
+      "ShareGPT",
+      "Alpaca",
+      "VideoChat",
+      "analog clock reading dataset"
+     ],
+     "accepted": [
+      "Conversational data",
+      "COCO Caption",
+      "TextCaps",
+      "VQAv2",
+      "OKVQA",
+      "GQA",
+      "TextVQA",
+      "M3IT",
+      "RefCOCO",
+      "RefCOCOg",
+      "LLaVaR",
+      "ShareGPT",
+      "Alpaca",
+      "analog clock reading dataset"
+     ],
+     "dropped": [
+      {
+       "value": "LLaVA",
+       "reason": "LLaVA is a model, not a dataset. (cached)"
+      },
+      {
+       "value": "VideoChat",
+       "reason": "VideoChat is a model, not a dataset. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Emu"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Emu",
+       "reason": "Emu is a specific model name, not a broader family or lineage. (cached)"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Frozen visual encoder",
+      "EVA-02-CLIP-E-plus"
+     ],
+     "accepted": [
+      "EVA-02-CLIP-E-plus"
+     ],
+     "dropped": [
+      {
+       "value": "Frozen visual encoder",
+       "reason": "Describes the training state/type rather than naming a specific vision encoder model or component."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 43,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 23
+  }
+ },
+ "contributions": [
+  {
+   "label": "Emu 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Emu 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-20",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Beijing Academy Of Artificial Intelligence, Tsinghua University, Peking University",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "In-context learning: Enables the model to quickly adapt to new tasks or environments with limited data by conditioning on task demonstrations, differing from prior supervised fine-tuning approaches that require extensive task-specific training data",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved image/video-text data structure: Uses special tokens ([IMG], [/IMG], [VIDEO]) to embed visual frames into the autoregressive sequence, allowing the model to process mixed modalities natively",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Grounded image-text pairs: Incorporates bounding box coordinates with text phrases to teach spatial understanding and grounding capabilities.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Predict-the-next-multimodal-element (unified autoregressive objective)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-2B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CapsFusion-120M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebVid-10M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Multimodal-C4 (MMC4)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YT-Storyboard-1B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GRIT-20M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CapsFusion-grounded-100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pile",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning for multimodal chat and academic tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "37B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 37000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual prompting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object-grounded generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Conversational AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Subject-driven generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal in-context learning and general-purpose multimodal understanding/generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "162M image-text, 7M video-text, 160M image-text, 3.8B tokens language-only",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Conversational data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Caption",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "M3IT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCOg",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVaR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Alpaca",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Analog clock reading dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "37B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on large-scale multimodal sequences with unified autoregressive objective -> Instruction tuning with conversational data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Unified autoregressive framework handling interleaved text-image-video at both input and output",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA-02-CLIP-E-plus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "SDXL-base (for Visual Decoder), Stable Diffusion 2.1 (for Video Decoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 68.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA: 57.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 57.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 50.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hateful Memes: 66.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art results on visual question-answering tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 48.5",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1778043",
+  "contribution_ids": [
+   "R1778045",
+   "R1778046",
+   "R1924125"
+  ],
+  "new_contribution_ids": [
+   "R1924125"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,778 @@
+{
+  "arxiv_id": "2408.05211",
+  "status": "completed",
+  "timestamp": "2026-08-29T05:26:47.041973",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2408.05211",
+    "title": "VITA: Towards Open-Source Interactive Omni Multimodal LLM",
+    "authors": [
+      "Chaoyou Fu",
+      "Haojia Lin",
+      "Zuwei Long",
+      "Yunhang Shen",
+      "Yuhang Dai",
+      "Meng Zhao",
+      "Yi-Fan Zhang",
+      "Shaoqi Dong",
+      "Yangze Li",
+      "Xiong Wang",
+      "Haoyu Cao",
+      "Di Yin",
+      "Long Ma",
+      "Xiawu Zheng",
+      "Rongrong Ji",
+      "Yunsheng Wu",
+      "Ran He",
+      "Caifeng Shan",
+      "Xing Sun"
+    ],
+    "abstract": "The remarkable multimodal capabilities and interactive experience of GPT-4o underscore their necessity in practical applications, yet open-source models rarely excel in both areas. In this paper, we introduce VITA, the first-ever open-source Multimodal Large Language Model (MLLM) adept at simultaneous processing and analysis of Video, Image, Text, and Audio modalities, and meanwhile has an advanced multimodal interactive experience. Starting from Mixtral 8x7B as a language foundation, we expand its Chinese vocabulary followed by bilingual instruction tuning. We further endow the language model with visual and audio capabilities through two-stage multi-task learning of multimodal alignment and instruction tuning. VITA demonstrates robust foundational capabilities of multilingual, vision, and audio understanding, as evidenced by its strong performance across a range of both unimodal and multimodal benchmarks. Beyond foundational capabilities, we have made considerable progress in enhancing the natural multimodal human-computer interaction experience. VITA is the first step for the open-source community to explore the seamless integration of multimodal understanding and interaction. While there is still lots of work to be done on VITA to get close to close-source counterparts, we hope that its role as a pioneer can serve as a cornerstone for subsequent research. Project Page: https://vita-home.github.io.",
+    "published": "2024-08-09T17:59:49+00:00",
+    "updated": "2025-05-30T12:57:16+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2408.05211v3",
+    "entry_id": "http://arxiv.org/abs/2408.05211v3",
+    "pdf_path": "data/papers/2408.05211.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 43197,
+  "word_count": 2536,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "VITA",
+      "parameters": "8X7B, 341M, 46.7B",
+      "parameters_millions": 46700,
+      "model_family": "VITA",
+      "date_created": "2024-08-09",
+      "organization": "Tencent",
+      "innovation": "First open-source MLLM adept at simultaneous processing and analysis of Video, Image, Text, and Audio modalities: expands Mixtral 8x7B with bilingual instruction tuning and two-stage multi-task learning to align individual encoders and connectors to the LLM, enabling end-to-end omni-modal understanding; Duplex deployment scheme: employs two models where one generates responses to user queries and another continuously tracks environmental inputs, selectively outputting new responses to enable non-awakening and audio-interrupt interactions without wake-up words; State tokens: introduces additional state tokens and corresponding training data/strategies to perceive various interaction scenarios, allowing the model to recognize input query types end-to-end.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction, multimodal alignment, instruction tuning",
+      "pretraining_corpus": "Synthetic bilingual corpus, ShareGPT4V, Allava-Caption, ShareGTP4o-Image, LLaVA-Mixture-sample, Lvis-Instruct, ScienceQA, Anyword-3M, ICDAR2019-LSVT, ICDAR2017-RCTW, Open-Chart, ShareGemini, Video-ChatGPT, VideoChat2",
+      "finetuning_task": "Bilingual instruction tuning, multimodal alignment, multimodal instruction tuning",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Expands base vocabulary from 32,000 to 51,747 tokens to infuse bilingual comprehension and improve inference efficiency.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Open-source interactive omni multimodal LLM and natural multimodal human-computer interaction",
+      "application": "Video, image, text, and audio understanding; multimodal human-computer interaction; non-awakening interaction; audio-interrupt interaction",
+      "paper_title": "VITA: Towards Open-Source Interactive Omni Multimodal LLM",
+      "training_corpus_size": "5 million pure text data, 800k entries; 10,000+ hours Wenetspeech, 10,000 hours Gigaspeech, 400K audio clips",
+      "finetuning_data": "High-quality bilingual text corpus, massive high-quality multimodal data, multimodal instruction tuning data, ShareGPT4V, Allava-Caption, ShareGTP4o-Image, LLaVA-Mixture-sample, Lvis-Instruct, ScienceQA, Anyword-3M, ICDAR2019-LSVT, ICDAR2017-RCTW, Open-Chart, ShareGemini, Video-ChatGPT, VideoChat2, synthetic data, Wenetspeech, Gigaspeech, AudioSet SL subset of Wavcaps, noisy audio samples (474K sentences)",
+      "tokenizer": "Expanded vocabulary (from Mixtral 8x7B)",
+      "supported_language": "Chinese, English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "12B",
+      "attention_mechanism": null,
+      "context_length_max": "6K tokens",
+      "context_extension_method": "Data concatenation (concatenating image-question pairs)",
+      "training_pipeline": "Bilingual instruction tuning -> Multimodal alignment -> Multimodal instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "8 experts, 2 active per token",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Generated by existing MLLMs",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "End-to-end processing of Video, Image, Text, and Audio",
+      "vision_encoder": "InternViT-300M-448px",
+      "base_model": "Mixtral 8x7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Adapted multimodal vLLM"
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "VITA": {
+      "application": [
+        "audio understanding",
+        "multimodal human-computer interaction",
+        "non-awakening interaction",
+        "audio-interrupt interaction"
+      ],
+      "base_model": [
+        "Mixtral 8x7B"
+      ],
+      "context_extension_method": [],
+      "finetuning_data": [
+        "multimodal instruction tuning data",
+        "ShareGPT4V",
+        "Allava-Caption",
+        "ShareGTP4o-Image",
+        "LLaVA-Mixture-sample",
+        "Lvis-Instruct",
+        "ScienceQA",
+        "Anyword-3M",
+        "ICDAR2019-LSVT",
+        "ICDAR2017-RCTW",
+        "Open-Chart",
+        "ShareGemini",
+        "VideoChat2",
+        "synthetic data",
+        "Wenetspeech",
+        "Gigaspeech",
+        "AudioSet SL subset of Wavcaps"
+      ],
+      "finetuning_task": [
+        "Bilingual instruction tuning",
+        "multimodal alignment",
+        "multimodal instruction tuning"
+      ],
+      "fusion_architecture": [],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "VITA"
+      ],
+      "model_name": [
+        "VITA"
+      ],
+      "organization": [
+        "Tencent"
+      ],
+      "parameters": [
+        "8X7B",
+        "341M",
+        "46.7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "ShareGPT4V",
+        "Allava-Caption",
+        "ShareGTP4o-Image",
+        "LLaVA-Mixture-sample",
+        "Lvis-Instruct",
+        "ScienceQA",
+        "Anyword-3M",
+        "ICDAR2019-LSVT",
+        "ICDAR2017-RCTW",
+        "Open-Chart",
+        "ShareGemini",
+        "Video-ChatGPT",
+        "VideoChat2"
+      ],
+      "pretraining_task": [
+        "Next-token prediction, multimodal alignment, instruction tuning"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "Chinese",
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Generated by existing MLLMs"
+      ],
+      "vision_encoder": [
+        "InternViT-300M-448px"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "VITA": {
+        "application": {
+          "candidates": [
+            "Video",
+            "image",
+            "text",
+            "audio understanding",
+            "multimodal human-computer interaction",
+            "non-awakening interaction",
+            "audio-interrupt interaction"
+          ],
+          "accepted": [
+            "audio understanding",
+            "multimodal human-computer interaction",
+            "non-awakening interaction",
+            "audio-interrupt interaction"
+          ],
+          "dropped": [
+            {
+              "value": "Video",
+              "reason": "Names a modality, not a concrete task or application domain."
+            },
+            {
+              "value": "image",
+              "reason": "Names a modality, not a concrete task or application domain."
+            },
+            {
+              "value": "text",
+              "reason": "Names a modality, not a concrete task or application domain."
+            }
+          ]
+        },
+        "context_extension_method": {
+          "candidates": [
+            "Data concatenation (concatenating image-question pairs)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Data concatenation (concatenating image-question pairs)",
+              "reason": "Describes data formatting/preparation, not a technique for extending context length."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality bilingual text corpus",
+            "massive high-quality multimodal data",
+            "multimodal instruction tuning data",
+            "ShareGPT4V",
+            "Allava-Caption",
+            "ShareGTP4o-Image",
+            "LLaVA-Mixture-sample",
+            "Lvis-Instruct",
+            "ScienceQA",
+            "Anyword-3M",
+            "ICDAR2019-LSVT",
+            "ICDAR2017-RCTW",
+            "Open-Chart",
+            "ShareGemini",
+            "Video-ChatGPT",
+            "VideoChat2",
+            "synthetic data",
+            "Wenetspeech",
+            "Gigaspeech",
+            "AudioSet SL subset of Wavcaps",
+            "noisy audio samples (474K sentences)"
+          ],
+          "accepted": [
+            "multimodal instruction tuning data",
+            "ShareGPT4V",
+            "Allava-Caption",
+            "ShareGTP4o-Image",
+            "LLaVA-Mixture-sample",
+            "Lvis-Instruct",
+            "ScienceQA",
+            "Anyword-3M",
+            "ICDAR2019-LSVT",
+            "ICDAR2017-RCTW",
+            "Open-Chart",
+            "ShareGemini",
+            "VideoChat2",
+            "synthetic data",
+            "Wenetspeech",
+            "Gigaspeech",
+            "AudioSet SL subset of Wavcaps"
+          ],
+          "dropped": [
+            {
+              "value": "Video-ChatGPT",
+              "reason": "Video-ChatGPT is a model, not a dataset. (cached)"
+            },
+            {
+              "value": "High-quality bilingual text corpus",
+              "reason": "Descriptive phrase rather than a specific dataset name."
+            },
+            {
+              "value": "massive high-quality multimodal data",
+              "reason": "Vague descriptive placeholder, not a specific dataset."
+            },
+            {
+              "value": "noisy audio samples (474K sentences)",
+              "reason": "Descriptive phrase about data characteristics, not a dataset name."
+            }
+          ]
+        },
+        "fusion_architecture": {
+          "candidates": [
+            "End-to-end processing of Video, Image, Text, and Audio"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "End-to-end processing of Video, Image, Text, and Audio",
+              "reason": "Describes a processing pipeline/approach rather than a specific architectural fusion design."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Synthetic bilingual corpus",
+            "ShareGPT4V",
+            "Allava-Caption",
+            "ShareGTP4o-Image",
+            "LLaVA-Mixture-sample",
+            "Lvis-Instruct",
+            "ScienceQA",
+            "Anyword-3M",
+            "ICDAR2019-LSVT",
+            "ICDAR2017-RCTW",
+            "Open-Chart",
+            "ShareGemini",
+            "Video-ChatGPT",
+            "VideoChat2"
+          ],
+          "accepted": [
+            "ShareGPT4V",
+            "Allava-Caption",
+            "ShareGTP4o-Image",
+            "LLaVA-Mixture-sample",
+            "Lvis-Instruct",
+            "ScienceQA",
+            "Anyword-3M",
+            "ICDAR2019-LSVT",
+            "ICDAR2017-RCTW",
+            "Open-Chart",
+            "ShareGemini",
+            "Video-ChatGPT",
+            "VideoChat2"
+          ],
+          "dropped": [
+            {
+              "value": "Synthetic bilingual corpus",
+              "reason": "Descriptive phrase, not an identifiable dataset or corpus name."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Open-source interactive omni multimodal LLM and natural multimodal human-computer interaction"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open-source interactive omni multimodal LLM and natural multimodal human-computer interaction",
+              "reason": "Describes the model/solution itself rather than naming a research problem or capability gap."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 51,
+      "dropped": 11,
+      "llm_calls": 1,
+      "values_sent_to_llm": 50
+    }
+  },
+  "contributions": [
+    {
+      "label": "VITA",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "VITA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "VITA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-09",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Tencent",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "First open-source MLLM adept at simultaneous processing and analysis of Video, Image, Text, and Audio modalities: expands Mixtral 8x7B with bilingual instruction tuning and two-stage multi-task learning to align individual encoders and connectors to the LLM, enabling end-to-end omni-modal understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Duplex deployment scheme: employs two models where one generates responses to user queries and another continuously tracks environmental inputs, selectively outputting new responses to enable non-awakening and audio-interrupt interactions without wake-up words",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "State tokens: introduces additional state tokens and corresponding training data/strategies to perceive various interaction scenarios, allowing the model to recognize input query types end-to-end.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction, multimodal alignment, instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGPT4V",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Allava-Caption",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGTP4o-Image",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-Mixture-sample",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Lvis-Instruct",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ScienceQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Anyword-3M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ICDAR2019-LSVT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ICDAR2017-RCTW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Open-Chart",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ShareGemini",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Video-ChatGPT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VideoChat2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Bilingual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Expanded vocabulary (from Mixtral 8x7B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8X7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "341M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "46.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 46700,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Audio understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal human-computer interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Non-awakening interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Audio-interrupt interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "5 million pure text data, 800k entries; 10,000+ hours Wenetspeech, 10,000 hours Gigaspeech, 400K audio clips",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal instruction tuning data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Allava-Caption",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGTP4o-Image",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Mixture-sample",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Lvis-Instruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ScienceQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Anyword-3M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ICDAR2019-LSVT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ICDAR2017-RCTW",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Open-Chart",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGemini",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VideoChat2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthetic data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Wenetspeech",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Gigaspeech",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AudioSet SL subset of Wavcaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "12B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "6K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Bilingual instruction tuning -> Multimodal alignment -> Multimodal instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "8 experts, 2 active per token",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Generated by existing MLLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M-448px",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Mixtral 8x7B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Adapted multimodal vLLM",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926395",
+    "contribution_ids": [
+      "R1926397"
+    ],
+    "new_contribution_ids": [
+      "R1926397"
+    ],
+    "comparison_updated": null
+  }
+}

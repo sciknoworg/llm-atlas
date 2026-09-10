@@ -1,0 +1,472 @@
+{
+  "arxiv_id": "2312.15166",
+  "status": "completed",
+  "timestamp": "2026-08-28T16:26:58.374195",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2312.15166",
+    "title": "SOLAR 10.7B: Scaling Large Language Models with Simple yet Effective Depth Up-Scaling",
+    "authors": [
+      "Dahyun Kim",
+      "Chanjun Park",
+      "Sanghoon Kim",
+      "Wonsung Lee",
+      "Wonho Song",
+      "Yunsu Kim",
+      "Hyeonwoo Kim",
+      "Yungi Kim",
+      "Hyeonju Lee",
+      "Jihoo Kim",
+      "Changbae Ahn",
+      "Seonghoon Yang",
+      "Sukyung Lee",
+      "Hyunbyung Park",
+      "Gyoungjin Gim",
+      "Mikyoung Cha",
+      "Hwalsuk Lee",
+      "Sunghun Kim"
+    ],
+    "abstract": "We introduce SOLAR 10.7B, a large language model (LLM) with 10.7 billion parameters, demonstrating superior performance in various natural language processing (NLP) tasks. Inspired by recent efforts to efficiently up-scale LLMs, we present a method for scaling LLMs called depth up-scaling (DUS), which encompasses depthwise scaling and continued pretraining. In contrast to other LLM up-scaling methods that use mixture-of-experts, DUS does not require complex changes to train and inference efficiently. We show experimentally that DUS is simple yet effective in scaling up high-performance LLMs from small ones. Building on the DUS model, we additionally present SOLAR 10.7B-Instruct, a variant fine-tuned for instruction-following capabilities, surpassing Mixtral-8x7B-Instruct. SOLAR 10.7B is publicly available under the Apache 2.0 license, promoting broad access and application in the LLM field.",
+    "published": "2023-12-23T05:11:37+00:00",
+    "updated": "2024-04-04T01:53:38+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2312.15166v3",
+    "entry_id": "http://arxiv.org/abs/2312.15166v3",
+    "pdf_path": "data/papers/2312.15166.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 49674,
+  "word_count": 4075,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "SOLAR",
+      "parameters": "~11B, 10.7B",
+      "parameters_millions": 10700,
+      "model_family": "SOLAR",
+      "date_created": "2023-12-23",
+      "organization": "Upstage Ai",
+      "innovation": "Depth Up-Scaling (DUS): increases model depth while keeping width constant to scale parameters, followed by continued pretraining to recover performance, offering a simpler alternative to MoE; Instruction tuning via Direct Preference Optimization (DPO) to align with human intentions and improve steerability without RLHF complexities.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": null,
+      "finetuning_task": "Supervised fine-tuning for instruction following, Supervised instruction tuning followed by Direct Preference Optimization (DPO)",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Depth Up-Scaling (DUS) technique to increase model depth from a base model without adding new modules or requiring specialized training frameworks.",
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Scaling Large Language Models efficiently.",
+      "application": "Natural language processing, instruction following",
+      "paper_title": "SOLAR 10.7B: Scaling Large Language Models with Simple yet Effective Depth Up-Scaling",
+      "training_corpus_size": null,
+      "finetuning_data": "Alpaca-GPT4, OpenOrca, Synth.Math-Instruct, OrcaDPOPairs, UltrafeedbackCleaned, Synth.Math-Alignment, FLAN-derived datasets (OpenOrca, ARC, HellaSwag, MMLU, TruthfulQA, Winogrande, GSM8K)",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "10.7B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Depthwise scaling (adding layers) -> Continued pretraining -> Supervised fine-tuning for instruction following",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Rephrasing seed math data from the Math dataset to create Synth.Math-Instruct; rephrasing QA pairs to create Synth.Math-Alignment for sDPO",
+      "rl_algorithm": "sDPO (improved Direct Preference Optimization), DPO",
+      "reward_mechanism": "Pairwise preference optimization using chosen (rephrased answer) and rejected (original answer) responses",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Data contamination test",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Llama 2 architecture initialized with pretrained weights from Mistral 7B",
+      "optimizer_innovation": null,
+      "benchmark_result": "H6(Avg.): 74.20; ARC: 71.08; HellaSwag: 88.16; MMLU: 66.21; TruthfulQA: 71.43; Winogrande: 83.58; GSM8K: 64.75; ARC-H: 74.20, ARC-E: 71.08, MMLU: 88.16, TruthfulQA: 66.21, Winogrande: 71.43, GSM8K: 83.58, HellaSwag: 64.75 (Instruct); ARC-H: 66.04, ARC-E: 61.95, MMLU: 84.60, TruthfulQA: 65.48, Winogrande: 45.04, GSM8K: 83.66, HellaSwag: 55.50 (Base)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "SOLAR": {
+      "application": [
+        "instruction following"
+      ],
+      "base_model": [
+        "Llama 2 architecture initialized with pretrained weights from Mistral 7B"
+      ],
+      "finetuning_data": [
+        "Alpaca-GPT4",
+        "OpenOrca",
+        "Synth.Math-Instruct",
+        "OrcaDPOPairs",
+        "UltrafeedbackCleaned",
+        "Synth.Math-Alignment",
+        "FLAN-derived datasets (OpenOrca, ARC, HellaSwag, MMLU, TruthfulQA, Winogrande, GSM8K)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning for instruction following",
+        "Supervised instruction tuning followed by Direct Preference Optimization (DPO)"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "SOLAR"
+      ],
+      "model_name": [
+        "SOLAR"
+      ],
+      "organization": [
+        "Upstage Ai"
+      ],
+      "parameters": [
+        "~11B",
+        "10.7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Scaling Large Language Models efficiently."
+      ],
+      "reward_mechanism": [
+        "Pairwise preference optimization using chosen (rephrased answer) and rejected (original answer) responses"
+      ],
+      "rl_algorithm": [
+        "sDPO (improved Direct Preference Optimization)",
+        "DPO"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Rephrasing seed math data from the Math dataset to create Synth.Math-Instruct",
+        "rephrasing QA pairs to create Synth.Math-Alignment for sDPO"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "SOLAR": {
+        "application": {
+          "candidates": [
+            "Natural language processing",
+            "instruction following"
+          ],
+          "accepted": [
+            "instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "Natural language processing",
+              "reason": "Broad field/category, not a concrete task or domain of application. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 26,
+      "dropped": 1,
+      "llm_calls": 1,
+      "values_sent_to_llm": 19
+    }
+  },
+  "contributions": [
+    {
+      "label": "SOLAR",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "SOLAR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "SOLAR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-12-23",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Upstage Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Depth Up-Scaling (DUS): increases model depth while keeping width constant to scale parameters, followed by continued pretraining to recover performance, offering a simpler alternative to MoE",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Instruction tuning via Direct Preference Optimization (DPO) to align with human intentions and improve steerability without RLHF complexities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised instruction tuning followed by Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "~11B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "10.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 10700,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Scaling Large Language Models efficiently.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Alpaca-GPT4",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OpenOrca",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synth.Math-Instruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OrcaDPOPairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UltrafeedbackCleaned",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synth.Math-Alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FLAN-derived datasets (OpenOrca, ARC, HellaSwag, MMLU, TruthfulQA, Winogrande, GSM8K)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "10.7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Depthwise scaling (adding layers) -> Continued pretraining -> Supervised fine-tuning for instruction following",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Rephrasing seed math data from the Math dataset to create Synth.Math-Instruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Rephrasing QA pairs to create Synth.Math-Alignment for sDPO",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "SDPO (improved Direct Preference Optimization)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Pairwise preference optimization using chosen (rephrased answer) and rejected (original answer) responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Data contamination test",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Llama 2 architecture initialized with pretrained weights from Mistral 7B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "H6(Avg.): 74.20",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC: 71.08",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 88.16",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 66.21",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TruthfulQA: 71.43",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Winogrande: 83.58",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 64.75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-H: 74.20, ARC-E: 71.08, MMLU: 88.16, TruthfulQA: 66.21, Winogrande: 71.43, GSM8K: 83.58, HellaSwag: 64.75 (Instruct)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-H: 66.04, ARC-E: 61.95, MMLU: 84.60, TruthfulQA: 65.48, Winogrande: 45.04, GSM8K: 83.66, HellaSwag: 55.50 (Base)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925892",
+    "contribution_ids": [
+      "R1925894"
+    ],
+    "new_contribution_ids": [
+      "R1925894"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "arxiv_id": "2605.30561",
+  "status": "completed",
+  "timestamp": "2026-08-30T15:12:32.678359",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2605.30561",
+    "title": "VLM3: Vision Language Models Are Native 3D Learners",
+    "authors": [
+      "Zhipeng Cai",
+      "Zhuang Liu",
+      "Yunyang Xiong",
+      "Zechun Liu",
+      "Vikas Chandra",
+      "Yangyang Shi"
+    ],
+    "abstract": "Vision Language Models (VLMs) enable a unified model to solve various vision tasks through prompting. They have shown promising performance in semantic understanding. However, 3D understanding still largely relies on expert vision models with complex task-specific designs. The key argument this work wants to make is that VLMs are native 3D learners. Our in-depth large scale study shows that 1) focal length unification, 2) text-based pixel reference and 3) data mixture and scaling, are all you need for effective 3D learning. Model architecture changes, large models, heavy data augmentations, and complex losses including the regression formulation, many of which form the foundation of expert vision models, are actually not necessary conditions. As a result, we propose VLM3, a scalable method with the simplest design that enables standard VLMs to master diverse 3D tasks. VLM3 not only advances the VLM depth estimation accuracy by a large margin (0.84 -> 0.9), but also enables diverse 3D tasks such as pixel correspondence, camera pose estimation and object-level 3D understanding, matching expert vision model accuracy while maintaining standard architectures and text-based training. We believe VLM3 opens up a new paradigm for simple and scalable 3D learning.",
+    "published": "2026-05-28T20:48:55+00:00",
+    "updated": "2026-05-28T20:48:55+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2605.30561v1",
+    "entry_id": "http://arxiv.org/abs/2605.30561v1",
+    "pdf_path": "data/papers/2605.30561.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM variant release)"
+  },
+  "text_length": 50931,
+  "word_count": 7121,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "VLM 3",
+      "parameters": "4B",
+      "parameters_millions": 4000,
+      "model_family": "VLM",
+      "date_created": "2026-05-28",
+      "organization": "Google",
+      "innovation": "Native 3D learning via next-token prediction: Uses a standard VLM to output text descriptions of 3D properties (depth, pose) via next-token prediction, differing from prior expert 3D models that rely on complex regression losses and multi-step pipelines; Text-based pixel and object references: Uses bounding box coordinates (xMin, yMin, xMax, yMax) in text to refer to objects and pixels, differing from prior VLMs that require extra encoders to encode object region masks; Unified focal length estimation: Uses a pretrained single-image calibration model to estimate camera intrinsics and unify focal length, enabling consistent 3D understanding across images.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Supervised fine-tuning (SFT)",
+      "pretraining_corpus": "DepthLM data mixture (26M samples), SpatialRGPT datasets (1M images), pixel correspondence datasets (~10M image pairs), camera pose estimation datasets (ETH3D, ScanNet++)",
+      "finetuning_task": "3D understanding tasks",
+      "optimizer": "AdamW",
+      "hardware_used": "GPUs",
+      "extension": "Extends the base VLM by replacing visual prompting with text-based pixel reference using normalized coordinates [0, 2000), unifying focal length to 1000 pixels, and applying dataset-size-based weighting during scaling.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "3D understanding (metric depth estimation, object-level 3D understanding, pixel correspondence estimation, camera pose estimation)",
+      "application": "3D understanding, metric depth estimation, object-level 3D understanding, pixel correspondence estimation, camera pose estimation",
+      "paper_title": "VLM3: Vision Language Models Are Native 3D Learners",
+      "training_corpus_size": "32M samples (320M labeled pixels) for depth estimation",
+      "finetuning_data": "Diverse 3D understanding datasets, 10M internal street view images",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": "32 GPUs for 3 days (depth), 3 hours (object understanding), 7 days (pixel correspondence), 4 days (pose estimation)",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "4B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Standard text-based supervised fine-tuning (SFT)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": "None (explicitly removes the need for extra encoders)",
+      "base_model": "Qwen3-vl-4B",
+      "optimizer_innovation": null,
+      "benchmark_result": "Metric Depth (δ1) Average: 0.904; Object-level 3D Understanding (Qualitative) Overall: 91.35; Object-level 3D Understanding (Quantitative) Overall: 58.51/0.35; Pixel Correspondence (EPE) ETH3D: 15.37, ScanNet++ Average: 94.0",
+      "weight_clipping_mechanism": "gradient clipping (0.02)",
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "VLM 3": {
+      "application": [
+        "3D understanding",
+        "metric depth estimation",
+        "object-level 3D understanding",
+        "pixel correspondence estimation",
+        "camera pose estimation"
+      ],
+      "base_model": [
+        "Qwen3-vl-4B"
+      ],
+      "finetuning_data": [
+        "Diverse 3D understanding datasets",
+        "10M internal street view images"
+      ],
+      "finetuning_task": [
+        "3D understanding tasks"
+      ],
+      "hardware_used": [
+        "GPUs"
+      ],
+      "model_family": [
+        "VLM"
+      ],
+      "model_name": [
+        "VLM 3"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "4B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "DepthLM data mixture (26M samples)",
+        "SpatialRGPT datasets (1M images)",
+        "pixel correspondence datasets (~10M image pairs)",
+        "camera pose estimation datasets (ETH3D, ScanNet++)"
+      ],
+      "pretraining_task": [],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "research_problem": [
+        "3D understanding (metric depth estimation, object-level 3D understanding, pixel correspondence estimation, camera pose estimation)"
+      ],
+      "vision_encoder": [],
+      "weight_clipping_mechanism": [
+        "gradient clipping (0.02)"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "VLM 3": {
+        "pretraining_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning (SFT)",
+              "reason": "SFT is a fine-tuning procedure, not a pretraining task."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "None (explicitly removes the need for extra encoders)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "None (explicitly removes the need for extra encoders)",
+              "reason": "Describes the absence of a component rather than naming a specific model component."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 23,
+      "dropped": 2,
+      "llm_calls": 1,
+      "values_sent_to_llm": 18
+    }
+  },
+  "contributions": [
+    {
+      "label": "VLM 3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "VLM 3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "VLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-05-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Native 3D learning via next-token prediction: Uses a standard VLM to output text descriptions of 3D properties (depth, pose) via next-token prediction, differing from prior expert 3D models that rely on complex regression losses and multi-step pipelines",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Text-based pixel and object references: Uses bounding box coordinates (xMin, yMin, xMax, yMax) in text to refer to objects and pixels, differing from prior VLMs that require extra encoders to encode object region masks",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified focal length estimation: Uses a pretrained single-image calibration model to estimate camera intrinsics and unify focal length, enabling consistent 3D understanding across images.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DepthLM data mixture (26M samples)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "SpatialRGPT datasets (1M images)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pixel correspondence datasets (~10M image pairs)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Camera pose estimation datasets (ETH3D, ScanNet++)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "3D understanding tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 4000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "32 GPUs for 3 days (depth), 3 hours (object understanding), 7 days (pixel correspondence), 4 days (pose estimation)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "3D understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Metric depth estimation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object-level 3D understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Pixel correspondence estimation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Camera pose estimation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "3D understanding (metric depth estimation, object-level 3D understanding, pixel correspondence estimation, camera pose estimation)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "32M samples (320M labeled pixels) for depth estimation",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Diverse 3D understanding datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "10M internal street view images",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "4B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Standard text-based supervised fine-tuning (SFT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen3-vl-4B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Metric Depth (δ1) Average: 0.904",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Object-level 3D Understanding (Qualitative) Overall: 91.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Object-level 3D Understanding (Quantitative) Overall: 58.51/0.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Pixel Correspondence (EPE) ETH3D: 15.37, ScanNet++ Average: 94.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203104",
+          "label": "weight_clipping_mechanism",
+          "value": "Gradient clipping (0.02)",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927378",
+    "contribution_ids": [
+      "R1927380"
+    ],
+    "new_contribution_ids": [
+      "R1927380"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,1585 @@
+{
+ "arxiv_id": "2005.11401",
+ "status": "completed",
+ "timestamp": "2026-08-24T20:01:23.525553",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2005.11401",
+  "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+  "authors": [
+   "Patrick Lewis",
+   "Ethan Perez",
+   "Aleksandra Piktus",
+   "Fabio Petroni",
+   "Vladimir Karpukhin",
+   "Naman Goyal",
+   "Heinrich K\u00fcttler",
+   "Mike Lewis",
+   "Wen-tau Yih",
+   "Tim Rockt\u00e4schel",
+   "Sebastian Riedel",
+   "Douwe Kiela"
+  ],
+  "abstract": "Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.",
+  "published": "2020-05-22T21:34:34+00:00",
+  "updated": "2021-04-12T15:42:18+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2005.11401v4",
+  "entry_id": "http://arxiv.org/abs/2005.11401v4",
+  "pdf_path": "data/papers/2005.11401.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture/variant)"
+ },
+ "text_length": 61099,
+ "word_count": 3392,
+ "models_extracted": 8,
+ "extraction_data": [
+  {
+   "model_name": "RAG",
+   "parameters": "225M, 400M, 406M, 930M",
+   "parameters_millions": 930,
+   "model_family": "RAG",
+   "date_created": "2020-05-22",
+   "organization": "Meta",
+   "innovation": "Introduces a neural sequence-to-sequence model augmented with a differentiable retriever (DPR) trained end-to-end via maximum likelihood estimation; RAG-Tok retrieves at the token level, while RAG-Seq retrieves at the sequence level, enabling the model to condition generation on retrieved passages without requiring pre-training on labeled task data.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Language modeling, dense passage retrieval",
+   "pretraining_corpus": "Wikipedia (for retriever), BooksCorpus and Wikipedia (for generator)",
+   "finetuning_task": "Supervised fine-tuning on knowledge-intensive NLP tasks, Supervised fine-tuning",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Knowledge-intensive NLP tasks, providing provenance for decisions, updating world knowledge, and reducing hallucinations in language generation.",
+   "application": "Open-domain question answering, fact verification, language generation",
+   "paper_title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+   "training_corpus_size": "5.4 billion words",
+   "finetuning_data": "Natural Questions, TriviaQA, WebQuestions, Curated Trec, MSMARCO NLG v2.1, SearchQA, FEVER, Jeopardy, MS MARCO, CuratedTREC, SQuAD, HotpotQA, WikiHow, DailyDialog, OpenDomainDialogue",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": "512",
+   "activated_parameters": "406M (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training of parametric and non-parametric components, followed by end-to-end fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Latent variable marginalization over retrieved documents conditioned on input",
+   "vision_encoder": null,
+   "base_model": "BART (generator), DPR (retriever)",
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on Natural Questions, WebQuestions, CuratedTrec; strong performance on TriviaQA, MS-MARCO, Jeopardy question generation; NQ EM 44.0; TQA 55.8; WQ 44.9; Jeopardy 15.3; MS MARCO 21.5; FVR-3 57.2; FVR-2 47.5; NQ: 35.1 EM; TriviaQA: 72.5 EM; WebQuestions: 52.0 EM; CuratedTREC: 68.0 EM; SQuAD: 84.5 EM; HotpotQA: 42.3 EM",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "RAG-Sequence",
+   "parameters": "400M, 626M",
+   "parameters_millions": 626,
+   "model_family": "RAG",
+   "date_created": "2020-05-22",
+   "organization": "Meta",
+   "innovation": "Marginalizes over a single latent retrieved document to generate the complete sequence, treating the document as a single latent variable; allows the generator to use consistent retrieved context for the entire output.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Denoising objective",
+   "pretraining_corpus": "Wikipedia, BooksCorpus, WebText",
+   "finetuning_task": "Fine-tuning on input/output pairs",
+   "optimizer": "Adam",
+   "hardware_used": "NVIDIA V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Knowledge-intensive NLP tasks",
+   "application": "question answering, knowledge-intensive generation, fact verification",
+   "paper_title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+   "training_corpus_size": "5.2 billion words",
+   "finetuning_data": "NaturalQuestions, WebQuestions, CuratedTrec, TriviaQA, MS-MARCO, Jeopardy, FEVER, Natural Questions, JeopardyQuestionGeneration",
+   "tokenizer": "SentencePiece (BPE)",
+   "supported_language": "English",
+   "hardware_description": "8, 32GB NVIDIA V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/huggingface/transformers/tree/master/examples/rag/",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NQ: 30.1 EM, TriviaQA: 71.5 EM, WebQuestions: 40.5 EM, CuratedTREC: 52.0 EM, SQuAD: 87.5 EM, HotpotQA: 53.1 EM, WikiBio: 35.1 ROUGE-L, CNN/DailyMail: 42.1 ROUGE-1, XSum: 43.1 ROUGE-1, MultiWOZ: 63.1 BLEU, WMT14 En-De: 28.1 BLEU, WMT14 En-Fr: 40.1 BLEU, WMT14 En-Cz: 20.1 BLEU; Natural Questions EM 44.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "RAG-Token",
+   "model_family": "RAG",
+   "date_created": "2020-05-22",
+   "organization": "Meta",
+   "innovation": "Integrates a dense retriever (DPR) with a sequence-to-sequence generator (BART) to combine parametric and non-parametric memory; marginalizes over retrieved documents token-by-token during generation, eliminating the need for separate extractive readers or cross-encoder re-rankers.",
+   "pretraining_corpus": "BookCorpus, Wikipedia, CC-News, OpenWebText, S2ORC",
+   "parameters": "400M, 1.4B",
+   "parameters_millions": 1400,
+   "application": "Open-domain question answering, abstractive QA, question generation, fact verification",
+   "license": "MIT",
+   "research_problem": "Knowledge-intensive NLP tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Sequence-to-sequence generation, masked language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "Natural Questions, TriviaQA, WebQuestions, CuratedTREC, Jeopardy, OpenMS-MARCO, FEVER",
+   "optimizer": "Adam",
+   "tokenizer": "BPE",
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/facebookresearch/RAG",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NQ: 44.1; TQA: 55.2/66.1; WQ: 45.5; CT: 50.0; Jeopardy: 17.3; MSMARCO: 40.1; FVR3: 72.5; FVR2: 89.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "RAG-Seq",
+   "model_family": "RAG",
+   "date_created": "2020-05-22",
+   "organization": "Meta",
+   "innovation": "Retrieval-Augmented Generation (RAG): integrates a non-parametric memory (retrieved documents) with a parametric neural language model; marginalizes over retrieved documents during generation (RAG-Seq), enabling knowledge-intensive tasks without fine-tuning the parametric memory on task-specific data, unlike prior approaches that rely solely on parametric memory or require extensive task-specific fine-tuning.",
+   "pretraining_corpus": "Wikipedia, BookCorpus, WebText103",
+   "parameters": "42M",
+   "parameters_millions": 42,
+   "application": "Open-domain question answering, document generation, summarization",
+   "license": "Apache 2.0",
+   "research_problem": "Knowledge-intensive NLP tasks",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Next-token prediction, Dense passage retrieval",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": "BPE",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/facebookresearch/RAG",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Retriever pre-training on Wikipedia -> Generator pre-training on BookCorpus/WebText -> Joint fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "RAG": {
+   "application": [
+    "Open-domain question answering",
+    "fact verification",
+    "language generation"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "BART (generator), DPR (retriever)"
+   ],
+   "finetuning_data": [
+    "Natural Questions",
+    "TriviaQA",
+    "WebQuestions",
+    "Curated Trec",
+    "MSMARCO NLG v2.1",
+    "SearchQA",
+    "FEVER",
+    "Jeopardy",
+    "MS MARCO",
+    "CuratedTREC",
+    "SQuAD",
+    "HotpotQA",
+    "WikiHow",
+    "DailyDialog",
+    "OpenDomainDialogue"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "225M",
+    "400M",
+    "406M",
+    "930M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia (for retriever)",
+    "BooksCorpus and Wikipedia (for generator)"
+   ],
+   "pretraining_task": [
+    "Language modeling, dense passage retrieval"
+   ],
+   "research_problem": [
+    "Knowledge-intensive NLP tasks"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "RAG-Sequence": {
+   "application": [
+    "question answering",
+    "knowledge-intensive generation",
+    "fact verification"
+   ],
+   "finetuning_data": [
+    "NaturalQuestions",
+    "WebQuestions",
+    "CuratedTrec",
+    "TriviaQA",
+    "MS-MARCO",
+    "Jeopardy",
+    "FEVER",
+    "Natural Questions",
+    "JeopardyQuestionGeneration"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "NVIDIA V100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "RAG-Sequence"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "400M",
+    "626M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "BooksCorpus",
+    "WebText"
+   ],
+   "pretraining_task": [
+    "Denoising objective"
+   ],
+   "research_problem": [
+    "Knowledge-intensive NLP tasks"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "RAG-Token": {
+   "application": [
+    "Open-domain question answering",
+    "abstractive QA",
+    "question generation",
+    "fact verification"
+   ],
+   "finetuning_data": [
+    "Natural Questions",
+    "TriviaQA",
+    "WebQuestions",
+    "CuratedTREC",
+    "Jeopardy",
+    "OpenMS-MARCO",
+    "FEVER"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [],
+   "model_name": [
+    "RAG-Token"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "400M",
+    "1.4B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "BookCorpus",
+    "Wikipedia",
+    "CC-News",
+    "OpenWebText",
+    "S2ORC"
+   ],
+   "pretraining_task": [
+    "Sequence-to-sequence generation, masked language modeling"
+   ],
+   "research_problem": [
+    "Knowledge-intensive NLP tasks"
+   ]
+  },
+  "RAG-Seq": {
+   "application": [
+    "Open-domain question answering",
+    "document generation",
+    "summarization"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "RAG-Seq"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "42M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "BookCorpus",
+    "WebText103"
+   ],
+   "pretraining_task": [
+    "Next-token prediction, Dense passage retrieval"
+   ],
+   "research_problem": [
+    "Knowledge-intensive NLP tasks"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "RAG": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on knowledge-intensive NLP tasks",
+      "Supervised fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning on knowledge-intensive NLP tasks",
+       "reason": "Describes the fine-tuning process/methodology rather than naming a specific task."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Latent variable marginalization over retrieved documents conditioned on input"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Latent variable marginalization over retrieved documents conditioned on input",
+       "reason": "Describes a mathematical inference/training procedure rather than an architectural design for combining components."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "RAG"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "RAG",
+       "reason": "RAG is a methodology/paradigm, not a model family or lineage."
+      }
+     ]
+    },
+    "model_name": {
+     "candidates": [
+      "RAG"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "RAG",
+       "reason": "RAG is a methodology/paradigm, not a specific model name."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Knowledge-intensive NLP tasks",
+      "providing provenance for decisions",
+      "updating world knowledge",
+      "reducing hallucinations in language generation."
+     ],
+     "accepted": [
+      "Knowledge-intensive NLP tasks"
+     ],
+     "dropped": [
+      {
+       "value": "providing provenance for decisions",
+       "reason": "Describes a solution/action rather than naming a research problem or capability gap."
+      },
+      {
+       "value": "updating world knowledge",
+       "reason": "Describes an action/capability rather than naming a research problem or challenge."
+      },
+      {
+       "value": "reducing hallucinations in language generation.",
+       "reason": "Describes a solution/action rather than naming a research problem or challenge."
+      }
+     ]
+    }
+   },
+   "RAG-Sequence": {
+    "finetuning_task": {
+     "candidates": [
+      "Fine-tuning on input/output pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Fine-tuning on input/output pairs",
+       "reason": "Describes the fine-tuning methodology rather than naming a specific task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "RAG"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "RAG",
+       "reason": "RAG is a methodology/paradigm, not a model family or lineage."
+      }
+     ]
+    }
+   },
+   "RAG-Token": {
+    "model_family": {
+     "candidates": [
+      "RAG"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "RAG",
+       "reason": "RAG is a methodology/paradigm, not a model family or lineage."
+      }
+     ]
+    }
+   },
+   "RAG-Seq": {
+    "model_family": {
+     "candidates": [
+      "RAG"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "RAG",
+       "reason": "RAG is a methodology/paradigm, not a model family or lineage."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 99,
+   "dropped": 12,
+   "llm_calls": 1,
+   "values_sent_to_llm": 40
+  }
+ },
+ "contributions": [
+  {
+   "label": "RAG",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-05-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a neural sequence-to-sequence model augmented with a differentiable retriever (DPR) trained end-to-end via maximum likelihood estimation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "RAG-Tok retrieves at the token level, while RAG-Seq retrieves at the sequence level, enabling the model to condition generation on retrieved passages without requiring pre-training on labeled task data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Language modeling, dense passage retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia (for retriever)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BooksCorpus and Wikipedia (for generator)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "225M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "406M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "930M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 930,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-domain question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Fact verification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Knowledge-intensive NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5.4 billion words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Curated Trec",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSMARCO NLG v2.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SearchQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FEVER",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Jeopardy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MS MARCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CuratedTREC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HotpotQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiHow",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DailyDialog",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenDomainDialogue",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "406M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training of parametric and non-parametric components, followed by end-to-end fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BART (generator), DPR (retriever)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on Natural Questions, WebQuestions, CuratedTrec",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Strong performance on TriviaQA, MS-MARCO, Jeopardy question generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ EM 44.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TQA 55.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WQ 44.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Jeopardy 15.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS MARCO 21.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FVR-3 57.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FVR-2 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ: 35.1 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 72.5 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQuestions: 52.0 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CuratedTREC: 68.0 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD: 84.5 EM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HotpotQA: 42.3 EM",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "RAG-Sequence",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "RAG-Sequence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-05-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Marginalizes over a single latent retrieved document to generate the complete sequence, treating the document as a single latent variable",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Allows the generator to use consistent retrieved context for the entire output.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Denoising objective",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BooksCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "626M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 626,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8, 32GB NVIDIA V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-intensive generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Fact verification",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/huggingface/transformers/tree/master/examples/rag/",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Knowledge-intensive NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5.2 billion words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NaturalQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CuratedTrec",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MS-MARCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Jeopardy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FEVER",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "JeopardyQuestionGeneration",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ: 30.1 EM, TriviaQA: 71.5 EM, WebQuestions: 40.5 EM, CuratedTREC: 52.0 EM, SQuAD: 87.5 EM, HotpotQA: 53.1 EM, WikiBio: 35.1 ROUGE-L, CNN/DailyMail: 42.1 ROUGE-1, XSum: 43.1 ROUGE-1, MultiWOZ: 63.1 BLEU, WMT14 En-De: 28.1 BLEU, WMT14 En-Fr: 40.1 BLEU, WMT14 En-Cz: 20.1 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions EM 44.5",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "RAG-Token",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "RAG-Token",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-05-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Integrates a dense retriever (DPR) with a sequence-to-sequence generator (BART) to combine parametric and non-parametric memory",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Marginalizes over retrieved documents token-by-token during generation, eliminating the need for separate extractive readers or cross-encoder re-rankers.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Sequence-to-sequence generation, masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-News",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "S2ORC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1400,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-domain question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Abstractive QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Fact verification",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/RAG",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Knowledge-intensive NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CuratedTREC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Jeopardy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenMS-MARCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FEVER",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ: 44.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TQA: 55.2/66.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WQ: 45.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CT: 50.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Jeopardy: 17.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSMARCO: 40.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FVR3: 72.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FVR2: 89.5",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "RAG-Seq",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "RAG-Seq",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-05-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Retrieval-Augmented Generation (RAG): integrates a non-parametric memory (retrieved documents) with a parametric neural language model",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Marginalizes over retrieved documents during generation (RAG-Seq), enabling knowledge-intensive tasks without fine-tuning the parametric memory on task-specific data, unlike prior approaches that rely solely on parametric memory or require extensive task-specific fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction, Dense passage retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebText103",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "42M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 42,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-domain question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/RAG",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Knowledge-intensive NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Retriever pre-training on Wikipedia -> Generator pre-training on BookCorpus/WebText -> Joint fine-tuning on downstream tasks",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R461813",
+  "contribution_ids": [
+   "R1565604",
+   "R1903558",
+   "R461814",
+   "R599930",
+   "R1920783",
+   "R1920791",
+   "R1920796",
+   "R1920800"
+  ],
+  "new_contribution_ids": [
+   "R1920783",
+   "R1920791",
+   "R1920796",
+   "R1920800"
+  ],
+  "comparison_updated": null
+ }
+}

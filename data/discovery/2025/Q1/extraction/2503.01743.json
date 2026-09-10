@@ -1,0 +1,901 @@
+{
+  "arxiv_id": "2503.01743",
+  "status": "completed",
+  "timestamp": "2026-08-29T18:10:46.725740",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2503.01743",
+    "title": "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs",
+    "authors": [
+      " Microsoft",
+      " :",
+      "Abdelrahman Abouelenin",
+      "Atabak Ashfaq",
+      "Adam Atkinson",
+      "Hany Awadalla",
+      "Nguyen Bach",
+      "Jianmin Bao",
+      "Alon Benhaim",
+      "Martin Cai",
+      "Vishrav Chaudhary",
+      "Congcong Chen",
+      "Dong Chen",
+      "Dongdong Chen",
+      "Junkun Chen",
+      "Weizhu Chen",
+      "Yen-Chun Chen",
+      "Yi-ling Chen",
+      "Qi Dai",
+      "Xiyang Dai",
+      "Ruchao Fan",
+      "Mei Gao",
+      "Min Gao",
+      "Amit Garg",
+      "Abhishek Goswami",
+      "Junheng Hao",
+      "Amr Hendy",
+      "Yuxuan Hu",
+      "Xin Jin",
+      "Mahmoud Khademi",
+      "Dongwoo Kim",
+      "Young Jin Kim",
+      "Gina Lee",
+      "Jinyu Li",
+      "Yunsheng Li",
+      "Chen Liang",
+      "Xihui Lin",
+      "Zeqi Lin",
+      "Mengchen Liu",
+      "Yang Liu",
+      "Gilsinia Lopez",
+      "Chong Luo",
+      "Piyush Madan",
+      "Vadim Mazalov",
+      "Arindam Mitra",
+      "Ali Mousavi",
+      "Anh Nguyen",
+      "Jing Pan",
+      "Daniel Perez-Becker",
+      "Jacob Platin",
+      "Thomas Portet",
+      "Kai Qiu",
+      "Bo Ren",
+      "Liliang Ren",
+      "Sambuddha Roy",
+      "Ning Shang",
+      "Yelong Shen",
+      "Saksham Singhal",
+      "Subhojit Som",
+      "Xia Song",
+      "Tetyana Sych",
+      "Praneetha Vaddamanu",
+      "Shuohang Wang",
+      "Yiming Wang",
+      "Zhenghao Wang",
+      "Haibin Wu",
+      "Haoran Xu",
+      "Weijian Xu",
+      "Yifan Yang",
+      "Ziyi Yang",
+      "Donghan Yu",
+      "Ishmam Zabir",
+      "Jianwen Zhang",
+      "Li Lyna Zhang",
+      "Yunan Zhang",
+      "Xiren Zhou"
+    ],
+    "abstract": "We introduce Phi-4-Mini and Phi-4-Multimodal, compact yet highly capable language and multimodal models. Phi-4-Mini is a 3.8-billion-parameter language model trained on high-quality web and synthetic data, significantly outperforming recent open-source models of similar size and matching the performance of models twice its size on math and coding tasks requiring complex reasoning. This achievement is driven by a carefully curated synthetic data recipe emphasizing high-quality math and coding datasets. Compared to its predecessor, Phi-3.5-Mini, Phi-4-Mini features an expanded vocabulary size of 200K tokens to better support multilingual applications, as well as group query attention for more efficient long-sequence generation. Phi-4-Multimodal is a multimodal model that integrates text, vision, and speech/audio input modalities into a single model. Its novel modality extension approach leverages LoRA adapters and modality-specific routers to allow multiple inference modes combining various modalities without interference. For example, it now ranks first in the OpenASR leaderboard to date, although the LoRA component of the speech/audio modality has just 460 million parameters. Phi-4-Multimodal supports scenarios involving (vision + language), (vision + speech), and (speech/audio) inputs, outperforming larger vision-language and speech-language models on a wide range of tasks. Additionally, we experiment to further train Phi-4-Mini to enhance its reasoning capabilities. Despite its compact 3.8-billion-parameter size, this experimental version achieves reasoning performance on par with or surpassing significantly larger models, including DeepSeek-R1-Distill-Qwen-7B and DeepSeek-R1-Distill-Llama-8B.",
+    "published": "2025-03-03T17:05:52+00:00",
+    "updated": "2025-03-07T09:05:58+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2503.01743v2",
+    "entry_id": "http://arxiv.org/abs/2503.01743v2",
+    "pdf_path": "data/papers/2503.01743.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM/VLM version release)"
+  },
+  "text_length": 108796,
+  "word_count": 15178,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "Phi-4",
+      "parameters": "1.5B, 3.8B",
+      "parameters_millions": 3800,
+      "model_family": "Phi",
+      "date_created": "2025-03-03",
+      "organization": "Microsoft",
+      "innovation": "Expanded vocabulary size of 200K tokens for multilingual support; Grouped Query Attention (GQA) for efficient long-sequence generation; carefully curated synthetic data recipe emphasizing high-quality math and coding datasets to achieve state-of-the-art performance for its size.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "5 trillion tokens (language); 0.5T tokens (vision-language); 0.3T tokens (vision-speech/SFT)",
+      "finetuning_task": "Supervised fine-tuning, safety alignment, reasoning enhancement, Supervised fine-tuning (SFT) for speech/audio tasks",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100/H100 GPUs",
+      "extension": "Mixture-of-LoRAs applied to vision and speech/audio adapters to preserve base capabilities while adding modality-specific functions.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Small Language Models (SLMs) for language understanding, generation, math, and coding",
+      "application": "Code synthesis, debugging, documentation generation, multi-modal reasoning, speech and audio recognition/translation, reasoning",
+      "paper_title": "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs",
+      "training_corpus_size": "5T tokens (language), 0.5T tokens (vision-language), 0.3T tokens (vision-speech/SFT)",
+      "finetuning_data": "Curated single-frame SFT data, multi-frame SFT data, large-scale ASR data, ~100M curated speech and audio SFT samples, vision-speech SFT data",
+      "tokenizer": "200K token vocabulary",
+      "supported_language": "Multilingual, English, Chinese, French, German, Italian, Japanese, Portuguese, Spanish",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": "128K",
+      "activated_parameters": "1.5B (dense, all parameters active)",
+      "attention_mechanism": "Grouped Query Attention (GQA), Multi-head attention",
+      "context_length_max": "128K tokens",
+      "context_extension_method": "LongRoPE",
+      "training_pipeline": "Pre-training -> Post-training",
+      "reasoning_mode": "Chain-of-thought (CoT)",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "reasoning-rich synthetic data, Synthetic CoT from frontier reasoning LLMs; in-house TTS/ASR for vision-speech; Phi-4 synthetic data",
+      "rl_algorithm": "DPO, Roll-Out DPO",
+      "reward_mechanism": "Rule-based and model-based rejection sampling; preference labeling (correct=preferred, incorrect=dis-preferred)",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Red-teaming, automated testing across dozens of RAI harm categories",
+      "safety_defect_rate": "3.75% (average across 4 harm categories); 1.25% (with jailbreaks)",
+      "fusion_architecture": "Mid-fusion via MLP projector; Mixture-of-LoRAs for adapters",
+      "vision_encoder": "Dynamic multi-crop strategy; 3 conv layers + 24 conformer blocks (audio)",
+      "base_model": "Phi-3-mini (text-only base)",
+      "optimizer_innovation": null,
+      "benchmark_result": "Matches performance of models twice its size on math and coding tasks; outperforms recent open-source models of similar size; SOTA on several compact multimodal benchmarks; competitive with larger models on MMBench, MathVista, etc.; MMMU: 55.1; MMMUPro: 38.5; ScienceQA: 97.5; MathVista: 62.4; Inter-GPS: 48.6; MMBench: 86.7; POPE: 85.6; AI2D: 82.3; ChartQA: 81.4; TextVQA: 75.6; DocVQA: 93.2; InfoVQA: 72.7; OCRBench: 84.4; BLINK: 61.3; VideoMME-16Frame: 55.0; ShareGPT4oAI2D: 68.9; ShareGPT4oChartQA: 69.0; ShareGPT4oDocVQA: 87.3; ShareGPT4oInfoVQA: 63.7",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "24 query / 8 key-value",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Phi-4": {
+      "application": [
+        "Code synthesis",
+        "debugging",
+        "documentation generation",
+        "multi-modal reasoning",
+        "speech and audio recognition/translation",
+        "reasoning"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA)",
+        "Multi-head attention"
+      ],
+      "base_model": [
+        "Phi-3-mini (text-only base)"
+      ],
+      "context_extension_method": [
+        "LongRoPE"
+      ],
+      "finetuning_data": [
+        "Curated single-frame SFT data",
+        "multi-frame SFT data",
+        "large-scale ASR data",
+        "~100M curated speech and audio SFT samples",
+        "vision-speech SFT data"
+      ],
+      "finetuning_task": [
+        "safety alignment",
+        "reasoning enhancement",
+        "Supervised fine-tuning (SFT) for speech/audio tasks"
+      ],
+      "fusion_architecture": [
+        "Mid-fusion via MLP projector; Mixture-of-LoRAs for adapters"
+      ],
+      "hardware_used": [
+        "NVIDIA A100/H100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Phi"
+      ],
+      "model_name": [
+        "Phi-4"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "1.5B",
+        "3.8B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "reasoning_mode": [
+        "Chain-of-thought (CoT)"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Rule-based and model-based rejection sampling",
+        "preference labeling (correct=preferred, incorrect=dis-preferred)"
+      ],
+      "rl_algorithm": [
+        "DPO",
+        "Roll-Out DPO"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese",
+        "French",
+        "German",
+        "Italian",
+        "Japanese",
+        "Portuguese",
+        "Spanish"
+      ],
+      "synthetic_data_generation_method": [
+        "Synthetic CoT from frontier reasoning LLMs",
+        "in-house TTS/ASR for vision-speech"
+      ],
+      "vision_encoder": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Phi-4": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning",
+            "safety alignment",
+            "reasoning enhancement",
+            "Supervised fine-tuning (SFT) for speech/audio tasks"
+          ],
+          "accepted": [
+            "safety alignment",
+            "reasoning enhancement",
+            "Supervised fine-tuning (SFT) for speech/audio tasks"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "5 trillion tokens (language)",
+            "0.5T tokens (vision-language)",
+            "0.3T tokens (vision-speech/SFT)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "5 trillion tokens (language)",
+              "reason": "Token count/quantity, not a named corpus or described collection."
+            },
+            {
+              "value": "0.5T tokens (vision-language)",
+              "reason": "Token count/quantity, not a named corpus or described collection."
+            },
+            {
+              "value": "0.3T tokens (vision-speech/SFT)",
+              "reason": "Token count/quantity, not a named corpus or described collection."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Small Language Models (SLMs) for language understanding, generation, math, and coding"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Small Language Models (SLMs) for language understanding, generation, math, and coding",
+              "reason": "Describes a model category and application scope, not a research problem or challenge."
+            }
+          ]
+        },
+        "supported_language": {
+          "candidates": [
+            "Multilingual",
+            "English",
+            "Chinese",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Portuguese",
+            "Spanish"
+          ],
+          "accepted": [
+            "English",
+            "Chinese",
+            "French",
+            "German",
+            "Italian",
+            "Japanese",
+            "Portuguese",
+            "Spanish"
+          ],
+          "dropped": [
+            {
+              "value": "Multilingual",
+              "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "reasoning-rich synthetic data",
+            "Synthetic CoT from frontier reasoning LLMs",
+            "in-house TTS/ASR for vision-speech",
+            "Phi-4 synthetic data"
+          ],
+          "accepted": [
+            "Synthetic CoT from frontier reasoning LLMs",
+            "in-house TTS/ASR for vision-speech"
+          ],
+          "dropped": [
+            {
+              "value": "reasoning-rich synthetic data",
+              "reason": "Describes characteristics of the generated data, not the generation method."
+            },
+            {
+              "value": "Phi-4 synthetic data",
+              "reason": "Names a model or data type, not the generation method."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "Dynamic multi-crop strategy",
+            "3 conv layers + 24 conformer blocks (audio)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Dynamic multi-crop strategy",
+              "reason": "Describes a processing strategy, not a model component."
+            },
+            {
+              "value": "3 conv layers + 24 conformer blocks (audio)",
+              "reason": "Describes an audio processing component, not a vision encoder."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 44,
+      "dropped": 10,
+      "llm_calls": 1,
+      "values_sent_to_llm": 27
+    }
+  },
+  "contributions": [
+    {
+      "label": "Phi-4",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Phi-4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Phi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-03-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Expanded vocabulary size of 200K tokens for multilingual support",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Grouped Query Attention (GQA) for efficient long-sequence generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Carefully curated synthetic data recipe emphasizing high-quality math and coding datasets to achieve state-of-the-art performance for its size.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Safety alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Reasoning enhancement",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) for speech/audio tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "200K token vocabulary",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3.8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 3800,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100/H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code synthesis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Debugging",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Documentation generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-modal reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Speech and audio recognition/translation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "5T tokens (language), 0.5T tokens (vision-language), 0.3T tokens (vision-speech/SFT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Curated single-frame SFT data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multi-frame SFT data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Large-scale ASR data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "~100M curated speech and audio SFT samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Vision-speech SFT data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163009",
+          "label": "context_length",
+          "value": "128K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1.5B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "128K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "LongRoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Post-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Chain-of-thought (CoT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthetic CoT from frontier reasoning LLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "In-house TTS/ASR for vision-speech",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Roll-Out DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Rule-based and model-based rejection sampling",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Preference labeling (correct=preferred, incorrect=dis-preferred)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Red-teaming, automated testing across dozens of RAI harm categories",
+          "datatype": "string"
+        },
+        {
+          "property": "P203098",
+          "label": "safety_defect_rate",
+          "value": "3.75% (average across 4 harm categories); 1.25% (with jailbreaks)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mid-fusion via MLP projector; Mixture-of-LoRAs for adapters",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Phi-3-mini (text-only base)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Matches performance of models twice its size on math and coding tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms recent open-source models of similar size",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on several compact multimodal benchmarks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Competitive with larger models on MMBench, MathVista, etc.",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 55.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUPro: 38.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA: 97.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 62.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Inter-GPS: 48.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench: 86.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 85.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 82.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 81.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 75.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 93.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA: 72.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 84.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLINK: 61.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoMME-16Frame: 55.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ShareGPT4oAI2D: 68.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ShareGPT4oChartQA: 69.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ShareGPT4oDocVQA: 87.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ShareGPT4oInfoVQA: 63.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "24 query / 8 key-value",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926614",
+    "contribution_ids": [
+      "R1926616"
+    ],
+    "new_contribution_ids": [
+      "R1926616"
+    ],
+    "comparison_updated": null
+  }
+}

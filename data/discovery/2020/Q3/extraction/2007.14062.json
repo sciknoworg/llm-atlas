@@ -1,0 +1,1447 @@
+{
+ "arxiv_id": "2007.14062",
+ "status": "completed",
+ "timestamp": "2026-08-24T20:50:20.724551",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2007.14062",
+  "title": "Big Bird: Transformers for Longer Sequences",
+  "authors": [
+   "Manzil Zaheer",
+   "Guru Guruganesh",
+   "Avinava Dubey",
+   "Joshua Ainslie",
+   "Chris Alberti",
+   "Santiago Ontanon",
+   "Philip Pham",
+   "Anirudh Ravula",
+   "Qifan Wang",
+   "Li Yang",
+   "Amr Ahmed"
+  ],
+  "abstract": "Transformers-based models, such as BERT, have been one of the most successful deep learning models for NLP. Unfortunately, one of their core limitations is the quadratic dependency (mainly in terms of memory) on the sequence length due to their full attention mechanism. To remedy this, we propose, BigBird, a sparse attention mechanism that reduces this quadratic dependency to linear. We show that BigBird is a universal approximator of sequence functions and is Turing complete, thereby preserving these properties of the quadratic, full attention model. Along the way, our theoretical analysis reveals some of the benefits of having $O(1)$ global tokens (such as CLS), that attend to the entire sequence as part of the sparse attention mechanism. The proposed sparse attention can handle sequences of length up to 8x of what was previously possible using similar hardware. As a consequence of the capability to handle longer context, BigBird drastically improves performance on various NLP tasks such as question answering and summarization. We also propose novel applications to genomics data.",
+  "published": "2020-07-28T08:34:04+00:00",
+  "updated": "2021-01-08T07:41:50+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.CL",
+   "stat.ML"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2007.14062v2",
+  "entry_id": "http://arxiv.org/abs/2007.14062v2",
+  "pdf_path": "data/papers/2007.14062.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture)"
+ },
+ "text_length": 121412,
+ "word_count": 9890,
+ "models_extracted": 14,
+ "extraction_data": [
+  {
+   "model_name": "Big Bird",
+   "parameters": "110M, 125M, 330M, 340M, 423M, 1.1B",
+   "parameters_millions": 1100,
+   "model_family": "Transformer",
+   "date_created": "2020-07-28",
+   "organization": "Google",
+   "innovation": "Sparse attention mechanism combining O(1) global tokens, local neighborhood attention, and random attention to reduce quadratic memory/compute dependency on sequence length to linear, while preserving theoretical expressivity and Turing completeness.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling",
+   "pretraining_corpus": "Human reference genome (GRCh37) for genomics; web text for NLP",
+   "finetuning_task": "Supervised fine-tuning for QA, document classification, and genomic sequence prediction, Supervised fine-tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "TPU/GPU",
+   "extension": "Sparse attention mechanism defined by any graph containing a star graph S.",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Overcoming the quadratic memory and compute dependency of full self-attention on sequence length to enable modeling of much longer contexts.",
+   "application": "Long document summarization, genomics (promoter site prediction, chromatin profile prediction)",
+   "paper_title": "Big Bird: Transformers for Longer Sequences",
+   "training_corpus_size": "3.3 billion words",
+   "finetuning_data": "SQuAD, Longformer dataset, ENCODE, Roadmap Epigenomics, ArXiv, PubMed, BigPatent, Eukaryotic Promoter Database (EPDnew)",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/big_bird",
+   "context_length": null,
+   "activated_parameters": "330M (BASE) / 1.1B (LARGE) \u2014 dense, all parameters active",
+   "attention_mechanism": "Sparse attention (O(1) global, local window, random), Sparse attention (local window + global + random), Block-sparse and random-sparse attention, Block-sparse + random sparse attention",
+   "context_length_max": "8x longer than 512 tokens",
+   "context_extension_method": "Sparse attention",
+   "training_pipeline": "Pre-training -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Transformer",
+   "optimizer_innovation": null,
+   "benchmark_result": "SQuAD F1: 92.1; Chromatin-Profile Prediction AUC: TF 96.1, DHS 88.7, HM 92.1; BigPatent R-1: 60.64, R-2: 42.46, R-L: 50.01 (BIGBIRD-Pegasus); Promoter Region Prediction F1: 99.9 (BIGBIRD); GLUE 83.1; SQuAD 1.1 F1 89.5; SQuAD 2.0 F1 86.5; MNLI 86.6; SST-2 94.9; QQP 91.3; QNLI 92.7; CoLA 62.4; STS-B 88.0; MRPC 89.3; RTE 70.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "BIGBIRD",
+   "parameters": null,
+   "parameters_millions": null,
+   "model_family": "Transformer",
+   "date_created": "2020-07-28",
+   "organization": "Google",
+   "innovation": "Sparse attention: combines random, local (sliding window), and global attention patterns to reduce self-attention complexity from O(n^2) to O(n) while preserving expressivity and enabling long-context modeling, unlike prior approximations that lack theoretical guarantees or require significant engineering.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling",
+   "pretraining_corpus": "Books, CC-News, Stories, Wikipedia",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Reducing the quadratic complexity of self-attention in Transformers to enable longer sequence modeling.",
+   "application": "Question answering, document summarization, genomics sequence analysis",
+   "paper_title": "Big Bird: Transformers for Longer Sequences",
+   "training_corpus_size": "19.2B tokens",
+   "finetuning_data": null,
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Sparse attention (random, local sliding window, and global tokens)",
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "BIGBIRD-ITC",
+   "parameters": "BASE, LARGE",
+   "parameters_millions": 0,
+   "model_family": "Transformer",
+   "date_created": "2020-07-28",
+   "organization": "Google",
+   "innovation": "Big Bird sparse attention mechanism: combines local, global, and random attention patterns to reduce self-attention complexity from O(n^2) to O(n) while preserving long-range dependency modeling; ITC adds convolutional layers to enhance local context, while ETC expands the global token set for improved long-range capture.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Modeling (MLM)",
+   "pretraining_corpus": "four standard data-sets for pretraining",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "16GB memory/chip",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Modeling longer input sequences for NLP tasks",
+   "application": "Long document classification, question answering with supporting evidence, masked language modeling",
+   "paper_title": "Big Bird: Transformers for Longer Sequences",
+   "training_corpus_size": "19.2B tokens",
+   "finetuning_data": null,
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Big Bird sparse attention (local, global, random)",
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on MLM objective, warm-started from public RoBERTa checkpoints, followed by task-specific fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "RoBERTa checkpoints",
+   "optimizer_innovation": null,
+   "benchmark_result": "HotpotQA F1: 81.2; NaturalQ F1: 89.1; TriviaQA F1: 73.6; WikiHop Acc: 82.3; Arxiv classification +5% points",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "BIGBIRD-ETC",
+   "model_family": "Transformer",
+   "date_created": "2020-07-28",
+   "organization": "Google",
+   "innovation": "Sparse attention mechanism combining block-local and global tokens (no random tokens) to reduce quadratic complexity to linear; ETC variant uses only global tokens for extremely long context.",
+   "pretraining_corpus": "Books, CC-News, Stories, Wikipedia",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Question answering, language modeling",
+   "license": null,
+   "research_problem": "Transformers for longer sequences",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Modeling (MLM)",
+   "training_corpus_size": "19.2B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Big Bird: Transformers for Longer Sequences",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "Big Bird": {
+   "application": [
+    "Long document summarization",
+    "genomics (promoter site prediction, chromatin profile prediction)"
+   ],
+   "attention_mechanism": [
+    "Sparse attention (O(1) global, local window, random)",
+    "Sparse attention (local window + global + random)",
+    "Block-sparse and random-sparse attention",
+    "Block-sparse + random sparse attention"
+   ],
+   "base_model": [],
+   "context_extension_method": [],
+   "finetuning_data": [
+    "SQuAD",
+    "ENCODE",
+    "Roadmap Epigenomics",
+    "ArXiv",
+    "PubMed",
+    "BigPatent",
+    "Eukaryotic Promoter Database (EPDnew)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning for QA",
+    "document classification",
+    "genomic sequence prediction"
+   ],
+   "hardware_used": [
+    "TPU/GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Big Bird"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "110M",
+    "125M",
+    "330M",
+    "340M",
+    "423M",
+    "1.1B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Human reference genome (GRCh37) for genomics"
+   ],
+   "pretraining_task": [
+    "Masked language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "BIGBIRD": {
+   "application": [
+    "Question answering",
+    "document summarization",
+    "genomics sequence analysis"
+   ],
+   "attention_mechanism": [
+    "Sparse attention (random, local sliding window, and global tokens)"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [],
+   "model_name": [
+    "BIGBIRD"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Books",
+    "CC-News",
+    "Stories",
+    "Wikipedia"
+   ],
+   "pretraining_task": [
+    "Masked language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "BIGBIRD-ITC": {
+   "application": [
+    "Long document classification",
+    "question answering with supporting evidence",
+    "masked language modeling"
+   ],
+   "attention_mechanism": [
+    "Big Bird sparse attention (local, global, random)"
+   ],
+   "base_model": [
+    "RoBERTa checkpoints"
+   ],
+   "hardware_used": [],
+   "model_family": [],
+   "model_name": [
+    "BIGBIRD-ITC"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Masked Language Modeling (MLM)"
+   ],
+   "research_problem": [
+    "Modeling longer input sequences for NLP tasks"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "BIGBIRD-ETC": {
+   "application": [
+    "Question answering",
+    "language modeling"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [],
+   "model_name": [
+    "BIGBIRD-ETC"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Books",
+    "CC-News",
+    "Stories",
+    "Wikipedia"
+   ],
+   "pretraining_task": [
+    "Masked Language Modeling (MLM)"
+   ],
+   "research_problem": [
+    "Transformers for longer sequences"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Big Bird": {
+    "base_model": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Refers to a neural network architecture, not a specific pre-trained model. (cached)"
+      }
+     ]
+    },
+    "context_extension_method": {
+     "candidates": [
+      "Sparse attention"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Sparse attention",
+       "reason": "Describes an attention mechanism, not a technique for extending context length. (cached)"
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "SQuAD",
+      "Longformer dataset",
+      "ENCODE",
+      "Roadmap Epigenomics",
+      "ArXiv",
+      "PubMed",
+      "BigPatent",
+      "Eukaryotic Promoter Database (EPDnew)"
+     ],
+     "accepted": [
+      "SQuAD",
+      "ENCODE",
+      "Roadmap Epigenomics",
+      "ArXiv",
+      "PubMed",
+      "BigPatent",
+      "Eukaryotic Promoter Database (EPDnew)"
+     ],
+     "dropped": [
+      {
+       "value": "Longformer dataset",
+       "reason": "Longformer is a model architecture, not a dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for QA",
+      "document classification",
+      "genomic sequence prediction",
+      "Supervised fine-tuning"
+     ],
+     "accepted": [
+      "Supervised fine-tuning for QA",
+      "document classification",
+      "genomic sequence prediction"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Human reference genome (GRCh37) for genomics",
+      "web text for NLP"
+     ],
+     "accepted": [
+      "Human reference genome (GRCh37) for genomics"
+     ],
+     "dropped": [
+      {
+       "value": "web text for NLP",
+       "reason": "Placeholder asserting breadth rather than naming an identifiable corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Overcoming the quadratic memory and compute dependency of full self-attention on sequence length to enable modeling of much longer contexts."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Overcoming the quadratic memory and compute dependency of full self-attention on sequence length to enable modeling of much longer contexts.",
+       "reason": "Describes a solution/action rather than naming the problem as a short noun phrase."
+      }
+     ]
+    }
+   },
+   "BIGBIRD": {
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Reducing the quadratic complexity of self-attention in Transformers to enable longer sequence modeling."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Reducing the quadratic complexity of self-attention in Transformers to enable longer sequence modeling.",
+       "reason": "Describes a solution/action rather than naming the problem as a short noun phrase."
+      }
+     ]
+    }
+   },
+   "BIGBIRD-ITC": {
+    "hardware_used": {
+     "candidates": [
+      "16GB memory/chip"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "16GB memory/chip",
+       "reason": "Describes a memory specification rather than the hardware device itself. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "BASE",
+      "LARGE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "LARGE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "four standard data-sets for pretraining"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "four standard data-sets for pretraining",
+       "reason": "Placeholder asserting breadth rather than naming specific datasets."
+      }
+     ]
+    }
+   },
+   "BIGBIRD-ETC": {
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 72,
+   "dropped": 15,
+   "llm_calls": 1,
+   "values_sent_to_llm": 29
+  }
+ },
+ "contributions": [
+  {
+   "label": "Big Bird",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Big Bird",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparse attention mechanism combining O(1) global tokens, local neighborhood attention, and random attention to reduce quadratic memory/compute dependency on sequence length to linear, while preserving theoretical expressivity and Turing completeness.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Human reference genome (GRCh37) for genomics",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Document classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Genomic sequence prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "330M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "423M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU/GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long document summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Genomics (promoter site prediction, chromatin profile prediction)",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/big_bird",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.3 billion words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ENCODE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Roadmap Epigenomics",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ArXiv",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PubMed",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BigPatent",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Eukaryotic Promoter Database (EPDnew)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "330M (BASE) / 1.1B (LARGE) \u2014 dense, all parameters active",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention (O(1) global, local window, random)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention (local window + global + random)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Block-sparse and random-sparse attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Block-sparse + random sparse attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "8x longer than 512 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD F1: 92.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Chromatin-Profile Prediction AUC: TF 96.1, DHS 88.7, HM 92.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BigPatent R-1: 60.64, R-2: 42.46, R-L: 50.01 (BIGBIRD-Pegasus)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Promoter Region Prediction F1: 99.9 (BIGBIRD)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE 83.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 1.1 F1 89.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 2.0 F1 86.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI 86.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST-2 94.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QQP 91.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QNLI 92.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STS-B 88.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MRPC 89.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RTE 70.1",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "BIGBIRD",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "BIGBIRD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparse attention: combines random, local (sliding window), and global attention patterns to reduce self-attention complexity from O(n^2) to O(n) while preserving expressivity and enabling long-context modeling, unlike prior approximations that lack theoretical guarantees or require significant engineering.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-News",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stories",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Genomics sequence analysis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "19.2B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention (random, local sliding window, and global tokens)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "BIGBIRD-ITC",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "BIGBIRD-ITC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Big Bird sparse attention mechanism: combines local, global, and random attention patterns to reduce self-attention complexity from O(n^2) to O(n) while preserving long-range dependency modeling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "ITC adds convolutional layers to enhance local context, while ETC expands the global token set for improved long-range capture.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Modeling (MLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 0,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long document classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering with supporting evidence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Modeling longer input sequences for NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "19.2B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Big Bird sparse attention (local, global, random)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on MLM objective, warm-started from public RoBERTa checkpoints, followed by task-specific fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "RoBERTa checkpoints",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HotpotQA F1: 81.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQ F1: 89.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA F1: 73.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiHop Acc: 82.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arxiv classification +5% points",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "BIGBIRD-ETC",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "BIGBIRD-ETC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-07-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparse attention mechanism combining block-local and global tokens (no random tokens) to reduce quadratic complexity to linear",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "ETC variant uses only global tokens for extremely long context.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Modeling (MLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-News",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stories",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Transformers for longer sequences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "19.2B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R216331",
+  "contribution_ids": [
+   "R216334",
+   "R1920805",
+   "R1920816",
+   "R1920823",
+   "R1920829"
+  ],
+  "new_contribution_ids": [
+   "R1920805",
+   "R1920816",
+   "R1920823",
+   "R1920829"
+  ],
+  "comparison_updated": null
+ }
+}

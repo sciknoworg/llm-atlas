@@ -1,0 +1,664 @@
+{
+ "arxiv_id": "2102.05918",
+ "status": "completed",
+ "timestamp": "2026-08-24T22:50:54.501451",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2102.05918",
+  "title": "Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision",
+  "authors": [
+   "Chao Jia",
+   "Yinfei Yang",
+   "Ye Xia",
+   "Yi-Ting Chen",
+   "Zarana Parekh",
+   "Hieu Pham",
+   "Quoc V. Le",
+   "Yunhsuan Sung",
+   "Zhen Li",
+   "Tom Duerig"
+  ],
+  "abstract": "Pre-trained representations are becoming crucial for many NLP and perception tasks. While representation learning in NLP has transitioned to training on raw text without human annotations, visual and vision-language representations still rely heavily on curated training datasets that are expensive or require expert knowledge. For vision applications, representations are mostly learned using datasets with explicit class labels such as ImageNet or OpenImages. For vision-language, popular datasets like Conceptual Captions, MSCOCO, or CLIP all involve a non-trivial data collection (and cleaning) process. This costly curation process limits the size of datasets and hence hinders the scaling of trained models. In this paper, we leverage a noisy dataset of over one billion image alt-text pairs, obtained without expensive filtering or post-processing steps in the Conceptual Captions dataset. A simple dual-encoder architecture learns to align visual and language representations of the image and text pairs using a contrastive loss. We show that the scale of our corpus can make up for its noise and leads to state-of-the-art representations even with such a simple learning scheme. Our visual representation achieves strong performance when transferred to classification tasks such as ImageNet and VTAB. The aligned visual and language representations enables zero-shot image classification and also set new state-of-the-art results on Flickr30K and MSCOCO image-text retrieval benchmarks, even when compared with more sophisticated cross-attention models. The representations also enable cross-modality search with complex text and text + image queries.",
+  "published": "2021-02-11T10:08:12+00:00",
+  "updated": "2021-06-11T07:51:39+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2102.05918v2",
+  "entry_id": "http://arxiv.org/abs/2102.05918v2",
+  "pdf_path": "data/papers/2102.05918.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 58830,
+ "word_count": 5035,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "ALIGN",
+   "parameters": "820M",
+   "parameters_millions": 820,
+   "model_family": "ALIGN",
+   "date_created": "2021-02-11",
+   "organization": "Google",
+   "innovation": "Scales vision-language representation learning by training on a massive, noisy image-text dataset (1.8B pairs) with minimal filtering, using a simple dual-encoder architecture instead of cross-attention, enabling strong zero-shot transfer and cross-modal retrieval without expert curation.",
+   "pretraining_architecture": "Encoder-Encoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "pretraining_corpus": "Conceptual Captions (1.8B raw English image-alt-text pairs)",
+   "finetuning_task": "Supervised discriminative fine-tuning (classification)",
+   "optimizer": "LAMB",
+   "hardware_used": "Cloud TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Visual and vision-language representation learning",
+   "application": "Cross-modal matching/retrieval, zero-shot image classification, downstream visual tasks",
+   "paper_title": "Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision",
+   "training_corpus_size": "1.8B image-text pairs",
+   "finetuning_data": "Flickr30K, MSCOCO, ImageNet, VTAB",
+   "tokenizer": "100k wordpiece vocabulary",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "820M",
+   "attention_mechanism": "Multi-head self-attention (BERT)",
+   "context_length_max": "64",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (contrastive alignment) -> Fine-tuning (train classification head, then fine-tune all layers)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Dual-encoder (separate image and text encoders with cosine similarity)",
+   "vision_encoder": "EfficientNet with global pooling",
+   "base_model": "EfficientNet-L2",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet zero-shot 76.4% top-1; ImageNet fine-tuned 88.64% top-1; outperforms previous SOTA by over 7% in most zero-shot and fine-tuned benchmarks; MSCOCO retrieval: 55.4; ImageNet KNN: 69.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "ALIGN mling",
+   "model_family": "ALIGN",
+   "date_created": "2021-02-11",
+   "organization": "Google",
+   "innovation": "Multilingual extension of ALIGN using a unified 250k WordPiece vocabulary to cover 100+ languages, trained on the same contrastive objective with extended Conceptual Captions data without language-specific filters.",
+   "pretraining_corpus": "Conceptual Captions (extended to multilingual, 1.8B image-text pairs)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Multilingual image retrieval, cross-modal retrieval",
+   "license": null,
+   "research_problem": "Visual and vision-language representation learning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive learning (image-text)",
+   "training_corpus_size": "1.8B image-text pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": "WordPiece (250k vocabulary)",
+   "context_length": null,
+   "supported_language": "English, German, French, Czech",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on noisy web data with contrastive loss",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Dual-encoder (separate image and text encoders, embeddings summed)",
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Multi30K mR: de 84.1, fr 84.9, cs 63.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "ALIGN": {
+   "application": [
+    "Cross-modal matching/retrieval",
+    "zero-shot image classification"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (BERT)"
+   ],
+   "base_model": [
+    "EfficientNet-L2"
+   ],
+   "finetuning_data": [
+    "Flickr30K",
+    "MSCOCO",
+    "ImageNet",
+    "VTAB"
+   ],
+   "finetuning_task": [
+    "Supervised discriminative fine-tuning (classification)"
+   ],
+   "fusion_architecture": [
+    "Dual-encoder (separate image and text encoders with cosine similarity)"
+   ],
+   "hardware_used": [
+    "Cloud TPUv3"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "ALIGN"
+   ],
+   "model_name": [
+    "ALIGN"
+   ],
+   "optimizer": [
+    "LAMB"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "820M"
+   ],
+   "pretraining_architecture": [],
+   "pretraining_corpus": [
+    "Conceptual Captions (1.8B raw English image-alt-text pairs)"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Visual and vision-language representation learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EfficientNet with global pooling"
+   ]
+  },
+  "ALIGN mling": {
+   "application": [
+    "Multilingual image retrieval",
+    "cross-modal retrieval"
+   ],
+   "fusion_architecture": [
+    "Dual-encoder (separate image and text encoders, embeddings summed)"
+   ],
+   "model_family": [
+    "ALIGN"
+   ],
+   "model_name": [
+    "ALIGN mling"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions (extended to multilingual, 1.8B image-text pairs)"
+   ],
+   "pretraining_task": [
+    "Contrastive learning (image-text)"
+   ],
+   "research_problem": [
+    "Visual and vision-language representation learning"
+   ],
+   "supported_language": [
+    "English",
+    "German",
+    "French",
+    "Czech"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ALIGN": {
+    "application": {
+     "candidates": [
+      "Cross-modal matching/retrieval",
+      "zero-shot image classification",
+      "downstream visual tasks"
+     ],
+     "accepted": [
+      "Cross-modal matching/retrieval",
+      "zero-shot image classification"
+     ],
+     "dropped": [
+      {
+       "value": "downstream visual tasks",
+       "reason": "Vague placeholder/general category rather than a concrete task or domain."
+      }
+     ]
+    },
+    "pretraining_architecture": {
+     "candidates": [
+      "Encoder-Encoder"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Encoder-Encoder",
+       "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Encoder-Encoder'"
+      }
+     ]
+    }
+   },
+   "ALIGN mling": {}
+  },
+  "counts": {
+   "kept": 36,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 21
+  }
+ },
+ "contributions": [
+  {
+   "label": "ALIGN",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ALIGN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ALIGN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-02-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scales vision-language representation learning by training on a massive, noisy image-text dataset (1.8B pairs) with minimal filtering, using a simple dual-encoder architecture instead of cross-attention, enabling strong zero-shot transfer and cross-modal retrieval without expert curation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (1.8B raw English image-alt-text pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised discriminative fine-tuning (classification)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "LAMB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "100k wordpiece vocabulary",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "820M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 820,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Cloud TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal matching/retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual and vision-language representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.8B image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VTAB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "820M",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (BERT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "64",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (contrastive alignment) -> Fine-tuning (train classification head, then fine-tune all layers)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Dual-encoder (separate image and text encoders with cosine similarity)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EfficientNet with global pooling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "EfficientNet-L2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet zero-shot 76.4% top-1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet fine-tuned 88.64% top-1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms previous SOTA by over 7% in most zero-shot and fine-tuned benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSCOCO retrieval: 55.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet KNN: 69.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "ALIGN mling",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ALIGN mling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ALIGN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-02-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual extension of ALIGN using a unified 250k WordPiece vocabulary to cover 100+ languages, trained on the same contrastive objective with extended Conceptual Captions data without language-specific filters.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning (image-text)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (extended to multilingual, 1.8B image-text pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece (250k vocabulary)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual image retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual and vision-language representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.8B image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on noisy web data with contrastive loss",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Dual-encoder (separate image and text encoders, embeddings summed)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi30K mR: de 84.1, fr 84.9, cs 63.2",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R509643",
+  "contribution_ids": [
+   "R509644",
+   "R509703",
+   "R509711",
+   "R1921046",
+   "R1921060"
+  ],
+  "new_contribution_ids": [
+   "R1921046",
+   "R1921060"
+  ],
+  "comparison_updated": null
+ }
+}

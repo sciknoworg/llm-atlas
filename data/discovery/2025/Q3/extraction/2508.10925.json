@@ -1,0 +1,963 @@
+{
+  "arxiv_id": "2508.10925",
+  "status": "completed",
+  "timestamp": "2026-08-30T02:52:48.610250",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2508.10925",
+    "title": "gpt-oss-120b & gpt-oss-20b Model Card",
+    "authors": [
+      " OpenAI",
+      " :",
+      "Sandhini Agarwal",
+      "Lama Ahmad",
+      "Jason Ai",
+      "Sam Altman",
+      "Andy Applebaum",
+      "Edwin Arbus",
+      "Rahul K. Arora",
+      "Yu Bai",
+      "Bowen Baker",
+      "Haiming Bao",
+      "Boaz Barak",
+      "Ally Bennett",
+      "Tyler Bertao",
+      "Nivedita Brett",
+      "Eugene Brevdo",
+      "Greg Brockman",
+      "Sebastien Bubeck",
+      "Che Chang",
+      "Kai Chen",
+      "Mark Chen",
+      "Enoch Cheung",
+      "Aidan Clark",
+      "Dan Cook",
+      "Marat Dukhan",
+      "Casey Dvorak",
+      "Kevin Fives",
+      "Vlad Fomenko",
+      "Timur Garipov",
+      "Kristian Georgiev",
+      "Mia Glaese",
+      "Tarun Gogineni",
+      "Adam Goucher",
+      "Lukas Gross",
+      "Katia Gil Guzman",
+      "John Hallman",
+      "Jackie Hehir",
+      "Johannes Heidecke",
+      "Alec Helyar",
+      "Haitang Hu",
+      "Romain Huet",
+      "Jacob Huh",
+      "Saachi Jain",
+      "Zach Johnson",
+      "Chris Koch",
+      "Irina Kofman",
+      "Dominik Kundel",
+      "Jason Kwon",
+      "Volodymyr Kyrylov",
+      "Elaine Ya Le",
+      "Guillaume Leclerc",
+      "James Park Lennon",
+      "Scott Lessans",
+      "Mario Lezcano-Casado",
+      "Yuanzhi Li",
+      "Zhuohan Li",
+      "Ji Lin",
+      "Jordan Liss",
+      " Lily",
+      " Liu",
+      "Jiancheng Liu",
+      "Kevin Lu",
+      "Chris Lu",
+      "Zoran Martinovic",
+      "Lindsay McCallum",
+      "Josh McGrath",
+      "Scott McKinney",
+      "Aidan McLaughlin",
+      "Song Mei",
+      "Steve Mostovoy",
+      "Tong Mu",
+      "Gideon Myles",
+      "Alexander Neitz",
+      "Alex Nichol",
+      "Jakub Pachocki",
+      "Alex Paino",
+      "Dana Palmie",
+      "Ashley Pantuliano",
+      "Giambattista Parascandolo",
+      "Jongsoo Park",
+      "Leher Pathak",
+      "Carolina Paz",
+      "Ludovic Peran",
+      "Dmitry Pimenov",
+      "Michelle Pokrass",
+      "Elizabeth Proehl",
+      "Huida Qiu",
+      "Gaby Raila",
+      "Filippo Raso",
+      "Hongyu Ren",
+      "Kimmy Richardson",
+      "David Robinson",
+      "Bob Rotsted",
+      "Hadi Salman",
+      "Suvansh Sanjeev",
+      "Max Schwarzer",
+      "D. Sculley",
+      "Harshit Sikchi",
+      "Kendal Simon",
+      "Karan Singhal",
+      "Yang Song",
+      "Dane Stuckey",
+      "Zhiqing Sun",
+      "Philippe Tillet",
+      "Sam Toizer",
+      "Foivos Tsimpourlas",
+      "Nikhil Vyas",
+      "Eric Wallace",
+      "Xin Wang",
+      "Miles Wang",
+      "Olivia Watkins",
+      "Kevin Weil",
+      "Amy Wendling",
+      "Kevin Whinnery",
+      "Cedric Whitney",
+      "Hannah Wong",
+      "Lin Yang",
+      "Yu Yang",
+      "Michihiro Yasunaga",
+      "Kristen Ying",
+      "Wojciech Zaremba",
+      "Wenting Zhan",
+      "Cyril Zhang",
+      "Brian Zhang",
+      "Eddie Zhang",
+      "Shengjia Zhao"
+    ],
+    "abstract": "We present gpt-oss-120b and gpt-oss-20b, two open-weight reasoning models that push the frontier of accuracy and inference cost. The models use an efficient mixture-of-expert transformer architecture and are trained using large-scale distillation and reinforcement learning. We optimize the models to have strong agentic capabilities (deep research browsing, python tool use, and support for developer-provided functions), all while using a rendered chat format that enables clear instruction following and role delineation. Both models achieve strong results on benchmarks ranging from mathematics, coding, and safety. We release the model weights, inference implementations, tool environments, and tokenizers under an Apache 2.0 license to enable broad use and further research.",
+    "published": "2025-08-08T19:24:38+00:00",
+    "updated": "2025-08-08T19:24:38+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2508.10925v1",
+    "entry_id": "http://arxiv.org/abs/2508.10925v1",
+    "pdf_path": "data/papers/2508.10925.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 75111,
+  "word_count": 11973,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "gpt-oss",
+      "parameters": "20B, 20.9B, 116.8B, 120B",
+      "parameters_millions": 120000,
+      "model_family": "GPT",
+      "date_created": "2025-08-08",
+      "organization": "OpenAI",
+      "innovation": "Autoregressive Mixture-of-Experts (MoE) transformer building on GPT-2/GPT-3; MXFP4 quantization of MoE weights to 4.25 bits per parameter; Grouped Query Attention (GQA) with alternating banded window (128 tokens) and fully dense patterns; rotary position embeddings extended to 131,072 tokens using YaRN; learned bias in denominator of softmax for attention.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Text-only dataset with trillions of tokens, focus on STEM, coding, general knowledge; filtered for harmful content using CBRN filters.",
+      "finetuning_task": "Deliberative alignment, instruction hierarchy, adversarial fine-tuning, Supervised fine-tuning for instruction hierarchy",
+      "optimizer": null,
+      "hardware_used": "NVIDIA H100 GPUs",
+      "extension": "Post-trained with a harmony prompt format to adhere to an instruction hierarchy (system > developer > user messages).",
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Safety, jailbreak robustness, and instruction hierarchy for multi-role prompt handling.",
+      "application": "Agentic workflows, web search, Python code execution, reasoning, instruction following",
+      "paper_title": "gpt-oss-120b & gpt-oss-20b Model Card",
+      "training_corpus_size": "trillions of tokens",
+      "finetuning_data": "Wide range of problems from coding, math, science, and more., Examples of conflicting system, developer, and user messages",
+      "tokenizer": "BPE",
+      "supported_language": "English, Arabic, Bengali, Chinese, French, German, Hindi, Indonesian, Italian, Japanese, Korean, Portuguese, Spanish, Swahili, Yoruba",
+      "hardware_description": "2.1 million H100-hours",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "5.1B",
+      "attention_mechanism": "Flash Attention, Grouped Query Attention (GQA) with 8 key-value heads; alternating banded window (bandwidth 128) and fully dense patterns; rotary position embeddings extended to 131, 072 tokens using YaRN; learned bias in denominator of softmax",
+      "context_length_max": "131,072 tokens",
+      "context_extension_method": "YaRN",
+      "training_pipeline": "Pre-training -> Post-training for reasoning and tool use (variable effort reasoning training, agentic tool use)",
+      "reasoning_mode": "Full chain-of-thought (CoT); variable effort reasoning",
+      "moe_configuration": "128 experts, 4 active",
+      "quantization_precision": "MXFP4 (4.25 bits per parameter)",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "CoT RL techniques",
+      "reward_mechanism": "Rewards answers that comply with unsafe prompts",
+      "tool_calling_format": "Responses API compatible; Structured Outputs",
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Preparedness Framework evaluations; adversarial fine-tuning simulations; scalable capability evaluations",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "gpt-oss",
+      "optimizer_innovation": null,
+      "benchmark_result": "AIME 2025: 85; GPQA Diamond: 80; SWE-Bench Verified: 60.7; Tau-Bench Retail: 57.6; AIME 2025: 80; GPQA Diamond: 75; SWE-Bench Verified: 60; Tau-Bench Retail: 54.8; AIME 2024: 96.0; AIME 2025: 98.4; GPQA Diamond: 87.3; HLE: 24.9; MMLU: 93.4; AIME 2024: 83.3; AIME 2025: 96.6; GPQA Diamond: 81.4; HLE: 17.7; MMLU: 85.3; Standard Disallowed Content Evaluation: hate 0.996/0.996, self-harm/intent 0.995/0.984, personal-data/semi-restrictive 0.967/0.947, sexual/exploitative 1.000/0.980, sexual/minors 1.000/0.971, illicit/non-violent 1.000/0.983, illicit/violent 1.000/1.000, personal-data/restricted 0.996/0.978; Production Benchmarks: non-violent hate 0.895/0.901, personal-data 0.888/0.921, harassment/threatening 0.832/0.819, sexual/illicit 0.919/0.852, sexual/minors 0.967/0.866, extremism 0.932/0.951, hate/threatening 0.898/0.829, illicit/nonviolent 0.692/0.656, illicit/violent 0.817/0.744, self-harm/intent 0.950/0.893, self-harm/instructions 0.910/0.899; Jailbreak evaluations: illicit/non-violent-crime 0.979/0.960, violence 0.983/0.979, abuse/disinformation/hate 0.993/0.982, sexual-content 0.989/0.970; Instruction Hierarchy: System prompt extraction 0.832/0.881, Prompt injection hijacking 0.780/0.639, Phrase protection system 0.912, Password protection system 0.965, Phrase protection developer 0.909, Password protection developer 1.000/0.946",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "64 query / 8 key-value",
+      "post_training_infrastructure": "Internal OpenAI o-series RL training stack"
+    }
+  ],
+  "models_after_selection": 5,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "gpt-oss": {
+      "application": [
+        "Agentic workflows",
+        "web search",
+        "Python code execution",
+        "reasoning",
+        "instruction following"
+      ],
+      "attention_mechanism": [
+        "Flash Attention",
+        "Grouped Query Attention (GQA) with 8 key-value heads",
+        "alternating banded window (bandwidth 128) and fully dense patterns",
+        "learned bias in denominator of softmax"
+      ],
+      "base_model": [
+        "gpt-oss"
+      ],
+      "context_extension_method": [
+        "YaRN"
+      ],
+      "finetuning_data": [
+        "math",
+        "science"
+      ],
+      "finetuning_task": [
+        "Deliberative alignment",
+        "instruction hierarchy",
+        "adversarial fine-tuning",
+        "Supervised fine-tuning for instruction hierarchy"
+      ],
+      "hardware_used": [
+        "NVIDIA H100 GPUs"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "GPT"
+      ],
+      "model_name": [
+        "gpt-oss"
+      ],
+      "organization": [
+        "OpenAI"
+      ],
+      "parameters": [
+        "20B",
+        "20.9B",
+        "116.8B",
+        "120B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "MXFP4 (4.25 bits per parameter)"
+      ],
+      "reasoning_mode": [
+        "Full chain-of-thought (CoT); variable effort reasoning"
+      ],
+      "research_problem": [
+        "Safety, jailbreak robustness, and instruction hierarchy for multi-role prompt handling."
+      ],
+      "reward_mechanism": [],
+      "rl_algorithm": [],
+      "supported_language": [
+        "English",
+        "Arabic",
+        "Bengali",
+        "Chinese",
+        "French",
+        "German",
+        "Hindi",
+        "Indonesian",
+        "Italian",
+        "Japanese",
+        "Korean",
+        "Portuguese",
+        "Spanish",
+        "Swahili",
+        "Yoruba"
+      ],
+      "tool_calling_format": [
+        "Responses API compatible; Structured Outputs"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "gpt-oss": {
+        "attention_mechanism": {
+          "candidates": [
+            "Flash Attention",
+            "Grouped Query Attention (GQA) with 8 key-value heads",
+            "alternating banded window (bandwidth 128) and fully dense patterns",
+            "rotary position embeddings extended to 131",
+            "072 tokens using YaRN",
+            "learned bias in denominator of softmax"
+          ],
+          "accepted": [
+            "Flash Attention",
+            "Grouped Query Attention (GQA) with 8 key-value heads",
+            "alternating banded window (bandwidth 128) and fully dense patterns",
+            "learned bias in denominator of softmax"
+          ],
+          "dropped": [
+            {
+              "value": "rotary position embeddings extended to 131",
+              "reason": "RoPE is a position encoding method, not an attention mechanism."
+            },
+            {
+              "value": "072 tokens using YaRN",
+              "reason": "YaRN is a context length extension method, not an attention mechanism."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Wide range of problems from coding",
+            "math",
+            "science",
+            "more.",
+            "Examples of conflicting system",
+            "developer",
+            "user messages"
+          ],
+          "accepted": [
+            "math",
+            "science"
+          ],
+          "dropped": [
+            {
+              "value": "Wide range of problems from coding",
+              "reason": "Describes data breadth/content rather than naming a specific dataset."
+            },
+            {
+              "value": "more.",
+              "reason": "Sentence fragment/placeholder."
+            },
+            {
+              "value": "Examples of conflicting system",
+              "reason": "Sentence fragment describing data content, not a dataset name."
+            },
+            {
+              "value": "developer",
+              "reason": "Not a dataset or data collection."
+            },
+            {
+              "value": "user messages",
+              "reason": "Not a dataset or data collection."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Text-only dataset with trillions of tokens, focus on STEM, coding, general knowledge",
+            "filtered for harmful content using CBRN filters."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Text-only dataset with trillions of tokens, focus on STEM, coding, general knowledge",
+              "reason": "Describes data breadth and focus without naming an identifiable dataset or corpus."
+            },
+            {
+              "value": "filtered for harmful content using CBRN filters.",
+              "reason": "Describes a data processing step rather than naming the corpus."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Rewards answers that comply with unsafe prompts"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Rewards answers that comply with unsafe prompts",
+              "reason": "Describes the reward signal's objective rather than the mechanism or method used."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "CoT RL techniques"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "CoT RL techniques",
+              "reason": "Refers to a category of techniques rather than naming a specific RL algorithm."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 47,
+      "dropped": 11,
+      "llm_calls": 1,
+      "values_sent_to_llm": 29
+    }
+  },
+  "contributions": [
+    {
+      "label": "gpt-oss",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Gpt-oss",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GPT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-08",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenAI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Autoregressive Mixture-of-Experts (MoE) transformer building on GPT-2/GPT-3",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "MXFP4 quantization of MoE weights to 4.25 bits per parameter",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Grouped Query Attention (GQA) with alternating banded window (128 tokens) and fully dense patterns",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Rotary position embeddings extended to 131,072 tokens using YaRN",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Learned bias in denominator of softmax for attention.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Deliberative alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction hierarchy",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Adversarial fine-tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for instruction hierarchy",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "116.8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "120B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 120000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "2.1 million H100-hours",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Agentic workflows",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Web search",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Python code execution",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Safety, jailbreak robustness, and instruction hierarchy for multi-role prompt handling.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "Trillions of tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Math",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Science",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bengali",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Indonesian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swahili",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Yoruba",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "5.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Flash Attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA) with 8 key-value heads",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Alternating banded window (bandwidth 128) and fully dense patterns",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Learned bias in denominator of softmax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "131,072 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "YaRN",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Post-training for reasoning and tool use (variable effort reasoning training, agentic tool use)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Full chain-of-thought (CoT); variable effort reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "128 experts, 4 active",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "MXFP4 (4.25 bits per parameter)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203095",
+          "label": "tool_calling_format",
+          "value": "Responses API compatible; Structured Outputs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Preparedness Framework evaluations; adversarial fine-tuning simulations; scalable capability evaluations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Gpt-oss",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2025: 85",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA Diamond: 80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-Bench Verified: 60.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Tau-Bench Retail: 57.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2025: 80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA Diamond: 75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-Bench Verified: 60",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Tau-Bench Retail: 54.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2024: 96.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2025: 98.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA Diamond: 87.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HLE: 24.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 93.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2024: 83.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2025: 96.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA Diamond: 81.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HLE: 17.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 85.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Standard Disallowed Content Evaluation: hate 0.996/0.996, self-harm/intent 0.995/0.984, personal-data/semi-restrictive 0.967/0.947, sexual/exploitative 1.000/0.980, sexual/minors 1.000/0.971, illicit/non-violent 1.000/0.983, illicit/violent 1.000/1.000, personal-data/restricted 0.996/0.978",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Production Benchmarks: non-violent hate 0.895/0.901, personal-data 0.888/0.921, harassment/threatening 0.832/0.819, sexual/illicit 0.919/0.852, sexual/minors 0.967/0.866, extremism 0.932/0.951, hate/threatening 0.898/0.829, illicit/nonviolent 0.692/0.656, illicit/violent 0.817/0.744, self-harm/intent 0.950/0.893, self-harm/instructions 0.910/0.899",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Jailbreak evaluations: illicit/non-violent-crime 0.979/0.960, violence 0.983/0.979, abuse/disinformation/hate 0.993/0.982, sexual-content 0.989/0.970",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Instruction Hierarchy: System prompt extraction 0.832/0.881, Prompt injection hijacking 0.780/0.639, Phrase protection system 0.912, Password protection system 0.965, Phrase protection developer 0.909, Password protection developer 1.000/0.946",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "64 query / 8 key-value",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Internal OpenAI o-series RL training stack",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927097",
+    "contribution_ids": [
+      "R1927099"
+    ],
+    "new_contribution_ids": [
+      "R1927099"
+    ],
+    "comparison_updated": null
+  }
+}

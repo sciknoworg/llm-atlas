@@ -1,0 +1,831 @@
+{
+ "arxiv_id": "2211.09085",
+ "status": "completed",
+ "timestamp": "2026-08-28T00:14:51.304237",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2211.09085",
+  "title": "Galactica: A Large Language Model for Science",
+  "authors": [
+   "Ross Taylor",
+   "Marcin Kardas",
+   "Guillem Cucurull",
+   "Thomas Scialom",
+   "Anthony Hartshorn",
+   "Elvis Saravia",
+   "Andrew Poulton",
+   "Viktor Kerkez",
+   "Robert Stojnic"
+  ],
+  "abstract": "Information overload is a major obstacle to scientific progress. The explosive growth in scientific literature and data has made it ever harder to discover useful insights in a large mass of information. Today scientific knowledge is accessed through search engines, but they are unable to organize scientific knowledge alone. In this paper we introduce Galactica: a large language model that can store, combine and reason about scientific knowledge. We train on a large scientific corpus of papers, reference material, knowledge bases and many other sources. We outperform existing models on a range of scientific tasks. On technical knowledge probes such as LaTeX equations, Galactica outperforms the latest GPT-3 by 68.2% versus 49.0%. Galactica also performs well on reasoning, outperforming Chinchilla on mathematical MMLU by 41.3% to 35.7%, and PaLM 540B on MATH with a score of 20.4% versus 8.8%. It also sets a new state-of-the-art on downstream tasks such as PubMedQA and MedMCQA dev of 77.6% and 52.9%. And despite not being trained on a general corpus, Galactica outperforms BLOOM and OPT-175B on BIG-bench. We believe these results demonstrate the potential for language models as a new interface for science. We open source the model for the benefit of the scientific community.",
+  "published": "2022-11-16T18:06:33+00:00",
+  "updated": "2022-11-16T18:06:33+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "stat.ML"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2211.09085v1",
+  "entry_id": "http://arxiv.org/abs/2211.09085v1",
+  "pdf_path": "data/papers/2211.09085.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 150602,
+ "word_count": 7633,
+ "models_extracted": 14,
+ "extraction_data": [
+  {
+   "model_name": "Galactica",
+   "parameters": "120M, 125M, 1.2B, 1.3B, 3B, 6.7B, 6.8B, 12B, 30B, 67B, 120B, 175B",
+   "parameters_millions": 175000,
+   "model_family": "Galactica",
+   "date_created": "2022-11-16",
+   "organization": "Meta",
+   "innovation": "Curated scientific corpus pre-training: trained on a highly curated dataset of 48M+ papers, textbooks, knowledge bases, compounds, and proteins rather than uncurated web crawl, enabling superior scientific knowledge storage and reasoning; Task-specific interface tokens: uses special tokens for citations, step-by-step reasoning (mimicking internal working memory), and modalities like SMILES and protein sequences to blend knowledge and support natural language interaction with scientific data.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Language modeling",
+   "pretraining_corpus": "Papers (88B tokens), Code (7B), Reference Material (7B), Knowledge Bases (2B), Filtered Common Crawl (1B), Prompts (0.4B), Other (0.2B)",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Absorbing scientific knowledge into model weights to improve generation reliability and network knowledge updates without retrieval augmentation.",
+   "application": "Scientific knowledge organization, literature review generation, encyclopedia article writing, linking papers with code/proteins/compounds/theories, mathematical reasoning",
+   "paper_title": "Galactica: A Large Language Model for Science",
+   "training_corpus_size": "106 billion tokens",
+   "finetuning_data": "Scientific QA datasets, fact-checking benchmarks, code benchmarks",
+   "tokenizer": "Specialized modality tokens ([START_REF], [END_REF], <work>, [START_SMILES], [END_SMILES], [START_AMINO], [END_AMINO]); character-based for sequences; digit-by-digit splitting for numbers; ASCII operation splitting for math",
+   "supported_language": "English",
+   "hardware_description": "Single NVIDIA A100 node for the 120B model",
+   "carbon_emitted": null,
+   "source_code": "https://huggingface.co/facebook/galactica-12b; https://github.com/facebookresearch/galactica",
+   "context_length": "3072",
+   "activated_parameters": "All parameters active (dense)",
+   "attention_mechanism": "Standard multi-head self-attention, Multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Single-stage pre-training on curated scientific corpus; zero-shot evaluation; optional `<work>` token prompting for reasoning",
+   "reasoning_mode": "Chain-of-thought prompting",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "CrowS-Pairs, StereoSet",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Mathematical MMLU: 41.3%; MATH: 20.4%; PubMedQA: 77.6%; MedMCQA dev: 52.9%; MATH: 8.8%; LaTeX equations: 68.2%; CrowS-Pairs Overall: 60.5%; StereoSet Overall SS: 56.2%; ICAT: 65.6%; LaTeX Equations Overall: 0.5%; Domain Probes Overall: 6.7%; LaTeX Equations Overall: 20.5%; Domain Probes Overall: 14.2%; MMLU Math Average: 27.1%; LaTeX Equations Overall: 41.7%; Domain Probes Overall: 17.5%; MMLU Math Average: 29.2%; LaTeX Equations Overall: 68.2%; Domain Probes Overall: 24.2%; MMLU Math Average: 35.8%; MATH Average: 16.6%; BioASQ: 94.3%; MedQA-USMLE: 44.4%; ARC Challenge: 67.9%; ARCEasy: 83.8%; Astronomy: 65.1%; Biology(College): 68.8%; Chemistry(College): 46.0%; Comp. Science(College): 49.0%; Econometrics: 42.1%; ElectricalEngineering: 62.8%; ElementaryMathematics: 38.1%; FormalLogic: 32.5%; MachineLearning: 38.4%; Mathematics(College): 43.0%; MedicalGenetics: 70.0%; Physics(College): 42.2%; Statistics(High-School): 41.2%; SQuAD: 88.3; PubMed QA: 78.3; SciFact: 82.5; PubMedMM: 76.4; arXiv: 88.1; SOTA on 10 of 12 scientific benchmarks (e.g., PubMedQA, SciQ, BioASQ, PubmedMRC, SciFact, QASC, SciTail, MMLU, MATH, GSM8K); outperforms OPT-175B on 10/12 scientific benchmarks; SOTA on 10 of 12 scientific QA benchmarks; outperforms GPT-3 on 11 of 12 benchmarks",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 14,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Galactica": {
+   "application": [
+    "Scientific knowledge organization",
+    "literature review generation",
+    "encyclopedia article writing",
+    "linking papers with code/proteins/compounds/theories",
+    "mathematical reasoning"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention",
+    "Multi-head self-attention"
+   ],
+   "finetuning_data": [
+    "Scientific QA datasets",
+    "fact-checking benchmarks",
+    "code benchmarks"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Galactica"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "120M",
+    "125M",
+    "1.2B",
+    "1.3B",
+    "3B",
+    "6.7B",
+    "6.8B",
+    "12B",
+    "30B",
+    "67B",
+    "120B",
+    "175B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Papers (88B tokens)",
+    "Code (7B)",
+    "Reference Material (7B)",
+    "Knowledge Bases (2B)",
+    "Filtered Common Crawl (1B)",
+    "Prompts (0.4B)",
+    "Other (0.2B)"
+   ],
+   "pretraining_task": [
+    "Language modeling"
+   ],
+   "reasoning_mode": [
+    "Chain-of-thought prompting"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Galactica": {
+    "model_family": {
+     "candidates": [
+      "Galactica"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Galactica",
+       "reason": "Galactica is a specific model, not a broader family or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Absorbing scientific knowledge into model weights to improve generation reliability and network knowledge updates without retrieval augmentation."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Absorbing scientific knowledge into model weights to improve generation reliability and network knowledge updates without retrieval augmentation.",
+       "reason": "Describes a solution or methodology rather than a short noun phrase naming the problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 38,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 18
+  }
+ },
+ "contributions": [
+  {
+   "label": "Galactica",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Galactica",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-16",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Curated scientific corpus pre-training: trained on a highly curated dataset of 48M+ papers, textbooks, knowledge bases, compounds, and proteins rather than uncurated web crawl, enabling superior scientific knowledge storage and reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Task-specific interface tokens: uses special tokens for citations, step-by-step reasoning (mimicking internal working memory), and modalities like SMILES and protein sequences to blend knowledge and support natural language interaction with scientific data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Papers (88B tokens)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Code (7B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Reference Material (7B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Knowledge Bases (2B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Filtered Common Crawl (1B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Prompts (0.4B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Other (0.2B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Specialized modality tokens ([START_REF], [END_REF], <work>, [START_SMILES], [END_SMILES], [START_AMINO], [END_AMINO]); character-based for sequences; digit-by-digit splitting for numbers; ASCII operation splitting for math",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "120M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "67B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "120B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "175B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 175000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Single NVIDIA A100 node for the 120B model",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scientific knowledge organization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Literature review generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Encyclopedia article writing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Linking papers with code/proteins/compounds/theories",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Mathematical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://huggingface.co/facebook/galactica-12b",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/galactica",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "106 billion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Scientific QA datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Fact-checking benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Code benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "3072",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "All parameters active (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Single-stage pre-training on curated scientific corpus; zero-shot evaluation; optional `<work>` token prompting for reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Chain-of-thought prompting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "CrowS-Pairs, StereoSet",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Mathematical MMLU: 41.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 20.4%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PubMedQA: 77.6%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MedMCQA dev: 52.9%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 8.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LaTeX equations: 68.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CrowS-Pairs Overall: 60.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "StereoSet Overall SS: 56.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ICAT: 65.6%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LaTeX Equations Overall: 0.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Domain Probes Overall: 6.7%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LaTeX Equations Overall: 20.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Domain Probes Overall: 14.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU Math Average: 27.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LaTeX Equations Overall: 41.7%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Domain Probes Overall: 17.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU Math Average: 29.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LaTeX Equations Overall: 68.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Domain Probes Overall: 24.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU Math Average: 35.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH Average: 16.6%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BioASQ: 94.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MedQA-USMLE: 44.4%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Challenge: 67.9%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARCEasy: 83.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Astronomy: 65.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Biology(College): 68.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Chemistry(College): 46.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Comp. Science(College): 49.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Econometrics: 42.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ElectricalEngineering: 62.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ElementaryMathematics: 38.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FormalLogic: 32.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MachineLearning: 38.4%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Mathematics(College): 43.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MedicalGenetics: 70.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Physics(College): 42.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Statistics(High-School): 41.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD: 88.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PubMed QA: 78.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciFact: 82.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PubMedMM: 76.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ArXiv: 88.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on 10 of 12 scientific benchmarks (e.g., PubMedQA, SciQ, BioASQ, PubmedMRC, SciFact, QASC, SciTail, MMLU, MATH, GSM8K)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms OPT-175B on 10/12 scientific benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on 10 of 12 scientific QA benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms GPT-3 on 11 of 12 benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R595034",
+  "contribution_ids": [
+   "R595036",
+   "R796194",
+   "R1923346"
+  ],
+  "new_contribution_ids": [
+   "R1923346"
+  ],
+  "comparison_updated": null
+ }
+}

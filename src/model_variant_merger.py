@@ -21,7 +21,7 @@ Usage:
 import logging
 import re
 from typing import Any, Dict, List, Optional
-from src.template_mapper import _MULTI_VALUED_FIELDS
+from src.template_mapper import _MULTI_VALUED_FIELDS, TemplateMapper
 
 logger = logging.getLogger(__name__)
 
@@ -178,6 +178,26 @@ def _normalize_model_name_spacing(name: str) -> str:
     return re.sub(r"([A-Za-z])(\d)", r"\1 \2", name).strip()
 
 
+def _family_of(canonical_name: str, version: Optional[str] = None) -> str:
+    """
+    Family name of a model, with any version token removed.
+
+    Derived by stripping the version rather than by a prefix regex. The previous
+    `^([A-Za-z][\\w-]*)` matched hyphens and digits too, so "GPT-3" yielded the
+    family "gpt-3" while the bare "GPT" yielded "gpt" — the two never met and the
+    bare entry survived as a second, phantom contribution. Space-separated
+    versions ("Gemini 1.0" -> "gemini") worked only by accident of the space
+    terminating the match.
+    """
+    name = (canonical_name or "").strip()
+    if version is None:
+        version = _extract_version_token(name)
+    if version:
+        # Remove a trailing version token and whatever separates it.
+        name = re.sub(rf"[\s-]*{re.escape(version)}\s*$", "", name).strip()
+    return name.lower()
+
+
 def _absorb_bare_family_groups(
     groups: Dict[str, List[Dict[str, Any]]],
 ) -> Dict[str, List[Dict[str, Any]]]:
@@ -194,18 +214,16 @@ def _absorb_bare_family_groups(
 
     for canonical_name in groups:
         version = _extract_version_token(canonical_name)
-        family_match = re.match(r"^([A-Za-z][\w-]*)", canonical_name)
-        family = family_match.group(1).lower() if family_match else ""
+        family = _family_of(canonical_name, version)
         if version:
             versioned_by_family.setdefault(family, []).append(canonical_name)
         elif family and canonical_name.strip().lower() == family:
             bare_keys.append(canonical_name)
 
     for bare_key in bare_keys:
-        family_match = re.match(r"^([A-Za-z][\w-]*)", bare_key)
-        if not family_match:
+        family = _family_of(bare_key, _extract_version_token(bare_key))
+        if not family:
             continue
-        family = family_match.group(1).lower()
         targets = versioned_by_family.get(family, [])
         if not targets:
             continue
@@ -449,10 +467,16 @@ def _merge_group(models: List[Dict[str, Any]], canonical_name: str) -> Dict[str,
     for model in models:
         params = model.get("parameters")
         if params:
-            # Normalize and collect
-            normalized = _normalize_parameter_string(str(params))
-            if normalized:
-                param_sizes.append(normalized)
+            # `parameters` holds a comma-separated LIST of sizes ("125M, 175B"),
+            # so each size is normalized on its own. Passing the whole string to
+            # _normalize_parameter_string made its single-size regex fail, the
+            # string was kept intact as one "size", and set() then deduplicated
+            # whole lists rather than sizes — producing output like
+            # "125M, 175B, 2.7B, 175B": unsorted, with 175B twice.
+            for part in TemplateMapper._split_top_level(str(params), (",",)):
+                normalized = _normalize_parameter_string(part)
+                if normalized:
+                    param_sizes.append(normalized)
 
         params_m = model.get("parameters_millions")
         if params_m is not None:
@@ -464,7 +488,23 @@ def _merge_group(models: List[Dict[str, Any]], canonical_name: str) -> Dict[str,
     # Deduplicate and sort sizes
     unique_sizes = sorted(set(param_sizes), key=_size_sort_key)
     merged["parameters"] = ", ".join(unique_sizes) if unique_sizes else None
-    merged["parameters_millions"] = max(param_millions_list) if param_millions_list else None
+
+    # parameters_millions is defined as "max params in million", so derive it
+    # from the sizes we just agreed on rather than from a separately extracted
+    # number. That keeps the two fields consistent: previously a model could
+    # report a maximum that appears nowhere in its own parameters list.
+    #
+    # _size_sort_key returns 0 for a size it cannot parse ("MoE 47B total",
+    # "A13B"), and those sort to the front, so a derived 0 means NO size in the
+    # list was parseable. Writing it out would replace a correct extracted count
+    # with a wrong one, so fall back to what was extracted instead.
+    derived = int(_size_sort_key(unique_sizes[-1])) if unique_sizes else 0
+    if derived > 0:
+        merged["parameters_millions"] = derived
+    else:
+        merged["parameters_millions"] = (
+            max(param_millions_list) if param_millions_list else None
+        )
 
     # Merge other fields
     fields_to_merge = [
@@ -546,6 +586,10 @@ def _normalize_parameter_string(param_str: str) -> Optional[str]:
     match = re.match(r"^(\d+\.?\d*)\s*([MBT])$", param_str)
     if match:
         num, unit = match.groups()
+        # Drop a redundant trailing ".0" so "13.0B" and "13B" are one size.
+        # Without this they survive de-duplication as two distinct entries.
+        if "." in num:
+            num = num.rstrip("0").rstrip(".")
         return f"{num}{unit}"
 
     # If it's just a number, assume millions
@@ -609,11 +653,36 @@ def _merge_field(models: List[Dict[str, Any]], field: str) -> Any:
           "," if field in ("blog_post", "source_code") else None
       )
     if sep:
-        all_parts = []
+        # Split with the SAME bracket-aware splitter the mapper uses. A plain
+        # str.split(sep) cuts inside parentheses and destroys values:
+        #
+        #   "W4A8 (INT4 for MoE experts, INT8 for Attention/MLP)"
+        #       -> "W4A8 (INT4 for MoE experts" + "INT8 for Attention/MLP)"
+        #
+        # and "Level-2 rendering properties (width, height, bounding boxes)"
+        # shed a bare "height" that then surfaced as a reward_mechanism row.
+        # Both were reported from real extractions.
+        all_parts: List[str] = []
         for val in non_null:
-            parts = str(val).split(sep)
-            all_parts.extend(part.strip() for part in parts if part.strip())
-        unique_parts = sorted(set(all_parts))
+            for part in TemplateMapper._split_top_level(str(val), (sep,)):
+                part = part.strip()
+                if part:
+                    all_parts.append(part)
+
+        # Preserve first-seen order. The previous sorted(set(...)) reordered the
+        # parts alphabetically, which is why damaged values came out scrambled
+        # ("INT4, INT8 for Attention/MLP), W4A8 (INT4 for MoE experts") and
+        # unrecoverable — no downstream cleanup can restore an order that was
+        # thrown away here.
+        unique_parts: List[str] = []
+        seen = set()
+        for part in all_parts:
+            marker = TemplateMapper._dedup_key(part)
+            if marker in seen:
+                continue
+            seen.add(marker)
+            unique_parts.append(part)
+
         return f"{sep} ".join(unique_parts) if unique_parts else None
 
     # Default: first non-null

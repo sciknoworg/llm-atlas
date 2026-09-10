@@ -1,0 +1,1965 @@
+{
+  "arxiv_id": "2206.07643",
+  "status": "completed",
+  "timestamp": "2026-08-27T14:51:38.344380",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2206.07643",
+    "title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+    "authors": [
+      "Zi-Yi Dou",
+      "Aishwarya Kamath",
+      "Zhe Gan",
+      "Pengchuan Zhang",
+      "Jianfeng Wang",
+      "Linjie Li",
+      "Zicheng Liu",
+      "Ce Liu",
+      "Yann LeCun",
+      "Nanyun Peng",
+      "Jianfeng Gao",
+      "Lijuan Wang"
+    ],
+    "abstract": "Vision-language (VL) pre-training has recently received considerable attention. However, most existing end-to-end pre-training approaches either only aim to tackle VL tasks such as image-text retrieval, visual question answering (VQA) and image captioning that test high-level understanding of images, or only target region-level understanding for tasks such as phrase grounding and object detection. We present FIBER (Fusion-In-the-Backbone-based transformER), a new VL model architecture that can seamlessly handle both these types of tasks. Instead of having dedicated transformer layers for fusion after the uni-modal backbones, FIBER pushes multimodal fusion deep into the model by inserting cross-attention into the image and text backbones, bringing gains in terms of memory and performance. In addition, unlike previous work that is either only pre-trained on image-text data or on fine-grained data with box-level annotations, we present a two-stage pre-training strategy that uses both these kinds of data efficiently: (i) coarse-grained pre-training based on image-text data; followed by (ii) fine-grained pre-training based on image-text-box data. We conduct comprehensive experiments on a wide range of VL tasks, ranging from VQA, image captioning, and retrieval, to phrase grounding, referring expression comprehension, and object detection. Using deep multimodal fusion coupled with the two-stage pre-training, FIBER provides consistent performance improvements over strong baselines across all tasks, often outperforming methods using magnitudes more data. Code is available at https://github.com/microsoft/FIBER.",
+    "published": "2022-06-15T16:41:29+00:00",
+    "updated": "2022-11-18T18:23:08+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2206.07643v2",
+    "entry_id": "http://arxiv.org/abs/2206.07643v2",
+    "pdf_path": "data/papers/2206.07643.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+  },
+  "text_length": 70509,
+  "word_count": 4171,
+  "models_extracted": 6,
+  "extraction_data": [
+    {
+      "model_name": "FIBER",
+      "model_family": "FIBER",
+      "date_created": "2022-06-15",
+      "organization": "Meta",
+      "innovation": "Coarse-to-fine two-stage pre-training pipeline; unified architecture that switches between a dual encoder (for fast retrieval) and a fusion encoder (for VQA/captioning) by toggling cross-attention modules; end-to-end support for both image-level and region-level tasks without task-specific architectures.",
+      "pretraining_corpus": "Web-harvested image-text data, image-text-box data with ground-truth box annotations",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "VQA, image captioning, image-text retrieval, phrase grounding, referring expression comprehension, object detection",
+      "license": null,
+      "research_problem": "Unified vision-language pre-training for image-level and region-level tasks",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Image-text matching, masked language modeling, image-text contrastive loss, bounding box localization loss, word-region alignment loss",
+      "training_corpus_size": "4M images",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "VQA, image captioning, retrieval, grounding, object detection",
+      "finetuning_data": "VQAv2, NLVR2, COCO captioning, NoCaps, COCO and Flickr30k image-text retrieval, Flickr30kEntities, referring expression comprehension, COCO and LVIS detection, 13 object detection in the wild datasets",
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "A100 GPU, V100 GPU",
+      "hardware_description": "64 A100 GPUs for coarse-grained pre-training; 64 V100 GPUs for fine-grained pre-training",
+      "carbon_emitted": null,
+      "extension": "Switching on/off cross-attention modules to adapt between dual encoder and fusion encoder modes; adding an object detection head for grounding/detection",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+      "activated_parameters": null,
+      "attention_mechanism": "Cross-attention fusion inserted into encoding layers of the backbone",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Coarse-grained pre-training (low-res 384x384, image-text matching, MLM, contrastive loss) -> fine-grained pre-training (high-res 800x1333, bounding box localization, word-region alignment, initialized from coarse model)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Cross-attention fusion (switchable between dual encoder and fusion encoder)",
+      "vision_encoder": "Swin Transformer",
+      "base_model": "Swin Transformer, RoBERTa",
+      "optimizer_innovation": null,
+      "benchmark_result": "COCO AP 49.3/58.4; LVIS AP 29.5/50.0; ODinW avg AP 32.2/56.9; ODinW datasets AP 40.1/58.1, 35.8/56.9, 47.0/65.9",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "FIBER-B",
+      "parameters": "213M",
+      "parameters_millions": 213,
+      "model_family": "FIBER",
+      "date_created": "2022-06-15",
+      "organization": "Google",
+      "innovation": "Coarse-to-fine vision-language pre-training with fusion in the backbone: inserts cross-attention modules into the top layers of pre-trained vision (Swin) and text (RoBERTa) encoders to produce text-aware image features and language-aware text features during fine-grained pre-training, unlike prior work (e.g., GLIP) that fuses modalities only in the detection head or after feature extraction.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Coarse-to-fine vision-language pre-training (object grounding, phrase grounding, image-text matching)",
+      "pretraining_corpus": "COCO, ConceptualCaptions, SBUCaptions, VisualGenome (coarse-grained); MDETR-curated data, Objects365 (fine-grained)",
+      "finetuning_task": "Supervised discriminative fine-tuning for VQA, retrieval, captioning, object detection, phrase grounding, Image captioning, open-ended VQA, grounding",
+      "optimizer": null,
+      "hardware_used": "NVIDIA V100 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Vision-and-language representation learning",
+      "application": "Object detection, phrase grounding, visual question answering (VQA), image-text retrieval, captioning, referring expression comprehension",
+      "paper_title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+      "training_corpus_size": "~4M images (coarse), ~0.8M images (fine)",
+      "finetuning_data": "COCO, VQAv2, NLVR2, Flickr30k, NoCaps, Flickr30k entities, RefCOCO, RefCOCOg, LVIS, ODinW",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": "V100(32GB) GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "213M",
+      "attention_mechanism": "Cross-attention modules inserted into top 6 blocks of vision and text encoders",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Coarse-grained pre-training -> Fine-grained pre-training -> Downstream task adaptation",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Cross-attention fusion inserted into backbone layers",
+      "vision_encoder": "Swin-Base, Swin-B",
+      "base_model": "Swin-Base, RoBERTa-Base",
+      "optimizer_innovation": null,
+      "benchmark_result": "COCO: 54.5; VQAv2: 78.22; NLVR2: 78.37; Flickr30k: 84.41; COCO test-P: 81.2; COCO CIDEr: SOTA for base-size models; Flickr30k entities: 96.1/97.4; RefCOCO val/testA/testB: 90.68/92.59/87.26; RefCOCO+: 85.74/90.13/79.38; RefCOCOg: 87.11/87.32; COCO OD: 49.3/58.4 AP; LVIS MiniVal AP: 29.5/50.0",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "FIBER-L",
+      "model_family": "FIBER",
+      "date_created": "2022-06-15",
+      "organization": "Meta",
+      "innovation": "Coarse-to-fine vision-language pre-training with fusion in the backbone; introduces a ladder architecture to align pre-training and fine-tuning objectives; applies CIDEr optimization for image captioning; demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+      "pretraining_corpus": "Flickr30k, RefCOCO+",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image captioning, open-ended VQA, object detection, grounding",
+      "license": null,
+      "research_problem": "Vision-Language Pre-training",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Coarse-to-fine vision-language pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image captioning, open-ended VQA, object detection, grounding",
+      "finetuning_data": "COCO, NoCaps, VQA, GLUE",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Fusion in the backbone (ladder/seq2seq)",
+      "vision_encoder": "SwinTransformer",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "COCO CIDEr 142.8; NoCaps CIDEr 108.9; VQA 71.6 overall; GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "FIBER-GOLD-B",
+      "model_family": "FIBER",
+      "date_created": "2022-06-15",
+      "organization": "Meta",
+      "innovation": "Coarse-to-fine vision-language pre-training with fusion in the backbone; introduces a ladder architecture to align pre-training and fine-tuning objectives; applies CIDEr optimization for image captioning; demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+      "pretraining_corpus": "Flickr30k, RefCOCO+",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image captioning, open-ended VQA, object detection, grounding",
+      "license": null,
+      "research_problem": "Vision-Language Pre-training",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Coarse-to-fine vision-language pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image captioning, open-ended VQA, object detection, grounding",
+      "finetuning_data": "COCO, NoCaps, VQA, GLUE",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Fusion in the backbone (ladder/seq2seq)",
+      "vision_encoder": "SwinTransformer",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "COCO CIDEr 144.4; NoCaps CIDEr 110.3; VQA 71.6 overall; GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "FIBER-Ladder-B",
+      "model_family": "FIBER",
+      "date_created": "2022-06-15",
+      "organization": "Meta",
+      "innovation": "Coarse-to-fine vision-language pre-training with fusion in the backbone; introduces a ladder architecture to align pre-training and fine-tuning objectives; applies CIDEr optimization for image captioning; demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+      "pretraining_corpus": "Flickr30k, RefCOCO+",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Image captioning, open-ended VQA, object detection, grounding",
+      "license": null,
+      "research_problem": "Vision-Language Pre-training",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Coarse-to-fine vision-language pre-training",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Image captioning, open-ended VQA, object detection, grounding",
+      "finetuning_data": "COCO, NoCaps, VQA, GLUE",
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Coarse-to-Fine Vision-Language Pre-training with Fusion in the Backbone",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Fusion in the backbone (ladder/seq2seq)",
+      "vision_encoder": "SwinTransformer",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "COCO CIDEr 127.5; NoCaps CIDEr 92.8; VQA 71.6 overall; GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 6,
+  "models_after_merge": 5,
+  "validated_rows": {
+    "FIBER": {
+      "application": [
+        "VQA",
+        "image captioning",
+        "image-text retrieval",
+        "phrase grounding",
+        "referring expression comprehension",
+        "object detection"
+      ],
+      "attention_mechanism": [
+        "Cross-attention fusion inserted into encoding layers of the backbone"
+      ],
+      "base_model": [
+        "Swin Transformer, RoBERTa"
+      ],
+      "finetuning_data": [
+        "VQAv2",
+        "NLVR2",
+        "COCO captioning",
+        "NoCaps",
+        "COCO and Flickr30k image-text retrieval",
+        "Flickr30kEntities",
+        "COCO and LVIS detection"
+      ],
+      "finetuning_task": [
+        "VQA",
+        "image captioning",
+        "retrieval",
+        "grounding",
+        "object detection"
+      ],
+      "fusion_architecture": [
+        "Cross-attention fusion (switchable between dual encoder and fusion encoder)"
+      ],
+      "hardware_used": [
+        "A100 GPU, V100 GPU"
+      ],
+      "model_family": [
+        "FIBER"
+      ],
+      "model_name": [
+        "FIBER"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Image-text matching, masked language modeling, image-text contrastive loss, bounding box localization loss, word-region alignment loss"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Swin Transformer"
+      ]
+    },
+    "FIBER-B": {
+      "application": [
+        "Object detection",
+        "phrase grounding",
+        "visual question answering (VQA)",
+        "image-text retrieval",
+        "captioning",
+        "referring expression comprehension"
+      ],
+      "attention_mechanism": [
+        "Cross-attention modules inserted into top 6 blocks of vision and text encoders"
+      ],
+      "base_model": [
+        "Swin-Base, RoBERTa-Base"
+      ],
+      "finetuning_data": [
+        "COCO",
+        "VQAv2",
+        "NLVR2",
+        "Flickr30k",
+        "NoCaps",
+        "Flickr30k entities",
+        "RefCOCO",
+        "RefCOCOg",
+        "LVIS",
+        "ODinW"
+      ],
+      "finetuning_task": [
+        "Supervised discriminative fine-tuning for VQA",
+        "retrieval",
+        "captioning",
+        "object detection",
+        "phrase grounding",
+        "Image captioning",
+        "open-ended VQA",
+        "grounding"
+      ],
+      "fusion_architecture": [
+        "Cross-attention fusion inserted into backbone layers"
+      ],
+      "hardware_used": [
+        "NVIDIA V100 GPU"
+      ],
+      "model_family": [
+        "FIBER"
+      ],
+      "model_name": [
+        "FIBER-B"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "213M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "COCO, ConceptualCaptions, SBUCaptions, VisualGenome (coarse-grained)",
+        "MDETR-curated data, Objects365 (fine-grained)"
+      ],
+      "pretraining_task": [
+        "Coarse-to-fine vision-language pre-training (object grounding, phrase grounding, image-text matching)"
+      ],
+      "research_problem": [
+        "Vision-and-language representation learning"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Swin-Base",
+        "Swin-B"
+      ]
+    },
+    "FIBER-L": {
+      "application": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "finetuning_data": [
+        "COCO",
+        "NoCaps",
+        "VQA",
+        "GLUE"
+      ],
+      "finetuning_task": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "fusion_architecture": [
+        "Fusion in the backbone (ladder/seq2seq)"
+      ],
+      "model_family": [
+        "FIBER"
+      ],
+      "model_name": [
+        "FIBER-L"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Flickr30k",
+        "RefCOCO+"
+      ],
+      "pretraining_task": [
+        "Coarse-to-fine vision-language pre-training"
+      ],
+      "research_problem": [
+        "Vision-Language Pre-training"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "SwinTransformer"
+      ]
+    },
+    "FIBER-GOLD-B": {
+      "application": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "finetuning_data": [
+        "COCO",
+        "NoCaps",
+        "VQA",
+        "GLUE"
+      ],
+      "finetuning_task": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "fusion_architecture": [
+        "Fusion in the backbone (ladder/seq2seq)"
+      ],
+      "model_family": [
+        "FIBER"
+      ],
+      "model_name": [
+        "FIBER-GOLD-B"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Flickr30k",
+        "RefCOCO+"
+      ],
+      "pretraining_task": [
+        "Coarse-to-fine vision-language pre-training"
+      ],
+      "research_problem": [
+        "Vision-Language Pre-training"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "SwinTransformer"
+      ]
+    },
+    "FIBER-Ladder-B": {
+      "application": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "finetuning_data": [
+        "COCO",
+        "NoCaps",
+        "VQA",
+        "GLUE"
+      ],
+      "finetuning_task": [
+        "Image captioning",
+        "open-ended VQA",
+        "object detection",
+        "grounding"
+      ],
+      "fusion_architecture": [
+        "Fusion in the backbone (ladder/seq2seq)"
+      ],
+      "model_family": [
+        "FIBER"
+      ],
+      "model_name": [
+        "FIBER-Ladder-B"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Flickr30k",
+        "RefCOCO+"
+      ],
+      "pretraining_task": [
+        "Coarse-to-fine vision-language pre-training"
+      ],
+      "research_problem": [
+        "Vision-Language Pre-training"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "SwinTransformer"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "FIBER": {
+        "finetuning_data": {
+          "candidates": [
+            "VQAv2",
+            "NLVR2",
+            "COCO captioning",
+            "NoCaps",
+            "COCO and Flickr30k image-text retrieval",
+            "Flickr30kEntities",
+            "referring expression comprehension",
+            "COCO and LVIS detection",
+            "13 object detection in the wild datasets"
+          ],
+          "accepted": [
+            "VQAv2",
+            "NLVR2",
+            "COCO captioning",
+            "NoCaps",
+            "COCO and Flickr30k image-text retrieval",
+            "Flickr30kEntities",
+            "COCO and LVIS detection"
+          ],
+          "dropped": [
+            {
+              "value": "referring expression comprehension",
+              "reason": "names a task, not a dataset"
+            },
+            {
+              "value": "13 object detection in the wild datasets",
+              "reason": "describes a collection/breadth rather than naming a specific dataset"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Web-harvested image-text data",
+            "image-text-box data with ground-truth box annotations"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Web-harvested image-text data",
+              "reason": "describes data type/source rather than naming an identifiable corpus"
+            },
+            {
+              "value": "image-text-box data with ground-truth box annotations",
+              "reason": "describes data format/content rather than naming a specific corpus"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Unified vision-language pre-training for image-level and region-level tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Unified vision-language pre-training for image-level and region-level tasks",
+              "reason": "describes a method/solution rather than naming a specific research problem or capability gap"
+            }
+          ]
+        }
+      },
+      "FIBER-B": {},
+      "FIBER-L": {},
+      "FIBER-GOLD-B": {},
+      "FIBER-Ladder-B": {}
+    },
+    "counts": {
+      "kept": 139,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 41
+    }
+  },
+  "contributions": [
+    {
+      "label": "FIBER",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-15",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Coarse-to-fine two-stage pre-training pipeline",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Unified architecture that switches between a dual encoder (for fast retrieval) and a fusion encoder (for VQA/captioning) by toggling cross-attention modules",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "End-to-end support for both image-level and region-level tasks without task-specific architectures.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text matching, masked language modeling, image-text contrastive loss, bounding box localization loss, word-region alignment loss",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "A100 GPU, V100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "64 A100 GPUs for coarse-grained pre-training; 64 V100 GPUs for fine-grained pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image-text retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Phrase grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring expression comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4M images",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLVR2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO and Flickr30k image-text retrieval",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Flickr30kEntities",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO and LVIS detection",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Cross-attention fusion inserted into encoding layers of the backbone",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Coarse-grained pre-training (low-res 384x384, image-text matching, MLM, contrastive loss) -> fine-grained pre-training (high-res 800x1333, bounding box localization, word-region alignment, initialized from coarse model)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Cross-attention fusion (switchable between dual encoder and fusion encoder)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Swin Transformer",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Swin Transformer, RoBERTa",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO AP 49.3/58.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LVIS AP 29.5/50.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ODinW avg AP 32.2/56.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ODinW datasets AP 40.1/58.1, 35.8/56.9, 47.0/65.9",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "FIBER-B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "FIBER-B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-15",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Coarse-to-fine vision-language pre-training with fusion in the backbone: inserts cross-attention modules into the top layers of pre-trained vision (Swin) and text (RoBERTa) encoders to produce text-aware image features and language-aware text features during fine-grained pre-training, unlike prior work (e.g., GLIP) that fuses modalities only in the detection head or after feature extraction.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Coarse-to-fine vision-language pre-training (object grounding, phrase grounding, image-text matching)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO, ConceptualCaptions, SBUCaptions, VisualGenome (coarse-grained)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MDETR-curated data, Objects365 (fine-grained)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised discriminative fine-tuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Phrase grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "213M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 213,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA V100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "V100(32GB) GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Phrase grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering (VQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image-text retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring expression comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-and-language representation learning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~4M images (coarse), ~0.8M images (fine)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLVR2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Flickr30k",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Flickr30k entities",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCOg",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LVIS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ODinW",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "213M",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Cross-attention modules inserted into top 6 blocks of vision and text encoders",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Coarse-grained pre-training -> Fine-grained pre-training -> Downstream task adaptation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Cross-attention fusion inserted into backbone layers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Swin-Base",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Swin-B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Swin-Base, RoBERTa-Base",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO: 54.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 78.22",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NLVR2: 78.37",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flickr30k: 84.41",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO test-P: 81.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO CIDEr: SOTA for base-size models",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flickr30k entities: 96.1/97.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RefCOCO val/testA/testB: 90.68/92.59/87.26",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RefCOCO+: 85.74/90.13/79.38",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RefCOCOg: 87.11/87.32",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO OD: 49.3/58.4 AP",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LVIS MiniVal AP: 29.5/50.0",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "FIBER-L",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "FIBER-L",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-15",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Coarse-to-fine vision-language pre-training with fusion in the backbone",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a ladder architecture to align pre-training and fine-tuning objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Applies CIDEr optimization for image captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Coarse-to-fine vision-language pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCO+",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-Language Pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Fusion in the backbone (ladder/seq2seq)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SwinTransformer",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO CIDEr 142.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoCaps CIDEr 108.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA 71.6 overall",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "FIBER-GOLD-B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "FIBER-GOLD-B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-15",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Coarse-to-fine vision-language pre-training with fusion in the backbone",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a ladder architecture to align pre-training and fine-tuning objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Applies CIDEr optimization for image captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Coarse-to-fine vision-language pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCO+",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-Language Pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Fusion in the backbone (ladder/seq2seq)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SwinTransformer",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO CIDEr 144.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoCaps CIDEr 110.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA 71.6 overall",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "FIBER-Ladder-B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "FIBER-Ladder-B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "FIBER",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-15",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Coarse-to-fine vision-language pre-training with fusion in the backbone",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a ladder architecture to align pre-training and fine-tuning objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Applies CIDEr optimization for image captioning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates that SwinTransformer+RoBERTa is the optimal backbone pairing for region-level tasks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Coarse-to-fine vision-language pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCO+",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-ended VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-Language Pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoCaps",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Coarse-to-fine pre-training on Flickr30k/RefCOCO+ -> Fine-tuning on COCO/NoCaps/VQA/GLUE",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Fusion in the backbone (ladder/seq2seq)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SwinTransformer",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO CIDEr 127.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoCaps CIDEr 92.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA 71.6 overall",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GLUE QQP 91.60, MNLI 86.23, QNLI 91.34, SST2 92.66, CoLA 59.56, MRPC 90.72, STSB 89.77, RTE 62.09",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925639",
+    "contribution_ids": [
+      "R1925641",
+      "R1925642",
+      "R1925643",
+      "R1925644",
+      "R1925645"
+    ],
+    "new_contribution_ids": [
+      "R1925641",
+      "R1925642",
+      "R1925643",
+      "R1925644",
+      "R1925645"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,872 @@
+{
+ "arxiv_id": "2110.13711",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:21:57.791813",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2110.13711",
+  "title": "Hierarchical Transformers Are More Efficient Language Models",
+  "authors": [
+   "Piotr Nawrot",
+   "Szymon Tworkowski",
+   "Micha\u0142 Tyrolski",
+   "\u0141ukasz Kaiser",
+   "Yuhuai Wu",
+   "Christian Szegedy",
+   "Henryk Michalewski"
+  ],
+  "abstract": "Transformer models yield impressive results on many NLP and sequence modeling tasks. Remarkably, Transformers can handle long sequences which allows them to produce long coherent outputs: full paragraphs produced by GPT-3 or well-structured images produced by DALL-E. These large language models are impressive but also very inefficient and costly, which limits their applications and accessibility. We postulate that having an explicit hierarchical architecture is the key to Transformers that efficiently handle long sequences. To verify this claim, we first study different ways to downsample and upsample activations in Transformers so as to make them hierarchical. We use the best performing upsampling and downsampling layers to create Hourglass - a hierarchical Transformer language model. Hourglass improves upon the Transformer baseline given the same amount of computation and can yield the same results as Transformers more efficiently. In particular, Hourglass sets new state-of-the-art for Transformer models on the ImageNet32 generation task and improves language modeling efficiency on the widely studied enwik8 benchmark.",
+  "published": "2021-10-26T14:00:49+00:00",
+  "updated": "2022-04-16T20:47:45+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2110.13711v2",
+  "entry_id": "http://arxiv.org/abs/2110.13711v2",
+  "pdf_path": "data/papers/2110.13711.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture)"
+ },
+ "text_length": 47053,
+ "word_count": 4776,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "Hourglass",
+   "model_family": "Transformer",
+   "date_created": "2021-10-26",
+   "organization": "OpenAI",
+   "innovation": "Hierarchical architecture that explicitly downsamples and upsamples internal sequence representations to reduce computational complexity for long sequences; uses shortening operations (e.g., linear pooling) and upsampling to merge tokens and combine with earlier layer outputs, improving efficiency over standard Transformers.",
+   "pretraining_corpus": "enwik8, ImageNet32",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Language modeling, image generation",
+   "license": null,
+   "research_problem": "Efficient language modeling and sequence modeling for long sequences",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Autoregressive language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "Entropy cluster",
+   "hardware_description": "Entropy cluster funded by NVIDIA, Intel, the Polish National Science Center grant UMO-2017/26/E/ST6/00622, and ERC Starting Grant",
+   "carbon_emitted": null,
+   "extension": "Hierarchical architecture with shortening and upsampling operations to reduce sequence length and memory usage while maintaining autoregressive property.",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Hierarchical Transformers Are More Efficient Language Models",
+   "activated_parameters": null,
+   "attention_mechanism": "Relative attention (Transformer-XL), optionally LSH attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Transformer-XL",
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on ImageNet32 generation; improved bits-per-character on enwik8 compared to Transformer-XL baseline",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "HourglassLM",
+   "model_family": "Transformer",
+   "date_created": "2021-10-26",
+   "organization": "Google",
+   "innovation": "Hierarchical architecture with shortening and upsampling layers to reduce sequence length and computational cost while preserving autoregressive property; reduces complexity from O(l^2) to O(l^2/k^2) for standard attention.",
+   "pretraining_corpus": "Enwik8",
+   "parameters": "21M, 24M, 28M, 34M, 41M, 48M, 55M, 62M, 69M, 75M",
+   "parameters_millions": 75,
+   "application": "Language modeling, text generation",
+   "license": "open source",
+   "research_problem": "Efficient language modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": "Byte-level",
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "Single GPU",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/google/trax/blob/master/trax/models/research/hourglass.py",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Hierarchical Transformers Are More Efficient Language Models",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Hierarchical Transformer",
+   "parameters": "146M",
+   "parameters_millions": 146,
+   "model_family": "Transformer",
+   "date_created": "2021-10-26",
+   "organization": "Google",
+   "innovation": "Hierarchical sequence processing: introduces a shortening function S_k and upsampling function U_k to process sequences at multiple scales, combined with a right-shift operation R_s to prevent information leak and preserve the autoregressive property without vanilla layers at the finest scale.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "enwik8, ImageNet, CIFAR-10",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "NVIDIA Titan V, NVIDIA RTX 2080 Ti, Google TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Efficient sequence modeling and language modeling",
+   "application": "Language modeling, text compression",
+   "paper_title": "Hierarchical Transformers Are More Efficient Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": "4x Titan V, 8x RTX 2080 Ti, 8x8 TPUv3 units",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google/trax",
+   "context_length": null,
+   "activated_parameters": "146M (dense, all parameters active)",
+   "attention_mechanism": null,
+   "context_length_max": "3072 (enwik8, ImageNet32), 12288 (ImageNet64)",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "0.98 bpc on enwik8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "8",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "Hourglass": {
+   "application": [
+    "Language modeling",
+    "image generation"
+   ],
+   "attention_mechanism": [
+    "Relative attention (Transformer-XL)"
+   ],
+   "base_model": [
+    "Transformer-XL"
+   ],
+   "hardware_used": [
+    "Entropy cluster"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Hourglass"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "enwik8",
+    "ImageNet32"
+   ],
+   "pretraining_task": [
+    "Autoregressive language modeling"
+   ],
+   "research_problem": [
+    "Efficient language modeling and sequence modeling for long sequences"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "HourglassLM": {
+   "application": [
+    "Language modeling",
+    "text generation"
+   ],
+   "hardware_used": [
+    "Single GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "HourglassLM"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "21M",
+    "24M",
+    "28M",
+    "34M",
+    "41M",
+    "48M",
+    "55M",
+    "62M",
+    "69M",
+    "75M"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Enwik8"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Efficient language modeling"
+   ]
+  },
+  "Hierarchical Transformer": {
+   "application": [
+    "Language modeling",
+    "text compression"
+   ],
+   "hardware_used": [
+    "NVIDIA Titan V, NVIDIA RTX 2080 Ti, Google TPUv3"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Hierarchical Transformer"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "146M"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "enwik8"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Efficient sequence modeling and language modeling"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Hourglass": {
+    "attention_mechanism": {
+     "candidates": [
+      "Relative attention (Transformer-XL)",
+      "optionally LSH attention"
+     ],
+     "accepted": [
+      "Relative attention (Transformer-XL)"
+     ],
+     "dropped": [
+      {
+       "value": "optionally LSH attention",
+       "reason": "Trailing qualifier rather than a standalone value (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    }
+   },
+   "HourglassLM": {
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    }
+   },
+   "Hierarchical Transformer": {
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "enwik8",
+      "ImageNet",
+      "CIFAR-10"
+     ],
+     "accepted": [
+      "enwik8"
+     ],
+     "dropped": [
+      {
+       "value": "ImageNet",
+       "reason": "Image dataset, not a text corpus"
+      },
+      {
+       "value": "CIFAR-10",
+       "reason": "Image dataset, not a text corpus"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 46,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 13
+  }
+ },
+ "contributions": [
+  {
+   "label": "Hourglass",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Hourglass",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-10-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Hierarchical architecture that explicitly downsamples and upsamples internal sequence representations to reduce computational complexity for long sequences",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses shortening operations (e.g., linear pooling) and upsampling to merge tokens and combine with earlier layer outputs, improving efficiency over standard Transformers.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Autoregressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Enwik8",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ImageNet32",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Entropy cluster",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Entropy cluster funded by NVIDIA, Intel, the Polish National Science Center grant UMO-2017/26/E/ST6/00622, and ERC Starting Grant",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Efficient language modeling and sequence modeling for long sequences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Relative attention (Transformer-XL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Transformer-XL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on ImageNet32 generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Improved bits-per-character on enwik8 compared to Transformer-XL baseline",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "HourglassLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "HourglassLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-10-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Hierarchical architecture with shortening and upsampling layers to reduce sequence length and computational cost while preserving autoregressive property",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reduces complexity from O(l^2) to O(l^2/k^2) for standard attention.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Enwik8",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-level",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "21M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "24M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "28M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "34M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "41M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "48M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "55M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "62M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "69M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "75M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 75,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Single GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google/trax/blob/master/trax/models/research/hourglass.py",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Efficient language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Hierarchical Transformer",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Hierarchical Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-10-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Hierarchical sequence processing: introduces a shortening function S_k and upsampling function U_k to process sequences at multiple scales, combined with a right-shift operation R_s to prevent information leak and preserve the autoregressive property without vanilla layers at the finest scale.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Enwik8",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "146M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 146,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA Titan V, NVIDIA RTX 2080 Ti, Google TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "4x Titan V, 8x RTX 2080 Ti, 8x8 TPUv3 units",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text compression",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google/trax",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Efficient sequence modeling and language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "146M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "3072 (enwik8, ImageNet32), 12288 (ImageNet64)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "0.98 bpc on enwik8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "8",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R424391",
+  "contribution_ids": [
+   "R424392",
+   "R1921429",
+   "R1921439",
+   "R1921443"
+  ],
+  "new_contribution_ids": [
+   "R1921429",
+   "R1921439",
+   "R1921443"
+  ],
+  "comparison_updated": null
+ }
+}

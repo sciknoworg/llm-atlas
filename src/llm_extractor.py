@@ -23,6 +23,8 @@ from openai import (
 )
 from pydantic import BaseModel, model_validator
 
+from src.key_pool import KeyPool
+
 logger = logging.getLogger(__name__)
 
 EXTRACTION_SYSTEM_PROMPT = """<Role>
@@ -42,12 +44,12 @@ EXTRACTION_SYSTEM_PROMPT = """<Role>
   - organization: Canonical name (Google, OpenAI, Meta) — not the long form ("Google AI Language").
   - innovation: The model's key innovation(s). For EACH distinct innovation: (a) name the technique in the paper's own terms (e.g. "masked language model", "RLHF"), (b) explain the mechanism, (c) state how it differs from or improves on prior work. Be specific; avoid
   generic phrases. Separate distinct innovations with "; ".
-  - pretraining_corpus: Training dataset/corpus.
+  - pretraining_corpus: NAMED training dataset(s)/corpus (e.g. "Common Crawl", "BookCorpus", "The Pile"), or a described collection with its stated source and size. Assertions of breadth alone are invalid: "diverse corpus of text", "large-scale web data".
   - research_problem: Research problem addressed.
-  - parameters: Parameter count as text (e.g. "7B", "175B", "117M").
+  - parameters: Parameter count(s) of THIS paper's own released model sizes, as text (e.g. "7B", "175B", "117M"). Comma-separate several sizes ("125M, 350M, 760M, 175B"). Include ONLY sizes the paper releases as its own contribution — never sizes of baselines or of other people's models named in comparison tables. Most papers release fewer than eight sizes; a long list is a sign that comparison rows have been picked up by mistake.
   - parameters_millions: Parameters as an integer in millions (7B -> 7000, 117M -> 117).
-  - application: Use cases/applications.
-  - license: License type (e.g. "Apache 2.0", "open source", "closed source").
+  - application: Concrete use cases the model is applied to (e.g. "code generation", "question answering", "document understanding"). Placeholders naming no particular use are invalid: "general NLP tasks", "general knowledge", "various applications".
+  - license: License name (e.g. "Apache 2.0", "MIT", "Llama 3.1 Community License"). "open source"/"closed source" are acceptable when the paper names no license; "custom" alone is not.
   </Required-Fields>
 
   <Conditional-Fields>
@@ -61,7 +63,7 @@ EXTRACTION_SYSTEM_PROMPT = """<Role>
   - training_corpus_size: Size of the pretraining corpus (e.g. "300B tokens", "570GB").
   - finetuning_data: Dataset(s) used for fine-tuning. May be multiple — separate with commas.
   - tokenizer: Tokenizer name/scheme (e.g. "BPE", "SentencePiece", "tiktoken").
-  - supported_language: Language(s) supported. May be multiple — separate with commas (e.g. "English, French").
+  - supported_language: Language(s) supported, NAMED individually and separated with commas (e.g. "English, French, Hindi"). Never write a count or a descriptor in place of names: "multiple languages", "multilingual", "119 languages", "various languages" are all invalid. If the paper says the model is multilingual but never names the languages, use null.
   - hardware_description: Description of the training hardware setup (e.g. "256 A100 GPUs for 21 days").
   - carbon_emitted: Reported carbon emissions (e.g. "552 tCO2eq").
   - source_code: URL of the source-code repository (return the bare URL only, e.g. a GitHub link).
@@ -77,7 +79,7 @@ EXTRACTION_SYSTEM_PROMPT = """<Role>
   - weight_clipping_mechanism: Weight/gradient/activation clipping technique for stability (e.g. "QK-clip", "gradient clipping").
   - quantization_precision: Numerical precision for training/inference (e.g. "FP8", "BF16", "INT4").
   - synthetic_data_generation_method: How synthetic training data is produced (e.g. "large-scale agentic data synthesis", "rejection sampling", "synthetic augmentation").
-  - rl_algorithm: Reinforcement-learning algorithm used in post-training (e.g. "GRPO", "PPO", "asynchronous agent RL").
+  - rl_algorithm: NAMED reinforcement-learning algorithm(s) used in post-training (e.g. "GRPO", "PPO", "DPO", "REINFORCE"). Give the algorithm's name, not a category: "General RL", "reinforcement learning" and "policy optimisation" are invalid. Describe the surrounding recipe in training_pipeline instead.
   - reward_mechanism: How RL rewards are defined (e.g. "verifiable rule-based rewards", "reward model").
   - reasoning_mode: [Reasoning models] Whether/how the model reasons (e.g. "hybrid thinking/non-thinking with explicit mode tokens", "non-thinking", "chain-of-thought").
   - tool_calling_format: Format/protocol for tool or function calling (e.g. "JSON function calling", "ReAct").
@@ -94,10 +96,10 @@ EXTRACTION_SYSTEM_PROMPT = """<Role>
   <Critical-Rules>
   1. TITLE: Extract the official, full RESEARCH PAPER TITLE and assign it to 'paper_title'.
   2. ALL VARIANTS: Extract ALL model versions, sizes, and variants as SEPARATE entries.
-  3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant. Calculate parameters_millions (e.g., 7B = 7000, 117M = 117).
+  3. PARAMETERS: Search for 'Our model' or 'Proposed'. Look for 'M' or 'B'. Extract parameter sizes for each variant THIS paper introduces. Benchmark and comparison tables list other people's models alongside; do not take their sizes. Calculate parameters_millions from the LARGEST size you kept (e.g., 7B = 7000, 117M = 117).
   4. DATES: Prefer YYYY-MM (e.g. 2018-10). Use YYYY-MM-DD when day is known, else YYYY-MM, else YYYY. Priority: metadata > header/footer > citation year.
   5. ORGANIZATION: Use canonical name (e.g. Google, OpenAI, Meta) not long form (e.g. not "Google AI Language").
-  6. PARAMETERS: For multiple sizes use comma-separated (e.g. "110M, 340M").
+  6. PARAMETERS: For multiple sizes use comma-separated, smallest first (e.g. "110M, 340M"). parameters_millions must equal the largest size listed in parameters.
   7. MULTIPLE MODELS: Set 'paper_describes_multiple_models' to true if the paper describes multiple distinct models, versions, or size variants.
   8. REQUIRED FIELDS: You MUST extract all required fields. If a field is not mentioned in the paper, use null, but prioritize extracting from paper text.
   9. TABLES: If the paper includes a [TABLES FROM DOCUMENT] block, the content is markdown tables from the PDF. Use these tables as the primary source for model names, metrics (e.g. F1, BERTScore), parameter counts, and dataset names; prefer exact values from table cells.
@@ -264,6 +266,7 @@ class LLMExtractor:
         rate_limit_delay: float = 2.0,
         retry_attempts: int = 5,
         retry_delay: float = 3.0,
+        api_keys: Optional[List[str]] = None,
     ):
         """
         Initialize KISSKI API extractor.
@@ -290,7 +293,17 @@ class LLMExtractor:
             - 10000 requests per hour
             - 50000 requests per day
         """
-        self.api_key = api_key
+        # A pool even when there is one key, so the call path has no special
+        # case. api_keys, when given, is the full ordered pool; api_key stays
+        # first for backward compatibility with existing callers.
+        pool_keys = [api_key] + [k for k in (api_keys or []) if k]
+        self.key_pool = KeyPool(pool_keys)
+        self.api_key = self.key_pool.current
+        if len(self.key_pool) > 1:
+            logger.info(
+                "KISSKI key pool: %d keys (%s)", len(self.key_pool), self.key_pool.status()
+            )
+
         self.base_url = base_url
         self.model_name = model
         self.temperature = temperature
@@ -303,7 +316,9 @@ class LLMExtractor:
 
         # Disable the OpenAI client's built-in retries — we handle retries
         # ourselves with escalating timeouts and exponential backoff.
-        self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0)
+        self.client = OpenAI(
+            api_key=self.key_pool.current, base_url=base_url, timeout=timeout, max_retries=0
+        )
 
         logger.info(f"Initialized KISSKI extractor with model: {model}")
         logger.info(f"API endpoint: {base_url}")
@@ -737,7 +752,12 @@ class LLMExtractor:
         """
         last_exception: Optional[Exception] = None
 
-        for attempt in range(1, self.retry_attempts + 1):
+        # Rotating to a fresh key should not consume a backoff retry — the point
+        # of a pool is to keep working, not to spend the budget switching. Give
+        # the loop one extra attempt per additional key.
+        max_attempts = self.retry_attempts + max(0, len(self.key_pool) - 1)
+
+        for attempt in range(1, max_attempts + 1):
             try:
                 self._enforce_rate_limit()
 
@@ -748,7 +768,7 @@ class LLMExtractor:
                 logger.info(
                     "API call attempt %d/%d (timeout=%ds, model=%s)",
                     attempt,
-                    self.retry_attempts,
+                    max_attempts,
                     attempt_timeout,
                     self.model_name,
                 )
@@ -768,13 +788,13 @@ class LLMExtractor:
 
             except (APITimeoutError, APIConnectionError) as exc:
                 last_exception = exc
-                if attempt < self.retry_attempts:
+                if attempt < max_attempts:
                     wait = self.retry_delay * (2 ** (attempt - 1)) + random.uniform(0, 2)
                     logger.warning(
                         "Transient error on attempt %d/%d: %s. "
                         "Retrying in %.1fs (next timeout=%ds)...",
                         attempt,
-                        self.retry_attempts,
+                        max_attempts,
                         type(exc).__name__,
                         wait,
                         self.timeout + attempt * 30,
@@ -783,49 +803,68 @@ class LLMExtractor:
                 else:
                     logger.error(
                         "API call failed after %d attempts: %s: %s",
-                        self.retry_attempts,
+                        max_attempts,
                         type(exc).__name__,
                         exc,
                     )
 
             except RateLimitError as exc:
                 last_exception = exc
-                if attempt < self.retry_attempts:
-                    wait = max(self.retry_delay * (2**attempt), 10) + random.uniform(0, 5)
+
+                # Park the exhausted key and try the next one. Quotas refill, so
+                # the key is cooled down rather than dropped.
+                self.key_pool.penalise_current()
+                rotated = self.key_pool.rotate()
+                if rotated is not None:
+                    self.client.api_key = rotated
+                    self.api_key = rotated
+                    logger.info(
+                        "Rate limited on attempt %d/%d — retrying on key %s",
+                        attempt, max_attempts, KeyPool.describe(rotated),
+                    )
+                    # Short pause only: a different key has its own quota, so
+                    # there is nothing to wait out.
+                    time.sleep(min(self.retry_delay, 2.0))
+                    continue
+
+                if attempt < max_attempts:
+                    # Every key is cooling down; wait for the earliest to clear,
+                    # bounded by the usual exponential backoff.
+                    backoff = max(self.retry_delay * (2**attempt), 10) + random.uniform(0, 5)
+                    wait = max(backoff, self.key_pool.seconds_until_any_available())
                     logger.warning(
-                        "Rate limited on attempt %d/%d. Retrying in %.1fs...",
-                        attempt,
-                        self.retry_attempts,
-                        wait,
+                        "Rate limited on attempt %d/%d, all %d key(s) cooling down. "
+                        "Retrying in %.1fs...",
+                        attempt, max_attempts, len(self.key_pool), wait,
                     )
                     time.sleep(wait)
                 else:
                     logger.error(
-                        "Rate limit exceeded after %d attempts",
-                        self.retry_attempts,
+                        "Rate limit exceeded after %d attempts across %d key(s)",
+                        max_attempts, len(self.key_pool),
                     )
 
             except InternalServerError as exc:
                 last_exception = exc
-                if attempt < self.retry_attempts:
+                if attempt < max_attempts:
                     wait = self.retry_delay * (2 ** (attempt - 1)) + random.uniform(0, 2)
                     logger.warning(
                         "Server error (HTTP %s) on attempt %d/%d. Retrying in %.1fs...",
                         getattr(exc, "status_code", "5xx"),
                         attempt,
-                        self.retry_attempts,
+                        max_attempts,
                         wait,
                     )
                     time.sleep(wait)
                 else:
                     logger.error(
                         "Server error persisted after %d attempts: %s",
-                        self.retry_attempts,
+                        max_attempts,
                         exc,
                     )
 
         logger.error(
-            "All %d retry attempts exhausted. Last error: %s", self.retry_attempts, last_exception
+            "All %d retry attempts exhausted. Last error: %s", max_attempts, last_exception
         )
         return None
 

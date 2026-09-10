@@ -1,0 +1,2391 @@
+{
+  "arxiv_id": "2408.15998",
+  "status": "completed",
+  "timestamp": "2026-08-29T06:04:05.581801",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2408.15998",
+    "title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+    "authors": [
+      "Min Shi",
+      "Fuxiao Liu",
+      "Shihao Wang",
+      "Shijia Liao",
+      "Subhashree Radhakrishnan",
+      "Yilin Zhao",
+      "De-An Huang",
+      "Hongxu Yin",
+      "Karan Sapra",
+      "Yaser Yacoob",
+      "Humphrey Shi",
+      "Bryan Catanzaro",
+      "Andrew Tao",
+      "Jan Kautz",
+      "Zhiding Yu",
+      "Guilin Liu"
+    ],
+    "abstract": "The ability to accurately interpret complex visual information is a crucial topic of multimodal large language models (MLLMs). Recent work indicates that enhanced visual perception significantly reduces hallucinations and improves performance on resolution-sensitive tasks, such as optical character recognition and document analysis. A number of recent MLLMs achieve this goal using a mixture of vision encoders. Despite their success, there is a lack of systematic comparisons and detailed ablation studies addressing critical aspects, such as expert selection and the integration of multiple vision experts. This study provides an extensive exploration of the design space for MLLMs using a mixture of vision encoders and resolutions. Our findings reveal several underlying principles common to various existing strategies, leading to a streamlined yet effective design approach. We discover that simply concatenating visual tokens from a set of complementary vision encoders is as effective as more complex mixing architectures or strategies. We additionally introduce Pre-Alignment to bridge the gap between vision-focused encoders and language tokens, enhancing model coherence. The resulting family of MLLMs, Eagle, surpasses other leading open-source models on major MLLM benchmarks.",
+    "published": "2024-08-28T17:59:31+00:00",
+    "updated": "2025-03-02T23:41:37+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.LG",
+      "cs.RO"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2408.15998v2",
+    "entry_id": "http://arxiv.org/abs/2408.15998v2",
+    "pdf_path": "data/papers/2408.15998.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 73318,
+  "word_count": 7532,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "Eagle-X 5",
+      "parameters": "1.5B, 2282.8M",
+      "parameters_millions": 2282,
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "NVIDIA",
+      "innovation": "Mixture of Encoders (MoE) design space for multimodal LLMs; explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention); multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language alignment, next-token prediction",
+      "pretraining_corpus": "LLaVA-595K, Eagle 1.8M",
+      "finetuning_task": "Supervised fine-tuning, Supervised finetuning for VQA, OCR, document understanding",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multimodal LLM design space, specifically vision-language alignment and multi-expert fusion",
+      "application": "OCR, document understanding, chart understanding, general vision-language tasks, reasoning, recognition, knowledge",
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "training_corpus_size": null,
+      "finetuning_data": "Eagle 1.8M, LLaVA-595K",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "2282.8M (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-alignment of vision experts -> Pre-training (projector + vision experts) -> Fine-tuning (whole model)",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture of Vision Encoders (5 encoders: CLIP, ConvNeXt, EfficientViT, Patch, Swin)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mixture of Encoders / Multi-expert fusion",
+      "vision_encoder": "High-resolution architecture, ConvNeXt, CLIP, task-specific vision backbones, Mixture of Encoders (multiple specialized vision experts), Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin)",
+      "base_model": "LLaVA-1.5 (1.5B)",
+      "optimizer_innovation": null,
+      "benchmark_result": "MME: 697.1; MMBench: 73.9; SEED: 37.0; MathVista: 36.3; MMMU: 88.8; ScienceQA: 70.0; POPE: 64.9; TextVQA: 54.4; ChartQA: 83.4; OCRBench: 529",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-1",
+      "parameters": "1.2B-2.6B (VISION ENCODER+PROJECTOR), 7B, 13B (LLM BACKBONE)",
+      "parameters_millions": 13000,
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "Microsoft",
+      "innovation": "Mixture of Encoders (MoE) for vision: integrates multiple task-specific vision experts (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2) with a round-robin search to select the optimal encoder for each input; introduces a pre-alignment stage to align experts before fusion; employs high-resolution adaptation via bilinear interpolation to 448x448, balancing efficiency and performance over tiling or freezing.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Multimodal alignment and instruction tuning",
+      "pretraining_corpus": "Eagle-1.8M, Cambrian data, diverse public image-text pairs, high-quality captions, VQA, multimodal dialogue datasets",
+      "finetuning_task": "Supervised fine-tuning on multimodal dialogue and VQA, Supervised instruction tuning, Supervised fine-tuning (SFT)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100 GPUs",
+      "extension": "Integrates a mixture of specialized vision encoders fused via channel concatenation into a single LLM backbone.",
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Multimodal LLM design space exploration, specifically vision encoder fusion and high-resolution adaptation.",
+      "application": "General VQA, OCR/document/chart understanding, vision-centric tasks, knowledge-based tasks, object detection, text recognition, segmentation",
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "training_corpus_size": "595k image-text pairs (pre-training), 1.8M samples (SFT)",
+      "finetuning_data": "Eagle1.8M (LLaVA-1.5, DocVQA, synDog-EN, ChartQA, DVQA, AI2D, ShareGPT-4V, laion-GPT4V, LVIS-Instruct4V, LRV-Instruct, Geo170k, LLaVAR, Visual7W, Open-Hermes2.5), Multi-modal conversation data, Eagle-1.8M, Cambrian data",
+      "tokenizer": "LLaMA tokenizer",
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Cross-attention, deformable attention, channel-wise concatenation, space expert selection",
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture of Encoders (MoE) with task-specific vision experts (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mixture of Encoders with dynamic routing",
+      "vision_encoder": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP), Mixture of complementary vision encoders (e.g., CLIP, high-resolution encoders), Mixture of Encoders (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2), CLIP, ConvNeXt, SAM, Pix2Struct, EVA-02, DINOv2",
+      "base_model": "LLaMA-2-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": "MME 1759; VizWiz 82.6; MMMU 54.0; ScienceQA 88.3; DocVQA 91.9; SEED 77.7; ChartQA 77.9; OCRBench 88.3; RWQA 63.1; MMBench 73.7; TextVQA 87.8; Avg: 670.5 (Interpolate 448), 659.7 (ConvNeXt 1024), 635.0 (Original 1024); GQA, VizWiz, MME, SEED, OCR, DocVQA, ChartQA, AI2D, POPE, RWQA, SQA; GQA: SOTA, VQAv2: SOTA, TextVQA: surpasses competitors, ChartQA: surpasses competitors",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-2",
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "Microsoft",
+      "innovation": "Mixture of Encoders (MoE) architecture for vision-language models; dynamically routes visual tokens to specialized encoders based on content, improving efficiency and performance over single-encoder VLMs.",
+      "pretraining_corpus": "LAION-CC-SBU, COCO, Visual Genome",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "Visual question answering, image captioning, visual reasoning",
+      "license": "Apache 2.0",
+      "research_problem": "Vision-Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Multimodal alignment and instruction tuning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mixture of Encoders with dynamic routing",
+      "vision_encoder": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+      "base_model": "LLaMA-2-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-3",
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "Microsoft",
+      "innovation": "Mixture of Encoders (MoE) architecture for vision-language models; dynamically routes visual tokens to specialized encoders based on content, improving efficiency and performance over single-encoder VLMs.",
+      "pretraining_corpus": "LAION-CC-SBU, COCO, Visual Genome",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "Visual question answering, image captioning, visual reasoning",
+      "license": "Apache 2.0",
+      "research_problem": "Vision-Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Multimodal alignment and instruction tuning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mixture of Encoders with dynamic routing",
+      "vision_encoder": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+      "base_model": "LLaMA-2-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-X 3",
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "NVIDIA",
+      "innovation": "Mixture of Encoders (MoE) design space for multimodal LLMs; explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention); multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+      "pretraining_corpus": null,
+      "parameters": "1459.6M",
+      "parameters_millions": 1460,
+      "application": null,
+      "license": null,
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised finetuning for VQA, OCR, document understanding",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "activated_parameters": "1459.6M (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture of Vision Encoders (3 encoders: CLIP, ConvNeXt, EfficientViT)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+      "vision_encoder": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT)",
+      "base_model": "Vicuna-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-X 4",
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "NVIDIA",
+      "innovation": "Mixture of Encoders (MoE) design space for multimodal LLMs; explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention); multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+      "pretraining_corpus": null,
+      "parameters": "1974.1M",
+      "parameters_millions": 1974,
+      "application": null,
+      "license": null,
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised finetuning for VQA, OCR, document understanding",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "activated_parameters": "1974.1M (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture of Vision Encoders (4 encoders: CLIP, ConvNeXt, EfficientViT, Patch)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+      "vision_encoder": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch)",
+      "base_model": "Vicuna-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Eagle-X 6",
+      "model_family": "Eagle",
+      "date_created": "2024-08-28",
+      "organization": "NVIDIA",
+      "innovation": "Mixture of Encoders (MoE) design space for multimodal LLMs; explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention); multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+      "pretraining_corpus": null,
+      "parameters": "2588.2M",
+      "parameters_millions": 2588,
+      "application": null,
+      "license": null,
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised finetuning for VQA, OCR, document understanding",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of Encoders",
+      "activated_parameters": "2588.2M (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture of Vision Encoders (6 encoders: CLIP, ConvNeXt, EfficientViT, Patch, Swin, Deformable)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+      "vision_encoder": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin, Deformable)",
+      "base_model": "Vicuna-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 12,
+  "models_after_merge": 7,
+  "validated_rows": {
+    "Eagle-X 5": {
+      "application": [
+        "OCR",
+        "document understanding",
+        "chart understanding",
+        "general vision-language tasks",
+        "reasoning"
+      ],
+      "base_model": [
+        "LLaVA-1.5 (1.5B)"
+      ],
+      "finetuning_data": [
+        "Eagle 1.8M",
+        "LLaVA-595K"
+      ],
+      "finetuning_task": [
+        "Supervised finetuning for VQA",
+        "OCR",
+        "document understanding"
+      ],
+      "fusion_architecture": [
+        "Mixture of Encoders / Multi-expert fusion"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-X 5"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "1.5B",
+        "2282.8M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LLaVA-595K",
+        "Eagle 1.8M"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment, next-token prediction"
+      ],
+      "research_problem": [
+        "Multimodal LLM design space"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "ConvNeXt",
+        "CLIP",
+        "Mixture of Encoders (multiple specialized vision experts)",
+        "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin)"
+      ]
+    },
+    "Eagle-1": {
+      "application": [
+        "General VQA",
+        "OCR/document/chart understanding",
+        "knowledge-based tasks",
+        "object detection",
+        "text recognition",
+        "segmentation"
+      ],
+      "attention_mechanism": [
+        "Cross-attention",
+        "deformable attention"
+      ],
+      "base_model": [
+        "LLaMA-2-7B"
+      ],
+      "finetuning_data": [
+        "Eagle1.8M (LLaVA-1.5, DocVQA, synDog-EN, ChartQA, DVQA, AI2D, ShareGPT-4V, laion-GPT4V, LVIS-Instruct4V, LRV-Instruct, Geo170k, LLaVAR, Visual7W, Open-Hermes2.5)",
+        "Eagle-1.8M",
+        "Cambrian data"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on multimodal dialogue and VQA",
+        "Supervised instruction tuning",
+        "Supervised fine-tuning (SFT)"
+      ],
+      "fusion_architecture": [
+        "Mixture of Encoders with dynamic routing"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPUs"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-1"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "1.2B-2.6B (VISION ENCODER+PROJECTOR)",
+        "7B",
+        "13B (LLM BACKBONE)"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Eagle-1.8M",
+        "Cambrian data",
+        "VQA"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and instruction tuning"
+      ],
+      "research_problem": [
+        "Multimodal LLM design space exploration"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+        "Mixture of complementary vision encoders (e.g., CLIP, high-resolution encoders)",
+        "Mixture of Encoders (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2)",
+        "CLIP",
+        "ConvNeXt",
+        "SAM",
+        "Pix2Struct",
+        "EVA-02",
+        "DINOv2"
+      ]
+    },
+    "Eagle-2": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "visual reasoning"
+      ],
+      "base_model": [
+        "LLaMA-2-7B"
+      ],
+      "fusion_architecture": [
+        "Mixture of Encoders with dynamic routing"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-2"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LAION-CC-SBU",
+        "COCO",
+        "Visual Genome"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and instruction tuning"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)"
+      ]
+    },
+    "Eagle-3": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "visual reasoning"
+      ],
+      "base_model": [
+        "LLaMA-2-7B"
+      ],
+      "fusion_architecture": [
+        "Mixture of Encoders with dynamic routing"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-3"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LAION-CC-SBU",
+        "COCO",
+        "Visual Genome"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and instruction tuning"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)"
+      ]
+    },
+    "Eagle-X 3": {
+      "base_model": [
+        "Vicuna-7B"
+      ],
+      "finetuning_task": [
+        "Supervised finetuning for VQA",
+        "OCR",
+        "document understanding"
+      ],
+      "fusion_architecture": [
+        "Channel-wise concatenation, low-resolution blurring, deformable cross-attention"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-X 3"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "1459.6M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment, text recognition, object detection, semantic segmentation"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT)"
+      ]
+    },
+    "Eagle-X 4": {
+      "base_model": [
+        "Vicuna-7B"
+      ],
+      "finetuning_task": [
+        "Supervised finetuning for VQA",
+        "OCR",
+        "document understanding"
+      ],
+      "fusion_architecture": [
+        "Channel-wise concatenation, low-resolution blurring, deformable cross-attention"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-X 4"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "1974.1M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment, text recognition, object detection, semantic segmentation"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch)"
+      ]
+    },
+    "Eagle-X 6": {
+      "base_model": [
+        "Vicuna-7B"
+      ],
+      "finetuning_task": [
+        "Supervised finetuning for VQA",
+        "OCR",
+        "document understanding"
+      ],
+      "fusion_architecture": [
+        "Channel-wise concatenation, low-resolution blurring, deformable cross-attention"
+      ],
+      "model_family": [
+        "Eagle"
+      ],
+      "model_name": [
+        "Eagle-X 6"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "2588.2M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment, text recognition, object detection, semantic segmentation"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin, Deformable)"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Eagle-X 5": {
+        "application": {
+          "candidates": [
+            "OCR",
+            "document understanding",
+            "chart understanding",
+            "general vision-language tasks",
+            "reasoning",
+            "recognition",
+            "knowledge"
+          ],
+          "accepted": [
+            "OCR",
+            "document understanding",
+            "chart understanding",
+            "general vision-language tasks",
+            "reasoning"
+          ],
+          "dropped": [
+            {
+              "value": "recognition",
+              "reason": "Too vague/generic, not a concrete task or domain"
+            },
+            {
+              "value": "knowledge",
+              "reason": "Not a task or domain; refers to a capability or attribute"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning",
+            "Supervised finetuning for VQA",
+            "OCR",
+            "document understanding"
+          ],
+          "accepted": [
+            "Supervised finetuning for VQA",
+            "OCR",
+            "document understanding"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal LLM design space",
+            "specifically vision-language alignment and multi-expert fusion"
+          ],
+          "accepted": [
+            "Multimodal LLM design space"
+          ],
+          "dropped": [
+            {
+              "value": "specifically vision-language alignment and multi-expert fusion",
+              "reason": "Describes solution components rather than naming the research problem"
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "High-resolution architecture",
+            "ConvNeXt",
+            "CLIP",
+            "task-specific vision backbones",
+            "Mixture of Encoders (multiple specialized vision experts)",
+            "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin)"
+          ],
+          "accepted": [
+            "ConvNeXt",
+            "CLIP",
+            "Mixture of Encoders (multiple specialized vision experts)",
+            "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin)"
+          ],
+          "dropped": [
+            {
+              "value": "High-resolution architecture",
+              "reason": "Describes an architectural property, not a specific vision encoder model"
+            },
+            {
+              "value": "task-specific vision backbones",
+              "reason": "Generic plural description, not a specific encoder model"
+            }
+          ]
+        }
+      },
+      "Eagle-1": {
+        "application": {
+          "candidates": [
+            "General VQA",
+            "OCR/document/chart understanding",
+            "vision-centric tasks",
+            "knowledge-based tasks",
+            "object detection",
+            "text recognition",
+            "segmentation"
+          ],
+          "accepted": [
+            "General VQA",
+            "OCR/document/chart understanding",
+            "knowledge-based tasks",
+            "object detection",
+            "text recognition",
+            "segmentation"
+          ],
+          "dropped": [
+            {
+              "value": "vision-centric tasks",
+              "reason": "Generic placeholder, not a concrete task or domain"
+            }
+          ]
+        },
+        "attention_mechanism": {
+          "candidates": [
+            "Cross-attention",
+            "deformable attention",
+            "channel-wise concatenation",
+            "space expert selection"
+          ],
+          "accepted": [
+            "Cross-attention",
+            "deformable attention"
+          ],
+          "dropped": [
+            {
+              "value": "channel-wise concatenation",
+              "reason": "Describes a data fusion method, not an attention mechanism"
+            },
+            {
+              "value": "space expert selection",
+              "reason": "Describes a routing/selection mechanism, not an attention mechanism"
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Eagle1.8M (LLaVA-1.5, DocVQA, synDog-EN, ChartQA, DVQA, AI2D, ShareGPT-4V, laion-GPT4V, LVIS-Instruct4V, LRV-Instruct, Geo170k, LLaVAR, Visual7W, Open-Hermes2.5)",
+            "Multi-modal conversation data",
+            "Eagle-1.8M",
+            "Cambrian data"
+          ],
+          "accepted": [
+            "Eagle1.8M (LLaVA-1.5, DocVQA, synDog-EN, ChartQA, DVQA, AI2D, ShareGPT-4V, laion-GPT4V, LVIS-Instruct4V, LRV-Instruct, Geo170k, LLaVAR, Visual7W, Open-Hermes2.5)",
+            "Eagle-1.8M",
+            "Cambrian data"
+          ],
+          "dropped": [
+            {
+              "value": "Multi-modal conversation data",
+              "reason": "Generic description, not a specific dataset name"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Eagle-1.8M",
+            "Cambrian data",
+            "diverse public image-text pairs",
+            "high-quality captions",
+            "VQA",
+            "multimodal dialogue datasets"
+          ],
+          "accepted": [
+            "Eagle-1.8M",
+            "Cambrian data",
+            "VQA"
+          ],
+          "dropped": [
+            {
+              "value": "diverse public image-text pairs",
+              "reason": "Asserts breadth rather than naming a specific corpus"
+            },
+            {
+              "value": "high-quality captions",
+              "reason": "Generic description, not a specific corpus"
+            },
+            {
+              "value": "multimodal dialogue datasets",
+              "reason": "Generic plural description, not a specific corpus"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal LLM design space exploration",
+            "specifically vision encoder fusion and high-resolution adaptation."
+          ],
+          "accepted": [
+            "Multimodal LLM design space exploration"
+          ],
+          "dropped": [
+            {
+              "value": "specifically vision encoder fusion and high-resolution adaptation.",
+              "reason": "Describes architectural solutions rather than naming the research problem"
+            }
+          ]
+        }
+      },
+      "Eagle-2": {
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        }
+      },
+      "Eagle-3": {
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        }
+      },
+      "Eagle-X 3": {},
+      "Eagle-X 4": {},
+      "Eagle-X 6": {}
+    },
+    "counts": {
+      "kept": 139,
+      "dropped": 16,
+      "llm_calls": 1,
+      "values_sent_to_llm": 66
+    }
+  },
+  "contributions": [
+    {
+      "label": "Eagle-X 5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-X 5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) design space for multimodal LLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment, next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-595K",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Eagle 1.8M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised finetuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2282.8M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 2282,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General vision-language tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal LLM design space",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Eagle 1.8M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-595K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "2282.8M (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-alignment of vision experts -> Pre-training (projector + vision experts) -> Fine-tuning (whole model)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture of Vision Encoders (5 encoders: CLIP, ConvNeXt, EfficientViT, Patch, Swin)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mixture of Encoders / Multi-expert fusion",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ConvNeXt",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (multiple specialized vision experts)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaVA-1.5 (1.5B)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 697.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench: 73.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEED: 37.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 36.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 88.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA: 70.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 64.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 54.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 83.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 529",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-1",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-1",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) for vision: integrates multiple task-specific vision experts (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2) with a round-robin search to select the optimal encoder for each input",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a pre-alignment stage to align experts before fusion",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Employs high-resolution adaptation via bilinear interpolation to 448x448, balancing efficiency and performance over tiling or freezing.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Eagle-1.8M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Cambrian data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on multimodal dialogue and VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "LLaMA tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2B-2.6B (VISION ENCODER+PROJECTOR)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B (LLM BACKBONE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 13000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR/document/chart understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge-based tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal LLM design space exploration",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "595k image-text pairs (pre-training), 1.8M samples (SFT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Eagle1.8M (LLaVA-1.5, DocVQA, synDog-EN, ChartQA, DVQA, AI2D, ShareGPT-4V, laion-GPT4V, LVIS-Instruct4V, LRV-Instruct, Geo170k, LLaVAR, Visual7W, Open-Hermes2.5)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Eagle-1.8M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Cambrian data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Cross-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Deformable attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture of Encoders (MoE) with task-specific vision experts (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mixture of Encoders with dynamic routing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of complementary vision encoders (e.g., CLIP, high-resolution encoders)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (CLIP, ConvNeXt, EVA-02, Pix2Struct, SAM, DINOv2)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ConvNeXt",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SAM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Pix2Struct",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "EVA-02",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "DINOv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaMA-2-7B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME 1759",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VizWiz 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU 54.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA 88.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA 91.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEED 77.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA 77.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench 88.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RWQA 63.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench 73.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA 87.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Avg: 670.5 (Interpolate 448), 659.7 (ConvNeXt 1024), 635.0 (Original 1024)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GQA, VizWiz, MME, SEED, OCR, DocVQA, ChartQA, AI2D, POPE, RWQA, SQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GQA: SOTA, VQAv2: SOTA, TextVQA: surpasses competitors, ChartQA: surpasses competitors",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) architecture for vision-language models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamically routes visual tokens to specialized encoders based on content, improving efficiency and performance over single-encoder VLMs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-CC-SBU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual Genome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mixture of Encoders with dynamic routing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaMA-2-7B",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) architecture for vision-language models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamically routes visual tokens to specialized encoders based on content, improving efficiency and performance over single-encoder VLMs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-CC-SBU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual Genome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Image-text alignment; Stage 2: Instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mixture of Encoders with dynamic routing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of specialized vision encoders (e.g., EVA-02, SigLIP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaMA-2-7B",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-X 3",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-X 3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) design space for multimodal LLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised finetuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1459.6M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 1460,
+          "datatype": "integer"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1459.6M (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture of Vision Encoders (3 encoders: CLIP, ConvNeXt, EfficientViT)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Vicuna-7B",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-X 4",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-X 4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) design space for multimodal LLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised finetuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1974.1M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 1974,
+          "datatype": "integer"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1974.1M (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture of Vision Encoders (4 encoders: CLIP, ConvNeXt, EfficientViT, Patch)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Vicuna-7B",
+          "datatype": "resource"
+        }
+      ]
+    },
+    {
+      "label": "Eagle-X 6",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Eagle-X 6",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Eagle",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-08-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture of Encoders (MoE) design space for multimodal LLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Explores combinations of vision encoders and fusion paradigms (channel-wise concatenation, low-res blurring, deformable cross-attention)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training (pre-alignment, joint-projector training, supervised finetuning) with expert selection to optimize vision-language alignment.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment, text recognition, object detection, semantic segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised finetuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2588.2M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 2588,
+          "datatype": "integer"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "2588.2M (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Stage 1: Pre-alignment of vision experts with Vicuna-7B; Stage 2: Joint-projector training for vision-language alignment; Stage 3: Supervised finetuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture of Vision Encoders (6 encoders: CLIP, ConvNeXt, EfficientViT, Patch, Swin, Deformable)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Channel-wise concatenation, low-resolution blurring, deformable cross-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Mixture of Encoders (CLIP, ConvNeXt, EfficientViT, Patch, Swin, Deformable)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Vicuna-7B",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926116",
+    "contribution_ids": [
+      "R1926118",
+      "R1926119",
+      "R1926120",
+      "R1926121",
+      "R1926122",
+      "R1926123",
+      "R1926124"
+    ],
+    "new_contribution_ids": [
+      "R1926118",
+      "R1926119",
+      "R1926120",
+      "R1926121",
+      "R1926122",
+      "R1926123",
+      "R1926124"
+    ],
+    "comparison_updated": null
+  }
+}

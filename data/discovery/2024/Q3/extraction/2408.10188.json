@@ -1,0 +1,477 @@
+{
+ "arxiv_id": "2408.10188",
+ "status": "completed",
+ "timestamp": "2026-08-29T05:47:26.639023",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2408.10188",
+  "title": "LongVILA: Scaling Long-Context Visual Language Models for Long Videos",
+  "authors": [
+   "Yukang Chen",
+   "Fuzhao Xue",
+   "Dacheng Li",
+   "Qinghao Hu",
+   "Ligeng Zhu",
+   "Xiuyu Li",
+   "Yunhao Fang",
+   "Haotian Tang",
+   "Shang Yang",
+   "Zhijian Liu",
+   "Ethan He",
+   "Hongxu Yin",
+   "Pavlo Molchanov",
+   "Jan Kautz",
+   "Linxi Fan",
+   "Yuke Zhu",
+   "Yao Lu",
+   "Song Han"
+  ],
+  "abstract": "Long-context capability is critical for multi-modal foundation models, especially for long video understanding. We introduce LongVILA, a full-stack solution for long-context visual-language models by co-designing the algorithm and system. For model training, we upgrade existing VLMs to support long video understanding by incorporating two additional stages, i.e., long context extension and long video supervised fine-tuning. However, training on long video is computationally and memory intensive. We introduce the long-context Multi-Modal Sequence Parallelism (MM-SP) system that efficiently parallelizes long video training and inference, enabling 2M context length training on 256 GPUs without any gradient checkpointing. LongVILA efficiently extends the number of video frames of VILA from 8 to 2048, achieving 99.8% accuracy in 6,000-frame (more than 1 million tokens) video needle-in-a-haystack. LongVILA-7B demonstrates strong accuracy on 9 popular video benchmarks, e.g. 65.1% VideoMME with subtitle. Besides, MM-SP is 2.1x - 5.7x faster than ring style sequence parallelism and 1.1x - 1.4x faster than Megatron with a hybrid context and tensor parallelism. Moreover, it seamlessly integrates with Hugging Face Transformers.",
+  "published": "2024-08-19T17:48:08+00:00",
+  "updated": "2024-12-13T02:32:06+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2408.10188v6",
+  "entry_id": "http://arxiv.org/abs/2408.10188v6",
+  "pdf_path": "data/papers/2408.10188.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 80326,
+ "word_count": 8340,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "LongVILA",
+   "parameters": "1.5B, 7B, 8B, 14B, 20B",
+   "parameters_millions": 20000,
+   "model_family": "LongVILA",
+   "date_created": "2024-08-19",
+   "organization": "MIT",
+   "innovation": "Two-stage sharding strategy for balanced GPU workload distribution; five-stage training pipeline extending feasible frame count from 8 to 2048; distributed inference system supporting up to 2M context length with 2.1x-5.7x speedup over ring sequence parallelism.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Visual language modeling",
+   "pretraining_corpus": "Curated long video datasets",
+   "finetuning_task": "Video understanding, video captioning",
+   "optimizer": null,
+   "hardware_used": "NVIDIA H100 GPU",
+   "extension": "Two-stage sharding strategy distributes workload based on both image and text tokens, solving imbalance in one-stage baselines.",
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Scaling long-context visual language models for long videos.",
+   "application": "Video captioning, general video understanding, needle-in-a-haystack retrieval",
+   "paper_title": "LongVILA: Scaling Long-Context Visual Language Models for Long Videos",
+   "training_corpus_size": null,
+   "finetuning_data": "Curated long video datasets",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": "32 H100 GPUs, 64 H100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "1.5B, 7B (dense)",
+   "attention_mechanism": "2D-Attention (combines Ulysses and Zigzag-RingAttention), 2D-Attention (Ulysses + Zigzag-RingAttention)",
+   "context_length_max": "2,000,000 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Five-stage training pipeline",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "fp16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Early fusion via linear projection",
+   "vision_encoder": "Dynamic-resolution vision encoder",
+   "base_model": "Qwen2-1.5B",
+   "optimizer_innovation": null,
+   "benchmark_result": "VideoMME: 60.1 (w/o subtitle), 65.1 (w/ subtitle); Needle-in-a-Haystack: 99.8% accuracy across 6000 frames (>1M tokens); Overall: 66.2, Short: 69.0, Medium: 66.2, Long: 69.0 (256 frames); Overall: 53.3, Short: 64.2, Medium: 64.2, Long: 64.2 (96 frames)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "Distributed system leveraging all GPUs to compute jointly, avoiding imbalanced activation allocation"
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "LongVILA": {
+   "application": [
+    "Video captioning",
+    "needle-in-a-haystack retrieval"
+   ],
+   "attention_mechanism": [
+    "2D-Attention (combines Ulysses and Zigzag-RingAttention)",
+    "2D-Attention (Ulysses + Zigzag-RingAttention)"
+   ],
+   "base_model": [
+    "Qwen2-1.5B"
+   ],
+   "finetuning_data": [
+    "Curated long video datasets"
+   ],
+   "finetuning_task": [
+    "Video understanding",
+    "video captioning"
+   ],
+   "fusion_architecture": [
+    "Early fusion via linear projection"
+   ],
+   "hardware_used": [
+    "NVIDIA H100 GPU"
+   ],
+   "model_family": [],
+   "model_name": [
+    "LongVILA"
+   ],
+   "organization": [
+    "MIT"
+   ],
+   "parameters": [
+    "1.5B",
+    "7B",
+    "8B",
+    "14B",
+    "20B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Visual language modeling"
+   ],
+   "quantization_precision": [
+    "fp16"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Dynamic-resolution vision encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "LongVILA": {
+    "application": {
+     "candidates": [
+      "Video captioning",
+      "general video understanding",
+      "needle-in-a-haystack retrieval"
+     ],
+     "accepted": [
+      "Video captioning",
+      "needle-in-a-haystack retrieval"
+     ],
+     "dropped": [
+      {
+       "value": "general video understanding",
+       "reason": "Contains 'general' acting as a vague placeholder rather than naming a concrete task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "LongVILA"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "LongVILA",
+       "reason": "Names a specific model rather than a broader family or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Curated long video datasets"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Curated long video datasets",
+       "reason": "Vague description of data type rather than a named, identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling long-context visual language models for long videos."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling long-context visual language models for long videos.",
+       "reason": "Reads as a sentence fragment or objective description rather than a short noun phrase naming the problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 22,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "LongVILA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LongVILA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-08-19",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "MIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage sharding strategy for balanced GPU workload distribution",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Five-stage training pipeline extending feasible frame count from 8 to 2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Distributed inference system supporting up to 2M context length with 2.1x-5.7x speedup over ring sequence parallelism.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Visual language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 20000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA H100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 H100 GPUs, 64 H100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Needle-in-a-haystack retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Curated long video datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.5B, 7B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "2D-Attention (combines Ulysses and Zigzag-RingAttention)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "2D-Attention (Ulysses + Zigzag-RingAttention)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2,000,000 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Five-stage training pipeline",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Fp16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Early fusion via linear projection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Dynamic-resolution vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen2-1.5B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VideoMME: 60.1 (w/o subtitle), 65.1 (w/ subtitle)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Needle-in-a-Haystack: 99.8% accuracy across 6000 frames (>1M tokens)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Overall: 66.2, Short: 69.0, Medium: 66.2, Long: 69.0 (256 frames)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Overall: 53.3, Short: 64.2, Medium: 64.2, Long: 64.2 (96 frames)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Distributed system leveraging all GPUs to compute jointly, avoiding imbalanced activation allocation",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1779873",
+  "contribution_ids": [
+   "R1779875",
+   "R1924653"
+  ],
+  "new_contribution_ids": [
+   "R1924653"
+  ],
+  "comparison_updated": null
+ }
+}

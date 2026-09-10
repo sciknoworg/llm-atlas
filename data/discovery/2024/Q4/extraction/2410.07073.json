@@ -1,0 +1,455 @@
+{
+  "arxiv_id": "2410.07073",
+  "status": "completed",
+  "timestamp": "2026-08-29T14:35:04.803911",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2410.07073",
+    "title": "Pixtral 12B",
+    "authors": [
+      "Pravesh Agrawal",
+      "Szymon Antoniak",
+      "Emma Bou Hanna",
+      "Baptiste Bout",
+      "Devendra Chaplot",
+      "Jessica Chudnovsky",
+      "Diogo Costa",
+      "Baudouin De Monicault",
+      "Saurabh Garg",
+      "Theophile Gervet",
+      "Soham Ghosh",
+      "Amélie Héliou",
+      "Paul Jacob",
+      "Albert Q. Jiang",
+      "Kartik Khandelwal",
+      "Timothée Lacroix",
+      "Guillaume Lample",
+      "Diego Las Casas",
+      "Thibaut Lavril",
+      "Teven Le Scao",
+      "Andy Lo",
+      "William Marshall",
+      "Louis Martin",
+      "Arthur Mensch",
+      "Pavankumar Muddireddy",
+      "Valera Nemychnikova",
+      "Marie Pellat",
+      "Patrick Von Platen",
+      "Nikhil Raghuraman",
+      "Baptiste Rozière",
+      "Alexandre Sablayrolles",
+      "Lucile Saulnier",
+      "Romain Sauvestre",
+      "Wendy Shang",
+      "Roman Soletskyi",
+      "Lawrence Stewart",
+      "Pierre Stock",
+      "Joachim Studnia",
+      "Sandeep Subramanian",
+      "Sagar Vaze",
+      "Thomas Wang",
+      "Sophia Yang"
+    ],
+    "abstract": "We introduce Pixtral-12B, a 12--billion-parameter multimodal language model. Pixtral-12B is trained to understand both natural images and documents, achieving leading performance on various multimodal benchmarks, surpassing a number of larger models. Unlike many open-source models, Pixtral is also a cutting-edge text model for its size, and does not compromise on natural language performance to excel in multimodal tasks. Pixtral uses a new vision encoder trained from scratch, which allows it to ingest images at their natural resolution and aspect ratio. This gives users flexibility on the number of tokens used to process an image. Pixtral is also able to process any number of images in its long context window of 128K tokens. Pixtral 12B substanially outperforms other open models of similar sizes (Llama-3.2 11B \\& Qwen-2-VL 7B). It also outperforms much larger open models like Llama-3.2 90B while being 7x smaller. We further contribute an open-source benchmark, MM-MT-Bench, for evaluating vision-language models in practical scenarios, and provide detailed analysis and code for standardized evaluation protocols for multimodal LLMs. Pixtral-12B is released under Apache 2.0 license.",
+    "published": "2024-10-09T17:16:22+00:00",
+    "updated": "2024-10-10T17:59:16+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2410.07073v2",
+    "entry_id": "http://arxiv.org/abs/2410.07073v2",
+    "pdf_path": "data/papers/2410.07073.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 59848,
+  "word_count": 9098,
+  "models_extracted": 1,
+  "extraction_data": [
+    {
+      "model_name": "Pixtral",
+      "model_family": "Pixtral",
+      "date_created": "2024-10-09",
+      "organization": "Mistral AI",
+      "innovation": "New vision encoder (Pixtral-ViT) trained from scratch with ROPE-2D to natively support variable image resolutions and aspect ratios; block-diagonal attention masks enable sequence packing for batching; instruction-tuned on interleaved image/text documents while maintaining strong text-only performance.",
+      "pretraining_corpus": "Large-scale interleaved image and text documents",
+      "parameters": "12B",
+      "parameters_millions": 12000,
+      "application": "Multimodal instruction following, multi-turn multi-image conversation, document understanding, natural language tasks",
+      "license": "Apache 2.0",
+      "research_problem": "Multimodal language understanding",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction, instruction tuning",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Multimodal instruction tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": "SentencePiece",
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Built on Mistral Nemo 12B",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Pixtral 12B",
+      "activated_parameters": "12B (dense, all parameters active)",
+      "attention_mechanism": "Block-diagonal attention masks for sequence packing; ROPE-2D for variable image sizes",
+      "context_length_max": "128K tokens",
+      "context_extension_method": "ROPE-2D",
+      "training_pipeline": "Pre-training on interleaved image/text documents -> instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Two-layer fully connected network (projector) linking vision encoder outputs to decoder input embeddings",
+      "vision_encoder": "Pixtral-ViT",
+      "base_model": "Mistral Nemo 12B",
+      "optimizer_innovation": null,
+      "benchmark_result": "Outperforms Llama-3.2 11B & Qwen-2-VL 7B on MMMU and MathVista; outperforms Llama-3.2 90B on multimodal benchmarks; highest ranked Apache 2.0 model on LMSys Vision Leaderboard (Oct 2024)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32 query, 8 key-value",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 1,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Pixtral": {
+      "application": [
+        "Multimodal instruction following",
+        "multi-turn multi-image conversation",
+        "document understanding"
+      ],
+      "attention_mechanism": [
+        "Block-diagonal attention masks for sequence packing"
+      ],
+      "base_model": [
+        "Mistral Nemo 12B"
+      ],
+      "context_extension_method": [
+        "ROPE-2D"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Two-layer fully connected network (projector) linking vision encoder outputs to decoder input embeddings"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [],
+      "model_name": [
+        "Pixtral"
+      ],
+      "organization": [
+        "Mistral AI"
+      ],
+      "parameters": [
+        "12B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction, instruction tuning"
+      ],
+      "research_problem": [
+        "Multimodal language understanding"
+      ],
+      "vision_encoder": [
+        "Pixtral-ViT"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Pixtral": {
+        "application": {
+          "candidates": [
+            "Multimodal instruction following",
+            "multi-turn multi-image conversation",
+            "document understanding",
+            "natural language tasks"
+          ],
+          "accepted": [
+            "Multimodal instruction following",
+            "multi-turn multi-image conversation",
+            "document understanding"
+          ],
+          "dropped": [
+            {
+              "value": "natural language tasks",
+              "reason": "Broad category/placeholder, not a concrete task or domain"
+            }
+          ]
+        },
+        "attention_mechanism": {
+          "candidates": [
+            "Block-diagonal attention masks for sequence packing",
+            "ROPE-2D for variable image sizes"
+          ],
+          "accepted": [
+            "Block-diagonal attention masks for sequence packing"
+          ],
+          "dropped": [
+            {
+              "value": "ROPE-2D for variable image sizes",
+              "reason": "Describes a positional encoding method, not an attention mechanism"
+            }
+          ]
+        },
+        "model_family": {
+          "candidates": [
+            "Pixtral"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pixtral",
+              "reason": "Specific model name, not a broader category or lineage"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Large-scale interleaved image and text documents"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Large-scale interleaved image and text documents",
+              "reason": "Describes the nature/breadth of the data rather than naming an identifiable dataset or corpus"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 16,
+      "dropped": 4,
+      "llm_calls": 1,
+      "values_sent_to_llm": 13
+    }
+  },
+  "contributions": [
+    {
+      "label": "Pixtral",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Pixtral",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-10-09",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Mistral AI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "New vision encoder (Pixtral-ViT) trained from scratch with ROPE-2D to natively support variable image resolutions and aspect ratios",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Block-diagonal attention masks enable sequence packing for batching",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Instruction-tuned on interleaved image/text documents while maintaining strong text-only performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction, instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "SentencePiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "12B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 12000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn multi-image conversation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "12B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Block-diagonal attention masks for sequence packing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "128K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "ROPE-2D",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on interleaved image/text documents -> instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Two-layer fully connected network (projector) linking vision encoder outputs to decoder input embeddings",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Pixtral-ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Mistral Nemo 12B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms Llama-3.2 11B & Qwen-2-VL 7B on MMMU and MathVista",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms Llama-3.2 90B on multimodal benchmarks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Highest ranked Apache 2.0 model on LMSys Vision Leaderboard (Oct 2024)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32 query, 8 key-value",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926530",
+    "contribution_ids": [
+      "R1926532"
+    ],
+    "new_contribution_ids": [
+      "R1926532"
+    ],
+    "comparison_updated": null
+  }
+}

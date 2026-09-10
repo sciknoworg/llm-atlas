@@ -1,0 +1,757 @@
+{
+ "arxiv_id": "2110.04725",
+ "status": "completed",
+ "timestamp": "2026-08-25T01:53:28.430800",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2110.04725",
+  "title": "Yuan 1.0: Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning",
+  "authors": [
+   "Shaohua Wu",
+   "Xudong Zhao",
+   "Tong Yu",
+   "Rongguo Zhang",
+   "Chong Shen",
+   "Hongli Liu",
+   "Feng Li",
+   "Hong Zhu",
+   "Jiangang Luo",
+   "Liang Xu",
+   "Xuanwei Zhang"
+  ],
+  "abstract": "Recent work like GPT-3 has demonstrated excellent performance of Zero-Shot and Few-Shot learning on many natural language processing (NLP) tasks by scaling up model size, dataset size and the amount of computation. However, training a model like GPT-3 requires huge amount of computational resources which makes it challengeable to researchers. In this work, we propose a method that incorporates large-scale distributed training performance into model architecture design. With this method, Yuan 1.0, the current largest singleton language model with 245B parameters, achieves excellent performance on thousands GPUs during training, and the state-of-the-art results on NLP tasks. A data processing method is designed to efficiently filter massive amount of raw data. The current largest high-quality Chinese corpus with 5TB high quality texts is built based on this method. In addition, a calibration and label expansion method is proposed to improve the Zero-Shot and Few-Shot performance, and steady improvement is observed on the accuracy of various tasks. Yuan 1.0 presents strong capacity of natural language generation, and the generated articles are difficult to distinguish from the human-written ones.",
+  "published": "2021-10-10T07:40:22+00:00",
+  "updated": "2021-10-12T02:25:35+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2110.04725v2",
+  "entry_id": "http://arxiv.org/abs/2110.04725v2",
+  "pdf_path": "data/papers/2110.04725.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 40460,
+ "word_count": 1905,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "Yuan 1.0",
+   "parameters": "245B, 245.73B",
+   "parameters_millions": 245730,
+   "model_family": "Yuan",
+   "date_created": "2021-10-10",
+   "organization": "Baidu",
+   "innovation": "Introduces a three-dimensional parallel training strategy (tensor, pipeline, and data parallelism) with theoretical analysis for optimal parameter selection; employs activation recomputation to enable longer sequence lengths (up to 2048) without excessive memory usage; utilizes a fully-visible mask in the prefix portion of the input sequence to improve performance on both NLU and NLG tasks compared to causal masking.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "CommonCrawl, SogouNews, SogouT, Encyclopedia, Books",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "Thousands of GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Developing large-scale pre-trained language models for zero-shot and few-shot learning while mitigating computational bottlenecks in distributed training.",
+   "application": "Text classification, Winograd Schema disambiguation, Natural Language Inference, Reading Comprehension, span extraction, closed-book question answering.",
+   "paper_title": "Yuan 1.0: Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning",
+   "training_corpus_size": "5TB",
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "Chinese",
+   "hardware_description": "2128 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "245B (dense, all parameters active)",
+   "attention_mechanism": "Fully-visible mask in prefix portion; causal masking for other parts",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training only",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Human detection accuracy: 49.16%; News generation: 42.12%; Story generation: 49.15%; Dialogue generation: 45.68%; ZeroCLUE Human: 82.48, Bustm: 88, Csl: 87.1, Csldcp: 84, Eprstmt: 68, Iflytek: 90, Ocnli: 66, Tnews: 90.3, Wsc: 71; FewCLUE Human: 98, Bustm: 70.16, Csl: 76.7, Csldcp: 69.45, Eprstmt: 76.57, Iflytek: 59.55, Ocnli: 88.05, Tnews: 45.77, Wsc: 73.87; WebQA EM: 40.467, F1: 50.36; CMRC2018 EM: 27.37, F1: 49.17",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "YuanLM",
+   "parameters": "12.87B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "Yuan",
+   "date_created": "2021-10-10",
+   "organization": "Baidu",
+   "innovation": "Large-scale pre-training on a 5TB high-quality Chinese corpus using a Massive Data Filtering System (MDFS); architectural tuning (layer count, hidden size, microbatch configuration) optimized for pipeline and tensor parallelism to stabilize training and improve performance.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling (next-token prediction)",
+   "pretraining_corpus": "CommonCrawl, SogouNews, SogouT, Encyclopedia, Books",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning",
+   "application": "Text classification, Winograd Schema disambiguation, Natural Language Inference, Reading Comprehension, span extraction, closed-book question answering.",
+   "paper_title": "Yuan 1.0: Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning",
+   "training_corpus_size": "5TB",
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "Chinese",
+   "hardware_description": "2128 GPUs cluster achieving 45% of theoretical peak performance",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training only",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ZeroCLUE Bustm: 56.88, Chid: 59.375, Csl: 86.14, Csldcp: 50, Eprstmt: 47.533, Iflytek: 88.125, Ocnli: 37.87, Tnews: 46.875, Wsc: 57.01; FewCLUE Bustm: 69.14, Chid: 81.25, Csl: 72.27, Csldcp: 81.25, Eprstmt: 60.9, Iflytek: 90.625, Ocnli: 54.87, Tnews: 46.25, Wsc: 52.45",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Yuan 1.0": {
+   "application": [
+    "Text classification",
+    "Winograd Schema disambiguation",
+    "Natural Language Inference",
+    "Reading Comprehension",
+    "span extraction",
+    "closed-book question answering."
+   ],
+   "attention_mechanism": [
+    "Fully-visible mask in prefix portion",
+    "causal masking for other parts"
+   ],
+   "hardware_used": [
+    "Thousands of GPUs"
+   ],
+   "model_family": [
+    "Yuan"
+   ],
+   "model_name": [
+    "Yuan 1.0"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Baidu"
+   ],
+   "parameters": [
+    "245B",
+    "245.73B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "CommonCrawl",
+    "SogouNews",
+    "SogouT",
+    "Encyclopedia",
+    "Books"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "Chinese"
+   ]
+  },
+  "YuanLM": {
+   "application": [
+    "Text classification",
+    "Winograd Schema disambiguation",
+    "Natural Language Inference",
+    "Reading Comprehension",
+    "span extraction",
+    "closed-book question answering."
+   ],
+   "hardware_used": [
+    "GPUs"
+   ],
+   "model_family": [
+    "Yuan"
+   ],
+   "model_name": [
+    "YuanLM"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Baidu"
+   ],
+   "parameters": [
+    "12.87B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "CommonCrawl",
+    "SogouNews",
+    "SogouT",
+    "Encyclopedia",
+    "Books"
+   ],
+   "pretraining_task": [
+    "Causal language modeling (next-token prediction)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "Chinese"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Yuan 1.0": {
+    "research_problem": {
+     "candidates": [
+      "Developing large-scale pre-trained language models for zero-shot and few-shot learning while mitigating computational bottlenecks in distributed training."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Developing large-scale pre-trained language models for zero-shot and few-shot learning while mitigating computational bottlenecks in distributed training.",
+       "reason": "It is a descriptive sentence fragment about the research activity, not a short noun phrase naming the problem."
+      }
+     ]
+    }
+   },
+   "YuanLM": {
+    "research_problem": {
+     "candidates": [
+      "Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-Scale Pre-trained Language Model in Zero-Shot and Few-Shot Learning",
+       "reason": "Describes the model/approach rather than naming a specific research problem or challenge. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 44,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 6
+  }
+ },
+ "contributions": [
+  {
+   "label": "Yuan 1.0",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Yuan 1.0",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Yuan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-10-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a three-dimensional parallel training strategy (tensor, pipeline, and data parallelism) with theoretical analysis for optimal parameter selection",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs activation recomputation to enable longer sequence lengths (up to 2048) without excessive memory usage",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Utilizes a fully-visible mask in the prefix portion of the input sequence to improve performance on both NLU and NLG tasks compared to causal masking.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SogouNews",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SogouT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Encyclopedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "245B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "245.73B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 245730,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Thousands of GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "2128 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Winograd Schema disambiguation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural Language Inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading Comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Span extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Closed-book question answering.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5TB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "245B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Fully-visible mask in prefix portion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal masking for other parts",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training only",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human detection accuracy: 49.16%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "News generation: 42.12%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Story generation: 49.15%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Dialogue generation: 45.68%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ZeroCLUE Human: 82.48, Bustm: 88, Csl: 87.1, Csldcp: 84, Eprstmt: 68, Iflytek: 90, Ocnli: 66, Tnews: 90.3, Wsc: 71",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FewCLUE Human: 98, Bustm: 70.16, Csl: 76.7, Csldcp: 69.45, Eprstmt: 76.57, Iflytek: 59.55, Ocnli: 88.05, Tnews: 45.77, Wsc: 73.87",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQA EM: 40.467, F1: 50.36",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMRC2018 EM: 27.37, F1: 49.17",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "YuanLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "YuanLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Yuan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-10-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Large-scale pre-training on a 5TB high-quality Chinese corpus using a Massive Data Filtering System (MDFS)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Architectural tuning (layer count, hidden size, microbatch configuration) optimized for pipeline and tensor parallelism to stabilize training and improve performance.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling (next-token prediction)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SogouNews",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SogouT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Encyclopedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12.87B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "2128 GPUs cluster achieving 45% of theoretical peak performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Winograd Schema disambiguation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural Language Inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading Comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Span extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Closed-book question answering.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5TB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training only",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ZeroCLUE Bustm: 56.88, Chid: 59.375, Csl: 86.14, Csldcp: 50, Eprstmt: 47.533, Iflytek: 88.125, Ocnli: 37.87, Tnews: 46.875, Wsc: 57.01",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FewCLUE Bustm: 69.14, Chid: 81.25, Csl: 72.27, Csldcp: 81.25, Eprstmt: 60.9, Iflytek: 90.625, Ocnli: 54.87, Tnews: 46.25, Wsc: 52.45",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1921372",
+  "contribution_ids": [
+   "R1921374",
+   "R1921375"
+  ],
+  "new_contribution_ids": [
+   "R1921374",
+   "R1921375"
+  ],
+  "comparison_updated": null
+ }
+}

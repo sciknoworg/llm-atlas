@@ -207,6 +207,20 @@ class PaperFetcher:
             logger.error(f"Error fetching metadata for {arxiv_id}: {e}")
             raise RuntimeError(f"Failed to fetch metadata for {arxiv_id}: {e}")
 
+    @staticmethod
+    def _earlier_version_urls(pdf_url: str) -> List[str]:
+        """
+        Same PDF URL, counting the version suffix down: v3 -> v2, v1.
+
+        Returns an empty list for an unversioned URL, which has nothing to
+        fall back to.
+        """
+        match = re.search(r"v(\d+)$", pdf_url or "")
+        if not match:
+            return []
+        base = pdf_url[: match.start()]
+        return [f"{base}v{n}" for n in range(int(match.group(1)) - 1, 0, -1)]
+
     def download_pdf(
         self, arxiv_id: str, filename: Optional[str] = None, force: bool = False
     ) -> Optional[Path]:
@@ -247,6 +261,19 @@ class PaperFetcher:
 
             # Download PDF with progress bar
             response = requests.get(pdf_url, stream=True)
+
+            # arXiv occasionally advertises a latest version whose PDF was never
+            # generated: the API returns .../pdf/<id>v2 and that URL 404s while
+            # v1 is served fine. Walk back through the earlier versions rather
+            # than losing the paper over it.
+            if response.status_code == 404:
+                for url in self._earlier_version_urls(pdf_url):
+                    logger.warning("PDF %s is missing (404) — trying %s", pdf_url, url)
+                    candidate = requests.get(url, stream=True)
+                    if candidate.ok:
+                        response = candidate
+                        break
+
             response.raise_for_status()
 
             total_size = int(response.headers.get("content-length", 0))

@@ -1,0 +1,602 @@
+{
+ "arxiv_id": "2205.01917",
+ "status": "completed",
+ "timestamp": "2026-08-25T13:28:09.085221",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2205.01917",
+  "title": "CoCa: Contrastive Captioners are Image-Text Foundation Models",
+  "authors": [
+   "Jiahui Yu",
+   "Zirui Wang",
+   "Vijay Vasudevan",
+   "Legg Yeung",
+   "Mojtaba Seyedhosseini",
+   "Yonghui Wu"
+  ],
+  "abstract": "Exploring large-scale pretrained foundation models is of significant interest in computer vision because these models can be quickly transferred to many downstream tasks. This paper presents Contrastive Captioner (CoCa), a minimalist design to pretrain an image-text encoder-decoder foundation model jointly with contrastive loss and captioning loss, thereby subsuming model capabilities from contrastive approaches like CLIP and generative methods like SimVLM. In contrast to standard encoder-decoder transformers where all decoder layers attend to encoder outputs, CoCa omits cross-attention in the first half of decoder layers to encode unimodal text representations, and cascades the remaining decoder layers which cross-attend to the image encoder for multimodal image-text representations. We apply a contrastive loss between unimodal image and text embeddings, in addition to a captioning loss on the multimodal decoder outputs which predicts text tokens autoregressively. By sharing the same computational graph, the two training objectives are computed efficiently with minimal overhead. CoCa is pretrained end-to-end and from scratch on both web-scale alt-text data and annotated images by treating all labels simply as text, seamlessly unifying natural language supervision for representation learning. Empirically, CoCa achieves state-of-the-art performance with zero-shot transfer or minimal task-specific adaptation on a broad range of downstream tasks, spanning visual recognition (ImageNet, Kinetics-400/600/700, Moments-in-Time), crossmodal retrieval (MSCOCO, Flickr30K, MSR-VTT), multimodal understanding (VQA, SNLI-VE, NLVR2), and image captioning (MSCOCO, NoCaps). Notably on ImageNet classification, CoCa obtains 86.3% zero-shot top-1 accuracy, 90.6% with a frozen encoder and learned classification head, and new state-of-the-art 91.0% top-1 accuracy on ImageNet with a finetuned encoder.",
+  "published": "2022-05-04T07:01:14+00:00",
+  "updated": "2022-06-14T00:48:04+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG",
+   "cs.MM"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2205.01917v2",
+  "entry_id": "http://arxiv.org/abs/2205.01917v2",
+  "pdf_path": "data/papers/2205.01917.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 61304,
+ "word_count": 3522,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "CoCa",
+   "parameters": "383M, 787M, 2.1B",
+   "parameters_millions": 2100,
+   "model_family": "CoCa",
+   "date_created": "2022-05-04",
+   "organization": "Google",
+   "innovation": "Decouples the decoder into a unimodal text decoder (omitting cross-attention to encode text-only representations) and a multimodal decoder (cascaded to cross-attend to the image encoder); jointly optimizes a contrastive loss between unimodal image/text embeddings and a generative captioning loss on multimodal decoder outputs, subsuming capabilities of dual-encoder (CLIP) and encoder-decoder (SimVLM) approaches in a single computational graph.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive learning, Causal language modeling (captioning)",
+   "pretraining_corpus": "Web-scale alt-text data, annotated images",
+   "finetuning_task": "Zero-shot transfer, frozen-feature evaluation, end-to-end finetuning",
+   "optimizer": "Adafactor",
+   "hardware_used": "Cloud TPUv4",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Image-text foundation models / Vision-language representation learning",
+   "application": "Image classification, video action recognition, cross-modal alignment, image-text retrieval, image captioning, multimodal understanding",
+   "paper_title": "CoCa: Contrastive Captioners are Image-Text Foundation Models",
+   "training_corpus_size": "400M+ image-text pairs",
+   "finetuning_data": "ImageNet, Kinetics-400, Kinetics-600, Kinetics-700, Moments-in-Time, Flickr30K, MSCOCO",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": "2,048 Cloud TPUv4 chips",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "383M (dense, all parameters active)",
+   "attention_mechanism": "Causally-masked self-attention in decoder; cross-attention in multimodal layers",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Single-stage end-to-end pretraining from scratch on combined web-scale alt-text and annotated image datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Early fusion (shared encoder, decoupled unimodal/multimodal decoder layers)",
+   "vision_encoder": "ViT-Base, Vision Transformer (ViT)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet zero-shot top-1 accuracy 86.3%; ImageNet frozen encoder 90.6%; ImageNet finetuned encoder 91.0%; ImageNet Top-1 91.0; Kinetics-400 88.9; Kinetics-600 89.4; Kinetics-700 82.7; Moments-in-Time 49.0; Flickr30K I->T 92.5, T->I 99.5, I->T 99.9; MSCOCO I->T 80.4, T->I 95.7, I->T 97.7; ImageNet-A 82.6; ImageNet-R 93.2; ImageNet-V2 76.5; ImageNet-Sketch 71.7; ObjectNet 71.6; Average 78.7",
+   "weight_clipping_mechanism": "Gradient clip 1.0",
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "CoCa": {
+   "application": [
+    "Image classification",
+    "video action recognition",
+    "cross-modal alignment",
+    "image-text retrieval",
+    "image captioning",
+    "multimodal understanding"
+   ],
+   "attention_mechanism": [
+    "Causally-masked self-attention in decoder",
+    "cross-attention in multimodal layers"
+   ],
+   "finetuning_data": [
+    "ImageNet",
+    "Kinetics-400",
+    "Kinetics-600",
+    "Kinetics-700",
+    "Moments-in-Time",
+    "Flickr30K",
+    "MSCOCO"
+   ],
+   "finetuning_task": [
+    "Zero-shot transfer"
+   ],
+   "fusion_architecture": [
+    "Early fusion (shared encoder, decoupled unimodal/multimodal decoder layers)"
+   ],
+   "hardware_used": [
+    "Cloud TPUv4"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "CoCa"
+   ],
+   "model_name": [
+    "CoCa"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "383M",
+    "787M",
+    "2.1B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Web-scale alt-text data",
+    "annotated images"
+   ],
+   "pretraining_task": [
+    "Contrastive learning, Causal language modeling (captioning)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT-Base",
+    "Vision Transformer (ViT)"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "CoCa": {
+    "finetuning_task": {
+     "candidates": [
+      "Zero-shot transfer",
+      "frozen-feature evaluation",
+      "end-to-end finetuning"
+     ],
+     "accepted": [
+      "Zero-shot transfer"
+     ],
+     "dropped": [
+      {
+       "value": "frozen-feature evaluation",
+       "reason": "Describes an evaluation protocol, not a fine-tuning task"
+      },
+      {
+       "value": "end-to-end finetuning",
+       "reason": "Describes a training strategy, not a specific fine-tuning task"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Image-text foundation models / Vision-language representation learning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Image-text foundation models / Vision-language representation learning",
+       "reason": "Names a model type/field rather than a specific research problem or capability gap"
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clip 1.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clip 1.0",
+       "reason": "Describes gradient clipping, not weight clipping"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 33,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 23
+  }
+ },
+ "contributions": [
+  {
+   "label": "CoCa",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CoCa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CoCa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-04",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Decouples the decoder into a unimodal text decoder (omitting cross-attention to encode text-only representations) and a multimodal decoder (cascaded to cross-attend to the image encoder)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Jointly optimizes a contrastive loss between unimodal image/text embeddings and a generative captioning loss on multimodal decoder outputs, subsuming capabilities of dual-encoder (CLIP) and encoder-decoder (SimVLM) approaches in a single computational graph.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning, Causal language modeling (captioning)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Web-scale alt-text data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Annotated images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Zero-shot transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "383M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "787M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 2100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Cloud TPUv4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "2,048 Cloud TPUv4 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video action recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "400M+ image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Kinetics-400",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Kinetics-600",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Kinetics-700",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Moments-in-Time",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "383M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causally-masked self-attention in decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention in multimodal layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Single-stage end-to-end pretraining from scratch on combined web-scale alt-text and annotated image datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Early fusion (shared encoder, decoupled unimodal/multimodal decoder layers)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Vision Transformer (ViT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet zero-shot top-1 accuracy 86.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet frozen encoder 90.6%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet finetuned encoder 91.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet Top-1 91.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Kinetics-400 88.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Kinetics-600 89.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Kinetics-700 82.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Moments-in-Time 49.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K I->T 92.5, T->I 99.5, I->T 99.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSCOCO I->T 80.4, T->I 95.7, I->T 97.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-A 82.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-R 93.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-V2 76.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-Sketch 71.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ObjectNet 71.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average 78.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R439661",
+  "contribution_ids": [
+   "R1922005"
+  ],
+  "new_contribution_ids": [
+   "R1922005"
+  ],
+  "comparison_updated": null
+ }
+}

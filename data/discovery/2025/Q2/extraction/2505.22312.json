@@ -1,0 +1,765 @@
+{
+  "arxiv_id": "2505.22312",
+  "status": "completed",
+  "timestamp": "2026-08-29T19:44:52.823990",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2505.22312",
+    "title": "Skywork Open Reasoner 1 Technical Report",
+    "authors": [
+      "Jujie He",
+      "Jiacai Liu",
+      "Chris Yuhao Liu",
+      "Rui Yan",
+      "Chaojie Wang",
+      "Peng Cheng",
+      "Xiaoyu Zhang",
+      "Fuxiang Zhang",
+      "Jiacheng Xu",
+      "Wei Shen",
+      "Siyuan Li",
+      "Liang Zeng",
+      "Tianwen Wei",
+      "Cheng Cheng",
+      "Bo An",
+      "Yang Liu",
+      "Yahui Zhou"
+    ],
+    "abstract": "The success of DeepSeek-R1 underscores the significant role of reinforcement learning (RL) in enhancing the reasoning capabilities of large language models (LLMs). In this work, we present Skywork-OR1, an effective and scalable RL implementation for long Chain-of-Thought (CoT) models. Building on the DeepSeek-R1-Distill model series, our RL approach achieves notable performance gains, increasing average accuracy across AIME24, AIME25, and LiveCodeBench from 57.8% to 72.8% (+15.0%) for the 32B model and from 43.6% to 57.5% (+13.9%) for the 7B model. Our Skywork-OR1-32B model surpasses both DeepSeek-R1 and Qwen3-32B on the AIME24 and AIME25 benchmarks, while achieving comparable results on LiveCodeBench. The Skywork-OR1-7B and Skywork-OR1-Math-7B models demonstrate competitive reasoning capabilities among models of similar size. We perform comprehensive ablation studies on the core components of our training pipeline to validate their effectiveness. Additionally, we thoroughly investigate the phenomenon of entropy collapse, identify key factors affecting entropy dynamics, and demonstrate that mitigating premature entropy collapse is critical for improved test performance. To support community research, we fully open-source our model weights, training code, and training datasets.",
+    "published": "2025-05-28T12:56:04+00:00",
+    "updated": "2025-05-29T09:07:33+00:00",
+    "doi": null,
+    "primary_category": "cs.LG",
+    "categories": [
+      "cs.LG",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2505.22312v2",
+    "entry_id": "http://arxiv.org/abs/2505.22312v2",
+    "pdf_path": "data/papers/2505.22312.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 101542,
+  "word_count": 15441,
+  "models_extracted": 7,
+  "extraction_data": [
+    {
+      "model_name": "Skywork-OR 1",
+      "parameters": "7B, 32B",
+      "parameters_millions": 32000,
+      "model_family": "Skywork",
+      "date_created": "2025-05-28",
+      "organization": "Skywork",
+      "innovation": "Efficient and scalable RL recipe for long CoT models; addresses premature entropy collapse via on-policy training and adaptive entropy control; omits KL penalty to improve test performance; rigorous data filtering and multi-stage training.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": null,
+      "finetuning_task": "Reinforcement Learning (RL)",
+      "optimizer": "SGD",
+      "hardware_used": "H800 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Improving reasoning abilities of long CoT models using RL efficiently and scalably.",
+      "application": "Math and coding tasks, reasoning",
+      "paper_title": "Skywork Open Reasoner 1 Technical Report",
+      "training_corpus_size": null,
+      "finetuning_data": "Open-source datasets with rigorous preprocessing and filtering",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": "32 H800 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "32B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": "32K",
+      "context_extension_method": null,
+      "training_pipeline": "Multi-stage training -> on-policy RL with adaptive entropy control (omitting KL penalty)",
+      "reasoning_mode": "Long Chain-of-Thought (CoT)",
+      "moe_configuration": "Dense",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "On-policy RL",
+      "reward_mechanism": "Verifiable rule-based rewards for math and code; zero-advantage group filtering",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "DeepSeek-R1-Distill model series",
+      "optimizer_innovation": "Entropy loss term to prevent premature entropy collapse",
+      "benchmark_result": "AIME24: 82.2; AIME25: 73.3; LiveCodeBench: 63.0; AIME24: 70.2; AIME25: 54.6; LiveCodeBench: 47.6",
+      "weight_clipping_mechanism": "higher-clip ratio (0.25, 0.265)",
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Skywork Open Reasoner 1",
+      "parameters": "7B, 32B",
+      "parameters_millions": 32000,
+      "model_family": "Skywork",
+      "date_created": "2025-05-28",
+      "organization": "Google",
+      "innovation": "Analysis of on-policy vs off-policy reinforcement learning training dynamics, specifically identifying that increasing SGD steps and off-policy data reuse accelerates premature entropy collapse and degrades test performance, while on-policy updates with controlled entropy regularization yield steady improvements.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": null,
+      "finetuning_task": "Reinforcement Learning (GRPO)",
+      "optimizer": null,
+      "hardware_used": "H800 GPUs",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Stability and performance of reinforcement learning training for reasoning models",
+      "application": "Math and coding reasoning",
+      "paper_title": "Skywork Open Reasoner 1 Technical Report",
+      "training_corpus_size": null,
+      "finetuning_data": "NuminaMath-1.5, CODE-RL, TACO, Eurus-RL, DeepScaleR, STILL-3-Preview-RL-Data, Omni-MATH, AIME, LeetCode",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": "32 to 256 H800 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "32K",
+      "context_extension_method": null,
+      "training_pipeline": "RL training (on-policy)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "On-policy RL, GRPO",
+      "reward_mechanism": "Verifiable rule-based rewards (correct/incorrect answers)",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "Skywork-OR 1": {
+      "application": [
+        "Math and coding tasks",
+        "reasoning"
+      ],
+      "base_model": [],
+      "finetuning_data": [],
+      "finetuning_task": [],
+      "hardware_used": [
+        "H800 GPU"
+      ],
+      "model_family": [
+        "Skywork"
+      ],
+      "model_name": [
+        "Skywork-OR 1"
+      ],
+      "optimizer": [
+        "SGD"
+      ],
+      "organization": [
+        "Skywork"
+      ],
+      "parameters": [
+        "7B",
+        "32B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "reasoning_mode": [
+        "Long Chain-of-Thought (CoT)"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Verifiable rule-based rewards for math and code"
+      ],
+      "rl_algorithm": [],
+      "weight_clipping_mechanism": []
+    },
+    "Skywork Open Reasoner 1": {
+      "application": [
+        "Math and coding reasoning"
+      ],
+      "finetuning_data": [
+        "NuminaMath-1.5",
+        "CODE-RL",
+        "TACO",
+        "Eurus-RL",
+        "DeepScaleR",
+        "STILL-3-Preview-RL-Data",
+        "Omni-MATH",
+        "AIME",
+        "LeetCode"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "H800 GPUs"
+      ],
+      "model_family": [
+        "Skywork"
+      ],
+      "model_name": [
+        "Skywork Open Reasoner 1"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "7B",
+        "32B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Stability and performance of reinforcement learning training for reasoning models"
+      ],
+      "reward_mechanism": [
+        "Verifiable rule-based rewards (correct/incorrect answers)"
+      ],
+      "rl_algorithm": [
+        "GRPO"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Skywork-OR 1": {
+        "base_model": {
+          "candidates": [
+            "DeepSeek-R1-Distill model series"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "DeepSeek-R1-Distill model series",
+              "reason": "Describes a series of distilled models rather than the foundational pre-trained model."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Open-source datasets with rigorous preprocessing and filtering"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open-source datasets with rigorous preprocessing and filtering",
+              "reason": "Describes data characteristics rather than naming a specific dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Reinforcement Learning (RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning (RL)",
+              "reason": "Names a training paradigm/method, not a specific fine-tuning task or objective. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Improving reasoning abilities of long CoT models using RL efficiently and scalably."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Improving reasoning abilities of long CoT models using RL efficiently and scalably.",
+              "reason": "Describes a solution or goal statement rather than a short noun phrase naming the problem."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Verifiable rule-based rewards for math and code",
+            "zero-advantage group filtering"
+          ],
+          "accepted": [
+            "Verifiable rule-based rewards for math and code"
+          ],
+          "dropped": [
+            {
+              "value": "zero-advantage group filtering",
+              "reason": "Describes a training filtering technique rather than a reward calculation method."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "On-policy RL"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "On-policy RL",
+              "reason": "Describes a category of algorithms rather than a specific algorithm."
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "higher-clip ratio (0.25, 0.265)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "higher-clip ratio (0.25, 0.265)",
+              "reason": "Describes a hyperparameter setting rather than the clipping method itself."
+            }
+          ]
+        }
+      },
+      "Skywork Open Reasoner 1": {
+        "finetuning_task": {
+          "candidates": [
+            "Reinforcement Learning (GRPO)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning (GRPO)",
+              "reason": "Describes a training method/algorithm rather than a specific task or objective."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "On-policy RL",
+            "GRPO"
+          ],
+          "accepted": [
+            "GRPO"
+          ],
+          "dropped": [
+            {
+              "value": "On-policy RL",
+              "reason": "Describes a category of algorithms rather than a specific algorithm."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 34,
+      "dropped": 9,
+      "llm_calls": 1,
+      "values_sent_to_llm": 25
+    }
+  },
+  "contributions": [
+    {
+      "label": "Skywork-OR 1",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Skywork-OR 1",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Skywork",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-05-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Skywork",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Efficient and scalable RL recipe for long CoT models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Addresses premature entropy collapse via on-policy training and adaptive entropy control",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Omits KL penalty to improve test performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Rigorous data filtering and multi-stage training.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "SGD",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "32B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 32000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H800 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "32 H800 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Math and coding tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "32B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Multi-stage training -> on-policy RL with adaptive entropy control (omitting KL penalty)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Long Chain-of-Thought (CoT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Dense",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Verifiable rule-based rewards for math and code",
+          "datatype": "string"
+        },
+        {
+          "property": "P203102",
+          "label": "optimizer_innovation",
+          "value": "Entropy loss term to prevent premature entropy collapse",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24: 82.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25: 73.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench: 63.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24: 70.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25: 54.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench: 47.6",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Skywork Open Reasoner 1",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Skywork Open Reasoner 1",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Skywork",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-05-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Analysis of on-policy vs off-policy reinforcement learning training dynamics, specifically identifying that increasing SGD steps and off-policy data reuse accelerates premature entropy collapse and degrades test performance, while on-policy updates with controlled entropy regularization yield steady improvements.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "32B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 32000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H800 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "32 to 256 H800 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Math and coding reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Stability and performance of reinforcement learning training for reasoning models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NuminaMath-1.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CODE-RL",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TACO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Eurus-RL",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DeepScaleR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "STILL-3-Preview-RL-Data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Omni-MATH",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AIME",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LeetCode",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "RL training (on-policy)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GRPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Verifiable rule-based rewards (correct/incorrect answers)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926769",
+    "contribution_ids": [
+      "R1926771",
+      "R1926772"
+    ],
+    "new_contribution_ids": [
+      "R1926771",
+      "R1926772"
+    ],
+    "comparison_updated": null
+  }
+}

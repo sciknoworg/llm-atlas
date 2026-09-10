@@ -1,0 +1,544 @@
+{
+  "arxiv_id": "2505.07608",
+  "status": "completed",
+  "timestamp": "2026-08-29T19:34:47.144723",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2505.07608",
+    "title": "MiMo: Unlocking the Reasoning Potential of Language Model -- From Pretraining to Posttraining",
+    "authors": [
+      "LLM-Core Xiaomi",
+      " :",
+      "Bingquan Xia",
+      "Bowen Shen",
+      " Cici",
+      "Dawei Zhu",
+      "Di Zhang",
+      "Gang Wang",
+      "Hailin Zhang",
+      "Huaqiu Liu",
+      "Jiebao Xiao",
+      "Jinhao Dong",
+      "Liang Zhao",
+      "Peidian Li",
+      "Peng Wang",
+      "Shihua Yu",
+      "Shimao Chen",
+      "Weikun Wang",
+      "Wenhan Ma",
+      "Xiangwei Deng",
+      "Yi Huang",
+      "Yifan Song",
+      "Zihan Jiang",
+      "Bowen Ye",
+      "Can Cai",
+      "Chenhong He",
+      "Dong Zhang",
+      "Duo Zhang",
+      "Guoan Wang",
+      "Hao Tian",
+      "Haochen Zhao",
+      "Heng Qu",
+      "Hongshen Xu",
+      "Jun Shi",
+      "Kainan Bao",
+      "Kai Fang",
+      "Kang Zhou",
+      "Kangyang Zhou",
+      "Lei Li",
+      "Menghang Zhu",
+      "Nuo Chen",
+      "Qiantong Wang",
+      "Shaohui Liu",
+      "Shicheng Li",
+      "Shuhao Gu",
+      "Shuhuai Ren",
+      "Shuo Liu",
+      "Sirui Deng",
+      "Weiji Zhuang",
+      "Weiwei Lv",
+      "Wenyu Yang",
+      "Xin Zhang",
+      "Xing Yong",
+      "Xing Zhang",
+      "Xingchen Song",
+      "Xinzhe Xu",
+      "Xu Wang",
+      "Yihan Yan",
+      "Yu Tu",
+      "Yuanyuan Tian",
+      "Yudong Wang",
+      "Yue Yu",
+      "Zhenru Lin",
+      "Zhichao Song",
+      "Zihao Yue"
+    ],
+    "abstract": "We present MiMo-7B, a large language model born for reasoning tasks, with optimization across both pre-training and post-training stages. During pre-training, we enhance the data preprocessing pipeline and employ a three-stage data mixing strategy to strengthen the base model's reasoning potential. MiMo-7B-Base is pre-trained on 25 trillion tokens, with additional Multi-Token Prediction objective for enhanced performance and accelerated inference speed. During post-training, we curate a dataset of 130K verifiable mathematics and programming problems for reinforcement learning, integrating a test-difficulty-driven code-reward scheme to alleviate sparse-reward issues and employing strategic data resampling to stabilize training. Extensive evaluations show that MiMo-7B-Base possesses exceptional reasoning potential, outperforming even much larger 32B models. The final RL-tuned model, MiMo-7B-RL, achieves superior performance on mathematics, code and general reasoning tasks, surpassing the performance of OpenAI o1-mini. The model checkpoints are available at https://github.com/xiaomimimo/MiMo.",
+    "published": "2025-05-12T14:30:11+00:00",
+    "updated": "2025-06-05T11:49:09+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2505.07608v2",
+    "entry_id": "http://arxiv.org/abs/2505.07608v2",
+    "pdf_path": "data/papers/2505.07608.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining and post-training)"
+  },
+  "text_length": 74350,
+  "word_count": 10529,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "MiMo",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "model_family": "MiMo",
+      "date_created": "2025-05-12",
+      "organization": "Xiaomi",
+      "innovation": "Multiple-Token Prediction (MTP): an additional training objective that predicts multiple future tokens simultaneously to enhance model performance and accelerate inference speed compared to standard next-token prediction; Three-stage data mixing strategy and optimized preprocessing pipeline: applies multi-dimensional data filtering and generates massive diverse synthetic reasoning data to increase reasoning pattern density in the pre-training corpus, strengthening the base model's inherent reasoning potential; Test-difficulty-driven code-reward scheme and strategic data resampling during RL: integrates difficulty-based rewards and resampling to alleviate sparse-reward issues and stabilize training, enabling small models to achieve uniform improvements in both mathematical and code capabilities.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling with Multiple-Token Prediction (MTP)",
+      "pretraining_corpus": "25 trillion tokens (text and synthetic reasoning data)",
+      "finetuning_task": "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning (RL)",
+      "optimizer": "AdamW",
+      "hardware_used": "H20 GPU",
+      "extension": "Multi-Token Prediction (MTP) modules replicated and fine-tuned for speculative decoding to accelerate inference speedup.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Unlocking reasoning potential in language models from pretraining to posttraining",
+      "application": "Mathematical reasoning, code generation, general reasoning tasks",
+      "paper_title": "MiMo: Unlocking the Reasoning Potential of Language Model -- From Pretraining to Posttraining",
+      "training_corpus_size": "25 trillion tokens",
+      "finetuning_data": "130K verifiable mathematics and programming problems",
+      "tokenizer": null,
+      "supported_language": "English, Chinese",
+      "hardware_description": "256 H20 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "7B (dense, all parameters active)",
+      "attention_mechanism": "Grouped-Query Attention (GQA)",
+      "context_length_max": "32,768 tokens",
+      "context_extension_method": "Rotary Positional Embedding (RoPE) with base expanded to 640,000",
+      "training_pipeline": "Pre-training (25T tokens, MTP objective) -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning (RL) with test-difficulty-driven reward and data resampling",
+      "reasoning_mode": "Step-by-step analysis, self-reflection and backtracking",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Synthetic reasoning data generation",
+      "rl_algorithm": "Direct RL",
+      "reward_mechanism": "Test-difficulty-driven code-reward scheme",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Trained from scratch",
+      "optimizer_innovation": null,
+      "benchmark_result": "LiveCodeBench v5: 57.8; AIME 2024-2025: 51.4",
+      "weight_clipping_mechanism": "Gradient clipping with a maximum norm of 1.0",
+      "number_of_attention_heads": "32 query / 8 key-value",
+      "post_training_infrastructure": "Seamless Rollout Engine; vLLM-based Inference Engine"
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "MiMo": {
+      "application": [
+        "Mathematical reasoning",
+        "code generation"
+      ],
+      "attention_mechanism": [
+        "Grouped-Query Attention (GQA)"
+      ],
+      "base_model": [],
+      "context_extension_method": [
+        "Rotary Positional Embedding (RoPE) with base expanded to 640,000"
+      ],
+      "finetuning_data": [
+        "130K verifiable mathematics and programming problems"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "H20 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "MiMo"
+      ],
+      "model_name": [
+        "MiMo"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Xiaomi"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling with Multiple-Token Prediction (MTP)"
+      ],
+      "reasoning_mode": [
+        "Step-by-step analysis, self-reflection and backtracking"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Test-difficulty-driven code-reward scheme"
+      ],
+      "rl_algorithm": [],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [],
+      "weight_clipping_mechanism": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiMo": {
+        "application": {
+          "candidates": [
+            "Mathematical reasoning",
+            "code generation",
+            "general reasoning tasks"
+          ],
+          "accepted": [
+            "Mathematical reasoning",
+            "code generation"
+          ],
+          "dropped": [
+            {
+              "value": "general reasoning tasks",
+              "reason": "Placeholder/category rather than a concrete task or domain."
+            }
+          ]
+        },
+        "base_model": {
+          "candidates": [
+            "Trained from scratch"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Trained from scratch",
+              "reason": "Describes a training methodology, not a specific pre-trained model. (cached)"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning (RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised Fine-Tuning (SFT) followed by Reinforcement Learning (RL)",
+              "reason": "Describes the training methodology/process rather than the specific task or objective."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "25 trillion tokens (text and synthetic reasoning data)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "25 trillion tokens (text and synthetic reasoning data)",
+              "reason": "Asserts data scale and composition rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Unlocking reasoning potential in language models from pretraining to posttraining"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Unlocking reasoning potential in language models from pretraining to posttraining",
+              "reason": "Reads like a paper title or solution description rather than a short noun phrase naming a problem."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Direct RL"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Direct RL",
+              "reason": "Vague category or term rather than a specific named RL algorithm."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Synthetic reasoning data generation"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Synthetic reasoning data generation",
+              "reason": "Describes the data type/output rather than naming a specific generation method or technique."
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Gradient clipping with a maximum norm of 1.0"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Gradient clipping with a maximum norm of 1.0",
+              "reason": "Describes gradient clipping, which constrains gradients rather than model weights as defined."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 18,
+      "dropped": 8,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiMo",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiMo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiMo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-05-12",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Xiaomi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multiple-Token Prediction (MTP): an additional training objective that predicts multiple future tokens simultaneously to enhance model performance and accelerate inference speed compared to standard next-token prediction",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Three-stage data mixing strategy and optimized preprocessing pipeline: applies multi-dimensional data filtering and generates massive diverse synthetic reasoning data to increase reasoning pattern density in the pre-training corpus, strengthening the base model's inherent reasoning potential",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Test-difficulty-driven code-reward scheme and strategic data resampling during RL: integrates difficulty-based rewards and resampling to alleviate sparse-reward issues and stabilize training, enabling small models to achieve uniform improvements in both mathematical and code capabilities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling with Multiple-Token Prediction (MTP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H20 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "256 H20 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "25 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "130K verifiable mathematics and programming problems",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32,768 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "Rotary Positional Embedding (RoPE) with base expanded to 640,000",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training (25T tokens, MTP objective) -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning (RL) with test-difficulty-driven reward and data resampling",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Step-by-step analysis, self-reflection and backtracking",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Test-difficulty-driven code-reward scheme",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench v5: 57.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2024-2025: 51.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32 query / 8 key-value",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Seamless Rollout Engine; vLLM-based Inference Engine",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926748",
+    "contribution_ids": [
+      "R1926750"
+    ],
+    "new_contribution_ids": [
+      "R1926750"
+    ],
+    "comparison_updated": null
+  }
+}

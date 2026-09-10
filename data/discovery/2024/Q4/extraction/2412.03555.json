@@ -1,0 +1,988 @@
+{
+  "arxiv_id": "2412.03555",
+  "status": "completed",
+  "timestamp": "2026-08-29T16:07:40.582247",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2412.03555",
+    "title": "PaliGemma 2: A Family of Versatile VLMs for Transfer",
+    "authors": [
+      "Andreas Steiner",
+      "André Susano Pinto",
+      "Michael Tschannen",
+      "Daniel Keysers",
+      "Xiao Wang",
+      "Yonatan Bitton",
+      "Alexey Gritsenko",
+      "Matthias Minderer",
+      "Anthony Sherbondy",
+      "Shangbang Long",
+      "Siyang Qin",
+      "Reeve Ingle",
+      "Emanuele Bugliarello",
+      "Sahar Kazemzadeh",
+      "Thomas Mesnard",
+      "Ibrahim Alabdulmohsin",
+      "Lucas Beyer",
+      "Xiaohua Zhai"
+    ],
+    "abstract": "PaliGemma 2 is an upgrade of the PaliGemma open Vision-Language Model (VLM) based on the Gemma 2 family of language models. We combine the SigLIP-So400m vision encoder that was also used by PaliGemma with the whole range of Gemma 2 models, from the 2B one all the way up to the 27B model. We train these models at three resolutions (224px, 448px, and 896px) in multiple stages to equip them with broad knowledge for transfer via fine-tuning. The resulting family of base models covering different model sizes and resolutions allows us to investigate factors impacting transfer performance (such as learning rate) and to analyze the interplay between the type of task, model size, and resolution. We further increase the number and breadth of transfer tasks beyond the scope of PaliGemma including different OCR-related tasks such as table structure recognition, molecular structure recognition, music score recognition, as well as long fine-grained captioning and radiography report generation, on which PaliGemma 2 obtains state-of-the-art results.",
+    "published": "2024-12-04T18:50:42+00:00",
+    "updated": "2024-12-04T18:50:42+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2412.03555v1",
+    "entry_id": "http://arxiv.org/abs/2412.03555v1",
+    "pdf_path": "data/papers/2412.03555.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+  },
+  "text_length": 95177,
+  "word_count": 13489,
+  "models_extracted": 7,
+  "extraction_data": [
+    {
+      "model_name": "PaliGemma 2",
+      "parameters": "3B, 10B, 14B, 28B",
+      "parameters_millions": 28000,
+      "model_family": "PaliGemma",
+      "date_created": "2024-12-04",
+      "organization": "Google",
+      "innovation": "Transfer-focused vision-language model family fine-tuned on diverse downstream tasks (molecule structure recognition, optical music score recognition, long fine-grained captioning, spatial reasoning); leverages high-resolution, dynamic-resolution vision encoders to improve perception and factual alignment; demonstrates significant performance gains from task-specific fine-tuning over zero-shot instruction-tuned baselines.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "PaLI-X data, CC3M, CC12M, LAION-400M, and other web-scale vision-language datasets",
+      "finetuning_task": "Supervised fine-tuning for transfer tasks, Supervised transfer learning on downstream benchmarks, Supervised fine-tuning on diverse vision-language tasks, Supervised fine-tuning for table structure recognition, molecule structure recognition, optical music score recognition, long captioning, spatial reasoning, radiography report generation",
+      "optimizer": "AdamW",
+      "hardware_used": "TPU v4-256",
+      "extension": null,
+      "blog_post": null,
+      "license": "open-weight",
+      "research_problem": "Versatile vision-language models for transfer learning",
+      "application": "Table structure recognition, molecule structure recognition, optical music score recognition, long captioning, spatial reasoning, radiography report generation, object detection, referring expression comprehension, segmentation",
+      "paper_title": "PaliGemma 2: A Family of Versatile VLMs for Transfer",
+      "training_corpus_size": "4B image-text pairs",
+      "finetuning_data": "ICDAR'15, Total-Text, PubMed Central Open Access Subset, FinTabNet, PubTabNet, GrandStaff, PubChem, MIMIC-CXR, DOCCI, Humdrum, ChemDraw molecular drawings, Sheet Music dataset, VSR benchmark, MIMIC-CXR radiography data",
+      "tokenizer": "SentencePiece",
+      "supported_language": "English, German, French, Italian, Spanish, Portuguese, Dutch, Russian, Japanese, Korean, Chinese, Hindi",
+      "hardware_description": "256 TPU-v5e chips",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/google/paligemma; https://github.com/google-deepmind/paligemma",
+      "context_length": null,
+      "activated_parameters": "3B, 10B, 28B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": "8640 tokens (448 image + 8192 text)",
+      "context_extension_method": null,
+      "training_pipeline": "Three-stage recipe: Stage 0 unimodal pretraining of components, Stage 1 combining pretrained SigLIP and Gemma 2, followed by additional stages for broad knowledge",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "8-bit switched floating-point",
+      "synthetic_data_generation_method": "Synthetic augmentation for GrandStaff dataset",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Perspective API with threshold > 0.8 to detect toxicity, profanity, and other potential issues",
+      "safety_defect_rate": "Max Toxicity: 0.14-0.39%; Identity Attack: 0.02-0.06%; Insult: 0.17-0.52%; Threat: 0.43-0.64%; Profanity: 0.00%",
+      "fusion_architecture": "Linear projection combining visual embeddings with text tokens",
+      "vision_encoder": "SigLIP-So400m, SigLIP, High-resolution, dynamic-resolution vision encoder, SigLIP-So400M-14",
+      "base_model": "Gemma 2, SigLIP-So400m",
+      "optimizer_innovation": null,
+      "benchmark_result": "ICDAR'15 Incidental F1: 75.9; Total-Text F1: 74.2; FinTabNet S-TEDS: 99.2, TEDS: 98.9, GriTS-Top: 99.4, GriTS-Con: 99.2; PubTabNet S-TEDS: 97.6, TEDS: 97.3, GriTS-Top: 98.0, GriTS-Con: 97.8; DA(val): 76.9; AOKVQA-MC(val): 30.6; COCO-35L(avg34): 139.1; DocVQA(val): 72.9; ScienceQA(minival): 113.2; TextVQA(val): 63.9; VizWizVQA(val): 76.1; DA(val): 68.8; AOKVQA-MC(val): 83.3; COCO-35L(avg34): 115.2; DocVQA(val): 42.2; ScienceQA(minival): 97.6; DA(val): 68.6; AOKVQA-MC(val): 84.0; COCO-35L(avg34): 116.6; DocVQA(val): 43.1; ScienceQA(minival): 97.4; TextVQA(val): 64.7; MolScribe CER: 1.6, SER: 2.3, LER: 6.7; VSR zs. split C: 19.9, B: 14.6, R: 31.9, F1: 28.8; VSR rand. split C: 74.8, B: 81.6; MIMIC-CXR CIDEr: 17.4, BLEU4: 15.0, ROUGE: 32.4, F1: 29.5; SOTA on 10 of 11 benchmarks in the 3B size class; competitive on 14B and 28B across VQA, OCR, localization, and scientific domains",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "gemma.cpp (lightweight, portable C++ inference engine)"
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "PaliGemma 2": {
+      "application": [
+        "Table structure recognition",
+        "molecule structure recognition",
+        "optical music score recognition",
+        "long captioning",
+        "spatial reasoning",
+        "radiography report generation",
+        "object detection",
+        "referring expression comprehension",
+        "segmentation"
+      ],
+      "base_model": [
+        "Gemma 2, SigLIP-So400m"
+      ],
+      "finetuning_data": [
+        "ICDAR'15",
+        "Total-Text",
+        "PubMed Central Open Access Subset",
+        "FinTabNet",
+        "PubTabNet",
+        "GrandStaff",
+        "PubChem",
+        "MIMIC-CXR",
+        "DOCCI",
+        "Humdrum",
+        "ChemDraw molecular drawings",
+        "Sheet Music dataset",
+        "VSR benchmark",
+        "MIMIC-CXR radiography data"
+      ],
+      "finetuning_task": [
+        "molecule structure recognition",
+        "optical music score recognition",
+        "long captioning",
+        "spatial reasoning",
+        "radiography report generation"
+      ],
+      "fusion_architecture": [
+        "Linear projection combining visual embeddings with text tokens"
+      ],
+      "hardware_used": [
+        "TPU v4-256"
+      ],
+      "license": [
+        "open-weight"
+      ],
+      "model_family": [
+        "PaliGemma"
+      ],
+      "model_name": [
+        "PaliGemma 2"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "3B",
+        "10B",
+        "14B",
+        "28B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "PaLI-X data",
+        "CC3M",
+        "CC12M",
+        "LAION-400M"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "8-bit switched floating-point"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "Dutch",
+        "Russian",
+        "Japanese",
+        "Korean",
+        "Chinese",
+        "Hindi"
+      ],
+      "synthetic_data_generation_method": [
+        "Synthetic augmentation for GrandStaff dataset"
+      ],
+      "vision_encoder": [
+        "SigLIP-So400m",
+        "SigLIP",
+        "dynamic-resolution vision encoder",
+        "SigLIP-So400M-14"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "PaliGemma 2": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning for transfer tasks",
+            "Supervised transfer learning on downstream benchmarks",
+            "Supervised fine-tuning on diverse vision-language tasks",
+            "Supervised fine-tuning for table structure recognition",
+            "molecule structure recognition",
+            "optical music score recognition",
+            "long captioning",
+            "spatial reasoning",
+            "radiography report generation"
+          ],
+          "accepted": [
+            "molecule structure recognition",
+            "optical music score recognition",
+            "long captioning",
+            "spatial reasoning",
+            "radiography report generation"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning for transfer tasks",
+              "reason": "Describes the training process/method rather than a specific task"
+            },
+            {
+              "value": "Supervised transfer learning on downstream benchmarks",
+              "reason": "Describes the training process/method rather than a specific task"
+            },
+            {
+              "value": "Supervised fine-tuning on diverse vision-language tasks",
+              "reason": "Describes the training process/method rather than a specific task"
+            },
+            {
+              "value": "Supervised fine-tuning for table structure recognition",
+              "reason": "Describes the training procedure rather than naming the task itself"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "PaLI-X data",
+            "CC3M",
+            "CC12M",
+            "LAION-400M",
+            "other web-scale vision-language datasets"
+          ],
+          "accepted": [
+            "PaLI-X data",
+            "CC3M",
+            "CC12M",
+            "LAION-400M"
+          ],
+          "dropped": [
+            {
+              "value": "other web-scale vision-language datasets",
+              "reason": "Vague placeholder that asserts breadth rather than naming a specific identifiable corpus"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Versatile vision-language models for transfer learning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Versatile vision-language models for transfer learning",
+              "reason": "Describes a model type or solution goal rather than a specific research problem or challenge"
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "SigLIP-So400m",
+            "SigLIP",
+            "High-resolution",
+            "dynamic-resolution vision encoder",
+            "SigLIP-So400M-14"
+          ],
+          "accepted": [
+            "SigLIP-So400m",
+            "SigLIP",
+            "dynamic-resolution vision encoder",
+            "SigLIP-So400M-14"
+          ],
+          "dropped": [
+            {
+              "value": "High-resolution",
+              "reason": "Adjective describing a feature, not a model component (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 64,
+      "dropped": 7,
+      "llm_calls": 1,
+      "values_sent_to_llm": 41
+    }
+  },
+  "contributions": [
+    {
+      "label": "PaliGemma 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PaliGemma 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PaliGemma",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-12-04",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Transfer-focused vision-language model family fine-tuned on diverse downstream tasks (molecule structure recognition, optical music score recognition, long fine-grained captioning, spatial reasoning)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Leverages high-resolution, dynamic-resolution vision encoders to improve perception and factual alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates significant performance gains from task-specific fine-tuning over zero-shot instruction-tuned baselines.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PaLI-X data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC3M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC12M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-400M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Molecule structure recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Optical music score recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Long captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Spatial reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Radiography report generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "SentencePiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "10B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 28000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "TPU v4-256",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "256 TPU-v5e chips",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Table structure recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Molecule structure recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Optical music score recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Spatial reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Radiography report generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Object detection",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring expression comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/google/paligemma",
+          "datatype": "URI"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/google-deepmind/paligemma",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4B image-text pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ICDAR'15",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Total-Text",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PubMed Central Open Access Subset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "FinTabNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PubTabNet",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GrandStaff",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PubChem",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MIMIC-CXR",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DOCCI",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Humdrum",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChemDraw molecular drawings",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Sheet Music dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VSR benchmark",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MIMIC-CXR radiography data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Dutch",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "3B, 10B, 28B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8640 tokens (448 image + 8192 text)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Three-stage recipe: Stage 0 unimodal pretraining of components, Stage 1 combining pretrained SigLIP and Gemma 2, followed by additional stages for broad knowledge",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8-bit switched floating-point",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthetic augmentation for GrandStaff dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Perspective API with threshold > 0.8 to detect toxicity, profanity, and other potential issues",
+          "datatype": "string"
+        },
+        {
+          "property": "P203098",
+          "label": "safety_defect_rate",
+          "value": "Max Toxicity: 0.14-0.39%; Identity Attack: 0.02-0.06%; Insult: 0.17-0.52%; Threat: 0.43-0.64%; Profanity: 0.00%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Linear projection combining visual embeddings with text tokens",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP-So400m",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP-So400M-14",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Gemma 2, SigLIP-So400m",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ICDAR'15 Incidental F1: 75.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Total-Text F1: 74.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "FinTabNet S-TEDS: 99.2, TEDS: 98.9, GriTS-Top: 99.4, GriTS-Con: 99.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PubTabNet S-TEDS: 97.6, TEDS: 97.3, GriTS-Top: 98.0, GriTS-Con: 97.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DA(val): 76.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AOKVQA-MC(val): 30.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO-35L(avg34): 139.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA(val): 72.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA(minival): 113.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA(val): 63.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VizWizVQA(val): 76.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DA(val): 68.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AOKVQA-MC(val): 83.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO-35L(avg34): 115.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA(val): 42.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA(minival): 97.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DA(val): 68.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AOKVQA-MC(val): 84.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO-35L(avg34): 116.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA(val): 43.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScienceQA(minival): 97.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA(val): 64.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MolScribe CER: 1.6, SER: 2.3, LER: 6.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VSR zs. split C: 19.9, B: 14.6, R: 31.9, F1: 28.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VSR rand. split C: 74.8, B: 81.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MIMIC-CXR CIDEr: 17.4, BLEU4: 15.0, ROUGE: 32.4, F1: 29.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on 10 of 11 benchmarks in the 3B size class",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Competitive on 14B and 28B across VQA, OCR, localization, and scientific domains",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Gemma.cpp (lightweight, portable C++ inference engine)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926500",
+    "contribution_ids": [
+      "R1926502"
+    ],
+    "new_contribution_ids": [
+      "R1926502"
+    ],
+    "comparison_updated": null
+  }
+}

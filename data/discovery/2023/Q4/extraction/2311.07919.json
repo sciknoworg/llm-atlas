@@ -1,0 +1,730 @@
+{
+ "arxiv_id": "2311.07919",
+ "status": "completed",
+ "timestamp": "2026-08-30T22:09:23.859378",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2311.07919",
+  "title": "Qwen-Audio: Advancing Universal Audio Understanding via Unified Large-Scale Audio-Language Models",
+  "authors": [
+   "Yunfei Chu",
+   "Jin Xu",
+   "Xiaohuan Zhou",
+   "Qian Yang",
+   "Shiliang Zhang",
+   "Zhijie Yan",
+   "Chang Zhou",
+   "Jingren Zhou"
+  ],
+  "abstract": "Recently, instruction-following audio-language models have received broad attention for audio interaction with humans. However, the absence of pre-trained audio models capable of handling diverse audio types and tasks has hindered progress in this field. Consequently, most existing works have only been able to support a limited range of interaction capabilities. In this paper, we develop the Qwen-Audio model and address this limitation by scaling up audio-language pre-training to cover over 30 tasks and various audio types, such as human speech, natural sounds, music, and songs, to facilitate universal audio understanding abilities. However, directly co-training all tasks and datasets can lead to interference issues, as the textual labels associated with different datasets exhibit considerable variations due to differences in task focus, language, granularity of annotation, and text structure. To overcome the one-to-many interference, we carefully design a multi-task training framework by conditioning on a sequence of hierarchical tags to the decoder for encouraging knowledge sharing and avoiding interference through shared and specified tags respectively. Remarkably, Qwen-Audio achieves impressive performance across diverse benchmark tasks without requiring any task-specific fine-tuning, surpassing its counterparts. Building upon the capabilities of Qwen-Audio, we further develop Qwen-Audio-Chat, which allows for input from various audios and text inputs, enabling multi-turn dialogues and supporting various audio-central scenarios.",
+  "published": "2023-11-14T05:34:50+00:00",
+  "updated": "2023-12-21T10:20:42+00:00",
+  "doi": null,
+  "primary_category": "eess.AS",
+  "categories": [
+   "eess.AS",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2311.07919v2",
+  "entry_id": "http://arxiv.org/abs/2311.07919v2",
+  "pdf_path": "data/papers/2311.07919.pdf"
+ },
+ "text_length": 59284,
+ "word_count": 5765,
+ "models_extracted": 3,
+ "extraction_data": [
+  {
+   "model_name": "Qwen-Audio",
+   "parameters": "7B, 8.34B",
+   "parameters_millions": 8340,
+   "model_family": "Qwen",
+   "date_created": "2023-11-14",
+   "organization": "Alibaba Group",
+   "innovation": "Multi-task training framework conditioning on a sequence of hierarchical tags to the decoder to encourage knowledge sharing and avoid interference through shared and specified tags; scaling up audio-language pre-training to cover over 30 tasks and various audio types (speech, natural sounds, music, songs) without requiring task-specific fine-tuning.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Audio-language pre-training, multi-task learning",
+   "pretraining_corpus": "ASR (30k hrs), S2TT (3.7k hrs), OSR (<1k hrs), DialectASR (2k hrs), English SRWT (10k hrs), Mandarin SRWT (11k hrs), DID (2k hrs), LID (11.7k hrs), SGC (4.8k hrs), Speech ER (<1k hrs), SV (1.2k hrs), SD (<1k hrs), SER (<1k hrs), KS (<1k hrs), IC (<1k hrs), SF (<1k hrs), SAP (4.8k hrs), VSC (<1k hrs), AAC (8.4k hrs), SEC (5.4k hrs), ASC (<1k hrs), SED (<1k hrs), AQA (<1k hrs), SID (<1k hrs), SMER (<1k hrs), MC (25k hrs), MIC (<1k hrs), MNA (<1k hrs), MGR (9.5k hrs), MR (<1k hrs), MQA (<1k hrs)",
+   "finetuning_task": "Instruction tuning, chat, Supervised instruction fine-tuning, Supervised fine-tuning for flexible human interaction",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": "Q-Former module connecting audio encoder to LLM; handles multi-audio dialogue with 'Audio id:' labeling.",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Universal audio understanding via unified large-scale audio-language models",
+   "application": "Natural sound detection, human speech recognition and grounding, audio captioning, transcription, translation, keyword analysis, question answering",
+   "paper_title": "Qwen-Audio: Advancing Universal Audio Understanding via Unified Large-Scale Audio-Language Models",
+   "training_corpus_size": "~130k hours",
+   "finetuning_data": "Manually created demonstrations for each task; GPT-3.5 generated Q&A; audio-dialogue dataset",
+   "tokenizer": "Qwen tokenizer (BPE)",
+   "supported_language": "English, Chinese, German, Spanish, French, Italian, Japanese, Korean",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "7B (dense, all parameters active)",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Audio-language pre-training -> instruction tuning (for chat variant)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": "GPT-3.5 used to generate further questions and answers based on raw text labels",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Single audio encoder connected to decoder",
+   "vision_encoder": null,
+   "base_model": "Qwen-7B",
+   "optimizer_innovation": null,
+   "benchmark_result": "SOTA on Aishell1, cochlsene, ClothoAQA, and VocalSound",
+   "weight_clipping_mechanism": "Gradient clipping (1.0)",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Qwen-Audio": {
+   "application": [
+    "Natural sound detection",
+    "human speech recognition and grounding",
+    "audio captioning",
+    "transcription",
+    "translation",
+    "keyword analysis",
+    "question answering"
+   ],
+   "base_model": [
+    "Qwen-7B"
+   ],
+   "finetuning_data": [
+    "Manually created demonstrations for each task",
+    "GPT-3.5 generated Q&A",
+    "audio-dialogue dataset"
+   ],
+   "finetuning_task": [
+    "Instruction tuning",
+    "chat",
+    "Supervised instruction fine-tuning"
+   ],
+   "fusion_architecture": [
+    "Single audio encoder connected to decoder"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen-Audio"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba Group"
+   ],
+   "parameters": [
+    "7B",
+    "8.34B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "ASR (30k hrs)",
+    "S2TT (3.7k hrs)",
+    "OSR (<1k hrs)",
+    "DialectASR (2k hrs)",
+    "English SRWT (10k hrs)",
+    "Mandarin SRWT (11k hrs)",
+    "DID (2k hrs)",
+    "LID (11.7k hrs)",
+    "SGC (4.8k hrs)",
+    "Speech ER (<1k hrs)",
+    "SV (1.2k hrs)",
+    "SD (<1k hrs)",
+    "SER (<1k hrs)",
+    "KS (<1k hrs)",
+    "IC (<1k hrs)",
+    "SF (<1k hrs)",
+    "SAP (4.8k hrs)",
+    "VSC (<1k hrs)",
+    "AAC (8.4k hrs)",
+    "SEC (5.4k hrs)",
+    "ASC (<1k hrs)",
+    "SED (<1k hrs)",
+    "AQA (<1k hrs)",
+    "SID (<1k hrs)",
+    "SMER (<1k hrs)",
+    "MC (25k hrs)",
+    "MIC (<1k hrs)",
+    "MNA (<1k hrs)",
+    "MGR (9.5k hrs)",
+    "MR (<1k hrs)",
+    "MQA (<1k hrs)"
+   ],
+   "pretraining_task": [
+    "Audio-language pre-training, multi-task learning"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "German",
+    "Spanish",
+    "French",
+    "Italian",
+    "Japanese",
+    "Korean"
+   ],
+   "synthetic_data_generation_method": [
+    "GPT-3.5 used to generate further questions and answers based on raw text labels"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Qwen-Audio": {
+    "finetuning_task": {
+     "candidates": [
+      "Instruction tuning",
+      "chat",
+      "Supervised instruction fine-tuning",
+      "Supervised fine-tuning for flexible human interaction"
+     ],
+     "accepted": [
+      "Instruction tuning",
+      "chat",
+      "Supervised instruction fine-tuning"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for flexible human interaction",
+       "reason": "Describes the fine-tuning process and goal rather than naming a specific task or objective."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Universal audio understanding via unified large-scale audio-language models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Universal audio understanding via unified large-scale audio-language models",
+       "reason": "Describes the proposed solution and model architecture rather than naming the research problem itself."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clipping (1.0)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clipping (1.0)",
+       "reason": "Describes gradient clipping, which constrains gradients rather than weight values as specified. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 66,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 46
+  }
+ },
+ "contributions": [
+  {
+   "label": "Qwen-Audio",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen-Audio",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-11-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba Group",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-task training framework conditioning on a sequence of hierarchical tags to the decoder to encourage knowledge sharing and avoid interference through shared and specified tags",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling up audio-language pre-training to cover over 30 tasks and various audio types (speech, natural sounds, music, songs) without requiring task-specific fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Audio-language pre-training, multi-task learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ASR (30k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "S2TT (3.7k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OSR (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DialectASR (2k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English SRWT (10k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Mandarin SRWT (11k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DID (2k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LID (11.7k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SGC (4.8k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Speech ER (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SV (1.2k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SD (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SER (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "KS (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IC (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SF (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SAP (4.8k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VSC (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AAC (8.4k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SEC (5.4k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ASC (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SED (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AQA (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SID (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SMER (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MC (25k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MIC (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MNA (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MGR (9.5k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MR (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MQA (<1k hrs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Chat",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Qwen tokenizer (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8.34B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 8340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural sound detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Human speech recognition and grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Audio captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Transcription",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Keyword analysis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~130k hours",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Manually created demonstrations for each task",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-3.5 generated Q&A",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Audio-dialogue dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Audio-language pre-training -> instruction tuning (for chat variant)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "GPT-3.5 used to generate further questions and answers based on raw text labels",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Single audio encoder connected to decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen-7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on Aishell1, cochlsene, ClothoAQA, and VocalSound",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1722801",
+  "contribution_ids": [
+   "R1722803",
+   "R1927470"
+  ],
+  "new_contribution_ids": [
+   "R1927470"
+  ],
+  "comparison_updated": null
+ }
+}

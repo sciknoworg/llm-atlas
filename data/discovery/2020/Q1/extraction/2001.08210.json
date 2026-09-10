@@ -1,0 +1,1594 @@
+{
+ "arxiv_id": "2001.08210",
+ "status": "completed",
+ "timestamp": "2026-08-24T17:28:24.029236",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2001.08210",
+  "title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+  "authors": [
+   "Yinhan Liu",
+   "Jiatao Gu",
+   "Naman Goyal",
+   "Xian Li",
+   "Sergey Edunov",
+   "Marjan Ghazvininejad",
+   "Mike Lewis",
+   "Luke Zettlemoyer"
+  ],
+  "abstract": "This paper demonstrates that multilingual denoising pre-training produces significant performance gains across a wide variety of machine translation (MT) tasks. We present mBART -- a sequence-to-sequence denoising auto-encoder pre-trained on large-scale monolingual corpora in many languages using the BART objective. mBART is one of the first methods for pre-training a complete sequence-to-sequence model by denoising full texts in multiple languages, while previous approaches have focused only on the encoder, decoder, or reconstructing parts of the text. Pre-training a complete model allows it to be directly fine tuned for supervised (both sentence-level and document-level) and unsupervised machine translation, with no task-specific modifications. We demonstrate that adding mBART initialization produces performance gains in all but the highest-resource settings, including up to 12 BLEU points for low resource MT and over 5 BLEU points for many document-level and unsupervised models. We also show it also enables new types of transfer to language pairs with no bi-text or that were not in the pre-training corpus, and present extensive analysis of which factors contribute the most to effective pre-training.",
+  "published": "2020-01-22T18:59:17+00:00",
+  "updated": "2020-01-23T18:58:48+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2001.08210v2",
+  "entry_id": "http://arxiv.org/abs/2001.08210v2",
+  "pdf_path": "data/papers/2001.08210.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 78068,
+ "word_count": 10395,
+ "models_extracted": 14,
+ "extraction_data": [
+  {
+   "model_name": "mBART 25",
+   "parameters": "400M, 406M, 680M, 1.5B",
+   "parameters_millions": 1500,
+   "model_family": "mBART",
+   "date_created": "2020-01-22",
+   "organization": "Meta",
+   "innovation": "Multilingual denoising pre-training on a sequence-to-sequence Transformer; injects noise by removing spans and replacing with mask tokens, and permuting sentence order; uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language; enables zero-shot and cross-lingual transfer.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multilingual denoising",
+   "pretraining_corpus": "160GB of text across 25 languages (Common Crawl, Wikipedia, news, web pages)",
+   "finetuning_task": "Supervised fine-tuning on machine translation, Supervised fine-tuning for machine translation",
+   "optimizer": "Adam",
+   "hardware_used": "Nvidia V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT",
+   "research_problem": "Multilingual Neural Machine Translation",
+   "application": "Machine translation (sentence-level and document-level), cross-lingual transfer, zero-shot translation",
+   "paper_title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+   "training_corpus_size": "CC25",
+   "finetuning_data": "WMT16 Ro-En, FLoRes (My-En, Ne-En, De-En), WMT datasets (En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja, En-Cs, En-Vi, En-Tl, En-Id, En-Nl, En-It, En-Pl, En-Bg, En-Sv, En-He, En-El, En-Fi, En-Ru, En-Ar, En-Hi, En-Tr, En-Pr, En-Pt, En-It, En-Cz, En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja)",
+   "tokenizer": "SentencePiece (SPM)",
+   "supported_language": "English, Romanian, German, Italian, French, Chinese, Japanese, Korean, Arabic, Hindi, etc., Spanish, Russian, Vietnamese, Thai, Indonesian, Malay, Burmese, Nepali, Bengali, Telugu, Tamil, Marathi, Gujarati, Urdu, Persian, Swahili, Hausa, Portuguese, Dutch, Turkish, Czech, Polish, Bulgarian, Swedish, Hebrew, Greek, Finnish",
+   "hardware_description": "256 Nvidia V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/pytorch/fairseq",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on denoising task -> fine-tuning on MT tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "WMT16 Ro-En: 39.9 BLEU; My-En: 39.8 BLEU; Ne-En: 39.8 BLEU; WMT14 EN-DE BLEU 28.4; WMT14 EN-FR BLEU 42.5; WMT16 EN-RO BLEU 43.3; WMT16 EN-ZH BLEU 39.7; WMT14 En-De 28.4 BLEU; WMT14 En-Fr 41.0 BLEU; WMT16 En-Ro 26.6 BLEU; WMT16 En-Zh 39.7 BLEU; WMT16 En-Ko 20.1 BLEU; WMT16 En-Ja 26.0 BLEU",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "mBART 06",
+   "parameters": "680M",
+   "parameters_millions": 680,
+   "model_family": "mBART",
+   "date_created": "2020-01-22",
+   "organization": "Meta",
+   "innovation": "Multilingual denoising pre-training on a sequence-to-sequence Transformer; injects noise by removing spans and replacing with mask tokens, and permuting sentence order; uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language; enables zero-shot and cross-lingual transfer.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multilingual denoising",
+   "pretraining_corpus": "Subset of 6 European languages",
+   "finetuning_task": "Supervised fine-tuning on machine translation",
+   "optimizer": null,
+   "hardware_used": "Nvidia V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT",
+   "research_problem": "Multilingual Neural Machine Translation",
+   "application": "Machine translation (sentence-level and document-level), cross-lingual transfer, zero-shot translation",
+   "paper_title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+   "training_corpus_size": "CC100",
+   "finetuning_data": "WMT16 Ro-En, FLoRes (My-En, Ne-En, De-En)",
+   "tokenizer": "SentencePiece (SPM)",
+   "supported_language": "English, Romanian, German, Italian, French, Chinese, Japanese, Korean, Arabic, Hindi, etc.",
+   "hardware_description": "256 Nvidia V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on denoising task -> fine-tuning on MT tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "WMT16 Ro-En: 39.3 BLEU; My-En: 37.8 BLEU; Ne-En: 39.2 BLEU",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "mBART 02",
+   "parameters": "680M",
+   "parameters_millions": 680,
+   "model_family": "mBART",
+   "date_created": "2020-01-22",
+   "organization": "Meta",
+   "innovation": "Multilingual denoising pre-training on a sequence-to-sequence Transformer; injects noise by removing spans and replacing with mask tokens, and permuting sentence order; uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language; enables zero-shot and cross-lingual transfer.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multilingual denoising",
+   "pretraining_corpus": "English + 1 other language for 4 language pairs",
+   "finetuning_task": "Supervised fine-tuning on machine translation",
+   "optimizer": null,
+   "hardware_used": "Nvidia V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT",
+   "research_problem": "Multilingual Neural Machine Translation",
+   "application": "Machine translation (sentence-level and document-level), cross-lingual transfer, zero-shot translation",
+   "paper_title": "Multilingual Denoising Pre-training for Neural Machine Translation",
+   "training_corpus_size": "300.8GB (En), 61.4GB (Ro)",
+   "finetuning_data": "WMT16 Ro-En, FLoRes (My-En, Ne-En, De-En)",
+   "tokenizer": "SentencePiece (SPM)",
+   "supported_language": "English, Romanian, German, Italian, French, Chinese, Japanese, Korean, Arabic, Hindi, etc.",
+   "hardware_description": "256 Nvidia V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on denoising task -> fine-tuning on MT tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "WMT16 Ro-En: 38.5 BLEU; My-En: 37.8 BLEU; Ne-En: 39.2 BLEU",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "mBART 25": {
+   "application": [
+    "Machine translation (sentence-level and document-level)",
+    "cross-lingual transfer",
+    "zero-shot translation"
+   ],
+   "finetuning_data": [
+    "WMT16 Ro-En",
+    "FLoRes (My-En, Ne-En, De-En)",
+    "WMT datasets (En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja, En-Cs, En-Vi, En-Tl, En-Id, En-Nl, En-It, En-Pl, En-Bg, En-Sv, En-He, En-El, En-Fi, En-Ru, En-Ar, En-Hi, En-Tr, En-Pr, En-Pt, En-It, En-Cz, En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on machine translation",
+    "Supervised fine-tuning for machine translation"
+   ],
+   "hardware_used": [
+    "Nvidia V100 GPU"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [
+    "mBART"
+   ],
+   "model_name": [
+    "mBART 25"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "400M",
+    "406M",
+    "680M",
+    "1.5B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "160GB of text across 25 languages (Common Crawl, Wikipedia, news, web pages)"
+   ],
+   "pretraining_task": [
+    "Multilingual denoising"
+   ],
+   "research_problem": [
+    "Multilingual Neural Machine Translation"
+   ],
+   "supported_language": [
+    "English",
+    "Romanian",
+    "German",
+    "Italian",
+    "French",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Arabic",
+    "Hindi",
+    "Spanish",
+    "Russian",
+    "Vietnamese",
+    "Thai",
+    "Indonesian",
+    "Malay",
+    "Burmese",
+    "Nepali",
+    "Bengali",
+    "Telugu",
+    "Tamil",
+    "Marathi",
+    "Gujarati",
+    "Urdu",
+    "Persian",
+    "Swahili",
+    "Hausa",
+    "Portuguese",
+    "Dutch",
+    "Turkish",
+    "Czech",
+    "Polish",
+    "Bulgarian",
+    "Swedish",
+    "Hebrew",
+    "Greek",
+    "Finnish"
+   ]
+  },
+  "mBART 06": {
+   "application": [
+    "Machine translation (sentence-level and document-level)",
+    "cross-lingual transfer",
+    "zero-shot translation"
+   ],
+   "finetuning_data": [
+    "WMT16 Ro-En",
+    "FLoRes (My-En, Ne-En, De-En)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on machine translation"
+   ],
+   "hardware_used": [
+    "Nvidia V100 GPU"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [
+    "mBART"
+   ],
+   "model_name": [
+    "mBART 06"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "680M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multilingual denoising"
+   ],
+   "research_problem": [
+    "Multilingual Neural Machine Translation"
+   ],
+   "supported_language": [
+    "English",
+    "Romanian",
+    "German",
+    "Italian",
+    "French",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Arabic",
+    "Hindi"
+   ]
+  },
+  "mBART 02": {
+   "application": [
+    "Machine translation (sentence-level and document-level)",
+    "cross-lingual transfer",
+    "zero-shot translation"
+   ],
+   "finetuning_data": [
+    "WMT16 Ro-En",
+    "FLoRes (My-En, Ne-En, De-En)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on machine translation"
+   ],
+   "hardware_used": [
+    "Nvidia V100 GPU"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [
+    "mBART"
+   ],
+   "model_name": [
+    "mBART 02"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "680M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multilingual denoising"
+   ],
+   "research_problem": [
+    "Multilingual Neural Machine Translation"
+   ],
+   "supported_language": [
+    "English",
+    "Romanian",
+    "German",
+    "Italian",
+    "French",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Arabic",
+    "Hindi"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "mBART 25": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi",
+      "etc.",
+      "Spanish",
+      "Russian",
+      "Vietnamese",
+      "Thai",
+      "Indonesian",
+      "Malay",
+      "Burmese",
+      "Nepali",
+      "Bengali",
+      "Telugu",
+      "Tamil",
+      "Marathi",
+      "Gujarati",
+      "Urdu",
+      "Persian",
+      "Swahili",
+      "Hausa",
+      "Portuguese",
+      "Dutch",
+      "Turkish",
+      "Czech",
+      "Polish",
+      "Bulgarian",
+      "Swedish",
+      "Hebrew",
+      "Greek",
+      "Finnish"
+     ],
+     "accepted": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi",
+      "Spanish",
+      "Russian",
+      "Vietnamese",
+      "Thai",
+      "Indonesian",
+      "Malay",
+      "Burmese",
+      "Nepali",
+      "Bengali",
+      "Telugu",
+      "Tamil",
+      "Marathi",
+      "Gujarati",
+      "Urdu",
+      "Persian",
+      "Swahili",
+      "Hausa",
+      "Portuguese",
+      "Dutch",
+      "Turkish",
+      "Czech",
+      "Polish",
+      "Bulgarian",
+      "Swedish",
+      "Hebrew",
+      "Greek",
+      "Finnish"
+     ],
+     "dropped": [
+      {
+       "value": "etc.",
+       "reason": "Placeholder/trailing qualifier, not a specific language."
+      }
+     ]
+    }
+   },
+   "mBART 06": {
+    "pretraining_corpus": {
+     "candidates": [
+      "Subset of 6 European languages"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Subset of 6 European languages",
+       "reason": "Describes a subset/characterization rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi",
+      "etc."
+     ],
+     "accepted": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi"
+     ],
+     "dropped": [
+      {
+       "value": "etc.",
+       "reason": "Placeholder/trailing qualifier, not a specific language."
+      }
+     ]
+    }
+   },
+   "mBART 02": {
+    "pretraining_corpus": {
+     "candidates": [
+      "English + 1 other language for 4 language pairs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "English + 1 other language for 4 language pairs",
+       "reason": "Describes language composition rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi",
+      "etc."
+     ],
+     "accepted": [
+      "English",
+      "Romanian",
+      "German",
+      "Italian",
+      "French",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Hindi"
+     ],
+     "dropped": [
+      {
+       "value": "etc.",
+       "reason": "Placeholder/trailing qualifier, not a specific language."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 109,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 24
+  }
+ },
+ "contributions": [
+  {
+   "label": "mBART 25",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MBART 25",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MBART",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-01-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual denoising pre-training on a sequence-to-sequence Transformer",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Injects noise by removing spans and replacing with mask tokens, and permuting sentence order",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables zero-shot and cross-lingual transfer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multilingual denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "160GB of text across 25 languages (Common Crawl, Wikipedia, news, web pages)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (SPM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "406M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "680M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256 Nvidia V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation (sentence-level and document-level)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/pytorch/fairseq",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual Neural Machine Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "CC25",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT16 Ro-En",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLoRes (My-En, Ne-En, De-En)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT datasets (En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja, En-Cs, En-Vi, En-Tl, En-Id, En-Nl, En-It, En-Pl, En-Bg, En-Sv, En-He, En-El, En-Fi, En-Ru, En-Ar, En-Hi, En-Tr, En-Pr, En-Pt, En-It, En-Cz, En-De, En-Fr, En-Ro, En-Zh, En-Ko, En-Ja)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malay",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Burmese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Nepali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Telugu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tamil",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Marathi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Gujarati",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Persian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hausa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dutch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swedish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hebrew",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Greek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Finnish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on denoising task -> fine-tuning on MT tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 Ro-En: 39.9 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "My-En: 39.8 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Ne-En: 39.8 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-DE BLEU 28.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-FR BLEU 42.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 EN-RO BLEU 43.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 EN-ZH BLEU 39.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 En-De 28.4 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 En-Fr 41.0 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 En-Ro 26.6 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 En-Zh 39.7 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 En-Ko 20.1 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 En-Ja 26.0 BLEU",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "mBART 06",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MBART 06",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MBART",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-01-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual denoising pre-training on a sequence-to-sequence Transformer",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Injects noise by removing spans and replacing with mask tokens, and permuting sentence order",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables zero-shot and cross-lingual transfer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multilingual denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (SPM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "680M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 680,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256 Nvidia V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation (sentence-level and document-level)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual Neural Machine Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "CC100",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT16 Ro-En",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLoRes (My-En, Ne-En, De-En)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on denoising task -> fine-tuning on MT tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 Ro-En: 39.3 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "My-En: 37.8 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Ne-En: 39.2 BLEU",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "mBART 02",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MBART 02",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MBART",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-01-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual denoising pre-training on a sequence-to-sequence Transformer",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Injects noise by removing spans and replacing with mask tokens, and permuting sentence order",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a special language ID token (<LID>) at encoder and decoder to predict sentence/language",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables zero-shot and cross-lingual transfer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multilingual denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (SPM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "680M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 680,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256 Nvidia V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation (sentence-level and document-level)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual Neural Machine Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "300.8GB (En), 61.4GB (Ro)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT16 Ro-En",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLoRes (My-En, Ne-En, De-En)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on denoising task -> fine-tuning on MT tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 Ro-En: 38.5 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "My-En: 37.8 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Ne-En: 39.2 BLEU",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370887",
+  "contribution_ids": [
+   "R370889",
+   "R1920496",
+   "R1920516",
+   "R1920518"
+  ],
+  "new_contribution_ids": [
+   "R1920496",
+   "R1920516",
+   "R1920518"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,763 @@
+{
+ "arxiv_id": "2303.03378",
+ "status": "completed",
+ "timestamp": "2026-08-28T02:08:11.761041",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2303.03378",
+  "title": "PaLM-E: An Embodied Multimodal Language Model",
+  "authors": [
+   "Danny Driess",
+   "Fei Xia",
+   "Mehdi S. M. Sajjadi",
+   "Corey Lynch",
+   "Aakanksha Chowdhery",
+   "Brian Ichter",
+   "Ayzaan Wahid",
+   "Jonathan Tompson",
+   "Quan Vuong",
+   "Tianhe Yu",
+   "Wenlong Huang",
+   "Yevgen Chebotar",
+   "Pierre Sermanet",
+   "Daniel Duckworth",
+   "Sergey Levine",
+   "Vincent Vanhoucke",
+   "Karol Hausman",
+   "Marc Toussaint",
+   "Klaus Greff",
+   "Andy Zeng",
+   "Igor Mordatch",
+   "Pete Florence"
+  ],
+  "abstract": "Large language models excel at a wide range of complex tasks. However, enabling general inference in the real world, e.g., for robotics problems, raises the challenge of grounding. We propose embodied language models to directly incorporate real-world continuous sensor modalities into language models and thereby establish the link between words and percepts. Input to our embodied language model are multi-modal sentences that interleave visual, continuous state estimation, and textual input encodings. We train these encodings end-to-end, in conjunction with a pre-trained large language model, for multiple embodied tasks including sequential robotic manipulation planning, visual question answering, and captioning. Our evaluations show that PaLM-E, a single large embodied multimodal model, can address a variety of embodied reasoning tasks, from a variety of observation modalities, on multiple embodiments, and further, exhibits positive transfer: the model benefits from diverse joint training across internet-scale language, vision, and visual-language domains. Our largest model, PaLM-E-562B with 562B parameters, in addition to being trained on robotics tasks, is a visual-language generalist with state-of-the-art performance on OK-VQA, and retains generalist language capabilities with increasing scale.",
+  "published": "2023-03-06T18:58:06+00:00",
+  "updated": "2023-03-06T18:58:06+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.AI",
+   "cs.RO"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2303.03378v1",
+  "entry_id": "http://arxiv.org/abs/2303.03378v1",
+  "pdf_path": "data/papers/2303.03378.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 79717,
+ "word_count": 8310,
+ "models_extracted": 14,
+ "extraction_data": [
+  {
+   "model_name": "PaLM-E",
+   "parameters": "8B, 12B, 62B, 84B, 540B, 562B",
+   "parameters_millions": 562000,
+   "model_family": "PaLM",
+   "date_created": "2023-03-06",
+   "organization": "Google",
+   "innovation": "Multimodal sentences representation: injects continuous embodied observations (images, state estimates, sensors) directly into language embeddings to process multiple images flexibly within any part of a sentence; introduces neural scene representations and entity-labeling multimodal tokens; enables direct action prediction and embodied reasoning without auxiliary grounding models.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "Webli, VQ2A, VQG, CC3M, ObjectAware, OKVQA, VQAv2, COCO, Wikipedia text, MobileManipulator, LanguageTable, TAMP",
+   "finetuning_task": "Robot control and visual grounding, Supervised fine-tuning on robot interaction data",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Grounding large language models in the real world for embodied reasoning and robotics.",
+   "application": "Sequential robotic manipulation planning, visual question answering, captioning, visual-language tasks, embodied reasoning",
+   "paper_title": "PaLM-E: An Embodied Multimodal Language Model",
+   "training_corpus_size": null,
+   "finetuning_data": "Robot sensor data, visual grounding tasks, TAMP, Language-Table, SayCan, VQA, COCO, Mobile Manipulation datasets, Lang. Table Data, SayCan Data, TAMP Data",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "562B (dense)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "End-to-end training on multi-modal sentences interleaving visual, continuous state, and text tokens; joint training across internet-scale language, vision, and visual-language domains alongside robotics tasks.",
+   "reasoning_mode": "Multimodal chain-of-thought reasoning",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Token interleaving",
+   "vision_encoder": "ViT, Pre-trained ViT, ViT (Vision Transformer), Vision Transformer (ViT), Early-fused visual features",
+   "base_model": "PaLM",
+   "optimizer_innovation": null,
+   "benchmark_result": "OK-VQA state-of-the-art; TAMP planning success: 94.9%; Language-Table success: 94.9%; Mobile Manipulation success: 99.4% (State GT input); TAMP Success: 100%; SayCan Affordances: 75%; TAMP 3-5 objects (state, unfrozen): 100.0, 98.8, 100.0, 97.6, 97.7, 95.5; TriviaQA: 74.6; NaturalQuestions: 27.2; Lambada: 83.3; HellaSwag: 83.5; StoryCloze: 86.3; Winograd: 89.0; AvgNLU: 78.5; AvgNLG: 51.7; Affordance F1: 0.91; Success Detection F1: 0.91",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "PaLM-E": {
+   "application": [
+    "Sequential robotic manipulation planning",
+    "visual question answering",
+    "captioning",
+    "visual-language tasks",
+    "embodied reasoning"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "PaLM"
+   ],
+   "finetuning_data": [
+    "Robot sensor data",
+    "TAMP",
+    "Language-Table",
+    "SayCan",
+    "VQA",
+    "COCO",
+    "Lang. Table Data",
+    "SayCan Data",
+    "TAMP Data"
+   ],
+   "finetuning_task": [
+    "Robot control and visual grounding"
+   ],
+   "fusion_architecture": [
+    "Token interleaving"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "PaLM-E"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "8B",
+    "12B",
+    "62B",
+    "84B",
+    "540B",
+    "562B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Webli",
+    "VQ2A",
+    "VQG",
+    "CC3M",
+    "ObjectAware",
+    "OKVQA",
+    "VQAv2",
+    "COCO",
+    "Wikipedia text",
+    "MobileManipulator",
+    "LanguageTable",
+    "TAMP"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "reasoning_mode": [
+    "Multimodal chain-of-thought reasoning"
+   ],
+   "research_problem": [
+    "Grounding large language models in the real world for embodied reasoning and robotics."
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT",
+    "Pre-trained ViT",
+    "ViT (Vision Transformer)",
+    "Vision Transformer (ViT)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "PaLM-E": {
+    "finetuning_data": {
+     "candidates": [
+      "Robot sensor data",
+      "visual grounding tasks",
+      "TAMP",
+      "Language-Table",
+      "SayCan",
+      "VQA",
+      "COCO",
+      "Mobile Manipulation datasets",
+      "Lang. Table Data",
+      "SayCan Data",
+      "TAMP Data"
+     ],
+     "accepted": [
+      "Robot sensor data",
+      "TAMP",
+      "Language-Table",
+      "SayCan",
+      "VQA",
+      "COCO",
+      "Lang. Table Data",
+      "SayCan Data",
+      "TAMP Data"
+     ],
+     "dropped": [
+      {
+       "value": "visual grounding tasks",
+       "reason": "Names a task, not a dataset"
+      },
+      {
+       "value": "Mobile Manipulation datasets",
+       "reason": "Generic category/placeholder rather than a specific dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Robot control and visual grounding",
+      "Supervised fine-tuning on robot interaction data"
+     ],
+     "accepted": [
+      "Robot control and visual grounding"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on robot interaction data",
+       "reason": "Describes the fine-tuning process/method rather than the specific task or objective"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "PaLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "PaLM",
+       "reason": "Names a specific model, not a broader family or lineage. (cached)"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "ViT",
+      "Pre-trained ViT",
+      "ViT (Vision Transformer)",
+      "Vision Transformer (ViT)",
+      "Early-fused visual features"
+     ],
+     "accepted": [
+      "ViT",
+      "Pre-trained ViT",
+      "ViT (Vision Transformer)",
+      "Vision Transformer (ViT)"
+     ],
+     "dropped": [
+      {
+       "value": "Early-fused visual features",
+       "reason": "Describes features or a fusion stage, not the specific encoder model component"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 48,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 32
+  }
+ },
+ "contributions": [
+  {
+   "label": "PaLM-E",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "PaLM-E",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-03-06",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multimodal sentences representation: injects continuous embodied observations (images, state estimates, sensors) directly into language embeddings to process multiple images flexibly within any part of a sentence",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces neural scene representations and entity-labeling multimodal tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables direct action prediction and embodied reasoning without auxiliary grounding models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Webli",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQ2A",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQG",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ObjectAware",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQAv2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MobileManipulator",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LanguageTable",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TAMP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Robot control and visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "62B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "84B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "540B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "562B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 562000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Sequential robotic manipulation planning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual-language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Embodied reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Grounding large language models in the real world for embodied reasoning and robotics.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Robot sensor data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TAMP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Language-Table",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SayCan",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Lang. Table Data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SayCan Data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TAMP Data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "562B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "End-to-end training on multi-modal sentences interleaving visual, continuous state, and text tokens; joint training across internet-scale language, vision, and visual-language domains alongside robotics tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Multimodal chain-of-thought reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Token interleaving",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Pre-trained ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (Vision Transformer)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Vision Transformer (ViT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "PaLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA state-of-the-art",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TAMP planning success: 94.9%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Language-Table success: 94.9%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Mobile Manipulation success: 99.4% (State GT input)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TAMP Success: 100%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SayCan Affordances: 75%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TAMP 3-5 objects (state, unfrozen): 100.0, 98.8, 100.0, 97.6, 97.7, 95.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 27.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Lambada: 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 83.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "StoryCloze: 86.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winograd: 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AvgNLU: 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AvgNLG: 51.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Affordance F1: 0.91",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Success Detection F1: 0.91",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1581676",
+  "contribution_ids": [
+   "R1581678",
+   "R1923501"
+  ],
+  "new_contribution_ids": [
+   "R1923501"
+  ],
+  "comparison_updated": null
+ }
+}

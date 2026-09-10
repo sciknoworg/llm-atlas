@@ -1,0 +1,624 @@
+{
+  "arxiv_id": "2101.00204",
+  "status": "completed",
+  "timestamp": "2026-08-24T23:24:10.254725",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2101.00204",
+    "title": "BanglaBERT: Language Model Pretraining and Benchmarks for Low-Resource Language Understanding Evaluation in Bangla",
+    "authors": [
+      "Abhik Bhattacharjee",
+      "Tahmid Hasan",
+      "Wasi Uddin Ahmad",
+      "Kazi Samin",
+      "Md Saiful Islam",
+      "Anindya Iqbal",
+      "M. Sohel Rahman",
+      "Rifat Shahriyar"
+    ],
+    "abstract": "In this work, we introduce BanglaBERT, a BERT-based Natural Language Understanding (NLU) model pretrained in Bangla, a widely spoken yet low-resource language in the NLP literature. To pretrain BanglaBERT, we collect 27.5 GB of Bangla pretraining data (dubbed `Bangla2B+') by crawling 110 popular Bangla sites. We introduce two downstream task datasets on natural language inference and question answering and benchmark on four diverse NLU tasks covering text classification, sequence labeling, and span prediction. In the process, we bring them under the first-ever Bangla Language Understanding Benchmark (BLUB). BanglaBERT achieves state-of-the-art results outperforming multilingual and monolingual models. We are making the models, datasets, and a leaderboard publicly available at https://github.com/csebuetnlp/banglabert to advance Bangla NLP.",
+    "published": "2021-01-01T09:28:45+00:00",
+    "updated": "2022-05-10T05:30:12+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2101.00204v4",
+    "entry_id": "http://arxiv.org/abs/2101.00204v4",
+    "pdf_path": "data/papers/2101.00204.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 37729,
+  "word_count": 3705,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "BanglaBERT",
+      "parameters": "110M",
+      "parameters_millions": 110,
+      "model_family": "BERT",
+      "date_created": "2021-01-01",
+      "organization": "Bangladesh University Of Engineering And Technology",
+      "innovation": "Replaced Token Detection (RTD) objective: jointly trains a generator and discriminator; the generator masks 15% of tokens and predicts them, then replaces them with sampled tokens, while the discriminator learns to classify every token as real or replaced; provides denser supervision signals than standard MLM by evaluating every token rather than only masked ones.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Replaced Token Detection (RTD)",
+      "pretraining_corpus": "Bangla2B+ (27.5GB of Bangla text crawled from 110 popular Bangla websites)",
+      "finetuning_task": "Supervised fine-tuning on downstream NLP tasks",
+      "optimizer": "Adam",
+      "hardware_used": "Google TensorFlow Research Cloud (TRC)",
+      "extension": null,
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Low-resource language understanding in Bangla",
+      "application": "Natural language understanding (NLU) tasks: text classification, sequence labeling, span prediction, sentiment classification, NLI, named entity recognition, question answering",
+      "paper_title": "BanglaBERT: Language Model Pretraining and Benchmarks for Low-Resource Language Understanding Evaluation in Bangla",
+      "training_corpus_size": "27.5GB (2.18B tokens)",
+      "finetuning_data": "NER, QA, Sentiment Classification, NLI datasets",
+      "tokenizer": "WordPiece",
+      "supported_language": "Bangla",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/csebuetnlp/banglabert",
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Bidirectional multi-head self-attention",
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on monolingual Bangla corpus followed by supervised fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Outperforms mBERT and XLM-R (base) by 6.8 and 4.3 BLUB scores in supervised setting; BLUBScore 77.09 (Supervised); BLUBScore 66.14 (Zero-shot)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "BanglishBERT",
+      "model_family": "BERT",
+      "date_created": "2021-01-01",
+      "organization": "Bangladesh University Of Engineering And Technology",
+      "innovation": "Bilingual pretraining on both Bangla and English corpora to enable zero-shot cross-lingual transfer learning, addressing the lack of labeled data in Bangla by leveraging English NLP resources.",
+      "pretraining_corpus": "Bangla2B+ and English Wikipedia/BooksCorpus",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Zero-shot cross-lingual transfer learning, NLU in Bangla",
+      "license": "open source",
+      "research_problem": "Zero-shot cross-lingual transfer learning between Bangla and English",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Replaced Token Detection (RTD)",
+      "training_corpus_size": "27.5GB (Bangla) + English Wikipedia/BooksCorpus",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "Bangla, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/csebuetnlp/banglabert",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "BanglaBERT: Language Model Pretraining and Benchmarks for Low-Resource Language Understanding Evaluation in Bangla",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Outperforms mBERT and XLM-R by 15.8 and 10.8 BLUB scores in zero-shot cross-lingual transfer",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "BanglaBERT": {
+      "application": [
+        "Natural language understanding (NLU) tasks: text classification",
+        "sequence labeling",
+        "span prediction",
+        "sentiment classification",
+        "NLI",
+        "named entity recognition",
+        "question answering"
+      ],
+      "attention_mechanism": [
+        "Bidirectional multi-head self-attention"
+      ],
+      "finetuning_data": [],
+      "finetuning_task": [],
+      "hardware_used": [],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "BanglaBERT"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Bangladesh University Of Engineering And Technology"
+      ],
+      "parameters": [
+        "110M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Bangla2B+ (27.5GB of Bangla text crawled from 110 popular Bangla websites)"
+      ],
+      "pretraining_task": [
+        "Replaced Token Detection (RTD)"
+      ],
+      "research_problem": [
+        "Low-resource language understanding in Bangla"
+      ],
+      "supported_language": [
+        "Bangla"
+      ]
+    },
+    "BanglishBERT": {
+      "application": [
+        "Zero-shot cross-lingual transfer learning",
+        "NLU in Bangla"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "BERT"
+      ],
+      "model_name": [
+        "BanglishBERT"
+      ],
+      "organization": [
+        "Bangladesh University Of Engineering And Technology"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Bangla2B+ and English Wikipedia/BooksCorpus"
+      ],
+      "pretraining_task": [
+        "Replaced Token Detection (RTD)"
+      ],
+      "research_problem": [
+        "Zero-shot cross-lingual transfer learning between Bangla and English"
+      ],
+      "supported_language": [
+        "Bangla",
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "BanglaBERT": {
+        "finetuning_data": {
+          "candidates": [
+            "NER",
+            "QA",
+            "Sentiment Classification",
+            "NLI datasets"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "NER",
+              "reason": "Names a task, not a dataset (cached)"
+            },
+            {
+              "value": "QA",
+              "reason": "Names a task, not a dataset. (cached)"
+            },
+            {
+              "value": "Sentiment Classification",
+              "reason": "Names a task, not a dataset. (cached)"
+            },
+            {
+              "value": "NLI datasets",
+              "reason": "Vague placeholder, does not name a specific dataset. (cached)"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning on downstream NLP tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning on downstream NLP tasks",
+              "reason": "Describes a training methodology rather than naming a specific task. (cached)"
+            }
+          ]
+        },
+        "hardware_used": {
+          "candidates": [
+            "Google TensorFlow Research Cloud (TRC)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Google TensorFlow Research Cloud (TRC)",
+              "reason": "Names a cloud computing program/platform, not specific hardware like GPUs or TPUs. (cached)"
+            }
+          ]
+        }
+      },
+      "BanglishBERT": {}
+    },
+    "counts": {
+      "kept": 31,
+      "dropped": 6,
+      "llm_calls": 1,
+      "values_sent_to_llm": 7
+    }
+  },
+  "contributions": [
+    {
+      "label": "BanglaBERT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BanglaBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01-01",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Bangladesh University Of Engineering And Technology",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Replaced Token Detection (RTD) objective: jointly trains a generator and discriminator",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "The generator masks 15% of tokens and predicts them, then replaces them with sampled tokens, while the discriminator learns to classify every token as real or replaced",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Provides denser supervision signals than standard MLM by evaluating every token rather than only masked ones.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Replaced Token Detection (RTD)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Bangla2B+ (27.5GB of Bangla text crawled from 110 popular Bangla websites)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "WordPiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "110M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 110,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language understanding (NLU) tasks: text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Sequence labeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Span prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Sentiment classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "NLI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Named entity recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/csebuetnlp/banglabert",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Low-resource language understanding in Bangla",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "27.5GB (2.18B tokens)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bangla",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Bidirectional multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on monolingual Bangla corpus followed by supervised fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms mBERT and XLM-R (base) by 6.8 and 4.3 BLUB scores in supervised setting",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLUBScore 77.09 (Supervised)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BLUBScore 66.14 (Zero-shot)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "BanglishBERT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BanglishBERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BERT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-01-01",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Bangladesh University Of Engineering And Technology",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Bilingual pretraining on both Bangla and English corpora to enable zero-shot cross-lingual transfer learning, addressing the lack of labeled data in Bangla by leveraging English NLP resources.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Replaced Token Detection (RTD)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Bangla2B+ and English Wikipedia/BooksCorpus",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Zero-shot cross-lingual transfer learning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "NLU in Bangla",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/csebuetnlp/banglabert",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Zero-shot cross-lingual transfer learning between Bangla and English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "27.5GB (Bangla) + English Wikipedia/BooksCorpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bangla",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms mBERT and XLM-R by 15.8 and 10.8 BLUB scores in zero-shot cross-lingual transfer",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925449",
+    "contribution_ids": [
+      "R1925451",
+      "R1925452"
+    ],
+    "new_contribution_ids": [
+      "R1925451",
+      "R1925452"
+    ],
+    "comparison_updated": null
+  }
+}

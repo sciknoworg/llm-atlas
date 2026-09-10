@@ -1,0 +1,3941 @@
+{
+  "arxiv_id": "2508.18265",
+  "status": "completed",
+  "timestamp": "2026-08-30T03:22:29.410683",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2508.18265",
+    "title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+    "authors": [
+      "Weiyun Wang",
+      "Zhangwei Gao",
+      "Lixin Gu",
+      "Hengjun Pu",
+      "Long Cui",
+      "Xingguang Wei",
+      "Zhaoyang Liu",
+      "Linglin Jing",
+      "Shenglong Ye",
+      "Jie Shao",
+      "Zhaokai Wang",
+      "Zhe Chen",
+      "Hongjie Zhang",
+      "Ganlin Yang",
+      "Haomin Wang",
+      "Qi Wei",
+      "Jinhui Yin",
+      "Wenhao Li",
+      "Erfei Cui",
+      "Guanzhou Chen",
+      "Zichen Ding",
+      "Changyao Tian",
+      "Zhenyu Wu",
+      "Jingjing Xie",
+      "Zehao Li",
+      "Bowen Yang",
+      "Yuchen Duan",
+      "Xuehui Wang",
+      "Zhi Hou",
+      "Haoran Hao",
+      "Tianyi Zhang",
+      "Songze Li",
+      "Xiangyu Zhao",
+      "Haodong Duan",
+      "Nianchen Deng",
+      "Bin Fu",
+      "Yinan He",
+      "Yi Wang",
+      "Conghui He",
+      "Botian Shi",
+      "Junjun He",
+      "Yingtong Xiong",
+      "Han Lv",
+      "Lijun Wu",
+      "Wenqi Shao",
+      "Kaipeng Zhang",
+      "Huipeng Deng",
+      "Biqing Qi",
+      "Jiaye Ge",
+      "Qipeng Guo",
+      "Wenwei Zhang",
+      "Songyang Zhang",
+      "Maosong Cao",
+      "Junyao Lin",
+      "Kexian Tang",
+      "Jianfei Gao",
+      "Haian Huang",
+      "Yuzhe Gu",
+      "Chengqi Lyu",
+      "Huanze Tang",
+      "Rui Wang",
+      "Haijun Lv",
+      "Wanli Ouyang",
+      "Limin Wang",
+      "Min Dou",
+      "Xizhou Zhu",
+      "Tong Lu",
+      "Dahua Lin",
+      "Jifeng Dai",
+      "Weijie Su",
+      "Bowen Zhou",
+      "Kai Chen",
+      "Yu Qiao",
+      "Wenhai Wang",
+      "Gen Luo"
+    ],
+    "abstract": "We introduce InternVL 3.5, a new family of open-source multimodal models that significantly advances versatility, reasoning capability, and inference efficiency along the InternVL series. A key innovation is the Cascade Reinforcement Learning (Cascade RL) framework, which enhances reasoning through a two-stage process: offline RL for stable convergence and online RL for refined alignment. This coarse-to-fine training strategy leads to substantial improvements on downstream reasoning tasks, e.g., MMMU and MathVista. To optimize efficiency, we propose a Visual Resolution Router (ViR) that dynamically adjusts the resolution of visual tokens without compromising performance. Coupled with ViR, our Decoupled Vision-Language Deployment (DvD) strategy separates the vision encoder and language model across different GPUs, effectively balancing computational load. These contributions collectively enable InternVL3.5 to achieve up to a +16.0\\% gain in overall reasoning performance and a 4.05$\\times$ inference speedup compared to its predecessor, i.e., InternVL3. In addition, InternVL3.5 supports novel capabilities such as GUI interaction and embodied agency. Notably, our largest model, i.e., InternVL3.5-241B-A28B, attains state-of-the-art results among open-source MLLMs across general multimodal, reasoning, text, and agentic tasks -- narrowing the performance gap with leading commercial models like GPT-5. All models and code are publicly released.",
+    "published": "2025-08-25T17:58:17+00:00",
+    "updated": "2025-08-27T14:39:45+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2508.18265v2",
+    "entry_id": "http://arxiv.org/abs/2508.18265v2",
+    "pdf_path": "data/papers/2508.18265.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+  },
+  "text_length": 158295,
+  "word_count": 16463,
+  "models_extracted": 29,
+  "extraction_data": [
+    {
+      "model_name": "InternVL 3.5",
+      "parameters": "N/A (SHARES ARCHITECTURE WITH INTERNVL3.5 SERIES), 1B, 1.1B, 2B, 2.3B, 4B, 4.4B, 4.7B, 8B, 8.5B, 14B, 15.1B, 26B, 38B, 38.4B, 78B, 241B-A28B",
+      "parameters_millions": 241000,
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "Shanghai Ai Laboratory",
+      "innovation": "Cascade Reinforcement Learning (CascadeRL): a two-stage coarse-to-fine training strategy that uses offline RL for stable convergence and online RL for refined alignment, improving reasoning performance and stability compared to single-stage RL; Visual Resolution Router (ViR): dynamically adjusts the resolution of visual tokens based on task requirements, improving inference efficiency without compromising performance; Decoupled Vision-Language Deployment (DvD): separates the vision encoder and language model across different GPUs, effectively balancing computational load and enabling faster inference compared to monolithic deployments.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets), ~250B tokens, 116M samples",
+      "finetuning_task": "Supervised fine-tuning, Cascade Reinforcement Learning (offline and online RL), Supervised fine-tuning (SFT), Cascade Reinforcement Learning (MPO, GSPO), Visual Consistency Learning (ViCO), Multi-Preference Optimization (MPO), Cascade Reinforcement Learning (CascadeRL), CascadeRL post-training, reinforcement learning, Direct Preference Optimization",
+      "optimizer": "AdamW",
+      "hardware_used": "GPUs",
+      "extension": "CascadeRL post-training; Visual Resolution Router (ViR); Decoupled Vision-Language Deployment (DvD)",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal Large Language Models (MLLMs), focusing on versatility, reasoning capability, and inference efficiency.",
+      "application": "Image captioning, general question answering, mathematics, scientific disciplines, charts, OCR, knowledge grounding, document understanding, multi-turn dialogue, medical data, GUI-based interaction, embodied interaction, SVG understanding/generation",
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "training_corpus_size": "250B tokens",
+      "finetuning_data": "High-quality conversation data, multimodal reasoning data (Thinking mode), capability-expansion datasets (GUI, embodied, SVG), Multimodal instruction tuning datasets",
+      "tokenizer": "Qwen3 / GPT-OSS tokenizer",
+      "supported_language": "English, Chinese, Portuguese, Arabic, Turkish, Russian",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/OpenGVLab/InternVL",
+      "context_length": null,
+      "activated_parameters": "28B",
+      "attention_mechanism": "Multi-head self-attention, Multi-head attention",
+      "context_length_max": "32K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Cascade Reinforcement Learning (offline RL -> online RL)",
+      "reasoning_mode": "Hybrid (parallel thinking / chain-of-thought)",
+      "moe_configuration": "241B total parameters, 28B active parameters",
+      "quantization_precision": "BF16",
+      "synthetic_data_generation_method": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+      "rl_algorithm": "CascadeRL (offline RL, online RL), Cascade Reinforcement Learning (Cascade RL), MPO, GSPO (Cascade RL), MPO (offline), GSPO (online), Cascade RL, Group Sequence Policy Optimization (GSPO), DPO",
+      "reward_mechanism": "Preference optimization, Normalized reward across responses sampled from the same query",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP Projector",
+      "vision_encoder": "InternViT-300M, InternViT-300M / InternViT-6B, InternViT-6B, InternViT-300M or InternViT-6B, High-resolution, dynamic-resolution vision encoder, High-resolution dynamic-resolution vision encoder",
+      "base_model": "InternVL3",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMMU: 73.4 (8B), 77.7 (241B-A28B); MMStar 72.0; MMVet 85.5; MMBenchV1.1(en) 84.8; MTVQA 33.7; AI2D(w/mask) 86.8; OCRBench 88.0; WildVision 75.8; MME-RealWorld(en) 64.8; HallusionBench 53.8; MVBench 72.1; VideoMME(w/osub) 68.7; MLVU 73.0; LongVideoBench 63.8; MMMU(val) 75.6; MathVista 80.9; MathVision 55.7; MathVerse(vision-only) 60.4; DynaMath 36.5; WeMath 48.4; OlympiadBench 62.9; LogicVista 55.7; MATH500 96.6; AIME24 79.4; AIME25 62.7; GPQA 68.2; MMLU-Pro 75.3; C-Eval 83.2; GAOKAO 91.9; IFEval 74.3; SGP-Bench 69.4; ScreenSpot 86.6; ScreenSpot-v2 87.3; OSWorld-G 42.4; VSI-Bench 63.7; ERQA 41.5; SpaCE-10 45.5; OmniSpatial 48.1; Overall: 33.8; Overall: 50.7; Overall: 57.4; MMMU: 73.3; Overall: 66.0",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "Varies by size",
+      "post_training_infrastructure": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs"
+    },
+    {
+      "model_name": "InternVL 3.5-30B-A",
+      "parameters": "30B-A3B, 30B, 30.8B",
+      "parameters_millions": 30800,
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "OpenGVLab",
+      "innovation": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance; Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses; Random JPEG compression: enhances real-world performance; Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning; Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Multimodal alignment and language modeling",
+      "pretraining_corpus": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets), ~250B tokens, 116M samples",
+      "finetuning_task": "CascadeRL (offline + online RL), Supervised fine-tuning (SFT), Cascade Reinforcement Learning (MPO, GSPO), Visual Consistency Learning (ViCO), Multi-Preference Optimization (MPO), Cascade Reinforcement Learning (CascadeRL)",
+      "optimizer": "AdamW",
+      "hardware_used": "8 A100 GPUs",
+      "extension": "CascadeRL post-training; Visual Resolution Router (ViR); Decoupled Vision-Language Deployment (DvD)",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal vision-language understanding and reasoning",
+      "application": "Image captioning, general question answering, mathematics, scientific disciplines, charts, OCR, knowledge grounding, document understanding, multi-turn dialogue, medical data, GUI-based interaction, embodied interaction, SVG understanding/generation",
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "training_corpus_size": "250B tokens",
+      "finetuning_data": "High-quality conversation data, multimodal reasoning data (Thinking mode), capability-expansion datasets (GUI, embodied, SVG)",
+      "tokenizer": "Qwen3 / GPT-OSS tokenizer",
+      "supported_language": "English, Chinese, Portuguese, Arabic, Turkish, Russian",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/OpenGVLab/InternVL",
+      "context_length": null,
+      "activated_parameters": "3B",
+      "attention_mechanism": null,
+      "context_length_max": "32K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement)",
+      "reasoning_mode": "Hybrid (parallel thinking / chain-of-thought)",
+      "moe_configuration": "30B total parameters, 3B active parameters",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+      "rl_algorithm": "Cascade Reinforcement Learning (Cascade RL), MPO, GSPO (Cascade RL), CascadeRL",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP Projector",
+      "vision_encoder": "InternViT-300M / InternViT-6B, InternViT-300M, Dynamic-resolution encoder",
+      "base_model": "Qwen3 series (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMMU: 73.4 (8B), 77.7 (241B-A28B); Table 3 Overall: 59.0",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs"
+    },
+    {
+      "model_name": "InternVL 3.5-241B-A",
+      "parameters": "240.7B, 241B-A28B, 241B",
+      "parameters_millions": 241000,
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "OpenGVLab",
+      "innovation": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance; Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses; Random JPEG compression: enhances real-world performance; Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning; Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Multimodal alignment and language modeling",
+      "pretraining_corpus": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets), ~250B tokens, 116M samples",
+      "finetuning_task": "Supervised fine-tuning (SFT), Cascade Reinforcement Learning (MPO, GSPO), Visual Consistency Learning (ViCO), Multi-Preference Optimization (MPO), Cascade Reinforcement Learning (CascadeRL)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100/H100 GPUs",
+      "extension": "CascadeRL post-training; Visual Resolution Router (ViR); Decoupled Vision-Language Deployment (DvD)",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Multimodal vision-language understanding and reasoning",
+      "application": "Image captioning, general question answering, mathematics, scientific disciplines, charts, OCR, knowledge grounding, document understanding, multi-turn dialogue, medical data, GUI-based interaction, embodied interaction, SVG understanding/generation",
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "training_corpus_size": "250B tokens",
+      "finetuning_data": "High-quality conversation data, multimodal reasoning data (Thinking mode), capability-expansion datasets (GUI, embodied, SVG)",
+      "tokenizer": "Qwen3 / GPT-OSS tokenizer",
+      "supported_language": "English, Chinese, Portuguese, Arabic, Turkish, Russian",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/OpenGVLab/InternVL",
+      "context_length": null,
+      "activated_parameters": "28B",
+      "attention_mechanism": null,
+      "context_length_max": "32K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement)",
+      "reasoning_mode": "Hybrid (parallel thinking / chain-of-thought)",
+      "moe_configuration": "241B total parameters, 28B active parameters",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+      "rl_algorithm": "Cascade Reinforcement Learning (Cascade RL), MPO, GSPO (Cascade RL), CascadeRL",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP Projector",
+      "vision_encoder": "InternViT-300M / InternViT-6B, InternViT-6B, Dynamic-resolution encoder",
+      "base_model": "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMMU: 73.4 (8B), 77.7 (241B-A28B); Table 3 Overall: 66.9",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs"
+    },
+    {
+      "model_name": "InternVL 3.5-Flash",
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "OpenGVLab",
+      "innovation": "Cascade Reinforcement Learning (Cascade RL): two-stage RL process (offline warm-up followed by online progressive improvement) for MLLM reasoning; Visual Resolution Router (ViR): dynamically selects optimal visual token resolution to reduce inference cost; Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs to maximize parallelism; Visual Consistency Learning (ViCO): light training stage to integrate ViR.",
+      "pretraining_corpus": null,
+      "parameters": "1.1B, 2.3B, 4.4B, 8B, 30B-A3B, 241B-A28B",
+      "parameters_millions": 241000,
+      "application": "General multimodal tasks, reasoning, GUI understanding, embodied tasks, SVG understanding/generation",
+      "license": "open source",
+      "research_problem": "Multimodal Large Language Models (MLLMs)",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Multimodal alignment and language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Extends InternVL3.5 with an additional Visual Resolution Router (ViR) module that dynamically selects the minimal resolution of visual tokens, achieving better inference efficiency.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "activated_parameters": "Varies by variant (1.1B to 28B active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement) -> ViCO (Visual Consistency Learning for ViR integration)",
+      "reasoning_mode": null,
+      "moe_configuration": "30B total/3B active; 241B total/28B active (for MoE variants)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "Cascade Reinforcement Learning (Cascade RL)",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "MLP Projector",
+      "vision_encoder": "InternViT-300M / InternViT-6B",
+      "base_model": "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMMU: 73.4 (8B), 77.7 (241B-A28B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs"
+    },
+    {
+      "model_name": "InternVL 3.5-20B-A",
+      "parameters": "20B, 20B-A4B, 21.2B",
+      "parameters_millions": 21200,
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "OpenGVLab",
+      "innovation": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance; Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses; Random JPEG compression: enhances real-world performance; Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning; Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Next-token prediction (NTP)",
+      "pretraining_corpus": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets), ~250B tokens, 116M samples",
+      "finetuning_task": "Supervised fine-tuning (SFT), Cascade Reinforcement Learning (MPO, GSPO), Visual Consistency Learning (ViCO)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100/H100 GPUs",
+      "extension": "Pixel-shuffle compression for visual tokens; Visual Resolution Router (ViR) for Flash",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Advancing open-source multimodal models in versatility, reasoning, and efficiency",
+      "application": "Image captioning, general question answering, mathematics, scientific disciplines, charts, OCR, knowledge grounding, document understanding, multi-turn dialogue, medical data, GUI-based interaction, embodied interaction, SVG understanding/generation",
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "training_corpus_size": "250B tokens",
+      "finetuning_data": "High-quality conversation data, multimodal reasoning data (Thinking mode), capability-expansion datasets (GUI, embodied, SVG), 56M samples (130B tokens), MMPR-v1.2 (200K pairs), MMPR-Tiny (70K queries)",
+      "tokenizer": "Qwen3 / GPT-OSS tokenizer",
+      "supported_language": "English, Chinese, Portuguese, Arabic, Turkish, Russian",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/OpenGVLab/InternVL",
+      "context_length": null,
+      "activated_parameters": "4B",
+      "attention_mechanism": "Window attention with sink",
+      "context_length_max": "32K tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training (NTP) -> SFT -> Cascade RL (MPO/GSPO) -> Visual Consistency Learning (ViCO for Flash)",
+      "reasoning_mode": "Deep thinking (step-by-step), Parallel thinking (Best-of-N with VisualPRM-v1.1)",
+      "moe_configuration": "A4B",
+      "quantization_precision": "FP8",
+      "synthetic_data_generation_method": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+      "rl_algorithm": "MPO, GSPO (Cascade RL), Cascade reinforcement learning (offline RL, online RL)",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mid-fusion / Early fusion (pixel-shuffle compression before LLM)",
+      "vision_encoder": "InternViT-300M, ViT, Dynamic-resolution encoder",
+      "base_model": "GPT-OSS-20B",
+      "optimizer_innovation": null,
+      "benchmark_result": "AI2D: 85.9/93.5; ChartQA: 86.6; TextVQA: 78.5; DocVQA: 92.9; InfoVQA: 78.1; OCRBench: 870; MME-RW: 69.3; RealWorld-MME: 38.2/78.5; VCR: 93.7/97.8; Overall: 81.7; Table 4 Overall: 85.0",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "XTuner, verl, Decoupled Vision-Language Deployment (DvD)"
+    },
+    {
+      "model_name": "InternVL 3.5-235B-MoE",
+      "model_family": "InternVL",
+      "date_created": "2025-08-25",
+      "organization": "OpenGVLab",
+      "innovation": "CascadeRL framework combining offline and online RL to boost reasoning; Visual Resolution Router (ViR) and Decoupled Vision-Language Deployment (DvD) to reduce inference cost and accelerate both dense and MoE models. Also released as InternVL3.5-241B-A28B.",
+      "pretraining_corpus": null,
+      "parameters": "235B",
+      "parameters_millions": 235000,
+      "application": "Document understanding, chart understanding, OCR, visual grounding, multi-image/video understanding, agency tasks.",
+      "license": "open source",
+      "research_problem": "Advancing open-source multimodal models in versatility, reasoning, and efficiency.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder + Vision encoder",
+      "pretraining_task": "Multimodal pretraining",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "CascadeRL (offline + online RL)",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": "8 A100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": "Flash variants (e.g., -Flash) apply ViR and DvD for up to 4.05x speed-up.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency",
+      "activated_parameters": "28B",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pretraining -> CascadeRL",
+      "reasoning_mode": null,
+      "moe_configuration": "MoE",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "CascadeRL",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": "Dynamic high-resolution strategy",
+      "base_model": "InternVL3",
+      "optimizer_innovation": null,
+      "benchmark_result": "DocVQA: 94.9; ChartVQA: 88.0; InfoVQA: 82.0; TextVQA: 84.5; OCRBench: 90.7; AI2D: 86.9; MMStar: 77.9; MMMU: 77.7; Mathvista: 82.7; Overall: 85.0",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 29,
+  "models_after_merge": 6,
+  "validated_rows": {
+    "InternVL 3.5": {
+      "application": [
+        "Image captioning",
+        "mathematics",
+        "charts",
+        "OCR",
+        "knowledge grounding",
+        "document understanding",
+        "multi-turn dialogue",
+        "GUI-based interaction",
+        "embodied interaction",
+        "SVG understanding/generation"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention",
+        "Multi-head attention"
+      ],
+      "base_model": [
+        "InternVL3"
+      ],
+      "finetuning_data": [
+        "multimodal reasoning data (Thinking mode)",
+        "capability-expansion datasets (GUI, embodied, SVG)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)",
+        "Visual Consistency Learning (ViCO)",
+        "Direct Preference Optimization"
+      ],
+      "fusion_architecture": [
+        "MLP Projector"
+      ],
+      "hardware_used": [
+        "GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Shanghai Ai Laboratory"
+      ],
+      "parameters": [
+        "1B",
+        "1.1B",
+        "2B",
+        "2.3B",
+        "4B",
+        "4.4B",
+        "4.7B",
+        "8B",
+        "8.5B",
+        "14B",
+        "15.1B",
+        "26B",
+        "38B",
+        "38.4B",
+        "78B",
+        "241B-A28B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "BF16"
+      ],
+      "reasoning_mode": [
+        "Hybrid (parallel thinking / chain-of-thought)"
+      ],
+      "research_problem": [
+        "reasoning capability",
+        "inference efficiency."
+      ],
+      "reward_mechanism": [
+        "Normalized reward across responses sampled from the same query"
+      ],
+      "rl_algorithm": [
+        "CascadeRL (offline RL, online RL)",
+        "Cascade Reinforcement Learning (Cascade RL)",
+        "MPO",
+        "GSPO (Cascade RL)",
+        "MPO (offline)",
+        "GSPO (online)",
+        "Cascade RL",
+        "Group Sequence Policy Optimization (GSPO)",
+        "DPO"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese",
+        "Portuguese",
+        "Arabic",
+        "Turkish",
+        "Russian"
+      ],
+      "synthetic_data_generation_method": [
+        "Large-scale reasoning model sampling rollouts with detailed reasoning processes"
+      ],
+      "vision_encoder": [
+        "InternViT-300M",
+        "InternViT-300M / InternViT-6B",
+        "InternViT-6B",
+        "InternViT-300M or InternViT-6B",
+        "dynamic-resolution vision encoder",
+        "High-resolution dynamic-resolution vision encoder"
+      ]
+    },
+    "InternVL 3.5-30B-A": {
+      "application": [
+        "Image captioning",
+        "mathematics",
+        "charts",
+        "OCR",
+        "knowledge grounding",
+        "document understanding",
+        "multi-turn dialogue",
+        "GUI-based interaction",
+        "embodied interaction",
+        "SVG understanding/generation"
+      ],
+      "base_model": [
+        "Qwen3 series (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)"
+      ],
+      "finetuning_data": [
+        "multimodal reasoning data (Thinking mode)",
+        "capability-expansion datasets (GUI, embodied, SVG)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)",
+        "Visual Consistency Learning (ViCO)"
+      ],
+      "fusion_architecture": [
+        "MLP Projector"
+      ],
+      "hardware_used": [
+        "8 A100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5-30B-A"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "OpenGVLab"
+      ],
+      "parameters": [
+        "30B-A3B",
+        "30B",
+        "30.8B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and language modeling"
+      ],
+      "reasoning_mode": [
+        "Hybrid (parallel thinking / chain-of-thought)"
+      ],
+      "research_problem": [
+        "Multimodal vision-language understanding and reasoning"
+      ],
+      "rl_algorithm": [
+        "Cascade Reinforcement Learning (Cascade RL)",
+        "MPO",
+        "GSPO (Cascade RL)",
+        "CascadeRL"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese",
+        "Portuguese",
+        "Arabic",
+        "Turkish",
+        "Russian"
+      ],
+      "synthetic_data_generation_method": [
+        "Large-scale reasoning model sampling rollouts with detailed reasoning processes"
+      ],
+      "vision_encoder": [
+        "InternViT-300M / InternViT-6B",
+        "InternViT-300M",
+        "Dynamic-resolution encoder"
+      ]
+    },
+    "InternVL 3.5-241B-A": {
+      "application": [
+        "Image captioning",
+        "mathematics",
+        "charts",
+        "OCR",
+        "knowledge grounding",
+        "document understanding",
+        "multi-turn dialogue",
+        "GUI-based interaction",
+        "embodied interaction",
+        "SVG understanding/generation"
+      ],
+      "base_model": [
+        "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)"
+      ],
+      "finetuning_data": [
+        "multimodal reasoning data (Thinking mode)",
+        "capability-expansion datasets (GUI, embodied, SVG)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)",
+        "Visual Consistency Learning (ViCO)"
+      ],
+      "fusion_architecture": [
+        "MLP Projector"
+      ],
+      "hardware_used": [
+        "NVIDIA A100/H100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5-241B-A"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "OpenGVLab"
+      ],
+      "parameters": [
+        "240.7B",
+        "241B-A28B",
+        "241B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and language modeling"
+      ],
+      "reasoning_mode": [
+        "Hybrid (parallel thinking / chain-of-thought)"
+      ],
+      "research_problem": [
+        "Multimodal vision-language understanding and reasoning"
+      ],
+      "rl_algorithm": [
+        "Cascade Reinforcement Learning (Cascade RL)",
+        "MPO",
+        "GSPO (Cascade RL)",
+        "CascadeRL"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese",
+        "Portuguese",
+        "Arabic",
+        "Turkish",
+        "Russian"
+      ],
+      "synthetic_data_generation_method": [
+        "Large-scale reasoning model sampling rollouts with detailed reasoning processes"
+      ],
+      "vision_encoder": [
+        "InternViT-300M / InternViT-6B",
+        "InternViT-6B",
+        "Dynamic-resolution encoder"
+      ]
+    },
+    "InternVL 3.5-Flash": {
+      "application": [
+        "reasoning",
+        "GUI understanding",
+        "embodied tasks",
+        "SVG understanding/generation"
+      ],
+      "base_model": [
+        "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)"
+      ],
+      "fusion_architecture": [
+        "MLP Projector"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5-Flash"
+      ],
+      "organization": [
+        "OpenGVLab"
+      ],
+      "parameters": [
+        "1.1B",
+        "2.3B",
+        "4.4B",
+        "8B",
+        "30B-A3B",
+        "241B-A28B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_task": [
+        "Multimodal alignment and language modeling"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [
+        "Cascade Reinforcement Learning (Cascade RL)"
+      ],
+      "vision_encoder": [
+        "InternViT-300M / InternViT-6B"
+      ]
+    },
+    "InternVL 3.5-20B-A": {
+      "application": [
+        "Image captioning",
+        "mathematics",
+        "charts",
+        "OCR",
+        "knowledge grounding",
+        "document understanding",
+        "multi-turn dialogue",
+        "GUI-based interaction",
+        "embodied interaction",
+        "SVG understanding/generation"
+      ],
+      "attention_mechanism": [
+        "Window attention with sink"
+      ],
+      "base_model": [
+        "GPT-OSS-20B"
+      ],
+      "finetuning_data": [
+        "multimodal reasoning data (Thinking mode)",
+        "capability-expansion datasets (GUI, embodied, SVG)",
+        "MMPR-v1.2 (200K pairs)",
+        "MMPR-Tiny (70K queries)"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)",
+        "Visual Consistency Learning (ViCO)"
+      ],
+      "fusion_architecture": [
+        "Mid-fusion / Early fusion (pixel-shuffle compression before LLM)"
+      ],
+      "hardware_used": [
+        "NVIDIA A100/H100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5-20B-A"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "OpenGVLab"
+      ],
+      "parameters": [
+        "20B",
+        "20B-A4B",
+        "21.2B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction (NTP)"
+      ],
+      "quantization_precision": [
+        "FP8"
+      ],
+      "reasoning_mode": [
+        "Deep thinking (step-by-step), Parallel thinking (Best-of-N with VisualPRM-v1.1)"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [
+        "MPO",
+        "GSPO (Cascade RL)",
+        "Cascade reinforcement learning (offline RL, online RL)"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese",
+        "Portuguese",
+        "Arabic",
+        "Turkish",
+        "Russian"
+      ],
+      "synthetic_data_generation_method": [
+        "Large-scale reasoning model sampling rollouts with detailed reasoning processes"
+      ],
+      "vision_encoder": [
+        "InternViT-300M",
+        "ViT",
+        "Dynamic-resolution encoder"
+      ]
+    },
+    "InternVL 3.5-235B-MoE": {
+      "application": [
+        "Document understanding",
+        "chart understanding",
+        "OCR",
+        "visual grounding",
+        "multi-image/video understanding",
+        "agency tasks."
+      ],
+      "base_model": [
+        "InternVL3"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "8 A100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "InternVL"
+      ],
+      "model_name": [
+        "InternVL 3.5-235B-MoE"
+      ],
+      "organization": [
+        "OpenGVLab"
+      ],
+      "parameters": [
+        "235B"
+      ],
+      "pretraining_architecture": [],
+      "pretraining_task": [
+        "Multimodal pretraining"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [
+        "CascadeRL"
+      ],
+      "vision_encoder": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "InternVL 3.5": {
+        "application": {
+          "candidates": [
+            "Image captioning",
+            "general question answering",
+            "mathematics",
+            "scientific disciplines",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "medical data",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "accepted": [
+            "Image captioning",
+            "mathematics",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "dropped": [
+            {
+              "value": "general question answering",
+              "reason": "Placeholder/category rather than a concrete task."
+            },
+            {
+              "value": "scientific disciplines",
+              "reason": "Vague subject area, not a concrete task or application domain."
+            },
+            {
+              "value": "medical data",
+              "reason": "Refers to a data type, not a task or application domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality conversation data",
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)",
+            "Multimodal instruction tuning datasets"
+          ],
+          "accepted": [
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality conversation data",
+              "reason": "Descriptive phrase about data quality, not a specific dataset."
+            },
+            {
+              "value": "Multimodal instruction tuning datasets",
+              "reason": "Generic plural description, not a specific dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning",
+            "Cascade Reinforcement Learning (offline and online RL)",
+            "Supervised fine-tuning (SFT)",
+            "Cascade Reinforcement Learning (MPO, GSPO)",
+            "Visual Consistency Learning (ViCO)",
+            "Multi-Preference Optimization (MPO)",
+            "Cascade Reinforcement Learning (CascadeRL)",
+            "CascadeRL post-training",
+            "reinforcement learning",
+            "Direct Preference Optimization"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)",
+            "Visual Consistency Learning (ViCO)",
+            "Direct Preference Optimization"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            },
+            {
+              "value": "reinforcement learning",
+              "reason": "Describes a training paradigm/method, not a specific fine-tuning task or objective. (cached)"
+            },
+            {
+              "value": "Cascade Reinforcement Learning (offline and online RL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "Cascade Reinforcement Learning (MPO, GSPO)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "Multi-Preference Optimization (MPO)",
+              "reason": "Describes an optimization algorithm, not a fine-tuning task."
+            },
+            {
+              "value": "Cascade Reinforcement Learning (CascadeRL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "CascadeRL post-training",
+              "reason": "Describes a training phase/method, not a fine-tuning task."
+            }
+          ]
+        },
+        "parameters": {
+          "candidates": [
+            "N/A (SHARES ARCHITECTURE WITH INTERNVL3.5 SERIES)",
+            "1B",
+            "1.1B",
+            "2B",
+            "2.3B",
+            "4B",
+            "4.4B",
+            "4.7B",
+            "8B",
+            "8.5B",
+            "14B",
+            "15.1B",
+            "26B",
+            "38B",
+            "38.4B",
+            "78B",
+            "241B-A28B"
+          ],
+          "accepted": [
+            "1B",
+            "1.1B",
+            "2B",
+            "2.3B",
+            "4B",
+            "4.4B",
+            "4.7B",
+            "8B",
+            "8.5B",
+            "14B",
+            "15.1B",
+            "26B",
+            "38B",
+            "38.4B",
+            "78B",
+            "241B-A28B"
+          ],
+          "dropped": [
+            {
+              "value": "N/A (SHARES ARCHITECTURE WITH INTERNVL3.5 SERIES)",
+              "reason": "Placeholder indicating shared architecture, not a parameter count."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+            "~250B tokens",
+            "116M samples"
+          ],
+          "accepted": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+          ],
+          "dropped": [
+            {
+              "value": "~250B tokens",
+              "reason": "Specifies quantity/size, not a corpus name."
+            },
+            {
+              "value": "116M samples",
+              "reason": "Specifies quantity/size, not a corpus name."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal Large Language Models (MLLMs)",
+            "focusing on versatility",
+            "reasoning capability",
+            "inference efficiency."
+          ],
+          "accepted": [
+            "reasoning capability",
+            "inference efficiency."
+          ],
+          "dropped": [
+            {
+              "value": "Multimodal Large Language Models (MLLMs)",
+              "reason": "Names a model class, not a research problem or challenge."
+            },
+            {
+              "value": "focusing on versatility",
+              "reason": "Sentence fragment/qualifier rather than a noun phrase naming a problem."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Preference optimization",
+            "Normalized reward across responses sampled from the same query"
+          ],
+          "accepted": [
+            "Normalized reward across responses sampled from the same query"
+          ],
+          "dropped": [
+            {
+              "value": "Preference optimization",
+              "reason": "Describes a training algorithm/method, not a reward calculation method."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "InternViT-300M",
+            "InternViT-300M / InternViT-6B",
+            "InternViT-6B",
+            "InternViT-300M or InternViT-6B",
+            "High-resolution",
+            "dynamic-resolution vision encoder",
+            "High-resolution dynamic-resolution vision encoder"
+          ],
+          "accepted": [
+            "InternViT-300M",
+            "InternViT-300M / InternViT-6B",
+            "InternViT-6B",
+            "InternViT-300M or InternViT-6B",
+            "dynamic-resolution vision encoder",
+            "High-resolution dynamic-resolution vision encoder"
+          ],
+          "dropped": [
+            {
+              "value": "High-resolution",
+              "reason": "Adjective describing a feature, not a model component (cached)"
+            }
+          ]
+        }
+      },
+      "InternVL 3.5-30B-A": {
+        "application": {
+          "candidates": [
+            "Image captioning",
+            "general question answering",
+            "mathematics",
+            "scientific disciplines",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "medical data",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "accepted": [
+            "Image captioning",
+            "mathematics",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "dropped": [
+            {
+              "value": "general question answering",
+              "reason": "Placeholder/category rather than a concrete task."
+            },
+            {
+              "value": "scientific disciplines",
+              "reason": "Vague subject area, not a concrete task or application domain."
+            },
+            {
+              "value": "medical data",
+              "reason": "Refers to a data type, not a task or application domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality conversation data",
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)"
+          ],
+          "accepted": [
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality conversation data",
+              "reason": "Descriptive phrase about data quality, not a specific dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "CascadeRL (offline + online RL)",
+            "Supervised fine-tuning (SFT)",
+            "Cascade Reinforcement Learning (MPO, GSPO)",
+            "Visual Consistency Learning (ViCO)",
+            "Multi-Preference Optimization (MPO)",
+            "Cascade Reinforcement Learning (CascadeRL)"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)",
+            "Visual Consistency Learning (ViCO)"
+          ],
+          "dropped": [
+            {
+              "value": "CascadeRL (offline + online RL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "Cascade Reinforcement Learning (MPO, GSPO)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "Multi-Preference Optimization (MPO)",
+              "reason": "Describes an optimization algorithm, not a fine-tuning task."
+            },
+            {
+              "value": "Cascade Reinforcement Learning (CascadeRL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+            "~250B tokens",
+            "116M samples"
+          ],
+          "accepted": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+          ],
+          "dropped": [
+            {
+              "value": "~250B tokens",
+              "reason": "Specifies quantity/size, not a corpus name."
+            },
+            {
+              "value": "116M samples",
+              "reason": "Specifies quantity/size, not a corpus name."
+            }
+          ]
+        }
+      },
+      "InternVL 3.5-241B-A": {
+        "application": {
+          "candidates": [
+            "Image captioning",
+            "general question answering",
+            "mathematics",
+            "scientific disciplines",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "medical data",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "accepted": [
+            "Image captioning",
+            "mathematics",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "dropped": [
+            {
+              "value": "general question answering",
+              "reason": "Placeholder/category rather than a concrete task."
+            },
+            {
+              "value": "scientific disciplines",
+              "reason": "Vague subject area, not a concrete task or application domain."
+            },
+            {
+              "value": "medical data",
+              "reason": "Refers to a data type, not a task or application domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality conversation data",
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)"
+          ],
+          "accepted": [
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality conversation data",
+              "reason": "Descriptive phrase about data quality, not a specific dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT)",
+            "Cascade Reinforcement Learning (MPO, GSPO)",
+            "Visual Consistency Learning (ViCO)",
+            "Multi-Preference Optimization (MPO)",
+            "Cascade Reinforcement Learning (CascadeRL)"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)",
+            "Visual Consistency Learning (ViCO)"
+          ],
+          "dropped": [
+            {
+              "value": "Cascade Reinforcement Learning (MPO, GSPO)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            },
+            {
+              "value": "Multi-Preference Optimization (MPO)",
+              "reason": "Describes an optimization algorithm, not a fine-tuning task."
+            },
+            {
+              "value": "Cascade Reinforcement Learning (CascadeRL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+            "~250B tokens",
+            "116M samples"
+          ],
+          "accepted": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+          ],
+          "dropped": [
+            {
+              "value": "~250B tokens",
+              "reason": "Specifies quantity/size, not a corpus name."
+            },
+            {
+              "value": "116M samples",
+              "reason": "Specifies quantity/size, not a corpus name."
+            }
+          ]
+        }
+      },
+      "InternVL 3.5-Flash": {
+        "application": {
+          "candidates": [
+            "General multimodal tasks",
+            "reasoning",
+            "GUI understanding",
+            "embodied tasks",
+            "SVG understanding/generation"
+          ],
+          "accepted": [
+            "reasoning",
+            "GUI understanding",
+            "embodied tasks",
+            "SVG understanding/generation"
+          ],
+          "dropped": [
+            {
+              "value": "General multimodal tasks",
+              "reason": "Vague placeholder, not a concrete task or domain. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Multimodal Large Language Models (MLLMs)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multimodal Large Language Models (MLLMs)",
+              "reason": "Names a model class, not a research problem or challenge."
+            }
+          ]
+        }
+      },
+      "InternVL 3.5-20B-A": {
+        "application": {
+          "candidates": [
+            "Image captioning",
+            "general question answering",
+            "mathematics",
+            "scientific disciplines",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "medical data",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "accepted": [
+            "Image captioning",
+            "mathematics",
+            "charts",
+            "OCR",
+            "knowledge grounding",
+            "document understanding",
+            "multi-turn dialogue",
+            "GUI-based interaction",
+            "embodied interaction",
+            "SVG understanding/generation"
+          ],
+          "dropped": [
+            {
+              "value": "general question answering",
+              "reason": "Placeholder/category rather than a concrete task."
+            },
+            {
+              "value": "scientific disciplines",
+              "reason": "Vague subject area, not a concrete task or application domain."
+            },
+            {
+              "value": "medical data",
+              "reason": "Refers to a data type, not a task or application domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality conversation data",
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)",
+            "56M samples (130B tokens)",
+            "MMPR-v1.2 (200K pairs)",
+            "MMPR-Tiny (70K queries)"
+          ],
+          "accepted": [
+            "multimodal reasoning data (Thinking mode)",
+            "capability-expansion datasets (GUI, embodied, SVG)",
+            "MMPR-v1.2 (200K pairs)",
+            "MMPR-Tiny (70K queries)"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality conversation data",
+              "reason": "Descriptive phrase about data quality, not a specific dataset."
+            },
+            {
+              "value": "56M samples (130B tokens)",
+              "reason": "Specifies quantity/size, not a dataset name."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT)",
+            "Cascade Reinforcement Learning (MPO, GSPO)",
+            "Visual Consistency Learning (ViCO)"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)",
+            "Visual Consistency Learning (ViCO)"
+          ],
+          "dropped": [
+            {
+              "value": "Cascade Reinforcement Learning (MPO, GSPO)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+            "~250B tokens",
+            "116M samples"
+          ],
+          "accepted": [
+            "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)"
+          ],
+          "dropped": [
+            {
+              "value": "~250B tokens",
+              "reason": "Specifies quantity/size, not a corpus name."
+            },
+            {
+              "value": "116M samples",
+              "reason": "Specifies quantity/size, not a corpus name."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Advancing open-source multimodal models in versatility, reasoning, and efficiency"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Advancing open-source multimodal models in versatility, reasoning, and efficiency",
+              "reason": "Describes a goal or solution rather than naming the problem itself."
+            }
+          ]
+        }
+      },
+      "InternVL 3.5-235B-MoE": {
+        "finetuning_task": {
+          "candidates": [
+            "CascadeRL (offline + online RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "CascadeRL (offline + online RL)",
+              "reason": "Describes a training algorithm/method, not a fine-tuning task."
+            }
+          ]
+        },
+        "pretraining_architecture": {
+          "candidates": [
+            "Decoder + Vision encoder"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Decoder + Vision encoder",
+              "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Decoder + Vision encoder'"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Advancing open-source multimodal models in versatility, reasoning, and efficiency."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Advancing open-source multimodal models in versatility, reasoning, and efficiency.",
+              "reason": "Describes a goal or solution rather than naming the problem itself."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "Dynamic high-resolution strategy"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Dynamic high-resolution strategy",
+              "reason": "Describes a processing strategy, not the vision encoder component."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 240,
+      "dropped": 53,
+      "llm_calls": 1,
+      "values_sent_to_llm": 79
+    }
+  },
+  "contributions": [
+    {
+      "label": "InternVL 3.5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Shanghai Ai Laboratory",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cascade Reinforcement Learning (CascadeRL): a two-stage coarse-to-fine training strategy that uses offline RL for stable convergence and online RL for refined alignment, improving reasoning performance and stability compared to single-stage RL",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Resolution Router (ViR): dynamically adjusts the resolution of visual tokens based on task requirements, improving inference efficiency without compromising performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoupled Vision-Language Deployment (DvD): separates the vision encoder and language model across different GPUs, effectively balancing computational load and enabling faster inference compared to monolithic deployments.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual Consistency Learning (ViCO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Direct Preference Optimization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen3 / GPT-OSS tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4.4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "15.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "26B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "38B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "38.4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "78B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "241B-A28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 241000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Charts",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI-based interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "SVG understanding/generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/OpenGVLab/InternVL",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Reasoning capability",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Inference efficiency.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "250B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal reasoning data (Thinking mode)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Capability-expansion datasets (GUI, embodied, SVG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Cascade Reinforcement Learning (offline RL -> online RL)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid (parallel thinking / chain-of-thought)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "241B total parameters, 28B active parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BF16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "CascadeRL (offline RL, online RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade Reinforcement Learning (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "MPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GSPO (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "MPO (offline)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GSPO (online)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade RL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Group Sequence Policy Optimization (GSPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Normalized reward across responses sampled from the same query",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP Projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M / InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M or InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "High-resolution dynamic-resolution vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "InternVL3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 73.4 (8B), 77.7 (241B-A28B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar 72.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMVet 85.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBenchV1.1(en) 84.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MTVQA 33.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D(w/mask) 86.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench 88.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WildVision 75.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME-RealWorld(en) 64.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench 53.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MVBench 72.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoMME(w/osub) 68.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MLVU 73.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LongVideoBench 63.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU(val) 75.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista 80.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVision 55.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVerse(vision-only) 60.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DynaMath 36.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WeMath 48.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OlympiadBench 62.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LogicVista 55.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH500 96.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24 79.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25 62.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA 68.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro 75.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C-Eval 83.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GAOKAO 91.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval 74.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SGP-Bench 69.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScreenSpot 86.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScreenSpot-v2 87.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OSWorld-G 42.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VSI-Bench 63.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ERQA 41.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SpaCE-10 45.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OmniSpatial 48.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 33.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 50.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 57.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 73.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 66.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "Varies by size",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "InternVL 3.5-30B-A",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5-30B-A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenGVLab",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Random JPEG compression: enhances real-world performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual Consistency Learning (ViCO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen3 / GPT-OSS tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30B-A3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30.8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 30800,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "8 A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Charts",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI-based interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "SVG understanding/generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/OpenGVLab/InternVL",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal vision-language understanding and reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "250B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal reasoning data (Thinking mode)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Capability-expansion datasets (GUI, embodied, SVG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid (parallel thinking / chain-of-thought)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "30B total parameters, 3B active parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade Reinforcement Learning (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "MPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GSPO (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "CascadeRL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP Projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M / InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen3 series (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 73.4 (8B), 77.7 (241B-A28B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Table 3 Overall: 59.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "InternVL 3.5-241B-A",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5-241B-A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenGVLab",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Random JPEG compression: enhances real-world performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual Consistency Learning (ViCO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen3 / GPT-OSS tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "240.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "241B-A28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "241B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 241000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100/H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Charts",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI-based interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "SVG understanding/generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/OpenGVLab/InternVL",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal vision-language understanding and reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "250B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal reasoning data (Thinking mode)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Capability-expansion datasets (GUI, embodied, SVG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid (parallel thinking / chain-of-thought)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "241B total parameters, 28B active parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade Reinforcement Learning (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "MPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GSPO (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "CascadeRL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP Projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M / InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 73.4 (8B), 77.7 (241B-A28B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Table 3 Overall: 66.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "InternVL 3.5-Flash",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5-Flash",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenGVLab",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cascade Reinforcement Learning (Cascade RL): two-stage RL process (offline warm-up followed by online progressive improvement) for MLLM reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Resolution Router (ViR): dynamically selects optimal visual token resolution to reduce inference cost",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs to maximize parallelism",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Consistency Learning (ViCO): light training stage to integrate ViR.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal alignment and language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4.4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30B-A3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "241B-A28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 241000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "SVG understanding/generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "Varies by variant (1.1B to 28B active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Cascade RL (offline warm-up -> online progressive improvement) -> ViCO (Visual Consistency Learning for ViR integration)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "30B total/3B active; 241B total/28B active (for MoE variants)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade Reinforcement Learning (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "MLP Projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M / InternViT-6B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen3 series / GPT-OSS (LLM backbone), InternViT-300M / InternViT-6B (vision encoder)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 73.4 (8B), 77.7 (241B-A28B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Decoupled Vision-Language Deployment (DvD): deploys ViTs and LLMs on separate GPUs",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "InternVL 3.5-20B-A",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5-20B-A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenGVLab",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Pixel-shuffle module: compresses 1024 visual tokens to 256 before passing to LLM, reducing visual token count by 50% while maintaining performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Square-averaging loss: reweights NTP loss to mitigate bias toward longer or shorter responses",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Random JPEG compression: enhances real-world performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cascade RL: combines offline and online RL (MPO, GSPO) to prune low-quality output regions and improve reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Consistency Learning (ViCO): integrates visual resolution router (ViR) by minimizing output divergence across compression rates.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction (NTP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multimodal data (InternVL3 corpora) and text-only data (InternLM corpora + open-sourced datasets)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual Consistency Learning (ViCO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen3 / GPT-OSS tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "20B-A4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "21.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 21200,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100/H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Charts",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Knowledge grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-turn dialogue",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI-based interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied interaction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "SVG understanding/generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/OpenGVLab/InternVL",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "250B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal reasoning data (Thinking mode)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Capability-expansion datasets (GUI, embodied, SVG)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MMPR-v1.2 (200K pairs)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MMPR-Tiny (70K queries)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Window attention with sink",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training (NTP) -> SFT -> Cascade RL (MPO/GSPO) -> Visual Consistency Learning (ViCO for Flash)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Deep thinking (step-by-step), Parallel thinking (Best-of-N with VisualPRM-v1.1)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "A4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "FP8",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Large-scale reasoning model sampling rollouts with detailed reasoning processes",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "MPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GSPO (Cascade RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Cascade reinforcement learning (offline RL, online RL)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mid-fusion / Early fusion (pixel-shuffle compression before LLM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "InternViT-300M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "GPT-OSS-20B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 85.9/93.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 86.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 78.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 92.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA: 78.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 870",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME-RW: 69.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RealWorld-MME: 38.2/78.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VCR: 93.7/97.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 81.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Table 4 Overall: 85.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "XTuner, verl, Decoupled Vision-Language Deployment (DvD)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "InternVL 3.5-235B-MoE",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "InternVL 3.5-235B-MoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "InternVL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-08-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "OpenGVLab",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "CascadeRL framework combining offline and online RL to boost reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual Resolution Router (ViR) and Decoupled Vision-Language Deployment (DvD) to reduce inference cost and accelerate both dense and MoE models. Also released as InternVL3.5-241B-A28B.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Multimodal pretraining",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "235B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 235000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "8 A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-image/video understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Agency tasks.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "28B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pretraining -> CascadeRL",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "MoE",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "CascadeRL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "InternVL3",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 94.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartVQA: 88.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "InfoVQA: 82.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 84.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 90.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 86.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 77.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 77.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Mathvista: 82.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Overall: 85.0",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926876",
+    "contribution_ids": [
+      "R1926878",
+      "R1926879",
+      "R1926880",
+      "R1926881",
+      "R1926882",
+      "R1926883"
+    ],
+    "new_contribution_ids": [
+      "R1926878",
+      "R1926879",
+      "R1926880",
+      "R1926881",
+      "R1926882",
+      "R1926883"
+    ],
+    "comparison_updated": null
+  }
+}

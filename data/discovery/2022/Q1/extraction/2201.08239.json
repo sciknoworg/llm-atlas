@@ -1,0 +1,767 @@
+{
+ "arxiv_id": "2201.08239",
+ "status": "completed",
+ "timestamp": "2026-08-25T04:37:18.244810",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2201.08239",
+  "title": "LaMDA: Language Models for Dialog Applications",
+  "authors": [
+   "Romal Thoppilan",
+   "Daniel De Freitas",
+   "Jamie Hall",
+   "Noam Shazeer",
+   "Apoorv Kulshreshtha",
+   "Heng-Tze Cheng",
+   "Alicia Jin",
+   "Taylor Bos",
+   "Leslie Baker",
+   "Yu Du",
+   "YaGuang Li",
+   "Hongrae Lee",
+   "Huaixiu Steven Zheng",
+   "Amin Ghafouri",
+   "Marcelo Menegali",
+   "Yanping Huang",
+   "Maxim Krikun",
+   "Dmitry Lepikhin",
+   "James Qin",
+   "Dehao Chen",
+   "Yuanzhong Xu",
+   "Zhifeng Chen",
+   "Adam Roberts",
+   "Maarten Bosma",
+   "Vincent Zhao",
+   "Yanqi Zhou",
+   "Chung-Ching Chang",
+   "Igor Krivokon",
+   "Will Rusch",
+   "Marc Pickett",
+   "Pranesh Srinivasan",
+   "Laichee Man",
+   "Kathleen Meier-Hellstern",
+   "Meredith Ringel Morris",
+   "Tulsee Doshi",
+   "Renelito Delos Santos",
+   "Toju Duke",
+   "Johnny Soraker",
+   "Ben Zevenbergen",
+   "Vinodkumar Prabhakaran",
+   "Mark Diaz",
+   "Ben Hutchinson",
+   "Kristen Olson",
+   "Alejandra Molina",
+   "Erin Hoffman-John",
+   "Josh Lee",
+   "Lora Aroyo",
+   "Ravi Rajakumar",
+   "Alena Butryna",
+   "Matthew Lamm",
+   "Viktoriya Kuzmina",
+   "Joe Fenton",
+   "Aaron Cohen",
+   "Rachel Bernstein",
+   "Ray Kurzweil",
+   "Blaise Aguera-Arcas",
+   "Claire Cui",
+   "Marian Croak",
+   "Ed Chi",
+   "Quoc Le"
+  ],
+  "abstract": "We present LaMDA: Language Models for Dialog Applications. LaMDA is a family of Transformer-based neural language models specialized for dialog, which have up to 137B parameters and are pre-trained on 1.56T words of public dialog data and web text. While model scaling alone can improve quality, it shows less improvements on safety and factual grounding. We demonstrate that fine-tuning with annotated data and enabling the model to consult external knowledge sources can lead to significant improvements towards the two key challenges of safety and factual grounding. The first challenge, safety, involves ensuring that the model's responses are consistent with a set of human values, such as preventing harmful suggestions and unfair bias. We quantify safety using a metric based on an illustrative set of human values, and we find that filtering candidate responses using a LaMDA classifier fine-tuned with a small amount of crowdworker-annotated data offers a promising approach to improving model safety. The second challenge, factual grounding, involves enabling the model to consult external knowledge sources, such as an information retrieval system, a language translator, and a calculator. We quantify factuality using a groundedness metric, and we find that our approach enables the model to generate responses grounded in known sources, rather than responses that merely sound plausible. Finally, we explore the use of LaMDA in the domains of education and content recommendations, and analyze their helpfulness and role consistency.",
+  "published": "2022-01-20T15:44:37+00:00",
+  "updated": "2022-02-10T16:30:11+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2201.08239v3",
+  "entry_id": "http://arxiv.org/abs/2201.08239v3",
+  "pdf_path": "data/papers/2201.08239.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 135569,
+ "word_count": 5598,
+ "models_extracted": 9,
+ "extraction_data": [
+  {
+   "model_name": "LaMDA",
+   "parameters": "2B, 8B, 137B",
+   "parameters_millions": 137000,
+   "model_family": "LaMDA",
+   "date_created": "2022-01-20",
+   "organization": "Google",
+   "innovation": "Separation of 'Base' and 'Research' models to improve groundedness; augmenting model outputs with external tools (information retrieval system) to mimic crowdworker behavior; preconditioning on application-specific dialog turns to adapt to target applications; fine-tuning on dialog-only data and crowdworker-annotated data to improve interestingness.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "Infiniset (2.97B documents, 1.12B dialogs, 13.39B utterances, 1.56T words; 50% public forum dialog data, 12.5% C4, 12.5% code documentation, 12.5% English Wikipedia, 6.25% English web documents, 6.25% non-English web documents)",
+   "finetuning_task": "Supervised fine-tuning on dialog-only data and crowdworker-annotated data, Dialog fine-tuning, safety fine-tuning, Supervised fine-tuning for dialog safety, groundedness, and informativeness",
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Language Models for Dialog Applications",
+   "application": "Open-domain dialog, conversational AI, question answering, information retrieval",
+   "paper_title": "LaMDA: Language Models for Dialog Applications",
+   "training_corpus_size": "1.56T words",
+   "finetuning_data": "Dialog-only data, crowdworker-annotated data, Safety (8k dialogs), Groundedness (4K dialogs), Informativeness, Specificity, Sensibleness",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": "1024 TPU-V3 chips, 123 TFLOPS/s, 56.5% FLOPS utilization, GSPMD parallelism",
+   "carbon_emitted": "26 tCO2e",
+   "source_code": "https://github.com/google-research/laMDA",
+   "context_length": null,
+   "activated_parameters": "137B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention, Relative attention",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> fine-tuning on dialog-only data -> fine-tuning on crowdworker-annotated data -> application-specific preconditioning",
+   "reasoning_mode": "Non-thinking",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "RLHF",
+   "reward_mechanism": "Safety objectives, Human preference rankings for dialogue responses; dedicated safety model for filtering unsafe outputs",
+   "tool_calling_format": "External information retrieval system",
+   "training_environment_scale": "1024 TPU-V3 chips",
+   "safety_evaluation_protocol": "Crowdsourced evaluation based on Google's AI Principles",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Pre-trained language model (PT)",
+   "optimizer_innovation": null,
+   "benchmark_result": "Evaluated on Mini-Turing Benchmark (MTB); Sensibleness: 92.3; Specificity: 79; Interestingness: 25.7; Safety: 95.2; Groundedness: 73.2; Informativeness: 62.3; PCL (Personalized Conversational Language) tasks: PCL-1, PCL-2, PCL-3, PCL-4, PCL-5; Sensibleness: 81.8; Specificity: 74.8; Interestingness: 23.4; Safety: 93.8; Groundedness: 53; Informativeness: 41.8; Sensibleness: 88; Specificity: 77.4; Interestingness: 22.2; Safety: 93.5; Groundedness: 64.6; Informativeness: 50.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "128",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "LaMDA": {
+   "application": [
+    "Open-domain dialog",
+    "conversational AI",
+    "question answering",
+    "information retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Relative attention"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "Dialog-only data",
+    "crowdworker-annotated data",
+    "Safety (8k dialogs)",
+    "Groundedness (4K dialogs)"
+   ],
+   "finetuning_task": [
+    "Dialog fine-tuning",
+    "safety fine-tuning",
+    "Supervised fine-tuning for dialog safety"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "LaMDA"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "2B",
+    "8B",
+    "137B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Infiniset (2.97B documents, 1.12B dialogs, 13.39B utterances, 1.56T words; 50% public forum dialog data, 12.5% C4, 12.5% code documentation, 12.5% English Wikipedia, 6.25% English web documents, 6.25% non-English web documents)"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "reasoning_mode": [
+    "Non-thinking"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Safety objectives",
+    "Human preference rankings for dialogue responses",
+    "dedicated safety model for filtering unsafe outputs"
+   ],
+   "rl_algorithm": [
+    "RLHF"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "tool_calling_format": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "LaMDA": {
+    "base_model": {
+     "candidates": [
+      "Pre-trained language model (PT)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Pre-trained language model (PT)",
+       "reason": "Generic category/type, not a specific named model."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Dialog-only data",
+      "crowdworker-annotated data",
+      "Safety (8k dialogs)",
+      "Groundedness (4K dialogs)",
+      "Informativeness",
+      "Specificity",
+      "Sensibleness"
+     ],
+     "accepted": [
+      "Dialog-only data",
+      "crowdworker-annotated data",
+      "Safety (8k dialogs)",
+      "Groundedness (4K dialogs)"
+     ],
+     "dropped": [
+      {
+       "value": "Informativeness",
+       "reason": "Quality metric/attribute, not a dataset."
+      },
+      {
+       "value": "Specificity",
+       "reason": "Quality metric/attribute, not a dataset."
+      },
+      {
+       "value": "Sensibleness",
+       "reason": "Quality metric/attribute, not a dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on dialog-only data and crowdworker-annotated data",
+      "Dialog fine-tuning",
+      "safety fine-tuning",
+      "Supervised fine-tuning for dialog safety",
+      "groundedness",
+      "informativeness"
+     ],
+     "accepted": [
+      "Dialog fine-tuning",
+      "safety fine-tuning",
+      "Supervised fine-tuning for dialog safety"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on dialog-only data and crowdworker-annotated data",
+       "reason": "Describes the data used for fine-tuning rather than the specific task or objective. (cached)"
+      },
+      {
+       "value": "groundedness",
+       "reason": "Quality metric/attribute, not a specific fine-tuning task."
+      },
+      {
+       "value": "informativeness",
+       "reason": "Quality metric/attribute, not a specific fine-tuning task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "LaMDA"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "LaMDA",
+       "reason": "LaMDA is a specific model name, not a broader model family or lineage. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Language Models for Dialog Applications"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Language Models for Dialog Applications",
+       "reason": "Describes a field or application area, not a specific research problem or capability gap."
+      }
+     ]
+    },
+    "tool_calling_format": {
+     "candidates": [
+      "External information retrieval system"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "External information retrieval system",
+       "reason": "Names a tool or system rather than a format or protocol for structuring tool calls. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 30,
+   "dropped": 10,
+   "llm_calls": 1,
+   "values_sent_to_llm": 17
+  }
+ },
+ "contributions": [
+  {
+   "label": "LaMDA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LaMDA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-01-20",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Separation of 'Base' and 'Research' models to improve groundedness",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Augmenting model outputs with external tools (information retrieval system) to mimic crowdworker behavior",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Preconditioning on application-specific dialog turns to adapt to target applications",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fine-tuning on dialog-only data and crowdworker-annotated data to improve interestingness.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Infiniset (2.97B documents, 1.12B dialogs, 13.39B utterances, 1.56T words; 50% public forum dialog data, 12.5% C4, 12.5% code documentation, 12.5% English Wikipedia, 6.25% English web documents, 6.25% non-English web documents)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Dialog fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Safety fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for dialog safety",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "137B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 137000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "1024 TPU-V3 chips, 123 TFLOPS/s, 56.5% FLOPS utilization, GSPMD parallelism",
+     "datatype": "string"
+    },
+    {
+     "property": "P119142",
+     "label": "carbon_emitted",
+     "value": "26 tCO2e",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-domain dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Conversational AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Information retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/laMDA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.56T words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Dialog-only data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Crowdworker-annotated data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Safety (8k dialogs)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Groundedness (4K dialogs)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "137B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Relative attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> fine-tuning on dialog-only data -> fine-tuning on crowdworker-annotated data -> application-specific preconditioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Non-thinking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "RLHF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Safety objectives",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Human preference rankings for dialogue responses",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Dedicated safety model for filtering unsafe outputs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "1024 TPU-V3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Crowdsourced evaluation based on Google's AI Principles",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Evaluated on Mini-Turing Benchmark (MTB)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Sensibleness: 92.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Specificity: 79",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Interestingness: 25.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Safety: 95.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Groundedness: 73.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Informativeness: 62.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PCL (Personalized Conversational Language) tasks: PCL-1, PCL-2, PCL-3, PCL-4, PCL-5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Sensibleness: 81.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Specificity: 74.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Interestingness: 23.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Safety: 93.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Groundedness: 53",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Informativeness: 41.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Sensibleness: 88",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Specificity: 77.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Interestingness: 22.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Safety: 93.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Groundedness: 64.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Informativeness: 50.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "128",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370942",
+  "contribution_ids": [
+   "R370943",
+   "R1921652"
+  ],
+  "new_contribution_ids": [
+   "R1921652"
+  ],
+  "comparison_updated": null
+ }
+}

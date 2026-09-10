@@ -1,0 +1,1037 @@
+{
+ "arxiv_id": "2410.16261",
+ "status": "completed",
+ "timestamp": "2026-08-30T23:14:22.942135",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2410.16261",
+  "title": "Mini-InternVL: A Flexible-Transfer Pocket Multimodal Model with 5% Parameters and 90% Performance",
+  "authors": [
+   "Zhangwei Gao",
+   "Zhe Chen",
+   "Erfei Cui",
+   "Yiming Ren",
+   "Weiyun Wang",
+   "Jinguo Zhu",
+   "Hao Tian",
+   "Shenglong Ye",
+   "Junjun He",
+   "Xizhou Zhu",
+   "Lewei Lu",
+   "Tong Lu",
+   "Yu Qiao",
+   "Jifeng Dai",
+   "Wenhai Wang"
+  ],
+  "abstract": "Multimodal large language models (MLLMs) have demonstrated impressive performance in vision-language tasks across a broad spectrum of domains. However, the large model scale and associated high computational costs pose significant challenges for training and deploying MLLMs on consumer-grade GPUs or edge devices, thereby hindering their widespread application. In this work, we introduce Mini-InternVL, a series of MLLMs with parameters ranging from 1B to 4B, which achieves 90% of the performance with only 5% of the parameters. This significant improvement in efficiency and effectiveness makes our models more accessible and applicable in various real-world scenarios. To further promote the adoption of our models, we develop a unified adaptation framework for Mini-InternVL, which enables our models to transfer and outperform specialized models in downstream tasks, including autonomous driving, medical images, and remote sensing. We believe that our study can provide valuable insights and resources to advance the development of efficient and effective MLLMs. Code is available at https://github.com/OpenGVLab/InternVL.",
+  "published": "2024-10-21T17:58:20+00:00",
+  "updated": "2024-11-07T15:35:52+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2410.16261v3",
+  "entry_id": "http://arxiv.org/abs/2410.16261v3",
+  "pdf_path": "data/papers/2410.16261.pdf"
+ },
+ "text_length": 77056,
+ "word_count": 4743,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "Mini-InternVL",
+   "parameters": "5% OF BASE MODEL, 400M, 1B, 2B, 3.8B, 4B",
+   "parameters_millions": 4000,
+   "model_family": "InternVL",
+   "date_created": "2024-10-21",
+   "organization": "Google",
+   "innovation": "Knowledge distillation from a large vision encoder (InternViT-6B) to a lightweight 300M-parameter model (InternViT-300M); pixel unshuffle to reduce visual tokens to one-quarter; lightweight MLP projector for embedding alignment; flexible-transfer paradigm enabling domain adaptation without architectural modifications",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal alignment, knowledge distillation",
+   "pretraining_corpus": "Laion, COYO, GRIT, COCO, LVIS, Objects365, Flickr30K, Visual Genome, All-Seeing, MMInstruct, LRV-Instruction, TextCaps, Wukong-OCR, CTW, MMC-Inst, LSVT, ST-VQA, RCTW-17, ReCTs, ArT, SynthDoG, LaionCOCO-OCR, COCO-Text, DocVQA, TextOCR, LLaVAR, TQA, SynthText, DocReason25K, CommonCrawlPDF, AI2D, PlotQA, InfoVQA, ChartQA, MapQA, FigureQA, IconQA, MMC-Instruction, CLEVR-Math/Super, GeoQA+, UniChart, ScienceQA, Inter-GPS, Multidisciplinary UniGeo, PMC-VQA, TabMWP, MetaMathQA, Stanford40, GQA, MovieNet, KonIQ-10K, ART500K, ViQuAE",
+   "finetuning_task": "Domain-specific adaptation / transfer learning, Instruction tuning / fine-tuning, Domain adaptation, Full-parameter fine-tuning for domain adaptation",
+   "optimizer": null,
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open-source",
+   "research_problem": "Lightweight, flexible-transfer multimodal models for general and domain-specific tasks",
+   "application": "Visual question answering, image classification, visual grounding, region perception, autonomous driving perception and planning",
+   "paper_title": "Mini-InternVL: A Flexible-Transfer Pocket Multimodal Model with 5% Parameters and 90% Performance",
+   "training_corpus_size": null,
+   "finetuning_data": "General multimodal data, domain-specific data (remote sensing, autonomous driving), RSVQA, PMC-VQA, remote sensing instruction data, DriveLM-nuScenes, RSVQA-LR, RSVQA-HR, DIOR-RSVG, DriveLM, MMBench, MME-RW, BDD-X, general datasets",
+   "tokenizer": "InternLM2 Tokenizer",
+   "supported_language": "English, Chinese",
+   "hardware_description": "8 A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "3.8B",
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Knowledge distillation (InternViT-6B -> InternViT-300M) -> MLP projector alignment -> Transfer learning for domain adaptation",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion via MLP projector",
+   "vision_encoder": "InternViT-300M, InternViT (dynamic resolution)",
+   "base_model": "InternViT-6B, InternLM2",
+   "optimizer_innovation": null,
+   "benchmark_result": "RSVQA-LR Avg: 69.55 (4B), 87.37 (DA-1B), 89.87 (DA-2B), 89.46 (DA-4B); DIOR-RSVG Avg: 73.55 (4B), 90.24 (DA-1B), 90.30 (DA-2B), 90.18 (DA-4B); MMB: 73.2 (2B); DriveLM: 70.9 (2B); DocVQA: 76.2 (2B); InfoVQA: 57.7 (2B); MME-RW-AD: 0.578 (2B); DriveLM-nuScenes: 31.34 Perception, 22.47 Reasoning, 28.96 Avg; MME-Realworld: surpasses LLaVA-OneVision-7B; BDD-X: CIDEr 223.85, BLEU4 34.17, ROUGE 62.11; DriveLM-nuScenes: 39.86 Perception, 30.13 Reasoning, 37.25 Avg; BDD-X: CIDEr 242.14, BLEU4 35.77, ROUGE 63.03; DriveLM-nuScenes: 38.96 Perception, 33.11 Reasoning, 37.39 Avg; BDD-X: CIDEr 237.41, BLEU4 35.94, ROUGE 63.67; 90% of base model performance on standard VLM benchmarks",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Mini-InternVL": {
+   "application": [
+    "Visual question answering",
+    "image classification",
+    "visual grounding",
+    "region perception",
+    "autonomous driving perception and planning"
+   ],
+   "base_model": [
+    "InternViT-6B, InternLM2"
+   ],
+   "finetuning_data": [
+    "RSVQA",
+    "PMC-VQA",
+    "DriveLM-nuScenes",
+    "RSVQA-LR",
+    "RSVQA-HR",
+    "DIOR-RSVG",
+    "DriveLM",
+    "MMBench",
+    "MME-RW",
+    "BDD-X"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Mid-fusion via MLP projector"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "open-source"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "Mini-InternVL"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "400M",
+    "1B",
+    "2B",
+    "3.8B",
+    "4B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Laion",
+    "COYO",
+    "GRIT",
+    "COCO",
+    "LVIS",
+    "Objects365",
+    "Flickr30K",
+    "Visual Genome",
+    "All-Seeing",
+    "MMInstruct",
+    "LRV-Instruction",
+    "TextCaps",
+    "Wukong-OCR",
+    "CTW",
+    "MMC-Inst",
+    "LSVT",
+    "ST-VQA",
+    "RCTW-17",
+    "ReCTs",
+    "ArT",
+    "SynthDoG",
+    "LaionCOCO-OCR",
+    "COCO-Text",
+    "DocVQA",
+    "TextOCR",
+    "LLaVAR",
+    "TQA",
+    "SynthText",
+    "DocReason25K",
+    "CommonCrawlPDF",
+    "AI2D",
+    "PlotQA",
+    "InfoVQA",
+    "ChartQA",
+    "MapQA",
+    "FigureQA",
+    "IconQA",
+    "MMC-Instruction",
+    "CLEVR-Math/Super",
+    "GeoQA+",
+    "UniChart",
+    "ScienceQA",
+    "Inter-GPS",
+    "Multidisciplinary UniGeo",
+    "PMC-VQA",
+    "TabMWP",
+    "MetaMathQA",
+    "Stanford40",
+    "GQA",
+    "MovieNet",
+    "KonIQ-10K",
+    "ART500K",
+    "ViQuAE"
+   ],
+   "pretraining_task": [
+    "Multimodal alignment, knowledge distillation"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "InternViT-300M",
+    "InternViT (dynamic resolution)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Mini-InternVL": {
+    "finetuning_data": {
+     "candidates": [
+      "General multimodal data",
+      "domain-specific data (remote sensing, autonomous driving)",
+      "RSVQA",
+      "PMC-VQA",
+      "remote sensing instruction data",
+      "DriveLM-nuScenes",
+      "RSVQA-LR",
+      "RSVQA-HR",
+      "DIOR-RSVG",
+      "DriveLM",
+      "MMBench",
+      "MME-RW",
+      "BDD-X",
+      "general datasets"
+     ],
+     "accepted": [
+      "RSVQA",
+      "PMC-VQA",
+      "DriveLM-nuScenes",
+      "RSVQA-LR",
+      "RSVQA-HR",
+      "DIOR-RSVG",
+      "DriveLM",
+      "MMBench",
+      "MME-RW",
+      "BDD-X"
+     ],
+     "dropped": [
+      {
+       "value": "General multimodal data",
+       "reason": "Vague descriptive phrase, not a specific dataset"
+      },
+      {
+       "value": "domain-specific data (remote sensing, autonomous driving)",
+       "reason": "Descriptive phrase, not a specific dataset"
+      },
+      {
+       "value": "remote sensing instruction data",
+       "reason": "Descriptive phrase, not a specific dataset"
+      },
+      {
+       "value": "general datasets",
+       "reason": "Vague placeholder, not a specific dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Domain-specific adaptation / transfer learning",
+      "Instruction tuning / fine-tuning",
+      "Domain adaptation",
+      "Full-parameter fine-tuning for domain adaptation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Domain-specific adaptation / transfer learning",
+       "reason": "Describes a training methodology, not a specific task"
+      },
+      {
+       "value": "Instruction tuning / fine-tuning",
+       "reason": "Describes a training methodology, not a specific task"
+      },
+      {
+       "value": "Domain adaptation",
+       "reason": "Describes a training methodology, not a specific task"
+      },
+      {
+       "value": "Full-parameter fine-tuning for domain adaptation",
+       "reason": "Describes a training methodology, not a specific task"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "5% OF BASE MODEL",
+      "400M",
+      "1B",
+      "2B",
+      "3.8B",
+      "4B"
+     ],
+     "accepted": [
+      "400M",
+      "1B",
+      "2B",
+      "3.8B",
+      "4B"
+     ],
+     "dropped": [
+      {
+       "value": "5% OF BASE MODEL",
+       "reason": "Relative proportion, not a specific number of parameters"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Lightweight, flexible-transfer multimodal models for general and domain-specific tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Lightweight, flexible-transfer multimodal models for general and domain-specific tasks",
+       "reason": "Describes a model type/solution rather than a research problem"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 86,
+   "dropped": 10,
+   "llm_calls": 1,
+   "values_sent_to_llm": 32
+  }
+ },
+ "contributions": [
+  {
+   "label": "Mini-InternVL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Mini-InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-10-21",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Knowledge distillation from a large vision encoder (InternViT-6B) to a lightweight 300M-parameter model (InternViT-300M)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Pixel unshuffle to reduce visual tokens to one-quarter",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Lightweight MLP projector for embedding alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Flexible-transfer paradigm enabling domain adaptation without architectural modifications",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment, knowledge distillation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COYO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GRIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LVIS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Objects365",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "All-Seeing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMInstruct",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LRV-Instruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wukong-OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CTW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMC-Inst",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LSVT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ST-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RCTW-17",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ReCTs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ArT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LaionCOCO-OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO-Text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DocVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextOCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DocReason25K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawlPDF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AI2D",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PlotQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "InfoVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ChartQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MapQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "FigureQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMC-Instruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CLEVR-Math/Super",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GeoQA+",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "UniChart",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Inter-GPS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Multidisciplinary UniGeo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PMC-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TabMWP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MetaMathQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stanford40",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MovieNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "KonIQ-10K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ART500K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ViQuAE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "InternLM2 Tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 4000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Region perception",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Autonomous driving perception and planning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RSVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PMC-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DriveLM-nuScenes",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RSVQA-LR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RSVQA-HR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DIOR-RSVG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DriveLM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MMBench",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MME-RW",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BDD-X",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Knowledge distillation (InternViT-6B -> InternViT-300M) -> MLP projector alignment -> Transfer learning for domain adaptation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion via MLP projector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-300M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT (dynamic resolution)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "InternViT-6B, InternLM2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RSVQA-LR Avg: 69.55 (4B), 87.37 (DA-1B), 89.87 (DA-2B), 89.46 (DA-4B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DIOR-RSVG Avg: 73.55 (4B), 90.24 (DA-1B), 90.30 (DA-2B), 90.18 (DA-4B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 73.2 (2B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DriveLM: 70.9 (2B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQA: 76.2 (2B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "InfoVQA: 57.7 (2B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RW-AD: 0.578 (2B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DriveLM-nuScenes: 31.34 Perception, 22.47 Reasoning, 28.96 Avg",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-Realworld: surpasses LLaVA-OneVision-7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BDD-X: CIDEr 223.85, BLEU4 34.17, ROUGE 62.11",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DriveLM-nuScenes: 39.86 Perception, 30.13 Reasoning, 37.25 Avg",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BDD-X: CIDEr 242.14, BLEU4 35.77, ROUGE 63.03",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DriveLM-nuScenes: 38.96 Perception, 33.11 Reasoning, 37.39 Avg",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BDD-X: CIDEr 237.41, BLEU4 35.94, ROUGE 63.67",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "90% of base model performance on standard VLM benchmarks",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1927596",
+  "contribution_ids": [
+   "R1927598"
+  ],
+  "new_contribution_ids": [
+   "R1927598"
+  ],
+  "comparison_updated": null
+ }
+}

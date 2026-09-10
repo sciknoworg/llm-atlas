@@ -1,0 +1,918 @@
+{
+  "arxiv_id": "2507.05934",
+  "status": "completed",
+  "timestamp": "2026-08-30T02:19:27.083702",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2507.05934",
+    "title": "BlueLM-2.5-3B Technical Report",
+    "authors": [
+      "Baojiao Xiong",
+      "Boheng Chen",
+      "Chengzhi Wang",
+      "Daxiong Luo",
+      "Dongsheng Xu",
+      "Dongyang Liu",
+      "Fan Yang",
+      "Fangyuan Li",
+      "Fei Teng",
+      "Feng Wang",
+      "Fukang Qin",
+      "Fuquan Peng",
+      "Guanxin Tan",
+      "Guozhi Wang",
+      "Haibo Yu",
+      "Haohao Gao",
+      "Heng Liu",
+      "Hongbo Yang",
+      "Hongjian Zou",
+      "Houzheng Shen",
+      "Hu Meng",
+      "Huan Li",
+      "Hui Tan",
+      "Jiali Chen",
+      "Jianzhao Chen",
+      "Jinliang Zhu",
+      "Kai Wang",
+      "Lei Wu",
+      "Liangbing Liu",
+      "Liuyang Bian",
+      "Liyan He",
+      "Long Liu",
+      "Peiwen Li",
+      "Penggang Shi",
+      "Qi Ding",
+      "Rui Hu",
+      "Shuai Cao",
+      "Shuai Ren",
+      "Shuang Peng",
+      "Teng Xie",
+      "Weiji Chen",
+      "Weilin Xiang",
+      "Weixin Wu",
+      "Xi Yin",
+      "Xiaoxin Chen",
+      "Xu Chen",
+      "Yafei Wen",
+      "Yan Hu",
+      "Yanzhou Yang",
+      "Yina Xie",
+      "Yinghao Chen",
+      "Yixuan Liao",
+      "Yu Geng",
+      "Yuanjiang Ouyang",
+      "Yuanzhuo Yang",
+      "Yuehua He",
+      "Yushuai Peng",
+      "Zhaoxiong Wang",
+      "Zheng Wang",
+      "Zhibo Zhou",
+      "Ziyang Wu"
+    ],
+    "abstract": "We present BlueLM-2.5-3B, a compact and unified dense Multimodal Large Language Model (MLLM) designed for efficient edge-device deployment, offering strong general-purpose and reasoning capabilities. To the best of our knowledge, this is the first 3B-scale MLLM to support both thinking and non-thinking modes, while also enabling explicit control over thinking token budget. BlueLM-2.5-3B is developed through diversified data curation, key data resampling, hybrid heterogeneous reinforcement learning, and a high-performance training infrastructure. Our model achieves superior multimodal capacity while preserving competitive pure-text performance with only 2.9 billion parameters. We conduct comprehensive evaluations across a broad range of multimodal and text-only benchmarks. In thinking mode, BlueLM-2.5-3B achieves comparable performance to Qwen3-4B on text-only benchmarks, and trails the larger Kimi-VL-A3B-16B by only about 5% on average across multimodal evaluations. In non-thinking mode, it outperforms Qwen2.5-VL-3B on the majority of multimodal benchmarks. Additionally, BlueLM-2.5-3B exhibits exceptional data efficiency. All of the aforementioned performance is achieved with substantially less total training data than Qwen2.5-VL-3B and Qwen3-4B. We hope our work contributes to the advancement of high-performance, on-device MLLMs and provides meaningful insights to the research community.",
+    "published": "2025-07-08T12:34:10+00:00",
+    "updated": "2025-07-08T12:34:10+00:00",
+    "doi": null,
+    "primary_category": "cs.AI",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2507.05934v1",
+    "entry_id": "http://arxiv.org/abs/2507.05934v1",
+    "pdf_path": "data/papers/2507.05934.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 102159,
+  "word_count": 14837,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "BlueLM-2.5",
+      "parameters": "2.9B, 3B",
+      "parameters_millions": 3000,
+      "model_family": "BlueLM",
+      "date_created": "2025-07-08",
+      "organization": "Google",
+      "innovation": "Adaptive thinking/non-thinking switching: single model adaptively switches between thinking and non-thinking modes based on user query types or chat templates, unlike prior models that require separate architectures or manual prompting; Multi-phase training pipeline with curriculum-inspired multi-stage distillation: blends pre-training data with synthesized reasoning data to strengthen complex reasoning and contextual understanding, improving performance across general and reasoning tasks; Joint pre-training with 40% pure text: increases pure text proportion in multimodal joint pre-training to mitigate text capability degradation common in small MLLMs; Large-model distillation for text pre-training: enhances small-model accuracy (+4%) while reducing training costs.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Pure text data (6T tokens for teacher, 3T distinct tokens for 3B), multimodal data (image-text pairs, VQA, GUIAgent, SynthesisQA, LongText), STEM, programming code, general reasoning examples, synthetic data",
+      "finetuning_task": "Joint supervised fine-tuning with thinking mode fusion, long-CoT SFT, RLHF, Supervised fine-tuning (SFT)",
+      "optimizer": "AdamW",
+      "hardware_used": "high-performance GPUs",
+      "extension": "Pruning and distillation from a 7B teacher model; YaRN for context extension from 4k to 32k",
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Building powerful edge-side multimodal large language models (MLLMs) with simultaneous multimodal reasoning and general understanding capabilities.",
+      "application": "Edge-side deployment, mobile devices, vehicles, robotics, complex inference, visual content manipulation, autonomous navigation, embodied intelligence, multimodal reasoning, GUI understanding",
+      "paper_title": "BlueLM-2.5-3B Technical Report",
+      "training_corpus_size": "3.3T tokens",
+      "finetuning_data": "Long-CoT dataset (300k STEM contest queries with validated ground truth); multimodal and text-only preference datasets for RLHF",
+      "tokenizer": null,
+      "supported_language": "Chinese",
+      "hardware_description": "on-premises GPU cluster of thousands of high-performance GPUs interconnected via 4x200 Gb/s InfiniBand (IB) network, adopting a fat-tree and rail-optimized topology; 10,000+ core resource pool",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "3B (dense, all parameters active)",
+      "attention_mechanism": "RoPE (switched to YaRN for long context)",
+      "context_length_max": "32k tokens",
+      "context_extension_method": "YaRN",
+      "training_pipeline": "Text pre-training with large-model distillation → MLLM pre-training (40% pure text) → reasoning-enhanced training with curriculum-inspired multi-stage distillation",
+      "reasoning_mode": "Hybrid thinking/non-thinking with adaptive switching based on query type or chat template",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "3.3T synthesized data for integrated image-text reasoning tasks, Synthesized reasoning data",
+      "rl_algorithm": "RLHF, Hybrid reinforcement learning",
+      "reward_mechanism": "Reward model trained on preference data collected from open-ended QA tasks, Task-specific reward forms",
+      "tool_calling_format": null,
+      "training_environment_scale": "10,000+ core resource pool",
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Modular decoupled architecture with vision encoder, adapter layer, and language model",
+      "vision_encoder": "ViT architectures, SigLIP2 (so400m-patch14-384), adjusted to 378x378, integrated with AnyRes processor for dynamic resolution and tiled processing",
+      "base_model": "LLM-base-3B (pruned/distilled from 7B)",
+      "optimizer_innovation": null,
+      "benchmark_result": "AIME2024: +27 points over Qwen3-4B in <8K tokens; LiveCodeBench-v1: +8 points over Qwen3-4B, +23 points over Kimi-VL-A3B in <8K tokens; MMMU: 51.3; MMBench-V1.1: 78.3; MMstar: 66.3; MM-vet: 65.1; OCRBench: 84.0; AI2D: 82.6; MIA-bench: 82.6; MathVista: 78.4; MathVision: 47.7; HallusionBench: 57.3; MMLU-pro: 66.7; GPQA-Diamond: 59.6; Math-500: 92.8; GSM8K: 95.5; BBH: 89.3; AIME24: 73.3; AIME25: 66.7; IF-Eval: 80.2; Humaneval: 94.5; LiveCodeBench-v1: 81.5; LiveCodeBench-v5: 54.2; MMMU: 47.5; MMBench-V1.1: 82.1; MMstar: 64.5; MM-vet: 66.7; OCRBench: 82.6; AI2D: 83.0; MIA-bench: 81.1; MathVista: 70.8; MathVision: 28.5; HallusionBench: 53.7",
+      "weight_clipping_mechanism": "Reward clipping",
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "RL infrastructure with performance optimization and remote deployment of the reward model"
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "BlueLM-2.5": {
+      "application": [
+        "robotics",
+        "visual content manipulation",
+        "autonomous navigation",
+        "embodied intelligence",
+        "multimodal reasoning",
+        "GUI understanding"
+      ],
+      "attention_mechanism": [
+        "RoPE (switched to YaRN for long context)"
+      ],
+      "base_model": [
+        "LLM-base-3B (pruned/distilled from 7B)"
+      ],
+      "context_extension_method": [
+        "YaRN"
+      ],
+      "finetuning_data": [
+        "Long-CoT dataset (300k STEM contest queries with validated ground truth)",
+        "multimodal and text-only preference datasets for RLHF"
+      ],
+      "finetuning_task": [
+        "long-CoT SFT",
+        "RLHF",
+        "Supervised fine-tuning (SFT)"
+      ],
+      "fusion_architecture": [
+        "Modular decoupled architecture with vision encoder, adapter layer, and language model"
+      ],
+      "hardware_used": [],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "BlueLM"
+      ],
+      "model_name": [
+        "BlueLM-2.5"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "2.9B",
+        "3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "multimodal data (image-text pairs, VQA, GUIAgent, SynthesisQA, LongText)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "reasoning_mode": [
+        "Hybrid thinking/non-thinking with adaptive switching based on query type or chat template"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Reward model trained on preference data collected from open-ended QA tasks",
+        "Task-specific reward forms"
+      ],
+      "rl_algorithm": [
+        "RLHF"
+      ],
+      "supported_language": [
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "ViT architectures",
+        "SigLIP2 (so400m-patch14-384)"
+      ],
+      "weight_clipping_mechanism": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "BlueLM-2.5": {
+        "application": {
+          "candidates": [
+            "Edge-side deployment",
+            "mobile devices",
+            "vehicles",
+            "robotics",
+            "complex inference",
+            "visual content manipulation",
+            "autonomous navigation",
+            "embodied intelligence",
+            "multimodal reasoning",
+            "GUI understanding"
+          ],
+          "accepted": [
+            "robotics",
+            "visual content manipulation",
+            "autonomous navigation",
+            "embodied intelligence",
+            "multimodal reasoning",
+            "GUI understanding"
+          ],
+          "dropped": [
+            {
+              "value": "Edge-side deployment",
+              "reason": "Describes deployment context/location, not a concrete task or domain."
+            },
+            {
+              "value": "mobile devices",
+              "reason": "Refers to hardware/platform, not a concrete task or domain."
+            },
+            {
+              "value": "vehicles",
+              "reason": "Refers to hardware/platform, not a concrete task or domain."
+            },
+            {
+              "value": "complex inference",
+              "reason": "Vague capability or processing phase, not a concrete task or domain."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Joint supervised fine-tuning with thinking mode fusion",
+            "long-CoT SFT",
+            "RLHF",
+            "Supervised fine-tuning (SFT)"
+          ],
+          "accepted": [
+            "long-CoT SFT",
+            "RLHF",
+            "Supervised fine-tuning (SFT)"
+          ],
+          "dropped": [
+            {
+              "value": "Joint supervised fine-tuning with thinking mode fusion",
+              "reason": "Describes a training methodology/process rather than a specific task or objective."
+            }
+          ]
+        },
+        "hardware_used": {
+          "candidates": [
+            "high-performance GPUs"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "high-performance GPUs",
+              "reason": "Generic descriptor lacking specific hardware model or configuration details."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Pure text data (6T tokens for teacher, 3T distinct tokens for 3B)",
+            "multimodal data (image-text pairs, VQA, GUIAgent, SynthesisQA, LongText)",
+            "STEM",
+            "programming code",
+            "general reasoning examples",
+            "synthetic data"
+          ],
+          "accepted": [
+            "multimodal data (image-text pairs, VQA, GUIAgent, SynthesisQA, LongText)"
+          ],
+          "dropped": [
+            {
+              "value": "synthetic data",
+              "reason": "Generic assertion of data type, does not name a specific corpus or collection (cached)"
+            },
+            {
+              "value": "Pure text data (6T tokens for teacher, 3T distinct tokens for 3B)",
+              "reason": "Asserts data type and quantity rather than naming an identifiable corpus or dataset."
+            },
+            {
+              "value": "STEM",
+              "reason": "Broad category/domain, not a specific corpus or dataset."
+            },
+            {
+              "value": "programming code",
+              "reason": "Broad data type/category, not a specific corpus or dataset."
+            },
+            {
+              "value": "general reasoning examples",
+              "reason": "Vague placeholder describing data type, not a specific corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Building powerful edge-side multimodal large language models (MLLMs) with simultaneous multimodal reasoning and general understanding capabilities."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Building powerful edge-side multimodal large language models (MLLMs) with simultaneous multimodal reasoning and general understanding capabilities.",
+              "reason": "Sentence fragment describing a solution/goal rather than a short noun phrase naming the problem."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "RLHF",
+            "Hybrid reinforcement learning"
+          ],
+          "accepted": [
+            "RLHF"
+          ],
+          "dropped": [
+            {
+              "value": "Hybrid reinforcement learning",
+              "reason": "Category/approach rather than a specific named algorithm."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "3.3T synthesized data for integrated image-text reasoning tasks",
+            "Synthesized reasoning data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "3.3T synthesized data for integrated image-text reasoning tasks",
+              "reason": "Describes data quantity and task rather than the generation method or technique."
+            },
+            {
+              "value": "Synthesized reasoning data",
+              "reason": "Describes the resulting data rather than the generation method or technique."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "ViT architectures",
+            "SigLIP2 (so400m-patch14-384)",
+            "adjusted to 378x378",
+            "integrated with AnyRes processor for dynamic resolution and tiled processing"
+          ],
+          "accepted": [
+            "ViT architectures",
+            "SigLIP2 (so400m-patch14-384)"
+          ],
+          "dropped": [
+            {
+              "value": "adjusted to 378x378",
+              "reason": "Trailing parameter/qualifier rather than the model component itself."
+            },
+            {
+              "value": "integrated with AnyRes processor for dynamic resolution and tiled processing",
+              "reason": "Description of integration/processing rather than the encoder component."
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Reward clipping"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Reward clipping",
+              "reason": "Refers to clipping rewards, not model weights as defined."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 32,
+      "dropped": 18,
+      "llm_calls": 1,
+      "values_sent_to_llm": 33
+    }
+  },
+  "contributions": [
+    {
+      "label": "BlueLM-2.5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "BlueLM-2.5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BlueLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-07-08",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Adaptive thinking/non-thinking switching: single model adaptively switches between thinking and non-thinking modes based on user query types or chat templates, unlike prior models that require separate architectures or manual prompting",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-phase training pipeline with curriculum-inspired multi-stage distillation: blends pre-training data with synthesized reasoning data to strengthen complex reasoning and contextual understanding, improving performance across general and reasoning tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Joint pre-training with 40% pure text: increases pure text proportion in multimodal joint pre-training to mitigate text capability degradation common in small MLLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Large-model distillation for text pre-training: enhances small-model accuracy (+4%) while reducing training costs.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multimodal data (image-text pairs, VQA, GUIAgent, SynthesisQA, LongText)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Long-CoT SFT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "RLHF",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 3000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "On-premises GPU cluster of thousands of high-performance GPUs interconnected via 4x200 Gb/s InfiniBand (IB) network, adopting a fat-tree and rail-optimized topology; 10,000+ core resource pool",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Robotics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual content manipulation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Autonomous navigation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied intelligence",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "GUI understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "3.3T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Long-CoT dataset (300k STEM contest queries with validated ground truth)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multimodal and text-only preference datasets for RLHF",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "3B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "RoPE (switched to YaRN for long context)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32k tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "YaRN",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Text pre-training with large-model distillation → MLLM pre-training (40% pure text) → reasoning-enhanced training with curriculum-inspired multi-stage distillation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Hybrid thinking/non-thinking with adaptive switching based on query type or chat template",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "RLHF",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Reward model trained on preference data collected from open-ended QA tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Task-specific reward forms",
+          "datatype": "string"
+        },
+        {
+          "property": "P203096",
+          "label": "training_environment_scale",
+          "value": "10,000+ core resource pool",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Modular decoupled architecture with vision encoder, adapter layer, and language model",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ViT architectures",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP2 (so400m-patch14-384)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLM-base-3B (pruned/distilled from 7B)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME2024: +27 points over Qwen3-4B in <8K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench-v1: +8 points over Qwen3-4B, +23 points over Kimi-VL-A3B in <8K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 51.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench-V1.1: 78.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMstar: 66.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-vet: 65.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 84.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MIA-bench: 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 78.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVision: 47.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench: 57.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-pro: 66.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA-Diamond: 59.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Math-500: 92.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 95.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH: 89.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24: 73.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25: 66.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IF-Eval: 80.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Humaneval: 94.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench-v1: 81.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench-v5: 54.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 47.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench-V1.1: 82.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMstar: 64.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-vet: 66.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 83.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MIA-bench: 81.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 70.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVision: 28.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench: 53.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "RL infrastructure with performance optimization and remote deployment of the reward model",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926804",
+    "contribution_ids": [
+      "R1926806"
+    ],
+    "new_contribution_ids": [
+      "R1926806"
+    ],
+    "comparison_updated": null
+  }
+}

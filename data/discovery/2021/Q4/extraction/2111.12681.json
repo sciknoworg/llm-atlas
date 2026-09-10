@@ -1,0 +1,423 @@
+{
+  "arxiv_id": "2111.12681",
+  "status": "completed",
+  "timestamp": "2026-08-25T02:54:15.839840",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2111.12681",
+    "title": "VIOLET : End-to-End Video-Language Transformers with Masked Visual-token Modeling",
+    "authors": [
+      "Tsu-Jui Fu",
+      "Linjie Li",
+      "Zhe Gan",
+      "Kevin Lin",
+      "William Yang Wang",
+      "Lijuan Wang",
+      "Zicheng Liu"
+    ],
+    "abstract": "A great challenge in video-language (VidL) modeling lies in the disconnection between fixed video representations extracted from image/video understanding models and downstream VidL data. Recent studies try to mitigate this disconnection via end-to-end training. To make it computationally feasible, prior works tend to \"imagify\" video inputs, i.e., a handful of sparsely sampled frames are fed into a 2D CNN, followed by a simple mean-pooling or concatenation to obtain the overall video representations. Although achieving promising results, such simple approaches may lose temporal information that is essential for performing downstream VidL tasks. In this work, we present VIOLET, a fully end-to-end VIdeO-LanguagE Transformer, which adopts a video transformer to explicitly model the temporal dynamics of video inputs. Further, unlike previous studies that found pre-training tasks on video inputs (e.g., masked frame modeling) not very effective, we design a new pre-training task, Masked Visual-token Modeling (MVM), for better video modeling. Specifically, the original video frame patches are \"tokenized\" into discrete visual tokens, and the goal is to recover the original visual tokens based on the masked patches. Comprehensive analysis demonstrates the effectiveness of both explicit temporal modeling via video transformer and MVM. As a result, VIOLET achieves new state-of-the-art performance on 5 video question answering tasks and 4 text-to-video retrieval tasks.",
+    "published": "2021-11-24T18:31:20+00:00",
+    "updated": "2022-04-16T04:21:26+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2111.12681v2",
+    "entry_id": "http://arxiv.org/abs/2111.12681v2",
+    "pdf_path": "data/papers/2111.12681.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+  },
+  "text_length": 66933,
+  "word_count": 6447,
+  "models_extracted": 1,
+  "extraction_data": [
+    {
+      "model_name": "VIOLET",
+      "model_family": "VIOLET",
+      "date_created": "2021-11-24",
+      "organization": "Microsoft",
+      "innovation": "Masked Visual-token Modeling (MVM) recovers masked patches into a finite discrete set, simplifying learning compared to Masked Classification (MCM), Masked Feature Modeling (MFM), or Masked Patch Modeling (MPM); end-to-end temporal modeling via VideoSwinTransformer instead of naive mean-pooling or concatenation.",
+      "pretraining_corpus": "WebVid, COCO+VG, CC, YT-Temporal",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Video question answering, video-text retrieval",
+      "license": null,
+      "research_problem": "Video-Language Understanding",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Masked Visual-token Modeling (MVM), Video-text pre-training",
+      "training_corpus_size": "180M video-subtitle pairs, 2.5M video-text pairs, 3.3M image-text pairs",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Supervised fine-tuning for video-text retrieval and video question answering",
+      "finetuning_data": "TGIF-Action, TGIF-Transition, MSRVTT, DiDeMo",
+      "optimizer": "AdamW",
+      "tokenizer": "Patch-based discrete visual tokens",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "GPU",
+      "hardware_description": "2,240 GPU hours on V100 GPUs",
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "VIOLET: End-to-End Video-Language Transformers with Masked Visual-token Modeling",
+      "activated_parameters": null,
+      "attention_mechanism": "spatial-temporal locality self-attention",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training (MVM, Visual-Text Matching, MLM) -> downstream finetuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Cross-modal Transformer (CT)",
+      "vision_encoder": "Video Swin Transformer (VT) with Discrete VAE tokenization",
+      "base_model": "Video Swin Transformer",
+      "optimizer_innovation": null,
+      "benchmark_result": "TGIF-Action: 91.0; TGIF-Transition: 94.7; MSRVTT-Retrieval: 25.4/54.3/64.6; DiDeMo-Retrieval: 26.7/56.4/64.6",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 1,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "VIOLET": {
+      "application": [
+        "Video question answering",
+        "video-text retrieval"
+      ],
+      "attention_mechanism": [
+        "spatial-temporal locality self-attention"
+      ],
+      "base_model": [
+        "Video Swin Transformer"
+      ],
+      "finetuning_data": [
+        "TGIF-Action",
+        "TGIF-Transition",
+        "MSRVTT",
+        "DiDeMo"
+      ],
+      "finetuning_task": [],
+      "fusion_architecture": [
+        "Cross-modal Transformer (CT)"
+      ],
+      "hardware_used": [
+        "GPU"
+      ],
+      "model_family": [],
+      "model_name": [
+        "VIOLET"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "WebVid",
+        "COCO+VG",
+        "CC",
+        "YT-Temporal"
+      ],
+      "pretraining_task": [
+        "Masked Visual-token Modeling (MVM), Video-text pre-training"
+      ],
+      "research_problem": [
+        "Video-Language Understanding"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Video Swin Transformer (VT) with Discrete VAE tokenization"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "VIOLET": {
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning for video-text retrieval and video question answering"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning for video-text retrieval and video question answering",
+              "reason": "Describes the fine-tuning process/method rather than naming the specific task itself."
+            }
+          ]
+        },
+        "model_family": {
+          "candidates": [
+            "VIOLET"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "VIOLET",
+              "reason": "Names a specific model rather than a broader category or lineage."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 22,
+      "dropped": 2,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "VIOLET",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "VIOLET",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-11-24",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Masked Visual-token Modeling (MVM) recovers masked patches into a finite discrete set, simplifying learning compared to Masked Classification (MCM), Masked Feature Modeling (MFM), or Masked Patch Modeling (MPM)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "End-to-end temporal modeling via VideoSwinTransformer instead of naive mean-pooling or concatenation.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked Visual-token Modeling (MVM), Video-text pre-training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "WebVid",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO+VG",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "YT-Temporal",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Patch-based discrete visual tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "2,240 GPU hours on V100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Video question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Video-text retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Video-Language Understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "180M video-subtitle pairs, 2.5M video-text pairs, 3.3M image-text pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TGIF-Action",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TGIF-Transition",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MSRVTT",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DiDeMo",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Spatial-temporal locality self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training (MVM, Visual-Text Matching, MLM) -> downstream finetuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Cross-modal Transformer (CT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Video Swin Transformer (VT) with Discrete VAE tokenization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Video Swin Transformer",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TGIF-Action: 91.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TGIF-Transition: 94.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MSRVTT-Retrieval: 25.4/54.3/64.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DiDeMo-Retrieval: 26.7/56.4/64.6",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925625",
+    "contribution_ids": [
+      "R1925627"
+    ],
+    "new_contribution_ids": [
+      "R1925627"
+    ],
+    "comparison_updated": null
+  }
+}

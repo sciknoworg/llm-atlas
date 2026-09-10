@@ -1,0 +1,755 @@
+{
+ "arxiv_id": "2006.03654",
+ "status": "completed",
+ "timestamp": "2026-08-24T19:20:39.516382",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2006.03654",
+  "title": "DeBERTa: Decoding-enhanced BERT with Disentangled Attention",
+  "authors": [
+   "Pengcheng He",
+   "Xiaodong Liu",
+   "Jianfeng Gao",
+   "Weizhu Chen"
+  ],
+  "abstract": "Recent progress in pre-trained neural language models has significantly improved the performance of many natural language processing (NLP) tasks. In this paper we propose a new model architecture DeBERTa (Decoding-enhanced BERT with disentangled attention) that improves the BERT and RoBERTa models using two novel techniques. The first is the disentangled attention mechanism, where each word is represented using two vectors that encode its content and position, respectively, and the attention weights among words are computed using disentangled matrices on their contents and relative positions, respectively. Second, an enhanced mask decoder is used to incorporate absolute positions in the decoding layer to predict the masked tokens in model pre-training. In addition, a new virtual adversarial training method is used for fine-tuning to improve models' generalization. We show that these techniques significantly improve the efficiency of model pre-training and the performance of both natural language understanding (NLU) and natural langauge generation (NLG) downstream tasks. Compared to RoBERTa-Large, a DeBERTa model trained on half of the training data performs consistently better on a wide range of NLP tasks, achieving improvements on MNLI by +0.9% (90.2% vs. 91.1%), on SQuAD v2.0 by +2.3% (88.4% vs. 90.7%) and RACE by +3.6% (83.2% vs. 86.8%). Notably, we scale up DeBERTa by training a larger version that consists of 48 Transform layers with 1.5 billion parameters. The significant performance boost makes the single DeBERTa model surpass the human performance on the SuperGLUE benchmark (Wang et al., 2019a) for the first time in terms of macro-average score (89.9 versus 89.8), and the ensemble DeBERTa model sits atop the SuperGLUE leaderboard as of January 6, 2021, out performing the human baseline by a decent margin (90.3 versus 89.8).",
+  "published": "2020-06-05T19:54:34+00:00",
+  "updated": "2021-10-06T21:02:00+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2006.03654v6",
+  "entry_id": "http://arxiv.org/abs/2006.03654v6",
+  "pdf_path": "data/papers/2006.03654.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 63605,
+ "word_count": 4311,
+ "models_extracted": 14,
+ "extraction_data": [
+  {
+   "model_name": "DeBERTa",
+   "parameters": "110M, 1.5B",
+   "parameters_millions": 1500,
+   "model_family": "DeBERTa",
+   "date_created": "2020-06-05",
+   "organization": "Microsoft",
+   "innovation": "Disentangled Attention Mechanism (EMD) that separates content and position representations in attention; introduces Content-to-Position (C2P) and Position-to-Content (P2C) terms to compute attention scores; adds a convolution layer to the first Transformer layer to induce n-gram knowledge of sub-word encodings.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked LM",
+   "pretraining_corpus": "English Wikipedia, BookCorpus, OPENWEBTEXT, STORIES",
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "optimizer": null,
+   "hardware_used": "NVIDIA V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Natural language understanding",
+   "application": "Natural language understanding, question answering, text classification, named entity recognition",
+   "paper_title": "DeBERTa: Decoding-enhanced BERT with Disentangled Attention",
+   "training_corpus_size": "160G",
+   "finetuning_data": "MNLI, SQuAD v2.0, SQuAD v1.1",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": "4 DGX-2 machines (64 V100 GPUs)",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "1.5B (dense)",
+   "attention_mechanism": "Disentangled Attention Mechanism (EMD) with Content-to-Position (C2P) and Position-to-Content (P2C) terms",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on masked language modeling objective",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT",
+   "optimizer_innovation": null,
+   "benchmark_result": "SuperGLUE Average: 89.9; Ensemble: 90.3; MNLI-m: 88.8; SQuADv1.1 F1/EM: 93.1/87.2; SQuADv2.0 F1/EM: 86.2/83.1; MNLI-m/mm: 91.1/91.1; SQuADv1.1 F1/EM: 95.5/90.1; SQuADv2.0 F1/EM: 90.7/88.0; RACE: 86.8; ReCoRD F1/EM: 91.4/91.0; SWAG: 90.8; CoNLL-2003 NER: 93.8; MNLI-m: 86.3; SQuAD v1.1 F1/EM: 92.1/86.1; SQuAD v2.0 F1/EM: 82.5/79.3; RACE: 71.7; MNLI-matched: 88.8/88.5; MNLI-matched: 91.1/91.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "DeBERTa RTD",
+   "parameters": null,
+   "parameters_millions": null,
+   "model_family": "DeBERTa",
+   "date_created": "2020-06-05",
+   "organization": "Microsoft",
+   "innovation": "Enhanced Mask Decoder (EMD) that disentangles content and position representations; absolute position embedding added to content hidden state as query vector; replaces standard MLM with Replaced Token Detection (RTD) for parameter efficiency.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Replaced Token Detection (RTD)",
+   "pretraining_corpus": "160GB data",
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Language Understanding",
+   "application": "Natural language understanding, question answering, text classification",
+   "paper_title": "DeBERTa: Decoding-enhanced BERT with Disentangled Attention",
+   "training_corpus_size": null,
+   "finetuning_data": "MNLI, SQuAD v2.0",
+   "tokenizer": null,
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MNLI-matched: 90.6/90.8; SQuADv2.0 F1/EM: 88.4/85.4; MNLI-matched: 92.0/91.9; SQuADv2.0 F1/EM: 91.5/89.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "DeBERTa": {
+   "application": [
+    "Natural language understanding",
+    "question answering",
+    "text classification",
+    "named entity recognition"
+   ],
+   "attention_mechanism": [
+    "Disentangled Attention Mechanism (EMD) with Content-to-Position (C2P) and Position-to-Content (P2C) terms"
+   ],
+   "base_model": [
+    "BERT"
+   ],
+   "finetuning_data": [
+    "MNLI",
+    "SQuAD v2.0",
+    "SQuAD v1.1"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "NVIDIA V100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeBERTa"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M",
+    "1.5B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "English Wikipedia",
+    "BookCorpus",
+    "OPENWEBTEXT",
+    "STORIES"
+   ],
+   "pretraining_task": [
+    "Masked LM"
+   ],
+   "research_problem": [
+    "Natural language understanding"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "DeBERTa RTD": {
+   "application": [
+    "Natural language understanding",
+    "question answering",
+    "text classification"
+   ],
+   "finetuning_data": [
+    "MNLI",
+    "SQuAD v2.0"
+   ],
+   "finetuning_task": [],
+   "model_family": [],
+   "model_name": [
+    "DeBERTa RTD"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Replaced Token Detection (RTD)"
+   ],
+   "research_problem": [
+    "Language Understanding"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DeBERTa": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    }
+   },
+   "DeBERTa RTD": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "160GB data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "160GB data",
+       "reason": "Describes data size/quantity rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 33,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 4
+  }
+ },
+ "contributions": [
+  {
+   "label": "DeBERTa",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeBERTa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-05",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Disentangled Attention Mechanism (EMD) that separates content and position representations in attention",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces Content-to-Position (C2P) and Position-to-Content (P2C) terms to compute attention scores",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adds a convolution layer to the first Transformer layer to induce n-gram knowledge of sub-word encodings.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked LM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPENWEBTEXT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "STORIES",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "4 DGX-2 machines (64 V100 GPUs)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "160G",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.5B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Disentangled Attention Mechanism (EMD) with Content-to-Position (C2P) and Position-to-Content (P2C) terms",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on masked language modeling objective",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE Average: 89.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Ensemble: 90.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m: 88.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv1.1 F1/EM: 93.1/87.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 F1/EM: 86.2/83.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m/mm: 91.1/91.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv1.1 F1/EM: 95.5/90.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 F1/EM: 90.7/88.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE: 86.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReCoRD F1/EM: 91.4/91.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SWAG: 90.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoNLL-2003 NER: 93.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m: 86.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v1.1 F1/EM: 92.1/86.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 F1/EM: 82.5/79.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE: 71.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-matched: 88.8/88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-matched: 91.1/91.1",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "DeBERTa RTD",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeBERTa RTD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-05",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enhanced Mask Decoder (EMD) that disentangles content and position representations",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Absolute position embedding added to content hidden state as query vector",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Replaces standard MLM with Replaced Token Detection (RTD) for parameter efficiency.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Replaced Token Detection (RTD)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language Understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-matched: 90.6/90.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 F1/EM: 88.4/85.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-matched: 92.0/91.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 F1/EM: 91.5/89.0",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R456184",
+  "contribution_ids": [
+   "R456185",
+   "R456197",
+   "R456228",
+   "R456235",
+   "R456259",
+   "R1920681",
+   "R1920684"
+  ],
+  "new_contribution_ids": [
+   "R1920681",
+   "R1920684"
+  ],
+  "comparison_updated": null
+ }
+}

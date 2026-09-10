@@ -1,0 +1,566 @@
+{
+ "arxiv_id": "2304.08485",
+ "status": "completed",
+ "timestamp": "2026-08-28T02:32:53.915737",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2304.08485",
+  "title": "Visual Instruction Tuning",
+  "authors": [
+   "Haotian Liu",
+   "Chunyuan Li",
+   "Qingyang Wu",
+   "Yong Jae Lee"
+  ],
+  "abstract": "Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks, but the idea is less explored in the multimodal field. In this paper, we present the first attempt to use language-only GPT-4 to generate multimodal language-image instruction-following data. By instruction tuning on such generated data, we introduce LLaVA: Large Language and Vision Assistant, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general-purpose visual and language understanding.Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset. When fine-tuned on Science QA, the synergy of LLaVA and GPT-4 achieves a new state-of-the-art accuracy of 92.53%. We make GPT-4 generated visual instruction tuning data, our model and code base publicly available.",
+  "published": "2023-04-17T17:59:25+00:00",
+  "updated": "2023-12-11T17:46:14+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.AI",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2304.08485v2",
+  "entry_id": "http://arxiv.org/abs/2304.08485v2",
+  "pdf_path": "data/papers/2304.08485.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+ },
+ "text_length": 90395,
+ "word_count": 6019,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "LLaVA",
+   "parameters": "7B, 13B, 33B",
+   "parameters_millions": 33000,
+   "model_family": "LLaVA",
+   "date_created": "2023-04-17",
+   "organization": "Microsoft",
+   "innovation": "Visual instruction tuning: aligns a frozen pre-trained CLIP visual encoder with a frozen pre-trained LLM (Vicuna) via a learnable projection layer, trained on 158K GPT-4-generated instruction-following samples to enable visual instruction following without full model pre-training, improving upon prior methods that required full model pre-training or lacked instruction-following capabilities.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal instruction following",
+   "pretraining_corpus": "158K GPT-4-generated language-image instruction-following samples (58K conversations, 23K detailed descriptions, 77K complex reasoning)",
+   "finetuning_task": "Supervised instruction tuning for multimodal chat and visual reasoning, Visual instruction tuning, Supervised fine-tuning on visual instruction data",
+   "optimizer": "AdamW",
+   "hardware_used": "8x A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Visual instruction tuning for general-purpose visual and language understanding",
+   "application": "Visual question answering, image captioning, visual reasoning, instruction following",
+   "paper_title": "Visual Instruction Tuning",
+   "training_corpus_size": "~80K unique images",
+   "finetuning_data": "GPT-4-generated multimodal instruction-following data, ScienceQA, GPT-4 generated multimodal instruction data from COCO, multimodal chat data, LLaVA-Instruct-158K, LLaVA-Pretrain-558K, ShareGPT-4V",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": "8x A100s",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/haotian-liu/LLaVA; https://github.com/LLaVA-Annonymous/LLaVA",
+   "context_length": "2048",
+   "activated_parameters": "7B (dense)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "End-to-end fine-tuning on generated instruction-following data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "BF16, TF32",
+   "synthetic_data_generation_method": "GPT-4-generated multimodal instruction-following data, GPT-4 generation with human curation",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "OpenAI Filter API for text input, NSFW Filter for image input",
+   "safety_defect_rate": null,
+   "fusion_architecture": "Connects vision encoder and LLM",
+   "vision_encoder": "CLIP, CLIP ViT-L/14, CLIP vision encoder",
+   "base_model": "CLIP, Vicuna",
+   "optimizer_innovation": null,
+   "benchmark_result": "85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset; 92.53% accuracy on ScienceQA; ScienceQA: 90.92% (13B), 89.84% (7B)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32 (Vicuna-7B), 40 (Vicuna-13B)",
+   "post_training_infrastructure": "FSDP (Full Shard Data Parallel) and gradient checkpointing"
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "LLaVA": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "instruction following"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "CLIP, Vicuna"
+   ],
+   "finetuning_data": [
+    "GPT-4-generated multimodal instruction-following data",
+    "ScienceQA",
+    "GPT-4 generated multimodal instruction data from COCO",
+    "multimodal chat data",
+    "LLaVA-Instruct-158K",
+    "LLaVA-Pretrain-558K",
+    "ShareGPT-4V"
+   ],
+   "finetuning_task": [
+    "Supervised instruction tuning for multimodal chat and visual reasoning",
+    "Visual instruction tuning",
+    "Supervised fine-tuning on visual instruction data"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "8x A100 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "LLaVA"
+   ],
+   "model_name": [
+    "LLaVA"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "7B",
+    "13B",
+    "33B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "158K GPT-4-generated language-image instruction-following samples (58K conversations, 23K detailed descriptions, 77K complex reasoning)"
+   ],
+   "pretraining_task": [
+    "Multimodal instruction following"
+   ],
+   "quantization_precision": [
+    "BF16",
+    "TF32"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [
+    "GPT-4 generation with human curation"
+   ],
+   "vision_encoder": [
+    "CLIP",
+    "CLIP ViT-L/14",
+    "CLIP vision encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "LLaVA": {
+    "fusion_architecture": {
+     "candidates": [
+      "Connects vision encoder and LLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Connects vision encoder and LLM",
+       "reason": "Describes the function of the architecture rather than naming the architectural design itself."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Visual instruction tuning for general-purpose visual and language understanding"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Visual instruction tuning for general-purpose visual and language understanding",
+       "reason": "Describes a method or task rather than naming the research problem or capability gap."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "GPT-4-generated multimodal instruction-following data",
+      "GPT-4 generation with human curation"
+     ],
+     "accepted": [
+      "GPT-4 generation with human curation"
+     ],
+     "dropped": [
+      {
+       "value": "GPT-4-generated multimodal instruction-following data",
+       "reason": "Names the generated data itself rather than the method or technique used to create it."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 35,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 22
+  }
+ },
+ "contributions": [
+  {
+   "label": "LLaVA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-04-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Visual instruction tuning: aligns a frozen pre-trained CLIP visual encoder with a frozen pre-trained LLM (Vicuna) via a learnable projection layer, trained on 158K GPT-4-generated instruction-following samples to enable visual instruction following without full model pre-training, improving upon prior methods that required full model pre-training or lacked instruction-following capabilities.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "158K GPT-4-generated language-image instruction-following samples (58K conversations, 23K detailed descriptions, 77K complex reasoning)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction tuning for multimodal chat and visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on visual instruction data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 33000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "8x A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8x A100s",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/haotian-liu/LLaVA",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/LLaVA-Annonymous/LLaVA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~80K unique images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-4-generated multimodal instruction-following data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-4 generated multimodal instruction data from COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multimodal chat data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Instruct-158K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Pretrain-558K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT-4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "End-to-end fine-tuning on generated instruction-following data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "BF16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "TF32",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "GPT-4 generation with human curation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "OpenAI Filter API for text input, NSFW Filter for image input",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "CLIP, Vicuna",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "92.53% accuracy on ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA: 90.92% (13B), 89.84% (7B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32 (Vicuna-7B), 40 (Vicuna-13B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "FSDP (Full Shard Data Parallel) and gradient checkpointing",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1923521",
+  "contribution_ids": [
+   "R1923523"
+  ],
+  "new_contribution_ids": [
+   "R1923523"
+  ],
+  "comparison_updated": null
+ }
+}

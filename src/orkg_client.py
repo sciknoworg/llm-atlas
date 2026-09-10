@@ -6,13 +6,21 @@ interaction with the ORKG API, including template and comparison operations.
 """
 
 import logging
+import os
 import re
-from typing import Any, Dict, List, Optional
+import time
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse, urlunparse
 
+import requests
 from orkg import ORKG, Hosts
 
 logger = logging.getLogger(__name__)
+
+# Seconds of remaining token lifetime below which the access token is renewed
+# rather than reused. ORKG issues 300-second access tokens, so a request that
+# starts at 299s could still arrive after expiry; renewing early avoids that.
+_TOKEN_REFRESH_MARGIN = 60.0
 
 _ORKG_RESOURCE_ID_RE = re.compile(r"(R\d+)$")
 _ORKG_DEFAULT_API_BASE = "https://sandbox.orkg.org"
@@ -75,6 +83,56 @@ ORKG_HOST_URLS = {
 }
 
 
+# ORKG accounts whose resources we are willing to reuse.
+#
+# ORKG is a shared graph: a search for "Google" returns resources created by
+# many different people and by bulk importers (the PWC_* entries), whose
+# modelling conventions do not match this template. Reusing one of those links
+# our contributions into someone else's vocabulary. So a resource is only reused
+# when its `created_by` is on this list; otherwise a fresh one is created.
+#
+# Override per environment with ORKG_RESOURCE_WHITELIST in .env (comma-separated
+# user UUIDs). Setting it to an empty string disables the check entirely and
+# restores "reuse the first exact-label match", which is what this code did
+# before the whitelist existed.
+_DEFAULT_RESOURCE_WHITELIST = (
+    "314f389f-59d1-4cad-990b-1d6e65891164", 
+    "3a55ad95-645b-4c1f-b614-d2293718ee0b", 
+)
+
+# How many exact-label matches to examine before giving up and creating a new
+# resource. Must be > 1: ORKG orders matches by its own relevance, not by
+# creator, and the whitelisted resource is often not first.
+_RESOURCE_LOOKUP_CANDIDATES = 10
+
+# Distinguishes "caller did not specify a whitelist" from "caller explicitly
+# passed None to disable the check".
+_UNSET = frozenset({"__unset__"})
+
+
+def load_resource_whitelist() -> Optional[frozenset]:
+    """
+    Read the reusable-creator whitelist from the environment.
+
+    Returns None when the check is disabled (env var present but empty), or a
+    frozenset of user UUIDs otherwise. An unset variable falls back to
+    _DEFAULT_RESOURCE_WHITELIST so the behaviour is the same for a fresh clone
+    with no .env.
+    """
+    raw = os.getenv("ORKG_RESOURCE_WHITELIST")
+    if raw is None:
+        return frozenset(_DEFAULT_RESOURCE_WHITELIST)
+
+    ids = {part.strip() for part in raw.split(",") if part.strip()}
+    if not ids:
+        logger.warning(
+            "ORKG_RESOURCE_WHITELIST is empty — resource reuse is UNFILTERED and may "
+            "link to resources created by other ORKG users"
+        )
+        return None
+    return frozenset(ids)
+
+
 def normalize_orkg_host(host_or_url: str) -> str:
     """Map ORKG host names or public URLs to the ORKG client host key."""
     value = (host_or_url or "sandbox").strip().rstrip("/")
@@ -109,6 +167,7 @@ class ORKGClient:
         email: Optional[str] = None,
         password: Optional[str] = None,
         timeout: int = 30,
+        resource_whitelist: Optional[frozenset] = _UNSET,
     ):
         """
         Initialize ORKG client.
@@ -118,6 +177,11 @@ class ORKGClient:
             email: ORKG account email (optional)
             password: ORKG account password (optional)
             timeout: API timeout in seconds
+            resource_whitelist: ORKG user UUIDs whose resources may be reused.
+                Defaults to the environment (ORKG_RESOURCE_WHITELIST, else the
+                built-in list). Pass None to disable the check. Note the default
+                is a sentinel, not None, precisely so that None can mean
+                "disabled" rather than "use the default".
         """
         host = normalize_orkg_host(host)
 
@@ -147,6 +211,17 @@ class ORKGClient:
         # Session-level cache: resource label → ORKG resource ID (positive hits only)
         self._resource_cache: Dict[str, str] = {}
 
+        self.resource_whitelist = (
+            load_resource_whitelist() if resource_whitelist is _UNSET else resource_whitelist
+        )
+        if self.resource_whitelist:
+            logger.info(
+                "Resource reuse restricted to %d whitelisted creator(s)",
+                len(self.resource_whitelist),
+            )
+        else:
+            logger.warning("Resource reuse is UNFILTERED (no creator whitelist in effect)")
+
     def ping(self) -> bool:
         """
         Test connection to ORKG.
@@ -162,6 +237,63 @@ class ORKGClient:
         except Exception as e:
             logger.error(f"ORKG connection test failed: {e}")
             return False
+
+    def refresh_auth(self, margin: float = _TOKEN_REFRESH_MARGIN) -> bool:
+        """
+        Re-stamp the bundled client's cached Authorization headers.
+
+        The bundled orkg client freezes the bearer token at construction time:
+        every namespaced client (papers, resources, statements, ...) copies
+        `Bearer <token>` into its own `auth` dict in `NamespacedClient.__init__`
+        and passes that same dict to every later request. Session.get_access_token()
+        knows how to renew an expired token, but nothing calls it again — so the
+        header stays frozen at whatever the token was when ORKG() was built.
+
+        ORKG access tokens last 300 seconds. A pipeline that keeps one client
+        across several papers spends minutes extracting between uploads, so by
+        the second paper the header is long dead and papers.add() comes back
+        401 even though the credentials are perfectly valid.
+
+        Calling this before ORKG work renews the token when little life is left
+        and rewrites every cached header. Cheap when the token is still fresh:
+        get_access_token() returns the in-memory token without a network call.
+
+        Returns:
+            True if the headers now carry a usable token, False if the client is
+            unauthenticated or the token could not be renewed.
+        """
+        session = getattr(self.orkg, "session", None)
+        if session is None:
+            return False  # unauthenticated client — nothing to refresh
+
+        try:
+            # Force a re-login when the token is spent or nearly so. Zeroing the
+            # timestamp makes the session's own expiry check fail, which is the
+            # supported way to drive it through _login() without calling it.
+            expires_in = (getattr(session, "jwt", None) or {}).get("expires_in", 0)
+            issued_at = getattr(session, "timestamp", 0)
+            if issued_at + expires_in - margin <= time.time():
+                session.timestamp = 0
+
+            token = session.get_access_token()
+        except Exception as exc:
+            logger.error(f"Could not renew ORKG access token: {exc}")
+            return False
+
+        if not token:
+            logger.error("ORKG returned an empty access token")
+            return False
+
+        header = f"Bearer {token}"
+        refreshed = 0
+        for attribute in vars(self.orkg).values():
+            auth = getattr(attribute, "auth", None)
+            if isinstance(auth, dict) and "Authorization" in auth:
+                auth["Authorization"] = header
+                refreshed += 1
+
+        logger.debug("Refreshed ORKG auth header on %d namespaced client(s)", refreshed)
+        return True
 
     def get_template(self, template_id: str) -> Optional[Dict[str, Any]]:
         """
@@ -286,10 +418,26 @@ class ORKGClient:
         except Exception as e:
             logger.error(f"Error fetching paper {paper_id}: {e}")
             return None
+    #Check if a resource can be re-used if it's added by a whitelisted user
+    def _is_reusable(self, resource: Dict[str, Any]) -> bool:
+        """
+        Decide whether an existing resource may be reused.
+
+        Only resources created by a whitelisted ORKG account qualify.
+        """
+        if not self.resource_whitelist:
+            return True
+        return resource.get("created_by") in self.resource_whitelist
 
     def _find_resource_by_label(self, label: str) -> Optional[str]:
         """
-        Look up an existing ORKG resource by exact label.
+        Look up a reusable existing ORKG resource by exact label.
+
+        Scans up to _RESOURCE_LOOKUP_CANDIDATES exact-label matches and returns
+        the first one created by a whitelisted account. Scanning several matters:
+        ORKG ranks matches by its own relevance, not by creator, so the
+        whitelisted resource is frequently not the first hit (on production the
+        whitelisted "Transformer" is the 5th).
 
         Uses a session-level cache so repeated lookups for the same label
         (e.g. "Google" across many contributions) cost only one API call.
@@ -300,28 +448,173 @@ class ORKGClient:
             label: Exact label to search for
 
         Returns:
-            ORKG resource ID (e.g. "R186195") if found, None otherwise
+            ORKG resource ID (e.g. "R186195") if a reusable one exists, else None
         """
         if label in self._resource_cache:
             logger.debug("Resource cache hit for '%s': %s", label, self._resource_cache[label])
             return self._resource_cache[label]
 
         try:
-            response = self.orkg.resources.get(q=label, exact=True, size=1)
+            response = self.orkg.resources.get(
+                q=label, exact=True, size=_RESOURCE_LOOKUP_CANDIDATES
+            )
+
+            # Raw lookup payload — shows exactly what ORKG returned for this label
+            logger.info(
+                "Resource lookup for '%s': succeeded=%s type=%s payload=%r",
+                label,
+                getattr(response, "succeeded", None),
+                type(getattr(response, "content", None)).__name__,
+                getattr(response, "content", None),
+            )
+
             if response.succeeded:
                 content = response.content
                 if isinstance(content, list) and content:
-                    resource_id = content[0].get("id")
-                    if resource_id:
+                    rejected = []
+                    for candidate in content:
+                        if not isinstance(candidate, dict):
+                            continue
+                        resource_id = candidate.get("id")
+                        if not resource_id:
+                            continue
+                        if not self._is_reusable(candidate):
+                            rejected.append((resource_id, candidate.get("created_by")))
+                            continue
                         self._resource_cache[label] = resource_id
                         logger.info(
-                            "Reusing existing ORKG resource '%s' → %s", label, resource_id
+                            "Reusing existing ORKG resource '%s' → %s (created_by %s)",
+                            label,
+                            resource_id,
+                            candidate.get("created_by"),
                         )
                         return resource_id
+
+                    if rejected:
+                        logger.info(
+                            "Found %d resource(s) labelled '%s' but none from a whitelisted "
+                            "creator — a new one will be created. Rejected: %s",
+                            len(rejected),
+                            label,
+                            ", ".join(f"{rid} (by {creator})" for rid, creator in rejected),
+                        )
         except Exception as exc:
             logger.warning("Resource lookup failed for '%s': %s", label, exc)
 
+        logger.info("No existing ORKG resource matched '%s' — will create inline", label)
         return None
+
+    def _build_contents(
+        self, contributions_data: List[Dict[str, Any]]
+    ) -> Tuple[List[Dict[str, Any]], Dict[str, Any], Dict[str, Any]]:
+        """
+        Convert mapped contributions into the ORKG "contents" shape.
+
+        Returns (contributions, resources, literals). The same structure is
+        accepted by paper creation and by the per-paper contributions endpoint,
+        so both go through this one conversion — including whitelist-filtered
+        resource reuse and the anyURI handling for links.
+        """
+        # Prepare contributions for the paper structure
+        orkg_contributions = []
+        orkg_literals = {}
+        orkg_resources = {}
+        literal_counter = 0
+        resource_counter = 0
+
+        for contrib_data in contributions_data:
+            contrib_label = contrib_data.get("label", "Unnamed Contribution")
+            statements = {}
+
+            for prop in contrib_data.get("properties", []):
+                prop_id = prop.get("property")
+                value = prop.get("value")
+                datatype = prop.get("datatype", "string")
+
+                if not prop_id:
+                    continue
+                if value is None:
+                    continue
+                if isinstance(value, str) and (
+                    not value.strip() or value.strip().lower() == "none"
+                ):
+                    logger.debug(f"Skipping property {prop_id} with empty/whitespace value")
+                    continue
+                if value == "":
+                    logger.debug(f"Skipping property {prop_id} with empty string value")
+                    continue
+
+                if prop_id not in statements:
+                    statements[prop_id] = []
+
+                if datatype == "resource":
+                    label = str(value)
+                    existing_id = self._find_resource_by_label(label)
+                    if existing_id:
+                        # Reuse the existing resource by its real ORKG ID
+                        statements[prop_id].append({"id": existing_id})
+                    else:
+                        # Not found — declare inline; papers.add creates it server-side
+                        inline_id = f"#resource_{resource_counter}"
+                        orkg_resources[inline_id] = {"label": label, "classes": []}
+                        statements[prop_id].append({"id": inline_id})
+                        resource_counter += 1
+                elif datatype == "URI" or (
+                    isinstance(value, str) and value.startswith("http")
+                ):
+                    # HTTP URL → xsd:anyURI literal so ORKG renders it as a
+                      # clickable link (URL chip) instead of a plain text chip.
+                      # Do NOT emit {"id": url}: ORKG treats "id" as a
+                      # reference to an existing resource, and a URL is not a
+                      # resolvable resource id — that makes papers.add 500.
+                    literal_id = f"#literal_{literal_counter}"
+                    orkg_literals[literal_id] = {
+                        "label": str(value),
+                        "data_type": "xsd:anyURI",
+                    }
+                    statements[prop_id].append({"id": literal_id})
+                    literal_counter += 1
+                elif datatype in ("date", "Date"):
+                    literal_id = f"#literal_{literal_counter}"
+                    orkg_literals[literal_id] = {
+                        "label": str(value),
+                        "data_type": "xsd:date",
+                    }
+                    statements[prop_id].append({"id": literal_id})
+                    literal_counter += 1
+                elif datatype in ("integer", "Integer") or isinstance(value, (int, float)):
+                    literal_id = f"#literal_{literal_counter}"
+                    orkg_literals[literal_id] = {
+                        "label": str(value),
+                        "data_type": "xsd:integer",
+                    }
+                    statements[prop_id].append({"id": literal_id})
+                    literal_counter += 1
+                else:
+                    # Free-form text → xsd:string literal
+                    literal_id = f"#literal_{literal_counter}"
+                    orkg_literals[literal_id] = {
+                        "label": str(value),
+                        "data_type": "xsd:string",
+                    }
+                    statements[prop_id].append({"id": literal_id})
+                    literal_counter += 1
+
+            orkg_contributions.append(
+                {
+                    "label": contrib_label,
+                    "classes": ["Contribution"],
+                    "statements": statements,
+                }
+            )
+
+        logger.info(
+            "Prepared %d contributions, %d resource(s), %d literal(s)",
+            len(orkg_contributions),
+            resource_counter,
+            literal_counter,
+        )
+        return orkg_contributions, orkg_resources, orkg_literals
 
     def create_paper_with_contributions(
         self,
@@ -360,105 +653,10 @@ class ORKGClient:
         try:
             logger.info(f"Creating paper with {len(contributions_data)} contributions: {title}")
 
-            # Prepare contributions for the paper structure
-            orkg_contributions = []
-            orkg_literals = {}
-            orkg_resources = {}
-            literal_counter = 0
-            resource_counter = 0
-
-            for contrib_data in contributions_data:
-                contrib_label = contrib_data.get("label", "Unnamed Contribution")
-                statements = {}
-
-                for prop in contrib_data.get("properties", []):
-                    prop_id = prop.get("property")
-                    value = prop.get("value")
-                    datatype = prop.get("datatype", "string")
-
-                    if not prop_id:
-                        continue
-                    if value is None:
-                        continue
-                    if isinstance(value, str) and (
-                        not value.strip() or value.strip().lower() == "none"
-                    ):
-                        logger.debug(f"Skipping property {prop_id} with empty/whitespace value")
-                        continue
-                    if value == "":
-                        logger.debug(f"Skipping property {prop_id} with empty string value")
-                        continue
-
-                    if prop_id not in statements:
-                        statements[prop_id] = []
-
-                    if datatype == "resource":
-                        label = str(value)
-                        existing_id = self._find_resource_by_label(label)
-                        if existing_id:
-                            # Reuse the existing resource by its real ORKG ID
-                            statements[prop_id].append({"id": existing_id})
-                        else:
-                            # Not found — declare inline; papers.add creates it server-side
-                            inline_id = f"#resource_{resource_counter}"
-                            orkg_resources[inline_id] = {"label": label, "classes": []}
-                            statements[prop_id].append({"id": inline_id})
-                            resource_counter += 1
-                    elif datatype == "URI" or (
-                        isinstance(value, str) and value.startswith("http")
-                    ):
-                        # HTTP URL → xsd:anyURI literal so ORKG renders it as a
-                          # clickable link (URL chip) instead of a plain text chip.
-                          # Do NOT emit {"id": url}: ORKG treats "id" as a
-                          # reference to an existing resource, and a URL is not a
-                          # resolvable resource id — that makes papers.add 500.
-                        literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {
-                            "label": str(value),
-                            "data_type": "xsd:anyURI",
-                        }
-                        statements[prop_id].append({"id": literal_id})
-                        literal_counter += 1
-                    elif datatype in ("date", "Date"):
-                        literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {
-                            "label": str(value),
-                            "data_type": "xsd:date",
-                        }
-                        statements[prop_id].append({"id": literal_id})
-                        literal_counter += 1
-                    elif datatype in ("integer", "Integer") or isinstance(value, (int, float)):
-                        literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {
-                            "label": str(value),
-                            "data_type": "xsd:integer",
-                        }
-                        statements[prop_id].append({"id": literal_id})
-                        literal_counter += 1
-                    else:
-                        # Free-form text → xsd:string literal
-                        literal_id = f"#literal_{literal_counter}"
-                        orkg_literals[literal_id] = {
-                            "label": str(value),
-                            "data_type": "xsd:string",
-                        }
-                        statements[prop_id].append({"id": literal_id})
-                        literal_counter += 1
-
-                orkg_contributions.append(
-                    {
-                        "label": contrib_label,
-                        "classes": ["Contribution"],
-                        "statements": statements,
-                    }
-                )
-
-            logger.info(
-                "Prepared %d contributions, %d resource(s), %d literal(s)",
-                len(orkg_contributions),
-                resource_counter,
-                literal_counter,
+            orkg_contributions, orkg_resources, orkg_literals = self._build_contents(
+                contributions_data
             )
+
 
             # Build paper params according to ORKG documentation structure
             paper_params = {
@@ -622,153 +820,98 @@ class ORKGClient:
             logger.error(f"Error updating contribution: {e}")
             return False
 
+    # The per-paper contributions endpoint speaks its own media type, and the
+    # bundled orkg client does not implement it at all.
+    _CONTRIBUTION_MEDIA_TYPE = "application/vnd.orkg.contribution.v2+json"
+
     def add_contribution_to_paper(
         self, paper_id: str, contribution_data: Dict[str, Any]
     ) -> Optional[str]:
         """
-        Add a new contribution to an existing paper.
+        Append one contribution to an existing paper.
 
-        Args:
-            paper_id: ORKG paper ID
-            contribution_data: Contribution data (label, properties)
+        Uses POST /api/papers/{id}/contributions, the endpoint built for exactly
+        this. The previous implementation went through papers.add() with
+        mergeIfExists, which the bundled client routes to the LEGACY /api/papers
+        endpoint with no media type at all — the server now answers that with
+        HTTP 415 (Unsupported Media Type), so appending never succeeded:
 
-        Returns:
-            New contribution ID if successful, None otherwise
+            Failed to append contribution: {"status":415,
+             "title":"Unsupported Media Type", "path":"/api/papers"}
+
+        Returns the new contribution's ID, or None on failure.
         """
-        try:
-            logger.info(
-                f"Adding contribution {contribution_data.get('label')} to paper "
-                f"{paper_id} using append strategy"
+        auth = self._auth_header()
+        if auth is None:
+            logger.error(
+                "Cannot add a contribution to %s: client has no ORKG credentials", paper_id
             )
-
-            # Prepare the payload for the 'Old Endpoint' structure which supports merge_if_exists
-            # Structure:
-            # paper = {
-            #    "paper": {
-            #       "title": "Title (Required but ignored for merge)",
-            #       "researchField": "R11" (Required),
-            #       "contributions": [ ... ]
-            #    }
-            # }
-
-            # We need to fetch the paper title first to satisfy the required field
-            paper_info = self.get_paper(paper_id)
-            paper_title = (
-                paper_info.get("title", "Existing Paper") if paper_info else "Existing Paper"
-            )
-
-            # Format statements for the contribution
-            # The structure for statements in 'old endpoint' is slightly different?
-            # Based on docs: values: { P32: [ { text: "..." } ] }
-
-            # Reuse the existing conversion logic but adapt it if necessary
-            # The docs show:
-            # "values": { "P32": [ { "text": "...", "@temp": "_..." } ] }
-
-            # Let's construct the properties map
-            properties = contribution_data.get("properties", [])
-            values_map = {}
-
-            for prop in properties:
-                prop_id = prop.get("property")
-                value = prop.get("value")
-                datatype = prop.get("datatype", "string")
-
-                if prop_id and value is not None:
-                    if prop_id not in values_map:
-                        values_map[prop_id] = []
-
-                    # Format value object based on type
-                    value_obj = {}
-                    if datatype == "URI" or (isinstance(value, str) and value.startswith("http")):
-                        # URL as a literal, not {"@id": url} (that is a resource ref).
-                        value_obj["text"] = str(value)
-                    elif datatype in ["Date", "date"]:
-                        value_obj["text"] = str(value)
-                        value_obj["datatype"] = "xsd:date"
-                    elif datatype in ["Integer", "integer"] or isinstance(value, int):
-                        value_obj["text"] = str(value)
-                        value_obj["datatype"] = "xsd:integer"
-                    else:
-                        value_obj["text"] = str(value)
-
-                    values_map[prop_id].append(value_obj)
-
-            # Construct the contribution object
-            # Include 'classes' field per ORKG documentation for proper classification
-            contribution_payload = {
-                "name": contribution_data.get("label", "New Contribution"),
-                "classes": contribution_data.get(
-                    "classes", ["Contribution"]
-                ),  # Explicit classification
-                "values": values_map,
-            }
-
-            # The 'Old Endpoint' structure for merge_if_exists=True
-            # explicitely requires the structure:
-            # {
-            #   "paper": {
-            #      "title": ...,
-            #      "researchField": ...,
-            #      "contributions": [...]
-            #   }
-            # }
-
-            paper_payload = {
-                "paper": {
-                    "title": paper_title,
-                    "researchField": "R133",
-                    "contributions": [contribution_payload],
-                }
-            }
-
-            logger.info(f"Calling papers.add with merge_if_exists=True for paper '{paper_title}'")
-
-            # IMPORTANT: The python client's papers.add method takes 'params' and expects
-            # EITHER the new structure (flat params) OR the old structure (nested 'paper').
-            # The 415 error often comes if we mix them or if the library defaults to a media type
-            # that the old endpoint doesn't like when combined with this structure.
-            # However, we must follow the doc: pass the dict as params.
-
-            response = self.orkg.papers.add(params=paper_payload, merge_if_exists=True)
-
-            if response.succeeded:
-                # ... (rest of success handling) ...
-                result_content = response.content
-                # Decode if needed (add returns dict; get_paper logic similar)
-                if isinstance(result_content, bytes):
-                    import json
-
-                    result_content = json.loads(result_content.decode("utf-8"))
-
-                if isinstance(result_content, dict):
-                    new_contrib_label = contribution_data.get("label")
-                    logger.info(f"Append successful. Response ID: {result_content.get('id')}")
-
-                    # We need to return the ID of the new contribution
-                    # Fetch paper again to find it
-                    updated_paper = self.get_paper(result_content.get("id"))
-                    if updated_paper and "contributions" in updated_paper:
-                        for c in updated_paper["contributions"]:
-                            # Old endpoint may return contributions as list of dicts w/ 'label'
-                            c_label = c.get("label")
-                            if c_label == new_contrib_label:
-                                return c.get("id")
-
-                return result_content.get("id")
-            else:
-                # ... (error handling) ...
-                error_msg = (
-                    response.content.decode("utf-8")
-                    if isinstance(response.content, bytes)
-                    else str(response.content)
-                )
-                logger.error(f"Failed to append contribution: {error_msg}")
-                return None
-
-        except Exception as e:
-            logger.error(f"Error adding contribution to paper: {e}", exc_info=True)
             return None
+
+        label = contribution_data.get("label", "Unnamed Contribution")
+        logger.info("Adding contribution %r to paper %s", label, paper_id)
+
+        # Same conversion as paper creation, so resource reuse and URI handling
+        # behave identically whichever path a contribution arrives by.
+        contributions, resources, literals = self._build_contents([contribution_data])
+        if not contributions:
+            logger.error("Contribution %r produced no statements — nothing to add", label)
+            return None
+
+        payload = {
+            "contribution": contributions[0],
+            "resources": resources,
+            "literals": literals,
+            "predicates": {},
+            "lists": {},
+            "extraction_method": "AUTOMATIC",
+        }
+
+        try:
+            response = requests.post(
+                f"{self._api_base}/api/papers/{paper_id}/contributions",
+                json=payload,
+                headers={
+                    "Content-Type": self._CONTRIBUTION_MEDIA_TYPE,
+                    "Accept": self._CONTRIBUTION_MEDIA_TYPE,
+                    **auth,
+                },
+                timeout=self.timeout,
+            )
+        except requests.RequestException as exc:
+            logger.error("Error adding contribution to paper %s: %s", paper_id, exc)
+            return None
+
+        if response.status_code not in (200, 201, 204):
+            logger.error(
+                "Failed to add contribution %r to paper %s: HTTP %s %s",
+                label, paper_id, response.status_code, response.text[:300],
+            )
+            return None
+
+        # ORKG returns the new resource in the Location header; the body may be
+        # empty on 201/204, so the header is the reliable source.
+        contribution_id = parse_orkg_resource_id(
+            normalize_orkg_location_url(
+                response.headers.get("Location", ""), self._api_base
+            )
+        )
+        if not contribution_id:
+            try:
+                body = response.json()
+                contribution_id = body.get("id") if isinstance(body, dict) else None
+            except ValueError:
+                contribution_id = None
+
+        if contribution_id:
+            logger.info(
+                "Added contribution %r to paper %s -> %s", label, paper_id, contribution_id
+            )
+        else:
+            logger.warning(
+                "Contribution %r accepted for paper %s but no id was returned", label, paper_id
+            )
+        return contribution_id
 
     def search_papers(self, query: str, size: int = 10) -> List[Dict[str, Any]]:
         """
@@ -831,6 +974,273 @@ class ORKGClient:
             logger.error(f"Error checking model existence: {e}")
             return None
 
+    # Media type the ORKG comparison endpoints currently speak. The bundled
+    # `orkg` package still sends v2, which the server now answers with HTTP 406,
+    # so these calls are made directly rather than through the client.
+    _COMPARISON_MEDIA_TYPE = "application/vnd.orkg.comparison.v3+json"
+
+    def _auth_header(self) -> Optional[Dict[str, str]]:
+        """
+        Bearer token for direct REST calls.
+
+        Reuses the ORKG client's own session so the token is shared with every
+        other call and refreshed automatically when it expires. Returns None
+        when the client was built without credentials.
+        """
+        session = getattr(self.orkg, "session", None)
+        if session is None:
+            return None
+        try:
+            return {"Authorization": f"Bearer {session.get_access_token()}"}
+        except Exception as exc:  # noqa: BLE001 - surfaced as "not authenticated"
+            logger.error("Could not obtain an ORKG access token: %s", exc)
+            return None
+
+    def _get_comparison_v3(self, comparison_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Fetch a comparison through the REST API using the v3 media type.
+
+        Separate from get_comparison(), which returns the *resource*
+        representation via the ORKG client and is what comparison_updater and
+        build_papers_list expect. This one returns the comparison
+        representation, the only shape that carries `published`, `sources` and
+        `versions.head` — the fields the update path needs.
+        """
+        url = f"{self._api_base}/api/comparisons/{comparison_id}"
+        try:
+            response = requests.get(
+                url, headers={"Accept": self._COMPARISON_MEDIA_TYPE}, timeout=self.timeout
+            )
+            if response.status_code != 200:
+                logger.error(
+                    "Could not fetch comparison %s: HTTP %s", comparison_id, response.status_code
+                )
+                return None
+            return response.json()
+        except (requests.RequestException, ValueError) as exc:
+            logger.error("Error fetching comparison %s: %s", comparison_id, exc)
+            return None
+
+    def _comparison_api(
+        self, comparison_id: str, path: str = ""
+    ) -> Optional[Dict[str, Any]]:
+        """GET a comparison sub-resource with the v3 media type."""
+        url = f"{self._api_base}/api/comparisons/{comparison_id}{path}"
+        try:
+            response = requests.get(
+                url, headers={"Accept": self._COMPARISON_MEDIA_TYPE}, timeout=self.timeout
+            )
+            if response.status_code != 200:
+                logger.error("GET %s: HTTP %s", url, response.status_code)
+                return None
+            return response.json()
+        except (requests.RequestException, ValueError) as exc:
+            logger.error("Error calling %s: %s", url, exc)
+            return None
+
+    def update_comparison_selected_paths(self, comparison_id: str) -> bool:
+        """
+        Make the comparison actually show property rows.
+
+        Adding sources to a comparison puts the contributions in as COLUMNS, but
+        the ROWS — the properties being compared — come from a separate list,
+        `selected_paths`, stored on /api/comparisons/{id}/contents. A comparison
+        with sources but no selected paths renders as an empty table, which is
+        exactly what an update that only touches `sources` produces.
+
+        /table-paths reports every predicate reachable from the current sources,
+        so it is the set of rows that could be shown. This selects the union of
+        what is already chosen and what is newly available, so an existing
+        curated row order is preserved and only genuinely new predicates get
+        appended.
+
+        Must run AFTER the sources update: available paths are derived from the
+        contributions currently attached.
+        """
+        auth = self._auth_header()
+        if auth is None:
+            logger.error("Cannot update comparison table: no ORKG credentials")
+            return False
+
+        available = self._comparison_api(comparison_id, "/table-paths")
+        if available is None:
+            return False
+        if isinstance(available, dict):
+            available = available.get("content") or available.get("paths") or []
+
+        contents = self._comparison_api(comparison_id, "/contents") or {}
+        selected = contents.get("selected_paths") or []
+
+        def as_path(entry: Dict[str, Any]) -> Dict[str, Any]:
+            # The request model carries only id/type/children; the response also
+            # includes label and description, which must not be sent back.
+            return {
+                "id": entry.get("id"),
+                "type": entry.get("type") or "PREDICATE",
+                "children": [as_path(c) for c in (entry.get("children") or [])],
+            }
+
+        merged: List[Dict[str, Any]] = []
+        seen = set()
+        for entry in list(selected) + list(available):
+            if not isinstance(entry, dict) or not entry.get("id"):
+                continue
+            if entry["id"] in seen:
+                continue
+            seen.add(entry["id"])
+            merged.append(as_path(entry))
+
+        if len(merged) == len(selected):
+            logger.info(
+                "Comparison %s already shows all %d available propert(ies)",
+                comparison_id,
+                len(merged),
+            )
+            return True
+
+        logger.info(
+            "Setting comparison %s property rows: %d -> %d",
+            comparison_id,
+            len(selected),
+            len(merged),
+        )
+
+        try:
+            response = requests.put(
+                f"{self._api_base}/api/comparisons/{comparison_id}/contents",
+                json={"selected_paths": merged},
+                headers={
+                    "Content-Type": self._COMPARISON_MEDIA_TYPE,
+                    "Accept": self._COMPARISON_MEDIA_TYPE,
+                    **auth,
+                },
+                timeout=self.timeout,
+            )
+        except requests.RequestException as exc:
+            logger.error("Error updating comparison table %s: %s", comparison_id, exc)
+            return False
+
+        if response.status_code in (200, 204):
+            logger.info("Comparison %s now shows %d property row(s)", comparison_id, len(merged))
+            return True
+
+        logger.error(
+            "Failed to update comparison table %s: HTTP %s %s",
+            comparison_id,
+            response.status_code,
+            response.text[:300],
+        )
+        return False
+
+    def update_comparison_sources(
+        self, comparison_id: str, contribution_ids: List[str]
+    ) -> bool:
+        """
+        Add contributions to a LIVE comparison via PUT /api/comparisons/{id}.
+
+        This is what the ORKG frontend does: it rewrites the comparison's
+        `sources` list. The request body is a partial update, so only `sources`
+        is sent — title and description are deliberately left untouched, which
+        removes any chance of renaming the comparison by accident.
+
+        Published comparisons CANNOT be updated: they are frozen snapshots, and
+        the API rejects them (ComparisonAlreadyPublished). Each published
+        comparison points at the live one it was cut from via `versions.head`,
+        so when the configured ID turns out to be published we say so and name
+        the head rather than failing obscurely.
+
+        Existing sources are read and preserved — new contributions are appended.
+        A blind overwrite would erase every contribution already in the
+        comparison on the first run.
+
+        Returns True only when ORKG accepted the update.
+        """
+        if not contribution_ids:
+            logger.info("No contributions to add to comparison %s", comparison_id)
+            return True
+
+        auth = self._auth_header()
+        if auth is None:
+            logger.error(
+                "Cannot update comparison %s: client has no ORKG credentials "
+                "(set ORKG_EMAIL and ORKG_PASSWORD)",
+                comparison_id,
+            )
+            return False
+
+        comparison = self._get_comparison_v3(comparison_id)
+        if comparison is None:
+            return False
+
+        if comparison.get("published"):
+            head = ((comparison.get("versions") or {}).get("head") or {}).get("id")
+            logger.error(
+                "Comparison %s is PUBLISHED and cannot be updated (published comparisons "
+                "are frozen snapshots). Point orkg.comparison_id at the live comparison%s.",
+                comparison_id,
+                f" {head}" if head else "",
+            )
+            return False
+
+        existing = [
+            source.get("id")
+            for source in (comparison.get("sources") or [])
+            if isinstance(source, dict) and source.get("id")
+        ]
+        merged = list(dict.fromkeys(existing + list(contribution_ids)))
+        added = [cid for cid in contribution_ids if cid not in existing]
+
+        if not added:
+            logger.info(
+                "All %d contribution(s) are already sources of comparison %s",
+                len(contribution_ids),
+                comparison_id,
+            )
+            # Still reconcile the property rows: sources can already be present
+            # while selected_paths is empty (e.g. after an update that only set
+            # sources), which renders as a table with columns but no rows.
+            return self.update_comparison_selected_paths(comparison_id)
+
+        logger.info(
+            "Adding %d new contribution(s) to comparison %s (%d -> %d sources)",
+            len(added),
+            comparison_id,
+            len(existing),
+            len(merged),
+        )
+
+        headers = {
+            "Content-Type": self._COMPARISON_MEDIA_TYPE,
+            "Accept": self._COMPARISON_MEDIA_TYPE,
+            **auth,
+        }
+        payload = {"sources": [{"id": cid, "type": "THING"} for cid in merged]}
+
+        try:
+            response = requests.put(
+                f"{self._api_base}/api/comparisons/{comparison_id}",
+                json=payload,
+                headers=headers,
+                timeout=self.timeout,
+            )
+        except requests.RequestException as exc:
+            logger.error("Error updating comparison %s: %s", comparison_id, exc)
+            return False
+
+        if response.status_code in (200, 204):
+            logger.info("Successfully updated comparison %s", comparison_id)
+            # Sources alone give columns but no rows — the property list has to
+            # be set separately or the comparison renders empty.
+            return self.update_comparison_selected_paths(comparison_id)
+
+        logger.error(
+            "Failed to update comparison %s: HTTP %s %s",
+            comparison_id,
+            response.status_code,
+            response.text[:300],
+        )
+        return False
+
     def update_comparison_with_contributions(
         self,
         comparison_id: str,
@@ -841,42 +1251,24 @@ class ORKGClient:
         authors: List[Dict[str, Any]],
     ) -> Optional[str]:
         """
-        Update an existing comparison by adding new contributions.
+        Add contributions to a comparison. Kept for call-site compatibility.
 
-        Args:
-            comparison_id: The ID of the comparison to update
-            title: Title for the comparison
-            description: Description for the comparison
-            new_contribution_ids: List of ALL contribution IDs that should be in the comparison
-            research_fields: List of research field IDs
-            authors: List of author dictionaries
+        Previously this called ``comparisons.create(comparison_id=...)``, which
+        was never a valid call: ``create()`` has no ``comparison_id`` parameter
+        and its required ``config``/``data`` arguments were not supplied, so
+        every attempt raised TypeError, was swallowed by a broad except, and was
+        reported as a generic upload failure. Comparison updates therefore never
+        actually worked.
+
+        It now delegates to update_comparison_sources(), which does what the
+        ORKG frontend does: PUT the comparison's ``sources`` list. title,
+        description, research_fields and authors are accepted but unused — a
+        partial update leaves them untouched, which is safer than resending
+        them, since a wrong title would rename the live comparison.
 
         Returns:
-            The comparison ID if successful, None otherwise
+            The comparison ID on success, None otherwise.
         """
-        try:
-            logger.info(
-                f"Updating comparison {comparison_id} "
-                f"with {len(new_contribution_ids)} contributions"
-            )
-
-            # ORKG comparisons are updated by creating a new version of the comparison.
-            # Argument may be 'comparison_id' or part of the payload depending on client.
-            response = self.orkg.comparisons.create(
-                comparison_id=comparison_id,
-                title=title,
-                description=description,
-                contributions=new_contribution_ids,
-                research_fields=research_fields,
-                authors=authors,
-            )
-
-            if response.succeeded:
-                logger.info(f"Successfully updated comparison {comparison_id}")
-                return comparison_id
-            else:
-                logger.error(f"Failed to update comparison: {response.content}")
-                return None
-        except Exception as e:
-            logger.error(f"Error updating comparison: {e}")
-            return None
+        if self.update_comparison_sources(comparison_id, new_contribution_ids):
+            return comparison_id
+        return None

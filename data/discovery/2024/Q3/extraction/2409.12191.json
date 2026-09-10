@@ -1,0 +1,826 @@
+{
+ "arxiv_id": "2409.12191",
+ "status": "completed",
+ "timestamp": "2026-08-29T06:28:02.378249",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2409.12191",
+  "title": "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution",
+  "authors": [
+   "Peng Wang",
+   "Shuai Bai",
+   "Sinan Tan",
+   "Shijie Wang",
+   "Zhihao Fan",
+   "Jinze Bai",
+   "Keqin Chen",
+   "Xuejing Liu",
+   "Jialin Wang",
+   "Wenbin Ge",
+   "Yang Fan",
+   "Kai Dang",
+   "Mengfei Du",
+   "Xuancheng Ren",
+   "Rui Men",
+   "Dayiheng Liu",
+   "Chang Zhou",
+   "Jingren Zhou",
+   "Junyang Lin"
+  ],
+  "abstract": "We present the Qwen2-VL Series, an advanced upgrade of the previous Qwen-VL models that redefines the conventional predetermined-resolution approach in visual processing. Qwen2-VL introduces the Naive Dynamic Resolution mechanism, which enables the model to dynamically process images of varying resolutions into different numbers of visual tokens. This approach allows the model to generate more efficient and accurate visual representations, closely aligning with human perceptual processes. The model also integrates Multimodal Rotary Position Embedding (M-RoPE), facilitating the effective fusion of positional information across text, images, and videos. We employ a unified paradigm for processing both images and videos, enhancing the model's visual perception capabilities. To explore the potential of large multimodal models, Qwen2-VL investigates the scaling laws for large vision-language models (LVLMs). By scaling both the model size-with versions at 2B, 8B, and 72B parameters-and the amount of training data, the Qwen2-VL Series achieves highly competitive performance. Notably, the Qwen2-VL-72B model achieves results comparable to leading models such as GPT-4o and Claude3.5-Sonnet across various multimodal benchmarks, outperforming other generalist models. Code is available at https://github.com/QwenLM/Qwen2-VL .",
+  "published": "2024-09-18T17:59:32+00:00",
+  "updated": "2024-10-03T15:54:49+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.AI",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2409.12191v2",
+  "entry_id": "http://arxiv.org/abs/2409.12191v2",
+  "pdf_path": "data/papers/2409.12191.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 108064,
+ "word_count": 5593,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "Qwen 2-VL",
+   "parameters": "2B, 7B, 8B, 72B",
+   "parameters_millions": 72000,
+   "model_family": "Qwen",
+   "date_created": "2024-09-18",
+   "organization": "Alibaba Group",
+   "innovation": "Naive Dynamic Resolution mechanism: dynamically processes images of varying resolutions into different numbers of visual tokens to generate efficient and accurate visual representations; Multimodal Rotary Position Embedding (M-RoPE): facilitates effective fusion of positional information across text, images, and videos; unified paradigm for processing both images and videos; dynamic resolution training with 2D RoPE in the vision transformer to better capture information across different spatial scales.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "Diverse dataset including image-text pairs, OCR data, interleaved image-text articles, VQA datasets, video dialogues, image knowledge datasets (cleaned webpages, open-sourced datasets, synthetic data)",
+   "finetuning_task": "Multimodal alignment and visual instruction tuning, Supervised fine-tuning for visual grounding and agent tasks",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Enhancing vision-language model's perception of the world at any resolution; investigating scaling laws for large vision-language models (LVLMs).",
+   "application": "Visual grounding, UI operations, robotic control, games, navigation, document understanding, multilingual recognition in images, video comprehension, agentic tasks",
+   "paper_title": "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution",
+   "training_corpus_size": "~1.4 trillion tokens",
+   "finetuning_data": "Instructional datasets in ChatML format, multimodal conversational data (image QA, document parsing, multi-image comparison, video comprehension, video stream dialogue, agent-based interactions)",
+   "tokenizer": "BPE",
+   "supported_language": "English, Chinese, most European languages, Japanese, Korean, Arabic, Vietnamese, European languages, French, German, Spanish, etc.",
+   "hardware_description": "3D parallelism (data, tensor, pipeline), DeepSpeed ZeRO-1, Sequence Parallelism with selective checkpointing, 1F1B pipeline parallelism",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/QwenLM/Qwen2-VL",
+   "context_length": null,
+   "activated_parameters": "72B (dense)",
+   "attention_mechanism": "M-RoPE (Multi-dimensional RoPE), Multimodal Rotary Position Embedding (M-RoPE)",
+   "context_length_max": "128K tokens",
+   "context_extension_method": "M-RoPE",
+   "training_pipeline": "Pre-training -> Supervised Fine-Tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": "JSON function calling with keyword pattern matching and action/result/return tokens",
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-modal connector between visual encoder and LLM",
+   "vision_encoder": "675M parameter Vision Transformer (ViT), ViT derived from DFN, initialized with RoPE-2D, Dynamic-resolution vision encoder, ViT-L, Dynamic-resolution encoder",
+   "base_model": "Qwen2, ViT",
+   "optimizer_innovation": null,
+   "benchmark_result": "Matches GPT-4o and Claude 3.5-Sonnet; surpasses other open-weight LVLMs on MMMU, MathVista, MathVision, RealWorldQA, MMBench-V1.1, MMT-Bench, HallBench, MMVet, MMStar, DocVQA, InfoVQA, ChartQA, TextVQA, OCRBench, MTVQA, MVBench, PerceptionTest, EgoSchema, Video-MME; InfoVQA: 75.89; RealWorldQA: 70.07; OCRBench: 866; MMMU val: 53.44; MathVista: 43.4; MMB: 60.6; MMStar: 36.7; RWQ: 53.7; DocVQA: 82.8; ChartQA: 68.4; TextVQA: 71.8; PerceptionTest: 47.4; NextQA: 46.0; STAR: 57.9",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Qwen 2-VL": {
+   "application": [
+    "Visual grounding",
+    "UI operations",
+    "robotic control",
+    "games",
+    "navigation",
+    "document understanding",
+    "multilingual recognition in images",
+    "video comprehension",
+    "agentic tasks"
+   ],
+   "attention_mechanism": [],
+   "base_model": [
+    "Qwen2, ViT"
+   ],
+   "context_extension_method": [],
+   "finetuning_data": [
+    "Instructional datasets in ChatML format",
+    "multimodal conversational data (image QA, document parsing, multi-image comparison, video comprehension, video stream dialogue, agent-based interactions)"
+   ],
+   "finetuning_task": [
+    "Multimodal alignment and visual instruction tuning",
+    "Supervised fine-tuning for visual grounding and agent tasks"
+   ],
+   "fusion_architecture": [
+    "Cross-modal connector between visual encoder and LLM"
+   ],
+   "hardware_used": [
+    "NVIDIA GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 2-VL"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba Group"
+   ],
+   "parameters": [
+    "2B",
+    "7B",
+    "8B",
+    "72B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "OCR data",
+    "interleaved image-text articles",
+    "VQA datasets",
+    "video dialogues"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Arabic",
+    "Vietnamese",
+    "French",
+    "German",
+    "Spanish"
+   ],
+   "tool_calling_format": [
+    "JSON function calling with keyword pattern matching and action/result/return tokens"
+   ],
+   "vision_encoder": [
+    "675M parameter Vision Transformer (ViT)",
+    "ViT derived from DFN",
+    "Dynamic-resolution vision encoder",
+    "ViT-L",
+    "Dynamic-resolution encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Qwen 2-VL": {
+    "attention_mechanism": {
+     "candidates": [
+      "M-RoPE (Multi-dimensional RoPE)",
+      "Multimodal Rotary Position Embedding (M-RoPE)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "M-RoPE (Multi-dimensional RoPE)",
+       "reason": "Positional encoding method, not an attention mechanism"
+      },
+      {
+       "value": "Multimodal Rotary Position Embedding (M-RoPE)",
+       "reason": "Positional encoding method, not an attention mechanism"
+      }
+     ]
+    },
+    "context_extension_method": {
+     "candidates": [
+      "M-RoPE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "M-RoPE",
+       "reason": "Positional encoding method, not a context length extension technique"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Diverse dataset including image-text pairs",
+      "OCR data",
+      "interleaved image-text articles",
+      "VQA datasets",
+      "video dialogues",
+      "image knowledge datasets (cleaned webpages, open-sourced datasets, synthetic data)"
+     ],
+     "accepted": [
+      "OCR data",
+      "interleaved image-text articles",
+      "VQA datasets",
+      "video dialogues"
+     ],
+     "dropped": [
+      {
+       "value": "Diverse dataset including image-text pairs",
+       "reason": "Asserts breadth/diversity rather than naming a specific corpus"
+      },
+      {
+       "value": "image knowledge datasets (cleaned webpages, open-sourced datasets, synthetic data)",
+       "reason": "Vague description asserting breadth, not a specific corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Enhancing vision-language model's perception of the world at any resolution",
+      "investigating scaling laws for large vision-language models (LVLMs)."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Enhancing vision-language model's perception of the world at any resolution",
+       "reason": "Describes a solution or goal rather than a research problem"
+      },
+      {
+       "value": "investigating scaling laws for large vision-language models (LVLMs).",
+       "reason": "Describes a research activity rather than a problem or challenge"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Chinese",
+      "most European languages",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Vietnamese",
+      "European languages",
+      "French",
+      "German",
+      "Spanish",
+      "etc."
+     ],
+     "accepted": [
+      "English",
+      "Chinese",
+      "Japanese",
+      "Korean",
+      "Arabic",
+      "Vietnamese",
+      "French",
+      "German",
+      "Spanish"
+     ],
+     "dropped": [
+      {
+       "value": "etc.",
+       "reason": "Placeholder/trailing qualifier, not a specific language. (cached)"
+      },
+      {
+       "value": "most European languages",
+       "reason": "Refers to a language group, not a specific natural language"
+      },
+      {
+       "value": "European languages",
+       "reason": "Refers to a language family/group, not a specific natural language"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "675M parameter Vision Transformer (ViT)",
+      "ViT derived from DFN",
+      "initialized with RoPE-2D",
+      "Dynamic-resolution vision encoder",
+      "ViT-L",
+      "Dynamic-resolution encoder"
+     ],
+     "accepted": [
+      "675M parameter Vision Transformer (ViT)",
+      "ViT derived from DFN",
+      "Dynamic-resolution vision encoder",
+      "ViT-L",
+      "Dynamic-resolution encoder"
+     ],
+     "dropped": [
+      {
+       "value": "initialized with RoPE-2D",
+       "reason": "Describes an initialization method, not the encoder component itself"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 46,
+   "dropped": 11,
+   "llm_calls": 1,
+   "values_sent_to_llm": 31
+  }
+ },
+ "contributions": [
+  {
+   "label": "Qwen 2-VL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 2-VL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-09-18",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba Group",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Naive Dynamic Resolution mechanism: dynamically processes images of varying resolutions into different numbers of visual tokens to generate efficient and accurate visual representations",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multimodal Rotary Position Embedding (M-RoPE): facilitates effective fusion of positional information across text, images, and videos",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified paradigm for processing both images and videos",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dynamic resolution training with 2D RoPE in the vision transformer to better capture information across different spatial scales.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OCR data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Interleaved image-text articles",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQA datasets",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Video dialogues",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal alignment and visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for visual grounding and agent tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "72B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 72000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "3D parallelism (data, tensor, pipeline), DeepSpeed ZeRO-1, Sequence Parallelism with selective checkpointing, 1F1B pipeline parallelism",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "UI operations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Robotic control",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Games",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Navigation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual recognition in images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Agentic tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/QwenLM/Qwen2-VL",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~1.4 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Instructional datasets in ChatML format",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multimodal conversational data (image QA, document parsing, multi-image comparison, video comprehension, video stream dialogue, agent-based interactions)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "72B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised Fine-Tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203095",
+     "label": "tool_calling_format",
+     "value": "JSON function calling with keyword pattern matching and action/result/return tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-modal connector between visual encoder and LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "675M parameter Vision Transformer (ViT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT derived from DFN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Dynamic-resolution vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Dynamic-resolution encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen2, ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Matches GPT-4o and Claude 3.5-Sonnet",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Surpasses other open-weight LVLMs on MMMU, MathVista, MathVision, RealWorldQA, MMBench-V1.1, MMT-Bench, HallBench, MMVet, MMStar, DocVQA, InfoVQA, ChartQA, TextVQA, OCRBench, MTVQA, MVBench, PerceptionTest, EgoSchema, Video-MME",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "InfoVQA: 75.89",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealWorldQA: 70.07",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench: 866",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU val: 53.44",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 43.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 60.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar: 36.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RWQ: 53.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQA: 82.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ChartQA: 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 71.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PerceptionTest: 47.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NextQA: 46.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STAR: 57.9",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1727061",
+  "contribution_ids": [
+   "R1727063",
+   "R1727064",
+   "R1727065",
+   "R1727066",
+   "R1727067",
+   "R1727068",
+   "R1727069",
+   "R1924676"
+  ],
+  "new_contribution_ids": [
+   "R1924676"
+  ],
+  "comparison_updated": null
+ }
+}

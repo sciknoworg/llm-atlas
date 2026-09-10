@@ -1,0 +1,559 @@
+{
+ "arxiv_id": "2306.00890",
+ "status": "completed",
+ "timestamp": "2026-08-31T00:06:49.373601",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2306.00890",
+  "title": "LLaVA-Med: Training a Large Language-and-Vision Assistant for Biomedicine in One Day",
+  "authors": [
+   "Chunyuan Li",
+   "Cliff Wong",
+   "Sheng Zhang",
+   "Naoto Usuyama",
+   "Haotian Liu",
+   "Jianwei Yang",
+   "Tristan Naumann",
+   "Hoifung Poon",
+   "Jianfeng Gao"
+  ],
+  "abstract": "Conversational generative AI has demonstrated remarkable promise for empowering biomedical practitioners, but current investigations focus on unimodal text. Multimodal conversational AI has seen rapid progress by leveraging billions of image-text pairs from the public web, but such general-domain vision-language models still lack sophistication in understanding and conversing about biomedical images. In this paper, we propose a cost-efficient approach for training a vision-language conversational assistant that can answer open-ended research questions of biomedical images. The key idea is to leverage a large-scale, broad-coverage biomedical figure-caption dataset extracted from PubMed Central, use GPT-4 to self-instruct open-ended instruction-following data from the captions, and then fine-tune a large general-domain vision-language model using a novel curriculum learning method. Specifically, the model first learns to align biomedical vocabulary using the figure-caption pairs as is, then learns to master open-ended conversational semantics using GPT-4 generated instruction-following data, broadly mimicking how a layperson gradually acquires biomedical knowledge. This enables us to train a Large Language and Vision Assistant for BioMedicine (LLaVA-Med) in less than 15 hours (with eight A100s). LLaVA-Med exhibits excellent multimodal conversational capability and can follow open-ended instruction to assist with inquiries about a biomedical image. On three standard biomedical visual question answering datasets, LLaVA-Med outperforms previous supervised state-of-the-art on certain metrics. To facilitate biomedical multimodal research, we will release our instruction-following data and the LLaVA-Med model.",
+  "published": "2023-06-01T16:50:07+00:00",
+  "updated": "2023-06-01T16:50:07+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2306.00890v1",
+  "entry_id": "http://arxiv.org/abs/2306.00890v1",
+  "pdf_path": "data/papers/2306.00890.pdf"
+ },
+ "text_length": 53694,
+ "word_count": 4014,
+ "models_extracted": 3,
+ "extraction_data": [
+  {
+   "model_name": "LLaVA-Med",
+   "parameters": "7B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "LLaVA",
+   "date_created": "2023-06-01",
+   "organization": "Microsoft",
+   "innovation": "Two-stage curriculum learning for biomedical domain adaptation: (1) Biomedical Concept Feature Alignment filters PMC-15M to 600K pairs, freezing vision encoder and LM to update only a linear projection matrix for concept coverage; (2) Medical Instruction Tuning uses 60K GPT-4-generated instruction-following pairs (incorporating in-line figure mentions as external context) to enable conversational medical VQA, achieving domain adaptation in one day.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal instruction tuning",
+   "pretraining_corpus": "PMC-15M (filtered to 600K for Stage 1), 60K biomedical instruction-following pairs (Stage 2)",
+   "finetuning_task": "Biomedical visual instruction tuning, Medical visual instruction following, medical VQA, Biomedical visual question answering, instruction tuning",
+   "optimizer": null,
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": "Two-stage training pipeline: Stage 1 aligns vision encoder with biomedical text; Stage 2 fine-tunes on curated biomedical instruction data (10K/60K samples), followed by downstream fine-tuning.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Biomedical visual question answering and open-ended instruction following for biomedical images.",
+   "application": "Biomedical visual question answering, open-ended instruction following for biomedical images, conversational AI for biomedical practitioners.",
+   "paper_title": "LLaVA-Med: Training a Large Language-and-Vision Assistant for Biomedicine in One Day",
+   "training_corpus_size": "15 million image-text pairs",
+   "finetuning_data": "GPT-4 generated instruction-following data from PMC-15M captions, PMC-15M (filtered), GPT-4-generated biomedical instruction-following data, VQA-RAD, PathVQA, SLAKE, 10K/60K biomedical instruction data, 60K-IM",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English, Chinese",
+   "hardware_description": "8 A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "7B, 13B (dense)",
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage curriculum learning: (1) align biomedical vocabulary using raw image-text pairs; (2) learn open-ended conversational semantics using GPT-4-generated instruction-following data.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "GPT-4 generation of instruction-following data from figure captions and in-line figure mentions",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP projector aligning visual features to language space",
+   "vision_encoder": "BioMedCLIP / CLIP ViT-L/14, Vision encoder (specific backbone not named in text), BioMedCLIP, CLIP",
+   "base_model": "LLaVA",
+   "optimizer_innovation": null,
+   "benchmark_result": "Outperforms supervised state-of-the-art on three standard biomedical VQA datasets on certain metrics.; LLaVA-Med Stage 2 Overall: 49.4; VQA-Radiology: 53.7; SLAKE: 57.3; Pathology-VQA: 39.8; Conversation: 53.7; Detailed Description: 49.4 (relative scores via GPT-4 evaluation); VQA-RAD Closed: 87.11, SLAKE Closed: 91.21, PathVQA Closed: 91.09",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "LLaVA-Med": {
+   "application": [
+    "Biomedical visual question answering",
+    "open-ended instruction following for biomedical images",
+    "conversational AI for biomedical practitioners."
+   ],
+   "base_model": [
+    "LLaVA"
+   ],
+   "finetuning_data": [
+    "GPT-4 generated instruction-following data from PMC-15M captions",
+    "PMC-15M (filtered)",
+    "GPT-4-generated biomedical instruction-following data",
+    "VQA-RAD",
+    "PathVQA",
+    "SLAKE",
+    "10K/60K biomedical instruction data",
+    "60K-IM"
+   ],
+   "finetuning_task": [
+    "Biomedical visual instruction tuning",
+    "Medical visual instruction following",
+    "medical VQA",
+    "Biomedical visual question answering",
+    "instruction tuning"
+   ],
+   "fusion_architecture": [
+    "MLP projector aligning visual features to language space"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "LLaVA"
+   ],
+   "model_name": [
+    "LLaVA-Med"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "7B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "PMC-15M (filtered to 600K for Stage 1)"
+   ],
+   "pretraining_task": [
+    "Multimodal instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "GPT-4 generation of instruction-following data from figure captions and in-line figure mentions"
+   ],
+   "vision_encoder": [
+    "BioMedCLIP / CLIP ViT-L/14",
+    "BioMedCLIP",
+    "CLIP"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "LLaVA-Med": {
+    "pretraining_corpus": {
+     "candidates": [
+      "PMC-15M (filtered to 600K for Stage 1)",
+      "60K biomedical instruction-following pairs (Stage 2)"
+     ],
+     "accepted": [
+      "PMC-15M (filtered to 600K for Stage 1)"
+     ],
+     "dropped": [
+      {
+       "value": "60K biomedical instruction-following pairs (Stage 2)",
+       "reason": "Describes fine-tuning/SFT data, not a pretraining corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Biomedical visual question answering and open-ended instruction following for biomedical images."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Biomedical visual question answering and open-ended instruction following for biomedical images.",
+       "reason": "Describes tasks/capabilities rather than a research problem or challenge."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "BioMedCLIP / CLIP ViT-L/14",
+      "Vision encoder (specific backbone not named in text)",
+      "BioMedCLIP",
+      "CLIP"
+     ],
+     "accepted": [
+      "BioMedCLIP / CLIP ViT-L/14",
+      "BioMedCLIP",
+      "CLIP"
+     ],
+     "dropped": [
+      {
+       "value": "Vision encoder (specific backbone not named in text)",
+       "reason": "Placeholder/description rather than a specific model component name."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 34,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 23
+  }
+ },
+ "contributions": [
+  {
+   "label": "LLaVA-Med",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LLaVA-Med",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-06-01",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage curriculum learning for biomedical domain adaptation: (1) Biomedical Concept Feature Alignment filters PMC-15M to 600K pairs, freezing vision encoder and LM to update only a linear projection matrix for concept coverage",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "(2) Medical Instruction Tuning uses 60K GPT-4-generated instruction-following pairs (incorporating in-line figure mentions as external context) to enable conversational medical VQA, achieving domain adaptation in one day.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PMC-15M (filtered to 600K for Stage 1)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Biomedical visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Medical visual instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Medical VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Biomedical visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Biomedical visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended instruction following for biomedical images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Conversational AI for biomedical practitioners.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "15 million image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-4 generated instruction-following data from PMC-15M captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PMC-15M (filtered)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GPT-4-generated biomedical instruction-following data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA-RAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PathVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SLAKE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "10K/60K biomedical instruction data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "60K-IM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B, 13B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage curriculum learning: (1) align biomedical vocabulary using raw image-text pairs; (2) learn open-ended conversational semantics using GPT-4-generated instruction-following data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "GPT-4 generation of instruction-following data from figure captions and in-line figure mentions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP projector aligning visual features to language space",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "BioMedCLIP / CLIP ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "BioMedCLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms supervised state-of-the-art on three standard biomedical VQA datasets on certain metrics.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVA-Med Stage 2 Overall: 49.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA-Radiology: 53.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SLAKE: 57.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pathology-VQA: 39.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Conversation: 53.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Detailed Description: 49.4 (relative scores via GPT-4 evaluation)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA-RAD Closed: 87.11, SLAKE Closed: 91.21, PathVQA Closed: 91.09",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1927636",
+  "contribution_ids": [
+   "R1927638"
+  ],
+  "new_contribution_ids": [
+   "R1927638"
+  ],
+  "comparison_updated": null
+ }
+}

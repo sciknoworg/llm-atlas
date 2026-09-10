@@ -1,0 +1,656 @@
+{
+ "arxiv_id": "2201.12086",
+ "status": "completed",
+ "timestamp": "2026-08-25T04:47:26.368701",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2201.12086",
+  "title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+  "authors": [
+   "Junnan Li",
+   "Dongxu Li",
+   "Caiming Xiong",
+   "Steven Hoi"
+  ],
+  "abstract": "Vision-Language Pre-training (VLP) has advanced the performance for many vision-language tasks. However, most existing pre-trained models only excel in either understanding-based tasks or generation-based tasks. Furthermore, performance improvement has been largely achieved by scaling up the dataset with noisy image-text pairs collected from the web, which is a suboptimal source of supervision. In this paper, we propose BLIP, a new VLP framework which transfers flexibly to both vision-language understanding and generation tasks. BLIP effectively utilizes the noisy web data by bootstrapping the captions, where a captioner generates synthetic captions and a filter removes the noisy ones. We achieve state-of-the-art results on a wide range of vision-language tasks, such as image-text retrieval (+2.7% in average recall@1), image captioning (+2.8% in CIDEr), and VQA (+1.6% in VQA score). BLIP also demonstrates strong generalization ability when directly transferred to video-language tasks in a zero-shot manner. Code, models, and datasets are released at https://github.com/salesforce/BLIP.",
+  "published": "2022-01-28T12:49:48+00:00",
+  "updated": "2022-02-15T05:43:32+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2201.12086v2",
+  "entry_id": "http://arxiv.org/abs/2201.12086v2",
+  "pdf_path": "data/papers/2201.12086.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 48247,
+ "word_count": 3853,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "BLIP",
+   "parameters": "14M, 129M, 224M",
+   "parameters_millions": 224,
+   "model_family": "BLIP",
+   "date_created": "2022-01-28",
+   "organization": "Salesforce",
+   "innovation": "Multimodal mixture of Encoder-Decoder (MED): a unified architecture that can operate as a unimodal encoder, an image-grounded text encoder, or an image-grounded text decoder, enabling flexible transfer to both understanding and generation tasks; Captioning and Filtering (CapFilt): a dataset bootstrapping method that fine-tunes the MED into a captioner to generate synthetic captions and a filter to remove noisy ones from web data.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image-text contrastive learning, image-text matching, image-conditioned language modeling",
+   "pretraining_corpus": "Conceptual Captions (CC), SBU Captioned Photos (SBU), LAION-400M, COCO, Visual Genome (VG)",
+   "finetuning_task": "Supervised fine-tuning for VQA, visual dialog, NLVR2, text-to-video retrieval, video question answering",
+   "optimizer": "AdamW",
+   "hardware_used": "16-GPU nodes",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Unified vision-language understanding and generation",
+   "application": "Image-text retrieval, image captioning, visual question answering, visual reasoning, visual dialog, video-language tasks",
+   "paper_title": "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation",
+   "training_corpus_size": "14M images",
+   "finetuning_data": "COCO dataset, COCO, Flickr30K, NoCaps, VQA, NLVR2, Visual Dialog",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": "two 16-GPU nodes",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/BLIP",
+   "context_length": null,
+   "activated_parameters": "14M",
+   "attention_mechanism": "Cross-attention layers for image-grounded text encoder/decoder; causal self-attention for decoder, Cross-attention, self-attention",
+   "context_length_max": "38",
+   "context_extension_method": null,
+   "training_pipeline": "Joint pre-training with three vision-language objectives (ITC, ITM, LM) -> fine-tuning into captioner and filter modules for CapFilt -> downstream task fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Captioning and Filtering (CapFilt) bootstrapping method",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-attention fusion",
+   "vision_encoder": "ViT-B/16, ViT-L/16, ViT-B",
+   "base_model": "BERT, ViT",
+   "optimizer_innovation": null,
+   "benchmark_result": "+2.8% in CIDEr; +1.6% in VQA score; Retrieval-FT(COCO) CIDEr 80.6; Retrieval-ZS(Flickr) CIDEr 63.1; Caption-FT(COCO) CIDEr 94.8; Caption-ZS(NoCaps) CIDEr 38.6; COCO IR: 94.8/99.7/100.0; Flickr30K IR: 84.9/96.7/98.3; NoCaps C: 111.3; VQA test-dev: 77.54; NLVR2 test-dev: 82.67; COCO IR: 96.0/99.9/100.0; Flickr30K IR: 85.0/96.8/98.6; NoCaps C: 109.1; VQA test-dev: 78.24; NLVR2 test-dev: 82.48",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "BLIP": {
+   "application": [
+    "Image-text retrieval",
+    "image captioning",
+    "visual question answering",
+    "visual reasoning",
+    "visual dialog",
+    "video-language tasks"
+   ],
+   "attention_mechanism": [
+    "Cross-attention layers for image-grounded text encoder/decoder",
+    "causal self-attention for decoder",
+    "Cross-attention",
+    "self-attention"
+   ],
+   "base_model": [
+    "BERT, ViT"
+   ],
+   "finetuning_data": [
+    "COCO dataset",
+    "COCO",
+    "Flickr30K",
+    "NoCaps",
+    "VQA",
+    "NLVR2",
+    "Visual Dialog"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning for VQA",
+    "visual dialog",
+    "NLVR2",
+    "text-to-video retrieval",
+    "video question answering"
+   ],
+   "fusion_architecture": [
+    "Cross-attention fusion"
+   ],
+   "hardware_used": [
+    "16-GPU nodes"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "BLIP"
+   ],
+   "model_name": [
+    "BLIP"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "14M",
+    "129M",
+    "224M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions (CC)",
+    "SBU Captioned Photos (SBU)",
+    "LAION-400M",
+    "COCO",
+    "Visual Genome (VG)"
+   ],
+   "pretraining_task": [
+    "Image-text contrastive learning, image-text matching, image-conditioned language modeling"
+   ],
+   "research_problem": [
+    "Unified vision-language understanding and generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [
+    "Captioning and Filtering (CapFilt) bootstrapping method"
+   ],
+   "vision_encoder": [
+    "ViT-B/16",
+    "ViT-L/16",
+    "ViT-B"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "BLIP": {}
+  },
+  "counts": {
+   "kept": 46,
+   "dropped": 0,
+   "llm_calls": 1,
+   "values_sent_to_llm": 7
+  }
+ },
+ "contributions": [
+  {
+   "label": "BLIP",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "BLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-01-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multimodal mixture of Encoder-Decoder (MED): a unified architecture that can operate as a unimodal encoder, an image-grounded text encoder, or an image-grounded text decoder, enabling flexible transfer to both understanding and generation tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Captioning and Filtering (CapFilt): a dataset bootstrapping method that fine-tunes the MED into a captioner to generate synthetic captions and a filter to remove noisy ones from web data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text contrastive learning, image-text matching, image-conditioned language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (CC)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU Captioned Photos (SBU)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome (VG)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "NLVR2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-to-video retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "129M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "224M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 224,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16-GPU nodes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Two 16-GPU nodes",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video-language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/BLIP",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unified vision-language understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "14M images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Dialog",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "14M",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention layers for image-grounded text encoder/decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal self-attention for decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "38",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint pre-training with three vision-language objectives (ITC, ITM, LM) -> fine-tuning into captioner and filter modules for CapFilt -> downstream task fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Captioning and Filtering (CapFilt) bootstrapping method",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-attention fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT, ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "+2.8% in CIDEr",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "+1.6% in VQA score",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Retrieval-FT(COCO) CIDEr 80.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Retrieval-ZS(Flickr) CIDEr 63.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Caption-FT(COCO) CIDEr 94.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Caption-ZS(NoCaps) CIDEr 38.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO IR: 94.8/99.7/100.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K IR: 84.9/96.7/98.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps C: 111.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-dev: 77.54",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-dev: 82.67",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO IR: 96.0/99.9/100.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K IR: 85.0/96.8/98.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps C: 109.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-dev: 78.24",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-dev: 82.48",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R503952",
+  "contribution_ids": [
+   "R503953",
+   "R503982",
+   "R1921665"
+  ],
+  "new_contribution_ids": [
+   "R1921665"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,1214 @@
+{
+ "arxiv_id": "2401.06066",
+ "status": "completed",
+ "timestamp": "2026-08-28T18:48:57.027776",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2401.06066",
+  "title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+  "authors": [
+   "Damai Dai",
+   "Chengqi Deng",
+   "Chenggang Zhao",
+   "R. X. Xu",
+   "Huazuo Gao",
+   "Deli Chen",
+   "Jiashi Li",
+   "Wangding Zeng",
+   "Xingkai Yu",
+   "Y. Wu",
+   "Zhenda Xie",
+   "Y. K. Li",
+   "Panpan Huang",
+   "Fuli Luo",
+   "Chong Ruan",
+   "Zhifang Sui",
+   "Wenfeng Liang"
+  ],
+  "abstract": "In the era of large language models, Mixture-of-Experts (MoE) is a promising architecture for managing computational costs when scaling up model parameters. However, conventional MoE architectures like GShard, which activate the top-$K$ out of $N$ experts, face challenges in ensuring expert specialization, i.e. each expert acquires non-overlapping and focused knowledge. In response, we propose the DeepSeekMoE architecture towards ultimate expert specialization. It involves two principal strategies: (1) finely segmenting the experts into $mN$ ones and activating $mK$ from them, allowing for a more flexible combination of activated experts; (2) isolating $K_s$ experts as shared ones, aiming at capturing common knowledge and mitigating redundancy in routed experts. Starting from a modest scale with 2B parameters, we demonstrate that DeepSeekMoE 2B achieves comparable performance with GShard 2.9B, which has 1.5 times the expert parameters and computation. In addition, DeepSeekMoE 2B nearly approaches the performance of its dense counterpart with the same number of total parameters, which set the upper bound of MoE models. Subsequently, we scale up DeepSeekMoE to 16B parameters and show that it achieves comparable performance with LLaMA2 7B, with only about 40% of computations. Further, our preliminary efforts to scale up DeepSeekMoE to 145B parameters consistently validate its substantial advantages over the GShard architecture, and show its performance comparable with DeepSeek 67B, using only 28.5% (maybe even 18.2%) of computations.",
+  "published": "2024-01-11T17:31:42+00:00",
+  "updated": "2024-01-11T17:31:42+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2401.06066v1",
+  "entry_id": "http://arxiv.org/abs/2401.06066v1",
+  "pdf_path": "data/papers/2401.06066.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 95773,
+ "word_count": 8449,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "DeepSeekMoE",
+   "parameters": "2B, 13.3B, 16B, 16.4B, 67B, 144.6B, 145B",
+   "parameters_millions": 145000,
+   "model_family": "DeepSeekMoE",
+   "date_created": "2024-01-11",
+   "organization": "DeepSeek-AI",
+   "innovation": "Fine-grained expert segmentation: splits each expert FFN into m smaller experts by reducing the FFN intermediate hidden dimension to 1/m of its original size, while increasing the number of activated experts to m*K to maintain constant computational cost, thereby enhancing combinatorial flexibility and knowledge decomposition; Shared expert isolation: isolates K_s experts as shared experts that are deterministically assigned to every token to consolidate common knowledge across contexts, alleviating parameter redundancy among routed experts.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "DeepSeek internal high-quality corpus (14T tokens)",
+   "finetuning_task": "Supervised fine-tuning (SFT) for alignment, Supervised fine-tuning (SFT)",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 or H800 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Scaling language models with Mixture-of-Experts while ensuring ultimate expert specialization and mitigating knowledge hybridity and redundancy.",
+   "application": "Language modeling, language understanding, reasoning, reading comprehension, code generation, closed-book question answering",
+   "paper_title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+   "training_corpus_size": "24.6T tokens",
+   "finetuning_data": "In-house curated data (1.4M examples spanning math, code, writing, QA, reasoning, summarization)",
+   "tokenizer": "Byte-pair encoding (BPE)",
+   "supported_language": "English, Chinese",
+   "hardware_description": "Clusters equipped with NVIDIA A100 or H800 GPUs (8 GPUs per node, NVLink/NVSwitch, InfiniBand interconnects)",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/deepseek-ai/DeepSeek-MoE",
+   "context_length": null,
+   "activated_parameters": "8 experts activated (1 shared + 7 routed)",
+   "attention_mechanism": "Multi-head attention (10 heads, 128 dim), Multi-head attention (32 heads), Multi-head attention, Grouped-Query Attention (GQA)",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Supervised fine-tuning (SFT) for alignment",
+   "reasoning_mode": null,
+   "moe_configuration": "64 experts total (1 shared, 63 routed), 8 activated per token (1 shared + 7 routed)",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "DPO",
+   "reward_mechanism": "Preference data / reward model",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "HellaSwag: 54.4; PIQA: 71.1; ARC-easy: 47.3; ARC-challenge: 34.1; RACE-middle: 46.4; RACE-high: 32.4; TriviaQA: 15.7; NaturalQuestions: 4.7; HellaSwag: 72.2; PIQA: 79.7; ARC-easy: 69.9; ARC-challenge: 50.0; BBH: 42.2; RACE-middle: 64.8; RACE-high: 50.6; DROP: 33.8; GSM8K: 62.2; MATH: 15.2; TriviaQA: 63.3; NaturalQuestions: 35.1; MMLU: 47.2; WinoGrande: 69.0; CLUEWSC: 68.2; CEval: 40.0; CMMLU: 49.3; Pile(Loss.) 1.961; HellaSwag(Acc.) 75.8; PIQA(Acc.) 80.7; ARC-easy(Acc.) 69.7; ARC-challenge(Acc.) 48.8; RACE-middle(Acc.) 62.1; RACE-high(Acc.) 45.5; DROP(EM) 27.8; GSM8K(EM) 12.2; MATH(EM) 3.1; TriviaQA(EM) 61.1; NaturalQuestions(EM) 25.0; MMLU(Acc.) 39.4; WinoGrande(Acc.) 71.9; CLUEWSC(EM) 71.9; CEval(Acc.) 37.1; CMMLU(Acc.) 35.9; CHID(Acc.) 90.3; Pile(Loss): 1.808; HellaSwag: 54.8; PIQA: 72.3; ARC-easy: 49.4; ARC-challenge: 34.3; RACE-middle: 44.0; RACE-high: 31.7; TriviaQA: 16.6; NaturalQuestions: 5.7; Pile loss comparable to GShard with half activated experts; outperforms LLaMA2 7B with ~40% computation; Pile: 1.808; HellaSwag: 69.1; PIQA: 75.7; ARC-easy: 58.8; ARC-challenge: 38.5; RACE-middle: 52.4; RACE-high: 38.5; TriviaQA: 38.2; NaturalQuestions: 13.7",
+   "weight_clipping_mechanism": "Gradient clipping norm set to 1.0",
+   "number_of_attention_heads": "10",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "DeepSeekMoE 142B (Half Activated)",
+   "model_family": "DeepSeekMoE",
+   "date_created": "2024-01-11",
+   "organization": "DeepSeek",
+   "innovation": "Fine-grained expert segmentation and shared expert isolation to achieve ultimate expert specialization; improves upon conventional top-1/top-2 routing strategies.",
+   "pretraining_corpus": null,
+   "parameters": "142B",
+   "parameters_millions": 142000,
+   "application": "Language modeling, knowledge-intensive tasks",
+   "license": null,
+   "research_problem": "Mixture-of-Experts Language Models",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Language modeling",
+   "training_corpus_size": "245B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models",
+   "activated_parameters": "12.2B",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training",
+   "reasoning_mode": null,
+   "moe_configuration": "142.3B total parameters, 12.2B activated; 2 shared + 128 routed experts; 2 shared + 6 activated experts; relative expert size 0.125",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Pile(Loss.) 1.888; HellaSwag(Acc.) 74.9; PIQA(Acc.) 80.2; ARC-easy(Acc.) 67.9; ARC-challenge(Acc.) 49.0; RACE-middle(Acc.) 59.5; RACE-high(Acc.) 42.6; DROP(EM) 28.9; GSM8K(EM) 13.8; MATH(EM) 2.8; TriviaQA(EM) 59.8; NaturalQuestions(EM) 23.5; MMLU(Acc.) 37.5; WinoGrande(Acc.) 70.8; CLUEWSC(EM) 72.6; CEval(Acc.) 32.8; CMMLU(Acc.) 31.9; CHID(Acc.) 88.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "DeepSeekMoE": {
+   "application": [
+    "Language modeling",
+    "language understanding",
+    "reasoning",
+    "reading comprehension",
+    "code generation",
+    "closed-book question answering"
+   ],
+   "attention_mechanism": [
+    "Multi-head attention (10 heads, 128 dim)",
+    "Multi-head attention (32 heads)",
+    "Multi-head attention",
+    "Grouped-Query Attention (GQA)"
+   ],
+   "finetuning_data": [
+    "In-house curated data (1.4M examples spanning math, code, writing, QA, reasoning, summarization)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT) for alignment",
+    "Supervised fine-tuning (SFT)"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 or H800 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeepSeekMoE"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "DeepSeek-AI"
+   ],
+   "parameters": [
+    "2B",
+    "13.3B",
+    "16B",
+    "16.4B",
+    "67B",
+    "144.6B",
+    "145B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "DeepSeek internal high-quality corpus (14T tokens)"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Preference data / reward model"
+   ],
+   "rl_algorithm": [
+    "DPO"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "weight_clipping_mechanism": [
+    "Gradient clipping norm set to 1.0"
+   ]
+  },
+  "DeepSeekMoE 142B (Half Activated)": {
+   "application": [
+    "Language modeling"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeepSeekMoE 142B (Half Activated)"
+   ],
+   "organization": [
+    "DeepSeek"
+   ],
+   "parameters": [
+    "142B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Language modeling"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DeepSeekMoE": {
+    "model_family": {
+     "candidates": [
+      "DeepSeekMoE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeepSeekMoE",
+       "reason": "Specific model name rather than a broader category or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling language models with Mixture-of-Experts while ensuring ultimate expert specialization and mitigating knowledge hybridity and redundancy."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling language models with Mixture-of-Experts while ensuring ultimate expert specialization and mitigating knowledge hybridity and redundancy.",
+       "reason": "Long description of the solution/approach rather than a short noun phrase naming the problem."
+      }
+     ]
+    }
+   },
+   "DeepSeekMoE 142B (Half Activated)": {
+    "application": {
+     "candidates": [
+      "Language modeling",
+      "knowledge-intensive tasks"
+     ],
+     "accepted": [
+      "Language modeling"
+     ],
+     "dropped": [
+      {
+       "value": "knowledge-intensive tasks",
+       "reason": "Broad category/description rather than a concrete task or domain."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeepSeekMoE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeepSeekMoE",
+       "reason": "Specific model name rather than a broader category or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Mixture-of-Experts Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Mixture-of-Experts Language Models",
+       "reason": "Names an architecture/approach rather than a research problem or challenge."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 39,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 21
+  }
+ },
+ "contributions": [
+  {
+   "label": "DeepSeekMoE",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeepSeekMoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek-AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fine-grained expert segmentation: splits each expert FFN into m smaller experts by reducing the FFN intermediate hidden dimension to 1/m of its original size, while increasing the number of activated experts to m*K to maintain constant computational cost, thereby enhancing combinatorial flexibility and knowledge decomposition",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Shared expert isolation: isolates K_s experts as shared experts that are deterministically assigned to every token to consolidate common knowledge across contexts, alleviating parameter redundancy among routed experts.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DeepSeek internal high-quality corpus (14T tokens)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT) for alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "67B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "144.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "145B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 145000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 or H800 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Clusters equipped with NVIDIA A100 or H800 GPUs (8 GPUs per node, NVLink/NVSwitch, InfiniBand interconnects)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Closed-book question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/deepseek-ai/DeepSeek-MoE",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "24.6T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "In-house curated data (1.4M examples spanning math, code, writing, QA, reasoning, summarization)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "8 experts activated (1 shared + 7 routed)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention (10 heads, 128 dim)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention (32 heads)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised fine-tuning (SFT) for alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "64 experts total (1 shared, 63 routed), 8 activated per token (1 shared + 7 routed)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Preference data / reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 54.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 71.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy: 47.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge: 34.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle: 46.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high: 32.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 15.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 4.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 72.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 79.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy: 69.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge: 50.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 42.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle: 64.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high: 50.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP: 33.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 62.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 15.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 63.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 35.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 47.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 69.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC: 68.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CEval: 40.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 49.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile(Loss.) 1.961",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag(Acc.) 75.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA(Acc.) 80.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy(Acc.) 69.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge(Acc.) 48.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle(Acc.) 62.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high(Acc.) 45.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP(EM) 27.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K(EM) 12.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH(EM) 3.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA(EM) 61.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions(EM) 25.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU(Acc.) 39.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande(Acc.) 71.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC(EM) 71.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CEval(Acc.) 37.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU(Acc.) 35.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CHID(Acc.) 90.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile(Loss): 1.808",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 54.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 72.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy: 49.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge: 34.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle: 44.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high: 31.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 16.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 5.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile loss comparable to GShard with half activated experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms LLaMA2 7B with ~40% computation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile: 1.808",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 69.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 75.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy: 58.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge: 38.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle: 52.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high: 38.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 38.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 13.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Gradient clipping norm set to 1.0",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "10",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "DeepSeekMoE 142B (Half Activated)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeepSeekMoE 142B (Half Activated)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fine-grained expert segmentation and shared expert isolation to achieve ultimate expert specialization",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Improves upon conventional top-1/top-2 routing strategies.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "142B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 142000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "245B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "12.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "142.3B total parameters, 12.2B activated; 2 shared + 128 routed experts; 2 shared + 6 activated experts; relative expert size 0.125",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile(Loss.) 1.888",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag(Acc.) 74.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA(Acc.) 80.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-easy(Acc.) 67.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-challenge(Acc.) 49.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-middle(Acc.) 59.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-high(Acc.) 42.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP(EM) 28.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K(EM) 13.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH(EM) 2.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA(EM) 59.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions(EM) 23.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU(Acc.) 37.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande(Acc.) 70.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLUEWSC(EM) 72.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CEval(Acc.) 32.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU(Acc.) 31.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CHID(Acc.) 88.3",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1382332",
+  "contribution_ids": [
+   "R1382334",
+   "R1924206",
+   "R1924216"
+  ],
+  "new_contribution_ids": [
+   "R1924206",
+   "R1924216"
+  ],
+  "comparison_updated": null
+ }
+}

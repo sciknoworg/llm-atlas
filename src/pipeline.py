@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 import argparse
 
 from src.extraction_normalizer import format_published_date_from_metadata, normalize_extraction
+from src.key_pool import load_keys_from_env
 from src.llm_extractor import LLMExtractor, LLMProperties, MultiModelResponse
 from src.paper_classifier import PaperClassifier
 from src.model_contribution_selector import select_primary_model_contributions
@@ -27,6 +28,7 @@ from src.orkg_manager import ORKGPaperManager
 from src.paper_fetcher import PaperFetcher
 from src.path_utils import PROJECT_ROOT, resolve_project_path
 from src.pdf_parser import PDFParser
+from src.semantic_validator import build_validator_from_config
 from src.template_mapper import TemplateMapper
 
 # Load environment variables
@@ -157,7 +159,11 @@ class ExtractionPipeline:
     def _initialize_components(self):
         """Initialize all pipeline components."""
         # Get API keys from environment
-        kisski_api_key = os.getenv("KISSKI_API_KEY")
+        # Every configured KISSKI key, primary first. One key behaves exactly as
+        # before; more than one lets a 429 fall through to the next rather than
+        # sleeping out the quota.
+        kisski_keys = load_keys_from_env()
+        kisski_api_key = kisski_keys[0] if kisski_keys else None
         kisski_base_url = os.getenv("KISSKI_BASE_URL", self.config["kisski"].get("base_url"))
         orkg_email = os.getenv("ORKG_EMAIL")
         orkg_password = os.getenv("ORKG_PASSWORD")
@@ -183,6 +189,7 @@ class ExtractionPipeline:
         if kisski_api_key:
             self.llm_extractor = LLMExtractor(
                 api_key=kisski_api_key,
+                api_keys=kisski_keys[1:],
                 base_url=kisski_base_url,
                 model=self.config["kisski"]["model"],
                 temperature=self.config["kisski"]["temperature"],
@@ -221,6 +228,21 @@ class ExtractionPipeline:
         # Initialize template mapper
         self.template_mapper = TemplateMapper(template_id=self.config["orkg"]["template_id"], host=self.config["orkg"].get("host", "sandbox"))
 
+        # Initialize semantic validator (None when disabled in config). Shares
+        # the extractor so the LLM layer reuses its retry/backoff behaviour, and
+        # shares the mapper so candidate rows are split exactly as the mapper
+        # would split them.
+        # When True the domain classifier still runs and its verdict is recorded,
+        # but a "not LLM/VLM" answer no longer aborts the paper. Used by batch
+        # runs where the papers were already selected upstream: there the
+        # classifier can only lose papers, and it has been observed rejecting
+        # "Language Models are Few-Shot Learners" (GPT-3) as OUT_OF_DOMAIN.
+        self.classification_advisory = False
+
+        self.semantic_validator = build_validator_from_config(
+            self.config, self.llm_extractor, self.template_mapper
+        )
+
     def _get_orkg_client(self):
         """Lazily initialize ORKG client (only when needed)."""
         if self._orkg_client is None:
@@ -231,6 +253,13 @@ class ExtractionPipeline:
                 password=self._orkg_password,
                 timeout=self.config["orkg"].get("timeout", 30),
             )
+        else:
+            # The client is reused for every paper in a run, but its bearer
+            # token only lives 300 seconds and the bundled client caches the
+            # header instead of renewing it. Extraction between two uploads
+            # takes longer than that, so without this the second paper onward
+            # would fail with 401 on valid credentials.
+            self._orkg_client.refresh_auth()
         return self._orkg_client
 
     def _get_orkg_manager(self):
@@ -243,7 +272,14 @@ class ExtractionPipeline:
                 comparison_id=self.config["orkg"]["comparison_id"],
                 comparison_title=self.config["orkg"].get("comparison_title"),
                 comparison_description=self.config["orkg"].get("comparison_description"),
+                update_comparison=self.config["orkg"].get("update_comparison", False),
             )
+        else:
+            # Uploads go through the manager, not the client, so this is the
+            # only place the per-paper token check can happen. The manager holds
+            # the very same ORKGClient instance, and refresh_auth() rewrites the
+            # headers in place, so refreshing here refreshes what it will use.
+            self._get_orkg_client()
         return self._orkg_manager
 
     @property
@@ -314,15 +350,33 @@ class ExtractionPipeline:
                     logger.error("Paper %s: classification aborted: %s", arxiv_id, classification.reason)
                     return result
                 if not classification.is_valid:
-                    result["status"] = "invalid_paper"
-                    result["error"] = f"Paper rejected: {classification.reason}"
-                    logger.info("Paper %s rejected (not LLM/VLM): %s", arxiv_id, classification.reason)
-                    return result
-                result["steps"]["classify"] = "success"
+                    if not self.classification_advisory:
+                        result["status"] = "invalid_paper"
+                        result["error"] = f"Paper rejected: {classification.reason}"
+                        logger.info(
+                            "Paper %s rejected (not LLM/VLM): %s", arxiv_id, classification.reason
+                        )
+                        return result
+                    logger.warning(
+                        "Paper %s classified as not LLM/VLM (%s) — continuing (advisory mode)",
+                        arxiv_id, classification.reason,
+                    )
+                    result["steps"]["classify"] = "advisory-override"
+                else:
+                    result["steps"]["classify"] = "success"
                 logger.info("Paper %s accepted: %s", arxiv_id, classification.reason)
 
             # Step 3: Parse PDF
             logger.info("Step 3: Parsing PDF")
+            # A failed download leaves pdf_path unset. Say so plainly — building
+            # a Path from None raises a TypeError about __fspath__ that names
+            # neither the paper nor the download.
+            if not paper_metadata.get("pdf_path"):
+                result["status"] = "failed"
+                result["error"] = f"No PDF available for {arxiv_id} (download failed)"
+                logger.error(result["error"])
+                return result
+
             pdf_path = Path(paper_metadata["pdf_path"])
             parsed_data = self.pdf_parser.parse(pdf_path)
 
@@ -387,13 +441,19 @@ class ExtractionPipeline:
                 f"{result['models_after_merge']}"
             )
 
+            # Step 5.5: Semantic validation (drops values that don't instantiate
+            # their property, and fixes row boundaries the splitter got wrong)
+            rows_by_model = self._apply_semantic_validation(result)
+
             # Step 6: Map to ORKG template (use merged models for downstream alignment)
             logger.info("Step 6: Mapping to ORKG template")
             merged_response = MultiModelResponse(
                 models=[LLMProperties(**model) for model in result["extraction_data"]],
                 paper_describes_multiple_models=(len(result["extraction_data"]) > 1),
             )
-            mapped_result = self.template_mapper.map_extraction_result(merged_response)
+            mapped_result = self.template_mapper.map_extraction_result(
+                merged_response, rows_by_model=rows_by_model
+            )
 
             result["steps"]["map"] = "success"
             result["contributions"] = mapped_result["contributions"]
@@ -410,6 +470,11 @@ class ExtractionPipeline:
                 # Prepare extraction data for ORKGPaperManager
                 extraction_data = {
                     "raw_extraction": result["extraction_data"],
+                    # The manager re-maps from the raw models, so the validated
+                    # row boundaries have to travel with them. Without this the
+                    # upload silently re-runs the heuristic splitter and undoes
+                    # semantic validation.
+                    "validated_rows": result.get("validated_rows"),
                     "paper_title": paper_metadata.get("title"),
                     "arxiv_id": arxiv_id,
                     "paper_url": paper_metadata.get("pdf_url"),
@@ -517,11 +582,20 @@ class ExtractionPipeline:
                     "reason": classification.reason,
                 }
                 if not classification.is_valid:
-                    result["status"] = "invalid_paper"
-                    result["error"] = f"Paper rejected: {classification.reason}"
-                    logger.info("PDF-URL paper rejected (not LLM/VLM): %s", classification.reason)
-                    return result
-                result["steps"]["classify"] = "success"
+                    if not self.classification_advisory:
+                        result["status"] = "invalid_paper"
+                        result["error"] = f"Paper rejected: {classification.reason}"
+                        logger.info(
+                            "PDF-URL paper rejected (not LLM/VLM): %s", classification.reason
+                        )
+                        return result
+                    logger.warning(
+                        "PDF-URL paper classified as not LLM/VLM (%s) — continuing (advisory)",
+                        classification.reason,
+                    )
+                    result["steps"]["classify"] = "advisory-override"
+                else:
+                    result["steps"]["classify"] = "success"
 
             # Step 2: Parse PDF
             logger.info("Step 2: Parsing PDF")
@@ -585,13 +659,19 @@ class ExtractionPipeline:
                 f"{result['models_after_merge']}"
             )
 
+            # Step 3.75: Semantic validation (drops values that don't instantiate
+            # their property, and fixes row boundaries the splitter got wrong)
+            rows_by_model = self._apply_semantic_validation(result)
+
             # Step 4: Map to ORKG template (use merged models for downstream alignment)
             logger.info("Step 4: Mapping to ORKG template")
             merged_response = MultiModelResponse(
                 models=[LLMProperties(**model) for model in result["extraction_data"]],
                 paper_describes_multiple_models=(len(result["extraction_data"]) > 1),
             )
-            mapped_result = self.template_mapper.map_extraction_result(merged_response)
+            mapped_result = self.template_mapper.map_extraction_result(
+                merged_response, rows_by_model=rows_by_model
+            )
             result["steps"]["map"] = "success"
             result["contributions"] = mapped_result["contributions"]
 
@@ -604,6 +684,7 @@ class ExtractionPipeline:
                 logger.info("Step 5: Uploading to ORKG")
                 extraction_data = {
                     "raw_extraction": result["extraction_data"],
+                    "validated_rows": result.get("validated_rows"),
                     "paper_title": paper_title,
                     "arxiv_id": None,
                     "paper_url": pdf_url,
@@ -737,6 +818,46 @@ class ExtractionPipeline:
         except Exception as e:
             logger.error(f"Error saving intermediate results: {e}")
             return None
+
+    def _apply_semantic_validation(self, result: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Run semantic validation over the merged models and record the outcome.
+
+        Must be called AFTER merge_model_variants: merging concatenates values
+        from several variants, so row boundaries decided before it would be
+        rebuilt afterwards and lost.
+
+        Stores two things on ``result``:
+          validated_rows      — {model_name: {field: [rows]}}, handed to the
+                                mapper here and re-read by ORKGPaperManager when
+                                an upload happens in a later, separate run.
+          semantic_validation — the audit trail of what was dropped and why.
+
+        Returns the rows dict, or None when validation is off or fails. A None
+        return means the mapper falls back to heuristic splitting, which is the
+        behaviour this project had before validation existed.
+        """
+        if not self.semantic_validator:
+            return None
+
+        logger.info("Step 5.5: Semantic validation of extracted values")
+        try:
+            rows_by_model, report = self.semantic_validator.validate_models(
+                result["extraction_data"]
+            )
+        except Exception as exc:  # noqa: BLE001 - validation must not fail a run
+            logger.warning("Semantic validation failed (%s) — continuing without it", exc)
+            result["semantic_validation"] = {"enabled": True, "error": str(exc)}
+            return None
+
+        result["validated_rows"] = rows_by_model
+        result["semantic_validation"] = report
+        logger.info(
+            "Semantic validation: kept %d, dropped %d",
+            report["counts"]["kept"],
+            report["counts"]["dropped"],
+        )
+        return rows_by_model
 
     def _inject_date_created_from_metadata(
         self, extraction_data: List[Dict[str, Any]], paper_metadata: Optional[Dict[str, Any]]
@@ -1143,6 +1264,9 @@ def main():
         # ORKGPaperManager expects 'raw_extraction' key, not 'extraction_data'
         orkg_extraction_data = {
             "raw_extraction": models_list,  # models_list is already extracted at line 478
+            # Carried through from the saved extraction JSON, so an upload run
+            # separately from extraction still honours semantic validation.
+            "validated_rows": extraction_data.get("validated_rows"),
             "paper_title": extraction_data.get("paper_title"),
             "arxiv_id": arxiv_id,
             "paper_url": extraction_data.get("paper_url"),

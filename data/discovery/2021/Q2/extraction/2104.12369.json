@@ -1,0 +1,689 @@
+{
+  "arxiv_id": "2104.12369",
+  "status": "completed",
+  "timestamp": "2026-08-19T18:19:23.312786",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2104.12369",
+    "title": "PanGu-$α$: Large-scale Autoregressive Pretrained Chinese Language Models with Auto-parallel Computation",
+    "authors": [
+      "Wei Zeng",
+      "Xiaozhe Ren",
+      "Teng Su",
+      "Hui Wang",
+      "Yi Liao",
+      "Zhiwei Wang",
+      "Xin Jiang",
+      "ZhenZhang Yang",
+      "Kaisheng Wang",
+      "Xiaoda Zhang",
+      "Chen Li",
+      "Ziyan Gong",
+      "Yifan Yao",
+      "Xinjing Huang",
+      "Jun Wang",
+      "Jianfeng Yu",
+      "Qi Guo",
+      "Yue Yu",
+      "Yan Zhang",
+      "Jin Wang",
+      "Hengtao Tao",
+      "Dasen Yan",
+      "Zexuan Yi",
+      "Fang Peng",
+      "Fangqing Jiang",
+      "Han Zhang",
+      "Lingfeng Deng",
+      "Yehong Zhang",
+      "Zhe Lin",
+      "Chao Zhang",
+      "Shaojie Zhang",
+      "Mingyue Guo",
+      "Shanzhi Gu",
+      "Gaojun Fan",
+      "Yaowei Wang",
+      "Xuefeng Jin",
+      "Qun Liu",
+      "Yonghong Tian"
+    ],
+    "abstract": "Large-scale Pretrained Language Models (PLMs) have become the new paradigm for Natural Language Processing (NLP). PLMs with hundreds of billions parameters such as GPT-3 have demonstrated strong performances on natural language understanding and generation with \\textit{few-shot in-context} learning. In this work, we present our practice on training large-scale autoregressive language models named PanGu-$α$, with up to 200 billion parameters. PanGu-$α$ is developed under the MindSpore and trained on a cluster of 2048 Ascend 910 AI processors. The training parallelism strategy is implemented based on MindSpore Auto-parallel, which composes five parallelism dimensions to scale the training task to 2048 processors efficiently, including data parallelism, op-level model parallelism, pipeline model parallelism, optimizer model parallelism and rematerialization. To enhance the generalization ability of PanGu-$α$, we collect 1.1TB high-quality Chinese data from a wide range of domains to pretrain the model. We empirically test the generation ability of PanGu-$α$ in various scenarios including text summarization, question answering, dialogue generation, etc. Moreover, we investigate the effect of model scales on the few-shot performances across a broad range of Chinese NLP tasks. The experimental results demonstrate the superior capabilities of PanGu-$α$ in performing various tasks under few-shot or zero-shot settings.",
+    "published": "2021-04-26T06:59:36+00:00",
+    "updated": "2021-04-26T06:59:36+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2104.12369v1",
+    "entry_id": "http://arxiv.org/abs/2104.12369v1",
+    "pdf_path": "data/papers/2104.12369.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 71328,
+  "word_count": 4449,
+  "models_extracted": 9,
+  "extraction_data": [
+    {
+      "model_name": "PanGu-α",
+      "parameters": "2.6B, 13B, 13.1B, 200B, 207B",
+      "parameters_millions": 207000,
+      "model_family": "PanGu",
+      "date_created": "2021-04-26",
+      "organization": "Huawei",
+      "innovation": "Auto-parallel computation framework supporting five-dimensional parallelism (data, op-level model, pipeline, optimizer model, and rematerialization) with topology-aware scheduling to maximize computation-over-communication ratio and minimize code modifications for training large-scale models.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Autoregressive language modeling",
+      "pretraining_corpus": "1.1TB high-quality Chinese text corpus constructed from public datasets (BaiDuQA, CAIL2018, Sogou-CA), Common Crawl webpages, encyclopedia, news, and e-books.",
+      "finetuning_task": null,
+      "optimizer": "Adam",
+      "hardware_used": "Ascend 910 AI processors",
+      "extension": null,
+      "blog_post": null,
+      "license": "closed source",
+      "research_problem": "Large-scale autoregressive language model training with efficient parallel computation",
+      "application": "Text classification, sentence pair similarity, keyword recognition, Winograd Schema Challenge, common sense reasoning, Chinese word prediction",
+      "paper_title": "PanGu-$α$: Large-scale Autoregressive Pretrained Chinese Language Models with Auto-parallel Computation",
+      "training_corpus_size": "20TB",
+      "finetuning_data": null,
+      "tokenizer": "BytePair Encoding (BPE), 40,000 vocabulary",
+      "supported_language": "Chinese",
+      "hardware_description": "Cluster of servers with multiple devices, connected via ToR and Spine switches",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "200B (dense, all parameters active)",
+      "attention_mechanism": "Standard multi-head self-attention, Multi-head self-attention",
+      "context_length_max": "1024",
+      "context_extension_method": null,
+      "training_pipeline": "Large-scale autoregressive pre-training",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": "512 to 2048 Ascend processors",
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Validation PPL: 15.59; Validation PPL: 19.33; Validation PPL: 17.69; Textclassification Acc: 74.26, 73.80; SentencePairSimilarity Acc: 59.29, 65.76; KeywordRecognition Acc: 50.50, 49.30; WSC Acc: 73.36, 75.00; CommonSenseReasoning Acc: 53.42, 54.47; ChineseWPLC PPL: 16.70, 19.18",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "40 (2.6B, 13B), 128 (200B)",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "PanGu-$\\alpha$",
+      "model_family": "PanGu",
+      "date_created": "2021-04-26",
+      "organization": "Huawei",
+      "innovation": "Auto-parallel computation framework enabling distributed training of large-scale models; autoregressive pretraining objective specifically adapted for Chinese language generation and understanding.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Dialog generation, automatic customer service replies, game NPC dialogue design, fiction writing",
+      "license": null,
+      "research_problem": "Large-scale autoregressive pretrained Chinese language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Autoregressive language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "Chinese",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "PanGu-$α$: Large-scale Autoregressive Pretrained Chinese Language Models with Auto-parallel Computation",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 8,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "PanGu-α": {
+      "application": [
+        "Text classification",
+        "sentence pair similarity",
+        "keyword recognition",
+        "Winograd Schema Challenge",
+        "common sense reasoning",
+        "Chinese word prediction"
+      ],
+      "attention_mechanism": [
+        "Standard multi-head self-attention",
+        "Multi-head self-attention"
+      ],
+      "hardware_used": [
+        "Ascend 910 AI processors"
+      ],
+      "license": [
+        "closed source"
+      ],
+      "model_family": [
+        "PanGu"
+      ],
+      "model_name": [
+        "PanGu-α"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Huawei"
+      ],
+      "parameters": [
+        "2.6B",
+        "13B",
+        "13.1B",
+        "200B",
+        "207B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "1.1TB high-quality Chinese text corpus constructed from public datasets (BaiDuQA, CAIL2018, Sogou-CA)",
+        "Common Crawl webpages",
+        "encyclopedia",
+        "news",
+        "e-books."
+      ],
+      "pretraining_task": [
+        "Autoregressive language modeling"
+      ],
+      "research_problem": [
+        "Large-scale autoregressive language model training with efficient parallel computation"
+      ],
+      "supported_language": [
+        "Chinese"
+      ]
+    },
+    "PanGu-$\\alpha$": {
+      "application": [
+        "Dialog generation",
+        "automatic customer service replies",
+        "game NPC dialogue design",
+        "fiction writing"
+      ],
+      "model_family": [
+        "PanGu"
+      ],
+      "model_name": [
+        "PanGu-$\\alpha$"
+      ],
+      "organization": [
+        "Huawei"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Autoregressive language modeling"
+      ],
+      "research_problem": [
+        "Large-scale autoregressive pretrained Chinese language models"
+      ],
+      "supported_language": [
+        "Chinese"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "PanGu-α": {},
+      "PanGu-$\\alpha$": {}
+    },
+    "counts": {
+      "kept": 39,
+      "dropped": 0,
+      "llm_calls": 0,
+      "values_sent_to_llm": 25
+    }
+  },
+  "contributions": [
+    {
+      "label": "PanGu-α",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PanGu-α",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PanGu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-04-26",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Huawei",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Auto-parallel computation framework supporting five-dimensional parallelism (data, op-level model, pipeline, optimizer model, and rematerialization) with topology-aware scheduling to maximize computation-over-communication ratio and minimize code modifications for training large-scale models.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Autoregressive language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "1.1TB high-quality Chinese text corpus constructed from public datasets (BaiDuQA, CAIL2018, Sogou-CA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Common Crawl webpages",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Encyclopedia",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "News",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "E-books.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BytePair Encoding (BPE), 40,000 vocabulary",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "200B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "207B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 207000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Ascend 910 AI processors",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Cluster of servers with multiple devices, connected via ToR and Spine switches",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Sentence pair similarity",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Keyword recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Winograd Schema Challenge",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Common sense reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chinese word prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Large-scale autoregressive language model training with efficient parallel computation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "20TB",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "200B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Large-scale autoregressive pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P203096",
+          "label": "training_environment_scale",
+          "value": "512 to 2048 Ascend processors",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Validation PPL: 15.59",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Validation PPL: 19.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Validation PPL: 17.69",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Textclassification Acc: 74.26, 73.80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SentencePairSimilarity Acc: 59.29, 65.76",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "KeywordRecognition Acc: 50.50, 49.30",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WSC Acc: 73.36, 75.00",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CommonSenseReasoning Acc: 53.42, 54.47",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChineseWPLC PPL: 16.70, 19.18",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "40 (2.6B, 13B), 128 (200B)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "PanGu-$\\alpha$",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "PanGu-$\\alpha$",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "PanGu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2021-04-26",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Huawei",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Auto-parallel computation framework enabling distributed training of large-scale models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Autoregressive pretraining objective specifically adapted for Chinese language generation and understanding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Autoregressive language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialog generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Automatic customer service replies",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Game NPC dialogue design",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Fiction writing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Large-scale autoregressive pretrained Chinese language models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927676",
+    "contribution_ids": [
+      "R1927678",
+      "R1927679"
+    ],
+    "new_contribution_ids": [
+      "R1927678",
+      "R1927679"
+    ],
+    "comparison_updated": null
+  }
+}

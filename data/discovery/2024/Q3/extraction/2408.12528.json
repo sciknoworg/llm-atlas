@@ -1,0 +1,681 @@
+{
+ "arxiv_id": "2408.12528",
+ "status": "completed",
+ "timestamp": "2026-08-29T05:56:07.746911",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2408.12528",
+  "title": "Show-o: One Single Transformer to Unify Multimodal Understanding and Generation",
+  "authors": [
+   "Jinheng Xie",
+   "Weijia Mao",
+   "Zechen Bai",
+   "David Junhao Zhang",
+   "Weihao Wang",
+   "Kevin Qinghong Lin",
+   "Yuchao Gu",
+   "Zhijie Chen",
+   "Zhenheng Yang",
+   "Mike Zheng Shou"
+  ],
+  "abstract": "We present a unified transformer, i.e., Show-o, that unifies multimodal understanding and generation. Unlike fully autoregressive models, Show-o unifies autoregressive and (discrete) diffusion modeling to adaptively handle inputs and outputs of various and mixed modalities. The unified model flexibly supports a wide range of vision-language tasks including visual question-answering, text-to-image generation, text-guided inpainting/extrapolation, and mixed-modality generation. Across various benchmarks, it demonstrates comparable or superior performance to existing individual models with an equivalent or larger number of parameters tailored for understanding or generation. This significantly highlights its potential as a next-generation foundation model. Code and models are released at https://github.com/showlab/Show-o.",
+  "published": "2024-08-22T16:32:32+00:00",
+  "updated": "2025-09-08T02:42:57+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2408.12528v7",
+  "entry_id": "http://arxiv.org/abs/2408.12528v7",
+  "pdf_path": "data/papers/2408.12528.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 81585,
+ "word_count": 7561,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "Show-o",
+   "parameters": "1.3B, 2B, 2.6B, 5.1B, 6.5B, 7B, 8B, 17B, 34B",
+   "parameters_millions": 34000,
+   "model_family": "Show-o",
+   "date_created": "2024-08-22",
+   "organization": "National Research Foundation, Singapore",
+   "innovation": "Omni-attention mechanism: adaptively mixes causal and full attention based on the input sequence format, allowing text tokens to attend causally while image tokens interact fully, differing from prior works that model sequences auto-regressively only; Unified Next Token Prediction (NTP) and Mask Token Prediction (MTP) objectives: combines standard language modeling for text with discrete diffusion modeling for images within a single sequence, enabling seamless multimodal understanding and generation without separate architectures; Discrete diffusion integration: employs MaskGIT-style masking and reconstruction for image tokens, allowing the model to generate images via token prediction rather than continuous diffusion or separate decoders.",
+   "pretraining_architecture": "Transformer",
+   "pretraining_task": "Multimodal alignment, autoregressive language modeling, discrete diffusion modeling",
+   "pretraining_corpus": "LLaVA-Pretrain-558K, publicly available datasets",
+   "finetuning_task": "Instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "48 A100 (80GB) GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Unifying multimodal understanding and generation into a single foundation model.",
+   "application": "Multimodal understanding, text-to-image generation, video understanding and generation, text-guided inpainting and extrapolation.",
+   "paper_title": "Show-o: One Single Transformer to Unify Multimodal Understanding and Generation",
+   "training_corpus_size": "2.0B image-text pairs",
+   "finetuning_data": "Filtered high-quality image-text pairs, instructional data for multimodal understanding, ~2M high-quality multimodal data",
+   "tokenizer": "MAGVIT-v2, CLIP-ViT",
+   "supported_language": "English",
+   "hardware_description": "48 A100 (80GB) GPUs, batch size 1,152",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/showlab/Show-o",
+   "context_length": null,
+   "activated_parameters": "1.3B (dense, all parameters active)",
+   "attention_mechanism": "Causal attention for text tokens, full attention for image tokens; QK-Norm prepended to each attention layer, Omni-attention (adaptive mix of causal and full attention)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Joint training on text, image-class, and image-text data (500K steps) -> text-to-image generation on 35M pairs (1,000K steps) -> fine-tuning on 1M internal pairs -> scaling to 2.0B pairs (500K steps) -> resolution increase to 512x512 (500K steps) -> instruction tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Unified transformer",
+   "vision_encoder": "MAGVIT-v2 lookup-free quantizer (discrete); also explores CLIP-ViT and MAGVIT-v2 continuous representations, CLIP-ViT",
+   "base_model": "MAGVIT-v2, CLIP-ViT",
+   "optimizer_innovation": null,
+   "benchmark_result": "POPE: 80.0; MME: 1097.2; Flickr30k: 62.5; VQAv2(test): 69.4; GQA: 58.0; MMMU: 26.7; VQAv2: 69.4; MMMU: 26.7 (Show-o); POPE: 84.5; MME: 1232.9; Flickr30k: 67.6; VQAv2: 74.7; GQA: 61.0; MMMU: 27.4 (Show-o\u2021); MMU: 5122; SOI: 80.0; EOI: 1097.2; SOT: 62.5; T2I: 69.4; 58.0; 26.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Show-o": {
+   "application": [
+    "Multimodal understanding",
+    "text-to-image generation",
+    "video understanding and generation",
+    "text-guided inpainting and extrapolation."
+   ],
+   "attention_mechanism": [
+    "Causal attention for text tokens",
+    "full attention for image tokens",
+    "Omni-attention (adaptive mix of causal and full attention)"
+   ],
+   "base_model": [
+    "MAGVIT-v2, CLIP-ViT"
+   ],
+   "finetuning_data": [],
+   "finetuning_task": [
+    "Instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Unified transformer"
+   ],
+   "hardware_used": [
+    "48 A100 (80GB) GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Show-o"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [],
+   "parameters": [
+    "1.3B",
+    "2B",
+    "2.6B",
+    "5.1B",
+    "6.5B",
+    "7B",
+    "8B",
+    "17B",
+    "34B"
+   ],
+   "pretraining_architecture": [],
+   "pretraining_corpus": [
+    "LLaVA-Pretrain-558K"
+   ],
+   "pretraining_task": [
+    "Multimodal alignment, autoregressive language modeling, discrete diffusion modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "MAGVIT-v2 lookup-free quantizer (discrete)",
+    "CLIP-ViT"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Show-o": {
+    "attention_mechanism": {
+     "candidates": [
+      "Causal attention for text tokens",
+      "full attention for image tokens",
+      "QK-Norm prepended to each attention layer",
+      "Omni-attention (adaptive mix of causal and full attention)"
+     ],
+     "accepted": [
+      "Causal attention for text tokens",
+      "full attention for image tokens",
+      "Omni-attention (adaptive mix of causal and full attention)"
+     ],
+     "dropped": [
+      {
+       "value": "QK-Norm prepended to each attention layer",
+       "reason": "Describes a normalization technique applied to attention, not the attention mechanism itself."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Filtered high-quality image-text pairs",
+      "instructional data for multimodal understanding",
+      "~2M high-quality multimodal data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Filtered high-quality image-text pairs",
+       "reason": "Describes data characteristics rather than naming a specific dataset."
+      },
+      {
+       "value": "instructional data for multimodal understanding",
+       "reason": "Describes data type and purpose rather than naming a specific dataset."
+      },
+      {
+       "value": "~2M high-quality multimodal data",
+       "reason": "Describes quantity and quality rather than naming a specific dataset."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Show-o"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Show-o",
+       "reason": "Names a specific model rather than a broader category or lineage."
+      }
+     ]
+    },
+    "organization": {
+     "candidates": [
+      "National Research Foundation, Singapore"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "National Research Foundation, Singapore",
+       "reason": "Names a funding agency rather than the developing entity."
+      }
+     ]
+    },
+    "pretraining_architecture": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Transformer'"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "LLaVA-Pretrain-558K",
+      "publicly available datasets"
+     ],
+     "accepted": [
+      "LLaVA-Pretrain-558K"
+     ],
+     "dropped": [
+      {
+       "value": "publicly available datasets",
+       "reason": "Asserts general source type rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unifying multimodal understanding and generation into a single foundation model."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Unifying multimodal understanding and generation into a single foundation model.",
+       "reason": "Describes a solution or goal rather than naming a research problem or challenge."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "MAGVIT-v2 lookup-free quantizer (discrete)",
+      "also explores CLIP-ViT and MAGVIT-v2 continuous representations",
+      "CLIP-ViT"
+     ],
+     "accepted": [
+      "MAGVIT-v2 lookup-free quantizer (discrete)",
+      "CLIP-ViT"
+     ],
+     "dropped": [
+      {
+       "value": "also explores CLIP-ViT and MAGVIT-v2 continuous representations",
+       "reason": "Sentence fragment describing exploration rather than naming a specific component."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 28,
+   "dropped": 10,
+   "llm_calls": 1,
+   "values_sent_to_llm": 23
+  }
+ },
+ "contributions": [
+  {
+   "label": "Show-o",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Show-o",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-08-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Omni-attention mechanism: adaptively mixes causal and full attention based on the input sequence format, allowing text tokens to attend causally while image tokens interact fully, differing from prior works that model sequences auto-regressively only",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified Next Token Prediction (NTP) and Mask Token Prediction (MTP) objectives: combines standard language modeling for text with discrete diffusion modeling for images within a single sequence, enabling seamless multimodal understanding and generation without separate architectures",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Discrete diffusion integration: employs MaskGIT-style masking and reconstruction for image tokens, allowing the model to generate images via token prediction rather than continuous diffusion or separate decoders.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment, autoregressive language modeling, discrete diffusion modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA-Pretrain-558K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "MAGVIT-v2, CLIP-ViT",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "17B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "34B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 34000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "48 A100 (80GB) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "48 A100 (80GB) GPUs, batch size 1,152",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-guided inpainting and extrapolation.",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/showlab/Show-o",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "2.0B image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.3B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal attention for text tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Full attention for image tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Omni-attention (adaptive mix of causal and full attention)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint training on text, image-class, and image-text data (500K steps) -> text-to-image generation on 35M pairs (1,000K steps) -> fine-tuning on 1M internal pairs -> scaling to 2.0B pairs (500K steps) -> resolution increase to 512x512 (500K steps) -> instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Unified transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "MAGVIT-v2 lookup-free quantizer (discrete)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP-ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "MAGVIT-v2, CLIP-ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1097.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2(test): 69.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 58.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 26.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 69.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 26.7 (Show-o)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1232.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k: 67.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 74.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 61.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 27.4 (Show-o\u2021)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMU: 5122",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOI: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "EOI: 1097.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOT: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "T2I: 69.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "58.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "26.7",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1740124",
+  "contribution_ids": [
+   "R1740126",
+   "R1740127",
+   "R1924663"
+  ],
+  "new_contribution_ids": [
+   "R1924663"
+  ],
+  "comparison_updated": null
+ }
+}

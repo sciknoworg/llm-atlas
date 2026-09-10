@@ -1,0 +1,3478 @@
+{
+ "arxiv_id": "2305.06500",
+ "status": "completed",
+ "timestamp": "2026-08-28T03:33:24.700772",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2305.06500",
+  "title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+  "authors": [
+   "Wenliang Dai",
+   "Junnan Li",
+   "Dongxu Li",
+   "Anthony Meng Huat Tiong",
+   "Junqi Zhao",
+   "Weisheng Wang",
+   "Boyang Li",
+   "Pascale Fung",
+   "Steven Hoi"
+  ],
+  "abstract": "Large-scale pre-training and instruction tuning have been successful at creating general-purpose language models with broad competence. However, building general-purpose vision-language models is challenging due to the rich input distributions and task diversity resulting from the additional visual input. Although vision-language pretraining has been widely studied, vision-language instruction tuning remains under-explored. In this paper, we conduct a systematic and comprehensive study on vision-language instruction tuning based on the pretrained BLIP-2 models. We gather 26 publicly available datasets, covering a wide variety of tasks and capabilities, and transform them into instruction tuning format. Additionally, we introduce an instruction-aware Query Transformer, which extracts informative features tailored to the given instruction. Trained on 13 held-in datasets, InstructBLIP attains state-of-the-art zero-shot performance across all 13 held-out datasets, substantially outperforming BLIP-2 and larger Flamingo models. Our models also lead to state-of-the-art performance when finetuned on individual downstream tasks (e.g., 90.7% accuracy on ScienceQA questions with image contexts). Furthermore, we qualitatively demonstrate the advantages of InstructBLIP over concurrent multimodal models. All InstructBLIP models are open-sourced at https://github.com/salesforce/LAVIS/tree/main/projects/instructblip.",
+  "published": "2023-05-11T00:38:10+00:00",
+  "updated": "2023-06-15T08:00:18+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2305.06500v2",
+  "entry_id": "http://arxiv.org/abs/2305.06500v2",
+  "pdf_path": "data/papers/2305.06500.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM instruction tuning)"
+ },
+ "text_length": 55577,
+ "word_count": 3915,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "InstructBLIP",
+   "parameters": "2.7B, 4B, 7B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "BLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce",
+   "innovation": "Instruction-aware Q-Former: takes instruction text tokens as additional input to interact with query embeddings via self-attention layers, encouraging extraction of task-relevant image features for instruction following; Dataset balancing strategy: samples datasets with probabilities proportional to the square root of their sizes to prevent overfitting to larger datasets and underfitting smaller ones.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Instruction tuning",
+   "pretraining_corpus": "COCO, Visual Genome, OK-VQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, VQAv2, Web CapFilt, LLaVA-Instruct-150K",
+   "finetuning_task": "Instruction tuning on 13 held-in datasets, Instruction tuning with language modeling loss, Instruction tuning, Supervised instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "application": "Image captioning, visual reasoning, conversational QA, video QA, OCR-VQA, image classification, detailed image description, reading comprehension",
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "training_corpus_size": "14M image-text pairs",
+   "finetuning_data": "COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, NoCaps, iVQA, IconQA, A-OKVQA, Flickr30K, OKVQA, TextCaps, OCR-VQA, VQAv2, Visual Conversation, ScienceQA, TextVQA, VizWiz, HatefulMemes, VSR, Hateful Memes, MSRVTT-QA, LLaVA-Instruct-150K, COCO, Visual Genome, OK-VQA",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/InstructBLIP; https://github.com/salesforce/LAVIS",
+   "context_length": null,
+   "activated_parameters": "2.7B, 7B (dense)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on BLIP-2 -> Instruction tuning on 13 held-in datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "BLIP-generated synthetic captions",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Learnable projector / Q-Former",
+   "vision_encoder": "ViT (e.g., ViT-G), EVA-CLIP",
+   "base_model": "BLIP-2",
+   "optimizer_innovation": null,
+   "benchmark_result": "90.7% accuracy on ScienceQA questions with image contexts; state-of-the-art zero-shot performance across 13 held-out datasets; substantially outperforms BLIP-2 and larger Flamingo models.; MSRVTT-QA: 47.1% relative improvement over previous SOTA; average relative improvement of 24.8% over Flamingo-80B on six shared datasets; VQAv2: 80.2; GQA: 64.5; OK-VQA: 58.1; TextVQA: 68.5; VizWiz: 52.1; POPE: 88.5; MME: 1835.2; COCO Caption: 100.8; GQA: 67.8; Visual Dialog: 92.5; MSVD QA: 89.0; Web CapFilt: 93.7; NoCaps: 93.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP-FlanT 5",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Research",
+   "innovation": "Instruction-aware visual feature extraction: injects the textual instruction into the Q-Former to guide visual feature extraction from the frozen image encoder; balanced sampling strategy to synchronize learning progress across heterogeneous instruction-tuning datasets.",
+   "pretraining_corpus": "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, visual reasoning, visual conversational QA, video QA, knowledge-grounded QA, image classification, OCR-VQA, image question generation",
+   "license": "open source",
+   "research_problem": "Vision-language instruction tuning for general-purpose multimodal models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Instruction tuning",
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize with pre-trained BLIP-2; freeze image encoder and LLM; fine-tune only the Q-Former on instruction-tuning data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Query Transformer (Q-Former) bridging frozen image encoder and LLM",
+   "vision_encoder": "Frozen image encoder (from BLIP-2)",
+   "base_model": "BLIP-2",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP-Vicuna",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Research",
+   "innovation": "Instruction-aware visual feature extraction: injects the textual instruction into the Q-Former to guide visual feature extraction from the frozen image encoder; balanced sampling strategy to synchronize learning progress across heterogeneous instruction-tuning datasets.",
+   "pretraining_corpus": "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, visual reasoning, visual conversational QA, video QA, knowledge-grounded QA, image classification, OCR-VQA, image question generation",
+   "license": "open source",
+   "research_problem": "Vision-language instruction tuning for general-purpose multimodal models",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Instruction tuning",
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize with pre-trained BLIP-2; freeze image encoder and LLM; fine-tune only the Q-Former on instruction-tuning data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Query Transformer (Q-Former) bridging frozen image encoder and LLM",
+   "vision_encoder": "Frozen image encoder (from BLIP-2)",
+   "base_model": "BLIP-2",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP (FlanT 5-XL)",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Language",
+   "innovation": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling; adapts BLIP-2's modular architecture to various frozen LLMs; employs vocabulary ranking for classification/multi-choice tasks.",
+   "pretraining_corpus": "OKVQA, A-OKVQA, COCO Caption, TextCaps, ScienceQA, VisualDialog, HatefulMemes, VizWiz, iVQA, GQA, IconQA, NoCaps, Flickr30K, MSVD, MSRVTT",
+   "parameters": "3B",
+   "parameters_millions": 3000,
+   "application": "Image captioning, open-ended VQA, classification, multi-choice VQA, video QA, visual dialog, hate speech detection",
+   "license": null,
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Vision-language instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "16 Nvidia A100 (40G) GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NoCaps: 119.9; Flickr30K: 84.5; GQA: 48.4; IconQA: 64.8; VizWiz: 50.0; iVQA: 46.6; HM: 46.6; SciQA: 56.6; VisualDialog: 32.7; MSVD: 70.4; MSRVTT: 43.4; A-OKVQA: 25.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP (FlanT 5-XXL)",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Language",
+   "innovation": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling; adapts BLIP-2's modular architecture to various frozen LLMs; employs vocabulary ranking for classification/multi-choice tasks.",
+   "pretraining_corpus": "OKVQA, A-OKVQA, COCO Caption, TextCaps, ScienceQA, VisualDialog, HatefulMemes, VizWiz, iVQA, GQA, IconQA, NoCaps, Flickr30K, MSVD, MSRVTT",
+   "parameters": "11B",
+   "parameters_millions": 11000,
+   "application": "Image captioning, open-ended VQA, classification, multi-choice VQA, video QA, visual dialog, hate speech detection",
+   "license": null,
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Vision-language instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "16 Nvidia A100 (40G) GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NoCaps: 120.0; Flickr30K: 83.5; GQA: 47.9; IconQA: 65.6; VizWiz: 51.2; iVQA: 46.6; HM: 48.5; SciQA: 54.1; VisualDialog: 30.9; MSVD: 70.6; MSRVTT: 44.3; A-OKVQA: 25.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP (Vicuna-7B)",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Language",
+   "innovation": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling; adapts BLIP-2's modular architecture to various frozen LLMs; employs vocabulary ranking for classification/multi-choice tasks.",
+   "pretraining_corpus": "OKVQA, A-OKVQA, COCO Caption, TextCaps, ScienceQA, VisualDialog, HatefulMemes, VizWiz, iVQA, GQA, IconQA, NoCaps, Flickr30K, MSVD, MSRVTT",
+   "parameters": "7B",
+   "parameters_millions": 7000,
+   "application": "Image captioning, open-ended VQA, classification, multi-choice VQA, video QA, visual dialog, hate speech detection",
+   "license": null,
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Vision-language instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "16 Nvidia A100 (40G) GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NoCaps: 123.1; Flickr30K: 82.4; GQA: 49.2; IconQA: 54.3; VizWiz: 43.1; iVQA: 50.1; HM: 45.2; SciQA: 59.6; VisualDialog: 34.5; MSVD: 60.5; MSRVTT: 41.8; A-OKVQA: 22.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP (Vicuna-13B)",
+   "model_family": "InstructBLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce Ai Language",
+   "innovation": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling; adapts BLIP-2's modular architecture to various frozen LLMs; employs vocabulary ranking for classification/multi-choice tasks.",
+   "pretraining_corpus": "OKVQA, A-OKVQA, COCO Caption, TextCaps, ScienceQA, VisualDialog, HatefulMemes, VizWiz, iVQA, GQA, IconQA, NoCaps, Flickr30K, MSVD, MSRVTT",
+   "parameters": "13B",
+   "parameters_millions": 13000,
+   "application": "Image captioning, open-ended VQA, classification, multi-choice VQA, video QA, visual dialog, hate speech detection",
+   "license": null,
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Vision-language instruction tuning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "16 Nvidia A100 (40G) GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "NoCaps: 121.9; Flickr30K: 82.8; GQA: 49.5; IconQA: 52.1; VizWiz: 44.8; iVQA: 50.7; HM: 45.4; SciQA: 57.5; VisualDialog: 33.4; MSVD: 63.1; MSRVTT: 41.2; A-OKVQA: 24.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InstructBLIP (FlanT 5 XXL)",
+   "model_family": "BLIP",
+   "date_created": "2023-05-11",
+   "organization": "Salesforce",
+   "innovation": "Instruction-aware visual feature extraction mechanism; instruction tuning framework that significantly improves zero-shot generalization to unseen tasks over multitask learning; reduces trainable parameters from 1.2B to 188M during downstream finetuning by freezing the visual encoder.",
+   "pretraining_corpus": "Vision-language instruction data (template-based converted datasets and LLM-generated data)",
+   "parameters": "1.2B",
+   "parameters_millions": 1200,
+   "application": "Visual question answering, image captioning, visual reasoning, multi-turn conversations, knowledge-grounded image description",
+   "license": null,
+   "research_problem": "General-purpose vision-language models with instruction tuning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Instruction tuning / Vision-language generation",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Downstream task finetuning (VQA, captioning, etc.)",
+   "finetuning_data": "A-OKVQA, ScienceQA, OCR-VQA, OKVQA, DirectAnswer, Multi-choice IMG",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "InstructBLIP: Towards General-purpose Vision-Language Models with Instruction Tuning",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Q-Former extracts visual features as input to LLMs",
+   "vision_encoder": "Frozen visual encoder (ViT)",
+   "base_model": "BLIP-2, FlanT5 XXL",
+   "optimizer_innovation": null,
+   "benchmark_result": "A-OKVQA Val 90.7, Test 90.7; ScienceQA IMG Val 73.3, Test 73.3; OCR-VQA Val 55.5, Test 55.5; OKVQA Val 57.1, Test 57.1; DirectAnswer Val 54.8, Test 54.8; Multi-choice IMG Val 81.0, Test 76.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 12,
+ "models_after_merge": 8,
+ "validated_rows": {
+  "InstructBLIP": {
+   "application": [
+    "Image captioning",
+    "visual reasoning",
+    "conversational QA",
+    "video QA",
+    "image classification",
+    "detailed image description",
+    "reading comprehension"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "BLIP-2"
+   ],
+   "finetuning_data": [
+    "COCO Caption",
+    "GQA",
+    "Visual Dialog",
+    "MSVD QA",
+    "Web CapFilt",
+    "NoCaps",
+    "iVQA",
+    "IconQA",
+    "A-OKVQA",
+    "Flickr30K",
+    "OKVQA",
+    "TextCaps",
+    "OCR-VQA",
+    "VQAv2",
+    "Visual Conversation",
+    "ScienceQA",
+    "TextVQA",
+    "VizWiz",
+    "HatefulMemes",
+    "VSR",
+    "Hateful Memes",
+    "MSRVTT-QA",
+    "LLaVA-Instruct-150K",
+    "COCO",
+    "Visual Genome",
+    "OK-VQA"
+   ],
+   "finetuning_task": [
+    "Instruction tuning on 13 held-in datasets",
+    "Instruction tuning with language modeling loss",
+    "Instruction tuning",
+    "Supervised instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Learnable projector / Q-Former"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "BLIP"
+   ],
+   "model_name": [
+    "InstructBLIP"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "2.7B",
+    "4B",
+    "7B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "OK-VQA",
+    "A-OKVQA",
+    "ScienceQA",
+    "TextCaps",
+    "OCR-VQA",
+    "VQAv2",
+    "Web CapFilt",
+    "LLaVA-Instruct-150K"
+   ],
+   "pretraining_task": [
+    "Instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [],
+   "vision_encoder": [
+    "ViT (e.g., ViT-G)",
+    "EVA-CLIP"
+   ]
+  },
+  "InstructBLIP-FlanT 5": {
+   "application": [
+    "Image captioning",
+    "visual reasoning",
+    "visual conversational QA",
+    "video QA",
+    "knowledge-grounded QA",
+    "image classification",
+    "image question generation"
+   ],
+   "base_model": [
+    "BLIP-2"
+   ],
+   "finetuning_task": [
+    "Instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Query Transformer (Q-Former) bridging frozen image encoder and LLM"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP-FlanT 5"
+   ],
+   "organization": [
+    "Salesforce Ai Research"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)"
+   ],
+   "pretraining_task": [
+    "Instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Frozen image encoder (from BLIP-2)"
+   ]
+  },
+  "InstructBLIP-Vicuna": {
+   "application": [
+    "Image captioning",
+    "visual reasoning",
+    "visual conversational QA",
+    "video QA",
+    "knowledge-grounded QA",
+    "image classification",
+    "image question generation"
+   ],
+   "base_model": [
+    "BLIP-2"
+   ],
+   "finetuning_task": [
+    "Instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Query Transformer (Q-Former) bridging frozen image encoder and LLM"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP-Vicuna"
+   ],
+   "organization": [
+    "Salesforce Ai Research"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)"
+   ],
+   "pretraining_task": [
+    "Instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Frozen image encoder (from BLIP-2)"
+   ]
+  },
+  "InstructBLIP (FlanT 5-XL)": {
+   "application": [
+    "Image captioning",
+    "open-ended VQA",
+    "classification",
+    "multi-choice VQA",
+    "video QA",
+    "visual dialog",
+    "hate speech detection"
+   ],
+   "hardware_used": [
+    "16 Nvidia A100 (40G) GPUs"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP (FlanT 5-XL)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce Ai Language"
+   ],
+   "parameters": [
+    "3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "OKVQA",
+    "A-OKVQA",
+    "COCO Caption",
+    "TextCaps",
+    "ScienceQA",
+    "VisualDialog",
+    "HatefulMemes",
+    "VizWiz",
+    "iVQA",
+    "GQA",
+    "IconQA",
+    "NoCaps",
+    "Flickr30K",
+    "MSVD",
+    "MSRVTT"
+   ],
+   "pretraining_task": [
+    "Vision-language instruction tuning"
+   ],
+   "research_problem": []
+  },
+  "InstructBLIP (FlanT 5-XXL)": {
+   "application": [
+    "Image captioning",
+    "open-ended VQA",
+    "classification",
+    "multi-choice VQA",
+    "video QA",
+    "visual dialog",
+    "hate speech detection"
+   ],
+   "hardware_used": [
+    "16 Nvidia A100 (40G) GPUs"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP (FlanT 5-XXL)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce Ai Language"
+   ],
+   "parameters": [
+    "11B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "OKVQA",
+    "A-OKVQA",
+    "COCO Caption",
+    "TextCaps",
+    "ScienceQA",
+    "VisualDialog",
+    "HatefulMemes",
+    "VizWiz",
+    "iVQA",
+    "GQA",
+    "IconQA",
+    "NoCaps",
+    "Flickr30K",
+    "MSVD",
+    "MSRVTT"
+   ],
+   "pretraining_task": [
+    "Vision-language instruction tuning"
+   ],
+   "research_problem": []
+  },
+  "InstructBLIP (Vicuna-7B)": {
+   "application": [
+    "Image captioning",
+    "open-ended VQA",
+    "classification",
+    "multi-choice VQA",
+    "video QA",
+    "visual dialog",
+    "hate speech detection"
+   ],
+   "hardware_used": [
+    "16 Nvidia A100 (40G) GPUs"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP (Vicuna-7B)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce Ai Language"
+   ],
+   "parameters": [
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "OKVQA",
+    "A-OKVQA",
+    "COCO Caption",
+    "TextCaps",
+    "ScienceQA",
+    "VisualDialog",
+    "HatefulMemes",
+    "VizWiz",
+    "iVQA",
+    "GQA",
+    "IconQA",
+    "NoCaps",
+    "Flickr30K",
+    "MSVD",
+    "MSRVTT"
+   ],
+   "pretraining_task": [
+    "Vision-language instruction tuning"
+   ],
+   "research_problem": []
+  },
+  "InstructBLIP (Vicuna-13B)": {
+   "application": [
+    "Image captioning",
+    "open-ended VQA",
+    "classification",
+    "multi-choice VQA",
+    "video QA",
+    "visual dialog",
+    "hate speech detection"
+   ],
+   "hardware_used": [
+    "16 Nvidia A100 (40G) GPUs"
+   ],
+   "model_family": [
+    "InstructBLIP"
+   ],
+   "model_name": [
+    "InstructBLIP (Vicuna-13B)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce Ai Language"
+   ],
+   "parameters": [
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "OKVQA",
+    "A-OKVQA",
+    "COCO Caption",
+    "TextCaps",
+    "ScienceQA",
+    "VisualDialog",
+    "HatefulMemes",
+    "VizWiz",
+    "iVQA",
+    "GQA",
+    "IconQA",
+    "NoCaps",
+    "Flickr30K",
+    "MSVD",
+    "MSRVTT"
+   ],
+   "pretraining_task": [
+    "Vision-language instruction tuning"
+   ],
+   "research_problem": []
+  },
+  "InstructBLIP (FlanT 5 XXL)": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "multi-turn conversations",
+    "knowledge-grounded image description"
+   ],
+   "base_model": [
+    "BLIP-2, FlanT5 XXL"
+   ],
+   "finetuning_data": [
+    "A-OKVQA",
+    "ScienceQA",
+    "OCR-VQA",
+    "OKVQA",
+    "DirectAnswer",
+    "Multi-choice IMG"
+   ],
+   "finetuning_task": [
+    "Downstream task finetuning (VQA, captioning, etc.)"
+   ],
+   "fusion_architecture": [],
+   "model_family": [
+    "BLIP"
+   ],
+   "model_name": [
+    "InstructBLIP (FlanT 5 XXL)"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "1.2B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Instruction tuning / Vision-language generation"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Frozen visual encoder (ViT)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "InstructBLIP": {
+    "application": {
+     "candidates": [
+      "Image captioning",
+      "visual reasoning",
+      "conversational QA",
+      "video QA",
+      "OCR-VQA",
+      "image classification",
+      "detailed image description",
+      "reading comprehension"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual reasoning",
+      "conversational QA",
+      "video QA",
+      "image classification",
+      "detailed image description",
+      "reading comprehension"
+     ],
+     "dropped": [
+      {
+       "value": "OCR-VQA",
+       "reason": "Dataset name, not a concrete task or domain"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "BLIP-generated synthetic captions"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "BLIP-generated synthetic captions",
+       "reason": "Names the generated data rather than the generation method or technique"
+      }
+     ]
+    }
+   },
+   "InstructBLIP-FlanT 5": {
+    "application": {
+     "candidates": [
+      "Image captioning",
+      "visual reasoning",
+      "visual conversational QA",
+      "video QA",
+      "knowledge-grounded QA",
+      "image classification",
+      "OCR-VQA",
+      "image question generation"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual reasoning",
+      "visual conversational QA",
+      "video QA",
+      "knowledge-grounded QA",
+      "image classification",
+      "image question generation"
+     ],
+     "dropped": [
+      {
+       "value": "OCR-VQA",
+       "reason": "Dataset name, not a concrete task or domain"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Vision-language instruction tuning for general-purpose multimodal models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-language instruction tuning for general-purpose multimodal models",
+       "reason": "Names a method/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP-Vicuna": {
+    "application": {
+     "candidates": [
+      "Image captioning",
+      "visual reasoning",
+      "visual conversational QA",
+      "video QA",
+      "knowledge-grounded QA",
+      "image classification",
+      "OCR-VQA",
+      "image question generation"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual reasoning",
+      "visual conversational QA",
+      "video QA",
+      "knowledge-grounded QA",
+      "image classification",
+      "image question generation"
+     ],
+     "dropped": [
+      {
+       "value": "OCR-VQA",
+       "reason": "Dataset name, not a concrete task or domain"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Vision-language instruction tuning for general-purpose multimodal models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-language instruction tuning for general-purpose multimodal models",
+       "reason": "Names a method/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP (FlanT 5-XL)": {
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP (FlanT 5-XXL)": {
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP (Vicuna-7B)": {
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP (Vicuna-13B)": {
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "InstructBLIP (FlanT 5 XXL)": {
+    "fusion_architecture": {
+     "candidates": [
+      "Q-Former extracts visual features as input to LLMs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Q-Former extracts visual features as input to LLMs",
+       "reason": "Describes functionality rather than naming the architectural design"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Vision-language instruction data (template-based converted datasets and LLM-generated data)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-language instruction data (template-based converted datasets and LLM-generated data)",
+       "reason": "Describes data type and source rather than naming a specific corpus or dataset"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "General-purpose vision-language models with instruction tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose vision-language models with instruction tuning",
+       "reason": "Names a model type/solution rather than a research problem or challenge"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 244,
+   "dropped": 14,
+   "llm_calls": 1,
+   "values_sent_to_llm": 68
+  }
+ },
+ "contributions": [
+  {
+   "label": "InstructBLIP",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction-aware Q-Former: takes instruction text tokens as additional input to interact with query embeddings via self-attention layers, encouraging extraction of task-relevant image features for instruction following",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dataset balancing strategy: samples datasets with probabilities proportional to the square root of their sizes to prevent overfitting to larger datasets and underfitting smaller ones.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OK-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OCR-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQAv2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Web CapFilt",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA-Instruct-150K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning on 13 held-in datasets",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning with language modeling loss",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Conversational QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Detailed image description",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/InstructBLIP",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/LAVIS",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "14M image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Caption",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Dialog",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSVD QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Web CapFilt",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IconQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCR-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Conversation",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HatefulMemes",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VSR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Hateful Memes",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSRVTT-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Instruct-150K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OK-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.7B, 7B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on BLIP-2 -> Instruction tuning on 13 held-in datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Learnable projector / Q-Former",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (e.g., ViT-G)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA-CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BLIP-2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "90.7% accuracy on ScienceQA questions with image contexts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art zero-shot performance across 13 held-out datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Substantially outperforms BLIP-2 and larger Flamingo models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT-QA: 47.1% relative improvement over previous SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average relative improvement of 24.8% over Flamingo-80B on six shared datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 80.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA: 58.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 52.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1835.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Caption: 100.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 67.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Dialog: 92.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD QA: 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Web CapFilt: 93.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 93.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP-FlanT 5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP-FlanT 5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Research",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction-aware visual feature extraction: injects the textual instruction into the Q-Former to guide visual feature extraction from the frozen image encoder",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Balanced sampling strategy to synchronize learning progress across heterogeneous instruction-tuning datasets.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual conversational QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-grounded QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image question generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize with pre-trained BLIP-2; freeze image encoder and LLM; fine-tune only the Q-Former on instruction-tuning data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Query Transformer (Q-Former) bridging frozen image encoder and LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Frozen image encoder (from BLIP-2)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BLIP-2",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP-Vicuna",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP-Vicuna",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Research",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction-aware visual feature extraction: injects the textual instruction into the Q-Former to guide visual feature extraction from the frozen image encoder",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Balanced sampling strategy to synchronize learning progress across heterogeneous instruction-tuning datasets.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "26 vision-language datasets transformed into instruction-tuning format (COCO Caption, GQA, Visual Dialog, MSVD QA, Web CapFilt, Visual Spatial, MSRVTT QA, NoCaps, iVQA, IconQA, Knowledge Grounded, Flickr30K, OKVQA, A-OKVQA, ScienceQA, TextCaps, OCR-VQA, LLaVA-Instruct-150K, TextVQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual conversational QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-grounded QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image question generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize with pre-trained BLIP-2; freeze image encoder and LLM; fine-tune only the Q-Former on instruction-tuning data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Query Transformer (Q-Former) bridging frozen image encoder and LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Frozen image encoder (from BLIP-2)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BLIP-2",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP (FlanT 5-XL)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP (FlanT 5-XL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adapts BLIP-2's modular architecture to various frozen LLMs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs vocabulary ranking for classification/multi-choice tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualDialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HatefulMemes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NoCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSVD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSRVTT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 Nvidia A100 (40G) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-choice VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Hate speech detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 119.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 48.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IconQA: 64.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 50.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IVQA: 46.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HM: 46.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQA: 56.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisualDialog: 32.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD: 70.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT: 43.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "A-OKVQA: 25.0",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP (FlanT 5-XXL)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP (FlanT 5-XXL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adapts BLIP-2's modular architecture to various frozen LLMs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs vocabulary ranking for classification/multi-choice tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualDialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HatefulMemes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NoCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSVD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSRVTT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "11B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 11000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 Nvidia A100 (40G) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-choice VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Hate speech detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 120.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 83.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 47.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IconQA: 65.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IVQA: 46.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HM: 48.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQA: 54.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisualDialog: 30.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD: 70.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT: 44.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "A-OKVQA: 25.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP (Vicuna-7B)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP (Vicuna-7B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adapts BLIP-2's modular architecture to various frozen LLMs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs vocabulary ranking for classification/multi-choice tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualDialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HatefulMemes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NoCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSVD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSRVTT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 Nvidia A100 (40G) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-choice VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Hate speech detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 123.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 82.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 49.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IconQA: 54.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 43.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IVQA: 50.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HM: 45.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQA: 59.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisualDialog: 34.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD: 60.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT: 41.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "A-OKVQA: 22.1",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP (Vicuna-13B)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP (Vicuna-13B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InstructBLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce Ai Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vision-language instruction tuning with instruction-aware visual features and balanced dataset sampling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adapts BLIP-2's modular architecture to various frozen LLMs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs vocabulary ranking for classification/multi-choice tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualDialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HatefulMemes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NoCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSVD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSRVTT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 Nvidia A100 (40G) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-choice VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual dialog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Hate speech detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Initialize from BLIP-2 checkpoints -> instruction tuning (finetune Q-Former, freeze image encoder and LLM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 121.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K: 82.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 49.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IconQA: 52.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 44.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IVQA: 50.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HM: 45.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQA: 57.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisualDialog: 33.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD: 63.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT: 41.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "A-OKVQA: 24.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InstructBLIP (FlanT 5 XXL)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InstructBLIP (FlanT 5 XXL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-05-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction-aware visual feature extraction mechanism",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Instruction tuning framework that significantly improves zero-shot generalization to unseen tasks over multitask learning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reduces trainable parameters from 1.2B to 188M during downstream finetuning by freezing the visual encoder.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Instruction tuning / Vision-language generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Downstream task finetuning (VQA, captioning, etc.)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1200,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn conversations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-grounded image description",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCR-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DirectAnswer",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi-choice IMG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Frozen visual encoder (ViT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BLIP-2, FlanT5 XXL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "A-OKVQA Val 90.7, Test 90.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA IMG Val 73.3, Test 73.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCR-VQA Val 55.5, Test 55.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA Val 57.1, Test 57.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DirectAnswer Val 54.8, Test 54.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-choice IMG Val 81.0, Test 76.7",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1777176",
+  "contribution_ids": [
+   "R1777178",
+   "R1777179",
+   "R1777180",
+   "R1777181",
+   "R1777182",
+   "R1777183",
+   "R1923574",
+   "R1923590",
+   "R1923599",
+   "R1923601",
+   "R1923616",
+   "R1923619",
+   "R1923622",
+   "R1923625"
+  ],
+  "new_contribution_ids": [
+   "R1923574",
+   "R1923590",
+   "R1923599",
+   "R1923601",
+   "R1923616",
+   "R1923619",
+   "R1923622",
+   "R1923625"
+  ],
+  "comparison_updated": null
+ }
+}

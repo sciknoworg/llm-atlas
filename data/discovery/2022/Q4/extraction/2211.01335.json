@@ -1,0 +1,3449 @@
+{
+ "arxiv_id": "2211.01335",
+ "status": "completed",
+ "timestamp": "2026-08-28T00:37:24.898399",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2211.01335",
+  "title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+  "authors": [
+   "An Yang",
+   "Junshu Pan",
+   "Junyang Lin",
+   "Rui Men",
+   "Yichang Zhang",
+   "Jingren Zhou",
+   "Chang Zhou"
+  ],
+  "abstract": "The tremendous success of CLIP (Radford et al., 2021) has promoted the research and application of contrastive learning for vision-language pretraining. In this work, we construct a large-scale dataset of image-text pairs in Chinese, where most data are retrieved from publicly available datasets, and we pretrain Chinese CLIP models on the new dataset. We develop 5 Chinese CLIP models of multiple sizes, spanning from 77 to 958 million parameters. Furthermore, we propose a two-stage pretraining method, where the model is first trained with the image encoder frozen and then trained with all parameters being optimized, to achieve enhanced model performance. Our comprehensive experiments demonstrate that Chinese CLIP can achieve the state-of-the-art performance on MUGE, Flickr30K-CN, and COCO-CN in the setups of zero-shot learning and finetuning, and it is able to achieve competitive performance in zero-shot image classification based on the evaluation on the ELEVATER benchmark (Li et al., 2022). We have released our codes, models, and demos in https://github.com/OFA-Sys/Chinese-CLIP",
+  "published": "2022-11-02T17:47:23+00:00",
+  "updated": "2023-05-23T01:28:21+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2211.01335v3",
+  "entry_id": "http://arxiv.org/abs/2211.01335v3",
+  "pdf_path": "data/papers/2211.01335.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 65541,
+ "word_count": 6713,
+ "models_extracted": 20,
+ "extraction_data": [
+  {
+   "model_name": "Chinese CLIP",
+   "parameters": "SWIN-L, RN50, VIT-B/16, SWIN-B, VIT-L/14, 77M, 188M, 406M, 958M, 3B",
+   "parameters_millions": 3000,
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Two-stage pretraining method: Stage 1 uses Locked-Image Tuning (freezing the image encoder and optimizing only the text encoder) to inherit from foundation models; Stage 2 uses contrastive tuning (unfreezing and optimizing both encoders) to effectively transfer to language-specific Chinese data.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive learning (image-text matching)",
+   "pretraining_corpus": "LAION-5B (zh), Wukong dataset, translated Visual Genome, MSCOCO",
+   "finetuning_task": "Zero-shot learning, finetuning, image classification, Zero-shot classification, fine-tuning on cross-modal retrieval",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Vision-language pretraining in Chinese / transferring foundation models to language-specific scenarios",
+   "application": "Cross-modal retrieval, zero-shot classification, image generation foundation model, search engine, recommender system",
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "training_corpus_size": "~200 million image-text pairs",
+   "finetuning_data": "MUGE, Flickr30K-CN, COCO-CN, ELEVATER benchmark, ICR dataset",
+   "tokenizer": "Chinese RoBERTa tokenizer",
+   "supported_language": "Chinese",
+   "hardware_description": "64 NVIDIA V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "77M (dense, all parameters active)",
+   "attention_mechanism": "Standard self-attention (ResNet/ViT/RoBERTa), Standard self-attention (ViT/RoBERTa)",
+   "context_length_max": "128 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: Locked-Image Tuning (Stage 1) -> Contrastive Tuning (Stage 2)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive loss (separate encoders)",
+   "vision_encoder": "ViT-B/16, ResNet-50, ViT-B/32, ViT-L/14, RN50, Swin-B, Swin-L, Swin-ViT-H/14",
+   "base_model": "OpenAI CLIP (vision encoder), RoBERTa-wwm-Chinese (text encoder)",
+   "optimizer_innovation": null,
+   "benchmark_result": "SOTA on MUGE, Flickr30K-CN, COCO-CN (zero-shot and finetuning); competitive on ELEVATER (zero-shot image classification); MR 42.6 (Tiny); MR 47.4 (Base); State-of-the-art on multiple cross-modal retrieval datasets in zero-shot and fine-tuning; competitive on 10 zero-shot image classification datasets; State-of-the-art on cross-modal retrieval tasks with long texts; zero-shot classification on 20 datasets (Win ELEVATER track)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CN-CLIP",
+   "parameters": "25M, 86M, 300M, 632M",
+   "parameters_millions": 632,
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining specifically for Chinese; a two-stage training method; systematic handcrafted prompt engineering to improve zero-shot classification performance; ONNX/TensorRT deployment pipeline for inference acceleration without accuracy loss.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive learning",
+   "pretraining_corpus": "Internal image-text pairs (~20M), machine-translated COCO",
+   "finetuning_task": "Contrastive tuning for cross-modal retrieval",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Cross-modal representation learning and zero-shot classification for Chinese language and images",
+   "application": "Zero-shot image classification, image-text retrieval, Chinese multimodal understanding",
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "training_corpus_size": null,
+   "finetuning_data": "MUGE-Retrieval, Flickr30K-CN, COCO-CN",
+   "tokenizer": "BPE",
+   "supported_language": "Chinese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage contrastive pretraining (Stage 1 general, Stage 2 Chinese adaptation); switching stages boosts performance",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive dual-encoder (similarity-based)",
+   "vision_encoder": "ResNet-50 (RN50), ViT-B/16, ViT-B/32, ViT-L/14, ResNet-50, ViT-H/14",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MUGE-Retrieval MR: 42.6 (zero-shot) / 68.6 (finetuning); Flickr30K-CN MR: 48.8 / 76.0; COCO-CN MR: 48.1 / 81.3; MUGE-Retrieval MR: 52.1 / 76.7; Flickr30K-CN MR: 62.7 / 86.9; COCO-CN MR: 62.2 / 86.6; MUGE-Retrieval MR: 56.3 / 79.8; Flickr30K-CN MR: 68.0 / 89.7; COCO-CN MR: 64.0 / 89.2; CIFAR10: 96.0; CIFAR100: 79.7; DTD: 51.2; EuroSAT: 52.0; FER: 55.1; FGVC: 26.2; KITTI: 49.9; MNIST: 79.4; PatchCamelyon: 63.5; Pascal VOC: 84.9; ImageNet: 59.6; Caltech-101: 90.6; CIFAR-10: 96.0; CIFAR-100: 79.7; Country-211: 25.3; FER-2013: 49.2; FGVC-Aircraft: 26.2; Food-101: 74.6; GTSRB: 38.5; Hateful-Memes: 54.7; KITTI-Distance: 39.1; OxfordFlowers-102: 68.4; Oxford-IIITPets: 83.5; PatchCamelyon: 52.4; Rendered-SST2: 61.0; RESISC-45: 66.9; Stanford-Cars: 71.8; VOC-2007: 84.9; MUGE-Retrieval MR: 63.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CN-CLIP Huge",
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining tailored for Chinese; scales to a huge model size (ViT-H/14) and uses ~20M high-quality internal image-text pairs plus machine-translated COCO to achieve state-of-the-art cross-modal retrieval and zero-shot classification.",
+   "pretraining_corpus": "Internal image-text pairs (~20M), machine-translated COCO",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Cross-modal retrieval, zero-shot classification, e-commerce",
+   "license": "Apache 2.0",
+   "research_problem": "Chinese multimodal representation learning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive learning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Contrastive tuning for cross-modal retrieval",
+   "finetuning_data": "MUGE-Retrieval, Flickr30K-CN, COCO-CN",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "Chinese",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage contrastive pretraining (Stage 1 general, Stage 2 Chinese adaptation); switching stages boosts performance",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive dual-encoder (similarity-based)",
+   "vision_encoder": "ViT-H/14",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MUGE-Retrieval MR: 63.0 / 84.1; Flickr30K-CN MR: 71.2 / 91.4; COCO-CN MR: 69.2 / 89.9",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CN-CLIP RN 50",
+   "parameters": "77M, 110M, 300M, 958M",
+   "parameters_millions": 958,
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining specifically for Chinese; scaling architecture from ResNet-50 to ViT-H/14; continued pretraining strategy with positional embedding interpolation to adapt to larger resolutions.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive vision-language pretraining",
+   "pretraining_corpus": "LAION-400M (Chinese subset), CC12M, and other Chinese image-text datasets",
+   "finetuning_task": "Cross-modal retrieval, image classification",
+   "optimizer": null,
+   "hardware_used": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision-language pretraining for Chinese",
+   "application": "Image classification, cross-modal retrieval, zero-shot classification",
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "training_corpus_size": null,
+   "finetuning_data": "MUGE, Flickr30K-CN, COCO-CN, ICR",
+   "tokenizer": null,
+   "supported_language": "Chinese",
+   "hardware_description": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ResNet-50, ViT-B/16, ViT-L/14, ViT-H/14",
+   "base_model": "OpenAI CLIP (for templates/translation)",
+   "optimizer_innovation": null,
+   "benchmark_result": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16); R2D2: 85.2, 89.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "ONNX, TensorRT"
+  },
+  {
+   "model_name": "CN-CLIP ViT-B/16",
+   "parameters": "77M, 110M, 300M, 958M",
+   "parameters_millions": 958,
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining specifically for Chinese; scaling architecture from ResNet-50 to ViT-H/14; continued pretraining strategy with positional embedding interpolation to adapt to larger resolutions.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive vision-language pretraining",
+   "pretraining_corpus": "LAION-400M (Chinese subset), CC12M, and other Chinese image-text datasets",
+   "finetuning_task": "Cross-modal retrieval, image classification",
+   "optimizer": null,
+   "hardware_used": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision-language pretraining for Chinese",
+   "application": "Image classification, cross-modal retrieval, zero-shot classification",
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "training_corpus_size": null,
+   "finetuning_data": "MUGE, Flickr30K-CN, COCO-CN, ICR",
+   "tokenizer": null,
+   "supported_language": "Chinese",
+   "hardware_description": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ResNet-50, ViT-B/16, ViT-L/14, ViT-H/14",
+   "base_model": "OpenAI CLIP (for templates/translation)",
+   "optimizer_innovation": null,
+   "benchmark_result": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16); R2D2: 85.2, 89.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "ONNX, TensorRT"
+  },
+  {
+   "model_name": "Chinese CLIP Large-336",
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining adapted for Chinese text using Chinese RoBERTa models; systematic scaling across 5 sizes (ResNet-50 to ViT-H/14) with image positional embedding interpolation for larger resolutions; two-stage pretraining (frozen image encoder then full fine-tuning)",
+   "pretraining_corpus": null,
+   "parameters": "407M",
+   "parameters_millions": 958,
+   "application": "Cross-modal retrieval, zero-shot image classification, Chinese vision-language understanding",
+   "license": null,
+   "research_problem": "Cross-modal retrieval, vision-language pretraining for Chinese",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive vision-language pretraining (image-text matching)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "ICR dataset",
+   "optimizer": "AdamW",
+   "tokenizer": "Chinese RoBERTa tokenizer (vocab size 21,128)",
+   "context_length": null,
+   "supported_language": "Chinese",
+   "hardware_used": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+   "hardware_description": "128 NVIDIA A100 GPUs",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "activated_parameters": "407M (dense, all parameters active)",
+   "attention_mechanism": "Standard self-attention (ViT/RoBERTa)",
+   "context_length_max": "128 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: Stage 1 (frozen image encoder, contrastive loss), Stage 2 (unfreeze image encoder, update all parameters); positional embedding interpolation for 336x336 resolution",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive (image-text matching)",
+   "vision_encoder": "ViT-L/14",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on cross-modal retrieval tasks with long texts; zero-shot classification on 20 datasets (Win ELEVATER track)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Chinese CLIP Huge",
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining adapted for Chinese text using Chinese RoBERTa models; systematic scaling across 5 sizes (ResNet-50 to ViT-H/14) with image positional embedding interpolation for larger resolutions; two-stage pretraining (frozen image encoder then full fine-tuning)",
+   "pretraining_corpus": null,
+   "parameters": "958M",
+   "parameters_millions": 958,
+   "application": "Cross-modal retrieval, zero-shot image classification, Chinese vision-language understanding",
+   "license": null,
+   "research_problem": "Cross-modal retrieval, vision-language pretraining for Chinese",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive vision-language pretraining (image-text matching)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "ICR dataset",
+   "optimizer": "AdamW",
+   "tokenizer": "Chinese RoBERTa tokenizer (vocab size 21,128)",
+   "context_length": null,
+   "supported_language": "Chinese",
+   "hardware_used": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+   "hardware_description": "184 NVIDIA A100 GPUs",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "activated_parameters": "958M (dense, all parameters active)",
+   "attention_mechanism": "Standard self-attention (ViT/RoBERTa)",
+   "context_length_max": "128 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: Stage 1 (frozen image encoder, contrastive loss), Stage 2 (unfreeze image encoder, update all parameters)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive (image-text matching)",
+   "vision_encoder": "ViT-H/14",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on cross-modal retrieval tasks with long texts; zero-shot classification on 20 datasets (Win ELEVATER track)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "CN-CLIP ViT-L/14",
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining tailored for Chinese; systematic scaling of model size consistently improves performance; deployment optimizations via ONNX and TensorRT for faster inference.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image classification, cross-modal retrieval, zero-shot classification",
+   "license": null,
+   "research_problem": "Vision-language pretraining in Chinese",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive language-image pretraining",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Cross-modal retrieval, image classification",
+   "finetuning_data": "MUGE, Flickr30K-CN, COCO-CN, ICR",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "Chinese",
+   "hardware_used": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+   "hardware_description": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ViT-L/14",
+   "base_model": "OpenAI CLIP (for templates/translation)",
+   "optimizer_innovation": null,
+   "benchmark_result": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16); R2D2: 85.2, 89.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "ONNX, TensorRT"
+  },
+  {
+   "model_name": "CN-CLIP ViT-H/14",
+   "model_family": "CLIP",
+   "date_created": "2022-11-02",
+   "organization": "Alibaba",
+   "innovation": "Contrastive vision-language pretraining tailored for Chinese; systematic scaling of model size consistently improves performance; deployment optimizations via ONNX and TensorRT for faster inference.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image classification, cross-modal retrieval, zero-shot classification",
+   "license": null,
+   "research_problem": "Vision-language pretraining in Chinese",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive language-image pretraining",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Cross-modal retrieval, image classification",
+   "finetuning_data": "MUGE, Flickr30K-CN, COCO-CN, ICR",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "Chinese",
+   "hardware_used": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+   "hardware_description": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Chinese CLIP: Contrastive Vision-Language Pretraining in Chinese",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ViT-H/14",
+   "base_model": "OpenAI CLIP (for templates/translation)",
+   "optimizer_innovation": null,
+   "benchmark_result": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16); R2D2: 85.2, 89.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "ONNX, TensorRT"
+  }
+ ],
+ "models_after_selection": 20,
+ "models_after_merge": 9,
+ "validated_rows": {
+  "Chinese CLIP": {
+   "application": [
+    "Cross-modal retrieval",
+    "zero-shot classification",
+    "search engine",
+    "recommender system"
+   ],
+   "attention_mechanism": [
+    "Standard self-attention (ResNet/ViT/RoBERTa)",
+    "Standard self-attention (ViT/RoBERTa)"
+   ],
+   "base_model": [
+    "OpenAI CLIP (vision encoder), RoBERTa-wwm-Chinese (text encoder)"
+   ],
+   "finetuning_data": [
+    "MUGE",
+    "Flickr30K-CN",
+    "COCO-CN",
+    "ELEVATER benchmark",
+    "ICR dataset"
+   ],
+   "finetuning_task": [
+    "image classification"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "NVIDIA V100 GPUs, NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "Chinese CLIP"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "77M",
+    "188M",
+    "406M",
+    "958M",
+    "3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-5B (zh)",
+    "Wukong dataset",
+    "translated Visual Genome",
+    "MSCOCO"
+   ],
+   "pretraining_task": [
+    "Contrastive learning (image-text matching)"
+   ],
+   "research_problem": [
+    "Vision-language pretraining in Chinese / transferring foundation models to language-specific scenarios"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-B/16",
+    "ResNet-50",
+    "ViT-B/32",
+    "ViT-L/14",
+    "RN50",
+    "Swin-B",
+    "Swin-L",
+    "Swin-ViT-H/14"
+   ]
+  },
+  "CN-CLIP": {
+   "application": [
+    "Zero-shot image classification",
+    "image-text retrieval",
+    "Chinese multimodal understanding"
+   ],
+   "finetuning_data": [
+    "MUGE-Retrieval",
+    "Flickr30K-CN",
+    "COCO-CN"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Contrastive dual-encoder (similarity-based)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "25M",
+    "86M",
+    "300M",
+    "632M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Internal image-text pairs (~20M)",
+    "machine-translated COCO"
+   ],
+   "pretraining_task": [
+    "Contrastive learning"
+   ],
+   "research_problem": [
+    "Cross-modal representation learning and zero-shot classification for Chinese language and images"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ResNet-50 (RN50)",
+    "ViT-B/16",
+    "ViT-B/32",
+    "ViT-L/14",
+    "ResNet-50",
+    "ViT-H/14"
+   ]
+  },
+  "CN-CLIP Huge": {
+   "application": [
+    "Cross-modal retrieval",
+    "zero-shot classification",
+    "e-commerce"
+   ],
+   "finetuning_data": [
+    "MUGE-Retrieval",
+    "Flickr30K-CN",
+    "COCO-CN"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [
+    "Contrastive dual-encoder (similarity-based)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP Huge"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Internal image-text pairs (~20M)",
+    "machine-translated COCO"
+   ],
+   "pretraining_task": [
+    "Contrastive learning"
+   ],
+   "research_problem": [
+    "Chinese multimodal representation learning"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-H/14"
+   ]
+  },
+  "CN-CLIP RN 50": {
+   "application": [
+    "Image classification",
+    "cross-modal retrieval",
+    "zero-shot classification"
+   ],
+   "base_model": [
+    "OpenAI CLIP (for templates/translation)"
+   ],
+   "finetuning_data": [
+    "MUGE",
+    "Flickr30K-CN",
+    "COCO-CN",
+    "ICR"
+   ],
+   "finetuning_task": [
+    "Cross-modal retrieval",
+    "image classification"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs, NVIDIA T4 GPU"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP RN 50"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "77M",
+    "110M",
+    "300M",
+    "958M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-400M (Chinese subset)",
+    "CC12M"
+   ],
+   "pretraining_task": [
+    "Contrastive vision-language pretraining"
+   ],
+   "quantization_precision": [
+    "FP16"
+   ],
+   "research_problem": [
+    "Vision-language pretraining for Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ResNet-50",
+    "ViT-B/16",
+    "ViT-L/14",
+    "ViT-H/14"
+   ]
+  },
+  "CN-CLIP ViT-B/16": {
+   "application": [
+    "Image classification",
+    "cross-modal retrieval",
+    "zero-shot classification"
+   ],
+   "base_model": [
+    "OpenAI CLIP (for templates/translation)"
+   ],
+   "finetuning_data": [
+    "MUGE",
+    "Flickr30K-CN",
+    "COCO-CN",
+    "ICR"
+   ],
+   "finetuning_task": [
+    "Cross-modal retrieval",
+    "image classification"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs, NVIDIA T4 GPU"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP ViT-B/16"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "77M",
+    "110M",
+    "300M",
+    "958M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-400M (Chinese subset)",
+    "CC12M"
+   ],
+   "pretraining_task": [
+    "Contrastive vision-language pretraining"
+   ],
+   "quantization_precision": [
+    "FP16"
+   ],
+   "research_problem": [
+    "Vision-language pretraining for Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ResNet-50",
+    "ViT-B/16",
+    "ViT-L/14",
+    "ViT-H/14"
+   ]
+  },
+  "Chinese CLIP Large-336": {
+   "application": [
+    "Cross-modal retrieval",
+    "zero-shot image classification",
+    "Chinese vision-language understanding"
+   ],
+   "attention_mechanism": [
+    "Standard self-attention (ViT/RoBERTa)"
+   ],
+   "finetuning_data": [
+    "ICR dataset"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "NVIDIA V100 GPUs, NVIDIA A100 GPUs"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "Chinese CLIP Large-336"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "407M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Contrastive vision-language pretraining (image-text matching)"
+   ],
+   "research_problem": [
+    "Cross-modal retrieval",
+    "vision-language pretraining for Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-L/14"
+   ]
+  },
+  "Chinese CLIP Huge": {
+   "application": [
+    "Cross-modal retrieval",
+    "zero-shot image classification",
+    "Chinese vision-language understanding"
+   ],
+   "attention_mechanism": [
+    "Standard self-attention (ViT/RoBERTa)"
+   ],
+   "finetuning_data": [
+    "ICR dataset"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "NVIDIA V100 GPUs, NVIDIA A100 GPUs"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "Chinese CLIP Huge"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "958M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Contrastive vision-language pretraining (image-text matching)"
+   ],
+   "research_problem": [
+    "Cross-modal retrieval",
+    "vision-language pretraining for Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-H/14"
+   ]
+  },
+  "CN-CLIP ViT-L/14": {
+   "application": [
+    "Image classification",
+    "cross-modal retrieval",
+    "zero-shot classification"
+   ],
+   "base_model": [
+    "OpenAI CLIP (for templates/translation)"
+   ],
+   "finetuning_data": [
+    "MUGE",
+    "Flickr30K-CN",
+    "COCO-CN",
+    "ICR"
+   ],
+   "finetuning_task": [
+    "Cross-modal retrieval",
+    "image classification"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs, NVIDIA T4 GPU"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP ViT-L/14"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Contrastive language-image pretraining"
+   ],
+   "quantization_precision": [
+    "FP16"
+   ],
+   "research_problem": [
+    "Vision-language pretraining in Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-L/14"
+   ]
+  },
+  "CN-CLIP ViT-H/14": {
+   "application": [
+    "Image classification",
+    "cross-modal retrieval",
+    "zero-shot classification"
+   ],
+   "base_model": [
+    "OpenAI CLIP (for templates/translation)"
+   ],
+   "finetuning_data": [
+    "MUGE",
+    "Flickr30K-CN",
+    "COCO-CN",
+    "ICR"
+   ],
+   "finetuning_task": [
+    "Cross-modal retrieval",
+    "image classification"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs, NVIDIA T4 GPU"
+   ],
+   "model_family": [
+    "CLIP"
+   ],
+   "model_name": [
+    "CN-CLIP ViT-H/14"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Contrastive language-image pretraining"
+   ],
+   "quantization_precision": [
+    "FP16"
+   ],
+   "research_problem": [
+    "Vision-language pretraining in Chinese"
+   ],
+   "supported_language": [
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-H/14"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Chinese CLIP": {
+    "application": {
+     "candidates": [
+      "Cross-modal retrieval",
+      "zero-shot classification",
+      "image generation foundation model",
+      "search engine",
+      "recommender system"
+     ],
+     "accepted": [
+      "Cross-modal retrieval",
+      "zero-shot classification",
+      "search engine",
+      "recommender system"
+     ],
+     "dropped": [
+      {
+       "value": "image generation foundation model",
+       "reason": "Describes a model category/type, not a concrete application or task."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Zero-shot learning",
+      "finetuning",
+      "image classification",
+      "Zero-shot classification",
+      "fine-tuning on cross-modal retrieval"
+     ],
+     "accepted": [
+      "image classification"
+     ],
+     "dropped": [
+      {
+       "value": "Zero-shot learning",
+       "reason": "Describes a learning paradigm/evaluation setting, not a fine-tuning task."
+      },
+      {
+       "value": "finetuning",
+       "reason": "Names the training process itself, not the specific task or objective."
+      },
+      {
+       "value": "Zero-shot classification",
+       "reason": "Describes an evaluation setting, not a fine-tuning objective."
+      },
+      {
+       "value": "fine-tuning on cross-modal retrieval",
+       "reason": "Describes the training process rather than naming the specific task."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Contrastive loss (separate encoders)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive loss (separate encoders)",
+       "reason": "Describes a loss function, not an architectural design."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "SWIN-L",
+      "RN50",
+      "VIT-B/16",
+      "SWIN-B",
+      "VIT-L/14",
+      "77M",
+      "188M",
+      "406M",
+      "958M",
+      "3B"
+     ],
+     "accepted": [
+      "77M",
+      "188M",
+      "406M",
+      "958M",
+      "3B"
+     ],
+     "dropped": [
+      {
+       "value": "RN50",
+       "reason": "Names a model architecture, not a parameter count. (cached)"
+      },
+      {
+       "value": "VIT-B/16",
+       "reason": "Names a model architecture, not a parameter count. (cached)"
+      },
+      {
+       "value": "VIT-L/14",
+       "reason": "Names a model architecture, not a parameter count. (cached)"
+      },
+      {
+       "value": "SWIN-L",
+       "reason": "Names a model variant, not a parameter count."
+      },
+      {
+       "value": "SWIN-B",
+       "reason": "Names a model variant, not a parameter count."
+      }
+     ]
+    }
+   },
+   "CN-CLIP": {
+    "finetuning_task": {
+     "candidates": [
+      "Contrastive tuning for cross-modal retrieval"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive tuning for cross-modal retrieval",
+       "reason": "Describes a training method/process rather than the task itself."
+      }
+     ]
+    }
+   },
+   "CN-CLIP Huge": {
+    "finetuning_task": {
+     "candidates": [
+      "Contrastive tuning for cross-modal retrieval"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive tuning for cross-modal retrieval",
+       "reason": "Describes a training method/process rather than the task itself."
+      }
+     ]
+    }
+   },
+   "CN-CLIP RN 50": {
+    "pretraining_corpus": {
+     "candidates": [
+      "LAION-400M (Chinese subset)",
+      "CC12M",
+      "other Chinese image-text datasets"
+     ],
+     "accepted": [
+      "LAION-400M (Chinese subset)",
+      "CC12M"
+     ],
+     "dropped": [
+      {
+       "value": "other Chinese image-text datasets",
+       "reason": "Vague placeholder that does not name a specific dataset or corpus."
+      }
+     ]
+    }
+   },
+   "CN-CLIP ViT-B/16": {
+    "pretraining_corpus": {
+     "candidates": [
+      "LAION-400M (Chinese subset)",
+      "CC12M",
+      "other Chinese image-text datasets"
+     ],
+     "accepted": [
+      "LAION-400M (Chinese subset)",
+      "CC12M"
+     ],
+     "dropped": [
+      {
+       "value": "other Chinese image-text datasets",
+       "reason": "Vague placeholder that does not name a specific dataset or corpus."
+      }
+     ]
+    }
+   },
+   "Chinese CLIP Large-336": {
+    "fusion_architecture": {
+     "candidates": [
+      "Contrastive (image-text matching)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive (image-text matching)",
+       "reason": "Describes a training objective/method rather than an architectural design."
+      }
+     ]
+    }
+   },
+   "Chinese CLIP Huge": {
+    "fusion_architecture": {
+     "candidates": [
+      "Contrastive (image-text matching)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive (image-text matching)",
+       "reason": "Describes a training objective/method rather than an architectural design."
+      }
+     ]
+    }
+   },
+   "CN-CLIP ViT-L/14": {},
+   "CN-CLIP ViT-H/14": {}
+  },
+  "counts": {
+   "kept": 217,
+   "dropped": 17,
+   "llm_calls": 1,
+   "values_sent_to_llm": 62
+  }
+ },
+ "contributions": [
+  {
+   "label": "Chinese CLIP",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Chinese CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage pretraining method: Stage 1 uses Locked-Image Tuning (freezing the image encoder and optimizing only the text encoder) to inherit from foundation models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Stage 2 uses contrastive tuning (unfreezing and optimizing both encoders) to effectively transfer to language-specific Chinese data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning (image-text matching)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-5B (zh)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wukong dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Translated Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Chinese RoBERTa tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "77M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "188M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "406M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "958M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 NVIDIA V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Search engine",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Recommender system",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining in Chinese / transferring foundation models to language-specific scenarios",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~200 million image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ELEVATER benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "77M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard self-attention (ResNet/ViT/RoBERTa)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard self-attention (ViT/RoBERTa)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: Locked-Image Tuning (Stage 1) -> Contrastive Tuning (Stage 2)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/32",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "RN50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Swin-B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Swin-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Swin-ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "OpenAI CLIP (vision encoder), RoBERTa-wwm-Chinese (text encoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on MUGE, Flickr30K-CN, COCO-CN (zero-shot and finetuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Competitive on ELEVATER (zero-shot image classification)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MR 42.6 (Tiny)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MR 47.4 (Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on multiple cross-modal retrieval datasets in zero-shot and fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Competitive on 10 zero-shot image classification datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on cross-modal retrieval tasks with long texts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Zero-shot classification on 20 datasets (Win ELEVATER track)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining specifically for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "A two-stage training method",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic handcrafted prompt engineering to improve zero-shot classification performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "ONNX/TensorRT deployment pipeline for inference acceleration without accuracy loss.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Internal image-text pairs (~20M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Machine-translated COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "25M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "86M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "632M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 632,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chinese multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Cross-modal representation learning and zero-shot classification for Chinese language and images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE-Retrieval",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage contrastive pretraining (Stage 1 general, Stage 2 Chinese adaptation); switching stages boosts performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Contrastive dual-encoder (similarity-based)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50 (RN50)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/32",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUGE-Retrieval MR: 42.6 (zero-shot) / 68.6 (finetuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN MR: 48.8 / 76.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN MR: 48.1 / 81.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUGE-Retrieval MR: 52.1 / 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN MR: 62.7 / 86.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN MR: 62.2 / 86.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUGE-Retrieval MR: 56.3 / 79.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN MR: 68.0 / 89.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN MR: 64.0 / 89.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR10: 96.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100: 79.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DTD: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "EuroSAT: 52.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FER: 55.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FGVC: 26.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "KITTI: 49.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNIST: 79.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PatchCamelyon: 63.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pascal VOC: 84.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet: 59.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Caltech-101: 90.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR-10: 96.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR-100: 79.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Country-211: 25.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FER-2013: 49.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FGVC-Aircraft: 26.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Food-101: 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GTSRB: 38.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hateful-Memes: 54.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "KITTI-Distance: 39.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OxfordFlowers-102: 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Oxford-IIITPets: 83.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PatchCamelyon: 52.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Rendered-SST2: 61.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RESISC-45: 66.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Stanford-Cars: 71.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VOC-2007: 84.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUGE-Retrieval MR: 63.0",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP Huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP Huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining tailored for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scales to a huge model size (ViT-H/14) and uses ~20M high-quality internal image-text pairs plus machine-translated COCO to achieve state-of-the-art cross-modal retrieval and zero-shot classification.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Internal image-text pairs (~20M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Machine-translated COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "E-commerce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Chinese multimodal representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE-Retrieval",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage contrastive pretraining (Stage 1 general, Stage 2 Chinese adaptation); switching stages boosts performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Contrastive dual-encoder (similarity-based)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUGE-Retrieval MR: 63.0 / 84.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K-CN MR: 71.2 / 91.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-CN MR: 69.2 / 89.9",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP RN 50",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP RN 50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining specifically for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling architecture from ResNet-50 to ViT-H/14",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Continued pretraining strategy with positional embedding interpolation to adapt to larger resolutions.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive vision-language pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M (Chinese subset)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "77M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "958M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 958,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining for Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "OpenAI CLIP (for templates/translation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R2D2: 85.2, 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "ONNX, TensorRT",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP ViT-B/16",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining specifically for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling architecture from ResNet-50 to ViT-H/14",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Continued pretraining strategy with positional embedding interpolation to adapt to larger resolutions.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive vision-language pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M (Chinese subset)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "77M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "958M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 958,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining for Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "OpenAI CLIP (for templates/translation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R2D2: 85.2, 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "ONNX, TensorRT",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Chinese CLIP Large-336",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Chinese CLIP Large-336",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining adapted for Chinese text using Chinese RoBERTa models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic scaling across 5 sizes (ResNet-50 to ViT-H/14) with image positional embedding interpolation for larger resolutions",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage pretraining (frozen image encoder then full fine-tuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive vision-language pretraining (image-text matching)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Chinese RoBERTa tokenizer (vocab size 21,128)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "407M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 958,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 NVIDIA A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chinese vision-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining for Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "407M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard self-attention (ViT/RoBERTa)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: Stage 1 (frozen image encoder, contrastive loss), Stage 2 (unfreeze image encoder, update all parameters); positional embedding interpolation for 336x336 resolution",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on cross-modal retrieval tasks with long texts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Zero-shot classification on 20 datasets (Win ELEVATER track)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Chinese CLIP Huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Chinese CLIP Huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining adapted for Chinese text using Chinese RoBERTa models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic scaling across 5 sizes (ResNet-50 to ViT-H/14) with image positional embedding interpolation for larger resolutions",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage pretraining (frozen image encoder then full fine-tuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive vision-language pretraining (image-text matching)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Chinese RoBERTa tokenizer (vocab size 21,128)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "958M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 958,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPUs, NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "184 NVIDIA A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chinese vision-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining for Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "958M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard self-attention (ViT/RoBERTa)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: Stage 1 (frozen image encoder, contrastive loss), Stage 2 (unfreeze image encoder, update all parameters)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on cross-modal retrieval tasks with long texts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Zero-shot classification on 20 datasets (Win ELEVATER track)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP ViT-L/14",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining tailored for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic scaling of model size consistently improves performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Deployment optimizations via ONNX and TensorRT for faster inference.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive language-image pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining in Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "OpenAI CLIP (for templates/translation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R2D2: 85.2, 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "ONNX, TensorRT",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "CN-CLIP ViT-H/14",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CN-CLIP ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive vision-language pretraining tailored for Chinese",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic scaling of model size consistently improves performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Deployment optimizations via ONNX and TensorRT for faster inference.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive language-image pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs, NVIDIA T4 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs for fine-tuning; single NVIDIA T4 GPU for deployment benchmark",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language pretraining in Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MUGE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-CN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pretraining -> fine-tuning on cross-modal retrieval datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "OpenAI CLIP (for templates/translation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ICR MR: 55.4 (ViT-L/14), 61.6 (ViT-B/16)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R2D2: 85.2, 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "ONNX, TensorRT",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1822461",
+  "contribution_ids": [
+   "R1822463",
+   "R1822464",
+   "R1822465",
+   "R1822466",
+   "R1822467",
+   "R1923358",
+   "R1923375",
+   "R1923384",
+   "R1923388",
+   "R1923395",
+   "R1923397",
+   "R1923401",
+   "R1923403",
+   "R1923407"
+  ],
+  "new_contribution_ids": [
+   "R1923358",
+   "R1923375",
+   "R1923384",
+   "R1923388",
+   "R1923395",
+   "R1923397",
+   "R1923401",
+   "R1923403",
+   "R1923407"
+  ],
+  "comparison_updated": null
+ }
+}

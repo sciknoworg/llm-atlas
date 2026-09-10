@@ -1,0 +1,552 @@
+{
+  "arxiv_id": "2405.10140",
+  "status": "completed",
+  "timestamp": "2026-08-29T01:26:01.960302",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2405.10140",
+    "title": "Libra: Building Decoupled Vision System on Large Language Models",
+    "authors": [
+      "Yifan Xu",
+      "Xiaoshan Yang",
+      "Yaguang Song",
+      "Changsheng Xu"
+    ],
+    "abstract": "In this work, we introduce Libra, a prototype model with a decoupled vision system on a large language model (LLM). The decoupled vision system decouples inner-modal modeling and cross-modal interaction, yielding unique visual information modeling and effective cross-modal comprehension. Libra is trained through discrete auto-regressive modeling on both vision and language inputs. Specifically, we incorporate a routed visual expert with a cross-modal bridge module into a pretrained LLM to route the vision and language flows during attention computing to enable different attention patterns in inner-modal modeling and cross-modal interaction scenarios. Experimental results demonstrate that the dedicated design of Libra achieves a strong MLLM baseline that rivals existing works in the image-to-text scenario with merely 50 million training data, providing a new perspective for future multimodal foundation models. Code is available at https://github.com/YifanXu74/Libra.",
+    "published": "2024-05-16T14:34:44+00:00",
+    "updated": "2024-05-16T14:34:44+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2405.10140v1",
+    "entry_id": "http://arxiv.org/abs/2405.10140v1",
+    "pdf_path": "data/papers/2405.10140.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+  },
+  "text_length": 65844,
+  "word_count": 5213,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "Libra",
+      "parameters": "7B, 11.3B",
+      "parameters_millions": 11300,
+      "model_family": "Libra",
+      "date_created": "2024-05-16",
+      "organization": "Chinese Academy Of Sciences",
+      "innovation": "Decoupled vision system design that separates inner-modal modeling from cross-modal interaction; incorporates a routed visual expert and cross-modal bridge module to route vision and language flows during attention computing, enabling distinct attention patterns for inner-modal and cross-modal scenarios.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Discrete auto-regressive modeling on vision and language inputs",
+      "pretraining_corpus": "COYO-700M, CC12M, COCO train split",
+      "finetuning_task": "Multimodal instruction tuning, Instruction tuning / Supervised finetuning (SFT)",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100-40G GPU",
+      "extension": "Uses lookup-free quantization (LFQ) with a CLIP-based VQGAN to tokenize images into two codebooks of size 2^9, reducing prediction head parameters to 4M while maintaining high reconstruction quality and preserving CLIP knowledge.",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Building an effective vision system for LLMs that retains extensive visual understanding while facilitating cross-modal comprehension, addressing the information imbalance in unified multimodal models.",
+      "application": "Image-to-text generation, multimodal conversation, visual understanding",
+      "paper_title": "Libra: Building Decoupled Vision System on Large Language Models",
+      "training_corpus_size": "50.5M image-text pairs",
+      "finetuning_data": null,
+      "tokenizer": "CLIP-based image tokenizer using lookup-free quantization (LFQ)",
+      "supported_language": "English",
+      "hardware_description": "8400 GPU hours for multimodal pretraining, 380 GPU hours for SFT on NVIDIA A100-40G",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/YifanXu74/Libra",
+      "context_length": null,
+      "activated_parameters": "11.3B (all active)",
+      "attention_mechanism": "Novel attention computing mechanism for routed visual experts, Diverse attention patterns across all layers",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Discrete auto-regressive modeling on vision and language inputs",
+      "reasoning_mode": null,
+      "moe_configuration": "Routed visual expert with 4B parameters",
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Decoupled (routed visual expert + cross-modal bridge module)",
+      "vision_encoder": "CLIP (frozen), CLIP vision encoder (0.3B parameters), CLIP-ViT-L-336px",
+      "base_model": "LLaMA",
+      "optimizer_innovation": null,
+      "benchmark_result": "VQAv2: 77.3; OKVQA: 59.7; GQA: 63.8; VizWiz: 59.5; SQA: 73.5; NoCaps: 123.8; Flickr: 86.6; COCO: 135.2; POPE: 88.2; MME: 1494.7; MMEC: 281.1; MMB: 65.2; MMBCN: 58.8; SEED: 62.7; MM-Vet: 31.8; MMVP: 30.0",
+      "weight_clipping_mechanism": "Gradient clipping (1.0)",
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Libra": {
+      "application": [
+        "Image-to-text generation",
+        "multimodal conversation",
+        "visual understanding"
+      ],
+      "attention_mechanism": [],
+      "base_model": [
+        "LLaMA"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning",
+        "Instruction tuning / Supervised finetuning (SFT)"
+      ],
+      "fusion_architecture": [
+        "Decoupled (routed visual expert + cross-modal bridge module)"
+      ],
+      "hardware_used": [
+        "NVIDIA A100-40G GPU"
+      ],
+      "model_family": [],
+      "model_name": [
+        "Libra"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Chinese Academy Of Sciences"
+      ],
+      "parameters": [
+        "7B",
+        "11.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "COYO-700M",
+        "CC12M",
+        "COCO train split"
+      ],
+      "pretraining_task": [
+        "Discrete auto-regressive modeling on vision and language inputs"
+      ],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "CLIP (frozen)",
+        "CLIP vision encoder (0.3B parameters)",
+        "CLIP-ViT-L-336px"
+      ],
+      "weight_clipping_mechanism": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Libra": {
+        "attention_mechanism": {
+          "candidates": [
+            "Novel attention computing mechanism for routed visual experts",
+            "Diverse attention patterns across all layers"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Novel attention computing mechanism for routed visual experts",
+              "reason": "Describes a feature or purpose rather than naming a specific attention method."
+            },
+            {
+              "value": "Diverse attention patterns across all layers",
+              "reason": "Describes an observed behavior rather than the attention mechanism itself."
+            }
+          ]
+        },
+        "model_family": {
+          "candidates": [
+            "Libra"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Libra",
+              "reason": "Appears to be the specific model name rather than a broader lineage or category."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Building an effective vision system for LLMs that retains extensive visual understanding while facilitating cross-modal comprehension",
+            "addressing the information imbalance in unified multimodal models."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Building an effective vision system for LLMs that retains extensive visual understanding while facilitating cross-modal comprehension",
+              "reason": "Long descriptive sentence stating a goal/solution rather than a short noun phrase naming the problem."
+            },
+            {
+              "value": "addressing the information imbalance in unified multimodal models.",
+              "reason": "Describes an action/solution rather than naming the problem as a short noun phrase."
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Gradient clipping (1.0)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Gradient clipping (1.0)",
+              "reason": "Describes gradient clipping, which constrains gradients rather than weight values as specified. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 23,
+      "dropped": 6,
+      "llm_calls": 1,
+      "values_sent_to_llm": 14
+    }
+  },
+  "contributions": [
+    {
+      "label": "Libra",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Libra",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-05-16",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Chinese Academy Of Sciences",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Decoupled vision system design that separates inner-modal modeling from cross-modal interaction",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Incorporates a routed visual expert and cross-modal bridge module to route vision and language flows during attention computing, enabling distinct attention patterns for inner-modal and cross-modal scenarios.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Discrete auto-regressive modeling on vision and language inputs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COYO-700M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC12M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO train split",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning / Supervised finetuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "CLIP-based image tokenizer using lookup-free quantization (LFQ)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "11.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 11300,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100-40G GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "8400 GPU hours for multimodal pretraining, 380 GPU hours for SFT on NVIDIA A100-40G",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image-to-text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal conversation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/YifanXu74/Libra",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "50.5M image-text pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "11.3B (all active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Discrete auto-regressive modeling on vision and language inputs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Routed visual expert with 4B parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Decoupled (routed visual expert + cross-modal bridge module)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP (frozen)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP vision encoder (0.3B parameters)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP-ViT-L-336px",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaMA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 77.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OKVQA: 59.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GQA: 63.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VizWiz: 59.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SQA: 73.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoCaps: 123.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flickr: 86.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO: 135.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 88.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1494.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMEC: 281.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMB: 65.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBCN: 58.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEED: 62.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-Vet: 31.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMVP: 30.0",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926014",
+    "contribution_ids": [
+      "R1926016"
+    ],
+    "new_contribution_ids": [
+      "R1926016"
+    ],
+    "comparison_updated": null
+  }
+}

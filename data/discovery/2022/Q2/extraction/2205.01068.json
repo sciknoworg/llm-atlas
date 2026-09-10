@@ -1,0 +1,708 @@
+{
+ "arxiv_id": "2205.01068",
+ "status": "completed",
+ "timestamp": "2026-08-25T13:17:51.549413",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2205.01068",
+  "title": "OPT: Open Pre-trained Transformer Language Models",
+  "authors": [
+   "Susan Zhang",
+   "Stephen Roller",
+   "Naman Goyal",
+   "Mikel Artetxe",
+   "Moya Chen",
+   "Shuohui Chen",
+   "Christopher Dewan",
+   "Mona Diab",
+   "Xian Li",
+   "Xi Victoria Lin",
+   "Todor Mihaylov",
+   "Myle Ott",
+   "Sam Shleifer",
+   "Kurt Shuster",
+   "Daniel Simig",
+   "Punit Singh Koura",
+   "Anjali Sridhar",
+   "Tianlu Wang",
+   "Luke Zettlemoyer"
+  ],
+  "abstract": "Large language models, which are often trained for hundreds of thousands of compute days, have shown remarkable capabilities for zero- and few-shot learning. Given their computational cost, these models are difficult to replicate without significant capital. For the few that are available through APIs, no access is granted to the full model weights, making them difficult to study. We present Open Pre-trained Transformers (OPT), a suite of decoder-only pre-trained transformers ranging from 125M to 175B parameters, which we aim to fully and responsibly share with interested researchers. We show that OPT-175B is comparable to GPT-3, while requiring only 1/7th the carbon footprint to develop. We are also releasing our logbook detailing the infrastructure challenges we faced, along with code for experimenting with all of the released models.",
+  "published": "2022-05-02T17:49:50+00:00",
+  "updated": "2022-06-21T17:04:40+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2205.01068v4",
+  "entry_id": "http://arxiv.org/abs/2205.01068v4",
+  "pdf_path": "data/papers/2205.01068.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 86243,
+ "word_count": 8157,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "OPT",
+   "parameters": "125M, 350M, 1.3B, 2.7B, 6.7B, 13B, 30B, 66B, 175B",
+   "parameters_millions": 175000,
+   "model_family": "OPT",
+   "date_created": "2022-05-02",
+   "organization": "Meta",
+   "innovation": "Openly released family of large-scale decoder-only Transformer language models (125M\u2013175B parameters) trained on a deduplicated ~180B-token corpus; introduces empirical learning rate scheduling, dynamic loss scaling, and detailed training logs to improve reproducibility and reduce training instabilities compared to prior closed models.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Auto-regressive language modeling",
+   "pretraining_corpus": "CommonCrawl, DM Mathematics, Project Gutenberg, HackerNews, OpenSubtitles, OpenWebText2, USPTO, Wikipedia, BookCorpus, Stories, CCNews v2, PushShift.io Reddit",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT License",
+   "research_problem": "Reproducible and responsible research at scale for large language models; democratizing access to LLMs.",
+   "application": "Few-shot prompting, general NLP tasks (HellaSwag, StoryCloze, PIQA, ARC, OpenBookQA, etc.)",
+   "paper_title": "OPT: Open Pre-trained Transformer Language Models",
+   "training_corpus_size": "300B tokens",
+   "finetuning_data": null,
+   "tokenizer": "GPT-2 tokenizer",
+   "supported_language": "English",
+   "hardware_description": "992 80GB A100 GPUs, reaching 147 TFLOP/s utilization per GPU",
+   "carbon_emitted": "1/7th the carbon footprint of GPT-3",
+   "source_code": "metaseq; https://github.com/facebookresearch/metaseq",
+   "context_length": null,
+   "activated_parameters": "175B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "2048 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Single-stage unsupervised pre-training",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16 weights, FP32 optimizer states",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "Evaluation of bias, toxicity, and hate speech",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Hate speech detection F1: Zero-shot 0.667, One-shot 0.713, Few-shot(binary) 0.759, Few-shot(multiclass) 0.812; CrowS-Pairs Overall 69.5; StereoSet LMS: Prof 74.1, Gend 74.0, Reli 84.0; Dialogue PPL: C2 10.8, WW 13.3, ED 10.3, BST 12.1, WoI 12.0; Dialogue UF1: C2 .185, WW .152, ED .149, BST .162, WoI .147; Zero-shot average accuracy across 14 NLP tasks matches GPT-3; ConvAI2 hidden test: 10.7 perplexity, 0.185 UF1; MSC dataset: 9.7 perplexity, 0.177 UF1; LAMBADA 0.638; HellaSwag 0.788; PIQA 0.821; WinoGrande 0.718; ARC-e 0.738; ARC-c 0.518; OpenBookQA 0.532; BoolQ 0.838; RACE-m 0.738; RACE-h 0.588; TriviaQA 0.858; SQuAD 0.858; WebQuestions 0.458; NaturalQuestions 0.258; CoQA 0.828; QuAC 0.458; DROP 0.558; SuperGLUE 0.758; GLUE 0.828",
+   "weight_clipping_mechanism": "Gradient clipping (0.3)",
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 12,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "OPT": {
+   "application": [],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "hardware_used": [
+    "NVIDIA GPUs"
+   ],
+   "license": [
+    "MIT License"
+   ],
+   "model_family": [
+    "OPT"
+   ],
+   "model_name": [
+    "OPT"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "125M",
+    "350M",
+    "1.3B",
+    "2.7B",
+    "6.7B",
+    "13B",
+    "30B",
+    "66B",
+    "175B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "CommonCrawl",
+    "DM Mathematics",
+    "Project Gutenberg",
+    "HackerNews",
+    "OpenSubtitles",
+    "OpenWebText2",
+    "USPTO",
+    "Wikipedia",
+    "BookCorpus",
+    "Stories",
+    "CCNews v2",
+    "PushShift.io Reddit"
+   ],
+   "pretraining_task": [
+    "Auto-regressive language modeling"
+   ],
+   "quantization_precision": [
+    "FP16 weights",
+    "FP32 optimizer states"
+   ],
+   "research_problem": [
+    "Reproducible and responsible research at scale for large language models",
+    "democratizing access to LLMs."
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "weight_clipping_mechanism": [
+    "Gradient clipping (0.3)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "OPT": {
+    "application": {
+     "candidates": [
+      "Few-shot prompting",
+      "general NLP tasks (HellaSwag, StoryCloze, PIQA, ARC, OpenBookQA, etc.)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Few-shot prompting",
+       "reason": "Describes a prompting technique, not a concrete application or domain. (cached)"
+      },
+      {
+       "value": "general NLP tasks (HellaSwag, StoryCloze, PIQA, ARC, OpenBookQA, etc.)",
+       "reason": "Explicitly matches the definition's rejection criteria for 'general NLP tasks' as a placeholder; lists evaluation benchmarks rather than a concrete application domain."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 36,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 15
+  }
+ },
+ "contributions": [
+  {
+   "label": "OPT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-02",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Openly released family of large-scale decoder-only Transformer language models (125M\u2013175B parameters) trained on a deduplicated ~180B-token corpus",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces empirical learning rate scheduling, dynamic loss scaling, and detailed training logs to improve reproducibility and reduce training instabilities compared to prior closed models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Auto-regressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DM Mathematics",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Project Gutenberg",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HackerNews",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenSubtitles",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "USPTO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stories",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CCNews v2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PushShift.io Reddit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "GPT-2 tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "66B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "175B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 175000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "992 80GB A100 GPUs, reaching 147 TFLOP/s utilization per GPU",
+     "datatype": "string"
+    },
+    {
+     "property": "P119142",
+     "label": "carbon_emitted",
+     "value": "1/7th the carbon footprint of GPT-3",
+     "datatype": "string"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "metaseq",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/metaseq",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Reproducible and responsible research at scale for large language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Democratizing access to LLMs.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "300B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "175B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Single-stage unsupervised pre-training",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16 weights",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP32 optimizer states",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Evaluation of bias, toxicity, and hate speech",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hate speech detection F1: Zero-shot 0.667, One-shot 0.713, Few-shot(binary) 0.759, Few-shot(multiclass) 0.812",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CrowS-Pairs Overall 69.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "StereoSet LMS: Prof 74.1, Gend 74.0, Reli 84.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Dialogue PPL: C2 10.8, WW 13.3, ED 10.3, BST 12.1, WoI 12.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Dialogue UF1: C2 .185, WW .152, ED .149, BST .162, WoI .147",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Zero-shot average accuracy across 14 NLP tasks matches GPT-3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ConvAI2 hidden test: 10.7 perplexity, 0.185 UF1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSC dataset: 9.7 perplexity, 0.177 UF1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LAMBADA 0.638",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag 0.788",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA 0.821",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande 0.718",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-e 0.738",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c 0.518",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenBookQA 0.532",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BoolQ 0.838",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-m 0.738",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-h 0.588",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA 0.858",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 0.858",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQuestions 0.458",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions 0.258",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoQA 0.828",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QuAC 0.458",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DROP 0.558",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE 0.758",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE 0.828",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Gradient clipping (0.3)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370968",
+  "contribution_ids": [
+   "R370969",
+   "R479846",
+   "R479850",
+   "R479854",
+   "R479858",
+   "R479862",
+   "R479866",
+   "R479870",
+   "R479890",
+   "R1921991"
+  ],
+  "new_contribution_ids": [
+   "R1921991"
+  ],
+  "comparison_updated": null
+ }
+}

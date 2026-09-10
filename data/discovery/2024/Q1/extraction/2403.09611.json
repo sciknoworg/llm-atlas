@@ -1,0 +1,1303 @@
+{
+ "arxiv_id": "2403.09611",
+ "status": "completed",
+ "timestamp": "2026-08-28T22:17:55.860204",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2403.09611",
+  "title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+  "authors": [
+   "Brandon McKinzie",
+   "Zhe Gan",
+   "Jean-Philippe Fauconnier",
+   "Sam Dodge",
+   "Bowen Zhang",
+   "Philipp Dufter",
+   "Dhruti Shah",
+   "Xianzhi Du",
+   "Futang Peng",
+   "Floris Weers",
+   "Anton Belyi",
+   "Haotian Zhang",
+   "Karanjeet Singh",
+   "Doug Kang",
+   "Ankur Jain",
+   "Hongyu H\u00e8",
+   "Max Schwarzer",
+   "Tom Gunter",
+   "Xiang Kong",
+   "Aonan Zhang",
+   "Jianyu Wang",
+   "Chong Wang",
+   "Nan Du",
+   "Tao Lei",
+   "Sam Wiseman",
+   "Guoli Yin",
+   "Mark Lee",
+   "Zirui Wang",
+   "Ruoming Pang",
+   "Peter Grasch",
+   "Alexander Toshev",
+   "Yinfei Yang"
+  ],
+  "abstract": "In this work, we discuss building performant Multimodal Large Language Models (MLLMs). In particular, we study the importance of various architecture components and data choices. Through careful and comprehensive ablations of the image encoder, the vision language connector, and various pre-training data choices, we identified several crucial design lessons. For example, we demonstrate that for large-scale multimodal pre-training using a careful mix of image-caption, interleaved image-text, and text-only data is crucial for achieving state-of-the-art (SOTA) few-shot results across multiple benchmarks, compared to other published pre-training results. Further, we show that the image encoder together with image resolution and the image token count has substantial impact, while the vision-language connector design is of comparatively negligible importance. By scaling up the presented recipe, we build MM1, a family of multimodal models up to 30B parameters, including both dense models and mixture-of-experts (MoE) variants, that are SOTA in pre-training metrics and achieve competitive performance after supervised fine-tuning on a range of established multimodal benchmarks. Thanks to large-scale pre-training, MM1 enjoys appealing properties such as enhanced in-context learning, and multi-image reasoning, enabling few-shot chain-of-thought prompting.",
+  "published": "2024-03-14T17:51:32+00:00",
+  "updated": "2024-04-18T18:51:04+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2403.09611v4",
+  "entry_id": "http://arxiv.org/abs/2403.09611v4",
+  "pdf_path": "data/papers/2403.09611.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 112489,
+ "word_count": 16283,
+ "models_extracted": 13,
+ "extraction_data": [
+  {
+   "model_name": "MM 1",
+   "parameters": "1.2B, 2.9B, 3B, 6.4B, 7B, 8B, 13B, 30B, 64B",
+   "parameters_millions": 64000,
+   "model_family": "MM1",
+   "date_created": "2024-03-14",
+   "organization": "Apple",
+   "innovation": "Unified multimodal LLM pre-training recipe; demonstrates joint scaling of data and compute yields linear performance gains; uses a simple MLP projector to align vision and language features without complex cross-attention; systematic ablation reveals that data quality and quantity are critical for MLLM scaling.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal pre-training (image-caption, interleaved image-text, text-only)",
+   "pretraining_corpus": "DFN-5B (for vision encoder); interleaved image-text documents, image-text pair documents, text-only documents",
+   "finetuning_task": "Supervised fine-tuning, Supervised Fine-Tuning (SFT), Supervised fine-tuning (SFT) for visual instruction following",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal LLM pre-training methods and scaling laws",
+   "application": "In-context predictions, object counting, OCR, common-sense knowledge, basic math, multi-image reasoning, few-shot chain-of-thought prompting",
+   "paper_title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+   "training_corpus_size": "400B tokens",
+   "finetuning_data": "LLaVA-Conv, LLaVA-Complex, ShareGPT-4V, VQAv2, GQA, OKVQA, A-OKVQA, COCO Captions, OCRVQA, TextCaps, DVQA, ChartQA, AI2D, DocVQA, InfoVQA, Synthdog-En, internal text-only dataset",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/LAVIS/tree/main/projects/mm1",
+   "context_length": null,
+   "activated_parameters": "3B",
+   "attention_mechanism": "Standard multi-head self-attention, Multi-head self-attention",
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Large-scale multimodal pre-training -> supervised fine-tuning",
+   "reasoning_mode": "Few-shot chain-of-thought prompting",
+   "moe_configuration": "Mixture-of-Experts (MoE) variants up to 64B total parameters",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "VeCap-300M (synthetic captions)",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Vision-language connector",
+   "vision_encoder": "Image encoder (high-resolution), CLIP DFN+VeCap ViT-L (378x378 dynamic resolution), ViT-L/14 (CLIP/DINOv2/AIM variants), ViT-H (378x378 resolution, CLIP objective on DFN-5B), ViT-L/14",
+   "base_model": "In-house pre-trained LLM decoder weights",
+   "optimizer_innovation": null,
+   "benchmark_result": "Competitive performance across 12 established multimodal benchmarks; SOTA on captioning and VQA in few-shot settings; COCO: 125.3, NoCaps: 116.0, TextCaps: 97.6, VQAv2: 71.9, VizWiz: 50.6, OKVQA: 59.3; VQAv2: 81.1, GQA: 64.5, TextVQA: 63.5, DocVQA: 88.2, ChartQA: 78.5, MathVista: 58.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "3B-MoE",
+   "model_family": "MM1",
+   "date_created": "2024-03-14",
+   "organization": "Meta",
+   "innovation": "Mixture-of-Experts scaling to increase model capacity without sacrificing inference speed; top-2 gating with load balance loss (0.01) and router z-loss (0.001) for training stability.",
+   "pretraining_corpus": "In-house multimodal data mix",
+   "parameters": "64B",
+   "parameters_millions": 64000,
+   "application": "Image captioning, visual question answering",
+   "license": null,
+   "research_problem": "Multimodal LLM pre-training and scaling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal next-token prediction",
+   "training_corpus_size": "400B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+   "activated_parameters": "3B",
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Multimodal pre-training for 200k steps",
+   "reasoning_mode": null,
+   "moe_configuration": "64 experts, top-2 gating, replaces dense layer in every-2 layers",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion (MLP connector)",
+   "vision_encoder": "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+   "base_model": "In-house pre-trained LLM decoder weights",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "7B-MoE",
+   "model_family": "MM1",
+   "date_created": "2024-03-14",
+   "organization": "Meta",
+   "innovation": "Mixture-of-Experts scaling to increase model capacity without sacrificing inference speed; top-2 gating with load balance loss (0.01) and router z-loss (0.001) for training stability.",
+   "pretraining_corpus": "In-house multimodal data mix",
+   "parameters": "47B",
+   "parameters_millions": 47000,
+   "application": "Image captioning, visual question answering",
+   "license": null,
+   "research_problem": "Multimodal LLM pre-training and scaling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal next-token prediction",
+   "training_corpus_size": "400B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MM1: Methods, Analysis & Insights from Multimodal LLM Pre-training",
+   "activated_parameters": "7B",
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Multimodal pre-training for 200k steps",
+   "reasoning_mode": null,
+   "moe_configuration": "32 experts, top-2 gating, replaces dense layer in every-4 layers",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion (MLP connector)",
+   "vision_encoder": "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+   "base_model": "In-house pre-trained LLM decoder weights",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 13,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "MM 1": {
+   "application": [
+    "object counting",
+    "OCR",
+    "common-sense knowledge",
+    "basic math",
+    "multi-image reasoning"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention",
+    "Multi-head self-attention"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "LLaVA-Conv",
+    "LLaVA-Complex",
+    "ShareGPT-4V",
+    "VQAv2",
+    "GQA",
+    "OKVQA",
+    "A-OKVQA",
+    "COCO Captions",
+    "OCRVQA",
+    "TextCaps",
+    "DVQA",
+    "ChartQA",
+    "AI2D",
+    "DocVQA",
+    "InfoVQA",
+    "Synthdog-En"
+   ],
+   "finetuning_task": [
+    "Supervised Fine-Tuning (SFT)"
+   ],
+   "fusion_architecture": [
+    "Vision-language connector"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "MM1"
+   ],
+   "model_name": [
+    "MM 1"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Apple"
+   ],
+   "parameters": [
+    "1.2B",
+    "2.9B",
+    "3B",
+    "6.4B",
+    "7B",
+    "8B",
+    "13B",
+    "30B",
+    "64B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "DFN-5B (for vision encoder)"
+   ],
+   "pretraining_task": [
+    "Multimodal pre-training (image-caption, interleaved image-text, text-only)"
+   ],
+   "reasoning_mode": [
+    "Few-shot chain-of-thought prompting"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [],
+   "vision_encoder": [
+    "Image encoder (high-resolution)",
+    "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+    "ViT-L/14 (CLIP/DINOv2/AIM variants)",
+    "ViT-H (378x378 resolution, CLIP objective on DFN-5B)",
+    "ViT-L/14"
+   ]
+  },
+  "3B-MoE": {
+   "application": [
+    "Image captioning",
+    "visual question answering"
+   ],
+   "base_model": [],
+   "fusion_architecture": [
+    "Mid-fusion (MLP connector)"
+   ],
+   "model_family": [
+    "MM1"
+   ],
+   "model_name": [
+    "3B-MoE"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "64B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multimodal next-token prediction"
+   ],
+   "research_problem": [],
+   "vision_encoder": [
+    "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)"
+   ]
+  },
+  "7B-MoE": {
+   "application": [
+    "Image captioning",
+    "visual question answering"
+   ],
+   "base_model": [],
+   "fusion_architecture": [
+    "Mid-fusion (MLP connector)"
+   ],
+   "model_family": [
+    "MM1"
+   ],
+   "model_name": [
+    "7B-MoE"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "47B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multimodal next-token prediction"
+   ],
+   "research_problem": [],
+   "vision_encoder": [
+    "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "MM 1": {
+    "application": {
+     "candidates": [
+      "In-context predictions",
+      "object counting",
+      "OCR",
+      "common-sense knowledge",
+      "basic math",
+      "multi-image reasoning",
+      "few-shot chain-of-thought prompting"
+     ],
+     "accepted": [
+      "object counting",
+      "OCR",
+      "common-sense knowledge",
+      "basic math",
+      "multi-image reasoning"
+     ],
+     "dropped": [
+      {
+       "value": "In-context predictions",
+       "reason": "Describes a technique/method, not a concrete application or domain."
+      },
+      {
+       "value": "few-shot chain-of-thought prompting",
+       "reason": "Describes a prompting technique, not a concrete application or domain."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "In-house pre-trained LLM decoder weights"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "In-house pre-trained LLM decoder weights",
+       "reason": "Describes model components/weights rather than naming a specific pre-trained model."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "LLaVA-Conv",
+      "LLaVA-Complex",
+      "ShareGPT-4V",
+      "VQAv2",
+      "GQA",
+      "OKVQA",
+      "A-OKVQA",
+      "COCO Captions",
+      "OCRVQA",
+      "TextCaps",
+      "DVQA",
+      "ChartQA",
+      "AI2D",
+      "DocVQA",
+      "InfoVQA",
+      "Synthdog-En",
+      "internal text-only dataset"
+     ],
+     "accepted": [
+      "LLaVA-Conv",
+      "LLaVA-Complex",
+      "ShareGPT-4V",
+      "VQAv2",
+      "GQA",
+      "OKVQA",
+      "A-OKVQA",
+      "COCO Captions",
+      "OCRVQA",
+      "TextCaps",
+      "DVQA",
+      "ChartQA",
+      "AI2D",
+      "DocVQA",
+      "InfoVQA",
+      "Synthdog-En"
+     ],
+     "dropped": [
+      {
+       "value": "internal text-only dataset",
+       "reason": "Placeholder/description rather than naming a specific dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning",
+      "Supervised Fine-Tuning (SFT)",
+      "Supervised fine-tuning (SFT) for visual instruction following"
+     ],
+     "accepted": [
+      "Supervised Fine-Tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning (SFT) for visual instruction following",
+       "reason": "Describes the fine-tuning process/method rather than naming the specific task."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "DFN-5B (for vision encoder)",
+      "interleaved image-text documents, image-text pair documents, text-only documents"
+     ],
+     "accepted": [
+      "DFN-5B (for vision encoder)"
+     ],
+     "dropped": [
+      {
+       "value": "interleaved image-text documents, image-text pair documents, text-only documents",
+       "reason": "Describes document formats/types rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal LLM pre-training methods and scaling laws"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multimodal LLM pre-training methods and scaling laws",
+       "reason": "Describes methods and scaling laws rather than naming a research problem or capability gap."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "VeCap-300M (synthetic captions)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "VeCap-300M (synthetic captions)",
+       "reason": "Names a dataset rather than describing a generation method or technique."
+      }
+     ]
+    }
+   },
+   "3B-MoE": {
+    "base_model": {
+     "candidates": [
+      "In-house pre-trained LLM decoder weights"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "In-house pre-trained LLM decoder weights",
+       "reason": "Describes model components/weights rather than naming a specific pre-trained model."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "In-house multimodal data mix"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "In-house multimodal data mix",
+       "reason": "Placeholder/description rather than naming a specific identifiable corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal LLM pre-training and scaling"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multimodal LLM pre-training and scaling",
+       "reason": "Describes research topics/methods rather than naming a specific problem or capability gap."
+      }
+     ]
+    }
+   },
+   "7B-MoE": {
+    "base_model": {
+     "candidates": [
+      "In-house pre-trained LLM decoder weights"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "In-house pre-trained LLM decoder weights",
+       "reason": "Describes model components/weights rather than naming a specific pre-trained model."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "In-house multimodal data mix"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "In-house multimodal data mix",
+       "reason": "Placeholder/description rather than naming a specific identifiable corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal LLM pre-training and scaling"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multimodal LLM pre-training and scaling",
+       "reason": "Describes research topics/methods rather than naming a specific problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 70,
+   "dropped": 15,
+   "llm_calls": 1,
+   "values_sent_to_llm": 36
+  }
+ },
+ "contributions": [
+  {
+   "label": "MM 1",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MM 1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MM1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Apple",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified multimodal LLM pre-training recipe",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Demonstrates joint scaling of data and compute yields linear performance gains",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a simple MLP projector to align vision and language features without complex cross-attention",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic ablation reveals that data quality and quantity are critical for MLLM scaling.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal pre-training (image-caption, interleaved image-text, text-only)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DFN-5B (for vision encoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised Fine-Tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "64B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 64000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object counting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Common-sense knowledge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Basic math",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-image reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/LAVIS/tree/main/projects/mm1",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "400B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Conv",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Complex",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT-4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCRVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ChartQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "AI2D",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DocVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "InfoVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Synthdog-En",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Large-scale multimodal pre-training -> supervised fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Few-shot chain-of-thought prompting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Mixture-of-Experts (MoE) variants up to 64B total parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Vision-language connector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Image encoder (high-resolution)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14 (CLIP/DINOv2/AIM variants)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-H (378x378 resolution, CLIP objective on DFN-5B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Competitive performance across 12 established multimodal benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on captioning and VQA in few-shot settings",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 125.3, NoCaps: 116.0, TextCaps: 97.6, VQAv2: 71.9, VizWiz: 50.6, OKVQA: 59.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 81.1, GQA: 64.5, TextVQA: 63.5, DocVQA: 88.2, ChartQA: 78.5, MathVista: 58.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "3B-MoE",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "3B-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MM1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Experts scaling to increase model capacity without sacrificing inference speed",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Top-2 gating with load balance loss (0.01) and router z-loss (0.001) for training stability.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "64B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 64000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "400B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Multimodal pre-training for 200k steps",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "64 experts, top-2 gating, replaces dense layer in every-2 layers",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion (MLP connector)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "7B-MoE",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "7B-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MM1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Experts scaling to increase model capacity without sacrificing inference speed",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Top-2 gating with load balance loss (0.01) and router z-loss (0.001) for training stability.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "47B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 47000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "400B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Multimodal pre-training for 200k steps",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "32 experts, top-2 gating, replaces dense layer in every-4 layers",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion (MLP connector)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP DFN+VeCap ViT-L (378x378 dynamic resolution)",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1778021",
+  "contribution_ids": [
+   "R1778023",
+   "R1778024",
+   "R1778025",
+   "R1924419",
+   "R1924434",
+   "R1924438"
+  ],
+  "new_contribution_ids": [
+   "R1924419",
+   "R1924434",
+   "R1924438"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,3223 @@
+{
+  "arxiv_id": "2409.17146",
+  "status": "completed",
+  "timestamp": "2026-08-29T06:54:52.027029",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2409.17146",
+    "title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+    "authors": [
+      "Matt Deitke",
+      "Christopher Clark",
+      "Sangho Lee",
+      "Rohun Tripathi",
+      "Yue Yang",
+      "Jae Sung Park",
+      "Mohammadreza Salehi",
+      "Niklas Muennighoff",
+      "Kyle Lo",
+      "Luca Soldaini",
+      "Jiasen Lu",
+      "Taira Anderson",
+      "Erin Bransom",
+      "Kiana Ehsani",
+      "Huong Ngo",
+      "YenSung Chen",
+      "Ajay Patel",
+      "Mark Yatskar",
+      "Chris Callison-Burch",
+      "Andrew Head",
+      "Rose Hendrix",
+      "Favyen Bastani",
+      "Eli VanderBilt",
+      "Nathan Lambert",
+      "Yvonne Chou",
+      "Arnavi Chheda",
+      "Jenna Sparks",
+      "Sam Skjonsberg",
+      "Michael Schmitz",
+      "Aaron Sarnat",
+      "Byron Bischoff",
+      "Pete Walsh",
+      "Chris Newell",
+      "Piper Wolters",
+      "Tanmay Gupta",
+      "Kuo-Hao Zeng",
+      "Jon Borchardt",
+      "Dirk Groeneveld",
+      "Crystal Nam",
+      "Sophie Lebrecht",
+      "Caitlin Wittlif",
+      "Carissa Schoenick",
+      "Oscar Michel",
+      "Ranjay Krishna",
+      "Luca Weihs",
+      "Noah A. Smith",
+      "Hannaneh Hajishirzi",
+      "Ross Girshick",
+      "Ali Farhadi",
+      "Aniruddha Kembhavi"
+    ],
+    "abstract": "Today's most advanced vision-language models (VLMs) remain proprietary. The strongest open-weight models rely heavily on synthetic data from proprietary VLMs to achieve good performance, effectively distilling these closed VLMs into open ones. As a result, the community has been missing foundational knowledge about how to build performant VLMs from scratch. We present Molmo, a new family of VLMs that are state-of-the-art in their class of openness. Our key contribution is a collection of new datasets called PixMo, including a dataset of highly detailed image captions for pre-training, a free-form image Q&A dataset for fine-tuning, and an innovative 2D pointing dataset, all collected without the use of external VLMs. The success of our approach relies on careful modeling choices, a well-tuned training pipeline, and, most critically, the quality of our newly collected datasets. Our best-in-class 72B model not only outperforms others in the class of open weight and data models, but also outperforms larger proprietary models including Claude 3.5 Sonnet, and Gemini 1.5 Pro and Flash, second only to GPT-4o based on both academic benchmarks and on a large human evaluation. Our model weights, new datasets, and source code are available at https://molmo.allenai.org/blog.",
+    "published": "2024-09-25T17:59:51+00:00",
+    "updated": "2024-12-05T14:28:40+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2409.17146v2",
+    "entry_id": "http://arxiv.org/abs/2409.17146v2",
+    "pdf_path": "data/papers/2409.17146.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 172681,
+  "word_count": 24567,
+  "models_extracted": 18,
+  "extraction_data": [
+    {
+      "model_name": "Molmo",
+      "parameters": "0.1B, 290M, 0.5B, 2B, 3B, 7B, 12B, 40B, 72B",
+      "parameters_millions": 72000,
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Introduces open-weight vision-language models (Molmo) trained on open synthetic and annotated data generated via the PixMo pipeline; employs a mid-fusion architecture with a dynamic-resolution vision encoder to improve fine-grained visual understanding and reasoning.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Image-text alignment, instruction following, pointing/grounding",
+      "pretraining_corpus": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+      "finetuning_task": "High-resolution fine-tuning, Visual instruction tuning, VQA, pointing, counting, captioning, Supervised fine-tuning",
+      "optimizer": "AdamW",
+      "hardware_used": "H100 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": "Open weights",
+      "research_problem": "Vision-Language Models",
+      "application": "Dense captioning, instruction following, grounding, counting, clock reading, chart/table understanding, OCR",
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "training_corpus_size": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+      "finetuning_data": "VQAv2.0, TextVQA, OK-VQA, ChartQA, DocVQA, InfographicVQA, AI2D, PixMo-Count, PixMo-CapQA, PixMo-Docs, PixMo-Clocks, PixMo-AskModelAnything, A-OKVQA, AndroidControl, ScienceQA, TabMWP, ST-VQA, TallyQA, CountBenchQA, VQAv2, Academic datasets, PixMo-Points",
+      "tokenizer": "Qwen2 tokenizer",
+      "supported_language": "English",
+      "hardware_description": "128 A100 80GB GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/allenai/Molmo",
+      "context_length": null,
+      "activated_parameters": "72B",
+      "attention_mechanism": "Scaled Dot Product Attention (SDPA), Grouped-Query Attention (GQA), Multi-head attention, Multi-head self-attention",
+      "context_length_max": "2304",
+      "context_extension_method": null,
+      "training_pipeline": "Two-stage: image-text alignment -> full-model instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Dense for 0.5B–7B; MoE for 12B and 40B",
+      "quantization_precision": "bfloat16 for most operations; float32 for weights, gradient reduction, layer normalization, and RoPE, BF16",
+      "synthetic_data_generation_method": "PixMo(Synthetic) dataset, Synthetic data generation pipelines (PixMo-Clocks, PixMo-Count, PixMo-AskModelAnything); LLM prompting for QA pairs and code generation",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Connector (MLP)",
+      "vision_encoder": "Pre-trained ViT, ViT (Vision Transformer), SigLIP, MetaCLIP, DINOv2, OpenAI CLIP, Dynamic-resolution vision encoder, Dynamic-resolution vision encoder (SigLIP-based), High-resolution dynamic vision encoder",
+      "base_model": "Qwen2 72B",
+      "optimizer_innovation": null,
+      "benchmark_result": "Highest academic benchmark score; ranks second by human preference; outperforms Gemini 1.5 Pro and Flash, Claude 3.5 Sonnet; 11-benchmark average, AI2D, VQAv2.0, user study win-rate 55% against DINOv2 variant; SOTA on multiple VLM benchmarks; SOTA on VQAv2, OK-VQA, ChartQA, DocVQA, MathVista, and AI2D among open-weight VLMs; 71.1; 78.5; 75.1; 78.3; 65.3; 66.7; 76.7; 50.0; 59.7; 73.7; 79.4; 69.4; 77.1; 69.5; 69.8; 74.5; 40.7; 43.9; 59.5; 63.4; 66.8; 72.0; 76.6; 68.6; 74.6; 77.3; 81.2",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "80",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "MolmoE",
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Overlapping multi-crop strategy for high-resolution image processing; simplified two-stage training pipeline; efficient method for training on images with multiple annotations; novel pointing data collection enabling grounding and counting without bounding boxes.",
+      "pretraining_corpus": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+      "parameters": "1B",
+      "parameters_millions": 1000,
+      "application": "Dense captioning, instruction following, grounding, counting, clock reading, chart/table understanding, OCR",
+      "license": "Open weights",
+      "research_problem": "Vision-Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Image-text alignment, instruction following, pointing/grounding",
+      "training_corpus_size": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "High-resolution fine-tuning",
+      "finetuning_data": "VQAv2.0, TextVQA, OK-VQA, ChartQA, DocVQA, InfographicVQA, AI2D, PixMo-Count",
+      "optimizer": "AdamW",
+      "tokenizer": "Qwen2 tokenizer",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "H100 GPU",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "activated_parameters": "1B",
+      "attention_mechanism": "Cross-attention for vision tokens",
+      "context_length_max": "1024",
+      "context_extension_method": null,
+      "training_pipeline": "Two-stage: image-text alignment -> full-model instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "1B total parameters",
+      "quantization_precision": "BF16",
+      "synthetic_data_generation_method": "PixMo pipeline using GPT-4o captions and synthetic math/visual reasoning/counting/clock data",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Connector (MLP)",
+      "vision_encoder": "Pre-trained ViT (e.g., SigLIP or MetaCLIP)",
+      "base_model": "OLMoE-1B-7B (Mixture-of-Experts)",
+      "optimizer_innovation": null,
+      "benchmark_result": "AI2D: 86.4; ChartQA: 78.0; HallusionBench: 83.9; MathVerse-MINI: 77.7; MathVision-MINI: 53.9; MathVista-MINI: 78.8; MMMU-VAL: 60.4; MMStar: 34.9; OCRBench: 34.0; ScreenSpot-v2: 87.2; CountBenchQA: 79.6; PixMo-Count: 68.6",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Molmo-7B-O",
+      "parameters": "7B, 7.3B",
+      "parameters_millions": 7300,
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Overlapping multi-crop strategy for high-resolution image processing; simplified two-stage training pipeline; efficient method for training on images with multiple annotations; novel pointing data collection enabling grounding and counting without bounding boxes.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Image-text alignment, instruction following, pointing/grounding",
+      "pretraining_corpus": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+      "finetuning_task": "High-resolution fine-tuning",
+      "optimizer": "AdamW",
+      "hardware_used": "H100 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": "Open weights",
+      "research_problem": "Vision-Language Models",
+      "application": "Dense captioning, instruction following, grounding, counting, clock reading, chart/table understanding, OCR",
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "training_corpus_size": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+      "finetuning_data": "VQAv2.0, TextVQA, OK-VQA, ChartQA, DocVQA, InfographicVQA, AI2D, PixMo-Count",
+      "tokenizer": "Qwen2 tokenizer",
+      "supported_language": "English",
+      "hardware_description": "128 A100 80GB GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/allenai/Molmo",
+      "context_length": null,
+      "activated_parameters": "7B",
+      "attention_mechanism": "ScaledDotProductAttention (PyTorch SDPA), Scaled Dot Product Attention (SDPA)",
+      "context_length_max": "2304",
+      "context_extension_method": null,
+      "training_pipeline": "Two-stage: image-text alignment -> full-model instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Dense for 0.5B–7B; MoE for 12B and 40B",
+      "quantization_precision": "bfloat16 for most operations; float32 for weights, gradient reduction, layer normalization, and RoPE",
+      "synthetic_data_generation_method": "PixMo(Synthetic) dataset",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Connector (MLP)",
+      "vision_encoder": "Pre-trained ViT, DINOv2",
+      "base_model": "OLMo-7B",
+      "optimizer_innovation": null,
+      "benchmark_result": "AI2D: 90.7; ChartQA: 80.4; HallusionBench: 85.3; MathVerse-MINI: 90.8; MathVision-MINI: 70.0; MathVista-MINI: 80.4; MMMU-VAL: 67.5; MMStar: 39.3; OCRBench: 44.5; ScreenSpot-v2: 89.0; CountBenchQA: 83.3; PixMo-Count: 74.6",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Molmo (100% fully open)",
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "100% fully open weights and training data; uses MetaCLIP vision encoder and OLMo LLM; same multi-crop preprocessing and connector architecture as Molmo-72B.",
+      "pretraining_corpus": "PixMo-CapQA, PixMo-Cap, PixMo-Points, PixMo-AskModelAnything, VQAv2.0, and other multimodal datasets",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Visual question answering, image captioning, pointing/counting, visual explanation, general VLM tasks",
+      "license": "100% open weights and data",
+      "research_problem": "Vision-Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Image-text alignment, captioning, VQA",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Connector pooling patch features from multiple ViT layers via multi-headed attention, mapped to LLM embedding space via MLP",
+      "vision_encoder": "MetaCLIP",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Not specified in text",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Molmo-1B-E",
+      "parameters": "1.2B, 6.9B",
+      "parameters_millions": 6900,
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Attention pooling for vision-language fusion; dynamic crop-based image encoding with overlapping high-resolution crops; open-weight and open-data training recipe using PixMo datasets.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "PixMo-Cap, PixMo-AskModelAnything, academic datasets, noisy web-scaled data",
+      "finetuning_task": null,
+      "optimizer": "AdamW",
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "Open weights",
+      "research_problem": "Vision-Language Models",
+      "application": "Visual question answering, image captioning, scientific/mathematical reasoning, UI understanding",
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "training_corpus_size": "350M tokens (Annotated), 120M tokens (Synthetic)",
+      "finetuning_data": null,
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "1.2B",
+      "attention_mechanism": "Scaled Dot Product Attention (SDPA), ScaledDotProductAttention (PyTorch SDPA)",
+      "context_length_max": "2304",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on image-caption/audio transcript pairs with length hints, followed by fine-tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "64 experts, 8 active",
+      "quantization_precision": "bfloat16 for most operations; float32 for weights, gradient reduction, layer normalization, and RoPE",
+      "synthetic_data_generation_method": "PixMo(Synthetic) dataset",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Attention pooling",
+      "vision_encoder": "DINOv2",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "16",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Molmo-7B-D",
+      "model_family": "Molmo",
+      "date_created": "2024-09-25",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Attention pooling for vision-language fusion; dynamic crop-based image encoding with overlapping high-resolution crops; open-weight and open-data training recipe using PixMo datasets.",
+      "pretraining_corpus": "PixMo-Cap, PixMo-AskModelAnything, academic datasets, noisy web-scaled data",
+      "parameters": "7.6B",
+      "parameters_millions": 7600,
+      "application": "Visual question answering, image captioning, scientific/mathematical reasoning, UI understanding",
+      "license": "Open weights",
+      "research_problem": null,
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Molmo and PixMo: Open Weights and Open Data for State-of-the-Art Vision-Language Models",
+      "activated_parameters": null,
+      "attention_mechanism": "Scaled Dot Product Attention (SDPA), Grouped-Query Attention (GQA)",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Attention pooling",
+      "vision_encoder": "DINOv2",
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "28",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 17,
+  "models_after_merge": 6,
+  "validated_rows": {
+    "Molmo": {
+      "application": [
+        "Dense captioning",
+        "instruction following",
+        "grounding",
+        "counting",
+        "clock reading",
+        "chart/table understanding",
+        "OCR"
+      ],
+      "attention_mechanism": [
+        "Scaled Dot Product Attention (SDPA)",
+        "Grouped-Query Attention (GQA)",
+        "Multi-head attention",
+        "Multi-head self-attention"
+      ],
+      "base_model": [
+        "Qwen2 72B"
+      ],
+      "finetuning_data": [
+        "VQAv2.0",
+        "TextVQA",
+        "OK-VQA",
+        "ChartQA",
+        "DocVQA",
+        "InfographicVQA",
+        "AI2D",
+        "PixMo-Count",
+        "PixMo-CapQA",
+        "PixMo-Docs",
+        "PixMo-Clocks",
+        "PixMo-AskModelAnything",
+        "A-OKVQA",
+        "AndroidControl",
+        "ScienceQA",
+        "TabMWP",
+        "ST-VQA",
+        "TallyQA",
+        "CountBenchQA",
+        "VQAv2",
+        "PixMo-Points"
+      ],
+      "finetuning_task": [
+        "Visual instruction tuning",
+        "VQA",
+        "pointing",
+        "counting",
+        "captioning"
+      ],
+      "fusion_architecture": [
+        "Connector (MLP)"
+      ],
+      "hardware_used": [
+        "H100 GPU"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "Molmo"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "0.1B",
+        "290M",
+        "0.5B",
+        "2B",
+        "3B",
+        "7B",
+        "12B",
+        "40B",
+        "72B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)"
+      ],
+      "pretraining_task": [
+        "Image-text alignment, instruction following, pointing/grounding"
+      ],
+      "quantization_precision": [
+        "bfloat16 for most operations",
+        "float32 for weights",
+        "BF16"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Synthetic data generation pipelines (PixMo-Clocks, PixMo-Count, PixMo-AskModelAnything)",
+        "LLM prompting for QA pairs and code generation"
+      ],
+      "vision_encoder": [
+        "Pre-trained ViT",
+        "ViT (Vision Transformer)",
+        "SigLIP",
+        "MetaCLIP",
+        "DINOv2",
+        "OpenAI CLIP",
+        "Dynamic-resolution vision encoder",
+        "Dynamic-resolution vision encoder (SigLIP-based)",
+        "High-resolution dynamic vision encoder"
+      ]
+    },
+    "MolmoE": {
+      "application": [
+        "Dense captioning",
+        "instruction following",
+        "grounding",
+        "counting",
+        "clock reading",
+        "chart/table understanding",
+        "OCR"
+      ],
+      "attention_mechanism": [
+        "Cross-attention for vision tokens"
+      ],
+      "base_model": [
+        "OLMoE-1B-7B (Mixture-of-Experts)"
+      ],
+      "finetuning_data": [
+        "VQAv2.0",
+        "TextVQA",
+        "OK-VQA",
+        "ChartQA",
+        "DocVQA",
+        "InfographicVQA",
+        "AI2D",
+        "PixMo-Count"
+      ],
+      "finetuning_task": [],
+      "fusion_architecture": [
+        "Connector (MLP)"
+      ],
+      "hardware_used": [
+        "H100 GPU"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "MolmoE"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "1B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)"
+      ],
+      "pretraining_task": [
+        "Image-text alignment, instruction following, pointing/grounding"
+      ],
+      "quantization_precision": [
+        "BF16"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "PixMo pipeline using GPT-4o captions and synthetic math/visual reasoning/counting/clock data"
+      ],
+      "vision_encoder": [
+        "Pre-trained ViT (e.g., SigLIP or MetaCLIP)"
+      ]
+    },
+    "Molmo-7B-O": {
+      "application": [
+        "Dense captioning",
+        "instruction following",
+        "grounding",
+        "counting",
+        "clock reading",
+        "chart/table understanding",
+        "OCR"
+      ],
+      "attention_mechanism": [
+        "ScaledDotProductAttention (PyTorch SDPA)",
+        "Scaled Dot Product Attention (SDPA)"
+      ],
+      "base_model": [
+        "OLMo-7B"
+      ],
+      "finetuning_data": [
+        "VQAv2.0",
+        "TextVQA",
+        "OK-VQA",
+        "ChartQA",
+        "DocVQA",
+        "InfographicVQA",
+        "AI2D",
+        "PixMo-Count"
+      ],
+      "finetuning_task": [],
+      "fusion_architecture": [
+        "Connector (MLP)"
+      ],
+      "hardware_used": [
+        "H100 GPU"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "Molmo-7B-O"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "7B",
+        "7.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)"
+      ],
+      "pretraining_task": [
+        "Image-text alignment, instruction following, pointing/grounding"
+      ],
+      "quantization_precision": [
+        "bfloat16 for most operations",
+        "float32 for weights"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "Pre-trained ViT",
+        "DINOv2"
+      ]
+    },
+    "Molmo (100% fully open)": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "pointing/counting",
+        "visual explanation"
+      ],
+      "fusion_architecture": [
+        "Connector pooling patch features from multiple ViT layers via multi-headed attention, mapped to LLM embedding space via MLP"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "Molmo (100% fully open)"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo-CapQA",
+        "PixMo-Cap",
+        "PixMo-Points",
+        "PixMo-AskModelAnything",
+        "VQAv2.0"
+      ],
+      "pretraining_task": [
+        "Image-text alignment, captioning, VQA"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "MetaCLIP"
+      ]
+    },
+    "Molmo-1B-E": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "scientific/mathematical reasoning",
+        "UI understanding"
+      ],
+      "attention_mechanism": [
+        "Scaled Dot Product Attention (SDPA)",
+        "ScaledDotProductAttention (PyTorch SDPA)"
+      ],
+      "fusion_architecture": [
+        "Attention pooling"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "Molmo-1B-E"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "1.2B",
+        "6.9B"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo-Cap",
+        "PixMo-AskModelAnything"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "bfloat16 for most operations",
+        "float32 for weights"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "DINOv2"
+      ]
+    },
+    "Molmo-7B-D": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "scientific/mathematical reasoning",
+        "UI understanding"
+      ],
+      "attention_mechanism": [
+        "Scaled Dot Product Attention (SDPA)",
+        "Grouped-Query Attention (GQA)"
+      ],
+      "fusion_architecture": [
+        "Attention pooling"
+      ],
+      "license": [],
+      "model_family": [
+        "Molmo"
+      ],
+      "model_name": [
+        "Molmo-7B-D"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "7.6B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "PixMo-Cap",
+        "PixMo-AskModelAnything"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "DINOv2"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Molmo": {
+        "finetuning_data": {
+          "candidates": [
+            "VQAv2.0",
+            "TextVQA",
+            "OK-VQA",
+            "ChartQA",
+            "DocVQA",
+            "InfographicVQA",
+            "AI2D",
+            "PixMo-Count",
+            "PixMo-CapQA",
+            "PixMo-Docs",
+            "PixMo-Clocks",
+            "PixMo-AskModelAnything",
+            "A-OKVQA",
+            "AndroidControl",
+            "ScienceQA",
+            "TabMWP",
+            "ST-VQA",
+            "TallyQA",
+            "CountBenchQA",
+            "VQAv2",
+            "Academic datasets",
+            "PixMo-Points"
+          ],
+          "accepted": [
+            "VQAv2.0",
+            "TextVQA",
+            "OK-VQA",
+            "ChartQA",
+            "DocVQA",
+            "InfographicVQA",
+            "AI2D",
+            "PixMo-Count",
+            "PixMo-CapQA",
+            "PixMo-Docs",
+            "PixMo-Clocks",
+            "PixMo-AskModelAnything",
+            "A-OKVQA",
+            "AndroidControl",
+            "ScienceQA",
+            "TabMWP",
+            "ST-VQA",
+            "TallyQA",
+            "CountBenchQA",
+            "VQAv2",
+            "PixMo-Points"
+          ],
+          "dropped": [
+            {
+              "value": "Academic datasets",
+              "reason": "Vague placeholder, does not name a specific curated dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "High-resolution fine-tuning",
+            "Visual instruction tuning",
+            "VQA",
+            "pointing",
+            "counting",
+            "captioning",
+            "Supervised fine-tuning"
+          ],
+          "accepted": [
+            "Visual instruction tuning",
+            "VQA",
+            "pointing",
+            "counting",
+            "captioning"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            },
+            {
+              "value": "High-resolution fine-tuning",
+              "reason": "Describes a training technique/setting rather than a specific task or objective."
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "Open weights"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open weights",
+              "reason": "Describes model availability rather than naming a specific license. (cached)"
+            }
+          ]
+        },
+        "quantization_precision": {
+          "candidates": [
+            "bfloat16 for most operations",
+            "float32 for weights",
+            "gradient reduction",
+            "layer normalization",
+            "RoPE",
+            "BF16"
+          ],
+          "accepted": [
+            "bfloat16 for most operations",
+            "float32 for weights",
+            "BF16"
+          ],
+          "dropped": [
+            {
+              "value": "gradient reduction",
+              "reason": "Describes a training optimization technique, not a numerical precision."
+            },
+            {
+              "value": "layer normalization",
+              "reason": "Describes a neural network component/technique, not a numerical precision."
+            },
+            {
+              "value": "RoPE",
+              "reason": "Describes a positional encoding method, not a numerical precision."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "PixMo(Synthetic) dataset",
+            "Synthetic data generation pipelines (PixMo-Clocks, PixMo-Count, PixMo-AskModelAnything)",
+            "LLM prompting for QA pairs and code generation"
+          ],
+          "accepted": [
+            "Synthetic data generation pipelines (PixMo-Clocks, PixMo-Count, PixMo-AskModelAnything)",
+            "LLM prompting for QA pairs and code generation"
+          ],
+          "dropped": [
+            {
+              "value": "PixMo(Synthetic) dataset",
+              "reason": "Names a dataset rather than describing a generation method or technique."
+            }
+          ]
+        }
+      },
+      "MolmoE": {
+        "finetuning_task": {
+          "candidates": [
+            "High-resolution fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "High-resolution fine-tuning",
+              "reason": "Describes a training technique/setting rather than a specific task or objective."
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "Open weights"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open weights",
+              "reason": "Describes model availability rather than naming a specific license. (cached)"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        }
+      },
+      "Molmo-7B-O": {
+        "finetuning_task": {
+          "candidates": [
+            "High-resolution fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "High-resolution fine-tuning",
+              "reason": "Describes a training technique/setting rather than a specific task or objective."
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "Open weights"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open weights",
+              "reason": "Describes model availability rather than naming a specific license. (cached)"
+            }
+          ]
+        },
+        "quantization_precision": {
+          "candidates": [
+            "bfloat16 for most operations",
+            "float32 for weights",
+            "gradient reduction",
+            "layer normalization",
+            "RoPE"
+          ],
+          "accepted": [
+            "bfloat16 for most operations",
+            "float32 for weights"
+          ],
+          "dropped": [
+            {
+              "value": "gradient reduction",
+              "reason": "Describes a training optimization technique, not a numerical precision."
+            },
+            {
+              "value": "layer normalization",
+              "reason": "Describes a neural network component/technique, not a numerical precision."
+            },
+            {
+              "value": "RoPE",
+              "reason": "Describes a positional encoding method, not a numerical precision."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "PixMo(Synthetic) dataset"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "PixMo(Synthetic) dataset",
+              "reason": "Names a dataset rather than describing a generation method or technique."
+            }
+          ]
+        }
+      },
+      "Molmo (100% fully open)": {
+        "application": {
+          "candidates": [
+            "Visual question answering",
+            "image captioning",
+            "pointing/counting",
+            "visual explanation",
+            "general VLM tasks"
+          ],
+          "accepted": [
+            "Visual question answering",
+            "image captioning",
+            "pointing/counting",
+            "visual explanation"
+          ],
+          "dropped": [
+            {
+              "value": "general VLM tasks",
+              "reason": "Vague placeholder, does not name a concrete task or domain."
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "100% open weights and data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "100% open weights and data",
+              "reason": "Describes availability/status rather than naming a specific license."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "PixMo-CapQA",
+            "PixMo-Cap",
+            "PixMo-Points",
+            "PixMo-AskModelAnything",
+            "VQAv2.0",
+            "other multimodal datasets"
+          ],
+          "accepted": [
+            "PixMo-CapQA",
+            "PixMo-Cap",
+            "PixMo-Points",
+            "PixMo-AskModelAnything",
+            "VQAv2.0"
+          ],
+          "dropped": [
+            {
+              "value": "other multimodal datasets",
+              "reason": "Vague placeholder, does not name an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        }
+      },
+      "Molmo-1B-E": {
+        "license": {
+          "candidates": [
+            "Open weights"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open weights",
+              "reason": "Describes model availability rather than naming a specific license. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "PixMo-Cap",
+            "PixMo-AskModelAnything",
+            "academic datasets",
+            "noisy web-scaled data"
+          ],
+          "accepted": [
+            "PixMo-Cap",
+            "PixMo-AskModelAnything"
+          ],
+          "dropped": [
+            {
+              "value": "academic datasets",
+              "reason": "Vague placeholder, does not name an identifiable dataset or corpus."
+            },
+            {
+              "value": "noisy web-scaled data",
+              "reason": "Describes a data type/source rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "quantization_precision": {
+          "candidates": [
+            "bfloat16 for most operations",
+            "float32 for weights",
+            "gradient reduction",
+            "layer normalization",
+            "RoPE"
+          ],
+          "accepted": [
+            "bfloat16 for most operations",
+            "float32 for weights"
+          ],
+          "dropped": [
+            {
+              "value": "gradient reduction",
+              "reason": "Describes a training optimization technique, not a numerical precision."
+            },
+            {
+              "value": "layer normalization",
+              "reason": "Describes a neural network component/technique, not a numerical precision."
+            },
+            {
+              "value": "RoPE",
+              "reason": "Describes a positional encoding method, not a numerical precision."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language Models",
+              "reason": "Names a model type/domain rather than a specific research problem or capability gap. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "PixMo(Synthetic) dataset"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "PixMo(Synthetic) dataset",
+              "reason": "Names a dataset rather than describing a generation method or technique."
+            }
+          ]
+        }
+      },
+      "Molmo-7B-D": {
+        "license": {
+          "candidates": [
+            "Open weights"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open weights",
+              "reason": "Describes model availability rather than naming a specific license. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "PixMo-Cap",
+            "PixMo-AskModelAnything",
+            "academic datasets",
+            "noisy web-scaled data"
+          ],
+          "accepted": [
+            "PixMo-Cap",
+            "PixMo-AskModelAnything"
+          ],
+          "dropped": [
+            {
+              "value": "academic datasets",
+              "reason": "Vague placeholder, does not name an identifiable dataset or corpus."
+            },
+            {
+              "value": "noisy web-scaled data",
+              "reason": "Describes a data type/source rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 191,
+      "dropped": 34,
+      "llm_calls": 1,
+      "values_sent_to_llm": 64
+    }
+  },
+  "contributions": [
+    {
+      "label": "Molmo",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces open-weight vision-language models (Molmo) trained on open synthetic and annotated data generated via the PixMo pipeline",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Employs a mid-fusion architecture with a dynamic-resolution vision encoder to improve fine-grained visual understanding and reasoning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text alignment, instruction following, pointing/grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Pointing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Counting",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen2 tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "290M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "0.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "12B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 72000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "128 A100 80GB GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dense captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Counting",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Clock reading",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart/table understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/Molmo",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChartQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DocVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "InfographicVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AI2D",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Count",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-CapQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Docs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Clocks",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-AskModelAnything",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "A-OKVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AndroidControl",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ScienceQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TabMWP",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ST-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TallyQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CountBenchQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Points",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Scaled Dot Product Attention (SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2304",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Two-stage: image-text alignment -> full-model instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Dense for 0.5B–7B; MoE for 12B and 40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16 for most operations",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Float32 for weights",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BF16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthetic data generation pipelines (PixMo-Clocks, PixMo-Count, PixMo-AskModelAnything)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "LLM prompting for QA pairs and code generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Connector (MLP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Pre-trained ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ViT (Vision Transformer)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "MetaCLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "DINOv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "OpenAI CLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dynamic-resolution vision encoder (SigLIP-based)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "High-resolution dynamic vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen2 72B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Highest academic benchmark score",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ranks second by human preference",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms Gemini 1.5 Pro and Flash, Claude 3.5 Sonnet",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "11-benchmark average, AI2D, VQAv2.0, user study win-rate 55% against DINOv2 variant",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on multiple VLM benchmarks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on VQAv2, OK-VQA, ChartQA, DocVQA, MathVista, and AI2D among open-weight VLMs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "71.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "78.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "75.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "78.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "65.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "66.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "76.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "50.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "59.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "73.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "79.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "69.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "77.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "69.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "69.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "74.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "40.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "43.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "59.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "63.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "66.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "72.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "76.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "68.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "74.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "77.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "81.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "80",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "MolmoE",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MolmoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Overlapping multi-crop strategy for high-resolution image processing",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Simplified two-stage training pipeline",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Efficient method for training on images with multiple annotations",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Novel pointing data collection enabling grounding and counting without bounding boxes.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text alignment, instruction following, pointing/grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen2 tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 1000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dense captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Counting",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Clock reading",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart/table understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChartQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DocVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "InfographicVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AI2D",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Count",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Cross-attention for vision tokens",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Two-stage: image-text alignment -> full-model instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "1B total parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BF16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "PixMo pipeline using GPT-4o captions and synthetic math/visual reasoning/counting/clock data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Connector (MLP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Pre-trained ViT (e.g., SigLIP or MetaCLIP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "OLMoE-1B-7B (Mixture-of-Experts)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 86.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 78.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench: 83.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVerse-MINI: 77.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVision-MINI: 53.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista-MINI: 78.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU-VAL: 60.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 34.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 34.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScreenSpot-v2: 87.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CountBenchQA: 79.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PixMo-Count: 68.6",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Molmo-7B-O",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Molmo-7B-O",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Overlapping multi-crop strategy for high-resolution image processing",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Simplified two-stage training pipeline",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Efficient method for training on images with multiple annotations",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Novel pointing data collection enabling grounding and counting without bounding boxes.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text alignment, instruction following, pointing/grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo dataset (712k dense captions, 162k instruction-following, 2.3M pointing, plus synthetic datasets for clock reading, chart/table understanding)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Qwen2 tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7300,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "128 A100 80GB GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dense captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Counting",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Clock reading",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart/table understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/Molmo",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "PixMo dataset (712k images for captions, 162k for instruction, 2.3M for pointing)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "TextVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChartQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DocVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "InfographicVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AI2D",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PixMo-Count",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "ScaledDotProductAttention (PyTorch SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Scaled Dot Product Attention (SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2304",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Two-stage: image-text alignment -> full-model instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Dense for 0.5B–7B; MoE for 12B and 40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16 for most operations",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Float32 for weights",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Connector (MLP)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Pre-trained ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "DINOv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "OLMo-7B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 90.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 80.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HallusionBench: 85.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVerse-MINI: 90.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVision-MINI: 70.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista-MINI: 80.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU-VAL: 67.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar: 39.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 44.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ScreenSpot-v2: 89.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CountBenchQA: 83.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PixMo-Count: 74.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Molmo (100% fully open)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Molmo (100% fully open)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "100% fully open weights and training data",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Uses MetaCLIP vision encoder and OLMo LLM",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Same multi-crop preprocessing and connector architecture as Molmo-72B.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Image-text alignment, captioning, VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-CapQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-Cap",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-Points",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-AskModelAnything",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQAv2.0",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Pointing/counting",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual explanation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Connector pooling patch features from multiple ViT layers via multi-headed attention, mapped to LLM embedding space via MLP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "MetaCLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Not specified in text",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Molmo-1B-E",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Molmo-1B-E",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Attention pooling for vision-language fusion",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamic crop-based image encoding with overlapping high-resolution crops",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open-weight and open-data training recipe using PixMo datasets.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-Cap",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-AskModelAnything",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "6.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 6900,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Scientific/mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "UI understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "350M tokens (Annotated), 120M tokens (Synthetic)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Scaled Dot Product Attention (SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "ScaledDotProductAttention (PyTorch SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2304",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on image-caption/audio transcript pairs with length hints, followed by fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "64 experts, 8 active",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16 for most operations",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Float32 for weights",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Attention pooling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "DINOv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "16",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Molmo-7B-D",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Molmo-7B-D",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Molmo",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-25",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Attention pooling for vision-language fusion",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Dynamic crop-based image encoding with overlapping high-resolution crops",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open-weight and open-data training recipe using PixMo datasets.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-Cap",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PixMo-AskModelAnything",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7600,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Scientific/mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "UI understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Scaled Dot Product Attention (SDPA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Attention pooling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "DINOv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "28",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926226",
+    "contribution_ids": [
+      "R1926228",
+      "R1926229",
+      "R1926230",
+      "R1926231",
+      "R1926232",
+      "R1926233"
+    ],
+    "new_contribution_ids": [
+      "R1926228",
+      "R1926229",
+      "R1926230",
+      "R1926231",
+      "R1926232",
+      "R1926233"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,892 @@
+{
+ "arxiv_id": "2311.04257",
+ "status": "completed",
+ "timestamp": "2026-08-30T22:02:08.598803",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2311.04257",
+  "title": "mPLUG-Owl2: Revolutionizing Multi-modal Large Language Model with Modality Collaboration",
+  "authors": [
+   "Qinghao Ye",
+   "Haiyang Xu",
+   "Jiabo Ye",
+   "Ming Yan",
+   "Anwen Hu",
+   "Haowei Liu",
+   "Qi Qian",
+   "Ji Zhang",
+   "Fei Huang",
+   "Jingren Zhou"
+  ],
+  "abstract": "Multi-modal Large Language Models (MLLMs) have demonstrated impressive instruction abilities across various open-ended tasks. However, previous methods primarily focus on enhancing multi-modal capabilities. In this work, we introduce a versatile multi-modal large language model, mPLUG-Owl2, which effectively leverages modality collaboration to improve performance in both text and multi-modal tasks. mPLUG-Owl2 utilizes a modularized network design, with the language decoder acting as a universal interface for managing different modalities. Specifically, mPLUG-Owl2 incorporates shared functional modules to facilitate modality collaboration and introduces a modality-adaptive module that preserves modality-specific features. Extensive experiments reveal that mPLUG-Owl2 is capable of generalizing both text tasks and multi-modal tasks and achieving state-of-the-art performances with a single generic model. Notably, mPLUG-Owl2 is the first MLLM model that demonstrates the modality collaboration phenomenon in both pure-text and multi-modal scenarios, setting a pioneering path in the development of future multi-modal foundation models.",
+  "published": "2023-11-07T14:21:29+00:00",
+  "updated": "2023-11-09T01:56:51+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2311.04257v2",
+  "entry_id": "http://arxiv.org/abs/2311.04257v2",
+  "pdf_path": "data/papers/2311.04257.pdf"
+ },
+ "text_length": 76861,
+ "word_count": 7505,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "mPLUG-Owl 2",
+   "parameters": "7B, 8.2B, 9.6B, 520B",
+   "parameters_millions": 520000,
+   "model_family": "mPLUG-Owl",
+   "date_created": "2023-11-07",
+   "organization": "Alibaba",
+   "innovation": "Modality-adaptive module that serves as a pivot across different modalities to preserve modality-specific features while projecting vision and language into a shared semantic space for cross-modality interaction; two-stage training paradigm (vision-language pre-training followed by joint vision-language instruction tuning) that trains the vision encoder across two stages to capture both low-level and high-level semantic visual information; visual abstractor using self-attention and SwiGLU to compress visual sequences, significantly reducing computational load for long visual contexts.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Vision-language pre-training, joint vision-language instruction tuning",
+   "pretraining_corpus": "Conceptual Captions (CC3M/CC12M), COCO, Laion-en, COYO, DataComp",
+   "finetuning_task": "Joint vision-language instruction tuning, Joint instruction tuning, Visual instruction tuning, Vision-language instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": "Modality-Adaptive Module",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multi-modal Large Language Model with modality collaboration",
+   "application": "Image captioning, visual question answering, video question answering, text reasoning, instruction following",
+   "paper_title": "mPLUG-Owl2: Revolutionizing Multi-modal Large Language Model with Modality Collaboration",
+   "training_corpus_size": "348 million image-text pairs",
+   "finetuning_data": "TextCaps, COCO, VQAv2, OKVQA, OCR-VQA, GQA, A-OKVQA, Ref-COCO, VisualGenome, LLaVA-instruct-150K, ShareGPT-80K, SlimOrca, TextVQA, MMBench, Q-Bench, MMLU, BBH, MSRVTT-QA, MSVD-QA, TGIF-QA",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English, Chinese",
+   "hardware_description": "A100 cluster",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/alibaba/multimodal-engine",
+   "context_length": null,
+   "activated_parameters": "7B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention, Decoupled key and value projection matrices with shared query projection matrix",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: vision-language pre-training followed by joint vision-language instruction tuning",
+   "reasoning_mode": "Non-thinking",
+   "moe_configuration": null,
+   "quantization_precision": "BF16, bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Modality-adaptive module projects vision and language into a shared semantic space for cross-modality interaction",
+   "vision_encoder": "ViT-L/14, ViT-L (0.3B), ViT-L, ViT-g (1.3B)",
+   "base_model": "PaLM-520B",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU: 53.4; BBH: 45.0; AGIEval: 32.7; ARC-c: 65.8; ARC-e: 79.9; COCO: 137.3; VQAv2: 79.4; OKVQA: 57.7; GQA: 56.1; VizWizQA: 54.5; TextVQA: 54.3; SciQA(IMG): 58.2; Flickr30K (Zero-Shot): 68.7; MME: 1450.19; MMBench: 64.5; MM-Vet: 36.2; SEED-Bench: 57.8; Q-Bench: 62.9; MMLU 78.0; BBH 79.9; MMBench 82.3; Q-Bench 83.9; VQAv2 76.8; TextVQA 42.5; MSRVTT-QA 46.7; MSVD-QA 65.4; TGIF-QA 67.1; MME: 1510.70; MMBench: 64.3; MM-Vet: 30.5; SEED-Bench: 58.6",
+   "weight_clipping_mechanism": "Gradient clip 1.0",
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": "Megatron distributed training framework"
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "mPLUG-Owl 2": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "video question answering",
+    "text reasoning",
+    "instruction following"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Decoupled key and value projection matrices with shared query projection matrix"
+   ],
+   "base_model": [
+    "PaLM-520B"
+   ],
+   "finetuning_data": [
+    "TextCaps",
+    "COCO",
+    "VQAv2",
+    "OKVQA",
+    "OCR-VQA",
+    "GQA",
+    "A-OKVQA",
+    "Ref-COCO",
+    "VisualGenome",
+    "LLaVA-instruct-150K",
+    "ShareGPT-80K",
+    "SlimOrca",
+    "TextVQA",
+    "MMBench",
+    "Q-Bench",
+    "MMLU",
+    "BBH",
+    "MSRVTT-QA",
+    "MSVD-QA",
+    "TGIF-QA"
+   ],
+   "finetuning_task": [
+    "Joint vision-language instruction tuning",
+    "Joint instruction tuning",
+    "Visual instruction tuning",
+    "Vision-language instruction tuning"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "mPLUG-Owl 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "7B",
+    "8.2B",
+    "9.6B",
+    "520B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions (CC3M/CC12M)",
+    "COCO",
+    "Laion-en",
+    "COYO",
+    "DataComp"
+   ],
+   "pretraining_task": [
+    "Vision-language pre-training, joint vision-language instruction tuning"
+   ],
+   "quantization_precision": [
+    "BF16",
+    "bfloat16"
+   ],
+   "reasoning_mode": [
+    "Non-thinking"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "ViT-L/14",
+    "ViT-L (0.3B)",
+    "ViT-L",
+    "ViT-g (1.3B)"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "mPLUG-Owl 2": {
+    "fusion_architecture": {
+     "candidates": [
+      "Modality-adaptive module projects vision and language into a shared semantic space for cross-modality interaction"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Modality-adaptive module projects vision and language into a shared semantic space for cross-modality interaction",
+       "reason": "Describes functionality/process rather than naming the architectural design itself"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "mPLUG-Owl"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "mPLUG-Owl",
+       "reason": "Specific model name, not a broader family or lineage. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multi-modal Large Language Model with modality collaboration"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multi-modal Large Language Model with modality collaboration",
+       "reason": "Describes the model/solution itself rather than naming the research problem or challenge"
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clip 1.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clip 1.0",
+       "reason": "Describes gradient clipping, not weight clipping (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 57,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 21
+  }
+ },
+ "contributions": [
+  {
+   "label": "mPLUG-Owl 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MPLUG-Owl 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-11-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Modality-adaptive module that serves as a pivot across different modalities to preserve modality-specific features while projecting vision and language into a shared semantic space for cross-modality interaction",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage training paradigm (vision-language pre-training followed by joint vision-language instruction tuning) that trains the vision encoder across two stages to capture both low-level and high-level semantic visual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Visual abstractor using self-attention and SwiGLU to compress visual sequences, significantly reducing computational load for long visual contexts.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language pre-training, joint vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (CC3M/CC12M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion-en",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COYO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DataComp",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Joint vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Joint instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Vision-language instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "9.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "520B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 520000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "A100 cluster",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/alibaba/multimodal-engine",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "348 million image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCR-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Ref-COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VisualGenome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-instruct-150K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT-80K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SlimOrca",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MMBench",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Q-Bench",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MMLU",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BBH",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSRVTT-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSVD-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TGIF-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Decoupled key and value projection matrices with shared query projection matrix",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: vision-language pre-training followed by joint vision-language instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Non-thinking",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "BF16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L (0.3B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-g (1.3B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "PaLM-520B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 53.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 45.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AGIEval: 32.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c: 65.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-e: 79.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 137.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 79.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA: 57.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 56.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWizQA: 54.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 54.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQA(IMG): 58.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K (Zero-Shot): 68.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1450.19",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 36.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED-Bench: 57.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Q-Bench: 62.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU 78.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH 79.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 82.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Q-Bench 83.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 76.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA 42.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT-QA 46.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD-QA 65.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TGIF-QA 67.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1510.70",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 64.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 30.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED-Bench: 58.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Megatron distributed training framework",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1777277",
+  "contribution_ids": [
+   "R1777279",
+   "R1777280",
+   "R1927460"
+  ],
+  "new_contribution_ids": [
+   "R1927460"
+  ],
+  "comparison_updated": null
+ }
+}
