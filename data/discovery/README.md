@@ -36,7 +36,7 @@ was assembled is part of the record. Every list here came from the prompt in
 |---|---|
 | **Discovery prompt** | [`docs/discovery-prompt.md`](../../docs/discovery-prompt.md), version `v1`. Only the date range and the result count on the first `TASK` line change per run. |
 | **Service** | ChatGPT's GPT-5.6 Luna with web search / browsing **enabled**. The prompt requires an abstract page to be opened per entry and forbids answering from memory. |
-| **Discovery runs** | One query per quarter against the service above. All 27 quarter lists were in place by 2026-08-19, ahead of extraction.
+| **Discovery runs** | One query per quarter against the service above. All 26 quarter lists were in place by 2026-08-19, ahead of extraction.
 | **Extraction runs** | 2026-08-24 … 2026-09-11, per `processed_at` in `processed_papers.csv`. |
 | **Coverage** | 2020-Q1 … 2026-Q2, i.e. arXiv submissions 2020-01-01 … 2026-06-30. 290 papers in the ledger. |
 | **Window convention** | A paper belongs to the quarter of its **arXiv v1 submission date**, not its conference or journal date. For papers not on arXiv, the venue's publication date. |
