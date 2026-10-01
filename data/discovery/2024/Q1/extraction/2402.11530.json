@@ -1,0 +1,615 @@
+{
+  "arxiv_id": "2402.11530",
+  "status": "completed",
+  "timestamp": "2026-08-28T22:52:24.303180",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2402.11530",
+    "title": "Efficient Multimodal Learning from Data-centric Perspective",
+    "authors": [
+      "Muyang He",
+      "Yexin Liu",
+      "Boya Wu",
+      "Jianhao Yuan",
+      "Yueze Wang",
+      "Tiejun Huang",
+      "Bo Zhao"
+    ],
+    "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated notable capabilities in general visual understanding and reasoning tasks. However, their deployment is hindered by substantial computational costs in both training and inference, limiting accessibility to the broader research and user communities. A straightforward solution is to leverage smaller pre-trained vision and language models, which inevitably cause significant performance drops. In this paper, we demonstrate the possibility of training a smaller but better MLLM with high-quality training data. Specifically, we introduce Bunny, a family of lightweight MLLMs with flexible vision and language backbones for efficient multimodal learning from selected training data. Experiments show that our Bunny-4B/8B outperforms the state-of-the-art large MLLMs on multiple benchmarks. We expect that this work can provide the community with a clean and flexible open-source tool for further research and development. The code, models, and data can be found in https://github.com/BAAI-DCAI/Bunny.",
+    "published": "2024-02-18T10:09:10+00:00",
+    "updated": "2024-07-22T09:54:40+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2402.11530v3",
+    "entry_id": "http://arxiv.org/abs/2402.11530v3",
+    "pdf_path": "data/papers/2402.11530.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 45319,
+  "word_count": 2983,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "Bunny",
+      "parameters": "1.3B, 1.6B, 1.8B, 2.7B, 3.8B, 4B, 8B",
+      "parameters_millions": 8000,
+      "model_family": "Bunny",
+      "date_created": "2024-02-18",
+      "organization": "Beijing Academy Of Artificial Intelligence",
+      "innovation": "Data-centric optimization for small-scale multimodal models; three-step coreset selection scheme to condense LAION-2B into 2M high-quality pre-training samples; two-stage training (vision-text alignment via MLP projector, then visual instruction tuning with LoRA); flexible backbone combinations (lightweight LLMs + SigLIP/EVA-CLIP)",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Visual instruction tuning",
+      "pretraining_corpus": "LAION-2B (condensed to 2M samples via coreset selection)",
+      "finetuning_task": "Multimodal instruction tuning, Visual instruction tuning",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Weight merging (averaging) and trainable vision encoder fine-tuning",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Efficient multimodal learning; training smaller but better MLLMs using high-quality curated data.",
+      "application": "Visual understanding, commonsense reasoning, external knowledge referring, optical character recognition, mathematical problem-solving, Chinese instruction-following",
+      "paper_title": "Efficient Multimodal Learning from Data-centric Perspective",
+      "training_corpus_size": "2M pre-training samples, 695K fine-tuning samples",
+      "finetuning_data": "Bunny-695K, LLaVA-665K, LLaVA-Instruct-4V, ALLaVA-Instruct-4V",
+      "tokenizer": null,
+      "supported_language": "English, Chinese",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "4B",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Fine-tuning with LoRA",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Multimodal projector",
+      "vision_encoder": "SigLIP-SO, SigLIP, EVA-CLIP",
+      "base_model": "Phi, SigLIP",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMEP: 1581.5; MMEC: 361.1; MMBT: 75.7; MMBD: 74.2; SEED(-I): 64.9/72.5; MMMUV: 41.4; MMMUT: 38.4; VQAv2: 82.1; GQA: 63.2; SQAI: 78.3; POPE: 87.2; MMEP: 1644.1; MMEC: 367.5; MMBT: 78.1; MMBD: 77.2; SEED(-I): 66.2/73.5; MMMUV: 43.3; MMMUT: 39.0; VQAv2: 82.9; GQA: 64.0; SQAI: 79.9",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Bunny": {
+      "application": [
+        "Visual understanding",
+        "commonsense reasoning",
+        "optical character recognition",
+        "mathematical problem-solving",
+        "Chinese instruction-following"
+      ],
+      "base_model": [
+        "Phi, SigLIP"
+      ],
+      "finetuning_data": [
+        "Bunny-695K",
+        "LLaVA-665K",
+        "LLaVA-Instruct-4V",
+        "ALLaVA-Instruct-4V"
+      ],
+      "finetuning_task": [
+        "Multimodal instruction tuning",
+        "Visual instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Multimodal projector"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Bunny"
+      ],
+      "model_name": [
+        "Bunny"
+      ],
+      "organization": [
+        "Beijing Academy Of Artificial Intelligence"
+      ],
+      "parameters": [
+        "1.3B",
+        "1.6B",
+        "1.8B",
+        "2.7B",
+        "3.8B",
+        "4B",
+        "8B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LAION-2B (condensed to 2M samples via coreset selection)"
+      ],
+      "pretraining_task": [
+        "Visual instruction tuning"
+      ],
+      "research_problem": [
+        "Efficient multimodal learning"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ],
+      "vision_encoder": [
+        "SigLIP-SO",
+        "SigLIP",
+        "EVA-CLIP"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Bunny": {
+        "application": {
+          "candidates": [
+            "Visual understanding",
+            "commonsense reasoning",
+            "external knowledge referring",
+            "optical character recognition",
+            "mathematical problem-solving",
+            "Chinese instruction-following"
+          ],
+          "accepted": [
+            "Visual understanding",
+            "commonsense reasoning",
+            "optical character recognition",
+            "mathematical problem-solving",
+            "Chinese instruction-following"
+          ],
+          "dropped": [
+            {
+              "value": "external knowledge referring",
+              "reason": "Sentence fragment/description, not a concrete task or domain"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Efficient multimodal learning",
+            "training smaller but better MLLMs using high-quality curated data."
+          ],
+          "accepted": [
+            "Efficient multimodal learning"
+          ],
+          "dropped": [
+            {
+              "value": "training smaller but better MLLMs using high-quality curated data.",
+              "reason": "Describes a solution/method rather than naming the research problem as a short noun phrase"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 33,
+      "dropped": 2,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "Bunny",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Bunny",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Bunny",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-02-18",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Beijing Academy Of Artificial Intelligence",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Data-centric optimization for small-scale multimodal models",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Three-step coreset selection scheme to condense LAION-2B into 2M high-quality pre-training samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Two-stage training (vision-text alignment via MLP projector, then visual instruction tuning with LoRA)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Flexible backbone combinations (lightweight LLMs + SigLIP/EVA-CLIP)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION-2B (condensed to 2M samples via coreset selection)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multimodal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.6B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3.8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Commonsense reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Optical character recognition",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical problem-solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chinese instruction-following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient multimodal learning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "2M pre-training samples, 695K fine-tuning samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Bunny-695K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-665K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Instruct-4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ALLaVA-Instruct-4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Fine-tuning with LoRA",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Multimodal projector",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP-SO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "EVA-CLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Phi, SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMEP: 1581.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMEC: 361.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBT: 75.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBD: 74.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEED(-I): 64.9/72.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUV: 41.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUT: 38.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 82.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GQA: 63.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SQAI: 78.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "POPE: 87.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMEP: 1644.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMEC: 367.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBT: 78.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBD: 77.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SEED(-I): 66.2/73.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUV: 43.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUT: 39.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 82.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GQA: 64.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SQAI: 79.9",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925932",
+    "contribution_ids": [
+      "R1925934"
+    ],
+    "new_contribution_ids": [
+      "R1925934"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,947 @@
+{
+  "arxiv_id": "2407.15390",
+  "status": "completed",
+  "timestamp": "2026-08-29T07:16:31.977276",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2407.15390",
+    "title": "ALLaM: Large Language Models for Arabic and English",
+    "authors": [
+      "M Saiful Bari",
+      "Yazeed Alnumay",
+      "Norah A. Alzahrani",
+      "Nouf M. Alotaibi",
+      "Hisham A. Alyahya",
+      "Sultan AlRashed",
+      "Faisal A. Mirza",
+      "Shaykhah Z. Alsubaie",
+      "Hassan A. Alahmed",
+      "Ghadah Alabduljabbar",
+      "Raghad Alkhathran",
+      "Yousef Almushayqih",
+      "Raneem Alnajim",
+      "Salman Alsubaihi",
+      "Maryam Al Mansour",
+      "Majed Alrubaian",
+      "Ali Alammari",
+      "Zaki Alawami",
+      "Abdulmohsen Al-Thubaity",
+      "Ahmed Abdelali",
+      "Jeril Kuriakose",
+      "Abdalghani Abujabal",
+      "Nora Al-Twairesh",
+      "Areeb Alowisheq",
+      "Haidar Khan"
+    ],
+    "abstract": "We present ALLaM: Arabic Large Language Model, a series of large language models to support the ecosystem of Arabic Language Technologies (ALT). ALLaM is carefully trained considering the values of language alignment and knowledge transfer at scale. Our autoregressive decoder-only architecture models demonstrate how second-language acquisition via vocabulary expansion and pretraining on a mixture of Arabic and English text can steer a model towards a new language (Arabic) without any catastrophic forgetting in the original language (English). Furthermore, we highlight the effectiveness of using parallel/translated data to aid the process of knowledge alignment between languages. Finally, we show that extensive alignment with human preferences can significantly enhance the performance of a language model compared to models of a larger scale with lower quality alignment. ALLaM achieves state-of-the-art performance in various Arabic benchmarks, including MMLU Arabic, ACVA, and Arabic Exams. Our aligned models improve both in Arabic and English from their base aligned models.",
+    "published": "2024-07-22T05:35:17+00:00",
+    "updated": "2024-07-22T05:35:17+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2407.15390v1",
+    "entry_id": "http://arxiv.org/abs/2407.15390v1",
+    "pdf_path": "data/papers/2407.15390.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 113438,
+  "word_count": 11910,
+  "models_extracted": 11,
+  "extraction_data": [
+    {
+      "model_name": "ALLaM",
+      "parameters": "7B, 13B, 27B, 30B, 34B, 70B, 72B",
+      "parameters_millions": 72000,
+      "model_family": "ALLaM",
+      "date_created": "2024-07-22",
+      "organization": "SDAIA",
+      "innovation": "Vocabulary expansion via merging language-specific tokenizer with original tokenizer to reduce fertility rate; embedding initialization for new tokens from averaged representations of original tokenizer tokens to speed up learning; continued pretraining recipe using cosine LR decay without dropout to prevent catastrophic forgetting in the source language.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction (autoregressive language modeling)",
+      "pretraining_corpus": "Mixture of Arabic and English text, including parallel/translated data",
+      "finetuning_task": "Supervised fine-tuning, preference training, Instruction tuning",
+      "optimizer": "AdamW",
+      "hardware_used": "A100 GPU",
+      "extension": "Tokenizer augmentation and expanded vocabulary learning to natively support Arabic with minimal English degradation",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Arabic and English language modeling, cross-lingual knowledge alignment, second-language acquisition for LLMs",
+      "application": "Arabic and English language tasks, Arabic benchmarks (MMLU Arabic, ACVA, Arabic Exams)",
+      "paper_title": "ALLaM: Large Language Models for Arabic and English",
+      "training_corpus_size": "4 trillion English tokens, 540 billion Arabic tokens (270B natural, 270B translated)",
+      "finetuning_data": null,
+      "tokenizer": "Merged tokenizer (original Llama-2 + Arabic-specific)",
+      "supported_language": "Arabic, English",
+      "hardware_description": "128-1024 A100 GPUs with InfiniBand connections; all-reduce 1200-1400 Gbps",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/kaist-ai/allam",
+      "context_length": null,
+      "activated_parameters": "7B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pretraining on Arabic/English mixture -> Continued pretraining -> Supervised fine-tuning -> Preference training",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bf16 mixed-precision",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Llama-2",
+      "optimizer_innovation": null,
+      "benchmark_result": "State-of-the-art on MMLU Arabic, ACVA, and Arabic Exams; Arabic MMLU, English MMLU, HellaSwag; MMLU(ar): 54.90; araSwag: 77.81; ACVA: 51.48; Exams(ar): 40.29; ETEC: 47.3; araTruthfulQA: 44.4; araMath: 28.5; Koto: 17.3; MMLU(ar): 59.35; araSwag: 79.67; ACVA: 59.21; Exams(ar): 49.34; ETEC: 53.82; araTruthfulQA: 55.97; araMath: 33.5; Koto: 38.7",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "ALLaM 7B (continued pretraining)",
+      "model_family": "ALLaM",
+      "date_created": "2024-07-22",
+      "organization": "KAUST",
+      "innovation": "Continued pretraining of Llama-2 with tokenizer/vocabulary expansion to incorporate Arabic without catastrophic forgetting; training from scratch with mixed Arabic/English data; using machine-translated Arabic data to reduce gradient spikes and align capabilities.",
+      "pretraining_corpus": "Dolma-v1 (Dolma-CC, TheStack, PeS2o, PubMed, DM-Math, StackExchange), Pile",
+      "parameters": "7B, 13B, 70B",
+      "parameters_millions": 70000,
+      "application": "Arabic and English language understanding, general NLP tasks",
+      "license": "open source",
+      "research_problem": "Adapting strong English LLMs to low-resource languages (Arabic) via continued pretraining and tokenizer expansion, or training from scratch sustainably.",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "4T tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Instruction tuning",
+      "finetuning_data": "25,854 human-verified preference triplets in English and Arabic; 245K filtered samples for DPO",
+      "optimizer": null,
+      "tokenizer": "Expanded vocabulary tokenizer (Llama-2 base expanded)",
+      "context_length": null,
+      "supported_language": "Arabic, English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "ALLaM: Large Language Models for Arabic and English",
+      "activated_parameters": "7B, 13B, 70B (dense, all parameters active)",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Continued pretraining (warm-start from Llama-2 with tokenizer expansion) OR training from scratch (random initialization) on mixed Arabic/English data; followed by instruction tuning/chat fine-tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "Direct Preference Optimization (DPO)",
+      "reward_mechanism": "Human-verified preference pairs; on-policy and off-policy negative outputs; temperature and nucleus sampling variations to generate rejected responses",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Llama-2",
+      "optimizer_innovation": null,
+      "benchmark_result": "Arabic MMLU, English MMLU, HellaSwag",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 9,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "ALLaM": {
+      "application": [
+        "Arabic and English language tasks"
+      ],
+      "base_model": [
+        "Llama-2"
+      ],
+      "finetuning_task": [
+        "preference training",
+        "Instruction tuning"
+      ],
+      "hardware_used": [
+        "A100 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "ALLaM"
+      ],
+      "model_name": [
+        "ALLaM"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "SDAIA"
+      ],
+      "parameters": [
+        "7B",
+        "13B",
+        "27B",
+        "30B",
+        "34B",
+        "70B",
+        "72B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction (autoregressive language modeling)"
+      ],
+      "quantization_precision": [
+        "bf16 mixed-precision"
+      ],
+      "research_problem": [
+        "Arabic and English language modeling",
+        "cross-lingual knowledge alignment",
+        "second-language acquisition for LLMs"
+      ],
+      "supported_language": [
+        "Arabic",
+        "English"
+      ]
+    },
+    "ALLaM 7B (continued pretraining)": {
+      "application": [
+        "Arabic and English language understanding"
+      ],
+      "base_model": [
+        "Llama-2"
+      ],
+      "finetuning_data": [
+        "854 human-verified preference triplets in English and Arabic",
+        "245K filtered samples for DPO"
+      ],
+      "finetuning_task": [
+        "Instruction tuning"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "ALLaM"
+      ],
+      "model_name": [
+        "ALLaM 7B (continued pretraining)"
+      ],
+      "organization": [
+        "KAUST"
+      ],
+      "parameters": [
+        "7B",
+        "13B",
+        "70B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Dolma-v1 (Dolma-CC, TheStack, PeS2o, PubMed, DM-Math, StackExchange)",
+        "Pile"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Human-verified preference pairs"
+      ],
+      "rl_algorithm": [
+        "Direct Preference Optimization (DPO)"
+      ],
+      "supported_language": [
+        "Arabic",
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "ALLaM": {
+        "application": {
+          "candidates": [
+            "Arabic and English language tasks",
+            "Arabic benchmarks (MMLU Arabic, ACVA, Arabic Exams)"
+          ],
+          "accepted": [
+            "Arabic and English language tasks"
+          ],
+          "dropped": [
+            {
+              "value": "Arabic benchmarks (MMLU Arabic, ACVA, Arabic Exams)",
+              "reason": "Names evaluation benchmarks, not a practical use or domain."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning",
+            "preference training",
+            "Instruction tuning"
+          ],
+          "accepted": [
+            "preference training",
+            "Instruction tuning"
+          ],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Mixture of Arabic and English text",
+            "including parallel/translated data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "including parallel/translated data",
+              "reason": "starts with a connective, so it is a fragment of a longer phrase rather than a pretraining_corpus name: 'including parallel/translated data'"
+            },
+            {
+              "value": "Mixture of Arabic and English text",
+              "reason": "Describes composition rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        }
+      },
+      "ALLaM 7B (continued pretraining)": {
+        "application": {
+          "candidates": [
+            "Arabic and English language understanding",
+            "general NLP tasks"
+          ],
+          "accepted": [
+            "Arabic and English language understanding"
+          ],
+          "dropped": [
+            {
+              "value": "general NLP tasks",
+              "reason": "Placeholder explicitly rejected by definition."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "25",
+            "854 human-verified preference triplets in English and Arabic",
+            "245K filtered samples for DPO"
+          ],
+          "accepted": [
+            "854 human-verified preference triplets in English and Arabic",
+            "245K filtered samples for DPO"
+          ],
+          "dropped": [
+            {
+              "value": "25",
+              "reason": "Not a dataset; just a number."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Adapting strong English LLMs to low-resource languages (Arabic) via continued pretraining and tokenizer expansion",
+            "or training from scratch sustainably."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Adapting strong English LLMs to low-resource languages (Arabic) via continued pretraining and tokenizer expansion",
+              "reason": "Describes the solution/method rather than naming the problem itself."
+            },
+            {
+              "value": "or training from scratch sustainably.",
+              "reason": "Sentence fragment and trailing qualifier."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Human-verified preference pairs",
+            "on-policy and off-policy negative outputs",
+            "temperature and nucleus sampling variations to generate rejected responses"
+          ],
+          "accepted": [
+            "Human-verified preference pairs"
+          ],
+          "dropped": [
+            {
+              "value": "on-policy and off-policy negative outputs",
+              "reason": "Describes data generation strategy, not a reward calculation method."
+            },
+            {
+              "value": "temperature and nucleus sampling variations to generate rejected responses",
+              "reason": "Describes response generation method, not a reward mechanism."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 45,
+      "dropped": 10,
+      "llm_calls": 1,
+      "values_sent_to_llm": 25
+    }
+  },
+  "contributions": [
+    {
+      "label": "ALLaM",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALLaM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALLaM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-07-22",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "SDAIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Vocabulary expansion via merging language-specific tokenizer with original tokenizer to reduce fertility rate",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Embedding initialization for new tokens from averaged representations of original tokenizer tokens to speed up learning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Continued pretraining recipe using cosine LR decay without dropout to prevent catastrophic forgetting in the source language.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction (autoregressive language modeling)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Preference training",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Merged tokenizer (original Llama-2 + Arabic-specific)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "27B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "34B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 72000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "A100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "128-1024 A100 GPUs with InfiniBand connections; all-reduce 1200-1400 Gbps",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Arabic and English language tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/kaist-ai/allam",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Arabic and English language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Cross-lingual knowledge alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Second-language acquisition for LLMs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4 trillion English tokens, 540 billion Arabic tokens (270B natural, 270B translated)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pretraining on Arabic/English mixture -> Continued pretraining -> Supervised fine-tuning -> Preference training",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bf16 mixed-precision",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Llama-2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "State-of-the-art on MMLU Arabic, ACVA, and Arabic Exams",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Arabic MMLU, English MMLU, HellaSwag",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU(ar): 54.90",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraSwag: 77.81",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ACVA: 51.48",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Exams(ar): 40.29",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ETEC: 47.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraTruthfulQA: 44.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraMath: 28.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Koto: 17.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU(ar): 59.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraSwag: 79.67",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ACVA: 59.21",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Exams(ar): 49.34",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ETEC: 53.82",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraTruthfulQA: 55.97",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AraMath: 33.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Koto: 38.7",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "ALLaM 7B (continued pretraining)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "ALLaM 7B (continued pretraining)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "ALLaM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-07-22",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "KAUST",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Continued pretraining of Llama-2 with tokenizer/vocabulary expansion to incorporate Arabic without catastrophic forgetting",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Training from scratch with mixed Arabic/English data",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Using machine-translated Arabic data to reduce gradient spikes and align capabilities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Dolma-v1 (Dolma-CC, TheStack, PeS2o, PubMed, DM-Math, StackExchange)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Pile",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Expanded vocabulary tokenizer (Llama-2 base expanded)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 70000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Arabic and English language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "854 human-verified preference triplets in English and Arabic",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "245K filtered samples for DPO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B, 13B, 70B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Continued pretraining (warm-start from Llama-2 with tokenizer expansion) OR training from scratch (random initialization) on mixed Arabic/English data; followed by instruction tuning/chat fine-tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Human-verified preference pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Llama-2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Arabic MMLU, English MMLU, HellaSwag",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926065",
+    "contribution_ids": [
+      "R1926067",
+      "R1926068"
+    ],
+    "new_contribution_ids": [
+      "R1926067",
+      "R1926068"
+    ],
+    "comparison_updated": null
+  }
+}

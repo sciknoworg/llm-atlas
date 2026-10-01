@@ -1,0 +1,718 @@
+{
+  "arxiv_id": "2512.22615",
+  "status": "completed",
+  "timestamp": "2026-08-30T05:44:25.665826",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2512.22615",
+    "title": "Dream-VL & Dream-VLA: Open Vision-Language and Vision-Language-Action Models with Diffusion Language Model Backbone",
+    "authors": [
+      "Jiacheng Ye",
+      "Shansan Gong",
+      "Jiahui Gao",
+      "Junming Fan",
+      "Shuang Wu",
+      "Wei Bi",
+      "Haoli Bai",
+      "Lifeng Shang",
+      "Lingpeng Kong"
+    ],
+    "abstract": "While autoregressive Large Vision-Language Models (VLMs) have achieved remarkable success, their sequential generation often limits their efficacy in complex visual planning and dynamic robotic control. In this work, we investigate the potential of constructing Vision-Language Models upon diffusion-based large language models (dLLMs) to overcome these limitations. We introduce Dream-VL, an open diffusion-based VLM (dVLM) that achieves state-of-the-art performance among previous dVLMs. Dream-VL is comparable to top-tier AR-based VLMs trained on open data on various benchmarks but exhibits superior potential when applied to visual planning tasks. Building upon Dream-VL, we introduce Dream-VLA, a dLLM-based Vision-Language-Action model (dVLA) developed through continuous pre-training on open robotic datasets. We demonstrate that the natively bidirectional nature of this diffusion backbone serves as a superior foundation for VLA tasks, inherently suited for action chunking and parallel generation, leading to significantly faster convergence in downstream fine-tuning. Dream-VLA achieves top-tier performance of 97.2% average success rate on LIBERO, 71.4% overall average on SimplerEnv-Bridge, and 60.5% overall average on SimplerEnv-Fractal, surpassing leading models such as $π_0$ and GR00T-N1. We also validate that dVLMs surpass AR baselines on downstream tasks across different training objectives. We release both Dream-VL and Dream-VLA to facilitate further research in the community.",
+    "published": "2025-12-27T14:46:24+00:00",
+    "updated": "2026-01-04T07:15:28+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2512.22615v2",
+    "entry_id": "http://arxiv.org/abs/2512.22615v2",
+    "pdf_path": "data/papers/2512.22615.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM/VLA release)"
+  },
+  "text_length": 92289,
+  "word_count": 13077,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "Dream-VL",
+      "parameters": "7B, 8.3B",
+      "parameters_millions": 8300,
+      "model_family": "Dream",
+      "date_created": "2025-12-27",
+      "organization": "Google",
+      "innovation": "Diffusion LLM-based vision-language model (dVLM) for general visual understanding; leverages bidirectional attention for richer visual-text fusion; utilizes text planning capability to enhance visual planning; naturally supports action chunking and parallel generation without architectural modification.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion language modeling",
+      "pretraining_corpus": "12M open-source multimodal data (instruction-response pairs from mathematical problem-solving, OCR, and domain-specific reasoning)",
+      "finetuning_task": "Vision-language understanding, action planning, Flow matching loss fine-tuning, Multi-stage training (projector alignment, full model tuning)",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "Open",
+      "research_problem": "Vision-language and vision-language-action models for planning tasks",
+      "application": "Mathematical problem-solving, OCR, domain-specific reasoning, chart and document understanding, real-world multimodal interactions",
+      "paper_title": "Dream-VL & Dream-VLA: Open Vision-Language and Vision-Language-Action Models with Diffusion Language Model Backbone",
+      "training_corpus_size": "~12M samples",
+      "finetuning_data": "LIBERO-Goal, LIBERO-Long, LCS, SingleImage(SI), Single, Multi-Image&Video",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "7B",
+      "attention_mechanism": "Bidirectional masked diffusion modeling",
+      "context_length_max": "8192",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Vision-Language alignment -> Continuous pre-training on robotic datasets",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Vision-Language",
+      "vision_encoder": "VIT, Qwen2ViT",
+      "base_model": "Dream-7B (dLLM)",
+      "optimizer_innovation": null,
+      "benchmark_result": "ViPlan benchmark (task success rate, action accuracy); WidowX Robot: 71.4% overall average; LIBERO: 97.2%; MMMU 52.2; MMMU-Pro 26.0; MMStar 59.9; MMBench 83.0; SeedBench 76.4; MathVista 63.1; MathVerse 31.5; AI2D 52.2",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Dream-VLA",
+      "model_family": "Dream",
+      "date_created": "2025-12-27",
+      "organization": "Google",
+      "innovation": "Diffusion LLM-based vision-language-action model (dVLA) for robotic manipulation; built upon Dream-VL to leverage bidirectional attention, text planning, and parallel action chunking for superior low-level action prediction and faster convergence during fine-tuning.",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Robotic manipulation, embodied action",
+      "license": "open",
+      "research_problem": "Embodied AI and robotic manipulation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Diffusion language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Flow matching loss fine-tuning",
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Dream-VL & Dream-VLA: Open Vision-Language and Vision-Language-Action Models with Diffusion Language Model Backbone",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Robotic pretraining -> Fine-tuning with flow matching loss",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "WidowX Robot: 71.4% overall average; LIBERO: 97.2%",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "Dream-VL": {
+      "application": [
+        "Mathematical problem-solving",
+        "OCR",
+        "domain-specific reasoning",
+        "chart and document understanding",
+        "real-world multimodal interactions"
+      ],
+      "attention_mechanism": [],
+      "base_model": [
+        "Dream-7B (dLLM)"
+      ],
+      "finetuning_data": [
+        "LIBERO-Goal",
+        "LIBERO-Long",
+        "LCS",
+        "SingleImage(SI)",
+        "Single",
+        "Multi-Image&Video"
+      ],
+      "finetuning_task": [
+        "Vision-language understanding",
+        "action planning"
+      ],
+      "fusion_architecture": [],
+      "license": [
+        "Open"
+      ],
+      "model_family": [
+        "Dream"
+      ],
+      "model_name": [
+        "Dream-VL"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "parameters": [
+        "7B",
+        "8.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "12M open-source multimodal data (instruction-response pairs from mathematical problem-solving, OCR, and domain-specific reasoning)"
+      ],
+      "pretraining_task": [
+        "Diffusion language modeling"
+      ],
+      "research_problem": [],
+      "vision_encoder": [
+        "VIT",
+        "Qwen2ViT"
+      ]
+    },
+    "Dream-VLA": {
+      "application": [
+        "Robotic manipulation",
+        "embodied action"
+      ],
+      "finetuning_task": [],
+      "license": [
+        "open"
+      ],
+      "model_family": [
+        "Dream"
+      ],
+      "model_name": [
+        "Dream-VLA"
+      ],
+      "organization": [
+        "Google"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Diffusion language modeling"
+      ],
+      "research_problem": [
+        "Embodied AI and robotic manipulation"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Dream-VL": {
+        "attention_mechanism": {
+          "candidates": [
+            "Bidirectional masked diffusion modeling"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Bidirectional masked diffusion modeling",
+              "reason": "Describes a pretraining objective or modeling approach, not an attention mechanism."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Vision-language understanding",
+            "action planning",
+            "Flow matching loss fine-tuning",
+            "Multi-stage training (projector alignment, full model tuning)"
+          ],
+          "accepted": [
+            "Vision-language understanding",
+            "action planning"
+          ],
+          "dropped": [
+            {
+              "value": "Flow matching loss fine-tuning",
+              "reason": "Describes a training method or loss function rather than the fine-tuning task."
+            },
+            {
+              "value": "Multi-stage training (projector alignment, full model tuning)",
+              "reason": "Describes a training procedure or stages rather than the fine-tuning task."
+            }
+          ]
+        },
+        "fusion_architecture": {
+          "candidates": [
+            "Vision-Language"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-Language",
+              "reason": "Names the modalities combined rather than the architectural design or fusion method."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-language and vision-language-action models for planning tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-language and vision-language-action models for planning tasks",
+              "reason": "Describes the model types or solution rather than the research problem or capability gap."
+            }
+          ]
+        }
+      },
+      "Dream-VLA": {
+        "finetuning_task": {
+          "candidates": [
+            "Flow matching loss fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Flow matching loss fine-tuning",
+              "reason": "Describes a training method or loss function rather than the fine-tuning task."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 34,
+      "dropped": 6,
+      "llm_calls": 1,
+      "values_sent_to_llm": 25
+    }
+  },
+  "contributions": [
+    {
+      "label": "Dream-VL",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Dream-VL",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Dream",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-12-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion LLM-based vision-language model (dVLM) for general visual understanding",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Leverages bidirectional attention for richer visual-text fusion",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Utilizes text planning capability to enhance visual planning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Naturally supports action chunking and parallel generation without architectural modification.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "12M open-source multimodal data (instruction-response pairs from mathematical problem-solving, OCR, and domain-specific reasoning)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Vision-language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Action planning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8300,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical problem-solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Domain-specific reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart and document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Real-world multimodal interactions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~12M samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LIBERO-Goal",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LIBERO-Long",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LCS",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SingleImage(SI)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Single",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multi-Image&Video",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8192",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Vision-Language alignment -> Continuous pre-training on robotic datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "VIT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Qwen2ViT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Dream-7B (dLLM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ViPlan benchmark (task success rate, action accuracy)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WidowX Robot: 71.4% overall average",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LIBERO: 97.2%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU 52.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU-Pro 26.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMStar 59.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMBench 83.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SeedBench 76.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista 63.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVerse 31.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D 52.2",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Dream-VLA",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Dream-VLA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Dream",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-12-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Google",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion LLM-based vision-language-action model (dVLA) for robotic manipulation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Built upon Dream-VL to leverage bidirectional attention, text planning, and parallel action chunking for superior low-level action prediction and faster convergence during fine-tuning.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Diffusion language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Robotic manipulation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Embodied action",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Embodied AI and robotic manipulation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Robotic pretraining -> Fine-tuning with flow matching loss",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WidowX Robot: 71.4% overall average",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LIBERO: 97.2%",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927149",
+    "contribution_ids": [
+      "R1927151",
+      "R1927152"
+    ],
+    "new_contribution_ids": [
+      "R1927151",
+      "R1927152"
+    ],
+    "comparison_updated": null
+  }
+}

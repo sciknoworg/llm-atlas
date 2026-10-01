@@ -1,0 +1,492 @@
+{
+ "arxiv_id": "2310.06825",
+ "status": "completed",
+ "timestamp": "2026-08-28T13:01:06.159640",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2310.06825",
+  "title": "Mistral 7B",
+  "authors": [
+   "Albert Q. Jiang",
+   "Alexandre Sablayrolles",
+   "Arthur Mensch",
+   "Chris Bamford",
+   "Devendra Singh Chaplot",
+   "Diego de las Casas",
+   "Florian Bressand",
+   "Gianna Lengyel",
+   "Guillaume Lample",
+   "Lucile Saulnier",
+   "L\u00e9lio Renard Lavaud",
+   "Marie-Anne Lachaux",
+   "Pierre Stock",
+   "Teven Le Scao",
+   "Thibaut Lavril",
+   "Thomas Wang",
+   "Timoth\u00e9e Lacroix",
+   "William El Sayed"
+  ],
+  "abstract": "We introduce Mistral 7B v0.1, a 7-billion-parameter language model engineered for superior performance and efficiency. Mistral 7B outperforms Llama 2 13B across all evaluated benchmarks, and Llama 1 34B in reasoning, mathematics, and code generation. Our model leverages grouped-query attention (GQA) for faster inference, coupled with sliding window attention (SWA) to effectively handle sequences of arbitrary length with a reduced inference cost. We also provide a model fine-tuned to follow instructions, Mistral 7B -- Instruct, that surpasses the Llama 2 13B -- Chat model both on human and automated benchmarks. Our models are released under the Apache 2.0 license.",
+  "published": "2023-10-10T17:54:58+00:00",
+  "updated": "2023-10-10T17:54:58+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2310.06825v1",
+  "entry_id": "http://arxiv.org/abs/2310.06825v1",
+  "pdf_path": "data/papers/2310.06825.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 21781,
+ "word_count": 1089,
+ "models_extracted": 1,
+ "extraction_data": [
+  {
+   "model_name": "Mistral",
+   "model_family": "Mistral",
+   "date_created": "2023-10-10",
+   "organization": "Mistral AI",
+   "innovation": "Grouped-Query Attention (GQA): shares a single set of key-value heads across multiple query heads, reducing memory requirements during decoding and accelerating inference speed for higher throughput; Sliding Window Attention (SWA): restricts each token to attend only to a fixed window of W tokens from the previous layer, enabling effective handling of longer sequences at reduced computational cost compared to full attention; Rolling Buffer Cache: implements a fixed-size cache of W slots using modular indexing to overwrite past values, reducing cache memory usage by 8x for long sequences without impacting model quality.",
+   "pretraining_corpus": "20 trillion tokens of web text, code, and mathematics",
+   "parameters": "7B",
+   "parameters_millions": 7000,
+   "application": "General language modeling, fine-tuning across diverse tasks, chat/instruction following",
+   "license": "Apache 2.0",
+   "research_problem": "Balancing high performance and efficiency in large language models to lower computational costs and inference latency for practical deployment.",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "training_corpus_size": "20 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised instruction tuning",
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": "SentencePiece BPE",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "CoreWeave cluster, CINECA/EuroHPC Leonardo",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Grouped-Query Attention (GQA) and Sliding Window Attention (SWA) are used to improve inference efficiency and handle long contexts.",
+   "source_code": "https://github.com/mistralai/mistral-src",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Mistral 7B",
+   "activated_parameters": "7B (dense, all parameters active)",
+   "attention_mechanism": "Grouped-Query Attention (GQA), Sliding Window Attention (SWA)",
+   "context_length_max": "8192",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Instruction fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "175 unsafe prompts; self-reflection on manually curated and balanced dataset of adversarial and standard prompts",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU: 60.1%; HellaSwag: 81.3%; WinoG: 75.3%; PIQA: 83.0%; Arc-e: 80.0%; Arc-c: 80.0%; NQ: 55.5%; TriviaQA: 28.8%; HumanEval: 30.5%; MBPP: 47.5%; MATH: 13.1%; GSM8K: 52.2%; MT-Bench: 6.84",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32 query / 8 key-value",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 1,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Mistral": {
+   "application": [
+    "chat/instruction following"
+   ],
+   "attention_mechanism": [
+    "Grouped-Query Attention (GQA)",
+    "Sliding Window Attention (SWA)"
+   ],
+   "finetuning_task": [
+    "Supervised instruction tuning"
+   ],
+   "hardware_used": [
+    "CoreWeave cluster, CINECA/EuroHPC Leonardo"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Mistral"
+   ],
+   "model_name": [
+    "Mistral"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Mistral AI"
+   ],
+   "parameters": [
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Mistral": {
+    "application": {
+     "candidates": [
+      "General language modeling",
+      "fine-tuning across diverse tasks",
+      "chat/instruction following"
+     ],
+     "accepted": [
+      "chat/instruction following"
+     ],
+     "dropped": [
+      {
+       "value": "General language modeling",
+       "reason": "Broad category/task type rather than a concrete practical use or domain."
+      },
+      {
+       "value": "fine-tuning across diverse tasks",
+       "reason": "Describes a training process rather than a concrete application or domain."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "20 trillion tokens of web text",
+      "code",
+      "mathematics"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "code",
+       "reason": "Too vague, does not name a specific corpus or dataset. (cached)"
+      },
+      {
+       "value": "mathematics",
+       "reason": "Names a domain/subject, not a dataset or corpus. (cached)"
+      },
+      {
+       "value": "20 trillion tokens of web text",
+       "reason": "Asserts breadth and size rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Balancing high performance and efficiency in large language models to lower computational costs and inference latency for practical deployment."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Balancing high performance and efficiency in large language models to lower computational costs and inference latency for practical deployment.",
+       "reason": "Describes a goal or solution approach rather than a short noun phrase naming the research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 14,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 10
+  }
+ },
+ "contributions": [
+  {
+   "label": "Mistral",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Mistral",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Mistral",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-10-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Mistral AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Grouped-Query Attention (GQA): shares a single set of key-value heads across multiple query heads, reducing memory requirements during decoding and accelerating inference speed for higher throughput",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sliding Window Attention (SWA): restricts each token to attend only to a fixed window of W tokens from the previous layer, enabling effective handling of longer sequences at reduced computational cost compared to full attention",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Rolling Buffer Cache: implements a fixed-size cache of W slots using modular indexing to overwrite past values, reducing cache memory usage by 8x for long sequences without impacting model quality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "CoreWeave cluster, CINECA/EuroHPC Leonardo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat/instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/mistralai/mistral-src",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "20 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sliding Window Attention (SWA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "8192",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Instruction fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "175 unsafe prompts; self-reflection on manually curated and balanced dataset of adversarial and standard prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 60.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 81.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoG: 75.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 83.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arc-e: 80.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arc-c: 80.0%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ: 55.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 28.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 30.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 47.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 13.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 52.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MT-Bench: 6.84",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32 query / 8 key-value",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1374923",
+  "contribution_ids": [
+   "R1374925",
+   "R1374927",
+   "R1923938"
+  ],
+  "new_contribution_ids": [
+   "R1923938"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,1571 @@
+{
+ "arxiv_id": "2209.06794",
+ "status": "completed",
+ "timestamp": "2026-08-27T22:43:18.228287",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2209.06794",
+  "title": "PaLI: A Jointly-Scaled Multilingual Language-Image Model",
+  "authors": [
+   "Xi Chen",
+   "Xiao Wang",
+   "Soravit Changpinyo",
+   "AJ Piergiovanni",
+   "Piotr Padlewski",
+   "Daniel Salz",
+   "Sebastian Goodman",
+   "Adam Grycner",
+   "Basil Mustafa",
+   "Lucas Beyer",
+   "Alexander Kolesnikov",
+   "Joan Puigcerver",
+   "Nan Ding",
+   "Keran Rong",
+   "Hassan Akbari",
+   "Gaurav Mishra",
+   "Linting Xue",
+   "Ashish Thapliyal",
+   "James Bradbury",
+   "Weicheng Kuo",
+   "Mojtaba Seyedhosseini",
+   "Chao Jia",
+   "Burcu Karagol Ayan",
+   "Carlos Riquelme",
+   "Andreas Steiner",
+   "Anelia Angelova",
+   "Xiaohua Zhai",
+   "Neil Houlsby",
+   "Radu Soricut"
+  ],
+  "abstract": "Effective scaling and a flexible task interface enable large language models to excel at many tasks. We present PaLI (Pathways Language and Image model), a model that extends this approach to the joint modeling of language and vision. PaLI generates text based on visual and textual inputs, and with this interface performs many vision, language, and multimodal tasks, in many languages. To train PaLI, we make use of large pre-trained encoder-decoder language models and Vision Transformers (ViTs). This allows us to capitalize on their existing capabilities and leverage the substantial cost of training them. We find that joint scaling of the vision and language components is important. Since existing Transformers for language are much larger than their vision counterparts, we train a large, 4-billion parameter ViT (ViT-e) to quantify the benefits from even larger-capacity vision models. To train PaLI, we create a large multilingual mix of pretraining tasks, based on a new image-text training set containing 10B images and texts in over 100 languages. PaLI achieves state-of-the-art in multiple vision and language tasks (such as captioning, visual question-answering, scene-text understanding), while retaining a simple, modular, and scalable design.",
+  "published": "2022-09-14T17:24:07+00:00",
+  "updated": "2023-06-05T17:55:12+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2209.06794v4",
+  "entry_id": "http://arxiv.org/abs/2209.06794v4",
+  "pdf_path": "data/papers/2209.06794.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 103017,
+ "word_count": 7399,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "PaLI",
+   "parameters": "700M, 3B, 5B, 14.8B, 15B, 16.9B, 17B, 55B, 100B, 150B, 200B, 250B, 300B, 350B, 400B, 450B, 500B, 550B, 600B, 650B, 700B, 750B, 800B, 850B, 900B, 950B, 1T",
+   "parameters_millions": 1000000,
+   "model_family": "PaLI",
+   "date_created": "2022-09-14",
+   "organization": "Google",
+   "innovation": "Joint scaling of vision and language components with a balanced parameter share (ViT-e accounts for ~25% of total parameters); reuse of large unimodal backbones (mT5-XXL, ViT-G/ViT-e) to transfer existing capabilities and reduce training cost; generalized VQA-like task interface casting all tasks into an 'image+query to answer' format to enable knowledge-sharing across multiple image and language tasks.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal language modeling",
+   "pretraining_corpus": "WebLI (English and non-English subsets), CC3M-35L, VQ2A-CC3M-35L, VQG-CC3M-35L",
+   "finetuning_task": "Supervised fine-tuning with cross-entropy loss, Image captioning, visual question answering, cross-lingual VQA",
+   "optimizer": "AdamW",
+   "hardware_used": "GCP-TPUv4",
+   "extension": "High-resolution pre-finetuning at 588x588 resolution for the largest model, using 2D bilinear upsampling of positional embeddings.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Multilingual vision-language understanding and generation",
+   "application": "Image captioning, visual question answering, object detection, image classification, natural language inference, multilingual question answering",
+   "paper_title": "PaLI: A Jointly-Scaled Multilingual Language-Image Model",
+   "training_corpus_size": "10 billion images and tens of billions of image-text pairs",
+   "finetuning_data": "COCO Captions, NoCaps, TextCaps, VizWiz-Cap, COCO-35L, OKVQA, TallyQA, XM-3600, xGQA, COCO-Cap, TextVQA, COCO, Crossmodal-3600, VQAv2, VizWiz-QA, MaXM, ImageNet, ImageNet-V2, ObjectNet, ReaL, ImageNet-R, ImageNet-A, ImageNet-Sketch, SuperGLUE, XNLI, XQuAD, TyDiQA",
+   "tokenizer": "250k T5 vocabulary",
+   "supported_language": "English, French, Hindi, Hebrew, Romanian, Thai, Chinese, and 90+ other languages, 101 other languages, Multilingual, Bengali, German, Indonesian, Korean, Portuguese, Russian, Spanish",
+   "hardware_description": "512 GCP-TPUv4 chips for 3 days (high-resolution phase)",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/pali",
+   "context_length": "512",
+   "activated_parameters": "17B (dense)",
+   "attention_mechanism": "Multi-head self-attention (mT5/ViT standard)",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Mixture-of-objectives pre-training followed by task-specific fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Encoder-Decoder with ViT encoder and mT5 decoder",
+   "vision_encoder": "ViT-e, ViT-G (1.8B), ViT-G, ViT-L, ViT",
+   "base_model": "mT5-XXL, ViT-G, ViT-e",
+   "optimizer_innovation": null,
+   "benchmark_result": "COCO Captioning: 149.1 CIDEr; VQAv2: 84.3%; COCO CIDEr: 145.4; NoCaps CIDEr: 121.1; VizWiz-Cap CIDEr: 117.2; COCO CIDEr: 146.2; NoCaps CIDEr: 121.2; VizWiz-Cap CIDEr: 121.7; TallyQA simple: 66.9; TallyQA complex: 55.6; Weighted average: 62.4; COCO-Cap: 145.4; OKVQA: 52.4; XM-3600: 93.8(EN)/42.5(6L); TextVQA: 41.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "PaLI-X",
+   "model_family": "PaLI",
+   "date_created": "2022-09-14",
+   "organization": "Google",
+   "innovation": "Jointly scales a multimodal language model across both visual modalities and multiple languages simultaneously, using a unified sequence interface that treats images and text as a single token stream, enabling multilingual visual understanding and generation without task-specific fine-tuning.",
+   "pretraining_corpus": "Conceptual Captions 12M, CC3M, CC4V, LAION-400M, SBU Captioned Images",
+   "parameters": "55B",
+   "parameters_millions": 55000,
+   "application": "Visual question answering, image captioning, visual reasoning, multilingual VQA, image-text generation",
+   "license": "Apache 2.0",
+   "research_problem": "Multilingual vision-and-language understanding",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal language modeling (next-token prediction on image-text sequences)",
+   "training_corpus_size": "10.5B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "COCO Captions, Visual Genome, VQA v2, TextVQA, ST-VQA, OK-VQA, A-OKVQA, ScienceQA, VizWiz, FVQA",
+   "optimizer": "AdamW",
+   "tokenizer": "SentencePiece BPE",
+   "context_length": null,
+   "supported_language": "English, German, French, Spanish, Italian, Portuguese, Polish, Turkish, Hindi, Bengali, Thai, Japanese, Korean, Chinese",
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/google-research/pali",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "PaLI: A Jointly-Scaled Multilingual Language-Image Model",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "SOTA on VQA v2, TextVQA, ST-VQA, OK-VQA, A-OKVQA, ScienceQA, VizWiz, FVQA, COCO Captions, Visual Genome",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 11,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "PaLI": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "object detection",
+    "image classification",
+    "natural language inference",
+    "multilingual question answering"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (mT5/ViT standard)"
+   ],
+   "base_model": [
+    "mT5-XXL, ViT-G, ViT-e"
+   ],
+   "finetuning_data": [
+    "COCO Captions",
+    "NoCaps",
+    "TextCaps",
+    "VizWiz-Cap",
+    "COCO-35L",
+    "OKVQA",
+    "TallyQA",
+    "XM-3600",
+    "xGQA",
+    "COCO-Cap",
+    "TextVQA",
+    "COCO",
+    "Crossmodal-3600",
+    "VQAv2",
+    "VizWiz-QA",
+    "MaXM",
+    "ImageNet",
+    "ImageNet-V2",
+    "ObjectNet",
+    "ReaL",
+    "ImageNet-R",
+    "ImageNet-A",
+    "ImageNet-Sketch",
+    "SuperGLUE",
+    "XNLI",
+    "XQuAD",
+    "TyDiQA"
+   ],
+   "finetuning_task": [
+    "Image captioning",
+    "visual question answering",
+    "cross-lingual VQA"
+   ],
+   "fusion_architecture": [
+    "Encoder-Decoder with ViT encoder and mT5 decoder"
+   ],
+   "hardware_used": [
+    "GCP-TPUv4"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "PaLI"
+   ],
+   "model_name": [
+    "PaLI"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "700M",
+    "3B",
+    "5B",
+    "14.8B",
+    "15B",
+    "16.9B",
+    "17B",
+    "55B",
+    "100B",
+    "150B",
+    "200B",
+    "250B",
+    "300B",
+    "350B",
+    "400B",
+    "450B",
+    "500B",
+    "550B",
+    "600B",
+    "650B",
+    "700B",
+    "750B",
+    "800B",
+    "850B",
+    "900B",
+    "950B",
+    "1T"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "WebLI (English and non-English subsets)",
+    "CC3M-35L",
+    "VQ2A-CC3M-35L",
+    "VQG-CC3M-35L"
+   ],
+   "pretraining_task": [
+    "Multimodal language modeling"
+   ],
+   "research_problem": [
+    "Multilingual vision-language understanding and generation"
+   ],
+   "supported_language": [
+    "English",
+    "French",
+    "Hindi",
+    "Hebrew",
+    "Romanian",
+    "Thai",
+    "Chinese",
+    "Bengali",
+    "German",
+    "Indonesian",
+    "Korean",
+    "Portuguese",
+    "Russian",
+    "Spanish"
+   ],
+   "vision_encoder": [
+    "ViT-e",
+    "ViT-G (1.8B)",
+    "ViT-G",
+    "ViT-L",
+    "ViT"
+   ]
+  },
+  "PaLI-X": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "multilingual VQA",
+    "image-text generation"
+   ],
+   "finetuning_data": [
+    "COCO Captions",
+    "Visual Genome",
+    "VQA v2",
+    "TextVQA",
+    "ST-VQA",
+    "OK-VQA",
+    "A-OKVQA",
+    "ScienceQA",
+    "VizWiz",
+    "FVQA"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "PaLI"
+   ],
+   "model_name": [
+    "PaLI-X"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "55B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions 12M",
+    "CC3M",
+    "CC4V",
+    "LAION-400M",
+    "SBU Captioned Images"
+   ],
+   "pretraining_task": [
+    "Multimodal language modeling (next-token prediction on image-text sequences)"
+   ],
+   "research_problem": [
+    "Multilingual vision-and-language understanding"
+   ],
+   "supported_language": [
+    "English",
+    "German",
+    "French",
+    "Spanish",
+    "Italian",
+    "Portuguese",
+    "Polish",
+    "Turkish",
+    "Hindi",
+    "Bengali",
+    "Thai",
+    "Japanese",
+    "Korean",
+    "Chinese"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "PaLI": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning with cross-entropy loss",
+      "Image captioning",
+      "visual question answering",
+      "cross-lingual VQA"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual question answering",
+      "cross-lingual VQA"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning with cross-entropy loss",
+       "reason": "Describes training methodology and loss function rather than a specific task or objective."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "French",
+      "Hindi",
+      "Hebrew",
+      "Romanian",
+      "Thai",
+      "Chinese",
+      "90+ other languages",
+      "101 other languages",
+      "Multilingual",
+      "Bengali",
+      "German",
+      "Indonesian",
+      "Korean",
+      "Portuguese",
+      "Russian",
+      "Spanish"
+     ],
+     "accepted": [
+      "English",
+      "French",
+      "Hindi",
+      "Hebrew",
+      "Romanian",
+      "Thai",
+      "Chinese",
+      "Bengali",
+      "German",
+      "Indonesian",
+      "Korean",
+      "Portuguese",
+      "Russian",
+      "Spanish"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      },
+      {
+       "value": "90+ other languages",
+       "reason": "Indicates a count or range of languages rather than naming a specific natural language."
+      },
+      {
+       "value": "101 other languages",
+       "reason": "Indicates a count or range of languages rather than naming a specific natural language."
+      }
+     ]
+    }
+   },
+   "PaLI-X": {}
+  },
+  "counts": {
+   "kept": 142,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 64
+  }
+ },
+ "contributions": [
+  {
+   "label": "PaLI",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "PaLI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "PaLI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-09-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Joint scaling of vision and language components with a balanced parameter share (ViT-e accounts for ~25% of total parameters)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reuse of large unimodal backbones (mT5-XXL, ViT-G/ViT-e) to transfer existing capabilities and reduce training cost",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Generalized VQA-like task interface casting all tasks into an 'image+query to answer' format to enable knowledge-sharing across multiple image and language tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebLI (English and non-English subsets)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M-35L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQ2A-CC3M-35L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQG-CC3M-35L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-lingual VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "250k T5 vocabulary",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "700M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "15B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "17B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "55B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "100B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "150B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "200B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "250B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "450B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "500B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "550B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "650B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "700B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "750B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "800B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "850B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "900B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "950B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1000000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GCP-TPUv4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512 GCP-TPUv4 chips for 3 days (high-resolution phase)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/pali",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual vision-language understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "10 billion images and tens of billions of image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-Cap",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-35L",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TallyQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XM-3600",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XGQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO-Cap",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Crossmodal-3600",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MaXM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-V2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ObjectNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReaL",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-R",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-A",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-Sketch",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TyDiQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hebrew",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "17B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (mT5/ViT standard)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Mixture-of-objectives pre-training followed by task-specific fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Encoder-Decoder with ViT encoder and mT5 decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-e",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-G (1.8B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-G",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "MT5-XXL, ViT-G, ViT-e",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Captioning: 149.1 CIDEr",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 84.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO CIDEr: 145.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps CIDEr: 121.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Cap CIDEr: 117.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO CIDEr: 146.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps CIDEr: 121.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Cap CIDEr: 121.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TallyQA simple: 66.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TallyQA complex: 55.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Weighted average: 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO-Cap: 145.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA: 52.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XM-3600: 93.8(EN)/42.5(6L)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 41.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "PaLI-X",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "PaLI-X",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "PaLI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-09-14",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Jointly scales a multimodal language model across both visual modalities and multiple languages simultaneously, using a unified sequence interface that treats images and text as a single token stream, enabling multilingual visual understanding and generation without task-specific fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal language modeling (next-token prediction on image-text sequences)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions 12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU Captioned Images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "55B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 55000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/pali",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual vision-and-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "10.5B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA v2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ST-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OK-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "A-OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on VQA v2, TextVQA, ST-VQA, OK-VQA, A-OKVQA, ScienceQA, VizWiz, FVQA, COCO Captions, Visual Genome",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1775640",
+  "contribution_ids": [
+   "R1775642",
+   "R1775643",
+   "R1775644",
+   "R1775645",
+   "R1923270",
+   "R1923289"
+  ],
+  "new_contribution_ids": [
+   "R1923270",
+   "R1923289"
+  ],
+  "comparison_updated": null
+ }
+}

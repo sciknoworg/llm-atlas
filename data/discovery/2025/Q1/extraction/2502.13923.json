@@ -1,0 +1,1146 @@
+{
+ "arxiv_id": "2502.13923",
+ "status": "completed",
+ "timestamp": "2026-08-29T18:01:21.618471",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2502.13923",
+  "title": "Qwen2.5-VL Technical Report",
+  "authors": [
+   "Shuai Bai",
+   "Keqin Chen",
+   "Xuejing Liu",
+   "Jialin Wang",
+   "Wenbin Ge",
+   "Sibo Song",
+   "Kai Dang",
+   "Peng Wang",
+   "Shijie Wang",
+   "Jun Tang",
+   "Humen Zhong",
+   "Yuanzhi Zhu",
+   "Mingkun Yang",
+   "Zhaohai Li",
+   "Jianqiang Wan",
+   "Pengfei Wang",
+   "Wei Ding",
+   "Zheren Fu",
+   "Yiheng Xu",
+   "Jiabo Ye",
+   "Xi Zhang",
+   "Tianbao Xie",
+   "Zesen Cheng",
+   "Hang Zhang",
+   "Zhibo Yang",
+   "Haiyang Xu",
+   "Junyang Lin"
+  ],
+  "abstract": "We introduce Qwen2.5-VL, the latest flagship model of Qwen vision-language series, which demonstrates significant advancements in both foundational capabilities and innovative functionalities. Qwen2.5-VL achieves a major leap forward in understanding and interacting with the world through enhanced visual recognition, precise object localization, robust document parsing, and long-video comprehension. A standout feature of Qwen2.5-VL is its ability to localize objects using bounding boxes or points accurately. It provides robust structured data extraction from invoices, forms, and tables, as well as detailed analysis of charts, diagrams, and layouts. To handle complex inputs, Qwen2.5-VL introduces dynamic resolution processing and absolute time encoding, enabling it to process images of varying sizes and videos of extended durations (up to hours) with second-level event localization. This allows the model to natively perceive spatial scales and temporal dynamics without relying on traditional normalization techniques. By training a native dynamic-resolution Vision Transformer (ViT) from scratch and incorporating Window Attention, we reduce computational overhead while maintaining native resolution. As a result, Qwen2.5-VL excels not only in static image and document understanding but also as an interactive visual agent capable of reasoning, tool usage, and task execution in real-world scenarios such as operating computers and mobile devices. Qwen2.5-VL is available in three sizes, addressing diverse use cases from edge AI to high-performance computing. The flagship Qwen2.5-VL-72B model matches state-of-the-art models like GPT-4o and Claude 3.5 Sonnet, particularly excelling in document and diagram understanding. Additionally, Qwen2.5-VL maintains robust linguistic performance, preserving the core language competencies of the Qwen2.5 LLM.",
+  "published": "2025-02-19T18:00:14+00:00",
+  "updated": "2025-02-19T18:00:14+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2502.13923v1",
+  "entry_id": "http://arxiv.org/abs/2502.13923v1",
+  "pdf_path": "data/papers/2502.13923.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 81769,
+ "word_count": 3823,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "Qwen 2.5-VL",
+   "parameters": "3B, 7B, 72B",
+   "parameters_millions": 72000,
+   "model_family": "Qwen",
+   "date_created": "2025-02-19",
+   "organization": "Alibaba",
+   "innovation": "Native Dynamic Resolution and Frame Rate: dynamically converts images of varying sizes into token sequences and uses actual dimensions for spatial features, improving adaptability across resolutions; dynamic FPS training and absolute time encoding for videos, allowing better capture of temporal dynamics. ; Multimodal Rotary Position Embedding Aligned to Absolute Time (MRoPE): aligns the temporal component of MRoPE with absolute time using intervals between temporal IDs to learn consistent temporal alignment across videos with different FPS sampling rates, eliminating the need for additional computational overhead or textual timestamps. ; SwiGLU and RMSNorm: adopted for normalization and activation to enhance computational efficiency and compatibility between vision and language components.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal language modeling",
+   "pretraining_corpus": "Multimodal data including image captions, interleaved image-text data, OCR data, visual knowledge, multi-modal academic questions, localization data, document parsing data, video descriptions, video localization, and agent-based interaction data",
+   "finetuning_task": "Supervised fine-tuning, Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+   "optimizer": null,
+   "hardware_used": "NVIDIA A800/H800 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Fine-grained visual perception, computational complexity, limited contextual understanding, and poor fine-grained visual perception in large vision-language models.",
+   "application": "Document parsing, object grounding, video understanding, computer and mobile device operation, visual reasoning",
+   "paper_title": "Qwen2.5-VL Technical Report",
+   "training_corpus_size": "4.1 trillion tokens",
+   "finetuning_data": "General VQA, Rejection Sampling datasets, Document and OCR, Grounding, Video, and Agent-related tasks, image-text pairs, pure text, Curated multimodal instruction-response pairs (~2M entries, 50% text, 50% image/video-text), image captioning, math, coding, security, Doc/OCR, Video Analysis, Agent Interactions",
+   "tokenizer": "BPE",
+   "supported_language": "English, Chinese, French, German, Italian, Spanish, Portuguese, Arabic, Russian, Japanese, Korean, Vietnamese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/QwenLM/Qwen2.5-VL",
+   "context_length": null,
+   "activated_parameters": "3B, 7B, 72B (dense)",
+   "attention_mechanism": "Windowed attention (max window size 112x112) in most ViT layers; full self-attention in 4 layers, Window attention (for vision encoder)",
+   "context_length_max": "128K tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Supervised fine-tuning",
+   "reasoning_mode": "Chain-of-Thought (CoT)",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Rejection sampling for CoT reasoning, Data synthesis and a four-stage scoring system using an internal evaluation model to clean and score interleaved image-text data",
+   "rl_algorithm": "DPO",
+   "reward_mechanism": "Model-based filtering using reward models trained on the Qwen2.5-VL series to evaluate multimodal QA pairs across multiple dimensions",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-modal projector",
+   "vision_encoder": "Native dynamic-resolution VisionTransformer (ViT), Redesigned ViT trained from scratch, aligned with LLM design principles, High-resolution, dynamic-resolution vision encoder",
+   "base_model": "Qwen2.5 LLM",
+   "optimizer_innovation": null,
+   "benchmark_result": "CountBench: 93.6; Video-MME: 73.3 (w/o sub), 81.3 (w sub); Video-MMMU: 60.2; MMVU: 62.9; MVBench: 70.4; MMBench-Video: 2.02; LongVideoBench: 60.7; LVBench: 47.3; EgoSchema: 76.2; PerceptionTest: 73.2; MLVU: 74.6; TempCompass: 74.8; Charades-STA: 50.9; ScreenSpot: 87.1; ScreenSpotPro: 43.6; AndroidControlHigh: 67.36; AndroidControlLow: 93.7; AndroidWorld: 35%; MobileMiniWob++: 68%; OSWorld: 8.83; MMStar: 55.9; MMStar: 63.9; MMMU: 70.2; MMMU-Pro: 51.1; MathVista: 74.8; MATH-Vision: 38.1; MathVerse: 57.6; MMBench-EN: 88.6; MuirBench: 70.7; BLINK: 64.4; MTVQA: 31.7; MMVet: 76.2; MM-MT-Bench: 7.6; MMBench-EN-V1.1: 88.4; MMStar: 70.8; MME-RealWorld: 63.2; MMLU-Pro: 71.2; MMLU-redux: 85.9; LiveBench-0831: 57.0; GPQA: 49.0; MATH: 83.0; GSM8K: 95.3; HumanEval: 87.8; MultiPL-E: 79.5; IFEval: 86.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16 (ViT); 2/4/8 KV heads (LLM)",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Qwen 2.5-VL": {
+   "application": [
+    "Document parsing",
+    "object grounding",
+    "video understanding",
+    "computer and mobile device operation",
+    "visual reasoning"
+   ],
+   "attention_mechanism": [
+    "Windowed attention (max window size 112x112) in most ViT layers",
+    "full self-attention in 4 layers",
+    "Window attention (for vision encoder)"
+   ],
+   "base_model": [
+    "Qwen2.5 LLM"
+   ],
+   "finetuning_data": [
+    "General VQA",
+    "Document and OCR",
+    "Grounding",
+    "Video",
+    "Agent-related tasks",
+    "image-text pairs",
+    "Curated multimodal instruction-response pairs (~2M entries, 50% text, 50% image/video-text)",
+    "image captioning",
+    "math",
+    "security",
+    "Doc/OCR",
+    "Video Analysis",
+    "Agent Interactions"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)"
+   ],
+   "fusion_architecture": [
+    "Cross-modal projector"
+   ],
+   "hardware_used": [
+    "NVIDIA A800/H800 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 2.5-VL"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "3B",
+    "7B",
+    "72B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Multimodal data including image captions",
+    "OCR data",
+    "multi-modal academic questions",
+    "localization data",
+    "document parsing data",
+    "video descriptions",
+    "agent-based interaction data"
+   ],
+   "pretraining_task": [
+    "Multimodal language modeling"
+   ],
+   "reasoning_mode": [
+    "Chain-of-Thought (CoT)"
+   ],
+   "research_problem": [
+    "Fine-grained visual perception",
+    "computational complexity",
+    "limited contextual understanding"
+   ],
+   "reward_mechanism": [
+    "Model-based filtering using reward models trained on the Qwen2.5-VL series to evaluate multimodal QA pairs across multiple dimensions"
+   ],
+   "rl_algorithm": [
+    "DPO"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "French",
+    "German",
+    "Italian",
+    "Spanish",
+    "Portuguese",
+    "Arabic",
+    "Russian",
+    "Japanese",
+    "Korean",
+    "Vietnamese"
+   ],
+   "synthetic_data_generation_method": [
+    "Rejection sampling for CoT reasoning",
+    "Data synthesis and a four-stage scoring system using an internal evaluation model to clean and score interleaved image-text data"
+   ],
+   "vision_encoder": [
+    "Native dynamic-resolution VisionTransformer (ViT)",
+    "Redesigned ViT trained from scratch",
+    "dynamic-resolution vision encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Qwen 2.5-VL": {
+    "finetuning_data": {
+     "candidates": [
+      "General VQA",
+      "Rejection Sampling datasets",
+      "Document and OCR",
+      "Grounding",
+      "Video",
+      "Agent-related tasks",
+      "image-text pairs",
+      "pure text",
+      "Curated multimodal instruction-response pairs (~2M entries, 50% text, 50% image/video-text)",
+      "image captioning",
+      "math",
+      "coding",
+      "security",
+      "Doc/OCR",
+      "Video Analysis",
+      "Agent Interactions"
+     ],
+     "accepted": [
+      "General VQA",
+      "Document and OCR",
+      "Grounding",
+      "Video",
+      "Agent-related tasks",
+      "image-text pairs",
+      "Curated multimodal instruction-response pairs (~2M entries, 50% text, 50% image/video-text)",
+      "image captioning",
+      "math",
+      "security",
+      "Doc/OCR",
+      "Video Analysis",
+      "Agent Interactions"
+     ],
+     "dropped": [
+      {
+       "value": "coding",
+       "reason": "Refers to a domain/task rather than a specific dataset or collection of fine-tuning data. (cached)"
+      },
+      {
+       "value": "Rejection Sampling datasets",
+       "reason": "Names a data generation/training method rather than a specific dataset or task domain"
+      },
+      {
+       "value": "pure text",
+       "reason": "Describes a data modality rather than a specific dataset or task domain"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning",
+      "Supervised fine-tuning (SFT)",
+      "Direct Preference Optimization (DPO)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Multimodal data including image captions",
+      "interleaved image-text data",
+      "OCR data",
+      "visual knowledge",
+      "multi-modal academic questions",
+      "localization data",
+      "document parsing data",
+      "video descriptions",
+      "video localization",
+      "agent-based interaction data"
+     ],
+     "accepted": [
+      "Multimodal data including image captions",
+      "OCR data",
+      "multi-modal academic questions",
+      "localization data",
+      "document parsing data",
+      "video descriptions",
+      "agent-based interaction data"
+     ],
+     "dropped": [
+      {
+       "value": "interleaved image-text data",
+       "reason": "Describes data format, not a named corpus or dataset. (cached)"
+      },
+      {
+       "value": "visual knowledge",
+       "reason": "Abstract concept rather than a dataset or corpus"
+      },
+      {
+       "value": "video localization",
+       "reason": "Names a task rather than a dataset or corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Fine-grained visual perception",
+      "computational complexity",
+      "limited contextual understanding",
+      "poor fine-grained visual perception in large vision-language models."
+     ],
+     "accepted": [
+      "Fine-grained visual perception",
+      "computational complexity",
+      "limited contextual understanding"
+     ],
+     "dropped": [
+      {
+       "value": "poor fine-grained visual perception in large vision-language models.",
+       "reason": "Full sentence description rather than a concise noun phrase"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Native dynamic-resolution VisionTransformer (ViT)",
+      "Redesigned ViT trained from scratch",
+      "aligned with LLM design principles",
+      "High-resolution",
+      "dynamic-resolution vision encoder"
+     ],
+     "accepted": [
+      "Native dynamic-resolution VisionTransformer (ViT)",
+      "Redesigned ViT trained from scratch",
+      "dynamic-resolution vision encoder"
+     ],
+     "dropped": [
+      {
+       "value": "High-resolution",
+       "reason": "Adjective describing a feature, not a model component (cached)"
+      },
+      {
+       "value": "aligned with LLM design principles",
+       "reason": "Describes a design characteristic rather than naming a model component"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 64,
+   "dropped": 11,
+   "llm_calls": 1,
+   "values_sent_to_llm": 38
+  }
+ },
+ "contributions": [
+  {
+   "label": "Qwen 2.5-VL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 2.5-VL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-02-19",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Native Dynamic Resolution and Frame Rate: dynamically converts images of varying sizes into token sequences and uses actual dimensions for spatial features, improving adaptability across resolutions",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dynamic FPS training and absolute time encoding for videos, allowing better capture of temporal dynamics.",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multimodal Rotary Position Embedding Aligned to Absolute Time (MRoPE): aligns the temporal component of MRoPE with absolute time using intervals between temporal IDs to learn consistent temporal alignment across videos with different FPS sampling rates, eliminating the need for additional computational overhead or textual timestamps.",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "SwiGLU and RMSNorm: adopted for normalization and activation to enhance computational efficiency and compatibility between vision and language components.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Multimodal data including image captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OCR data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Multi-modal academic questions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Localization data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Document parsing data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Video descriptions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Agent-based interaction data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "72B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 72000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A800/H800 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document parsing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Computer and mobile device operation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/QwenLM/Qwen2.5-VL",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Fine-grained visual perception",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Computational complexity",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Limited contextual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "4.1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "General VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Document and OCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Grounding",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Video",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Agent-related tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Curated multimodal instruction-response pairs (~2M entries, 50% text, 50% image/video-text)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Image captioning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Math",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Security",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Doc/OCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Video Analysis",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Agent Interactions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B, 7B, 72B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Windowed attention (max window size 112x112) in most ViT layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Full self-attention in 4 layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Window attention (for vision encoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Chain-of-Thought (CoT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Rejection sampling for CoT reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Data synthesis and a four-stage scoring system using an internal evaluation model to clean and score interleaved image-text data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Model-based filtering using reward models trained on the Qwen2.5-VL series to evaluate multimodal QA pairs across multiple dimensions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-modal projector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Native dynamic-resolution VisionTransformer (ViT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Redesigned ViT trained from scratch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Dynamic-resolution vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen2.5 LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CountBench: 93.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MME: 73.3 (w/o sub), 81.3 (w sub)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MMMU: 60.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMVU: 62.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MVBench: 70.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-Video: 2.02",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LongVideoBench: 60.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LVBench: 47.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "EgoSchema: 76.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PerceptionTest: 73.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MLVU: 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TempCompass: 74.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Charades-STA: 50.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScreenSpot: 87.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScreenSpotPro: 43.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AndroidControlHigh: 67.36",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AndroidControlLow: 93.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AndroidWorld: 35%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MobileMiniWob++: 68%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OSWorld: 8.83",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar: 55.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar: 63.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 70.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro: 51.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 74.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH-Vision: 38.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVerse: 57.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-EN: 88.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MuirBench: 70.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK: 64.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MTVQA: 31.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMVet: 76.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-MT-Bench: 7.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-EN-V1.1: 88.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar: 70.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RealWorld: 63.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 71.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 85.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveBench-0831: 57.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 49.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 83.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 95.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 87.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 79.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval: 86.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16 (ViT); 2/4/8 KV heads (LLM)",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1775458",
+  "contribution_ids": [
+   "R1775460",
+   "R1775461",
+   "R1924887"
+  ],
+  "new_contribution_ids": [
+   "R1924887"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,753 @@
+{
+  "arxiv_id": "2603.00729",
+  "status": "completed",
+  "timestamp": "2026-08-30T07:46:29.492553",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2603.00729",
+    "title": "Qwen3-Coder-Next Technical Report",
+    "authors": [
+      "Ruisheng Cao",
+      "Mouxiang Chen",
+      "Jiawei Chen",
+      "Zeyu Cui",
+      "Yunlong Feng",
+      "Binyuan Hui",
+      "Yuheng Jing",
+      "Kaixin Li",
+      "Mingze Li",
+      "Junyang Lin",
+      "Zeyao Ma",
+      "Kashun Shum",
+      "Xuwu Wang",
+      "Jinxi Wei",
+      "Jiaxi Yang",
+      "Jiajun Zhang",
+      "Lei Zhang",
+      "Zongmeng Zhang",
+      "Wenting Zhao",
+      "Fan Zhou"
+    ],
+    "abstract": "We present Qwen3-Coder-Next, an open-weight language model specialized for coding agents. Qwen3-Coder-Next is an 80-billion-parameter model that activates only 3 billion parameters during inference, enabling strong coding capability with efficient inference. In this work, we explore how far strong training recipes can push the capability limits of models with small parameter footprints. To achieve this, we perform agentic training through large-scale synthesis of verifiable coding tasks paired with executable environments, allowing learning directly from environment feedback via mid-training and reinforcement learning. Across agent-centric benchmarks including SWE-Bench and Terminal-Bench, Qwen3-Coder-Next achieves competitive performance relative to its active parameter count. We release both base and instruction-tuned open-weight versions to support research and real-world coding agent development.",
+    "published": "2026-02-28T16:25:04+00:00",
+    "updated": "2026-02-28T16:25:04+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2603.00729v1",
+    "entry_id": "http://arxiv.org/abs/2603.00729v1",
+    "pdf_path": "data/papers/2603.00729.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 84260,
+  "word_count": 6270,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "Qwen 3-Coder-Next",
+      "parameters": "80B, 480B",
+      "parameters_millions": 480000,
+      "model_family": "Qwen",
+      "date_created": "2026-02-28",
+      "organization": "Alibaba",
+      "innovation": "Expands training context length from 32,768 to 262,144 tokens; expands repository-level data to ~600B tokens with multi-format serialization and special tokens; rewrites web documents into normalized structured text to mitigate low-quality content; constructs GitHub PR-based training data with realistic signal/noise mixtures; synthesizes single-turn QA and multi-turn agentic coding trajectories using a teacher model; supports fill-in-the-middle (FIM) code completion in chat and diff-style formats.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "CommonCrawl, domain-targeted sources (math, programming, education), repository-level data (~600B tokens), Stack-V2",
+      "finetuning_task": "Supervised fine-tuning on agentic coding data, Mid-training for coding and agentic tasks, Instruction following, agentic coding, FIM completion",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": "Expert Distillation: consolidates capabilities from multiple domain experts into a single unified deployment model.",
+      "blog_post": null,
+      "license": "open-weight",
+      "research_problem": "Scaling agentic training to push capability limits of models with small parameter footprints for coding agents",
+      "application": "Code generation, software engineering, agentic coding, fill-in-the-middle code completion, document editing",
+      "paper_title": "Qwen3-Coder-Next Technical Report",
+      "training_corpus_size": null,
+      "finetuning_data": "High-quality agentic coding data, Natural data (GitHub, CommonCrawl, web) + synthetic verifiable software engineering tasks, GitHub PRs, synthetic single-turn QA, multi-turn agentic coding trajectories, instruction-following data, Stack-V2 FIM data",
+      "tokenizer": "Stack-V2",
+      "supported_language": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "3B",
+      "attention_mechanism": "Hybrid attention",
+      "context_length_max": "262,144 tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Continued pretraining on code/agent data -> SFT on agentic coding data -> distillation of multiple expert models into a single unified model",
+      "reasoning_mode": null,
+      "moe_configuration": "80B total parameters, 3B activated",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Mining GitHub PRs to construct runnable Docker environments and verification scripts; synthesizing new task instances from existing open-source datasets, Model-driven rewriting, semantic perturbations, and rule-based transformations to inject controlled bugs into existing codebases; automated detection to filter non-functional verifiers; quality-assurance agent to remove ambiguous tasks, Teacher model prompting for grounded QA and agentic trajectories; web document rewriting to normalized structured text",
+      "rl_algorithm": "Reinforcement learning, Reinforcement learning (execution-based rewards, trajectory-level rewards, token-level penalties)",
+      "reward_mechanism": "Execution feedback from executable environments, Execution-based rewards (unittests), trajectory-level rewards based on final task completion, unfinished trajectory penalty, token-level penalties, reward-hacking blocker",
+      "tool_calling_format": "Tool calls across multiple steps to solve software engineering tasks",
+      "training_environment_scale": "Large-scale synthesis of verifiable coding tasks paired with executable environments",
+      "safety_evaluation_protocol": "SecCodeBench, CWEval",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Qwen3-Next",
+      "optimizer_innovation": null,
+      "benchmark_result": "SWE-Bench Verified: 74.2; SWE-Bench Multilingual: 70.6; SWE-Bench Pro: 69.9; Terminal-Bench 2.0: 66.2; Aider: 62.8; SWE-bench Verified Scaffold 1: 98.0; Scaffold 2: 83.0; Scaffold 3: 98.0; Scaffold 4: 91.5; Scaffold 5: 93.0; Avg: 92.7; Evalplus: 63.09; MultiplE: 48.35; CRUX-Eval: 58.94",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "MegaFlow, an internal orchestration system based on AlibabaCloud Kubernetes 1, using Argo workflows for agent rollout, evaluation, and post-processing"
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Qwen 3-Coder-Next": {
+      "application": [
+        "Code generation",
+        "software engineering",
+        "agentic coding",
+        "fill-in-the-middle code completion",
+        "document editing"
+      ],
+      "attention_mechanism": [
+        "Hybrid attention"
+      ],
+      "base_model": [
+        "Qwen3-Next"
+      ],
+      "finetuning_data": [
+        "High-quality agentic coding data",
+        "Natural data (GitHub, CommonCrawl, web) + synthetic verifiable software engineering tasks",
+        "GitHub PRs",
+        "synthetic single-turn QA",
+        "multi-turn agentic coding trajectories",
+        "instruction-following data",
+        "Stack-V2 FIM data"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning on agentic coding data",
+        "Mid-training for coding and agentic tasks",
+        "Instruction following",
+        "agentic coding",
+        "FIM completion"
+      ],
+      "license": [
+        "open-weight"
+      ],
+      "model_family": [
+        "Qwen"
+      ],
+      "model_name": [
+        "Qwen 3-Coder-Next"
+      ],
+      "organization": [
+        "Alibaba"
+      ],
+      "parameters": [
+        "80B",
+        "480B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "CommonCrawl",
+        "repository-level data (~600B tokens)",
+        "Stack-V2"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Execution feedback from executable environments",
+        "Execution-based rewards (unittests)",
+        "trajectory-level rewards based on final task completion",
+        "unfinished trajectory penalty",
+        "token-level penalties",
+        "reward-hacking blocker"
+      ],
+      "rl_algorithm": [],
+      "synthetic_data_generation_method": [
+        "Mining GitHub PRs to construct runnable Docker environments and verification scripts",
+        "synthesizing new task instances from existing open-source datasets",
+        "Model-driven rewriting",
+        "semantic perturbations",
+        "rule-based transformations to inject controlled bugs into existing codebases",
+        "Teacher model prompting for grounded QA and agentic trajectories",
+        "web document rewriting to normalized structured text"
+      ],
+      "tool_calling_format": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Qwen 3-Coder-Next": {
+        "pretraining_corpus": {
+          "candidates": [
+            "CommonCrawl",
+            "domain-targeted sources (math, programming, education)",
+            "repository-level data (~600B tokens)",
+            "Stack-V2"
+          ],
+          "accepted": [
+            "CommonCrawl",
+            "repository-level data (~600B tokens)",
+            "Stack-V2"
+          ],
+          "dropped": [
+            {
+              "value": "domain-targeted sources (math, programming, education)",
+              "reason": "Vague description of sources rather than a named or identifiable corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Scaling agentic training to push capability limits of models with small parameter footprints for coding agents"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Scaling agentic training to push capability limits of models with small parameter footprints for coding agents",
+              "reason": "Reads as a description of a research goal or methodology rather than a short noun phrase naming a specific problem or capability gap."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Reinforcement learning",
+            "Reinforcement learning (execution-based rewards, trajectory-level rewards, token-level penalties)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Reinforcement learning",
+              "reason": "Names a general category/approach rather than a specific RL algorithm (cached)"
+            },
+            {
+              "value": "Reinforcement learning (execution-based rewards, trajectory-level rewards, token-level penalties)",
+              "reason": "Names a general category of approach rather than a specific algorithm (e.g., PPO, GRPO, DPO)."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Mining GitHub PRs to construct runnable Docker environments and verification scripts",
+            "synthesizing new task instances from existing open-source datasets",
+            "Model-driven rewriting",
+            "semantic perturbations",
+            "rule-based transformations to inject controlled bugs into existing codebases",
+            "automated detection to filter non-functional verifiers",
+            "quality-assurance agent to remove ambiguous tasks",
+            "Teacher model prompting for grounded QA and agentic trajectories",
+            "web document rewriting to normalized structured text"
+          ],
+          "accepted": [
+            "Mining GitHub PRs to construct runnable Docker environments and verification scripts",
+            "synthesizing new task instances from existing open-source datasets",
+            "Model-driven rewriting",
+            "semantic perturbations",
+            "rule-based transformations to inject controlled bugs into existing codebases",
+            "Teacher model prompting for grounded QA and agentic trajectories",
+            "web document rewriting to normalized structured text"
+          ],
+          "dropped": [
+            {
+              "value": "automated detection to filter non-functional verifiers",
+              "reason": "Describes a filtering/validation step rather than a data generation technique."
+            },
+            {
+              "value": "quality-assurance agent to remove ambiguous tasks",
+              "reason": "Describes a curation/filtering step rather than a data generation technique."
+            }
+          ]
+        },
+        "tool_calling_format": {
+          "candidates": [
+            "Tool calls across multiple steps to solve software engineering tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Tool calls across multiple steps to solve software engineering tasks",
+              "reason": "Describes a usage pattern or capability rather than a specific format or protocol for encoding tool calls."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 43,
+      "dropped": 7,
+      "llm_calls": 1,
+      "values_sent_to_llm": 40
+    }
+  },
+  "contributions": [
+    {
+      "label": "Qwen 3-Coder-Next",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Qwen 3-Coder-Next",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Qwen",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-02-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Alibaba",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Expands training context length from 32,768 to 262,144 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Expands repository-level data to ~600B tokens with multi-format serialization and special tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Rewrites web documents into normalized structured text to mitigate low-quality content",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Constructs GitHub PR-based training data with realistic signal/noise mixtures",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Synthesizes single-turn QA and multi-turn agentic coding trajectories using a teacher model",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Supports fill-in-the-middle (FIM) code completion in chat and diff-style formats.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CommonCrawl",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Repository-level data (~600B tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Stack-V2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning on agentic coding data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Mid-training for coding and agentic tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Agentic coding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "FIM completion",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Stack-V2",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "80B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "480B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 480000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Software engineering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Agentic coding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Fill-in-the-middle code completion",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document editing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "High-quality agentic coding data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Natural data (GitHub, CommonCrawl, web) + synthetic verifiable software engineering tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GitHub PRs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthetic single-turn QA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multi-turn agentic coding trajectories",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Instruction-following data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Stack-V2 FIM data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "262,144 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Continued pretraining on code/agent data -> SFT on agentic coding data -> distillation of multiple expert models into a single unified model",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "80B total parameters, 3B activated",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Mining GitHub PRs to construct runnable Docker environments and verification scripts",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthesizing new task instances from existing open-source datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Model-driven rewriting",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Semantic perturbations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Rule-based transformations to inject controlled bugs into existing codebases",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Teacher model prompting for grounded QA and agentic trajectories",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Web document rewriting to normalized structured text",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Execution feedback from executable environments",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Execution-based rewards (unittests)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Trajectory-level rewards based on final task completion",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Unfinished trajectory penalty",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Token-level penalties",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Reward-hacking blocker",
+          "datatype": "string"
+        },
+        {
+          "property": "P203096",
+          "label": "training_environment_scale",
+          "value": "Large-scale synthesis of verifiable coding tasks paired with executable environments",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "SecCodeBench, CWEval",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen3-Next",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-Bench Verified: 74.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-Bench Multilingual: 70.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-Bench Pro: 69.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Terminal-Bench 2.0: 66.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Aider: 62.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SWE-bench Verified Scaffold 1: 98.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Scaffold 2: 83.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Scaffold 3: 98.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Scaffold 4: 91.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Scaffold 5: 93.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Avg: 92.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Evalplus: 63.09",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MultiplE: 48.35",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CRUX-Eval: 58.94",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "MegaFlow, an internal orchestration system based on AlibabaCloud Kubernetes 1, using Argo workflows for agent rollout, evaluation, and post-processing",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927281",
+    "contribution_ids": [
+      "R1927283"
+    ],
+    "new_contribution_ids": [
+      "R1927283"
+    ],
+    "comparison_updated": null
+  }
+}

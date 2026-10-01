@@ -1,0 +1,790 @@
+{
+ "arxiv_id": "2403.04652",
+ "status": "completed",
+ "timestamp": "2026-08-28T21:38:25.265753",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2403.04652",
+  "title": "Yi: Open Foundation Models by 01.AI",
+  "authors": [
+   "01. AI",
+   " :",
+   "Alex Young",
+   "Bei Chen",
+   "Chao Li",
+   "Chengen Huang",
+   "Ge Zhang",
+   "Guanwei Zhang",
+   "Guoyin Wang",
+   "Heng Li",
+   "Jiangcheng Zhu",
+   "Jianqun Chen",
+   "Jing Chang",
+   "Kaidong Yu",
+   "Peng Liu",
+   "Qiang Liu",
+   "Shawn Yue",
+   "Senbin Yang",
+   "Shiming Yang",
+   "Wen Xie",
+   "Wenhao Huang",
+   "Xiaohui Hu",
+   "Xiaoyi Ren",
+   "Xinyao Niu",
+   "Pengcheng Nie",
+   "Yanpeng Li",
+   "Yuchi Xu",
+   "Yudong Liu",
+   "Yue Wang",
+   "Yuxuan Cai",
+   "Zhenyu Gu",
+   "Zhiyuan Liu",
+   "Zonghong Dai"
+  ],
+  "abstract": "We introduce the Yi model family, a series of language and multimodal models that demonstrate strong multi-dimensional capabilities. The Yi model family is based on 6B and 34B pretrained language models, then we extend them to chat models, 200K long context models, depth-upscaled models, and vision-language models. Our base models achieve strong performance on a wide range of benchmarks like MMLU, and our finetuned chat models deliver strong human preference rate on major evaluation platforms like AlpacaEval and Chatbot Arena. Building upon our scalable super-computing infrastructure and the classical transformer architecture, we attribute the performance of Yi models primarily to its data quality resulting from our data-engineering efforts. For pretraining, we construct 3.1 trillion tokens of English and Chinese corpora using a cascaded data deduplication and quality filtering pipeline. For finetuning, we polish a small scale (less than 10K) instruction dataset over multiple iterations such that every single instance has been verified directly by our machine learning engineers. For vision-language, we combine the chat language model with a vision transformer encoder and train the model to align visual representations to the semantic space of the language model. We further extend the context length to 200K through lightweight continual pretraining and demonstrate strong needle-in-a-haystack retrieval performance. We show that extending the depth of the pretrained checkpoint through continual pretraining further improves performance. We believe that given our current results, continuing to scale up model parameters using thoroughly optimized data will lead to even stronger frontier models.",
+  "published": "2024-03-07T16:52:49+00:00",
+  "updated": "2025-01-21T10:12:05+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2403.04652v3",
+  "entry_id": "http://arxiv.org/abs/2403.04652v3",
+  "pdf_path": "data/papers/2403.04652.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 80819,
+ "word_count": 5828,
+ "models_extracted": 3,
+ "extraction_data": [
+  {
+   "model_name": "Yi",
+   "parameters": "6B, 9B, 34B",
+   "parameters_millions": 34000,
+   "model_family": "Yi",
+   "date_created": "2024-03-07",
+   "organization": "01.AI",
+   "innovation": "Grouped-Query Attention (GQA): splits query heads into groups sharing a single key and value head per group, reducing training and inference costs compared to Multi-Head Attention without performance degradation on the 6B model; SwiGLU activation: replaces the standard post-attention layer to reduce activation size from 4h to 8/3h, compensating for parameter reduction from GQA to keep overall parameter count comparable to existing 7B and 34B models; RoPE base frequency adjustment (RoPE ABF) and continued pre-training: adjusts the base frequency of Rotary Position Embedding and continues pre-training on 10B tokens with upsampled long sequences to intrinsically support 200K context windows, demonstrating that modeling longer dependencies is an intrinsic capability released by post-train rather than injected by it; rigorous data cleaning pipeline: integrates learned scorers (perplexity, quality, safety, document coherence), cluster-based semantic filtering, and comprehensive deduplication to produce high-quality bilingual data, outperforming standard heuristic rules especially for Chinese CommonCrawl content.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "CommonCrawl (English and Chinese)",
+   "finetuning_task": "Supervised Fine-Tuning (SFT), Supervised fine-tuning on multi-turn instruction-response pairs, Iterative instruction tuning on small datasets (\u226410K samples)",
+   "optimizer": "AdamW",
+   "hardware_used": "GPUs",
+   "extension": "Depth upscaling enhances the 6B model's capacity; continual pretraining on length-upsampled long-context data and multi-document QA synthetic data unlocks 200K context window; CLIP ViT-H/14 vision encoder integrated for multimodal understanding.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Open foundation models matching GPT-3.5 quality with cost-effective deployment",
+   "application": "Language modeling, chatbots, AI-native applications, agents, locally runnable chatbots",
+   "paper_title": "Yi: Open Foundation Models by 01.AI",
+   "training_corpus_size": "3.1T high-quality tokens",
+   "finetuning_data": "<10K multi-turn instruction-response dialog pairs, open-source prompts, Curated multi-turn instruction-response pairs (<10K)",
+   "tokenizer": "Byte-pair encoding (BPE) via SentencePiece, 64K vocabulary",
+   "supported_language": "English, Chinese",
+   "hardware_description": "Multi-cloud GPU cluster, Megatron and DeepSpeed",
+   "carbon_emitted": null,
+   "source_code": "https://huggingface.co/01-ai",
+   "context_length": null,
+   "activated_parameters": "6B (dense, all parameters active)",
+   "attention_mechanism": "Grouped-Query Attention (GQA)",
+   "context_length_max": "200K tokens",
+   "context_extension_method": "Rotary Position Embedding (RoPE) with adjusted base frequency (RoPE ABF) and continued pre-training on 10B tokens with upsampled long sequences",
+   "training_pipeline": "Pre-training on 3.1T tokens -> continued pre-training on 10B tokens for long context -> Supervised Fine-Tuning (SFT)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "4-bit quantization, 8-bit, 4-bit, 4/8-bit",
+   "synthetic_data_generation_method": "Model-assisted automated methods: randomly concatenate multiple documents, sample paragraphs, ask a chat model to construct question-answer pairs with recitation/rephrasing of the original paragraph",
+   "rl_algorithm": "DPO, PPO",
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "RAISE full-stack safety engine; safety taxonomy covering environmental, religious, discriminatory, substance abuse, violent, illegal, hate speech, privacy, self-harm, sexual, mental health, cybersecurity; simulated attack prompts",
+   "safety_defect_rate": null,
+   "fusion_architecture": "Vision Transformer (ViT) + LLM",
+   "vision_encoder": "CLIP ViT-H/14, Vision encoder integrated for vision-language tasks",
+   "base_model": "LLaMA",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU: 63.2; BBH: 42.8; C-Eval: 72.0; CMMLU: 75.5; Gaokao: 72.2; CR: 72.2; RC: 68.7; Code: 21.1; Math: 18.6; MMLU: 76.3; BBH: 54.3; C-Eval: 81.4; CMMLU: 83.7; Gaokao: 82.8; CR: 80.7; RC: 76.5; Code: 32.1; Math: 40.8; Arc-C: 55.6; HellaSwag: 76.4; MMLU: 68.4; Winogrande: 73.0; GSM8K: 52.3; MATH: 15.9; HumanEval: 39.0; MBPP: 54.4",
+   "weight_clipping_mechanism": "Gradient clipping (max threshold 1.0)",
+   "number_of_attention_heads": "32 query / 4 key-value",
+   "post_training_infrastructure": "Multi-cloud task scheduling, Megatron/DeepSpeed, paged attention, continuous batching"
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Yi": {
+   "application": [
+    "Language modeling",
+    "chatbots",
+    "AI-native applications",
+    "agents",
+    "locally runnable chatbots"
+   ],
+   "attention_mechanism": [
+    "Grouped-Query Attention (GQA)"
+   ],
+   "base_model": [
+    "LLaMA"
+   ],
+   "context_extension_method": [
+    "Rotary Position Embedding (RoPE) with adjusted base frequency (RoPE ABF) and continued pre-training on 10B tokens with upsampled long sequences"
+   ],
+   "finetuning_data": [
+    "<10K multi-turn instruction-response dialog pairs",
+    "open-source prompts",
+    "Curated multi-turn instruction-response pairs (<10K)"
+   ],
+   "finetuning_task": [
+    "Supervised Fine-Tuning (SFT)"
+   ],
+   "fusion_architecture": [
+    "Vision Transformer (ViT) + LLM"
+   ],
+   "hardware_used": [
+    "GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "Yi"
+   ],
+   "model_name": [
+    "Yi"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "01.AI"
+   ],
+   "parameters": [
+    "6B",
+    "9B",
+    "34B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "CommonCrawl (English and Chinese)"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "4-bit quantization",
+    "8-bit",
+    "4-bit",
+    "4/8-bit"
+   ],
+   "research_problem": [],
+   "rl_algorithm": [
+    "DPO",
+    "PPO"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "Model-assisted automated methods: randomly concatenate multiple documents",
+    "ask a chat model to construct question-answer pairs with recitation/rephrasing of the original paragraph"
+   ],
+   "vision_encoder": [
+    "CLIP ViT-H/14"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Yi": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised Fine-Tuning (SFT)",
+      "Supervised fine-tuning on multi-turn instruction-response pairs",
+      "Iterative instruction tuning on small datasets (\u226410K samples)"
+     ],
+     "accepted": [
+      "Supervised Fine-Tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on multi-turn instruction-response pairs",
+       "reason": "Describes the fine-tuning process/method rather than naming the specific task."
+      },
+      {
+       "value": "Iterative instruction tuning on small datasets (\u226410K samples)",
+       "reason": "Describes the training methodology rather than naming the specific fine-tuning task."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Open foundation models matching GPT-3.5 quality with cost-effective deployment"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Open foundation models matching GPT-3.5 quality with cost-effective deployment",
+       "reason": "Describes a development goal or model achievement rather than naming a specific research problem or capability gap."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "Model-assisted automated methods: randomly concatenate multiple documents",
+      "sample paragraphs",
+      "ask a chat model to construct question-answer pairs with recitation/rephrasing of the original paragraph"
+     ],
+     "accepted": [
+      "Model-assisted automated methods: randomly concatenate multiple documents",
+      "ask a chat model to construct question-answer pairs with recitation/rephrasing of the original paragraph"
+     ],
+     "dropped": [
+      {
+       "value": "sample paragraphs",
+       "reason": "Names a data artifact rather than a generation method."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "CLIP ViT-H/14",
+      "Vision encoder integrated for vision-language tasks"
+     ],
+     "accepted": [
+      "CLIP ViT-H/14"
+     ],
+     "dropped": [
+      {
+       "value": "Vision encoder integrated for vision-language tasks",
+       "reason": "Describes the purpose/integration rather than naming a specific vision encoder component."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clipping (max threshold 1.0)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clipping (max threshold 1.0)",
+       "reason": "Describes gradient clipping, which constrains gradients rather than weight values as specified in the definition."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 36,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 25
+  }
+ },
+ "contributions": [
+  {
+   "label": "Yi",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Yi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Yi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "01.AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Grouped-Query Attention (GQA): splits query heads into groups sharing a single key and value head per group, reducing training and inference costs compared to Multi-Head Attention without performance degradation on the 6B model",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "SwiGLU activation: replaces the standard post-attention layer to reduce activation size from 4h to 8/3h, compensating for parameter reduction from GQA to keep overall parameter count comparable to existing 7B and 34B models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "RoPE base frequency adjustment (RoPE ABF) and continued pre-training: adjusts the base frequency of Rotary Position Embedding and continues pre-training on 10B tokens with upsampled long sequences to intrinsically support 200K context windows, demonstrating that modeling longer dependencies is an intrinsic capability released by post-train rather than injected by it",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Rigorous data cleaning pipeline: integrates learned scorers (perplexity, quality, safety, document coherence), cluster-based semantic filtering, and comprehensive deduplication to produce high-quality bilingual data, outperforming standard heuristic rules especially for Chinese CommonCrawl content.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl (English and Chinese)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised Fine-Tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE) via SentencePiece, 64K vocabulary",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "34B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 34000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Multi-cloud GPU cluster, Megatron and DeepSpeed",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chatbots",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "AI-native applications",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Agents",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Locally runnable chatbots",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://huggingface.co/01-ai",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.1T high-quality tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "<10K multi-turn instruction-response dialog pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Open-source prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Curated multi-turn instruction-response pairs (<10K)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "6B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "200K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "Rotary Position Embedding (RoPE) with adjusted base frequency (RoPE ABF) and continued pre-training on 10B tokens with upsampled long sequences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 3.1T tokens -> continued pre-training on 10B tokens for long context -> Supervised Fine-Tuning (SFT)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "4-bit quantization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "8-bit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "4-bit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "4/8-bit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Model-assisted automated methods: randomly concatenate multiple documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Ask a chat model to construct question-answer pairs with recitation/rephrasing of the original paragraph",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "PPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "RAISE full-stack safety engine; safety taxonomy covering environmental, religious, discriminatory, substance abuse, violent, illegal, hate speech, privacy, self-harm, sexual, mental health, cybersecurity; simulated attack prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Vision Transformer (ViT) + LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-H/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "LLaMA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 63.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 42.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 72.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 75.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Gaokao: 72.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CR: 72.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RC: 68.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Code: 21.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Math: 18.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 76.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 54.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 81.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 83.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Gaokao: 82.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CR: 80.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RC: 76.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Code: 32.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Math: 40.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arc-C: 55.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 76.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 73.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 52.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 15.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 39.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 54.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32 query / 4 key-value",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Multi-cloud task scheduling, Megatron/DeepSpeed, paged attention, continuous batching",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1374949",
+  "contribution_ids": [
+   "R1374951",
+   "R1374952",
+   "R1374957",
+   "R1924355"
+  ],
+  "new_contribution_ids": [
+   "R1924355"
+  ],
+  "comparison_updated": null
+ }
+}

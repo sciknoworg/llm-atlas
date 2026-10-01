@@ -1,0 +1,1465 @@
+{
+ "arxiv_id": "2404.06395",
+ "status": "completed",
+ "timestamp": "2026-08-30T23:01:25.736160",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2404.06395",
+  "title": "MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies",
+  "authors": [
+   "Shengding Hu",
+   "Yuge Tu",
+   "Xu Han",
+   "Chaoqun He",
+   "Ganqu Cui",
+   "Xiang Long",
+   "Zhi Zheng",
+   "Yewei Fang",
+   "Yuxiang Huang",
+   "Weilin Zhao",
+   "Xinrong Zhang",
+   "Zheng Leng Thai",
+   "Kaihuo Zhang",
+   "Chongyi Wang",
+   "Yuan Yao",
+   "Chenyang Zhao",
+   "Jie Zhou",
+   "Jie Cai",
+   "Zhongwu Zhai",
+   "Ning Ding",
+   "Chao Jia",
+   "Guoyang Zeng",
+   "Dahai Li",
+   "Zhiyuan Liu",
+   "Maosong Sun"
+  ],
+  "abstract": "The burgeoning interest in developing Large Language Models (LLMs) with up to trillion parameters has been met with concerns regarding resource efficiency and practical expense, particularly given the immense cost of experimentation. This scenario underscores the importance of exploring the potential of Small Language Models (SLMs) as a resource-efficient alternative. In this context, we introduce MiniCPM, specifically the 1.2B and 2.4B non-embedding parameter variants, not only excel in their respective categories but also demonstrate capabilities on par with 7B-13B LLMs. While focusing on SLMs, our approach exhibits scalability in both model and data dimensions for future LLM research. Regarding model scaling, we employ extensive model wind tunnel experiments for stable and optimal scaling. For data scaling, we introduce a Warmup-Stable-Decay (WSD) learning rate scheduler (LRS), conducive to continuous training and domain adaptation. We present an in-depth analysis of the intriguing training dynamics that occurred in the WSD LRS. With WSD LRS, we are now able to efficiently study data-model scaling law without extensive retraining experiments on both axes of model and data, from which we derive the much higher compute optimal data-model ratio than Chinchilla Optimal. Additionally, we introduce MiniCPM family, including MiniCPM-DPO, MiniCPM-MoE and MiniCPM-128K, whose excellent performance further cementing MiniCPM's foundation in diverse SLM applications. MiniCPM models are available publicly at https://github.com/OpenBMB/MiniCPM .",
+  "published": "2024-04-09T15:36:50+00:00",
+  "updated": "2024-06-03T08:54:38+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2404.06395v3",
+  "entry_id": "http://arxiv.org/abs/2404.06395v3",
+  "pdf_path": "data/papers/2404.06395.pdf"
+ },
+ "text_length": 92643,
+ "word_count": 6922,
+ "models_extracted": 13,
+ "extraction_data": [
+  {
+   "model_name": "MiniCPM",
+   "parameters": "9M, 30M, 0.031B, 0.036B, 0.04B, 70M, 0.1B, 0.11B, 0.17B, 0.2B, 0.25B, 0.3B, 0.49B, 0.5B, 0.85B, 1B, 1.2B, 2B, 2.1B, 2.4B, 3B, 4B, 8B, 14B, 24B, 30B",
+   "parameters_millions": 30000,
+   "model_family": "MiniCPM",
+   "date_created": "2024-04-09",
+   "organization": "Google",
+   "innovation": "Weight-Scale-Decay (WSD) learning rate schedule that maintains a stable training stage; tensor program techniques (embedding output scaling, residual connection scaling, LM head scaling, learning rate scaling of tensors) to improve training stability and efficiency; optimal batch size estimation under fixed GPU resources focusing on minimizing token quantity rather than steps.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "Dolma, CommonCrawl, CodePretrain, LawPretrain, WebMath, C4, Stack, StarCoder, Pile, Wikipedia, BookChinese, BaiduBaike, OpenOrca, SlimOrca, OssInstruct, EvolInstruct, ShareGPT4, UltraChat, Math, S2, RangeQA, Synthetic, KnowledgeSFT, CodeSFT, SFTmixed",
+   "finetuning_task": "Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+   "optimizer": "Adam",
+   "hardware_used": "NVIDIA A100/H100 GPUs",
+   "extension": "Deep-and-thin network architecture; Embedding Sharing technique for shared input-output layers; Grouped Query Attention (GQA) to reduce parameters; WSD (Weight-Scale Decay) Scheduler with exponential annealing for training stability.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Scaling laws for small language models and efficient training strategies",
+   "application": "Translation, math and reasoning, instruction following, JSON generation, mobile edge deployment",
+   "paper_title": "MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies",
+   "training_corpus_size": "1.1T tokens",
+   "finetuning_data": "UltraChat, SlimOrca, OssInstruct, EvolInstruct, ShareGPT4, LeetCode questions, K12 textbooks and questions, proprietary SFT data, Orca, UltraFeedback",
+   "tokenizer": "BPE (73,440 vocab)",
+   "supported_language": "English, Chinese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/OpenBMB/MiniCPM",
+   "context_length": null,
+   "activated_parameters": "1.2B",
+   "attention_mechanism": "Grouped Query Attention (GQA), Standard multi-head attention",
+   "context_length_max": "128K",
+   "context_extension_method": "Adjusted Base Frequency (ABF), NTK-Aware RoPE Scaling",
+   "training_pipeline": "Three-stage: stable training stage (1T tokens), decay stage (mixture of pretraining and high-quality SFT data with WSD scheduler), SFT stage (6B tokens)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "INT4",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "ORPO, DPO",
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "MiniCPM 2.4B",
+   "optimizer_innovation": "WSD (Warmup-Scale-Decay) learning rate scheduler",
+   "benchmark_result": "C-Eval: 49.14; CMMLU: 46.81; MMLU: 49.63; HumanEval: 44.51; MBPP: 32.75; GSM8K: 31.77; MATH: 10.60; BBH: 34.70; ARC-e: 80.93; ARC-c: 66.81; HellaSwag: 54.72; Surpasses Mistral-7B and Llama-13B; DPO surpasses Zephyr-7B on MTBench; 128K matches Yarn-Mistral-7B-128K; MoE on par with Llama2-34B.; MMLU: 68.5; C-Eval: 71.2; GSM8K: 78.4; HumanEval: 68.3; MMLU: 66.5 (2B), 73.8 (8B); GSM8K: 78.2 (2B), 88.5 (8B); HumanEval: 68.3 (2B), 80.5 (8B)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "64 query / 8 key-value",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MiniCPM-MoE",
+   "parameters": "4B, 13.6B",
+   "parameters_millions": 13600,
+   "model_family": "MiniCPM",
+   "date_created": "2024-04-09",
+   "organization": "Tsinghua University",
+   "innovation": "Windtunnel hyperparameter optimization; Warmup-Stable-Decay (WSD) learning rate scheduler enabling continuous training and domain adaptation without predefined token counts; derives higher compute-optimal data-model ratio than Chinchilla.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "Books, Wikis, Papers, Short Data",
+   "finetuning_task": "Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Scaling laws and training strategies for Small Language Models (SLMs)",
+   "application": "Chat, instruction following, coding, math reasoning",
+   "paper_title": "MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": "Custom tokenizer",
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "4B",
+   "attention_mechanism": null,
+   "context_length_max": "128K",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> continue pre-training -> decay stage -> SFT -> DPO",
+   "reasoning_mode": null,
+   "moe_configuration": "4B activated parameters",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": "WSD (Warmup-Scale-Decay) learning rate scheduler",
+   "benchmark_result": "Surpasses Mistral-7B and Llama-13B; DPO surpasses Zephyr-7B on MTBench; 128K matches Yarn-Mistral-7B-128K; MoE on par with Llama2-34B.; C-Eval 58.11; CMMLU 58.80; MMLU 58.90; HumanEval 56.71; MBPP 51.05; GSM8K 61.56; MATH 10.52; BBH 39.22",
+   "weight_clipping_mechanism": "Load balancing loss (multiplied by 0.01)",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 13,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "MiniCPM": {
+   "application": [
+    "Translation",
+    "math and reasoning",
+    "instruction following",
+    "JSON generation"
+   ],
+   "attention_mechanism": [
+    "Grouped Query Attention (GQA)",
+    "Standard multi-head attention"
+   ],
+   "base_model": [
+    "MiniCPM 2.4B"
+   ],
+   "context_extension_method": [
+    "Adjusted Base Frequency (ABF), NTK-Aware RoPE Scaling"
+   ],
+   "finetuning_data": [
+    "UltraChat",
+    "SlimOrca",
+    "OssInstruct",
+    "EvolInstruct",
+    "ShareGPT4",
+    "LeetCode questions",
+    "K12 textbooks and questions",
+    "Orca",
+    "UltraFeedback"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)"
+   ],
+   "hardware_used": [
+    "NVIDIA A100/H100 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "MiniCPM"
+   ],
+   "model_name": [
+    "MiniCPM"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "9M",
+    "30M",
+    "0.031B",
+    "0.036B",
+    "0.04B",
+    "70M",
+    "0.1B",
+    "0.11B",
+    "0.17B",
+    "0.2B",
+    "0.25B",
+    "0.3B",
+    "0.49B",
+    "0.5B",
+    "0.85B",
+    "1B",
+    "1.2B",
+    "2B",
+    "2.1B",
+    "2.4B",
+    "3B",
+    "4B",
+    "8B",
+    "14B",
+    "24B",
+    "30B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Dolma",
+    "CommonCrawl",
+    "CodePretrain",
+    "LawPretrain",
+    "WebMath",
+    "C4",
+    "Stack",
+    "Pile",
+    "Wikipedia",
+    "BookChinese",
+    "BaiduBaike",
+    "OpenOrca",
+    "SlimOrca",
+    "OssInstruct",
+    "EvolInstruct",
+    "ShareGPT4",
+    "UltraChat",
+    "S2",
+    "RangeQA"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "INT4"
+   ],
+   "research_problem": [
+    "Scaling laws for small language models and efficient training strategies"
+   ],
+   "rl_algorithm": [
+    "ORPO",
+    "DPO"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ]
+  },
+  "MiniCPM-MoE": {
+   "application": [
+    "Chat",
+    "instruction following",
+    "coding",
+    "math reasoning"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "MiniCPM"
+   ],
+   "model_name": [
+    "MiniCPM-MoE"
+   ],
+   "organization": [
+    "Tsinghua University"
+   ],
+   "parameters": [
+    "4B",
+    "13.6B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Books",
+    "Wikis",
+    "Papers"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [
+    "Scaling laws and training strategies for Small Language Models (SLMs)"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "MiniCPM": {
+    "application": {
+     "candidates": [
+      "Translation",
+      "math and reasoning",
+      "instruction following",
+      "JSON generation",
+      "mobile edge deployment"
+     ],
+     "accepted": [
+      "Translation",
+      "math and reasoning",
+      "instruction following",
+      "JSON generation"
+     ],
+     "dropped": [
+      {
+       "value": "mobile edge deployment",
+       "reason": "Describes a deployment context rather than a concrete task or domain of use."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "UltraChat",
+      "SlimOrca",
+      "OssInstruct",
+      "EvolInstruct",
+      "ShareGPT4",
+      "LeetCode questions",
+      "K12 textbooks and questions",
+      "proprietary SFT data",
+      "Orca",
+      "UltraFeedback"
+     ],
+     "accepted": [
+      "UltraChat",
+      "SlimOrca",
+      "OssInstruct",
+      "EvolInstruct",
+      "ShareGPT4",
+      "LeetCode questions",
+      "K12 textbooks and questions",
+      "Orca",
+      "UltraFeedback"
+     ],
+     "dropped": [
+      {
+       "value": "proprietary SFT data",
+       "reason": "Placeholder/description rather than a named or identifiable dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Direct Preference Optimization (DPO)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Dolma",
+      "CommonCrawl",
+      "CodePretrain",
+      "LawPretrain",
+      "WebMath",
+      "C4",
+      "Stack",
+      "StarCoder",
+      "Pile",
+      "Wikipedia",
+      "BookChinese",
+      "BaiduBaike",
+      "OpenOrca",
+      "SlimOrca",
+      "OssInstruct",
+      "EvolInstruct",
+      "ShareGPT4",
+      "UltraChat",
+      "Math",
+      "S2",
+      "RangeQA",
+      "Synthetic",
+      "KnowledgeSFT",
+      "CodeSFT",
+      "SFTmixed"
+     ],
+     "accepted": [
+      "Dolma",
+      "CommonCrawl",
+      "CodePretrain",
+      "LawPretrain",
+      "WebMath",
+      "C4",
+      "Stack",
+      "Pile",
+      "Wikipedia",
+      "BookChinese",
+      "BaiduBaike",
+      "OpenOrca",
+      "SlimOrca",
+      "OssInstruct",
+      "EvolInstruct",
+      "ShareGPT4",
+      "UltraChat",
+      "S2",
+      "RangeQA"
+     ],
+     "dropped": [
+      {
+       "value": "StarCoder",
+       "reason": "Names a model, not a pretraining dataset or corpus (cached)"
+      },
+      {
+       "value": "Math",
+       "reason": "Names a domain, not a pretraining corpus. (cached)"
+      },
+      {
+       "value": "Synthetic",
+       "reason": "Describes a data type/category rather than naming a specific identifiable corpus."
+      },
+      {
+       "value": "KnowledgeSFT",
+       "reason": "Refers to fine-tuning data type rather than a pretraining corpus."
+      },
+      {
+       "value": "CodeSFT",
+       "reason": "Refers to fine-tuning data type rather than a pretraining corpus."
+      },
+      {
+       "value": "SFTmixed",
+       "reason": "Refers to fine-tuning data type rather than a pretraining corpus."
+      }
+     ]
+    }
+   },
+   "MiniCPM-MoE": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Direct Preference Optimization (DPO)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Books",
+      "Wikis",
+      "Papers",
+      "Short Data"
+     ],
+     "accepted": [
+      "Books",
+      "Wikis",
+      "Papers"
+     ],
+     "dropped": [
+      {
+       "value": "Short Data",
+       "reason": "Vague placeholder/description rather than a named corpus."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Load balancing loss (multiplied by 0.01)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Load balancing loss (multiplied by 0.01)",
+       "reason": "Describes a loss function term rather than a weight clipping or constraint mechanism."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 94,
+   "dropped": 12,
+   "llm_calls": 1,
+   "values_sent_to_llm": 46
+  }
+ },
+ "contributions": [
+  {
+   "label": "MiniCPM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MiniCPM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MiniCPM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-04-09",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Weight-Scale-Decay (WSD) learning rate schedule that maintains a stable training stage",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Tensor program techniques (embedding output scaling, residual connection scaling, LM head scaling, learning rate scaling of tensors) to improve training stability and efficiency",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Optimal batch size estimation under fixed GPU resources focusing on minimizing token quantity rather than steps.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Dolma",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CodePretrain",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LawPretrain",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebMath",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stack",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pile",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookChinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BaiduBaike",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenOrca",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SlimOrca",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OssInstruct",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EvolInstruct",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "UltraChat",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "S2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RangeQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE (73,440 vocab)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "9M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.031B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.036B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.04B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "70M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.11B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.17B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.25B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.49B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.85B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "24B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 30000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100/H100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Math and reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "JSON generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/OpenBMB/MiniCPM",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Scaling laws for small language models and efficient training strategies",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.1T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UltraChat",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SlimOrca",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OssInstruct",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "EvolInstruct",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT4",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LeetCode questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "K12 textbooks and questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Orca",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UltraFeedback",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "Adjusted Base Frequency (ABF), NTK-Aware RoPE Scaling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Three-stage: stable training stage (1T tokens), decay stage (mixture of pretraining and high-quality SFT data with WSD scheduler), SFT stage (6B tokens)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "INT4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "ORPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "MiniCPM 2.4B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203102",
+     "label": "optimizer_innovation",
+     "value": "WSD (Warmup-Scale-Decay) learning rate scheduler",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 49.14",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU: 46.81",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 49.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 44.51",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 32.75",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 31.77",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 10.60",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 34.70",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-e: 80.93",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c: 66.81",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 54.72",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Surpasses Mistral-7B and Llama-13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DPO surpasses Zephyr-7B on MTBench",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "128K matches Yarn-Mistral-7B-128K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MoE on par with Llama2-34B.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval: 71.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 78.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 68.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 66.5 (2B), 73.8 (8B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 78.2 (2B), 88.5 (8B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 68.3 (2B), 80.5 (8B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "64 query / 8 key-value",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MiniCPM-MoE",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MiniCPM-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MiniCPM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-04-09",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Tsinghua University",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Windtunnel hyperparameter optimization",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Warmup-Stable-Decay (WSD) learning rate scheduler enabling continuous training and domain adaptation without predefined token counts",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Derives higher compute-optimal data-model ratio than Chinchilla.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Papers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Custom tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13600,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Math reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Scaling laws and training strategies for Small Language Models (SLMs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "128K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> continue pre-training -> decay stage -> SFT -> DPO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4B activated parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P203102",
+     "label": "optimizer_innovation",
+     "value": "WSD (Warmup-Scale-Decay) learning rate scheduler",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Surpasses Mistral-7B and Llama-13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DPO surpasses Zephyr-7B on MTBench",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "128K matches Yarn-Mistral-7B-128K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MoE on par with Llama2-34B.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C-Eval 58.11",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMLU 58.80",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU 58.90",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval 56.71",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP 51.05",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K 61.56",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH 10.52",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH 39.22",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R796022",
+  "contribution_ids": [
+   "R796024",
+   "R1927572",
+   "R1927592"
+  ],
+  "new_contribution_ids": [
+   "R1927572",
+   "R1927592"
+  ],
+  "comparison_updated": null
+ }
+}

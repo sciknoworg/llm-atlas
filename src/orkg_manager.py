@@ -19,14 +19,17 @@ class ORKGPaperManager:
         comparison_id: str = "R1364660",
         comparison_title: Optional[str] = None,
         comparison_description: Optional[str] = None,
+        update_comparison: bool = False,
     ):
         self.client = orkg_client
         self.mapper = template_mapper
-        # Comparison to attach contributions to — id AND title must match the
-        # target ORKG instance (sandbox vs live), so they come from config.
-        # Updating a comparison writes a NEW VERSION with this title, so a wrong
-        # title would rename the live comparison. Defaults are a fallback only.
+        # Comparison to attach contributions to — the id must match the target
+        # ORKG instance (sandbox vs live), so it comes from config.
         self.comparison_id = comparison_id
+        # Gate for the comparison step. Off by default: only LIVE comparisons can
+        # be updated, so pointing this at a published snapshot fails, and the
+        # paper upload itself is useful without it.
+        self.update_comparison = update_comparison
         self.comparison_title = comparison_title or "Generative AI Model Landscape"
         self.comparison_description = (
             comparison_description
@@ -99,18 +102,31 @@ class ORKGPaperManager:
                 return None
 
             # 3. Map extraction to ORKG template structure
-            mapped_data = self.mapper.map_extraction_result(extraction_result)
+            #
+            # Uploads often run from a saved extraction JSON in a separate
+            # invocation, so the validated row boundaries have to be read back
+            # out of that file. Without this, an upload would silently fall back
+            # to the heuristic splitter and undo semantic validation.
+            rows_by_model = extraction_data.get("validated_rows")
+            if rows_by_model:
+                logger.info(
+                    "Using semantically validated rows for %d model(s)", len(rows_by_model)
+                )
+            mapped_data = self.mapper.map_extraction_result(
+                extraction_result, rows_by_model=rows_by_model
+            )
             if not mapped_data or not mapped_data.get("contributions"):
                 logger.error("Mapping failed - no valid contributions to upload")
                 return None
 
-            # 4. On live, reuse an existing paper (dedup) and add only the
-            #    contributions that aren't already there. On sandbox/incubating we
-            #    intentionally skip the search and always create a fresh test paper
-            #    (its title carries a unique [TEST-...] suffix, so a search by the
-            #    real title wouldn't match one anyway).
+            # 4. On live, reuse an existing paper and append this extraction to
+            #    it as additional contribution tabs. On sandbox/incubating we
+            #    intentionally skip the search and always create a fresh test
+            #    paper (its title carries a unique [TEST-...] suffix, so a search
+            #    by the real title wouldn't match one anyway).
             paper_id = None
-            contribution_ids = []
+            contribution_ids = []      # everything on the paper afterwards
+            new_contribution_ids = []  # only what this run added
             is_live = getattr(self.client, "host", "sandbox") == "production"
 
             if is_live:
@@ -120,33 +136,43 @@ class ORKGPaperManager:
                         paper_id = paper.get("id")
                         logger.info(f"Found existing paper in ORKG: {paper_id}")
 
-                        # Fetch its existing contributions so we don't re-add them
+                        # Keep the existing contributions and add this
+                        # extraction alongside them, as further contribution
+                        # tabs — the same shape a paper gets when it introduces
+                        # several models. A re-extraction is new information
+                        # about the paper, not a duplicate to be suppressed, so
+                        # a matching label no longer causes a skip.
                         paper_data = self.client.get_paper(paper_id)
                         existing_contribs = (
                             paper_data.get("contributions", []) if paper_data else []
                         )
-                        existing_labels = {
-                            c.get("label", "").strip().lower()
-                            for c in existing_contribs
-                            if isinstance(c, dict)
-                        }
                         contribution_ids = [
                             c.get("id")
                             for c in existing_contribs
                             if isinstance(c, dict) and c.get("id")
                         ]
+                        logger.info(
+                            "Paper %s already has %d contribution(s); adding %d more",
+                            paper_id,
+                            len(contribution_ids),
+                            len(mapped_data["contributions"]),
+                        )
 
-                        # Add only the models not already on this paper
                         for contrib_data in mapped_data["contributions"]:
                             label = contrib_data.get("label", "").strip()
-                            if label.lower() in existing_labels:
-                                logger.info(f"Contribution '{label}' already exists, skipping")
-                                continue
-                            logger.info(f"Adding contribution '{label}' to paper {paper_id}")
+                            logger.info(
+                                "Adding contribution '%s' to existing paper %s", label, paper_id
+                            )
                             new_cid = self.client.add_contribution_to_paper(paper_id, contrib_data)
                             if new_cid:
                                 contribution_ids.append(new_cid)
-                                existing_labels.add(label.lower())
+                                new_contribution_ids.append(new_cid)
+                            else:
+                                logger.error(
+                                    "Failed to add contribution '%s' to paper %s",
+                                    label,
+                                    paper_id,
+                                )
                         break
 
             # Create a new paper when none matched (always, on sandbox)
@@ -182,23 +208,45 @@ class ORKGPaperManager:
 
                 paper_id = result["paper_id"]
                 contribution_ids = result.get("contribution_ids", [])
+                # A new paper carries only what we just uploaded.
+                new_contribution_ids = list(contribution_ids)
 
-            # 6. Link to Comparison Table (Step B) — comparison is env-specific,
-            # supplied from config (sandbox vs live).
-            logger.info(
-                f"Linking {len(contribution_ids)} contributions to comparison {self.comparison_id}"
-            )
-            self.client.update_comparison_with_contributions(
-                comparison_id=self.comparison_id,
-                title=self.comparison_title,
-                description=self.comparison_description,
-                new_contribution_ids=contribution_ids,
-                research_fields=["R133"],
-                authors=[{"name": "Alaa Kefi"}],
-            )
+            # 6. Link to Comparison Table (Step B) — gated by config, because
+            # only live comparisons are updatable and the paper upload above is
+            # complete and useful on its own.
+            comparison_updated = None
+            if not self.update_comparison:
+                logger.info(
+                    "Skipping comparison %s (orkg.update_comparison is false)",
+                    self.comparison_id,
+                )
+            else:
+                logger.info(
+                    "Adding %d contribution(s) to comparison %s",
+                    len(contribution_ids),
+                    self.comparison_id,
+                )
+                comparison_updated = self.client.update_comparison_sources(
+                    self.comparison_id, contribution_ids
+                )
+                if not comparison_updated:
+                    # The paper and its contributions are already in ORKG, so
+                    # this is a partial success, not a failed upload.
+                    logger.error(
+                        "Paper %s uploaded, but comparison %s was NOT updated",
+                        paper_id,
+                        self.comparison_id,
+                    )
 
             logger.info(f"Successfully processed paper: {paper_id}")
-            return {"paper_id": paper_id, "contribution_ids": contribution_ids}
+            return {
+                "paper_id": paper_id,
+                # Everything on the paper now, versus only what this run added.
+                # The ledger records the latter: those are the tabs to open.
+                "contribution_ids": contribution_ids,
+                "new_contribution_ids": new_contribution_ids,
+                "comparison_updated": comparison_updated,
+            }
 
         except Exception as e:
             logger.error(f"Pipeline error: {e}", exc_info=True)

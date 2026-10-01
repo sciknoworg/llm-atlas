@@ -1,0 +1,2877 @@
+{
+  "arxiv_id": "2409.02060",
+  "status": "completed",
+  "timestamp": "2026-08-29T06:11:34.190212",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2409.02060",
+    "title": "OLMoE: Open Mixture-of-Experts Language Models",
+    "authors": [
+      "Niklas Muennighoff",
+      "Luca Soldaini",
+      "Dirk Groeneveld",
+      "Kyle Lo",
+      "Jacob Morrison",
+      "Sewon Min",
+      "Weijia Shi",
+      "Pete Walsh",
+      "Oyvind Tafjord",
+      "Nathan Lambert",
+      "Yuling Gu",
+      "Shane Arora",
+      "Akshita Bhagia",
+      "Dustin Schwenk",
+      "David Wadden",
+      "Alexander Wettig",
+      "Binyuan Hui",
+      "Tim Dettmers",
+      "Douwe Kiela",
+      "Ali Farhadi",
+      "Noah A. Smith",
+      "Pang Wei Koh",
+      "Amanpreet Singh",
+      "Hannaneh Hajishirzi"
+    ],
+    "abstract": "We introduce OLMoE, a fully open, state-of-the-art language model leveraging sparse Mixture-of-Experts (MoE). OLMoE-1B-7B has 7 billion (B) parameters but uses only 1B per input token. We pretrain it on 5 trillion tokens and further adapt it to create OLMoE-1B-7B-Instruct. Our models outperform all available models with similar active parameters, even surpassing larger ones like Llama2-13B-Chat and DeepSeekMoE-16B. We present various experiments on MoE training, analyze routing in our model showing high specialization, and open-source all aspects of our work: model weights, training data, code, and logs.",
+    "published": "2024-09-03T17:08:20+00:00",
+    "updated": "2025-03-03T01:25:46+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2409.02060v2",
+    "entry_id": "http://arxiv.org/abs/2409.02060v2",
+    "pdf_path": "data/papers/2409.02060.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 179185,
+  "word_count": 20516,
+  "models_extracted": 17,
+  "extraction_data": [
+    {
+      "model_name": "OLMoE-1B",
+      "parameters": "1B TOTAL, 1B, 1.3B, 1.3B ACTIVE, 6.9B, 6.9B TOTAL, 7B ACTIVATED, 7B",
+      "parameters_millions": 7000,
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Sparse upcycling: cloning a dense MLP for each desired expert to form MoE layers, adding a newly initialized router, and continuing pretraining so cloned MLPs specialize and the router learns; Token Choice (TC) routing with a dropless MoE and load balancing loss to ensure equal expert distribution and improve training efficiency over Expert Choice (EC).",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Language modeling",
+      "pretraining_corpus": "DCLM-Baseline, StarCoder, peS2o, arXiv, OpenWebMath, AlgebraicStack, English Wikipedia & Wikibooks",
+      "finetuning_task": "Instruction tuning, Instruction tuning and Direct Preference Optimization (DPO), Supervised fine-tuning (SFT), Direct Preference Optimization (DPO), Kahneman-Tversky Optimization (KTO)",
+      "optimizer": "AdamW",
+      "hardware_used": "Google TPUv4",
+      "extension": "Sparse upcycling turns a dense model into a Mixture-of-Experts model by cloning the dense MLP for each expert and adding a newly initialized router, allowing the cloned MLPs to specialize while the router is learned.",
+      "blog_post": null,
+      "license": "Open source",
+      "research_problem": "Cost-performance trade-off in language models and lack of open-source Mixture-of-Experts resources.",
+      "application": "Language modeling, downstream evaluation (MMLU, HellaSwag, C4)",
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "training_corpus_size": "5 trillion tokens",
+      "finetuning_data": "tulu-v3.1-mix-preview-4096-OLMoE, ultrafeedback binarized cleaned, Tulu2 SFT Mix, NoRobots, CodeFeedback-Filtered-Instruction, MetaMathQA, Advanced subset of DaringAnteater, UltraFeedback, OpenHermes 2.5, Orca, HelpSteer2, OpenInstruct",
+      "tokenizer": "Byte-level BPE",
+      "supported_language": "English",
+      "hardware_description": "1024 TPUv4 chips for ~10 days",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "context_length": null,
+      "activated_parameters": "1B",
+      "attention_mechanism": "Multi-head self-attention with MoE feed-forward layers, Full attention",
+      "context_length_max": "2048",
+      "context_extension_method": "RoPE",
+      "training_pipeline": "Pretraining on 5 trillion tokens -> Adaptation to create INSTRUCT version",
+      "reasoning_mode": null,
+      "moe_configuration": "7B total parameters, 1B activated per token",
+      "quantization_precision": "Low precision, BF16, FP32",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "KTO, DPO",
+      "reward_mechanism": "UltraFeedback binarized and filtered for TruthfulQA contamination",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Trained from scratch",
+      "optimizer_innovation": "QK-Norm (query-key layer normalization); AdamW epsilon set to 1E-08 for improved stability and performance",
+      "benchmark_result": "MMLU: 78.2; HellaSwag: 88.5; PIQA: 86.1; WinoGrande: 81.2; ARC-C: 72.4; GSM8K: 68.9; MMLU: 62.1; HellaSwag: 84.2; ARC-c: 79.2; PIQA: 72.9; WinoGrande: 80.0; BoolQ: 54.1; OpenBookQA: 65.4; QuALITY: 79.8; DROP: 63.0; SuperGLUE: 70.2; MMLU-Pro: 71.1; MMLU: 51.9; GSM8k: 45.5; BBH: 37.0; Eval: 54.8; Eval1.0: 84.0; XSTest: 48.1; IFEval: 57.7; AlpacaEval: 57.7; MMLU 0-shot 51.9; GSM8k 8-shot CoT 45.5; BBH 0-shot 37.0; AlpacaEval 1.0 84.0%; XSTest 0-shot 82.6; IFEval 0-shot 48.1; MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B); HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B); ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+      "weight_clipping_mechanism": "Gradient clipping at 1.0",
+      "number_of_attention_heads": "16",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE 1B-7B-0924",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": null,
+      "pretraining_corpus": null,
+      "parameters": "7.1B",
+      "parameters_millions": 7100,
+      "application": null,
+      "license": "Apache 2.0",
+      "research_problem": "Open Mixture-of-Experts Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": "1.1B",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": "7.1B total parameters, 1.1B active parameters per token",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE-2B",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes; introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+      "pretraining_corpus": "OLMo Mix",
+      "parameters": "2B",
+      "parameters_millions": 8000,
+      "application": "General language modeling, instruction following, benchmark evaluation",
+      "license": "Apache 2.0",
+      "research_problem": "Open Mixture-of-Experts Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "1 trillion tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": "Byte-level BPE",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "Google TPUv4",
+      "hardware_description": "Google TPUv4 cluster",
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": "9B",
+      "attention_mechanism": "Multi-head attention",
+      "context_length_max": "2048",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+      "reasoning_mode": null,
+      "moe_configuration": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B); HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B); ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "16",
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE-4B",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes; introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+      "pretraining_corpus": "OLMo Mix",
+      "parameters": "4B",
+      "parameters_millions": 8000,
+      "application": "General language modeling, instruction following, benchmark evaluation",
+      "license": "Apache 2.0",
+      "research_problem": "Open Mixture-of-Experts Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "1 trillion tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": "Byte-level BPE",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "Google TPUv4",
+      "hardware_description": "Google TPUv4 cluster",
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "2048",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+      "reasoning_mode": null,
+      "moe_configuration": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B); HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B); ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE-8B",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes; introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+      "pretraining_corpus": "OLMo Mix",
+      "parameters": "8B",
+      "parameters_millions": 8000,
+      "application": "General language modeling, instruction following, benchmark evaluation",
+      "license": "Apache 2.0",
+      "research_problem": "Open Mixture-of-Experts Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "1 trillion tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW",
+      "tokenizer": "Byte-level BPE",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "Google TPUv4",
+      "hardware_description": "Google TPUv4 cluster",
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "2048",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+      "reasoning_mode": null,
+      "moe_configuration": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B); HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B); ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE-1B-7B-0125",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Ai",
+      "innovation": "Improved checkpoint with updated annealing on DOLMINO mix and advanced post-training (SFT, DPO, PPO) leveraging verifiers as rewards, yielding significant gains in reasoning, math, and instruction following.",
+      "pretraining_corpus": "DOLMINO mix (Filtered DCLM, Decontaminated FLAN, StackExchange Q&A, peS2o, Wikipedia/Wikibooks, DolminoMath)",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "application": "General language understanding, reasoning, math, coding, instruction following",
+      "license": "open source",
+      "research_problem": "Open Mixture-of-Experts Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "100B tokens (annealing stage)",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://huggingface.co/collections/allenai/olmoe-january-2025-67992134f9ebea0a941706ca",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": "1B",
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training → Annealing on DOLMINO → SFT → DPO → PPO",
+      "reasoning_mode": null,
+      "moe_configuration": "7B total parameters, 1B activated per token",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "PPO",
+      "reward_mechanism": "Verifiers as model reward",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Avg: 49.8; MMLU: 55.1; PopQA: 19.8; TruthfulQA: 50.6; BigBenchHard: 38.6; DROP: 47.9; MATH: 21.4; GSM8K: 72.4; HumanEval: 62.3; HumanEval+: 54.4; IFEval: 66.4; AlpacaEval2: 18.0; Safety: 90.4",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE",
+      "parameters": "8.5B, 8.7B",
+      "parameters_millions": 8700,
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Open Mixture-of-Experts (MoE) architecture with configurable expert counts and activation ratios, trained on fully open datasets to achieve performance competitive with proprietary dense models at significantly lower compute, utilizing stable routing and load-balancing techniques.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "RedPajama, Dolma, and other open web corpora",
+      "finetuning_task": null,
+      "optimizer": "AdamW, Adafactor",
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Open, efficient, and scalable language models",
+      "application": "General language modeling, text generation, NLP tasks",
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "training_corpus_size": "1,000B tokens",
+      "finetuning_data": null,
+      "tokenizer": "BPE",
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": "8 experts, 1B activated, 8.5B total parameters",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Benchmark scores not explicitly separated in provided text; follows same evaluation protocol as OLMoE-1B-7B",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "OLMoE-1B-Dense",
+      "model_family": "OLMoE",
+      "date_created": "2024-09-03",
+      "organization": "Allen Institute For Ai",
+      "innovation": "Open Mixture-of-Experts (MoE) architecture with configurable expert counts and activation ratios, trained on fully open datasets to achieve performance competitive with proprietary dense models at significantly lower compute, utilizing stable routing and load-balancing techniques.",
+      "pretraining_corpus": "RedPajama, Dolma, and other open web corpora",
+      "parameters": "1.3B",
+      "parameters_millions": 8700,
+      "application": "General language modeling, text generation, NLP tasks",
+      "license": "Apache 2.0",
+      "research_problem": "Open, efficient, and scalable language models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "training_corpus_size": "2,000B tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "AdamW, Adafactor",
+      "tokenizer": "BPE",
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/allenai/OLMoE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "OLMoE: Open Mixture-of-Experts Language Models",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": "1 expert, 1.3B activated, 1.3B total parameters (dense baseline)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Benchmark scores not explicitly separated in provided text; follows same evaluation protocol as OLMoE-1B-7B",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 15,
+  "models_after_merge": 8,
+  "validated_rows": {
+    "OLMoE-1B": {
+      "application": [
+        "Language modeling"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention with MoE feed-forward layers",
+        "Full attention"
+      ],
+      "base_model": [],
+      "context_extension_method": [
+        "RoPE"
+      ],
+      "finetuning_data": [
+        "tulu-v3.1-mix-preview-4096-OLMoE",
+        "ultrafeedback binarized cleaned",
+        "Tulu2 SFT Mix",
+        "NoRobots",
+        "CodeFeedback-Filtered-Instruction",
+        "MetaMathQA",
+        "Advanced subset of DaringAnteater",
+        "UltraFeedback",
+        "OpenHermes 2.5",
+        "Orca",
+        "HelpSteer2",
+        "OpenInstruct"
+      ],
+      "finetuning_task": [
+        "Instruction tuning",
+        "Instruction tuning and Direct Preference Optimization (DPO)",
+        "Supervised fine-tuning (SFT)",
+        "Kahneman-Tversky Optimization (KTO)"
+      ],
+      "hardware_used": [
+        "Google TPUv4"
+      ],
+      "license": [
+        "Open source"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-1B"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "1B TOTAL",
+        "1B",
+        "1.3B",
+        "1.3B ACTIVE",
+        "6.9B",
+        "6.9B TOTAL",
+        "7B ACTIVATED",
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "DCLM-Baseline",
+        "peS2o",
+        "arXiv",
+        "OpenWebMath",
+        "AlgebraicStack",
+        "English Wikipedia & Wikibooks"
+      ],
+      "pretraining_task": [
+        "Language modeling"
+      ],
+      "quantization_precision": [
+        "BF16",
+        "FP32"
+      ],
+      "research_problem": [
+        "Cost-performance trade-off in language models and lack of open-source Mixture-of-Experts resources."
+      ],
+      "reward_mechanism": [
+        "UltraFeedback binarized and filtered for TruthfulQA contamination"
+      ],
+      "rl_algorithm": [
+        "KTO",
+        "DPO"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "weight_clipping_mechanism": []
+    },
+    "OLMoE 1B-7B-0924": {
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE 1B-7B-0924"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "7.1B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open Mixture-of-Experts Language Models"
+      ]
+    },
+    "OLMoE-2B": {
+      "application": [
+        "instruction following"
+      ],
+      "attention_mechanism": [
+        "Multi-head attention"
+      ],
+      "hardware_used": [
+        "Google TPUv4"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-2B"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "2B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "OLMo Mix"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open Mixture-of-Experts Language Models"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "OLMoE-4B": {
+      "application": [
+        "instruction following"
+      ],
+      "hardware_used": [
+        "Google TPUv4"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-4B"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "4B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "OLMo Mix"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open Mixture-of-Experts Language Models"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "OLMoE-8B": {
+      "application": [
+        "instruction following"
+      ],
+      "hardware_used": [
+        "Google TPUv4"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-8B"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "8B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "OLMo Mix"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open Mixture-of-Experts Language Models"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "OLMoE-1B-7B-0125": {
+      "application": [
+        "reasoning",
+        "math",
+        "coding",
+        "instruction following"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-1B-7B-0125"
+      ],
+      "organization": [
+        "Allen Ai"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "DOLMINO mix (Filtered DCLM, Decontaminated FLAN, StackExchange Q&A, peS2o, Wikipedia/Wikibooks, DolminoMath)"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open Mixture-of-Experts Language Models"
+      ],
+      "reward_mechanism": [
+        "Verifiers as model reward"
+      ],
+      "rl_algorithm": [
+        "PPO"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "OLMoE": {
+      "application": [
+        "text generation"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE"
+      ],
+      "optimizer": [
+        "AdamW, Adafactor"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "8.5B",
+        "8.7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "RedPajama",
+        "Dolma"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open, efficient, and scalable language models"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "OLMoE-1B-Dense": {
+      "application": [
+        "text generation"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "OLMoE"
+      ],
+      "model_name": [
+        "OLMoE-1B-Dense"
+      ],
+      "optimizer": [
+        "AdamW, Adafactor"
+      ],
+      "organization": [
+        "Allen Institute For Ai"
+      ],
+      "parameters": [
+        "1.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "RedPajama",
+        "Dolma"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Open, efficient, and scalable language models"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "OLMoE-1B": {
+        "application": {
+          "candidates": [
+            "Language modeling",
+            "downstream evaluation (MMLU, HellaSwag, C4)"
+          ],
+          "accepted": [
+            "Language modeling"
+          ],
+          "dropped": [
+            {
+              "value": "downstream evaluation (MMLU, HellaSwag, C4)",
+              "reason": "Describes evaluation benchmarks/tasks, not a concrete application or domain."
+            }
+          ]
+        },
+        "base_model": {
+          "candidates": [
+            "Trained from scratch"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Trained from scratch",
+              "reason": "Describes a training methodology, not a specific pre-trained model."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Instruction tuning",
+            "Instruction tuning and Direct Preference Optimization (DPO)",
+            "Supervised fine-tuning (SFT)",
+            "Direct Preference Optimization (DPO)",
+            "Kahneman-Tversky Optimization (KTO)"
+          ],
+          "accepted": [
+            "Instruction tuning",
+            "Instruction tuning and Direct Preference Optimization (DPO)",
+            "Supervised fine-tuning (SFT)",
+            "Kahneman-Tversky Optimization (KTO)"
+          ],
+          "dropped": [
+            {
+              "value": "Direct Preference Optimization (DPO)",
+              "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "DCLM-Baseline",
+            "StarCoder",
+            "peS2o",
+            "arXiv",
+            "OpenWebMath",
+            "AlgebraicStack",
+            "English Wikipedia & Wikibooks"
+          ],
+          "accepted": [
+            "DCLM-Baseline",
+            "peS2o",
+            "arXiv",
+            "OpenWebMath",
+            "AlgebraicStack",
+            "English Wikipedia & Wikibooks"
+          ],
+          "dropped": [
+            {
+              "value": "StarCoder",
+              "reason": "Names a model, not a pretraining dataset or corpus (cached)"
+            }
+          ]
+        },
+        "quantization_precision": {
+          "candidates": [
+            "Low precision",
+            "BF16",
+            "FP32"
+          ],
+          "accepted": [
+            "BF16",
+            "FP32"
+          ],
+          "dropped": [
+            {
+              "value": "Low precision",
+              "reason": "Vague description rather than a specific numerical precision format."
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Gradient clipping at 1.0"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Gradient clipping at 1.0",
+              "reason": "Describes gradient clipping, not weight clipping as defined."
+            }
+          ]
+        }
+      },
+      "OLMoE 1B-7B-0924": {},
+      "OLMoE-2B": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "instruction following",
+            "benchmark evaluation"
+          ],
+          "accepted": [
+            "instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "benchmark evaluation",
+              "reason": "Describes evaluation methodology, not a concrete application or domain."
+            }
+          ]
+        }
+      },
+      "OLMoE-4B": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "instruction following",
+            "benchmark evaluation"
+          ],
+          "accepted": [
+            "instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "benchmark evaluation",
+              "reason": "Describes evaluation methodology, not a concrete application or domain."
+            }
+          ]
+        }
+      },
+      "OLMoE-8B": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "instruction following",
+            "benchmark evaluation"
+          ],
+          "accepted": [
+            "instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "benchmark evaluation",
+              "reason": "Describes evaluation methodology, not a concrete application or domain."
+            }
+          ]
+        }
+      },
+      "OLMoE-1B-7B-0125": {
+        "application": {
+          "candidates": [
+            "General language understanding",
+            "reasoning",
+            "math",
+            "coding",
+            "instruction following"
+          ],
+          "accepted": [
+            "reasoning",
+            "math",
+            "coding",
+            "instruction following"
+          ],
+          "dropped": [
+            {
+              "value": "General language understanding",
+              "reason": "Broad placeholder/category, not a concrete task or domain (cached)"
+            }
+          ]
+        }
+      },
+      "OLMoE": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "text generation",
+            "NLP tasks"
+          ],
+          "accepted": [
+            "text generation"
+          ],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "NLP tasks",
+              "reason": "Placeholder/category, not a concrete task or domain (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "RedPajama",
+            "Dolma",
+            "other open web corpora"
+          ],
+          "accepted": [
+            "RedPajama",
+            "Dolma"
+          ],
+          "dropped": [
+            {
+              "value": "other open web corpora",
+              "reason": "Vague description asserting breadth rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        }
+      },
+      "OLMoE-1B-Dense": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "text generation",
+            "NLP tasks"
+          ],
+          "accepted": [
+            "text generation"
+          ],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "NLP tasks",
+              "reason": "Placeholder/category, not a concrete task or domain (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "RedPajama",
+            "Dolma",
+            "other open web corpora"
+          ],
+          "accepted": [
+            "RedPajama",
+            "Dolma"
+          ],
+          "dropped": [
+            {
+              "value": "other open web corpora",
+              "reason": "Vague description asserting breadth rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 140,
+      "dropped": 19,
+      "llm_calls": 1,
+      "values_sent_to_llm": 49
+    }
+  },
+  "contributions": [
+    {
+      "label": "OLMoE-1B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-1B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Sparse upcycling: cloning a dense MLP for each desired expert to form MoE layers, adding a newly initialized router, and continuing pretraining so cloned MLPs specialize and the router learns",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Token Choice (TC) routing with a dropless MoE and load balancing loss to ensure equal expert distribution and improve training efficiency over Expert Choice (EC).",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DCLM-Baseline",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "PeS2o",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ArXiv",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OpenWebMath",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "AlgebraicStack",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "English Wikipedia & Wikibooks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning and Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Kahneman-Tversky Optimization (KTO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B TOTAL",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B ACTIVE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "6.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "6.9B TOTAL",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B ACTIVATED",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Google TPUv4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "1024 TPUv4 chips for ~10 days",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Cost-performance trade-off in language models and lack of open-source Mixture-of-Experts resources.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "5 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Tulu-v3.1-mix-preview-4096-OLMoE",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Ultrafeedback binarized cleaned",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Tulu2 SFT Mix",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NoRobots",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CodeFeedback-Filtered-Instruction",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "MetaMathQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Advanced subset of DaringAnteater",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UltraFeedback",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OpenHermes 2.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Orca",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "HelpSteer2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OpenInstruct",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention with MoE feed-forward layers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Full attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2048",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pretraining on 5 trillion tokens -> Adaptation to create INSTRUCT version",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7B total parameters, 1B activated per token",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BF16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "FP32",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "KTO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "UltraFeedback binarized and filtered for TruthfulQA contamination",
+          "datatype": "string"
+        },
+        {
+          "property": "P203102",
+          "label": "optimizer_innovation",
+          "value": "QK-Norm (query-key layer normalization); AdamW epsilon set to 1E-08 for improved stability and performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 78.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 88.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PIQA: 86.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande: 81.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 72.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 68.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 62.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 84.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-c: 79.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PIQA: 72.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande: 80.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BoolQ: 54.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OpenBookQA: 65.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "QuALITY: 79.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DROP: 63.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SuperGLUE: 70.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 71.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 51.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8k: 45.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH: 37.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Eval: 54.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Eval1.0: 84.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "XSTest: 48.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 57.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AlpacaEval: 57.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU 0-shot 51.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8k 8-shot CoT 45.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH 0-shot 37.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AlpacaEval 1.0 84.0%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "XSTest 0-shot 82.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval 0-shot 48.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "16",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE 1B-7B-0924",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE 1B-7B-0924",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7100,
+          "datatype": "integer"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open Mixture-of-Experts Language Models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1.1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7.1B total parameters, 1.1B active parameters per token",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE-2B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-2B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OLMo Mix",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Google TPUv4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Google TPUv4 cluster",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open Mixture-of-Experts Language Models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2048",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "16",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE-4B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-4B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OLMo Mix",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "4B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Google TPUv4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Google TPUv4 cluster",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open Mixture-of-Experts Language Models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2048",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE-8B",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-8B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open-weight Mixture-of-Experts (MoE) architecture demonstrating reliable scaling and predictable performance across 1B, 2B, 4B, and 8B activated parameter sizes",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a fully open training recipe, code, and a 1T-token pretraining dataset (OLMo Mix) to democratize MoE research.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OLMo Mix",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Google TPUv4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Google TPUv4 cluster",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open Mixture-of-Experts Language Models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "2048",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on 1T tokens -> Supervised fine-tuning on 1.5M samples -> KTO alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7B total parameters per model; 1B, 2B, 4B, or 8B activated parameters depending on variant; 128 experts per layer, top-2 routing",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 38.5 (1B), 44.5 (2B), 51.2 (4B), 56.8 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 68.1 (1B), 73.5 (2B), 78.2 (4B), 81.4 (8B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 38.2 (1B), 45.1 (2B), 52.3 (4B), 58.7 (8B)",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE-1B-7B-0125",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-1B-7B-0125",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Improved checkpoint with updated annealing on DOLMINO mix and advanced post-training (SFT, DPO, PPO) leveraging verifiers as rewards, yielding significant gains in reasoning, math, and instruction following.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "DOLMINO mix (Filtered DCLM, Decontaminated FLAN, StackExchange Q&A, peS2o, Wikipedia/Wikibooks, DolminoMath)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Math",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Coding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://huggingface.co/collections/allenai/olmoe-january-2025-67992134f9ebea0a941706ca",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open Mixture-of-Experts Language Models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "100B tokens (annealing stage)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training → Annealing on DOLMINO → SFT → DPO → PPO",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "7B total parameters, 1B activated per token",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "PPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Verifiers as model reward",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Avg: 49.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 55.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PopQA: 19.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TruthfulQA: 50.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BigBenchHard: 38.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DROP: 47.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 21.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 72.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 62.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval+: 54.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 66.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AlpacaEval2: 18.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Safety: 90.4",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open Mixture-of-Experts (MoE) architecture with configurable expert counts and activation ratios, trained on fully open datasets to achieve performance competitive with proprietary dense models at significantly lower compute, utilizing stable routing and load-balancing techniques.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RedPajama",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Dolma",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW, Adafactor",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8700,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open, efficient, and scalable language models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1,000B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "8 experts, 1B activated, 8.5B total parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Benchmark scores not explicitly separated in provided text",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Follows same evaluation protocol as OLMoE-1B-7B",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "OLMoE-1B-Dense",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "OLMoE-1B-Dense",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "OLMoE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-09-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Allen Institute For Ai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Open Mixture-of-Experts (MoE) architecture with configurable expert counts and activation ratios, trained on fully open datasets to achieve performance competitive with proprietary dense models at significantly lower compute, utilizing stable routing and load-balancing techniques.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RedPajama",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Dolma",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW, Adafactor",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8700,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/allenai/OLMoE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Open, efficient, and scalable language models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "2,000B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "1 expert, 1.3B activated, 1.3B total parameters (dense baseline)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Benchmark scores not explicitly separated in provided text",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Follows same evaluation protocol as OLMoE-1B-7B",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926341",
+    "contribution_ids": [
+      "R1926343",
+      "R1926344",
+      "R1926345",
+      "R1926346",
+      "R1926347",
+      "R1926348",
+      "R1926349",
+      "R1926350"
+    ],
+    "new_contribution_ids": [
+      "R1926343",
+      "R1926344",
+      "R1926345",
+      "R1926346",
+      "R1926347",
+      "R1926348",
+      "R1926349",
+      "R1926350"
+    ],
+    "comparison_updated": null
+  }
+}

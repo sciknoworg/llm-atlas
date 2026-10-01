@@ -1,0 +1,418 @@
+{
+ "arxiv_id": "2009.13682",
+ "status": "completed",
+ "timestamp": "2026-08-24T21:45:08.119464",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2009.13682",
+  "title": "VIVO: Visual Vocabulary Pre-Training for Novel Object Captioning",
+  "authors": [
+   "Xiaowei Hu",
+   "Xi Yin",
+   "Kevin Lin",
+   "Lijuan Wang",
+   "Lei Zhang",
+   "Jianfeng Gao",
+   "Zicheng Liu"
+  ],
+  "abstract": "It is highly desirable yet challenging to generate image captions that can describe novel objects which are unseen in caption-labeled training data, a capability that is evaluated in the novel object captioning challenge (nocaps). In this challenge, no additional image-caption training data, other thanCOCO Captions, is allowed for model training. Thus, conventional Vision-Language Pre-training (VLP) methods cannot be applied. This paper presents VIsual VOcabulary pretraining (VIVO) that performs pre-training in the absence of caption annotations. By breaking the dependency of paired image-caption training data in VLP, VIVO can leverage large amounts of paired image-tag data to learn a visual vocabulary. This is done by pre-training a multi-layer Transformer model that learns to align image-level tags with their corresponding image region features. To address the unordered nature of image tags, VIVO uses a Hungarian matching loss with masked tag prediction to conduct pre-training. We validate the effectiveness of VIVO by fine-tuning the pre-trained model for image captioning. In addition, we perform an analysis of the visual-text alignment inferred by our model. The results show that our model can not only generate fluent image captions that describe novel objects, but also identify the locations of these objects. Our single model has achieved new state-of-the-art results on nocaps and surpassed the human CIDEr score.",
+  "published": "2020-09-28T23:20:02+00:00",
+  "updated": "2021-03-04T20:01:10+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2009.13682v2",
+  "entry_id": "http://arxiv.org/abs/2009.13682v2",
+  "pdf_path": "data/papers/2009.13682.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 49624,
+ "word_count": 5126,
+ "models_extracted": 3,
+ "extraction_data": [
+  {
+   "model_name": "VIVO",
+   "parameters": "12 LAYERS, HIDDEN SIZE 768, 110M",
+   "parameters_millions": 110,
+   "model_family": "Transformer",
+   "date_created": "2020-09-28",
+   "organization": "Microsoft",
+   "innovation": "Visual Vocabulary Pre-Training (VIVO): uses Hungarian matching loss to formulate tag prediction as an unordered set-matching problem, aligning image regions with tags without positional restrictions; differs from prior positional tag models by enabling flexible cross-modal alignment for novel objects. Unidirectional attention mask during fine-tuning: applies left-to-right causal masking on the caption sequence to prevent attending to subsequent positions, ensuring proper auto-regressive generation.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Unordered set-matching tag prediction (Hungarian matching loss)",
+   "pretraining_corpus": "Open Images V5 challenge training set (1.7M images, 500 bounding-box classes, 6.4K image-level classes)",
+   "finetuning_task": "Auto-regressive image captioning (cross-entropy loss, SCST optimization), Image captioning",
+   "optimizer": "Cross-entropy optimizer, Self-Critical Sequence Training (SCST)",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Novel Object Captioning (NOC) and visual-text alignment",
+   "application": "Image captioning, novel object captioning, visual grounding",
+   "paper_title": "VIVO: Visual Vocabulary Pre-Training for Novel Object Captioning",
+   "training_corpus_size": "1.7M images (Open Images V5), 118K images (COCO)",
+   "finetuning_data": "COCO training set (118K images, 5 captions each)",
+   "tokenizer": "WordPiece (inherited from BERT-base)",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "110M (dense, all parameters active)",
+   "attention_mechanism": "Self-attention (Transformer)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "VIVO pre-training on Open Images -> fine-tuning on COCO -> SCST optimization",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Region features fed into Transformer encoder layers",
+   "vision_encoder": "UpDown object detector (Anderson et al. 2018) for region features, Object detector (from UpDown) for region features",
+   "base_model": "BERT-base",
+   "optimizer_innovation": null,
+   "benchmark_result": "nocaps Validation CIDEr: 92.2, SPICE: 12.4; nocaps Test CIDEr: 89.0, SPICE: 12.4; COCO Test CIDEr: 77.8, SPICE: 12.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "VIVO": {
+   "application": [
+    "Image captioning",
+    "novel object captioning",
+    "visual grounding"
+   ],
+   "attention_mechanism": [
+    "Self-attention (Transformer)"
+   ],
+   "base_model": [
+    "BERT-base"
+   ],
+   "finetuning_data": [
+    "COCO training set (118K images, 5 captions each)"
+   ],
+   "finetuning_task": [
+    "Auto-regressive image captioning (cross-entropy loss, SCST optimization)",
+    "Image captioning"
+   ],
+   "fusion_architecture": [
+    "Region features fed into Transformer encoder layers"
+   ],
+   "model_family": [],
+   "model_name": [
+    "VIVO"
+   ],
+   "optimizer": [],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Open Images V5 challenge training set (1.7M images, 500 bounding-box classes, 6.4K image-level classes)"
+   ],
+   "pretraining_task": [
+    "Unordered set-matching tag prediction (Hungarian matching loss)"
+   ],
+   "research_problem": [
+    "Novel Object Captioning (NOC) and visual-text alignment"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "UpDown object detector (Anderson et al. 2018) for region features",
+    "Object detector (from UpDown) for region features"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "VIVO": {
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    },
+    "optimizer": {
+     "candidates": [
+      "Cross-entropy optimizer, Self-Critical Sequence Training (SCST)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-entropy optimizer, Self-Critical Sequence Training (SCST)",
+       "reason": "Describes loss functions and training objectives, not an optimization algorithm (e.g., Adam, SGD)."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "12 LAYERS",
+      "HIDDEN SIZE 768",
+      "110M"
+     ],
+     "accepted": [
+      "110M"
+     ],
+     "dropped": [
+      {
+       "value": "12 LAYERS",
+       "reason": "Describes network depth, not the total number of trainable parameters."
+      },
+      {
+       "value": "HIDDEN SIZE 768",
+       "reason": "Describes hidden dimension size, not the total number of trainable parameters."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 19,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "VIVO",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "VIVO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-09-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Visual Vocabulary Pre-Training (VIVO): uses Hungarian matching loss to formulate tag prediction as an unordered set-matching problem, aligning image regions with tags without positional restrictions",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior positional tag models by enabling flexible cross-modal alignment for novel objects. Unidirectional attention mask during fine-tuning: applies left-to-right causal masking on the caption sequence to prevent attending to subsequent positions, ensuring proper auto-regressive generation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Unordered set-matching tag prediction (Hungarian matching loss)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Open Images V5 challenge training set (1.7M images, 500 bounding-box classes, 6.4K image-level classes)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Auto-regressive image captioning (cross-entropy loss, SCST optimization)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece (inherited from BERT-base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 110,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Novel object captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Novel Object Captioning (NOC) and visual-text alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.7M images (Open Images V5), 118K images (COCO)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO training set (118K images, 5 captions each)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "110M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention (Transformer)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "VIVO pre-training on Open Images -> fine-tuning on COCO -> SCST optimization",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Region features fed into Transformer encoder layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "UpDown object detector (Anderson et al. 2018) for region features",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Object detector (from UpDown) for region features",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT-base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Nocaps Validation CIDEr: 92.2, SPICE: 12.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Nocaps Test CIDEr: 89.0, SPICE: 12.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Test CIDEr: 77.8, SPICE: 12.0",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R504304",
+  "contribution_ids": [
+   "R504305",
+   "R1920921"
+  ],
+  "new_contribution_ids": [
+   "R1920921"
+  ],
+  "comparison_updated": null
+ }
+}

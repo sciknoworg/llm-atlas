@@ -1,0 +1,639 @@
+{
+  "arxiv_id": "2601.02346",
+  "status": "completed",
+  "timestamp": "2026-08-30T06:53:02.911644",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2601.02346",
+    "title": "Falcon-H1R: Pushing the Reasoning Frontiers with a Hybrid Model for Efficient Test-Time Scaling",
+    "authors": [
+      " Falcon LLM Team",
+      "Iheb Chaabane",
+      "Puneesh Khanna",
+      "Suhail Mohmad",
+      "Slim Frikha",
+      "Shi Hu",
+      "Abdalgader Abubaker",
+      "Reda Alami",
+      "Mikhail Lubinets",
+      "Mohamed El Amine Seddik",
+      "Hakim Hacid"
+    ],
+    "abstract": "This work introduces Falcon-H1R, a 7B-parameter reasoning-optimized model that establishes the feasibility of achieving competitive reasoning performance with small language models (SLMs). Falcon-H1R stands out for its parameter efficiency, consistently matching or outperforming SOTA reasoning models that are $2\\times$ to $7\\times$ larger across a variety of reasoning-intensive benchmarks. These results underscore the importance of careful data curation and targeted training strategies (via both efficient SFT and RL scaling) in delivering significant performance gains without increasing model size. Furthermore, Falcon-H1R advances the 3D limits of reasoning efficiency by combining faster inference (through its hybrid-parallel architecture design), token efficiency, and higher accuracy. This unique blend makes Falcon-H1R-7B a practical backbone for scaling advanced reasoning systems, particularly in scenarios requiring extensive chain-of-thoughts generation and parallel test-time scaling. Leveraging the recently introduced DeepConf approach, Falcon-H1R achieves state-of-the-art test-time scaling efficiency, offering substantial improvements in both accuracy and computational cost. As a result, Falcon-H1R demonstrates that compact models, through targeted model training and architectural choices, can deliver robust and scalable reasoning performance.",
+    "published": "2026-01-05T18:44:27+00:00",
+    "updated": "2026-01-05T18:44:27+00:00",
+    "doi": null,
+    "primary_category": "cs.AI",
+    "categories": [
+      "cs.AI"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2601.02346v1",
+    "entry_id": "http://arxiv.org/abs/2601.02346v1",
+    "pdf_path": "data/papers/2601.02346.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 82342,
+  "word_count": 11616,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "Falcon-H 1R",
+      "parameters": "7B, 7.59B",
+      "parameters_millions": 7590,
+      "model_family": "Falcon",
+      "date_created": "2026-01-05",
+      "organization": "TII",
+      "innovation": "Hybrid Transformer-SSM architecture combining attention and state-space models for efficient long-context reasoning; RL data filtering pipeline using majority vote and pass-rate thresholds to curate high-quality reasoning trajectories for test-time scaling.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": null,
+      "finetuning_task": "Supervised Fine-Tuning (SFT) on high-quality instruction data; Reinforcement Learning (RL) for fine-grained alignment, Supervised Fine-Tuning (SFT) for reasoning",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA H100 GPU",
+      "extension": "Hybrid-parallel architecture design for faster inference; DeepConf approach for test-time scaling efficiency",
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Efficient test-time scaling and reasoning performance in small language models",
+      "application": "Reasoning-intensive tasks, chain-of-thoughts generation, parallel test-time scaling, mathematics, code generation, multi-hop and scientific reasoning",
+      "paper_title": "Falcon-H1R: Pushing the Reasoning Frontiers with a Hybrid Model for Efficient Test-Time Scaling",
+      "training_corpus_size": "3.1M samples",
+      "finetuning_data": "High-quality instruction data; RL data, Mathematics, coding (Python, C++), science, instruction-following, tool-calling, general chat",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": "256 H100 GPUs with Fully Sharded Data Parallelism (FSDP) and Context Parallelism (CP=2)",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "7B",
+      "attention_mechanism": "Hybrid Transformer–Mamba (state-space), Hybrid Transformer and State Space Model (SSM); Grouped-Query Attention (GQA) with 12 query / 2 key-value heads",
+      "context_length_max": "48K tokens",
+      "context_extension_method": "RoPE",
+      "training_pipeline": "Cold-start SFT Stage -> Reinforcement Learning Stage",
+      "reasoning_mode": "Chain-of-thoughts generation",
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "Reinforcement Learning (RL), GRPO",
+      "reward_mechanism": "Verifiable rewards (rule-based checker for math; curated and generated test cases for coding), Binary reward based on correct final extractable answer; two-tier verification using LaTeX string matching and symbolic equivalence checks",
+      "tool_calling_format": null,
+      "training_environment_scale": "Distributed sandbox instances via Docker, parallel vLLM instances",
+      "safety_evaluation_protocol": "Multi-pronged strategy evaluating CoT Only, Answer Only, and CoT+Answer across 81,970 prompts from JailbreakBench, ALERT, AllenAI, WalledEval, and SALAD Bench; safety scores assigned using meta-llama/Llama-Guard-3-8B classifier.",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Falcon-H1-7B",
+      "optimizer_innovation": "Modified GRPO: clip high, no KL-penalty, no entropy terms, Truncated Importance Sampling, CrossEntropyLoss on positive samples, Online Sampling with backfill and generation caching",
+      "benchmark_result": "AIME24: 88.1%; AIME25: 83.1%; HMMT25: 64.9%; AMO-Bench: 36.3%; LiveCodeBenchv6: 68.6%; AIME25 (with TTS): 96.7%",
+      "weight_clipping_mechanism": "Gradient clipping at 1.0",
+      "number_of_attention_heads": "12 query / 2 key-value",
+      "post_training_infrastructure": "Liger Kernels for fused RoPE, RMSNorm, and Cross-Entropy; streaming-dataset implementation with weighted data-mixture support"
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Falcon-H 1R": {
+      "application": [
+        "Reasoning-intensive tasks",
+        "mathematics",
+        "code generation",
+        "multi-hop and scientific reasoning"
+      ],
+      "attention_mechanism": [
+        "Grouped-Query Attention (GQA) with 12 query / 2 key-value heads"
+      ],
+      "base_model": [
+        "Falcon-H1-7B"
+      ],
+      "context_extension_method": [
+        "RoPE"
+      ],
+      "finetuning_data": [
+        "RL data",
+        "Mathematics",
+        "coding (Python, C++)",
+        "science",
+        "instruction-following",
+        "general chat"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "NVIDIA H100 GPU"
+      ],
+      "model_family": [
+        "Falcon"
+      ],
+      "model_name": [
+        "Falcon-H 1R"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "TII"
+      ],
+      "parameters": [
+        "7B",
+        "7.59B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "reasoning_mode": [
+        "Chain-of-thoughts generation"
+      ],
+      "research_problem": [
+        "Efficient test-time scaling and reasoning performance in small language models"
+      ],
+      "reward_mechanism": [
+        "Verifiable rewards (rule-based checker for math; curated and generated test cases for coding)",
+        "Binary reward based on correct final extractable answer",
+        "two-tier verification using LaTeX string matching and symbolic equivalence checks"
+      ],
+      "rl_algorithm": [
+        "GRPO"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "weight_clipping_mechanism": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Falcon-H 1R": {
+        "application": {
+          "candidates": [
+            "Reasoning-intensive tasks",
+            "chain-of-thoughts generation",
+            "parallel test-time scaling",
+            "mathematics",
+            "code generation",
+            "multi-hop and scientific reasoning"
+          ],
+          "accepted": [
+            "Reasoning-intensive tasks",
+            "mathematics",
+            "code generation",
+            "multi-hop and scientific reasoning"
+          ],
+          "dropped": [
+            {
+              "value": "chain-of-thoughts generation",
+              "reason": "Describes a reasoning technique, not a practical application or domain."
+            },
+            {
+              "value": "parallel test-time scaling",
+              "reason": "Describes a scaling method/process, not a practical application or domain."
+            }
+          ]
+        },
+        "attention_mechanism": {
+          "candidates": [
+            "Hybrid Transformer–Mamba (state-space)",
+            "Hybrid Transformer and State Space Model (SSM)",
+            "Grouped-Query Attention (GQA) with 12 query / 2 key-value heads"
+          ],
+          "accepted": [
+            "Grouped-Query Attention (GQA) with 12 query / 2 key-value heads"
+          ],
+          "dropped": [
+            {
+              "value": "Hybrid Transformer–Mamba (state-space)",
+              "reason": "Describes a hybrid model architecture, not an attention mechanism."
+            },
+            {
+              "value": "Hybrid Transformer and State Space Model (SSM)",
+              "reason": "Describes a hybrid model architecture, not an attention mechanism."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "High-quality instruction data",
+            "RL data",
+            "Mathematics",
+            "coding (Python, C++)",
+            "science",
+            "instruction-following",
+            "tool-calling",
+            "general chat"
+          ],
+          "accepted": [
+            "RL data",
+            "Mathematics",
+            "coding (Python, C++)",
+            "science",
+            "instruction-following",
+            "general chat"
+          ],
+          "dropped": [
+            {
+              "value": "High-quality instruction data",
+              "reason": "Vague description/placeholder rather than a specific named dataset. (cached)"
+            },
+            {
+              "value": "tool-calling",
+              "reason": "Names a task or capability rather than a dataset or data collection. (cached)"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised Fine-Tuning (SFT) on high-quality instruction data",
+            "Reinforcement Learning (RL) for fine-grained alignment",
+            "Supervised Fine-Tuning (SFT) for reasoning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised Fine-Tuning (SFT) on high-quality instruction data",
+              "reason": "Describes the fine-tuning procedure/method rather than the specific task or objective."
+            },
+            {
+              "value": "Reinforcement Learning (RL) for fine-grained alignment",
+              "reason": "Describes a training method/approach rather than a specific fine-tuning task."
+            },
+            {
+              "value": "Supervised Fine-Tuning (SFT) for reasoning",
+              "reason": "Describes the fine-tuning approach/method rather than naming the specific task."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Reinforcement Learning (RL)",
+            "GRPO"
+          ],
+          "accepted": [
+            "GRPO"
+          ],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning (RL)",
+              "reason": "Category/framework rather than a specific algorithm. (cached)"
+            }
+          ]
+        },
+        "weight_clipping_mechanism": {
+          "candidates": [
+            "Gradient clipping at 1.0"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Gradient clipping at 1.0",
+              "reason": "Describes gradient clipping, not weight clipping as defined. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 30,
+      "dropped": 11,
+      "llm_calls": 1,
+      "values_sent_to_llm": 20
+    }
+  },
+  "contributions": [
+    {
+      "label": "Falcon-H 1R",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Falcon-H 1R",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Falcon",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-01-05",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "TII",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid Transformer-SSM architecture combining attention and state-space models for efficient long-context reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "RL data filtering pipeline using majority vote and pass-rate thresholds to curate high-quality reasoning trajectories for test-time scaling.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7.59B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7590,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "256 H100 GPUs with Fully Sharded Data Parallelism (FSDP) and Context Parallelism (CP=2)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reasoning-intensive tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-hop and scientific reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient test-time scaling and reasoning performance in small language models",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "3.1M samples",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RL data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Mathematics",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Coding (Python, C++)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Science",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Instruction-following",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "General chat",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA) with 12 query / 2 key-value heads",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "48K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Cold-start SFT Stage -> Reinforcement Learning Stage",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Chain-of-thoughts generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GRPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Verifiable rewards (rule-based checker for math; curated and generated test cases for coding)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Binary reward based on correct final extractable answer",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Two-tier verification using LaTeX string matching and symbolic equivalence checks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203096",
+          "label": "training_environment_scale",
+          "value": "Distributed sandbox instances via Docker, parallel vLLM instances",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Multi-pronged strategy evaluating CoT Only, Answer Only, and CoT+Answer across 81,970 prompts from JailbreakBench, ALERT, AllenAI, WalledEval, and SALAD Bench; safety scores assigned using meta-llama/Llama-Guard-3-8B classifier.",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Falcon-H1-7B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203102",
+          "label": "optimizer_innovation",
+          "value": "Modified GRPO: clip high, no KL-penalty, no entropy terms, Truncated Importance Sampling, CrossEntropyLoss on positive samples, Online Sampling with backfill and generation caching",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24: 88.1%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25: 83.1%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HMMT25: 64.9%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AMO-Bench: 36.3%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBenchv6: 68.6%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25 (with TTS): 96.7%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "12 query / 2 key-value",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Liger Kernels for fused RoPE, RMSNorm, and Cross-Entropy; streaming-dataset implementation with weighted data-mixture support",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927224",
+    "contribution_ids": [
+      "R1927226"
+    ],
+    "new_contribution_ids": [
+      "R1927226"
+    ],
+    "comparison_updated": null
+  }
+}

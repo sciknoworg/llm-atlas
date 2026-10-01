@@ -1,0 +1,666 @@
+{
+ "arxiv_id": "2404.14619",
+ "status": "completed",
+ "timestamp": "2026-08-29T00:22:19.559187",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2404.14619",
+  "title": "OpenELM: An Efficient Language Model Family with Open Training and Inference Framework",
+  "authors": [
+   "Sachin Mehta",
+   "Mohammad Hossein Sekhavat",
+   "Qingqing Cao",
+   "Maxwell Horton",
+   "Yanzi Jin",
+   "Chenfan Sun",
+   "Iman Mirzadeh",
+   "Mahyar Najibi",
+   "Dmitry Belenko",
+   "Peter Zatloukal",
+   "Mohammad Rastegari"
+  ],
+  "abstract": "The reproducibility and transparency of large language models are crucial for advancing open research, ensuring the trustworthiness of results, and enabling investigations into data and model biases, as well as potential risks. To this end, we release OpenELM, a state-of-the-art open language model. OpenELM uses a layer-wise scaling strategy to efficiently allocate parameters within each layer of the transformer model, leading to enhanced accuracy. For example, with a parameter budget of approximately one billion parameters, OpenELM exhibits a 2.36% improvement in accuracy compared to OLMo while requiring $2\\times$ fewer pre-training tokens.\n  Diverging from prior practices that only provide model weights and inference code, and pre-train on private datasets, our release includes the complete framework for training and evaluation of the language model on publicly available datasets, including training logs, multiple checkpoints, and pre-training configurations. We also release code to convert models to MLX library for inference and fine-tuning on Apple devices. This comprehensive release aims to empower and strengthen the open research community, paving the way for future open research endeavors.\n  Our source code along with pre-trained model weights and training recipes is available at \\url{https://github.com/apple/corenet}. Additionally, \\model models can be found on HuggingFace at: \\url{https://huggingface.co/apple/OpenELM}.",
+  "published": "2024-04-22T23:12:03+00:00",
+  "updated": "2024-05-02T00:30:57+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2404.14619v2",
+  "entry_id": "http://arxiv.org/abs/2404.14619v2",
+  "pdf_path": "data/papers/2404.14619.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 45110,
+ "word_count": 5021,
+ "models_extracted": 11,
+ "extraction_data": [
+  {
+   "model_name": "OpenELM",
+   "parameters": "270M, 0.27B, 450M, 0.45B, 1.08B, 1.1B, 3B, 3.04B",
+   "parameters_millions": 3040,
+   "model_family": "OpenELM",
+   "date_created": "2024-04-22",
+   "organization": "Apple",
+   "innovation": "Introduces an efficient language model family with an open training and inference framework; improves accuracy via weight averaging of the last five training checkpoints; applies instruction tuning using the UltraFeedback dataset with statistical rejection sampling and direct preference optimization (DPO).",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "RefinedWeb, Github, Wikipedia, StackExchange, C4, PILE, TheStack, Reddit, Dolma, PeS2o, ProjectGutenberg, Wikipedia+Wikibooks",
+   "finetuning_task": "Supervised instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA GPUs, Apple M-series chips",
+   "extension": "Uses RMSNorm normalization layer for improved throughput compared to LayerNorm.",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Efficient language modeling with open training and inference framework.",
+   "application": "Common-sense reasoning, knowledge understanding, misinformation & bias evaluation, general language modeling.",
+   "paper_title": "OpenELM: An Efficient Language Model Family with Open Training and Inference Framework",
+   "training_corpus_size": "3 trillion tokens",
+   "finetuning_data": "OpenELM Instruct dataset, UltraFeedback",
+   "tokenizer": "SentencePiece BPE",
+   "supported_language": "English",
+   "hardware_description": "128 A100/H100 GPUs for pre-training; 8 A100 GPUs for instruction tuning",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/apple/ml-openelm",
+   "context_length": null,
+   "activated_parameters": "Dense (all parameters active)",
+   "attention_mechanism": "Grouped-query attention (GQA), Multi-head attention (MHA)",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Supervised fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "BFloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ARC-c: 35.58; HellaSwag: 72.44; MMLU: 26.76; TruthfulQA: 34.98; WinoGrande: 65.51; ARC-c: 42.24; HellaSwag: 73.28; TruthfulQA-mc2: 34.98; WinoGrande: 67.25; Average: 48.90 (3.04B base); ARC-c: 39.42; HellaSwag: 76.36; TruthfulQA: 68.17; PIQA: 79.00; SciQ: 92.50; WinoGrande: 66.85; Average: 69.15 (3.04B instruction-tuned)",
+   "weight_clipping_mechanism": "Gradient clipping of 1.0",
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": "CoreNet (formerly CVNets)"
+  }
+ ],
+ "models_after_selection": 11,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "OpenELM": {
+   "application": [
+    "Common-sense reasoning",
+    "knowledge understanding",
+    "misinformation & bias evaluation"
+   ],
+   "attention_mechanism": [
+    "Grouped-query attention (GQA)",
+    "Multi-head attention (MHA)"
+   ],
+   "finetuning_data": [
+    "OpenELM Instruct dataset",
+    "UltraFeedback"
+   ],
+   "finetuning_task": [
+    "Supervised instruction tuning"
+   ],
+   "hardware_used": [
+    "NVIDIA GPUs, Apple M-series chips"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "OpenELM"
+   ],
+   "model_name": [
+    "OpenELM"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Apple"
+   ],
+   "parameters": [
+    "270M",
+    "0.27B",
+    "450M",
+    "0.45B",
+    "1.08B",
+    "1.1B",
+    "3B",
+    "3.04B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "RefinedWeb",
+    "Github",
+    "Wikipedia",
+    "StackExchange",
+    "C4",
+    "PILE",
+    "TheStack",
+    "Reddit",
+    "Dolma",
+    "PeS2o",
+    "ProjectGutenberg",
+    "Wikipedia+Wikibooks"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "BFloat16"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "weight_clipping_mechanism": [
+    "Gradient clipping of 1.0"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "OpenELM": {
+    "application": {
+     "candidates": [
+      "Common-sense reasoning",
+      "knowledge understanding",
+      "misinformation & bias evaluation",
+      "general language modeling."
+     ],
+     "accepted": [
+      "Common-sense reasoning",
+      "knowledge understanding",
+      "misinformation & bias evaluation"
+     ],
+     "dropped": [
+      {
+       "value": "general language modeling.",
+       "reason": "Vague placeholder/broad category rather than a concrete task or domain."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Efficient language modeling with open training and inference framework."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Efficient language modeling with open training and inference framework.",
+       "reason": "Describes a solution or framework rather than naming a specific research problem or challenge."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 39,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 19
+  }
+ },
+ "contributions": [
+  {
+   "label": "OpenELM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OpenELM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OpenELM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-04-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Apple",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces an efficient language model family with an open training and inference framework",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Improves accuracy via weight averaging of the last five training checkpoints",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Applies instruction tuning using the UltraFeedback dataset with statistical rejection sampling and direct preference optimization (DPO).",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefinedWeb",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Github",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "StackExchange",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PILE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TheStack",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Reddit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Dolma",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PeS2o",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ProjectGutenberg",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia+Wikibooks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "270M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.27B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "450M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.45B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.08B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.04B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3040,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA GPUs, Apple M-series chips",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 A100/H100 GPUs for pre-training; 8 A100 GPUs for instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Common-sense reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Misinformation & bias evaluation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/apple/ml-openelm",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenELM Instruct dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UltraFeedback",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "Dense (all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-query attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention (MHA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "BFloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c: 35.58",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 72.44",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 26.76",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 34.98",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 65.51",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c: 42.24",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 73.28",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA-mc2: 34.98",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 67.25",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 48.90 (3.04B base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-c: 39.42",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 76.36",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 68.17",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PIQA: 79.00",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SciQ: 92.50",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 66.85",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 69.15 (3.04B instruction-tuned)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Gradient clipping of 1.0",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "CoreNet (formerly CVNets)",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R796088",
+  "contribution_ids": [
+   "R796090",
+   "R1924459"
+  ],
+  "new_contribution_ids": [
+   "R1924459"
+  ],
+  "comparison_updated": null
+ }
+}

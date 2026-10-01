@@ -1,0 +1,689 @@
+{
+ "arxiv_id": "2111.11133",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:45:53.244467",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2111.11133",
+  "title": "L-Verse: Bidirectional Generation Between Image and Text",
+  "authors": [
+   "Taehoon Kim",
+   "Gwangmo Song",
+   "Sihaeng Lee",
+   "Sangyun Kim",
+   "Yewon Seo",
+   "Soonyoung Lee",
+   "Seung Hwan Kim",
+   "Honglak Lee",
+   "Kyunghoon Bae"
+  ],
+  "abstract": "Far beyond learning long-range interactions of natural language, transformers are becoming the de-facto standard for many vision tasks with their power and scalability. Especially with cross-modal tasks between image and text, vector quantized variational autoencoders (VQ-VAEs) are widely used to make a raw RGB image into a sequence of feature vectors. To better leverage the correlation between image and text, we propose L-Verse, a novel architecture consisting of feature-augmented variational autoencoder (AugVAE) and bidirectional auto-regressive transformer (BiART) for image-to-text and text-to-image generation. Our AugVAE shows the state-of-the-art reconstruction performance on ImageNet1K validation set, along with the robustness to unseen images in the wild. Unlike other models, BiART can distinguish between image (or text) as a conditional reference and a generation target. L-Verse can be directly used for image-to-text or text-to-image generation without any finetuning or extra object detection framework. In quantitative and qualitative experiments, L-Verse shows impressive results against previous methods in both image-to-text and text-to-image generation on MS-COCO Captions. We furthermore assess the scalability of L-Verse architecture on Conceptual Captions and present the initial result of bidirectional vision-language representation learning on general domain.",
+  "published": "2021-11-22T11:48:26+00:00",
+  "updated": "2022-04-06T09:58:42+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2111.11133v11",
+  "entry_id": "http://arxiv.org/abs/2111.11133v11",
+  "pdf_path": "data/papers/2111.11133.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 54993,
+ "word_count": 5887,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "L-Verse",
+   "model_family": "L-Verse",
+   "date_created": "2021-11-22",
+   "organization": "Lg Ai Research",
+   "innovation": "Feature-augmented variational autoencoder (AugVAE) with cross-level CNN feature augmentation to increase visual codebook diversity; Bidirectional auto-regressive transformer (BiART) with segment embeddings to distinguish between conditional reference and generation target, enabling zero-shot bidirectional generation without fine-tuning.",
+   "pretraining_corpus": "MS-COCO Captions, Conceptual Captions",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image-to-text generation, text-to-image generation",
+   "license": null,
+   "research_problem": "Bidirectional cross-modal representation learning for image and text generation",
+   "model_version": null,
+   "pretraining_architecture": "Transformer",
+   "pretraining_task": "Bidirectional image-to-text and text-to-image generation",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Image captioning, text-to-image generation",
+   "finetuning_data": "MS-COCO Captions 2014 Karpathy splits, Conceptual Captions",
+   "optimizer": "AdamW",
+   "tokenizer": "Byte-pair encoding (BPE) with BPE dropout",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/tgisaturday/L-Verse",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "L-Verse: Bidirectional Generation Between Image and Text",
+   "activated_parameters": null,
+   "attention_mechanism": "Multi-head attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Joint training of AugVAE and BiART on image-text pairs",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16 (O2 mixed-precision)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Latent feature alignment via VQ-VAE and transformer",
+   "vision_encoder": "CNN encoder (part of AugVAE)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "BLEU-4: 39.9; METEOR: 31.4; ROUGE: 60.4; CIDEr: 102.2; SPICE: 23.3; FID-0: 45.8; FID-1: 41.9; FID-2: 35.5; FID-4: 30.2; FID-8: 29.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "L-Verse-CC",
+   "model_family": "L-Verse",
+   "date_created": "2021-11-22",
+   "organization": "Lg Ai Research",
+   "innovation": "Bidirectional auto-regressive transformer (BiART) that learns both image-to-text and text-to-image as a whole; feature-augmented variational autoencoder (AugVAE) as a universal backbone encoder-decoder; segment embedding enabling bidirectional training of auto-regressive transformer.",
+   "pretraining_corpus": "Conceptual Captions",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, text-to-image generation",
+   "license": null,
+   "research_problem": "Bidirectional generation between image and text",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Bidirectional auto-regressive generation (image-to-text and text-to-image)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": "Byte-pair encoding (BPE) with dropout",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/tgisaturday/L-Verse",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "L-Verse: Bidirectional Generation Between Image and Text",
+   "activated_parameters": null,
+   "attention_mechanism": "Masked self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Joint training of AugVAE and BiART on image-text pairs",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16 (O2 mixed-precision)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "VQ-VAE (AugVAE)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "FID (MS-COCO validation, Gaussian filter radius 0/2/4/6/8): 37.2/31.6/25.7/21.4/21.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "L-Verse": {
+   "application": [
+    "Image-to-text generation",
+    "text-to-image generation"
+   ],
+   "attention_mechanism": [
+    "Multi-head attention"
+   ],
+   "finetuning_data": [
+    "MS-COCO Captions 2014 Karpathy splits",
+    "Conceptual Captions"
+   ],
+   "finetuning_task": [
+    "Image captioning",
+    "text-to-image generation"
+   ],
+   "fusion_architecture": [],
+   "model_family": [
+    "L-Verse"
+   ],
+   "model_name": [
+    "L-Verse"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Lg Ai Research"
+   ],
+   "pretraining_architecture": [],
+   "pretraining_corpus": [
+    "MS-COCO Captions",
+    "Conceptual Captions"
+   ],
+   "pretraining_task": [
+    "Bidirectional image-to-text and text-to-image generation"
+   ],
+   "quantization_precision": [
+    "FP16 (O2 mixed-precision)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "CNN encoder (part of AugVAE)"
+   ]
+  },
+  "L-Verse-CC": {
+   "application": [
+    "Image captioning",
+    "text-to-image generation"
+   ],
+   "attention_mechanism": [
+    "Masked self-attention"
+   ],
+   "model_family": [
+    "L-Verse"
+   ],
+   "model_name": [
+    "L-Verse-CC"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Lg Ai Research"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions"
+   ],
+   "pretraining_task": [
+    "Bidirectional auto-regressive generation (image-to-text and text-to-image)"
+   ],
+   "quantization_precision": [
+    "FP16 (O2 mixed-precision)"
+   ],
+   "research_problem": [
+    "Bidirectional generation between image and text"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "VQ-VAE (AugVAE)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "L-Verse": {
+    "fusion_architecture": {
+     "candidates": [
+      "Latent feature alignment via VQ-VAE and transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Latent feature alignment via VQ-VAE and transformer",
+       "reason": "Describes an alignment method or training objective rather than a specific fusion architecture design."
+      }
+     ]
+    },
+    "pretraining_architecture": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Transformer'"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Bidirectional cross-modal representation learning for image and text generation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Bidirectional cross-modal representation learning for image and text generation",
+       "reason": "Describes a method or solution rather than naming a research problem or capability gap (cached)"
+      }
+     ]
+    }
+   },
+   "L-Verse-CC": {}
+  },
+  "counts": {
+   "kept": 31,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 5
+  }
+ },
+ "contributions": [
+  {
+   "label": "L-Verse",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "L-Verse",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "L-Verse",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Lg Ai Research",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Feature-augmented variational autoencoder (AugVAE) with cross-level CNN feature augmentation to increase visual codebook diversity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Bidirectional auto-regressive transformer (BiART) with segment embeddings to distinguish between conditional reference and generation target, enabling zero-shot bidirectional generation without fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Bidirectional image-to-text and text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MS-COCO Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE) with BPE dropout",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/tgisaturday/L-Verse",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MS-COCO Captions 2014 Karpathy splits",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Conceptual Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint training of AugVAE and BiART on image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16 (O2 mixed-precision)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CNN encoder (part of AugVAE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU-4: 39.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "METEOR: 31.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ROUGE: 60.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIDEr: 102.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SPICE: 23.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-0: 45.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-1: 41.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-2: 35.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-4: 30.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID-8: 29.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "L-Verse-CC",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "L-Verse-CC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "L-Verse",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Lg Ai Research",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Bidirectional auto-regressive transformer (BiART) that learns both image-to-text and text-to-image as a whole",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Feature-augmented variational autoencoder (AugVAE) as a universal backbone encoder-decoder",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Segment embedding enabling bidirectional training of auto-regressive transformer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Bidirectional auto-regressive generation (image-to-text and text-to-image)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE) with dropout",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/tgisaturday/L-Verse",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Bidirectional generation between image and text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Masked self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint training of AugVAE and BiART on image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16 (O2 mixed-precision)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQ-VAE (AugVAE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID (MS-COCO validation, Gaussian filter radius 0/2/4/6/8): 37.2/31.6/25.7/21.4/21.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R426644",
+  "contribution_ids": [
+   "R426645",
+   "R426657",
+   "R426680",
+   "R426684",
+   "R1921524",
+   "R1921534"
+  ],
+  "new_contribution_ids": [
+   "R1921524",
+   "R1921534"
+  ],
+  "comparison_updated": null
+ }
+}

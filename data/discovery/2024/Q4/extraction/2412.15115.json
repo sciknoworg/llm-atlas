@@ -1,0 +1,2230 @@
+{
+ "arxiv_id": "2412.15115",
+ "status": "completed",
+ "timestamp": "2026-08-29T16:20:53.700506",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2412.15115",
+  "title": "Qwen2.5 Technical Report",
+  "authors": [
+   " Qwen",
+   " :",
+   "An Yang",
+   "Baosong Yang",
+   "Beichen Zhang",
+   "Binyuan Hui",
+   "Bo Zheng",
+   "Bowen Yu",
+   "Chengyuan Li",
+   "Dayiheng Liu",
+   "Fei Huang",
+   "Haoran Wei",
+   "Huan Lin",
+   "Jian Yang",
+   "Jianhong Tu",
+   "Jianwei Zhang",
+   "Jianxin Yang",
+   "Jiaxi Yang",
+   "Jingren Zhou",
+   "Junyang Lin",
+   "Kai Dang",
+   "Keming Lu",
+   "Keqin Bao",
+   "Kexin Yang",
+   "Le Yu",
+   "Mei Li",
+   "Mingfeng Xue",
+   "Pei Zhang",
+   "Qin Zhu",
+   "Rui Men",
+   "Runji Lin",
+   "Tianhao Li",
+   "Tianyi Tang",
+   "Tingyu Xia",
+   "Xingzhang Ren",
+   "Xuancheng Ren",
+   "Yang Fan",
+   "Yang Su",
+   "Yichang Zhang",
+   "Yu Wan",
+   "Yuqiong Liu",
+   "Zeyu Cui",
+   "Zhenru Zhang",
+   "Zihan Qiu"
+  ],
+  "abstract": "In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet diverse needs. Compared to previous iterations, Qwen 2.5 has been significantly improved during both the pre-training and post-training stages. In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens. This provides a strong foundation for common sense, expert knowledge, and reasoning capabilities. In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning. Post-training techniques enhance human preference, and notably improve long text generation, structural data analysis, and instruction following. To handle diverse and varied use cases effectively, we present Qwen2.5 LLM series in rich sizes. Open-weight offerings include base and instruction-tuned models, with quantized versions available. In addition, for hosted solutions, the proprietary models currently include two mixture-of-experts (MoE) variants: Qwen2.5-Turbo and Qwen2.5-Plus, both available from Alibaba Cloud Model Studio. Qwen2.5 has demonstrated top-tier performance on a wide range of benchmarks evaluating language understanding, reasoning, mathematics, coding, human preference alignment, etc. Specifically, the open-weight flagship Qwen2.5-72B-Instruct outperforms a number of open and proprietary models and demonstrates competitive performance to the state-of-the-art open-weight model, Llama-3-405B-Instruct, which is around 5 times larger. Qwen2.5-Turbo and Qwen2.5-Plus offer superior cost-effectiveness while performing competitively against GPT-4o-mini and GPT-4o respectively. Additionally, as the foundation, Qwen2.5 models have been instrumental in training specialized models such as Qwen2.5-Math, Qwen2.5-Coder, QwQ, and multimodal models.",
+  "published": "2024-12-19T17:56:09+00:00",
+  "updated": "2025-01-03T02:18:21+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2412.15115v2",
+  "entry_id": "http://arxiv.org/abs/2412.15115v2",
+  "pdf_path": "data/papers/2412.15115.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 86158,
+ "word_count": 5113,
+ "models_extracted": 11,
+ "extraction_data": [
+  {
+   "model_name": "Qwen 2.5",
+   "parameters": "TURBO, 44M, 0.5B, 1B ACTIVATED (MOE), 1.5B, 3B, 7B, 14B (DENSE), 14B, 32B, 72B, 1T",
+   "parameters_millions": 1000000,
+   "model_family": "Qwen",
+   "date_created": "2024-12-19",
+   "organization": "Alibaba",
+   "innovation": "Better data mixture: strategic down-sampling of overrepresented domains (e-commerce, social media) and up-sampling of high-value domains (technology, science, academic research) to create a balanced, information-rich dataset; Scaling laws for hyper-parameters to optimize learning rate and batch size across architectures; Two-phase long-context pre-training with RoPE base frequency extension (ABF technique), YARN, and Dual Chunk Attention (DCA) to scale context from 4K to 32K/1M tokens; Two-stage reinforcement learning (Offline RL for reasoning/factuality, Online RL for nuance/safety) and expanded SFT data coverage for long-sequence generation and complex tasks.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "18 trillion tokens of high-quality pre-training datasets",
+   "finetuning_task": "Supervised fine-tuning (SFT), Offline Reinforcement Learning (DPO), Direct Preference Optimization (DPO), Group Relative Policy Optimization (GRPO), Supervised fine-tuning for long-sequence generation, math, coding, instruction-following, structured data understanding, logical reasoning, cross-lingual transfer",
+   "optimizer": "AdamW (SFT), Online Merging Optimizer (DPO)",
+   "hardware_used": "NVIDIA A800/H800 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open-weight",
+   "research_problem": "Language modeling, long-sequence generation, mathematics, coding, instruction-following, structured data understanding, logical reasoning",
+   "application": "Long-sequence generation, mathematical problem-solving, coding, instruction-following, structured data understanding, logical reasoning, cross-lingual transfer",
+   "paper_title": "Qwen2.5 Technical Report",
+   "training_corpus_size": "18 trillion tokens",
+   "finetuning_data": "Over 1 million samples, long-response datasets, Qwen2.5-Math chain-of-thought data, Qwen2.5-Coder instruction tuning data, code-related Q&A websites, GitHub algorithmic code snippets, structured understanding dataset, 70, 000 logical reasoning queries, 1 million SFT examples, 150, 000 DPO training pairs, 1 million examples across SFT, DPO, and GRPO stages, Long-response datasets generated via back-translation from pre-training corpora; millions of high-quality examples for SFT",
+   "tokenizer": "BPE",
+   "supported_language": "English, Chinese, Arabic, Japanese, Korean, Indonesian, Turkish, Portuguese, Vietnamese, Spanish, French, German, Italian, and many others, and 27 other languages",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/QwenLM/Qwen2.5",
+   "context_length": null,
+   "activated_parameters": "44M, 1B (MoE variants)",
+   "attention_mechanism": "Sparse attention based on Minference, Grouped Query Attention (GQA), Dual Chunk Attention (DCA)",
+   "context_length_max": "131072",
+   "context_extension_method": "DCA + YaRN",
+   "training_pipeline": "Pre-training -> SFT -> DPO -> GRPO",
+   "reasoning_mode": "Chain-of-thought",
+   "moe_configuration": "Mixture-of-Experts (MoE)",
+   "quantization_precision": "bfloat16, various quantized precisions",
+   "synthetic_data_generation_method": "Back-translation for long-text data; rejection sampling with reward modeling/annotated answers for math; multiple language-specific agents for coding; LLM-generated instructions with verification code and unittests for cross-validation; translation model for cross-lingual transfer, Leverages Qwen2-72B-Instruct and Qwen2-Math-RM-72B to generate high-quality synthetic data in math, code, and knowledge domains, filtered by a proprietary general reward model, Back-translation techniques to generate queries for long-text data from pre-training corpora",
+   "rl_algorithm": "DPO, GRPO, Direct Preference Optimization (DPO), Multi-stage RL, Offline RL, Online RL",
+   "reward_mechanism": "Execution feedback, answer matching, human and automated review processes, dedicated critic model, multi-agent collaborative scoring system, Reward model evaluating truthfulness, helpfulness, conciseness, relevance, harmlessness, and debiasing",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Qwen2",
+   "optimizer_innovation": "Online Merging Optimizer",
+   "benchmark_result": "MMLU: 47.5; MMLU-pro: 15.7; MMLU-redux: 45.1; BBH: 20.3; ARC-C: 35.6; TruthfulQA: 40.2; Winogrande: 56.3; Hellaswag: 52.1; GPQA: 24.8; TheoremQA: 16.0; MATH: 19.5; MMLU-STEM: 39.8; GSM8K: 41.6; HumanEval: 30.5; HumanEval+: 26.8; MBPP: 39.3; MBPP+: 33.8; MultiPL-E: 18.9; Multi-Exam: 30.8; Multi-Understanding: 41.0; Multi-Mathematics: 13.5; Multi-Translation: 15.3; MMLU: 60.9; MMLU-pro: 28.5; MMLU-redux: 58.5; BBH: 45.1; ARC-C: 54.7; TruthfulQA: 46.6; Winogrande: 65.0; Hellaswag: 67.9; GPQA: 24.2; TheoremQA: 22.1; MATH: 35.0; MMLU-STEM: 54.8; GSM8K: 68.5; HumanEval: 37.2; HumanEval+: 29.9; MBPP: 60.2; MBPP+: 49.6; MultiPL-E: 33.1; Multi-Exam: 47.9; Multi-Understanding: 65.1; Multi-Mathematics: 37.5; Multi-Translation: 25.0; MMLU: 65.6; MMLU-pro: 34.6; MMLU-redux: 63.7; BBH: 56.3; ARC-C: 56.5; TruthfulQA: 48.9; Winogrande: 71.1; Hellaswag: 74.6; GPQA: 26.3; TheoremQA: 27.4; MATH: 42.6; MMLU-STEM: 62.5; GSM8K: 79.1; HumanEval: 42.1; HumanEval+: 36.0; MBPP: 57.1; MBPP+: 49.4; MultiPL-E: 41.2; Multi-Exam: 54.6; Multi-Understanding: 76.6; Multi-Mathematics: 48.9; Multi-Translation: 29.3; MMLU: 74.2; MMLU-pro: 45.0; MMLU-redux: 71.1; BBH: 70.4; ARC-C: 63.7; TruthfulQA: 56.4; Winogrande: 75.9; HellaSwag: 80.2; GPQA: 36.4; TheoremQA: 36.0; MATH: 49.8; MMLU-stem: 72.3; GSM8K: 85.4; HumanEval: 57.9; HumanEval+: 50.6; MBPP: 74.9; MBPP+: 62.9; MultiPL-E: 50.3; Multi-Exam: 59.4; Multi-Understanding: 79.3; Multi-Mathematics: 57.8; Multi-Translation: 32.4; MMLU: 79.7; MMLU-pro: 51.2; MMLU-redux: 76.6; BBH: 78.2; ARC-C: 67.3; TruthfulQA: 58.4; Winogrande: 81.0; Hellaswag: 84.3; GPQA: 32.8; Theoremqa: 43.0; MATH: 55.6; MMLU-stem: 76.4; GSM8K: 90.2; HumanEval: 56.7; HumanEval+: 51.2; MBPP: 76.7; MBPP+: 63.2; MultiPL-E: 53.5; Multi-Exam: 70.6; Multi-Understanding: 85.9; Multi-Mathematics: 68.5; Multi-Translation: 36.2; MMLU: 83.3; MMLU-pro: 55.1; MMLU-redux: 82.0; BBH: 84.5; ARC-C: 70.4; TruthfulQA: 57.8; Winogrande: 82.0; Hellaswag: 85.2; GPQA: 48.0; Theoremqa: 44.1; MATH: 57.7; MMLU-stem: 80.9; GSM8K: 92.9; HumanEval: 58.5; HumanEval+: 52.4; MBPP: 84.5; MBPP+: 67.2; MultiPL-E: 59.4; Multi-Exam: 75.4; Multi-Understanding: 88.4; Multi-Mathematics: 73.7; Multi-Translation: 37.3; MMLU: 86.1; MMLU-Pro: 58.1; MMLU-redux: 83.9; BBH: 86.3; ARC-C: 72.4; TruthfulQA: 60.4; Winogrande: 83.9; HellaSwag: 87.6; GPQA: 45.9; TheoremQA: 42.4; MATH: 62.1; MMLU-stem: 82.7; GSM8K: 91.5; HumanEval: 59.1; MBPP: 84.7; MBPP+: 69.2; MultiPL-E: 60.5; Multi-Exam: 78.7; Multi-Understanding: 89.6; Multi-Mathematics: 76.7; Multi-Translation: 39.0; MMLU-Pro: 64.5; MMLU-redux: 81.7; LiveBench0831: 42.3; GPQA: 42.3; MATH: 81.1; GSM8K: 93.8; HumanEval: 86.6; MBPP: 82.8; MultiPL-E: 73.7; LiveCodeBench: 37.8; IFEval: 76.3; Arena-Hard: 67.1; MTbench: 8.81; LV-Eval: 55.9 (7B), 53.0 (14B), 56.0 (32B), 60.4 (72B); LongBench-Chat: 7.42 (7B), 8.04 (14B), 8.70 (32B), 8.72 (72B); LV-Eval: 53.4; LongBench-Chat: 8.34",
+   "weight_clipping_mechanism": "Gradient norms clipped at a maximum value of 1.0",
+   "number_of_attention_heads": "14/2",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 11,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Qwen 2.5": {
+   "application": [
+    "Long-sequence generation",
+    "mathematical problem-solving",
+    "coding",
+    "instruction-following",
+    "structured data understanding",
+    "logical reasoning",
+    "cross-lingual transfer"
+   ],
+   "attention_mechanism": [
+    "Sparse attention based on Minference",
+    "Grouped Query Attention (GQA)",
+    "Dual Chunk Attention (DCA)"
+   ],
+   "base_model": [
+    "Qwen2"
+   ],
+   "context_extension_method": [
+    "DCA + YaRN"
+   ],
+   "finetuning_data": [
+    "long-response datasets",
+    "Qwen2.5-Math chain-of-thought data",
+    "Qwen2.5-Coder instruction tuning data",
+    "code-related Q&A websites",
+    "GitHub algorithmic code snippets",
+    "structured understanding dataset",
+    "Long-response datasets generated via back-translation from pre-training corpora"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)",
+    "Offline Reinforcement Learning (DPO)",
+    "Supervised fine-tuning for long-sequence generation",
+    "math",
+    "coding",
+    "instruction-following",
+    "structured data understanding",
+    "logical reasoning",
+    "cross-lingual transfer"
+   ],
+   "hardware_used": [
+    "NVIDIA A800/H800 GPUs"
+   ],
+   "license": [
+    "open-weight"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 2.5"
+   ],
+   "optimizer": [
+    "AdamW (SFT), Online Merging Optimizer (DPO)"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "44M",
+    "0.5B",
+    "1B ACTIVATED (MOE)",
+    "1.5B",
+    "3B",
+    "7B",
+    "14B (DENSE)",
+    "14B",
+    "32B",
+    "72B",
+    "1T"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "reasoning_mode": [
+    "Chain-of-thought"
+   ],
+   "research_problem": [
+    "Language modeling, long-sequence generation, mathematics, coding, instruction-following, structured data understanding, logical reasoning"
+   ],
+   "reward_mechanism": [
+    "Execution feedback",
+    "answer matching",
+    "human and automated review processes",
+    "dedicated critic model",
+    "multi-agent collaborative scoring system",
+    "Reward model evaluating truthfulness",
+    "helpfulness",
+    "conciseness",
+    "relevance",
+    "harmlessness"
+   ],
+   "rl_algorithm": [
+    "DPO",
+    "GRPO",
+    "Direct Preference Optimization (DPO)"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Arabic",
+    "Japanese",
+    "Korean",
+    "Indonesian",
+    "Turkish",
+    "Portuguese",
+    "Vietnamese",
+    "Spanish",
+    "French",
+    "German",
+    "Italian"
+   ],
+   "synthetic_data_generation_method": [
+    "Back-translation for long-text data",
+    "rejection sampling with reward modeling/annotated answers for math",
+    "multiple language-specific agents for coding",
+    "LLM-generated instructions with verification code and unittests for cross-validation",
+    "translation model for cross-lingual transfer",
+    "Back-translation techniques to generate queries for long-text data from pre-training corpora"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Qwen 2.5": {
+    "finetuning_data": {
+     "candidates": [
+      "Over 1 million samples",
+      "long-response datasets",
+      "Qwen2.5-Math chain-of-thought data",
+      "Qwen2.5-Coder instruction tuning data",
+      "code-related Q&A websites",
+      "GitHub algorithmic code snippets",
+      "structured understanding dataset",
+      "70",
+      "000 logical reasoning queries",
+      "1 million SFT examples",
+      "150",
+      "000 DPO training pairs",
+      "1 million examples across SFT",
+      "DPO",
+      "GRPO stages",
+      "Long-response datasets generated via back-translation from pre-training corpora",
+      "millions of high-quality examples for SFT"
+     ],
+     "accepted": [
+      "long-response datasets",
+      "Qwen2.5-Math chain-of-thought data",
+      "Qwen2.5-Coder instruction tuning data",
+      "code-related Q&A websites",
+      "GitHub algorithmic code snippets",
+      "structured understanding dataset",
+      "Long-response datasets generated via back-translation from pre-training corpora"
+     ],
+     "dropped": [
+      {
+       "value": "Over 1 million samples",
+       "reason": "starts with a connective, so it is a fragment of a longer phrase rather than a finetuning_data name: 'Over 1 million samples'"
+      },
+      {
+       "value": "70",
+       "reason": "Not a dataset; just a number"
+      },
+      {
+       "value": "000 logical reasoning queries",
+       "reason": "Fragment/number fragment, not a standalone dataset name"
+      },
+      {
+       "value": "1 million SFT examples",
+       "reason": "Describes a quantity rather than naming a dataset"
+      },
+      {
+       "value": "150",
+       "reason": "Not a dataset; just a number"
+      },
+      {
+       "value": "000 DPO training pairs",
+       "reason": "Fragment/number fragment, not a standalone dataset name"
+      },
+      {
+       "value": "1 million examples across SFT",
+       "reason": "Describes a quantity rather than naming a dataset"
+      },
+      {
+       "value": "DPO",
+       "reason": "Names an optimization algorithm, not a dataset"
+      },
+      {
+       "value": "GRPO stages",
+       "reason": "Describes training stages/algorithm, not a dataset"
+      },
+      {
+       "value": "millions of high-quality examples for SFT",
+       "reason": "Describes a quantity rather than naming a dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Offline Reinforcement Learning (DPO)",
+      "Direct Preference Optimization (DPO)",
+      "Group Relative Policy Optimization (GRPO)",
+      "Supervised fine-tuning for long-sequence generation",
+      "math",
+      "coding",
+      "instruction-following",
+      "structured data understanding",
+      "logical reasoning",
+      "cross-lingual transfer"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)",
+      "Offline Reinforcement Learning (DPO)",
+      "Supervised fine-tuning for long-sequence generation",
+      "math",
+      "coding",
+      "instruction-following",
+      "structured data understanding",
+      "logical reasoning",
+      "cross-lingual transfer"
+     ],
+     "dropped": [
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+      },
+      {
+       "value": "Group Relative Policy Optimization (GRPO)",
+       "reason": "Names an optimization algorithm, not a fine-tuning task"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "TURBO",
+      "44M",
+      "0.5B",
+      "1B ACTIVATED (MOE)",
+      "1.5B",
+      "3B",
+      "7B",
+      "14B (DENSE)",
+      "14B",
+      "32B",
+      "72B",
+      "1T"
+     ],
+     "accepted": [
+      "44M",
+      "0.5B",
+      "1B ACTIVATED (MOE)",
+      "1.5B",
+      "3B",
+      "7B",
+      "14B (DENSE)",
+      "14B",
+      "32B",
+      "72B",
+      "1T"
+     ],
+     "dropped": [
+      {
+       "value": "TURBO",
+       "reason": "Not a numerical value or parameter count"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "18 trillion tokens of high-quality pre-training datasets"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "18 trillion tokens of high-quality pre-training datasets",
+       "reason": "Asserts quantity and breadth rather than naming a specific identifiable corpus"
+      }
+     ]
+    },
+    "quantization_precision": {
+     "candidates": [
+      "bfloat16",
+      "various quantized precisions"
+     ],
+     "accepted": [
+      "bfloat16"
+     ],
+     "dropped": [
+      {
+       "value": "various quantized precisions",
+       "reason": "Vague placeholder that does not name a specific numerical precision"
+      }
+     ]
+    },
+    "reward_mechanism": {
+     "candidates": [
+      "Execution feedback",
+      "answer matching",
+      "human and automated review processes",
+      "dedicated critic model",
+      "multi-agent collaborative scoring system",
+      "Reward model evaluating truthfulness",
+      "helpfulness",
+      "conciseness",
+      "relevance",
+      "harmlessness",
+      "debiasing"
+     ],
+     "accepted": [
+      "Execution feedback",
+      "answer matching",
+      "human and automated review processes",
+      "dedicated critic model",
+      "multi-agent collaborative scoring system",
+      "Reward model evaluating truthfulness",
+      "helpfulness",
+      "conciseness",
+      "relevance",
+      "harmlessness"
+     ],
+     "dropped": [
+      {
+       "value": "debiasing",
+       "reason": "Describes a training objective or process rather than a method for calculating/providing rewards"
+      }
+     ]
+    },
+    "rl_algorithm": {
+     "candidates": [
+      "DPO",
+      "GRPO",
+      "Direct Preference Optimization (DPO)",
+      "Multi-stage RL",
+      "Offline RL",
+      "Online RL"
+     ],
+     "accepted": [
+      "DPO",
+      "GRPO",
+      "Direct Preference Optimization (DPO)"
+     ],
+     "dropped": [
+      {
+       "value": "Multi-stage RL",
+       "reason": "Describes a training setup/category rather than a specific RL algorithm"
+      },
+      {
+       "value": "Offline RL",
+       "reason": "Describes a learning paradigm/category rather than a specific algorithm"
+      },
+      {
+       "value": "Online RL",
+       "reason": "Describes a learning paradigm/category rather than a specific algorithm"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Chinese",
+      "Arabic",
+      "Japanese",
+      "Korean",
+      "Indonesian",
+      "Turkish",
+      "Portuguese",
+      "Vietnamese",
+      "Spanish",
+      "French",
+      "German",
+      "Italian",
+      "many others",
+      "27 other languages"
+     ],
+     "accepted": [
+      "English",
+      "Chinese",
+      "Arabic",
+      "Japanese",
+      "Korean",
+      "Indonesian",
+      "Turkish",
+      "Portuguese",
+      "Vietnamese",
+      "Spanish",
+      "French",
+      "German",
+      "Italian"
+     ],
+     "dropped": [
+      {
+       "value": "many others",
+       "reason": "Placeholder that does not name a specific language"
+      },
+      {
+       "value": "27 other languages",
+       "reason": "Describes a quantity of languages rather than naming a specific language"
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "Back-translation for long-text data",
+      "rejection sampling with reward modeling/annotated answers for math",
+      "multiple language-specific agents for coding",
+      "LLM-generated instructions with verification code and unittests for cross-validation",
+      "translation model for cross-lingual transfer",
+      "Leverages Qwen2-72B-Instruct and Qwen2-Math-RM-72B to generate high-quality synthetic data in math",
+      "code",
+      "knowledge domains",
+      "filtered by a proprietary general reward model",
+      "Back-translation techniques to generate queries for long-text data from pre-training corpora"
+     ],
+     "accepted": [
+      "Back-translation for long-text data",
+      "rejection sampling with reward modeling/annotated answers for math",
+      "multiple language-specific agents for coding",
+      "LLM-generated instructions with verification code and unittests for cross-validation",
+      "translation model for cross-lingual transfer",
+      "Back-translation techniques to generate queries for long-text data from pre-training corpora"
+     ],
+     "dropped": [
+      {
+       "value": "Leverages Qwen2-72B-Instruct and Qwen2-Math-RM-72B to generate high-quality synthetic data in math",
+       "reason": "Describes the model setup and process rather than naming the generation method itself"
+      },
+      {
+       "value": "code",
+       "reason": "Names a domain/task, not a data generation method"
+      },
+      {
+       "value": "knowledge domains",
+       "reason": "Names a category of content, not a generation method"
+      },
+      {
+       "value": "filtered by a proprietary general reward model",
+       "reason": "Describes a filtering step rather than a data generation technique"
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient norms clipped at a maximum value of 1.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient norms clipped at a maximum value of 1.0",
+       "reason": "Describes gradient clipping, not a mechanism for constraining model weight values"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 82,
+   "dropped": 26,
+   "llm_calls": 1,
+   "values_sent_to_llm": 67
+  }
+ },
+ "contributions": [
+  {
+   "label": "Qwen 2.5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 2.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-12-19",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Better data mixture: strategic down-sampling of overrepresented domains (e-commerce, social media) and up-sampling of high-value domains (technology, science, academic research) to create a balanced, information-rich dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling laws for hyper-parameters to optimize learning rate and batch size across architectures",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-phase long-context pre-training with RoPE base frequency extension (ABF technique), YARN, and Dual Chunk Attention (DCA) to scale context from 4K to 32K/1M tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage reinforcement learning (Offline RL for reasoning/factuality, Online RL for nuance/safety) and expanded SFT data coverage for long-sequence generation and complex tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Offline Reinforcement Learning (DPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for long-sequence generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Math",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction-following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Structured data understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW (SFT), Online Merging Optimizer (DPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "44M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B ACTIVATED (MOE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14B (DENSE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "32B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "72B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1000000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A800/H800 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long-sequence generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Mathematical problem-solving",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction-following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Structured data understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/QwenLM/Qwen2.5",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language modeling, long-sequence generation, mathematics, coding, instruction-following, structured data understanding, logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "18 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long-response datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Qwen2.5-Math chain-of-thought data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Qwen2.5-Coder instruction tuning data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Code-related Q&A websites",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GitHub algorithmic code snippets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Structured understanding dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long-response datasets generated via back-translation from pre-training corpora",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "44M, 1B (MoE variants)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention based on Minference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dual Chunk Attention (DCA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "131072",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "DCA + YaRN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> SFT -> DPO -> GRPO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Chain-of-thought",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Mixture-of-Experts (MoE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Back-translation for long-text data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Rejection sampling with reward modeling/annotated answers for math",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Multiple language-specific agents for coding",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "LLM-generated instructions with verification code and unittests for cross-validation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Translation model for cross-lingual transfer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Back-translation techniques to generate queries for long-text data from pre-training corpora",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "GRPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "Direct Preference Optimization (DPO)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Execution feedback",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Answer matching",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Human and automated review processes",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Dedicated critic model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Multi-agent collaborative scoring system",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Reward model evaluating truthfulness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Helpfulness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Conciseness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Relevance",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Harmlessness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203102",
+     "label": "optimizer_innovation",
+     "value": "Online Merging Optimizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 15.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 45.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 20.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 35.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 40.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 56.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hellaswag: 52.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 24.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 16.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 19.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-STEM: 39.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 41.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 30.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 26.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 39.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 33.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 18.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 30.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 41.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 13.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 15.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 60.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 28.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 58.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 45.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 54.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 46.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 65.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hellaswag: 67.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 24.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 22.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 35.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-STEM: 54.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 37.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 29.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 60.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 49.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 33.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 47.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 65.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 37.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 25.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 65.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 34.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 63.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 56.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 56.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 48.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 71.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hellaswag: 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 26.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 27.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 42.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-STEM: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 79.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 42.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 36.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 57.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 49.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 41.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 54.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 76.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 48.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 29.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 74.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 45.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 71.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 70.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 63.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 56.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 75.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 80.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 36.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 36.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 49.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-stem: 72.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 85.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 57.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 50.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 74.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 62.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 50.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 59.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 79.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 57.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 32.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 79.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 76.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 78.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 67.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 58.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 81.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hellaswag: 84.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 32.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Theoremqa: 43.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 55.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-stem: 76.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 90.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 56.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 63.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 53.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 70.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 85.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 36.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-pro: 55.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 82.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 70.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 57.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 82.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Hellaswag: 85.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 48.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Theoremqa: 44.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 57.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-stem: 80.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 92.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 58.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 52.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 67.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 59.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 75.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 88.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 73.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 37.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 86.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 58.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 83.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 86.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-C: 72.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 60.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 83.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 87.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 45.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 42.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 62.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-stem: 82.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 91.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 59.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 84.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 69.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 60.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Exam: 78.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Understanding: 89.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Mathematics: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Multi-Translation: 39.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-redux: 81.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveBench0831: 42.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 42.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 81.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 93.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 86.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 82.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 73.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveCodeBench: 37.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval: 76.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arena-Hard: 67.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MTbench: 8.81",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LV-Eval: 55.9 (7B), 53.0 (14B), 56.0 (32B), 60.4 (72B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LongBench-Chat: 7.42 (7B), 8.04 (14B), 8.70 (32B), 8.72 (72B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LV-Eval: 53.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LongBench-Chat: 8.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "14/2",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1374918",
+  "contribution_ids": [
+   "R1374920",
+   "R1924822"
+  ],
+  "new_contribution_ids": [
+   "R1924822"
+  ],
+  "comparison_updated": null
+ }
+}

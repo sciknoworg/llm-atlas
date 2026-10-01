@@ -1,0 +1,1483 @@
+{
+  "arxiv_id": "2501.08313",
+  "status": "completed",
+  "timestamp": "2026-08-29T17:03:53.686839",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2501.08313",
+    "title": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+    "authors": [
+      " MiniMax",
+      "Aonian Li",
+      "Bangwei Gong",
+      "Bo Yang",
+      "Boji Shan",
+      "Chang Liu",
+      "Cheng Zhu",
+      "Chunhao Zhang",
+      "Congchao Guo",
+      "Da Chen",
+      "Dong Li",
+      "Enwei Jiao",
+      "Gengxin Li",
+      "Guojun Zhang",
+      "Haohai Sun",
+      "Houze Dong",
+      "Jiadai Zhu",
+      "Jiaqi Zhuang",
+      "Jiayuan Song",
+      "Jin Zhu",
+      "Jingtao Han",
+      "Jingyang Li",
+      "Junbin Xie",
+      "Junhao Xu",
+      "Junjie Yan",
+      "Kaishun Zhang",
+      "Kecheng Xiao",
+      "Kexi Kang",
+      "Le Han",
+      "Leyang Wang",
+      "Lianfei Yu",
+      "Liheng Feng",
+      "Lin Zheng",
+      "Linbo Chai",
+      "Long Xing",
+      "Meizhi Ju",
+      "Mingyuan Chi",
+      "Mozhi Zhang",
+      "Peikai Huang",
+      "Pengcheng Niu",
+      "Pengfei Li",
+      "Pengyu Zhao",
+      "Qi Yang",
+      "Qidi Xu",
+      "Qiexiang Wang",
+      "Qin Wang",
+      "Qiuhui Li",
+      "Ruitao Leng",
+      "Shengmin Shi",
+      "Shuqi Yu",
+      "Sichen Li",
+      "Songquan Zhu",
+      "Tao Huang",
+      "Tianrun Liang",
+      "Weigao Sun",
+      "Weixuan Sun",
+      "Weiyu Cheng",
+      "Wenkai Li",
+      "Xiangjun Song",
+      "Xiao Su",
+      "Xiaodong Han",
+      "Xinjie Zhang",
+      "Xinzhu Hou",
+      "Xu Min",
+      "Xun Zou",
+      "Xuyang Shen",
+      "Yan Gong",
+      "Yingjie Zhu",
+      "Yipeng Zhou",
+      "Yiran Zhong",
+      "Yongyi Hu",
+      "Yuanxiang Fan",
+      "Yue Yu",
+      "Yufeng Yang",
+      "Yuhao Li",
+      "Yunan Huang",
+      "Yunji Li",
+      "Yunpeng Huang",
+      "Yunzhi Xu",
+      "Yuxin Mao",
+      "Zehan Li",
+      "Zekang Li",
+      "Zewei Tao",
+      "Zewen Ying",
+      "Zhaoyang Cong",
+      "Zhen Qin",
+      "Zhenhua Fan",
+      "Zhihang Yu",
+      "Zhuo Jiang",
+      "Zijia Wu"
+    ],
+    "abstract": "We introduce MiniMax-01 series, including MiniMax-Text-01 and MiniMax-VL-01, which are comparable to top-tier models while offering superior capabilities in processing longer contexts. The core lies in lightning attention and its efficient scaling. To maximize computational capacity, we integrate it with Mixture of Experts (MoE), creating a model with 32 experts and 456 billion total parameters, of which 45.9 billion are activated for each token. We develop an optimized parallel strategy and highly efficient computation-communication overlap techniques for MoE and lightning attention. This approach enables us to conduct efficient training and inference on models with hundreds of billions of parameters across contexts spanning millions of tokens. The context window of MiniMax-Text-01 can reach up to 1 million tokens during training and extrapolate to 4 million tokens during inference at an affordable cost. Our vision-language model, MiniMax-VL-01 is built through continued training with 512 billion vision-language tokens. Experiments on both standard and in-house benchmarks show that our models match the performance of state-of-the-art models like GPT-4o and Claude-3.5-Sonnet while offering 20-32 times longer context window. We publicly release MiniMax-01 at https://github.com/MiniMax-AI.",
+    "published": "2025-01-14T18:50:05+00:00",
+    "updated": "2025-01-14T18:50:05+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2501.08313v1",
+    "entry_id": "http://arxiv.org/abs/2501.08313v1",
+    "pdf_path": "data/papers/2501.08313.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM/VLM pretraining)"
+  },
+  "text_length": 264377,
+  "word_count": 26932,
+  "models_extracted": 12,
+  "extraction_data": [
+    {
+      "model_name": "MiniMax-VL-01",
+      "parameters": "2B, 7B, 456B",
+      "parameters_millions": 456000,
+      "model_family": "MiniMax",
+      "date_created": "2025-01-14",
+      "organization": "MiniMax",
+      "innovation": "Lightning Attention: factorizes QK^T into (QΦ)(K^TΦ) to reduce attention complexity from O(N^2) to O(N), enabling efficient 1M-token context; Hybrid-Lightning Attention: integrates local window attention with global linear attention to preserve performance while maintaining linear scaling; Mixture-of-Experts (MoE) architecture for the 2B variant to maximize parameter efficiency.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "512 billion vision-language tokens",
+      "finetuning_task": "Supervised Fine-Tuning (SFT)",
+      "optimizer": null,
+      "hardware_used": "H800 GPU",
+      "extension": "Continued pre-training on 512B vision-language tokens to adapt the text model for multimodal capabilities.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Scaling foundation models with efficient long-context attention and multimodal capabilities",
+      "application": "Vision-language understanding, chart/document/OCR processing, math/science multimodal reasoning.",
+      "paper_title": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+      "training_corpus_size": "512B tokens",
+      "finetuning_data": "Expert model responses via rejection sampling; SFT-trained and SFT-untrained prompts; safety-category specific prompts, real-world user data, augmented red team prompts",
+      "tokenizer": "Byte-level BPE",
+      "supported_language": "English, Chinese",
+      "hardware_description": "1500 to 2500 H800 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "45.9B",
+      "attention_mechanism": "Lightning attention (I/O-aware linear attention) with one softmax attention block every seven lightning attention blocks, Lightning Attention (I/O-aware optimized TransNormer with tiling technique for intra-block left product and inter-block right product computation), Lightning Attention (Linear Attention), Hybrid-Lightning Attention",
+      "context_length_max": "1M tokens (training), 4M tokens (inference)",
+      "context_extension_method": "Lightning attention",
+      "training_pipeline": "Continued training on vision-language tokens",
+      "reasoning_mode": "Zero-shot chain-of-thought strategy (during evaluation)",
+      "moe_configuration": "32 experts, 45.9B activated out of 456B total",
+      "quantization_precision": "8-bit quantization",
+      "synthetic_data_generation_method": "Rejection sampling with expert models; prompt augmentation using early-version MiniMax-Text-01",
+      "rl_algorithm": "Offline and Online Reinforcement Learning (RL)",
+      "reward_mechanism": "Reward-based quality enhancement during data curation; precisely tuned reward dimensions during alignment, Hierarchical reward system evaluating correctness, truthfulness, helpfulness, and harmlessness; binary reward signals for math/reasoning; test case success rates for programming; deterministic/probabilistic compliance checks; specialized harmless reward model",
+      "tool_calling_format": "Search tool integration (MiniMax-Text-01-Search)",
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Exhaustive data mining techniques; specialized harmless reward model; automated rule-based constraint verification; human evaluation of key metrics",
+      "safety_defect_rate": null,
+      "fusion_architecture": "Integrates image encoder and adapter",
+      "vision_encoder": "Lightweight Vision Transformer (ViT)",
+      "base_model": "MiniMax-Text-01",
+      "optimizer_innovation": null,
+      "benchmark_result": "MMMU: 96.4; MMMU-Pro: 91.7; ChartQA: 0.80; DocVQA: 0.865; AI2D: 0.833; MathVista: 0.80; OCRBench: 68.5; Top-3 on MMLU, IFEval, Arena-Hard; surpasses on C-SimpleQA",
+      "weight_clipping_mechanism": "Importance sampling weight clipping in modified GRPO",
+      "number_of_attention_heads": "64",
+      "post_training_infrastructure": "Optimized parallel strategy and highly efficient computation-communication overlap techniques for MoE and lightning attention."
+    },
+    {
+      "model_name": "MiniMax-01 (Lightning Attention)",
+      "model_family": "MiniMax",
+      "date_created": "2025-01-14",
+      "organization": "MiniMax",
+      "innovation": "Lightning Attention: IO-aware block-wise implementation that computes intra-block attention on-chip SRAM and accumulates a KV cache for inter-block attention, significantly reducing FLOPs and memory bandwidth compared to standard softmax attention.",
+      "pretraining_corpus": null,
+      "parameters": "70M, 160M, 410M, 1B, 3B, 7B",
+      "parameters_millions": 7000,
+      "application": "General language modeling, downstream NLP tasks (question answering, commonsense reasoning, reading comprehension, long-context retrieval)",
+      "license": null,
+      "research_problem": "Scaling foundation models with efficient attention mechanisms",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": "up to 300 billion tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+      "activated_parameters": null,
+      "attention_mechanism": "Lightning Attention (block-wise on-chip SRAM computation with KV cache accumulation)",
+      "context_length_max": "8192",
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "MiniMax-01",
+      "parameters": "50M, 150M, 410M, 600M, 1B, 3B, 5B, 7B, 8B, 12B, 57B",
+      "parameters_millions": 57000,
+      "model_family": "MiniMax",
+      "date_created": "2025-01-14",
+      "organization": "MiniMax",
+      "innovation": "Lightning Attention: replaces softmax attention with a linear attention mechanism to achieve constant training speed regardless of sequence length and linear computational complexity; Hybrid-Lightning Attention: alternates softmax and linear attention layers (e.g., every eight layers) to combine the language modeling efficiency of linear attention with the strong retrieval and extrapolation capabilities of softmax attention.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "Web documents, hypothesis data",
+      "finetuning_task": null,
+      "optimizer": "AdamW",
+      "hardware_used": "H800 GPUs",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Scaling foundation models with efficient attention mechanisms to improve training speed and long-context retrieval.",
+      "application": "Language modeling, common sense reasoning, reading comprehension, needle-in-a-haystack retrieval, in-context learning",
+      "paper_title": "MiniMax-01: Scaling Foundation Models with Lightning Attention",
+      "training_corpus_size": "40B tokens",
+      "finetuning_data": null,
+      "tokenizer": null,
+      "supported_language": "English, Chinese",
+      "hardware_description": "Single-node H800 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "All parameters active (dense)",
+      "attention_mechanism": "Lightning Attention (linear attention); Hybrid-Lightning Attention (alternating softmax and linear attention layers), Lightning Attention",
+      "context_length_max": "65,536 tokens",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Long-context extension (three-stage upsampling)",
+      "reasoning_mode": null,
+      "moe_configuration": "8B total parameters, 1B activated parameters",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "DPO",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "PIQA: 98.0; HellaSwag: 76.5; WinoGrande: 68.5; ARC-E: 74.2; ARC-C: 66.3; OBQA: 61.1; CSR-AVG: 55.2; NIAH: 95.7; SCROLLS: 13.3",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 8,
+  "models_after_merge": 3,
+  "validated_rows": {
+    "MiniMax-VL-01": {
+      "application": [
+        "Vision-language understanding",
+        "chart/document/OCR processing",
+        "math/science multimodal reasoning."
+      ],
+      "attention_mechanism": [
+        "Lightning attention (I/O-aware linear attention) with one softmax attention block every seven lightning attention blocks",
+        "Lightning Attention (I/O-aware optimized TransNormer with tiling technique for intra-block left product and inter-block right product computation)",
+        "Lightning Attention (Linear Attention)",
+        "Hybrid-Lightning Attention"
+      ],
+      "base_model": [
+        "MiniMax-Text-01"
+      ],
+      "context_extension_method": [],
+      "finetuning_data": [
+        "Expert model responses via rejection sampling",
+        "SFT-trained and SFT-untrained prompts",
+        "safety-category specific prompts",
+        "real-world user data",
+        "augmented red team prompts"
+      ],
+      "finetuning_task": [
+        "Supervised Fine-Tuning (SFT)"
+      ],
+      "fusion_architecture": [],
+      "hardware_used": [
+        "H800 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "MiniMax"
+      ],
+      "model_name": [
+        "MiniMax-VL-01"
+      ],
+      "organization": [
+        "MiniMax"
+      ],
+      "parameters": [
+        "2B",
+        "7B",
+        "456B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "8-bit quantization"
+      ],
+      "reasoning_mode": [
+        "Zero-shot chain-of-thought strategy (during evaluation)"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Hierarchical reward system evaluating correctness",
+        "truthfulness",
+        "helpfulness",
+        "harmlessness",
+        "binary reward signals for math/reasoning",
+        "test case success rates for programming",
+        "deterministic/probabilistic compliance checks",
+        "specialized harmless reward model"
+      ],
+      "rl_algorithm": [],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ],
+      "synthetic_data_generation_method": [
+        "Rejection sampling with expert models",
+        "prompt augmentation using early-version MiniMax-Text-01"
+      ],
+      "tool_calling_format": [],
+      "vision_encoder": [
+        "Lightweight Vision Transformer (ViT)"
+      ],
+      "weight_clipping_mechanism": [
+        "Importance sampling weight clipping in modified GRPO"
+      ]
+    },
+    "MiniMax-01 (Lightning Attention)": {
+      "application": [],
+      "attention_mechanism": [
+        "Lightning Attention (block-wise on-chip SRAM computation with KV cache accumulation)"
+      ],
+      "model_family": [
+        "MiniMax"
+      ],
+      "model_name": [
+        "MiniMax-01 (Lightning Attention)"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "MiniMax"
+      ],
+      "parameters": [
+        "70M",
+        "160M",
+        "410M",
+        "1B",
+        "3B",
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": []
+    },
+    "MiniMax-01": {
+      "application": [
+        "Language modeling",
+        "common sense reasoning",
+        "reading comprehension",
+        "needle-in-a-haystack retrieval"
+      ],
+      "attention_mechanism": [
+        "Lightning Attention (linear attention)",
+        "Hybrid-Lightning Attention (alternating softmax and linear attention layers)",
+        "Lightning Attention"
+      ],
+      "hardware_used": [
+        "H800 GPUs"
+      ],
+      "model_family": [
+        "MiniMax"
+      ],
+      "model_name": [
+        "MiniMax-01"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "MiniMax"
+      ],
+      "parameters": [
+        "50M",
+        "150M",
+        "410M",
+        "600M",
+        "1B",
+        "3B",
+        "5B",
+        "7B",
+        "8B",
+        "12B",
+        "57B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [
+        "DPO"
+      ],
+      "supported_language": [
+        "English",
+        "Chinese"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiniMax-VL-01": {
+        "context_extension_method": {
+          "candidates": [
+            "Lightning attention"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Lightning attention",
+              "reason": "Names an attention mechanism, not a technique for extending context length."
+            }
+          ]
+        },
+        "fusion_architecture": {
+          "candidates": [
+            "Integrates image encoder and adapter"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Integrates image encoder and adapter",
+              "reason": "Describes a functional integration rather than naming the architectural design."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "512 billion vision-language tokens"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "512 billion vision-language tokens",
+              "reason": "States a quantity of tokens rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Scaling foundation models with efficient long-context attention and multimodal capabilities"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Scaling foundation models with efficient long-context attention and multimodal capabilities",
+              "reason": "Describes a solution or methodology rather than naming the research problem or capability gap."
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Reward-based quality enhancement during data curation",
+            "precisely tuned reward dimensions during alignment",
+            "Hierarchical reward system evaluating correctness",
+            "truthfulness",
+            "helpfulness",
+            "harmlessness",
+            "binary reward signals for math/reasoning",
+            "test case success rates for programming",
+            "deterministic/probabilistic compliance checks",
+            "specialized harmless reward model"
+          ],
+          "accepted": [
+            "Hierarchical reward system evaluating correctness",
+            "truthfulness",
+            "helpfulness",
+            "harmlessness",
+            "binary reward signals for math/reasoning",
+            "test case success rates for programming",
+            "deterministic/probabilistic compliance checks",
+            "specialized harmless reward model"
+          ],
+          "dropped": [
+            {
+              "value": "Reward-based quality enhancement during data curation",
+              "reason": "Describes a data curation process rather than a specific reward calculation method."
+            },
+            {
+              "value": "precisely tuned reward dimensions during alignment",
+              "reason": "Vague description of alignment process rather than a specific reward mechanism."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Offline and Online Reinforcement Learning (RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Offline and Online Reinforcement Learning (RL)",
+              "reason": "Names a broad category/paradigm of learning rather than a specific algorithm."
+            }
+          ]
+        },
+        "tool_calling_format": {
+          "candidates": [
+            "Search tool integration (MiniMax-Text-01-Search)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Search tool integration (MiniMax-Text-01-Search)",
+              "reason": "Describes a specific tool integration rather than the format or protocol for structuring tool calls."
+            }
+          ]
+        }
+      },
+      "MiniMax-01 (Lightning Attention)": {
+        "application": {
+          "candidates": [
+            "General language modeling",
+            "downstream NLP tasks (question answering, commonsense reasoning, reading comprehension, long-context retrieval)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "General language modeling",
+              "reason": "Broad category/task type rather than a concrete practical use or domain. (cached)"
+            },
+            {
+              "value": "downstream NLP tasks (question answering, commonsense reasoning, reading comprehension, long-context retrieval)",
+              "reason": "Placeholder/category rather than a concrete task or domain."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Scaling foundation models with efficient attention mechanisms"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Scaling foundation models with efficient attention mechanisms",
+              "reason": "Describes a solution or methodology rather than naming the research problem."
+            }
+          ]
+        }
+      },
+      "MiniMax-01": {
+        "application": {
+          "candidates": [
+            "Language modeling",
+            "common sense reasoning",
+            "reading comprehension",
+            "needle-in-a-haystack retrieval",
+            "in-context learning"
+          ],
+          "accepted": [
+            "Language modeling",
+            "common sense reasoning",
+            "reading comprehension",
+            "needle-in-a-haystack retrieval"
+          ],
+          "dropped": [
+            {
+              "value": "in-context learning",
+              "reason": "Describes a learning paradigm, not a concrete application or domain. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Web documents",
+            "hypothesis data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Web documents",
+              "reason": "Generic description of source type rather than a specific identifiable corpus or dataset. (cached)"
+            },
+            {
+              "value": "hypothesis data",
+              "reason": "Vague descriptor rather than a named dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Scaling foundation models with efficient attention mechanisms to improve training speed and long-context retrieval."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Scaling foundation models with efficient attention mechanisms to improve training speed and long-context retrieval.",
+              "reason": "Describes a solution and its goals rather than naming the research problem."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 81,
+      "dropped": 15,
+      "llm_calls": 1,
+      "values_sent_to_llm": 48
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiniMax-VL-01",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniMax-VL-01",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-01-14",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Lightning Attention: factorizes QK^T into (QΦ)(K^TΦ) to reduce attention complexity from O(N^2) to O(N), enabling efficient 1M-token context",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid-Lightning Attention: integrates local window attention with global linear attention to preserve performance while maintaining linear scaling",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture-of-Experts (MoE) architecture for the 2B variant to maximize parameter efficiency.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised Fine-Tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "456B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 456000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H800 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "1500 to 2500 H800 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Vision-language understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart/document/OCR processing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Math/science multimodal reasoning.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "512B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Expert model responses via rejection sampling",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SFT-trained and SFT-untrained prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Safety-category specific prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Real-world user data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Augmented red team prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "45.9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning attention (I/O-aware linear attention) with one softmax attention block every seven lightning attention blocks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning Attention (I/O-aware optimized TransNormer with tiling technique for intra-block left product and inter-block right product computation)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning Attention (Linear Attention)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid-Lightning Attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1M tokens (training), 4M tokens (inference)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Continued training on vision-language tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Zero-shot chain-of-thought strategy (during evaluation)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "32 experts, 45.9B activated out of 456B total",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8-bit quantization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Rejection sampling with expert models",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Prompt augmentation using early-version MiniMax-Text-01",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Hierarchical reward system evaluating correctness",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Truthfulness",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Helpfulness",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Harmlessness",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Binary reward signals for math/reasoning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Test case success rates for programming",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Deterministic/probabilistic compliance checks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Specialized harmless reward model",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Exhaustive data mining techniques; specialized harmless reward model; automated rule-based constraint verification; human evaluation of key metrics",
+          "datatype": "string"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Lightweight Vision Transformer (ViT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "MiniMax-Text-01",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 96.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU-Pro: 91.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ChartQA: 0.80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "DocVQA: 0.865",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AI2D: 0.833",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 0.80",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OCRBench: 68.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Top-3 on MMLU, IFEval, Arena-Hard",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Surpasses on C-SimpleQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P203104",
+          "label": "weight_clipping_mechanism",
+          "value": "Importance sampling weight clipping in modified GRPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "64",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Optimized parallel strategy and highly efficient computation-communication overlap techniques for MoE and lightning attention.",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "MiniMax-01 (Lightning Attention)",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniMax-01 (Lightning Attention)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-01-14",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Lightning Attention: IO-aware block-wise implementation that computes intra-block attention on-chip SRAM and accumulates a KV cache for inter-block attention, significantly reducing FLOPs and memory bandwidth compared to standard softmax attention.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "160M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "410M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "Up to 300 billion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning Attention (block-wise on-chip SRAM computation with KV cache accumulation)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8192",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "MiniMax-01",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniMax-01",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-01-14",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "MiniMax",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Lightning Attention: replaces softmax attention with a linear attention mechanism to achieve constant training speed regardless of sequence length and linear computational complexity",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid-Lightning Attention: alternates softmax and linear attention layers (e.g., every eight layers) to combine the language modeling efficiency of linear attention with the strong retrieval and extrapolation capabilities of softmax attention.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "50M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "150M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "410M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "600M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "5B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "12B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "57B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 57000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "H800 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Single-node H800 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Common sense reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Reading comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Needle-in-a-haystack retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "40B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "All parameters active (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning Attention (linear attention)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid-Lightning Attention (alternating softmax and linear attention layers)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Lightning Attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "65,536 tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Long-context extension (three-stage upsampling)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "8B total parameters, 1B activated parameters",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PIQA: 98.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 76.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande: 68.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-E: 74.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 66.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OBQA: 61.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CSR-AVG: 55.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NIAH: 95.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SCROLLS: 13.3",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926584",
+    "contribution_ids": [
+      "R1926586",
+      "R1926587",
+      "R1926588"
+    ],
+    "new_contribution_ids": [
+      "R1926586",
+      "R1926587",
+      "R1926588"
+    ],
+    "comparison_updated": null
+  }
+}

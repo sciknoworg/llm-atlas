@@ -1,0 +1,655 @@
+{
+ "arxiv_id": "2212.06742",
+ "status": "completed",
+ "timestamp": "2026-08-30T23:35:29.653497",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2212.06742",
+  "title": "ERNIE-Code: Beyond English-Centric Cross-lingual Pretraining for Programming Languages",
+  "authors": [
+   "Yekun Chai",
+   "Shuohuan Wang",
+   "Chao Pang",
+   "Yu Sun",
+   "Hao Tian",
+   "Hua Wu"
+  ],
+  "abstract": "Software engineers working with the same programming language (PL) may speak different natural languages (NLs) and vice versa, erecting huge barriers to communication and working efficiency. Recent studies have demonstrated the effectiveness of generative pre-training in computer programs, yet they are always English-centric. In this work, we step towards bridging the gap between multilingual NLs and multilingual PLs for large language models (LLMs). We release ERNIE-Code, a unified pre-trained language model for 116 NLs and 6 PLs. We employ two methods for universal cross-lingual pre-training: span-corruption language modeling that learns patterns from monolingual NL or PL; and pivot-based translation language modeling that relies on parallel data of many NLs and PLs. Extensive results show that ERNIE-Code outperforms previous multilingual LLMs for PL or NL across a wide range of end tasks of code intelligence, including multilingual code-to-text, text-to-code, code-to-code, and text-to-text generation. We further show its advantage of zero-shot prompting on multilingual code summarization and text-to-text translation. We release our code and pre-trained checkpoints.",
+  "published": "2022-12-13T17:21:44+00:00",
+  "updated": "2023-05-19T14:14:30+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG",
+   "cs.PL",
+   "cs.SE"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2212.06742v2",
+  "entry_id": "http://arxiv.org/abs/2212.06742v2",
+  "pdf_path": "data/papers/2212.06742.pdf"
+ },
+ "text_length": 106114,
+ "word_count": 13184,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "ERNIE-Code",
+   "parameters": "110M, 155M, 340M, 560M, 1.3B, 3.1B, 3.4B, 10B",
+   "parameters_millions": 10000,
+   "model_family": "ERNIE",
+   "date_created": "2022-12-13",
+   "organization": "Baidu",
+   "innovation": "Pivot-based translation language modeling (PTLM): jointly learns alignment between multiple natural languages and programming languages by using English as a pivot, enabling zero-shot translation between unseen NL-PL pairs; Enhanced SentencePiece tokenizer: introduces explicit tokens for whitespace indentation lengths in programming languages to better capture PL syntax structure.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Span-corruption denoising, pivot-based translation language modeling",
+   "pretraining_corpus": "Multilingual natural languages (116 languages) and programming languages (6 languages); parallel data of many NLs and PLs",
+   "finetuning_task": "Multilingual code summarization, text-to-code generation, documentation translation, code repair",
+   "optimizer": "Adafactor (pre-training), AdamW (fine-tuning)",
+   "hardware_used": "NVIDIA A100 GPU, NVIDIA V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Bridging the gap between multilingual NLs and multilingual PLs for LLMs, mitigating English-centric bias in code pre-training.",
+   "application": "Code intelligence tasks including multilingual code-to-text, text-to-code, code-to-code, text-to-text generation, code summarization, and text-to-text translation",
+   "paper_title": "ERNIE-Code: Beyond English-Centric Cross-lingual Pretraining for Programming Languages",
+   "training_corpus_size": "1.5 billion document pages",
+   "finetuning_data": "Multilingual text-to-code generation, code summarization, documentation translation, code repair",
+   "tokenizer": "Custom tokenizer encoding whitespace characters",
+   "supported_language": "101 natural languages, programming languages, English, Go, Java, JavaScript, PHP, Python, Ruby, Chinese, multilingual programming languages, Japanese, Russian, Spanish, Icelandic, Czech, Malay, Korean, Portuguese, Arabic",
+   "hardware_description": "32 NVIDIA A100 GPUs with 40G memory for pre-training; 8 NVIDIA V100 GPUs with 32G memory for fine-tuning",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/PaddlePaddle/ERNIE-Code",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512, 1024",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training with SCLM and PTLM -> Prompt-based fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "BFloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5",
+   "optimizer_innovation": null,
+   "benchmark_result": "mCoNaLa translate-train Spanish: BLEU-4 1.90/2.51, ROUGE-L 32.51/33.87, chrF 23.22/24.00; Japanese: BLEU-4 0.30/0.58, ROUGE-L 10.62/8.55, chrF 9.16/8.81; Russian: BLEU-4 0.43/0.28, ROUGE-L 5.01/5.69, chrF 16.60/15.24",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "ERNIE-Code": {
+   "application": [
+    "Code intelligence tasks including multilingual code-to-text",
+    "text-to-code",
+    "code-to-code",
+    "text-to-text generation",
+    "code summarization",
+    "text-to-text translation"
+   ],
+   "base_model": [
+    "T5"
+   ],
+   "finetuning_data": [],
+   "finetuning_task": [
+    "Multilingual code summarization",
+    "text-to-code generation",
+    "documentation translation",
+    "code repair"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU, NVIDIA V100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "ERNIE"
+   ],
+   "model_name": [
+    "ERNIE-Code"
+   ],
+   "optimizer": [
+    "Adafactor (pre-training), AdamW (fine-tuning)"
+   ],
+   "organization": [
+    "Baidu"
+   ],
+   "parameters": [
+    "110M",
+    "155M",
+    "340M",
+    "560M",
+    "1.3B",
+    "3.1B",
+    "3.4B",
+    "10B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Span-corruption denoising, pivot-based translation language modeling"
+   ],
+   "quantization_precision": [
+    "BFloat16"
+   ],
+   "research_problem": [
+    "Bridging the gap between multilingual NLs and multilingual PLs for LLMs"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Japanese",
+    "Russian",
+    "Spanish",
+    "Icelandic",
+    "Czech",
+    "Malay",
+    "Korean",
+    "Portuguese",
+    "Arabic"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ERNIE-Code": {
+    "finetuning_data": {
+     "candidates": [
+      "Multilingual text-to-code generation",
+      "code summarization",
+      "documentation translation",
+      "code repair"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multilingual text-to-code generation",
+       "reason": "describes a task, not a dataset"
+      },
+      {
+       "value": "code summarization",
+       "reason": "describes a task, not a dataset"
+      },
+      {
+       "value": "documentation translation",
+       "reason": "describes a task, not a dataset"
+      },
+      {
+       "value": "code repair",
+       "reason": "describes a task, not a dataset"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Multilingual natural languages (116 languages) and programming languages (6 languages)",
+      "parallel data of many NLs and PLs"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multilingual natural languages (116 languages) and programming languages (6 languages)",
+       "reason": "describes data composition rather than naming a specific corpus or dataset"
+      },
+      {
+       "value": "parallel data of many NLs and PLs",
+       "reason": "describes data type/breadth rather than naming a specific corpus or dataset"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Bridging the gap between multilingual NLs and multilingual PLs for LLMs",
+      "mitigating English-centric bias in code pre-training."
+     ],
+     "accepted": [
+      "Bridging the gap between multilingual NLs and multilingual PLs for LLMs"
+     ],
+     "dropped": [
+      {
+       "value": "mitigating English-centric bias in code pre-training.",
+       "reason": "describes an action/solution rather than the problem itself"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "101 natural languages",
+      "programming languages",
+      "English",
+      "Go",
+      "Java",
+      "JavaScript",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Chinese",
+      "multilingual programming languages",
+      "Japanese",
+      "Russian",
+      "Spanish",
+      "Icelandic",
+      "Czech",
+      "Malay",
+      "Korean",
+      "Portuguese",
+      "Arabic"
+     ],
+     "accepted": [
+      "English",
+      "Chinese",
+      "Japanese",
+      "Russian",
+      "Spanish",
+      "Icelandic",
+      "Czech",
+      "Malay",
+      "Korean",
+      "Portuguese",
+      "Arabic"
+     ],
+     "dropped": [
+      {
+       "value": "Go",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Java",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "JavaScript",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "PHP",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Python",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Ruby",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "101 natural languages",
+       "reason": "counts/characterizes languages instead of naming a specific one"
+      },
+      {
+       "value": "programming languages",
+       "reason": "not a natural language"
+      },
+      {
+       "value": "multilingual programming languages",
+       "reason": "not a natural language and characterizes languages"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 40,
+   "dropped": 16,
+   "llm_calls": 1,
+   "values_sent_to_llm": 23
+  }
+ },
+ "contributions": [
+  {
+   "label": "ERNIE-Code",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ERNIE-Code",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ERNIE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-12-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Pivot-based translation language modeling (PTLM): jointly learns alignment between multiple natural languages and programming languages by using English as a pivot, enabling zero-shot translation between unseen NL-PL pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enhanced SentencePiece tokenizer: introduces explicit tokens for whitespace indentation lengths in programming languages to better capture PL syntax structure.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Span-corruption denoising, pivot-based translation language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multilingual code summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Text-to-code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Documentation translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Code repair",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor (pre-training), AdamW (fine-tuning)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Custom tokenizer encoding whitespace characters",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "155M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "560M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "10B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 10000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU, NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 NVIDIA A100 GPUs with 40G memory for pre-training; 8 NVIDIA V100 GPUs with 32G memory for fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code intelligence tasks including multilingual code-to-text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-code",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code-to-code",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-text translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/PaddlePaddle/ERNIE-Code",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Bridging the gap between multilingual NLs and multilingual PLs for LLMs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.5 billion document pages",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Icelandic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malay",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512, 1024",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training with SCLM and PTLM -> Prompt-based fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "BFloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MCoNaLa translate-train Spanish: BLEU-4 1.90/2.51, ROUGE-L 32.51/33.87, chrF 23.22/24.00",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Japanese: BLEU-4 0.30/0.58, ROUGE-L 10.62/8.55, chrF 9.16/8.81",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Russian: BLEU-4 0.43/0.28, ROUGE-L 5.01/5.69, chrF 16.60/15.24",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1927612",
+  "contribution_ids": [
+   "R1927614"
+  ],
+  "new_contribution_ids": [
+   "R1927614"
+  ],
+  "comparison_updated": null
+ }
+}

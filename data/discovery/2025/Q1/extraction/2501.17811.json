@@ -1,0 +1,551 @@
+{
+ "arxiv_id": "2501.17811",
+ "status": "completed",
+ "timestamp": "2026-08-29T17:35:33.914117",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2501.17811",
+  "title": "Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling",
+  "authors": [
+   "Xiaokang Chen",
+   "Zhiyu Wu",
+   "Xingchao Liu",
+   "Zizheng Pan",
+   "Wen Liu",
+   "Zhenda Xie",
+   "Xingkai Yu",
+   "Chong Ruan"
+  ],
+  "abstract": "In this work, we introduce Janus-Pro, an advanced version of the previous work Janus. Specifically, Janus-Pro incorporates (1) an optimized training strategy, (2) expanded training data, and (3) scaling to larger model size. With these improvements, Janus-Pro achieves significant advancements in both multimodal understanding and text-to-image instruction-following capabilities, while also enhancing the stability of text-to-image generation. We hope this work will inspire further exploration in the field. Code and models are publicly available.",
+  "published": "2025-01-29T18:00:19+00:00",
+  "updated": "2025-01-29T18:00:19+00:00",
+  "doi": null,
+  "primary_category": "cs.AI",
+  "categories": [
+   "cs.AI",
+   "cs.CL",
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2501.17811v1",
+  "entry_id": "http://arxiv.org/abs/2501.17811v1",
+  "pdf_path": "data/papers/2501.17811.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 36034,
+ "word_count": 3385,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "Janus-Pro",
+   "parameters": "1B, 1.5B, 7B",
+   "parameters_millions": 7000,
+   "model_family": "Janus",
+   "date_created": "2025-01-29",
+   "organization": "DeepSeek-AI",
+   "innovation": "Decoupled visual encoding/decoding: uses separate understanding and generation adaptors to map image features and VQ codebook embeddings into the LLM input space, concatenated as a single sequence; Optimized three-stage training: extends Stage I for pixel dependence modeling, drops ImageNet in Stage II to focus on normal text-to-image data, and adjusts Stage III data ratios to 5:1:4 to balance understanding and generation; Data scaling: incorporates ~90M multimodal understanding samples and ~72M synthetic aesthetic samples to improve convergence and generation quality.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal understanding and text-to-image generation",
+   "pretraining_corpus": "YFCC, Docmatix, MEME, Chinese conversational data, synthetic aesthetic data",
+   "finetuning_task": "Unified multimodal instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "Nvidia A100 (40GB) GPUs",
+   "extension": "Decouples visual encoding for understanding and generation tasks to mitigate task conflict",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Unified multimodal understanding and generation",
+   "application": "Multimodal understanding, text-to-image generation, instruction following",
+   "paper_title": "Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling",
+   "training_corpus_size": "~90M samples for understanding, ~72M synthetic aesthetic samples",
+   "finetuning_data": "YFCC, Docmatix, MEME, Chinese conversational data, synthetic aesthetic data",
+   "tokenizer": "VQ tokenizer, Text Tokenizer",
+   "supported_language": "English, Chinese",
+   "hardware_description": "16/32 nodes, each equipped with 8 Nvidia A100 (40GB) GPUs for 1.5B/7B model",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "1B (dense)",
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Stage 1, Stage 2, Stage 3",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Decoupled visual encoding with unified autoregressive transformer",
+   "vision_encoder": "SigLIP encoder, VQ tokenizer, SigLIP-Large-Patch16-384",
+   "base_model": "DeepSeek-LLM",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMBench: 79.2; GenEval: 0.80; POPE: 86.2/87.4; MME-P: 1444.0/1567.1; MMB: 75.5/79.2; SEED: 68.3/72.1; GQA: 59.3/62.0; MMMU: 36.3/41.0; MM-Vet: 39.8/50.0; GenEval Overall: 0.73/0.80; DPG-Bench Overall: 88.30/88.30",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16",
+   "post_training_infrastructure": "HAI-LLM framework"
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Janus-Pro": {
+   "application": [
+    "Multimodal understanding",
+    "text-to-image generation",
+    "instruction following"
+   ],
+   "base_model": [
+    "DeepSeek-LLM"
+   ],
+   "finetuning_data": [
+    "YFCC",
+    "Docmatix",
+    "MEME",
+    "Chinese conversational data",
+    "synthetic aesthetic data"
+   ],
+   "finetuning_task": [
+    "Unified multimodal instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Decoupled visual encoding with unified autoregressive transformer"
+   ],
+   "hardware_used": [
+    "Nvidia A100 (40GB) GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "Janus"
+   ],
+   "model_name": [
+    "Janus-Pro"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "DeepSeek-AI"
+   ],
+   "parameters": [
+    "1B",
+    "1.5B",
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "YFCC",
+    "Docmatix",
+    "MEME",
+    "Chinese conversational data",
+    "synthetic aesthetic data"
+   ],
+   "pretraining_task": [
+    "Multimodal understanding and text-to-image generation"
+   ],
+   "research_problem": [
+    "Unified multimodal understanding and generation"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "SigLIP encoder",
+    "VQ tokenizer",
+    "SigLIP-Large-Patch16-384"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Janus-Pro": {}
+  },
+  "counts": {
+   "kept": 33,
+   "dropped": 0,
+   "llm_calls": 1,
+   "values_sent_to_llm": 18
+  }
+ },
+ "contributions": [
+  {
+   "label": "Janus-Pro",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Janus-Pro",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Janus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek-AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Decoupled visual encoding/decoding: uses separate understanding and generation adaptors to map image features and VQ codebook embeddings into the LLM input space, concatenated as a single sequence",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Optimized three-stage training: extends Stage I for pixel dependence modeling, drops ImageNet in Stage II to focus on normal text-to-image data, and adjusts Stage III data ratios to 5:1:4 to balance understanding and generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Data scaling: incorporates ~90M multimodal understanding samples and ~72M synthetic aesthetic samples to improve convergence and generation quality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal understanding and text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Docmatix",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MEME",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Chinese conversational data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Synthetic aesthetic data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Unified multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "VQ tokenizer, Text Tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia A100 (40GB) GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "16/32 nodes, each equipped with 8 Nvidia A100 (40GB) GPUs for 1.5B/7B model",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unified multimodal understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~90M samples for understanding, ~72M synthetic aesthetic samples",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "YFCC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Docmatix",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MEME",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Chinese conversational data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Synthetic aesthetic data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage 1, Stage 2, Stage 3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Decoupled visual encoding with unified autoregressive transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQ tokenizer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-Large-Patch16-384",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "DeepSeek-LLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 79.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GenEval: 0.80",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 86.2/87.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-P: 1444.0/1567.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 75.5/79.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 68.3/72.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 59.3/62.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 36.3/41.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 39.8/50.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GenEval Overall: 0.73/0.80",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DPG-Bench Overall: 88.30/88.30",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "HAI-LLM framework",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1740061",
+  "contribution_ids": [
+   "R1740063",
+   "R1740064",
+   "R1740065",
+   "R1740066",
+   "R1924871"
+  ],
+  "new_contribution_ids": [
+   "R1924871"
+  ],
+  "comparison_updated": null
+ }
+}

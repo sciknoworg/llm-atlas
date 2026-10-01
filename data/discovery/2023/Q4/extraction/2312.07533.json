@@ -1,0 +1,686 @@
+{
+ "arxiv_id": "2312.07533",
+ "status": "completed",
+ "timestamp": "2026-08-28T16:16:55.473374",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2312.07533",
+  "title": "VILA: On Pre-training for Visual Language Models",
+  "authors": [
+   "Ji Lin",
+   "Hongxu Yin",
+   "Wei Ping",
+   "Yao Lu",
+   "Pavlo Molchanov",
+   "Andrew Tao",
+   "Huizi Mao",
+   "Jan Kautz",
+   "Mohammad Shoeybi",
+   "Song Han"
+  ],
+  "abstract": "Visual language models (VLMs) rapidly progressed with the recent success of large language models. There have been growing efforts on visual instruction tuning to extend the LLM with visual inputs, but lacks an in-depth study of the visual language pre-training process, where the model learns to perform joint modeling on both modalities. In this work, we examine the design options for VLM pre-training by augmenting LLM towards VLM through step-by-step controllable comparisons. We introduce three main findings: (1) freezing LLMs during pre-training can achieve decent zero-shot performance, but lack in-context learning capability, which requires unfreezing the LLM; (2) interleaved pre-training data is beneficial whereas image-text pairs alone are not optimal; (3) re-blending text-only instruction data to image-text data during instruction fine-tuning not only remedies the degradation of text-only tasks, but also boosts VLM task accuracy. With an enhanced pre-training recipe we build VILA, a Visual Language model family that consistently outperforms the state-of-the-art models, e.g., LLaVA-1.5, across main benchmarks without bells and whistles. Multi-modal pre-training also helps unveil appealing properties of VILA, including multi-image reasoning, enhanced in-context learning, and better world knowledge.",
+  "published": "2023-12-12T18:58:18+00:00",
+  "updated": "2024-05-16T21:21:30+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2312.07533v4",
+  "entry_id": "http://arxiv.org/abs/2312.07533v4",
+  "pdf_path": "data/papers/2312.07533.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 73341,
+ "word_count": 6080,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "VILA",
+   "parameters": "1B, 7B, 8B, 13B",
+   "parameters_millions": 13000,
+   "model_family": "VILA",
+   "date_created": "2023-12-12",
+   "organization": "NVIDIA",
+   "innovation": "Freezing LLM during pre-training: freezes the LLM weights during visual language pre-training to achieve decent zero-shot performance, but lacks in-context learning capability, which requires unfreezing the LLM to encourage deep embedding alignment; Interleaved pre-training data: combines image-text pairs with text-only data during pre-training to provide accurate gradient updates and maintain text-only capability, whereas image-text pairs alone are not optimal; Re-blending text-only instruction data during SFT: adds text-only instruction data back during the instruction fine-tuning stage to remediate text-only task degradation and boost VLM task accuracy.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Auto-regressive language modeling",
+   "pretraining_corpus": "LLaVA-665K, ShareGPT4V, LLaVA-Instruct-150K, COCO Captions, Visual Genome",
+   "finetuning_task": "Visual instruction tuning, Joint supervised fine-tuning (SFT) on visual-language and text-only instruction data",
+   "optimizer": "AdamW",
+   "hardware_used": "A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Visual language pre-training process design",
+   "application": "Visual language tasks, zero-shot generalization, few-shot in-context learning, multi-image reasoning, on-device deployment",
+   "paper_title": "VILA: On Pre-training for Visual Language Models",
+   "training_corpus_size": "50M images",
+   "finetuning_data": "Visual instruction datasets converted to FLAN style, 1M text-only instruction tuning data sampled from FLAN, LLaVA-1.5 SFT data blend, ShareGPT4V",
+   "tokenizer": "LLaMA tokenizer",
+   "supported_language": "English",
+   "hardware_description": "16 A100 GPU nodes (128 GPUs total)",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/NVIDIA/VILA",
+   "context_length": null,
+   "activated_parameters": "7B",
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Projector initialization -> Visual language pre-training -> Visual instruction tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion via projector connecting LLM and ViT",
+   "vision_encoder": "ViT (Vision Transformer), OpenAI CLIP-L",
+   "base_model": "Pre-trained text-only LLM",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 80.8; MM-Vet: 38.8; GQA: 80.0; LLaVA-Bench: 57.5; VizWiz: 72.8; SQA-IMG: 63.6; MMBench-CN: 60.6; TextVQA: 84.9; MME: 64.3; POPE: 78.2; MMBench: 1570.1; VQAv2: 79.9; GQA: 62.3; VisWiz: 57.8; SQAI: 68.2; VQAT: 64.4; POPE: 85.5; MME: 1533.0; MMB: 68.9; MMBCN: 61.7; SEED: 69.7; MM-Vet: 34.9; GQA: 63.3; VisWiz: 60.6; SQAI: 73.7; VQAT: 66.6; POPE: 84.2; MME: 1570.1; MMB: 70.3; MMBCN: 64.3; SEED: 73.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "VILA": {
+   "application": [
+    "Visual language tasks",
+    "multi-image reasoning"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "Visual instruction datasets converted to FLAN style",
+    "1M text-only instruction tuning data sampled from FLAN",
+    "LLaVA-1.5 SFT data blend",
+    "ShareGPT4V"
+   ],
+   "finetuning_task": [
+    "Visual instruction tuning",
+    "Joint supervised fine-tuning (SFT) on visual-language and text-only instruction data"
+   ],
+   "fusion_architecture": [
+    "Mid-fusion via projector connecting LLM and ViT"
+   ],
+   "hardware_used": [
+    "A100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "VILA"
+   ],
+   "model_name": [
+    "VILA"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "NVIDIA"
+   ],
+   "parameters": [
+    "1B",
+    "7B",
+    "8B",
+    "13B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "LLaVA-665K",
+    "ShareGPT4V",
+    "LLaVA-Instruct-150K",
+    "COCO Captions",
+    "Visual Genome"
+   ],
+   "pretraining_task": [
+    "Auto-regressive language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT (Vision Transformer)",
+    "OpenAI CLIP-L"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "VILA": {
+    "application": {
+     "candidates": [
+      "Visual language tasks",
+      "zero-shot generalization",
+      "few-shot in-context learning",
+      "multi-image reasoning",
+      "on-device deployment"
+     ],
+     "accepted": [
+      "Visual language tasks",
+      "multi-image reasoning"
+     ],
+     "dropped": [
+      {
+       "value": "zero-shot generalization",
+       "reason": "Describes a capability rather than a concrete application or domain. (cached)"
+      },
+      {
+       "value": "on-device deployment",
+       "reason": "Describes a deployment method, not a practical use or domain. (cached)"
+      },
+      {
+       "value": "few-shot in-context learning",
+       "reason": "Describes a learning paradigm/technique, not a practical application or domain."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "Pre-trained text-only LLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Pre-trained text-only LLM",
+       "reason": "Generic description/category rather than a specific named model."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Visual language pre-training process design"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Visual language pre-training process design",
+       "reason": "Describes a methodological process or solution design rather than a research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 29,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 17
+  }
+ },
+ "contributions": [
+  {
+   "label": "VILA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "VILA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "VILA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-12-12",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "NVIDIA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Freezing LLM during pre-training: freezes the LLM weights during visual language pre-training to achieve decent zero-shot performance, but lacks in-context learning capability, which requires unfreezing the LLM to encourage deep embedding alignment",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved pre-training data: combines image-text pairs with text-only data during pre-training to provide accurate gradient updates and maintain text-only capability, whereas image-text pairs alone are not optimal",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Re-blending text-only instruction data during SFT: adds text-only instruction data back during the instruction fine-tuning stage to remediate text-only task degradation and boost VLM task accuracy.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Auto-regressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA-665K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA-Instruct-150K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Joint supervised fine-tuning (SFT) on visual-language and text-only instruction data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 13000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "16 A100 GPU nodes (128 GPUs total)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-image reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/NVIDIA/VILA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "50M images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual instruction datasets converted to FLAN style",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "1M text-only instruction tuning data sampled from FLAN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-1.5 SFT data blend",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Projector initialization -> Visual language pre-training -> Visual instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion via projector connecting LLM and ViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (Vision Transformer)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "OpenAI CLIP-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 80.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 38.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVA-Bench: 57.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 72.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQA-IMG: 63.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN: 60.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 84.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 64.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 78.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 1570.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 79.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 62.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisWiz: 57.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQAI: 68.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAT: 64.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 85.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1533.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 68.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBCN: 61.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 69.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 34.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 63.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisWiz: 60.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQAI: 73.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAT: 66.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 84.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1570.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 70.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBCN: 64.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 73.0",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1772370",
+  "contribution_ids": [
+   "R1772372",
+   "R1772373",
+   "R1772374",
+   "R1924193"
+  ],
+  "new_contribution_ids": [
+   "R1924193"
+  ],
+  "comparison_updated": null
+ }
+}

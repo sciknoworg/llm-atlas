@@ -1,0 +1,981 @@
+{
+ "arxiv_id": "2311.03079",
+ "status": "completed",
+ "timestamp": "2026-08-30T21:55:21.699759",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2311.03079",
+  "title": "CogVLM: Visual Expert for Pretrained Language Models",
+  "authors": [
+   "Weihan Wang",
+   "Qingsong Lv",
+   "Wenmeng Yu",
+   "Wenyi Hong",
+   "Ji Qi",
+   "Yan Wang",
+   "Junhui Ji",
+   "Zhuoyi Yang",
+   "Lei Zhao",
+   "Xixuan Song",
+   "Jiazheng Xu",
+   "Bin Xu",
+   "Juanzi Li",
+   "Yuxiao Dong",
+   "Ming Ding",
+   "Jie Tang"
+  ],
+  "abstract": "We introduce CogVLM, a powerful open-source visual language foundation model. Different from the popular shallow alignment method which maps image features into the input space of language model, CogVLM bridges the gap between the frozen pretrained language model and image encoder by a trainable visual expert module in the attention and FFN layers. As a result, CogVLM enables deep fusion of vision language features without sacrificing any performance on NLP tasks. CogVLM-17B achieves state-of-the-art performance on 10 classic cross-modal benchmarks, including NoCaps, Flicker30k captioning, RefCOCO, RefCOCO+, RefCOCOg, Visual7W, GQA, ScienceQA, VizWiz VQA and TDIUC, and ranks the 2nd on VQAv2, OKVQA, TextVQA, COCO captioning, etc., surpassing or matching PaLI-X 55B. Codes and checkpoints are available at https://github.com/THUDM/CogVLM.",
+  "published": "2023-11-06T13:04:39+00:00",
+  "updated": "2024-02-04T08:23:04+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2311.03079v2",
+  "entry_id": "http://arxiv.org/abs/2311.03079v2",
+  "pdf_path": "data/papers/2311.03079.pdf"
+ },
+ "text_length": 60593,
+ "word_count": 4777,
+ "models_extracted": 7,
+ "extraction_data": [
+  {
+   "model_name": "CogVLM",
+   "parameters": "1.5B, 6.6B, 7B, 17B",
+   "parameters_millions": 17000,
+   "model_family": "CogVLM",
+   "date_created": "2023-11-06",
+   "organization": "Zhipu Ai",
+   "innovation": "Deep fusion paradigm: Integrates a Visual Expert (VE) module directly into LLM layers instead of using shallow alignment (like BLIP-2), significantly improving performance on knowledge-intensive and reasoning tasks; Visual Self-Supervised Learning (SSL) loss: Predicts CLIP features of the next position for visual features during pretraining to enhance visual representation learning; Exponential Moving Average (EMA): Applied during pretraining to stabilize training and improve performance across tasks; LLM-weight initialization: Initializes the visual expert with weights from the pre-trained LLM, providing a more effective starting point than random initialization.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "1.5B tokens of multimodal data",
+   "finetuning_task": "Supervised fine-tuning (SFT), Instruction-tuned supervised fine-tuning (SFT) for VQA, captioning, and visual grounding, Multitask visual instruction tuning, Visual Question Answering (VQA), visual grounding, sentiment understanding",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": "MLP adapter connecting vision encoder to LLM",
+   "blog_post": null,
+   "license": "open-source",
+   "research_problem": "Multimodal understanding and reasoning, specifically addressing object hallucination and visual grounding in large language models.",
+   "application": "Visual Question Answering (VQA), visual grounding, sentiment understanding, activity recognition, scene classification, object recognition, counting",
+   "paper_title": "CogVLM: Visual Expert for Pretrained Language Models",
+   "training_corpus_size": "~1.5B image-text pairs, 40M visual grounding pairs",
+   "finetuning_data": "VQAv2, OKVQA, TextVQA, OCRVQA, ScienceQA, LLaVA-Instruct, LRV-Instruction, LLaVAR, Flickr30KEntities, RefCOCO, Visual7W, VisualGenome, GroundedCoT-VQA, NoCaps, COCO, TextCaps, Visual instruction tuning datasets, POPE, MMMU, MathVista, RefCOCOg, Flickr30K-Entities, TDIUC",
+   "tokenizer": "LLaMA tokenizer (BPE)",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/THUDM/CogVLM",
+   "context_length": null,
+   "activated_parameters": "17B",
+   "attention_mechanism": "Causal mask (found superior to full mask for LLM structure), Causal mask on visual tokens",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage pretraining: Stage 1 image captioning (120k iterations), Stage 2 mixture of image captioning and REC (60k iterations) with input resolution change from 224x224 to 490x490.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Deep fusion via trainable visual expert module in attention and FFN layers",
+   "vision_encoder": "Frozen pretrained image encoder, EVA2-E (300M), EVA2-L (4.4B), EVA2-CLIP-E",
+   "base_model": "Frozen pretrained language model (e.g., LLaMA2)",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMMU: 34.75; POPE: 87.88; MathVista: 77.25; SEED: 40.75; RefCOCO: 30.5; MMBench: 65.0; MM-Vet: 80.0; RefCOCO+: 88.5; RefCOCOg: 71.5; NoCaps: 95.0; Flickr: 70.5; ScienceQA: 64.5; VQAv2: 82.25; OKVQA: 70.5; TextVQA: 64.5; NoCaps val: 132.6; NoCaps test: 128.3; Flickr COCO Karp.: 128.0; COCO Karp. test: 126.4; TextCaps: 148.7; Seed-Bench: 88.14; MMBench: 85.83; LLaVA-Bench: 86.34; MMMU: 41.1; POPE: 87.9; MathVista: 35.2; RefCOCO val: 92.76; RefCOCO+ test-A: 92.91; RefCOCOg test: 90.79; State-of-the-art performance on 17 classic multi-modal benchmarks; State-of-the-art on VQAv2, OK-VQA, TextVQA, DocVQA; TDIUC: 94.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 7,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "CogVLM": {
+   "application": [
+    "Visual Question Answering (VQA)",
+    "visual grounding",
+    "sentiment understanding",
+    "activity recognition",
+    "scene classification",
+    "object recognition",
+    "counting"
+   ],
+   "attention_mechanism": [
+    "Causal mask on visual tokens"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "VQAv2",
+    "OKVQA",
+    "TextVQA",
+    "OCRVQA",
+    "ScienceQA",
+    "LLaVA-Instruct",
+    "LRV-Instruction",
+    "LLaVAR",
+    "Flickr30KEntities",
+    "RefCOCO",
+    "Visual7W",
+    "VisualGenome",
+    "GroundedCoT-VQA",
+    "NoCaps",
+    "COCO",
+    "TextCaps",
+    "POPE",
+    "MMMU",
+    "MathVista",
+    "RefCOCOg",
+    "Flickr30K-Entities",
+    "TDIUC"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)",
+    "captioning",
+    "visual grounding",
+    "Multitask visual instruction tuning",
+    "Visual Question Answering (VQA)",
+    "sentiment understanding"
+   ],
+   "fusion_architecture": [
+    "Deep fusion via trainable visual expert module in attention and FFN layers"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "license": [
+    "open-source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "CogVLM"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Zhipu Ai"
+   ],
+   "parameters": [
+    "1.5B",
+    "6.6B",
+    "7B",
+    "17B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [
+    "Multimodal understanding and reasoning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EVA2-E (300M)",
+    "EVA2-L (4.4B)",
+    "EVA2-CLIP-E"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "CogVLM": {
+    "attention_mechanism": {
+     "candidates": [
+      "Causal mask (found superior to full mask for LLM structure)",
+      "Causal mask on visual tokens"
+     ],
+     "accepted": [
+      "Causal mask on visual tokens"
+     ],
+     "dropped": [
+      {
+       "value": "Causal mask (found superior to full mask for LLM structure)",
+       "reason": "Contains trailing qualifier/result claim rather than standalone mechanism name"
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "Frozen pretrained language model (e.g., LLaMA2)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Frozen pretrained language model (e.g., LLaMA2)",
+       "reason": "Describes a category/configuration with an example rather than naming a specific base model"
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "VQAv2",
+      "OKVQA",
+      "TextVQA",
+      "OCRVQA",
+      "ScienceQA",
+      "LLaVA-Instruct",
+      "LRV-Instruction",
+      "LLaVAR",
+      "Flickr30KEntities",
+      "RefCOCO",
+      "Visual7W",
+      "VisualGenome",
+      "GroundedCoT-VQA",
+      "NoCaps",
+      "COCO",
+      "TextCaps",
+      "Visual instruction tuning datasets",
+      "POPE",
+      "MMMU",
+      "MathVista",
+      "RefCOCOg",
+      "Flickr30K-Entities",
+      "TDIUC"
+     ],
+     "accepted": [
+      "VQAv2",
+      "OKVQA",
+      "TextVQA",
+      "OCRVQA",
+      "ScienceQA",
+      "LLaVA-Instruct",
+      "LRV-Instruction",
+      "LLaVAR",
+      "Flickr30KEntities",
+      "RefCOCO",
+      "Visual7W",
+      "VisualGenome",
+      "GroundedCoT-VQA",
+      "NoCaps",
+      "COCO",
+      "TextCaps",
+      "POPE",
+      "MMMU",
+      "MathVista",
+      "RefCOCOg",
+      "Flickr30K-Entities",
+      "TDIUC"
+     ],
+     "dropped": [
+      {
+       "value": "Visual instruction tuning datasets",
+       "reason": "Generic description/category rather than a specific dataset name"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Instruction-tuned supervised fine-tuning (SFT) for VQA",
+      "captioning",
+      "visual grounding",
+      "Multitask visual instruction tuning",
+      "Visual Question Answering (VQA)",
+      "sentiment understanding"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)",
+      "captioning",
+      "visual grounding",
+      "Multitask visual instruction tuning",
+      "Visual Question Answering (VQA)",
+      "sentiment understanding"
+     ],
+     "dropped": [
+      {
+       "value": "Instruction-tuned supervised fine-tuning (SFT) for VQA",
+       "reason": "Describes the fine-tuning methodology rather than the specific task objective"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "CogVLM"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "CogVLM",
+       "reason": "Names a specific model rather than a broader family or lineage"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "1.5B tokens of multimodal data"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "1.5B tokens of multimodal data",
+       "reason": "Describes size and type rather than naming an identifiable dataset or corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal understanding and reasoning",
+      "specifically addressing object hallucination and visual grounding in large language models."
+     ],
+     "accepted": [
+      "Multimodal understanding and reasoning"
+     ],
+     "dropped": [
+      {
+       "value": "specifically addressing object hallucination and visual grounding in large language models.",
+       "reason": "Sentence fragment describing the model's solution/action rather than a standalone noun phrase naming the problem"
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Frozen pretrained image encoder",
+      "EVA2-E (300M)",
+      "EVA2-L (4.4B)",
+      "EVA2-CLIP-E"
+     ],
+     "accepted": [
+      "EVA2-E (300M)",
+      "EVA2-L (4.4B)",
+      "EVA2-CLIP-E"
+     ],
+     "dropped": [
+      {
+       "value": "Frozen pretrained image encoder",
+       "reason": "Describes a configuration/state rather than naming a specific encoder model or component"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 53,
+   "dropped": 8,
+   "llm_calls": 1,
+   "values_sent_to_llm": 24
+  }
+ },
+ "contributions": [
+  {
+   "label": "CogVLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "CogVLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-11-06",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Zhipu Ai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Deep fusion paradigm: Integrates a Visual Expert (VE) module directly into LLM layers instead of using shallow alignment (like BLIP-2), significantly improving performance on knowledge-intensive and reasoning tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Visual Self-Supervised Learning (SSL) loss: Predicts CLIP features of the next position for visual features during pretraining to enhance visual representation learning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Exponential Moving Average (EMA): Applied during pretraining to stabilize training and improve performance across tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "LLM-weight initialization: Initializes the visual expert with weights from the pre-trained LLM, providing a more effective starting point than random initialization.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multitask visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual Question Answering (VQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sentiment understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "17B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 17000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Question Answering (VQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Sentiment understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Activity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scene classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Counting",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/THUDM/CogVLM",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal understanding and reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~1.5B image-text pairs, 40M visual grounding pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OKVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCRVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Instruct",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LRV-Instruction",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVAR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30KEntities",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual7W",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VisualGenome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GroundedCoT-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NoCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "POPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MMMU",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MathVista",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCOg",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K-Entities",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TDIUC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "17B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal mask on visual tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage pretraining: Stage 1 image captioning (120k iterations), Stage 2 mixture of image captioning and REC (60k iterations) with input resolution change from 224x224 to 490x490.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Deep fusion via trainable visual expert module in attention and FFN layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA2-E (300M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA2-L (4.4B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA2-CLIP-E",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 34.75",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 87.88",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 77.25",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 40.75",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO: 30.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 65.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 80.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg: 71.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps: 95.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr: 70.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA: 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 82.25",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA: 70.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA: 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps val: 132.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps test: 128.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr COCO Karp.: 128.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Karp. test: 126.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextCaps: 148.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Seed-Bench: 88.14",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 85.83",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVA-Bench: 86.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 41.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 87.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 35.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO val: 92.76",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ test-A: 92.91",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg test: 90.79",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art performance on 17 classic multi-modal benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on VQAv2, OK-VQA, TextVQA, DocVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TDIUC: 94.0",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1777099",
+  "contribution_ids": [
+   "R1777101",
+   "R1777102",
+   "R1777103",
+   "R1777104",
+   "R1777105",
+   "R1777106",
+   "R1927448"
+  ],
+  "new_contribution_ids": [
+   "R1927448"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,551 @@
+{
+ "arxiv_id": "2209.14375",
+ "status": "completed",
+ "timestamp": "2026-08-27T22:58:36.465309",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2209.14375",
+  "title": "Improving alignment of dialogue agents via targeted human judgements",
+  "authors": [
+   "Amelia Glaese",
+   "Nat McAleese",
+   "Maja Tr\u0119bacz",
+   "John Aslanides",
+   "Vlad Firoiu",
+   "Timo Ewalds",
+   "Maribeth Rauh",
+   "Laura Weidinger",
+   "Martin Chadwick",
+   "Phoebe Thacker",
+   "Lucy Campbell-Gillingham",
+   "Jonathan Uesato",
+   "Po-Sen Huang",
+   "Ramona Comanescu",
+   "Fan Yang",
+   "Abigail See",
+   "Sumanth Dathathri",
+   "Rory Greig",
+   "Charlie Chen",
+   "Doug Fritz",
+   "Jaume Sanchez Elias",
+   "Richard Green",
+   "So\u0148a Mokr\u00e1",
+   "Nicholas Fernando",
+   "Boxi Wu",
+   "Rachel Foley",
+   "Susannah Young",
+   "Iason Gabriel",
+   "William Isaac",
+   "John Mellor",
+   "Demis Hassabis",
+   "Koray Kavukcuoglu",
+   "Lisa Anne Hendricks",
+   "Geoffrey Irving"
+  ],
+  "abstract": "We present Sparrow, an information-seeking dialogue agent trained to be more helpful, correct, and harmless compared to prompted language model baselines. We use reinforcement learning from human feedback to train our models with two new additions to help human raters judge agent behaviour. First, to make our agent more helpful and harmless, we break down the requirements for good dialogue into natural language rules the agent should follow, and ask raters about each rule separately. We demonstrate that this breakdown enables us to collect more targeted human judgements of agent behaviour and allows for more efficient rule-conditional reward models. Second, our agent provides evidence from sources supporting factual claims when collecting preference judgements over model statements. For factual questions, evidence provided by Sparrow supports the sampled response 78% of the time. Sparrow is preferred more often than baselines while being more resilient to adversarial probing by humans, violating our rules only 8% of the time when probed. Finally, we conduct extensive analyses showing that though our model learns to follow our rules it can exhibit distributional biases.",
+  "published": "2022-09-28T19:04:43+00:00",
+  "updated": "2022-09-28T19:04:43+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2209.14375v1",
+  "entry_id": "http://arxiv.org/abs/2209.14375v1",
+  "pdf_path": "data/papers/2209.14375.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM alignment)"
+ },
+ "text_length": 219180,
+ "word_count": 24669,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "Sparrow",
+   "parameters": "70B",
+   "parameters_millions": 70000,
+   "model_family": "Sparrow",
+   "date_created": "2022-09-28",
+   "organization": "Google",
+   "innovation": "Targeted human judgements of specific rules: guides and elicits targeted judgements from human annotators on specific rule violations (e.g., threatening statements, financial advice) to characterize failures and train targeted classifiers; Multi-objective RLHF: combines targeted rule judgements and preference judgements to maximize preference rates and minimize rule violations simultaneously; Inline evidence: adapts GopherCite methods to interactive dialogue to support and verify claims, improving correctness and verifiability.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": null,
+   "finetuning_task": "Reinforcement learning from human feedback (RLHF), supervised fine-tuning., Multi-objective RLHF with targeted rule judgements and preference judgements",
+   "optimizer": "A2C (Advantage Actor-Critic)",
+   "hardware_used": "TPU v3",
+   "extension": "Integrates retrieval capabilities to pull in external knowledge and uses targeted human judgements via Preference and Rule Reward Models for alignment.",
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Improving alignment of dialogue agents via targeted human judgements",
+   "application": "Information-seeking dialogue, factual question answering, rule-following.",
+   "paper_title": "Improving alignment of dialogue agents via targeted human judgements",
+   "training_corpus_size": null,
+   "finetuning_data": "Human preference judgements on rule-following and evidence; targeted human judgements on natural language rules., Human judgements of rule violations and per-turn response preferences",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": "64 TPU v3 machines",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "70B (dense, all parameters active)",
+   "attention_mechanism": null,
+   "context_length_max": "2048 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Supervised fine-tuning -> Reinforcement learning from human feedback (RLHF) with rule-conditional reward models.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": "Self-play data accumulation, red team language model (Chinchilla) generating adversarial questions, LM-generated questions for red-teaming",
+   "rl_algorithm": "Reinforcement learning from human feedback (RLHF), RLHF",
+   "reward_mechanism": "Rule-conditional reward models trained on targeted human judgements; evidence-supported preference judgements., Targeted human judgements of specific rules and per-turn response preferences",
+   "tool_calling_format": "SearchQuery tool for Google Search",
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "Human adversarial probing to estimate rule violation rate",
+   "safety_defect_rate": "8% rule violation rate under adversarial conditions",
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Prompted language model baseline",
+   "optimizer_innovation": null,
+   "benchmark_result": "Supported & plausible rates: SFT-choosesearch 0.57\u00b10.029, DPC-alwayssearch 0.61\u00b10.011, DPC-choosesearch 0.70\u00b10.035 to 0.78\u00b10.028; Evidence rates: 0.84 to 0.91; Human preference over GopherCite: 63% (90% CI=[56%, 70%])",
+   "weight_clipping_mechanism": "l2-norm gradient clipping to max norm 1.0",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Sparrow": {
+   "application": [
+    "Information-seeking dialogue",
+    "factual question answering",
+    "rule-following."
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "Human preference judgements on rule-following and evidence",
+    "targeted human judgements on natural language rules.",
+    "Human judgements of rule violations and per-turn response preferences"
+   ],
+   "finetuning_task": [
+    "Reinforcement learning from human feedback (RLHF)"
+   ],
+   "hardware_used": [
+    "TPU v3"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Sparrow"
+   ],
+   "optimizer": [],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "70B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Rule-conditional reward models trained on targeted human judgements",
+    "evidence-supported preference judgements.",
+    "Targeted human judgements of specific rules and per-turn response preferences"
+   ],
+   "rl_algorithm": [
+    "RLHF"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [
+    "Self-play data accumulation",
+    "red team language model (Chinchilla) generating adversarial questions",
+    "LM-generated questions for red-teaming"
+   ],
+   "tool_calling_format": [],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Sparrow": {
+    "base_model": {
+     "candidates": [
+      "Prompted language model baseline"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Prompted language model baseline",
+       "reason": "Describes a baseline setup/method, not a specific pre-trained model name."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Reinforcement learning from human feedback (RLHF)",
+      "supervised fine-tuning.",
+      "Multi-objective RLHF with targeted rule judgements and preference judgements"
+     ],
+     "accepted": [
+      "Reinforcement learning from human feedback (RLHF)"
+     ],
+     "dropped": [
+      {
+       "value": "supervised fine-tuning.",
+       "reason": "Describes a training paradigm/method, not a specific fine-tuning task."
+      },
+      {
+       "value": "Multi-objective RLHF with targeted rule judgements and preference judgements",
+       "reason": "Describes a training methodology/process rather than a specific task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Sparrow"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Sparrow",
+       "reason": "Specific model name, not a broader category or lineage."
+      }
+     ]
+    },
+    "optimizer": {
+     "candidates": [
+      "A2C (Advantage Actor-Critic)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "A2C (Advantage Actor-Critic)",
+       "reason": "A2C is a reinforcement learning algorithm, not a weight optimization algorithm (e.g., Adam, SGD)."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Improving alignment of dialogue agents via targeted human judgements"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Improving alignment of dialogue agents via targeted human judgements",
+       "reason": "Describes a solution/method rather than naming the research problem or challenge."
+      }
+     ]
+    },
+    "rl_algorithm": {
+     "candidates": [
+      "Reinforcement learning from human feedback (RLHF)",
+      "RLHF"
+     ],
+     "accepted": [
+      "RLHF"
+     ],
+     "dropped": [
+      {
+       "value": "Reinforcement learning from human feedback (RLHF)",
+       "reason": "RLHF is a training paradigm/framework, not a specific RL optimization algorithm (e.g., PPO, DPO)."
+      }
+     ]
+    },
+    "tool_calling_format": {
+     "candidates": [
+      "SearchQuery tool for Google Search"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "SearchQuery tool for Google Search",
+       "reason": "Names a specific tool rather than a format or protocol for structuring tool calls."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "l2-norm gradient clipping to max norm 1.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "l2-norm gradient clipping to max norm 1.0",
+       "reason": "Describes gradient clipping, not weight value clipping as defined."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 23,
+   "dropped": 9,
+   "llm_calls": 1,
+   "values_sent_to_llm": 22
+  }
+ },
+ "contributions": [
+  {
+   "label": "Sparrow",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Sparrow",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-09-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Targeted human judgements of specific rules: guides and elicits targeted judgements from human annotators on specific rule violations (e.g., threatening statements, financial advice) to characterize failures and train targeted classifiers",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-objective RLHF: combines targeted rule judgements and preference judgements to maximize preference rates and minimize rule violations simultaneously",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Inline evidence: adapts GopherCite methods to interactive dialogue to support and verify claims, improving correctness and verifiability.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement learning from human feedback (RLHF)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "70B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 70000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU v3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 TPU v3 machines",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Information-seeking dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Factual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Rule-following.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human preference judgements on rule-following and evidence",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Targeted human judgements on natural language rules.",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human judgements of rule violations and per-turn response preferences",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "70B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Supervised fine-tuning -> Reinforcement learning from human feedback (RLHF) with rule-conditional reward models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Self-play data accumulation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Red team language model (Chinchilla) generating adversarial questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "LM-generated questions for red-teaming",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "RLHF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Rule-conditional reward models trained on targeted human judgements",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Evidence-supported preference judgements.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Targeted human judgements of specific rules and per-turn response preferences",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Human adversarial probing to estimate rule violation rate",
+     "datatype": "string"
+    },
+    {
+     "property": "P203098",
+     "label": "safety_defect_rate",
+     "value": "8% rule violation rate under adversarial conditions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Supported & plausible rates: SFT-choosesearch 0.57\u00b10.029, DPC-alwayssearch 0.61\u00b10.011, DPC-choosesearch 0.70\u00b10.035 to 0.78\u00b10.028",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Evidence rates: 0.84 to 0.91",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human preference over GopherCite: 63% (90% CI=[56%, 70%])",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370983",
+  "contribution_ids": [
+   "R370984",
+   "R1923297"
+  ],
+  "new_contribution_ids": [
+   "R1923297"
+  ],
+  "comparison_updated": null
+ }
+}

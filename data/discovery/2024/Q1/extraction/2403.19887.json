@@ -1,0 +1,660 @@
+{
+  "arxiv_id": "2403.19887",
+  "status": "completed",
+  "timestamp": "2026-08-28T22:59:45.043602",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2403.19887",
+    "title": "Jamba: A Hybrid Transformer-Mamba Language Model",
+    "authors": [
+      "Opher Lieber",
+      "Barak Lenz",
+      "Hofit Bata",
+      "Gal Cohen",
+      "Jhonathan Osin",
+      "Itay Dalmedigos",
+      "Erez Safahi",
+      "Shaked Meirom",
+      "Yonatan Belinkov",
+      "Shai Shalev-Shwartz",
+      "Omri Abend",
+      "Raz Alon",
+      "Tomer Asida",
+      "Amir Bergman",
+      "Roman Glozman",
+      "Michael Gokhman",
+      "Avashalom Manevich",
+      "Nir Ratner",
+      "Noam Rozen",
+      "Erez Shwartz",
+      "Mor Zusman",
+      "Yoav Shoham"
+    ],
+    "abstract": "We present Jamba, a new base large language model based on a novel hybrid Transformer-Mamba mixture-of-experts (MoE) architecture. Specifically, Jamba interleaves blocks of Transformer and Mamba layers, enjoying the benefits of both model families. MoE is added in some of these layers to increase model capacity while keeping active parameter usage manageable. This flexible architecture allows resource- and objective-specific configurations. In the particular configuration we have implemented, we end up with a powerful model that fits in a single 80GB GPU. Built at large scale, Jamba provides high throughput and small memory footprint compared to vanilla Transformers, and at the same time state-of-the-art performance on standard language model benchmarks and long-context evaluations. Remarkably, the model presents strong results for up to 256K tokens context length. We study various architectural decisions, such as how to combine Transformer and Mamba layers, and how to mix experts, and show that some of them are crucial in large scale modeling. We also describe several interesting properties of these architectures which the training and evaluation of Jamba have revealed, and plan to release checkpoints from various ablation runs, to encourage further exploration of this novel architecture. We make the weights of our implementation of Jamba publicly available under a permissive license.",
+    "published": "2024-03-28T23:55:06+00:00",
+    "updated": "2024-07-03T14:30:33+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2403.19887v2",
+    "entry_id": "http://arxiv.org/abs/2403.19887v2",
+    "pdf_path": "data/papers/2403.19887.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 44013,
+  "word_count": 2371,
+  "models_extracted": 8,
+  "extraction_data": [
+    {
+      "model_name": "Jamba",
+      "parameters": "1.3B, 7B, 13B, 52B, 69B, 300B",
+      "parameters_millions": 300000,
+      "model_family": "Jamba",
+      "date_created": "2024-03-28",
+      "organization": "Ai21 Labs",
+      "innovation": "Hybrid Transformer-Mamba architecture: interleaves Transformer and Mamba (state-space model) layers to combine Transformer's long-range dependency modeling with Mamba's linear-complexity, single-state summarization for efficient long-context processing and high throughput; Mixture-of-Experts (MoE) applied to some MLP layers (16 experts, top-2 active) to increase total model capacity (52B) while keeping active parameter usage manageable (12B), balancing memory, training efficiency, and performance.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "In-house dataset containing text data from the Web, books, and code (last updated March 2024)",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "80GB GPU",
+      "extension": "Integrates Mixture-of-Experts (MoE) with a hybrid Attention-Mamba architecture, applying MoE every 2 layers with 16 total experts and 2 active per token.",
+      "blog_post": null,
+      "license": "Permissive license",
+      "research_problem": "Large language models, long-context processing, efficient training and inference",
+      "application": "Text generation, long-context understanding, code generation, mathematical reasoning",
+      "paper_title": "Jamba: A Hybrid Transformer-Mamba Language Model",
+      "training_corpus_size": "250B tokens",
+      "finetuning_data": null,
+      "tokenizer": "BPE",
+      "supported_language": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "12B",
+      "attention_mechanism": "Hybrid Attention-Mamba architecture; uses only 4 attention layers for long-context retrieval, Grouped-Query Attention (GQA), Multi-head self-attention interleaved with Mamba (SSM) layers",
+      "context_length_max": "256K tokens",
+      "context_extension_method": "RoPE (optional, results similar without)",
+      "training_pipeline": "Pre-training",
+      "reasoning_mode": null,
+      "moe_configuration": "16 experts, top-2 active per token",
+      "quantization_precision": "8-bit, int8",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Comparable to Mixtral-8x7B and Llama-2 70B; HellaSwag (10-shot): 65.1; WinoGrande (5-shot): 61.7; NQ (5-shot): 16.5; C4 log-prob: -0.533; Books log-prob: -0.649; Code log-prob: -0.321; LongFQA: 0.44; CUAD: 0.44; NarrativeQA: 0.30; NQ: 0.60; SFiction: 0.40; Avg: 0.44; HellaSwag (10-shot): 62.5; WinoGrande (5-shot): 58.8; NQ (5-shot): 15.4; C4 log-prob: -0.547; Books log-prob: -0.658; Code log-prob: -0.340; HellaWino: 71.5; OLLM: 64.2; Swag: 40.7; ARC-C: 50.5; QA: 22.2; NQ: 68.9; BoolQ: -0.516; C4: -0.623; Books: -0.299",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "In-house proprietary framework with FSDP, tensor parallelism, sequence parallelism, and expert parallelism"
+    }
+  ],
+  "models_after_selection": 7,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Jamba": {
+      "application": [
+        "Text generation",
+        "long-context understanding",
+        "code generation",
+        "mathematical reasoning"
+      ],
+      "attention_mechanism": [
+        "Hybrid Attention-Mamba architecture",
+        "Grouped-Query Attention (GQA)",
+        "Multi-head self-attention interleaved with Mamba (SSM) layers"
+      ],
+      "context_extension_method": [
+        "RoPE (optional, results similar without)"
+      ],
+      "hardware_used": [
+        "80GB GPU"
+      ],
+      "license": [],
+      "model_family": [
+        "Jamba"
+      ],
+      "model_name": [
+        "Jamba"
+      ],
+      "organization": [
+        "Ai21 Labs"
+      ],
+      "parameters": [
+        "1.3B",
+        "7B",
+        "13B",
+        "52B",
+        "69B",
+        "300B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "books"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "8-bit",
+        "int8"
+      ],
+      "research_problem": [
+        "long-context processing",
+        "efficient training and inference"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Jamba": {
+        "attention_mechanism": {
+          "candidates": [
+            "Hybrid Attention-Mamba architecture",
+            "uses only 4 attention layers for long-context retrieval",
+            "Grouped-Query Attention (GQA)",
+            "Multi-head self-attention interleaved with Mamba (SSM) layers"
+          ],
+          "accepted": [
+            "Hybrid Attention-Mamba architecture",
+            "Grouped-Query Attention (GQA)",
+            "Multi-head self-attention interleaved with Mamba (SSM) layers"
+          ],
+          "dropped": [
+            {
+              "value": "uses only 4 attention layers for long-context retrieval",
+              "reason": "Description of architecture configuration rather than the mechanism itself"
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "Permissive license"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Permissive license",
+              "reason": "Describes a license category, not a specific license name. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "In-house dataset containing text data from the Web",
+            "books",
+            "code (last updated March 2024)"
+          ],
+          "accepted": [
+            "books"
+          ],
+          "dropped": [
+            {
+              "value": "In-house dataset containing text data from the Web",
+              "reason": "Vague description asserting breadth rather than naming an identifiable dataset or corpus"
+            },
+            {
+              "value": "code (last updated March 2024)",
+              "reason": "Sentence fragment/qualifier rather than a standalone dataset name"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Large language models",
+            "long-context processing",
+            "efficient training and inference"
+          ],
+          "accepted": [
+            "long-context processing",
+            "efficient training and inference"
+          ],
+          "dropped": [
+            {
+              "value": "Large language models",
+              "reason": "Names a model category, not a research problem or challenge (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 25,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 12
+    }
+  },
+  "contributions": [
+    {
+      "label": "Jamba",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Jamba",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Jamba",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-03-28",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Ai21 Labs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid Transformer-Mamba architecture: interleaves Transformer and Mamba (state-space model) layers to combine Transformer's long-range dependency modeling with Mamba's linear-complexity, single-state summarization for efficient long-context processing and high throughput",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture-of-Experts (MoE) applied to some MLP layers (16 experts, top-2 active) to increase total model capacity (52B) while keeping active parameter usage manageable (12B), balancing memory, training efficiency, and performance.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Books",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "52B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "69B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "300B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 300000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "80GB GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long-context understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long-context processing",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient training and inference",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "250B tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "12B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid Attention-Mamba architecture",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention interleaved with Mamba (SSM) layers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "256K tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE (optional, results similar without)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "16 experts, top-2 active per token",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "8-bit",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Int8",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Comparable to Mixtral-8x7B and Llama-2 70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag (10-shot): 65.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande (5-shot): 61.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NQ (5-shot): 16.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C4 log-prob: -0.533",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Books log-prob: -0.649",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Code log-prob: -0.321",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LongFQA: 0.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CUAD: 0.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NarrativeQA: 0.30",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NQ: 0.60",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SFiction: 0.40",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Avg: 0.44",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag (10-shot): 62.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande (5-shot): 58.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NQ (5-shot): 15.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C4 log-prob: -0.547",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Books log-prob: -0.658",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Code log-prob: -0.340",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaWino: 71.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OLLM: 64.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Swag: 40.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ARC-C: 50.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "QA: 22.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NQ: 68.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BoolQ: -0.516",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "C4: -0.623",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Books: -0.299",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "In-house proprietary framework with FSDP, tensor parallelism, sequence parallelism, and expert parallelism",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925944",
+    "contribution_ids": [
+      "R1925946"
+    ],
+    "new_contribution_ids": [
+      "R1925946"
+    ],
+    "comparison_updated": null
+  }
+}

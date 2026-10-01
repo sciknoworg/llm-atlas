@@ -1,0 +1,1533 @@
+{
+ "arxiv_id": "2205.11487",
+ "status": "completed",
+ "timestamp": "2026-08-27T14:23:36.462139",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2205.11487",
+  "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+  "authors": [
+   "Chitwan Saharia",
+   "William Chan",
+   "Saurabh Saxena",
+   "Lala Li",
+   "Jay Whang",
+   "Emily Denton",
+   "Seyed Kamyar Seyed Ghasemipour",
+   "Burcu Karagol Ayan",
+   "S. Sara Mahdavi",
+   "Rapha Gontijo Lopes",
+   "Tim Salimans",
+   "Jonathan Ho",
+   "David J Fleet",
+   "Mohammad Norouzi"
+  ],
+  "abstract": "We present Imagen, a text-to-image diffusion model with an unprecedented degree of photorealism and a deep level of language understanding. Imagen builds on the power of large transformer language models in understanding text and hinges on the strength of diffusion models in high-fidelity image generation. Our key discovery is that generic large language models (e.g. T5), pretrained on text-only corpora, are surprisingly effective at encoding text for image synthesis: increasing the size of the language model in Imagen boosts both sample fidelity and image-text alignment much more than increasing the size of the image diffusion model. Imagen achieves a new state-of-the-art FID score of 7.27 on the COCO dataset, without ever training on COCO, and human raters find Imagen samples to be on par with the COCO data itself in image-text alignment. To assess text-to-image models in greater depth, we introduce DrawBench, a comprehensive and challenging benchmark for text-to-image models. With DrawBench, we compare Imagen with recent methods including VQ-GAN+CLIP, Latent Diffusion Models, and DALL-E 2, and find that human raters prefer Imagen over other models in side-by-side comparisons, both in terms of sample quality and image-text alignment. See https://imagen.research.google/ for an overview of the results.",
+  "published": "2022-05-23T17:42:53+00:00",
+  "updated": "2022-05-23T17:42:53+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2205.11487v1",
+  "entry_id": "http://arxiv.org/abs/2205.11487v1",
+  "pdf_path": "data/papers/2205.11487.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 81900,
+ "word_count": 4804,
+ "models_extracted": 15,
+ "extraction_data": [
+  {
+   "model_name": "Imagen",
+   "parameters": "300M, 400M, 500M, 600M, 1B, 2B, 4.6B",
+   "parameters_millions": 4600,
+   "model_family": "Imagen",
+   "date_created": "2022-05-23",
+   "organization": "Google",
+   "innovation": "Cascade of diffusion models: trains a sequence of diffusion models (64x64, 256x256, 1024x1024) to generate photorealistic images; Deep language understanding conditioning: uses frozen T5-XXL text encoder to generate contextual embeddings for conditioning, improving image-text alignment over prior models; EfficientU-Net for super-resolution: shifts parameters to low-resolution blocks, scales skip connections by 1/sqrt(2), and reverses downsampling/upsampling order to improve forward pass speed and memory efficiency without performance degradation.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Text-to-image generation",
+   "pretraining_corpus": "Internal datasets (~460M image-text pairs), Laion dataset (~400M image-text pairs)",
+   "finetuning_task": null,
+   "optimizer": "Adafactor",
+   "hardware_used": "TPU",
+   "extension": "Multi-stage super-resolution pipeline (64x64 -> 256x256 -> 1024x1024) with Efficient U-Net replacing standard U-Net for faster convergence and sampling.",
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Photorealistic text-to-image generation with high fidelity and strong text-image alignment.",
+   "application": "Text-to-image generation, image super-resolution, style transfer",
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "training_corpus_size": "~860M image-text pairs",
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": "256 TPU-v4 chips",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Cross-attention over text embeddings at multiple resolutions; Layer Normalization applied to text embeddings in attention and pooling layers, Cross-attention for text conditioning; self-attention within U-Net blocks.",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Cascaded generation: base 64x64 model -> 64x64\u2192256x256 SR -> 256x256\u21921024x1024 SR",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5-XXL",
+   "optimizer_innovation": null,
+   "benchmark_result": "COCO FID-30K: 7.27; MS-COCO FID-30K: 7.27; Human evaluation photorealism: 39.5% (original), 43.9% (no people); Alignment: 91.4% (original), 92.1% (no people); COCO FID, DrawBench human preference rates; CLIPScore, FID-10K, DrawBench human preference scores",
+   "weight_clipping_mechanism": "Static thresholding (elementwise clipping of x-prediction to [-1,1]) and Dynamic thresholding (scaling x-prediction by a percentile s to prevent pixel saturation)",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "DALL-E 2",
+   "parameters": "3.5B, 4.2B",
+   "parameters_millions": 4200,
+   "model_family": "DALL-E",
+   "date_created": "2022-05-23",
+   "organization": "OpenAI",
+   "innovation": "Combines a CLIP-guided autoregressive prior with a latent diffusion model (U-Net) to generate high-fidelity images from text; uses a VQ-VAE to compress images into a discrete latent space for efficient diffusion; enables zero-shot text-to-image generation and editing without task-specific fine-tuning.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Text-to-image generation, image reconstruction",
+   "pretraining_corpus": "650 million image-text pairs (LAION-400M, LAION-Aesthetics v2 5+, COYO-700M, CC12M, CC3M)",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "TPU v3",
+   "extension": null,
+   "blog_post": null,
+   "license": "OpenAI Research License",
+   "research_problem": "Text-to-image generation",
+   "application": "Text-to-image synthesis, image editing, zero-shot transfer",
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "training_corpus_size": "650 million image-text pairs",
+   "finetuning_data": null,
+   "tokenizer": "VQ-VAE (discrete codebook)",
+   "supported_language": "English",
+   "hardware_description": "TPU v3-256",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "3.5B",
+   "attention_mechanism": "Multi-head self-attention, Multi-head self-attention (prior), U-Net with cross-attention (decoder)",
+   "context_length_max": "256 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 650M image-text pairs",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP32/FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Late fusion (text prior conditions latent diffusion)",
+   "vision_encoder": "VQ-VAE, CLIP ViT-L/14 (frozen)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "DALL-Eval 6.8; CLIPScore 31.8; ImageReward 0.68; PickScore 0.62; Outperforms GLIDE and VQ-Diffusion on COCO and ImageNet FID scores",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "EfficientU-Net",
+   "model_family": "U-Net",
+   "date_created": "2022-05-23",
+   "organization": "Google",
+   "innovation": "Parameter shifting: moves model parameters from high-resolution blocks to low-resolution blocks to increase capacity without egregious memory/computation costs; Skip connection scaling: scales skip connections by 1/sqrt(2) to improve convergence speed; Reversed downsampling/upsampling order: changes operation order in blocks to significantly improve forward pass speed without performance degradation.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image super-resolution",
+   "license": null,
+   "research_problem": "Image super-resolution",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": null,
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Base 64x 64 Diffusion Model",
+   "model_family": "DALL-E 2",
+   "date_created": "2022-05-23",
+   "organization": "OpenAI",
+   "innovation": "Cascaded diffusion architecture; text conditioning via cross-attention and attention-pooled embeddings; dynamic thresholding during sampling to prevent over-saturation; conditioning augmentation during training to improve robustness.",
+   "pretraining_corpus": "Large-scale text-image dataset",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Text-to-image generation",
+   "license": "OpenAI Research License",
+   "research_problem": "Photorealistic text-to-image generation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Diffusion denoising",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adafactor",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "64x 64 -> 256x 256 Super-Resolution Model",
+   "model_family": "DALL-E 2",
+   "date_created": "2022-05-23",
+   "organization": "OpenAI",
+   "innovation": "Efficient U-Net super-resolution model that upscales 64x64 diffusion outputs to 256x256 using text cross-attention and self-attention, enabling high-fidelity detail generation.",
+   "pretraining_corpus": "Large-scale text-image dataset",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Text-to-image generation",
+   "license": "OpenAI Research License",
+   "research_problem": "Photorealistic text-to-image generation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Diffusion denoising",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "256x 256 -> 1024x 1024 Super-Resolution Model",
+   "model_family": "DALL-E 2",
+   "date_created": "2022-05-23",
+   "organization": "OpenAI",
+   "innovation": "Final cascade stage that upscales 256x256 outputs to 1024x1024 using only text cross-attention (no self-attention) for computational efficiency while maintaining photorealistic quality.",
+   "pretraining_corpus": "Large-scale text-image dataset",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Text-to-image generation",
+   "license": "OpenAI Research License",
+   "research_problem": "Photorealistic text-to-image generation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Diffusion denoising",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 15,
+ "models_after_merge": 6,
+ "validated_rows": {
+  "Imagen": {
+   "application": [
+    "Text-to-image generation",
+    "image super-resolution",
+    "style transfer"
+   ],
+   "attention_mechanism": [
+    "Cross-attention over text embeddings at multiple resolutions",
+    "Cross-attention for text conditioning",
+    "self-attention within U-Net blocks."
+   ],
+   "base_model": [
+    "T5-XXL"
+   ],
+   "hardware_used": [
+    "TPU"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "Imagen"
+   ],
+   "model_name": [
+    "Imagen"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "300M",
+    "400M",
+    "500M",
+    "600M",
+    "1B",
+    "2B",
+    "4.6B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Internal datasets (~460M image-text pairs)",
+    "Laion dataset (~400M image-text pairs)"
+   ],
+   "pretraining_task": [
+    "Text-to-image generation"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "weight_clipping_mechanism": [
+    "Static thresholding (elementwise clipping of x-prediction to [-1,1]) and Dynamic thresholding (scaling x-prediction by a percentile s to prevent pixel saturation)"
+   ]
+  },
+  "DALL-E 2": {
+   "application": [
+    "Text-to-image synthesis",
+    "image editing",
+    "zero-shot transfer"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Multi-head self-attention (prior)"
+   ],
+   "fusion_architecture": [
+    "Late fusion (text prior conditions latent diffusion)"
+   ],
+   "hardware_used": [
+    "TPU v3"
+   ],
+   "license": [
+    "OpenAI Research License"
+   ],
+   "model_family": [
+    "DALL-E"
+   ],
+   "model_name": [
+    "DALL-E 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "parameters": [
+    "3.5B",
+    "4.2B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "650 million image-text pairs (LAION-400M, LAION-Aesthetics v2 5+, COYO-700M, CC12M, CC3M)"
+   ],
+   "pretraining_task": [
+    "Text-to-image generation, image reconstruction"
+   ],
+   "quantization_precision": [
+    "FP32/FP16"
+   ],
+   "research_problem": [
+    "Text-to-image generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "VQ-VAE",
+    "CLIP ViT-L/14 (frozen)"
+   ]
+  },
+  "EfficientU-Net": {
+   "application": [
+    "Image super-resolution"
+   ],
+   "model_family": [],
+   "model_name": [
+    "EfficientU-Net"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "research_problem": [
+    "Image super-resolution"
+   ]
+  },
+  "Base 64x 64 Diffusion Model": {
+   "application": [
+    "Text-to-image generation"
+   ],
+   "license": [
+    "OpenAI Research License"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Base 64x 64 Diffusion Model"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Diffusion denoising"
+   ],
+   "research_problem": [
+    "Photorealistic text-to-image generation"
+   ]
+  },
+  "64x 64 -> 256x 256 Super-Resolution Model": {
+   "application": [
+    "Text-to-image generation"
+   ],
+   "license": [
+    "OpenAI Research License"
+   ],
+   "model_family": [],
+   "model_name": [
+    "64x 64 -> 256x 256 Super-Resolution Model"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Diffusion denoising"
+   ],
+   "research_problem": [
+    "Photorealistic text-to-image generation"
+   ]
+  },
+  "256x 256 -> 1024x 1024 Super-Resolution Model": {
+   "application": [
+    "Text-to-image generation"
+   ],
+   "license": [
+    "OpenAI Research License"
+   ],
+   "model_family": [],
+   "model_name": [
+    "256x 256 -> 1024x 1024 Super-Resolution Model"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Diffusion denoising"
+   ],
+   "research_problem": [
+    "Photorealistic text-to-image generation"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Imagen": {
+    "attention_mechanism": {
+     "candidates": [
+      "Cross-attention over text embeddings at multiple resolutions",
+      "Layer Normalization applied to text embeddings in attention and pooling layers",
+      "Cross-attention for text conditioning",
+      "self-attention within U-Net blocks."
+     ],
+     "accepted": [
+      "Cross-attention over text embeddings at multiple resolutions",
+      "Cross-attention for text conditioning",
+      "self-attention within U-Net blocks."
+     ],
+     "dropped": [
+      {
+       "value": "Layer Normalization applied to text embeddings in attention and pooling layers",
+       "reason": "Describes a normalization operation, not an attention mechanism."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Photorealistic text-to-image generation with high fidelity and strong text-image alignment."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Photorealistic text-to-image generation with high fidelity and strong text-image alignment.",
+       "reason": "Long descriptive phrase stating a capability or goal rather than a short noun phrase naming the problem."
+      }
+     ]
+    }
+   },
+   "DALL-E 2": {
+    "attention_mechanism": {
+     "candidates": [
+      "Multi-head self-attention",
+      "Multi-head self-attention (prior)",
+      "U-Net with cross-attention (decoder)"
+     ],
+     "accepted": [
+      "Multi-head self-attention",
+      "Multi-head self-attention (prior)"
+     ],
+     "dropped": [
+      {
+       "value": "U-Net with cross-attention (decoder)",
+       "reason": "Describes an architectural component rather than the attention mechanism itself."
+      }
+     ]
+    }
+   },
+   "EfficientU-Net": {
+    "model_family": {
+     "candidates": [
+      "U-Net"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "U-Net",
+       "reason": "Describes a neural network architecture, not a model family or lineage."
+      }
+     ]
+    }
+   },
+   "Base 64x 64 Diffusion Model": {
+    "model_family": {
+     "candidates": [
+      "DALL-E 2"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DALL-E 2",
+       "reason": "Names a specific model version rather than the broader family or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Large-scale text-image dataset"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-scale text-image dataset",
+       "reason": "Vague description asserting scale rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "64x 64 -> 256x 256 Super-Resolution Model": {
+    "model_family": {
+     "candidates": [
+      "DALL-E 2"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DALL-E 2",
+       "reason": "Names a specific model version rather than the broader family or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Large-scale text-image dataset"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-scale text-image dataset",
+       "reason": "Vague description asserting scale rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   },
+   "256x 256 -> 1024x 1024 Super-Resolution Model": {
+    "model_family": {
+     "candidates": [
+      "DALL-E 2"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DALL-E 2",
+       "reason": "Names a specific model version rather than the broader family or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Large-scale text-image dataset"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-scale text-image dataset",
+       "reason": "Vague description asserting scale rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 77,
+   "dropped": 10,
+   "llm_calls": 1,
+   "values_sent_to_llm": 41
+  }
+ },
+ "contributions": [
+  {
+   "label": "Imagen",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Imagen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Imagen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cascade of diffusion models: trains a sequence of diffusion models (64x64, 256x256, 1024x1024) to generate photorealistic images",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Deep language understanding conditioning: uses frozen T5-XXL text encoder to generate contextual embeddings for conditioning, improving image-text alignment over prior models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "EfficientU-Net for super-resolution: shifts parameters to low-resolution blocks, scales skip connections by 1/sqrt(2), and reverses downsampling/upsampling order to improve forward pass speed and memory efficiency without performance degradation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Internal datasets (~460M image-text pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion dataset (~400M image-text pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "500M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 4600,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256 TPU-v4 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image super-resolution",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Style transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~860M image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention over text embeddings at multiple resolutions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention for text conditioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention within U-Net blocks.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Cascaded generation: base 64x64 model -> 64x64\u2192256x256 SR -> 256x256\u21921024x1024 SR",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5-XXL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO FID-30K: 7.27",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID-30K: 7.27",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human evaluation photorealism: 39.5% (original), 43.9% (no people)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Alignment: 91.4% (original), 92.1% (no people)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO FID, DrawBench human preference rates",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLIPScore, FID-10K, DrawBench human preference scores",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Static thresholding (elementwise clipping of x-prediction to [-1,1]) and Dynamic thresholding (scaling x-prediction by a percentile s to prevent pixel saturation)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "DALL-E 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DALL-E 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "DALL-E",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Combines a CLIP-guided autoregressive prior with a latent diffusion model (U-Net) to generate high-fidelity images from text",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a VQ-VAE to compress images into a discrete latent space for efficient diffusion",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables zero-shot text-to-image generation and editing without task-specific fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Text-to-image generation, image reconstruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "650 million image-text pairs (LAION-400M, LAION-Aesthetics v2 5+, COYO-700M, CC12M, CC3M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "VQ-VAE (discrete codebook)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 4200,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU v3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPU v3-256",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image editing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "650 million image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (prior)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 650M image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP32/FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Late fusion (text prior conditions latent diffusion)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQ-VAE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-L/14 (frozen)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DALL-Eval 6.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CLIPScore 31.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageReward 0.68",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PickScore 0.62",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms GLIDE and VQ-Diffusion on COCO and ImageNet FID scores",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "EfficientU-Net",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "EfficientU-Net",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Parameter shifting: moves model parameters from high-resolution blocks to low-resolution blocks to increase capacity without egregious memory/computation costs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Skip connection scaling: scales skip connections by 1/sqrt(2) to improve convergence speed",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reversed downsampling/upsampling order: changes operation order in blocks to significantly improve forward pass speed without performance degradation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image super-resolution",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Image super-resolution",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "Base 64x 64 Diffusion Model",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Base 64x 64 Diffusion Model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cascaded diffusion architecture",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Text conditioning via cross-attention and attention-pooled embeddings",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dynamic thresholding during sampling to prevent over-saturation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Conditioning augmentation during training to improve robustness.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Diffusion denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Photorealistic text-to-image generation",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "64x 64 -> 256x 256 Super-Resolution Model",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "64x 64 -> 256x 256 Super-Resolution Model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Efficient U-Net super-resolution model that upscales 64x64 diffusion outputs to 256x256 using text cross-attention and self-attention, enabling high-fidelity detail generation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Diffusion denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Photorealistic text-to-image generation",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "256x 256 -> 1024x 1024 Super-Resolution Model",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "256x 256 -> 1024x 1024 Super-Resolution Model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-23",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Final cascade stage that upscales 256x256 outputs to 1024x1024 using only text cross-attention (no self-attention) for computational efficiency while maintaining photorealistic quality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Diffusion denoising",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Photorealistic text-to-image generation",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370975",
+  "contribution_ids": [
+   "R370976",
+   "R426388",
+   "R1923057",
+   "R1923067",
+   "R1923077",
+   "R1923079",
+   "R1923083",
+   "R1923085"
+  ],
+  "new_contribution_ids": [
+   "R1923057",
+   "R1923067",
+   "R1923077",
+   "R1923079",
+   "R1923083",
+   "R1923085"
+  ],
+  "comparison_updated": null
+ }
+}

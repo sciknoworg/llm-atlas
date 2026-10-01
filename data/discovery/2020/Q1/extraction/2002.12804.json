@@ -1,0 +1,836 @@
+{
+ "arxiv_id": "2002.12804",
+ "status": "completed",
+ "timestamp": "2026-08-24T17:51:42.781420",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2002.12804",
+  "title": "UniLMv2: Pseudo-Masked Language Models for Unified Language Model Pre-Training",
+  "authors": [
+   "Hangbo Bao",
+   "Li Dong",
+   "Furu Wei",
+   "Wenhui Wang",
+   "Nan Yang",
+   "Xiaodong Liu",
+   "Yu Wang",
+   "Songhao Piao",
+   "Jianfeng Gao",
+   "Ming Zhou",
+   "Hsiao-Wuen Hon"
+  ],
+  "abstract": "We propose to pre-train a unified language model for both autoencoding and partially autoregressive language modeling tasks using a novel training procedure, referred to as a pseudo-masked language model (PMLM). Given an input text with masked tokens, we rely on conventional masks to learn inter-relations between corrupted tokens and context via autoencoding, and pseudo masks to learn intra-relations between masked spans via partially autoregressive modeling. With well-designed position embeddings and self-attention masks, the context encodings are reused to avoid redundant computation. Moreover, conventional masks used for autoencoding provide global masking information, so that all the position embeddings are accessible in partially autoregressive language modeling. In addition, the two tasks pre-train a unified language model as a bidirectional encoder and a sequence-to-sequence decoder, respectively. Our experiments show that the unified language models pre-trained using PMLM achieve new state-of-the-art results on a wide range of natural language understanding and generation tasks across several widely used benchmarks.",
+  "published": "2020-02-28T15:28:49+00:00",
+  "updated": "2020-02-28T15:28:49+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2002.12804v1",
+  "entry_id": "http://arxiv.org/abs/2002.12804v1",
+  "pdf_path": "data/papers/2002.12804.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 43249,
+ "word_count": 3800,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "UniLMv 2",
+   "parameters": "110M, 124M, 340M",
+   "parameters_millions": 340,
+   "model_family": "UniLM",
+   "date_created": "2020-02-28",
+   "organization": "Microsoft",
+   "innovation": "Pseudo-Masked LM (PMLM): jointly pre-trains a bidirectional encoder (via Autoencoding with [M] masks) and a sequence-to-sequence decoder (via Partially Autoregressive modeling with [P] pseudo-masks) in a unified framework; reuses context encodings from the AE pass to avoid redundant computation in the PAR pass; uses well-designed position embeddings and self-attention masks to allow PAR factorization steps to access all position embeddings, improving computational efficiency over separate pre-training.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Autoencoding (AE), Partially Autoregressive (PAR) masked language modeling",
+   "pretraining_corpus": "Wikipedia, BookCorpus",
+   "finetuning_task": "Natural language understanding and generation tasks, Supervised fine-tuning for NLU (text classification, QA) and NLG (summarization, question generation)",
+   "optimizer": "Adam",
+   "hardware_used": "Nvidia V100-32GB GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Unified language model pre-training for both natural language understanding and generation",
+   "application": "Text generation, natural language understanding, machine translation, question answering",
+   "paper_title": "UniLMv2: Pseudo-Masked Language Models for Unified Language Model Pre-Training",
+   "training_corpus_size": null,
+   "finetuning_data": "SQuAD v1.1, SQuAD v2.0, GLUE benchmark (MNLI, SST-2, MRPC, RTE, QNLI, QQP, STS, CoLA), Stories dataset",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": "64 Nvidia V100-32GB GPU cards",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Multi-head self-attention with relative position bias",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (PMLM) \u2192 Fine-tuning (NLU/NLG tasks)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT Base",
+   "optimizer_innovation": null,
+   "benchmark_result": "SQuAD v1.1 F1: 93.1, EM: 87.1; SQuAD v2.0 F1: 86.1, EM: 83.3; GLUE: MNLI 88.5, SST-2 95.1, MRPC 91.8, RTE 81.3, QNLI 93.5, QQP 91.7, STS 91.0, CoLA 65.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "UNILMv 2",
+   "parameters": "110M",
+   "parameters_millions": 110,
+   "model_family": "UNILM",
+   "date_created": "2020-02-28",
+   "organization": "Microsoft",
+   "innovation": "Pseudo-Masked Language Model (PMLM): jointly learns bidirectional language modeling (via autoencoding) and sequence-to-sequence modeling (via partially autoregressive modeling) in a single forward pass; autoencoding provides global masking information to the partially autoregressive component, while partially autoregressive modeling learns intra-relations between masked spans and long-distance dependencies, preventing local shortcuts and improving computational efficiency compared to separate pre-training objectives.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Pseudo-Masked Language Modeling (PMLM), Autoencoding (AE), Permutation Language Modeling (PAR)",
+   "pretraining_corpus": "English Wikipedia, BookCorpus, OpenWebText1, CC-News",
+   "finetuning_task": "Supervised fine-tuning for downstream tasks",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Unified language model pre-training for natural language understanding and generation",
+   "application": "Question answering, natural language inference, sentiment classification, question generation",
+   "paper_title": "UniLMv2: Pseudo-Masked Language Models for Unified Language Model Pre-Training",
+   "training_corpus_size": "160GB",
+   "finetuning_data": "SQuAD v1.1, SQuAD v2.0, MNLI, SST-2, CoLA, STS, QQP, MRPC, RTE, CNN/DailyMail, XSum, Question Generation datasets",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "110M (dense, all parameters active)",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (PMLM/AE+PAR) -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "SQuAD v1.1 F1 92.0, EM 85.6; SQuAD v2.0 F1 83.6, EM 80.9; MNLI mm 93.2; SST-2 93.2; CNN/DailyMail RG-L 40.14; XSum RG-L 36.08; Question Generation BLEU-4 26.29, METEOR 27.16, RG-L 53.22",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "UniLMv 2": {
+   "application": [
+    "Text generation",
+    "natural language understanding",
+    "machine translation",
+    "question answering"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention with relative position bias"
+   ],
+   "base_model": [
+    "BERT Base"
+   ],
+   "finetuning_data": [
+    "SQuAD v1.1",
+    "SQuAD v2.0",
+    "GLUE benchmark (MNLI, SST-2, MRPC, RTE, QNLI, QQP, STS, CoLA)",
+    "Stories dataset"
+   ],
+   "finetuning_task": [
+    "Natural language understanding and generation tasks",
+    "Supervised fine-tuning for NLU (text classification, QA) and NLG (summarization, question generation)"
+   ],
+   "hardware_used": [
+    "Nvidia V100-32GB GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "UniLM"
+   ],
+   "model_name": [
+    "UniLMv 2"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M",
+    "124M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "BookCorpus"
+   ],
+   "pretraining_task": [
+    "Autoencoding (AE), Partially Autoregressive (PAR) masked language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "UNILMv 2": {
+   "application": [
+    "Question answering",
+    "natural language inference",
+    "sentiment classification",
+    "question generation"
+   ],
+   "finetuning_data": [
+    "SQuAD v1.1",
+    "SQuAD v2.0",
+    "MNLI",
+    "SST-2",
+    "CoLA",
+    "STS",
+    "QQP",
+    "MRPC",
+    "RTE",
+    "CNN/DailyMail",
+    "XSum",
+    "Question Generation datasets"
+   ],
+   "finetuning_task": [],
+   "model_family": [
+    "UNILM"
+   ],
+   "model_name": [
+    "UNILMv 2"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "English Wikipedia",
+    "BookCorpus",
+    "OpenWebText1",
+    "CC-News"
+   ],
+   "pretraining_task": [
+    "Pseudo-Masked Language Modeling (PMLM), Autoencoding (AE), Permutation Language Modeling (PAR)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "UniLMv 2": {
+    "research_problem": {
+     "candidates": [
+      "Unified language model pre-training for both natural language understanding and generation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Unified language model pre-training for both natural language understanding and generation",
+       "reason": "Describes the proposed solution/approach rather than naming the underlying research problem."
+      }
+     ]
+    }
+   },
+   "UNILMv 2": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for downstream tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for downstream tasks",
+       "reason": "Describes the training process rather than naming a specific task."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unified language model pre-training for natural language understanding and generation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Unified language model pre-training for natural language understanding and generation",
+       "reason": "Describes the proposed solution/approach rather than naming the underlying research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 54,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 19
+  }
+ },
+ "contributions": [
+  {
+   "label": "UniLMv 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "UniLMv 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "UniLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-02-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Pseudo-Masked LM (PMLM): jointly pre-trains a bidirectional encoder (via Autoencoding with [M] masks) and a sequence-to-sequence decoder (via Partially Autoregressive modeling with [P] pseudo-masks) in a unified framework",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reuses context encodings from the AE pass to avoid redundant computation in the PAR pass",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses well-designed position embeddings and self-attention masks to allow PAR factorization steps to access all position embeddings, improving computational efficiency over separate pre-training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Autoencoding (AE), Partially Autoregressive (PAR) masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Natural language understanding and generation tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for NLU (text classification, QA) and NLG (summarization, question generation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "124M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia V100-32GB GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 Nvidia V100-32GB GPU cards",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE benchmark (MNLI, SST-2, MRPC, RTE, QNLI, QQP, STS, CoLA)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Stories dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention with relative position bias",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (PMLM) \u2192 Fine-tuning (NLU/NLG tasks)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v1.1 F1: 93.1, EM: 87.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 F1: 86.1, EM: 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE: MNLI 88.5, SST-2 95.1, MRPC 91.8, RTE 81.3, QNLI 93.5, QQP 91.7, STS 91.0, CoLA 65.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "UNILMv 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "UNILMv 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "UNILM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-02-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Pseudo-Masked Language Model (PMLM): jointly learns bidirectional language modeling (via autoencoding) and sequence-to-sequence modeling (via partially autoregressive modeling) in a single forward pass",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Autoencoding provides global masking information to the partially autoregressive component, while partially autoregressive modeling learns intra-relations between masked spans and long-distance dependencies, preventing local shortcuts and improving computational efficiency compared to separate pre-training objectives.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Pseudo-Masked Language Modeling (PMLM), Autoencoding (AE), Permutation Language Modeling (PAR)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-News",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 110,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Sentiment classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "160GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SST-2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoLA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "STS",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QQP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MRPC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RTE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNN/DailyMail",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Question Generation datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "110M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (PMLM/AE+PAR) -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v1.1 F1 92.0, EM 85.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 F1 83.6, EM 80.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI mm 93.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST-2 93.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN/DailyMail RG-L 40.14",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum RG-L 36.08",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Question Generation BLEU-4 26.29, METEOR 27.16, RG-L 53.22",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R558105",
+  "contribution_ids": [
+   "R558106",
+   "R1920533",
+   "R1920544"
+  ],
+  "new_contribution_ids": [
+   "R1920533",
+   "R1920544"
+  ],
+  "comparison_updated": null
+ }
+}

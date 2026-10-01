@@ -1,0 +1,930 @@
+{
+ "arxiv_id": "2107.03374",
+ "status": "completed",
+ "timestamp": "2026-08-25T01:09:42.230787",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2107.03374",
+  "title": "Evaluating Large Language Models Trained on Code",
+  "authors": [
+   "Mark Chen",
+   "Jerry Tworek",
+   "Heewoo Jun",
+   "Qiming Yuan",
+   "Henrique Ponde de Oliveira Pinto",
+   "Jared Kaplan",
+   "Harri Edwards",
+   "Yuri Burda",
+   "Nicholas Joseph",
+   "Greg Brockman",
+   "Alex Ray",
+   "Raul Puri",
+   "Gretchen Krueger",
+   "Michael Petrov",
+   "Heidy Khlaaf",
+   "Girish Sastry",
+   "Pamela Mishkin",
+   "Brooke Chan",
+   "Scott Gray",
+   "Nick Ryder",
+   "Mikhail Pavlov",
+   "Alethea Power",
+   "Lukasz Kaiser",
+   "Mohammad Bavarian",
+   "Clemens Winter",
+   "Philippe Tillet",
+   "Felipe Petroski Such",
+   "Dave Cummings",
+   "Matthias Plappert",
+   "Fotios Chantzis",
+   "Elizabeth Barnes",
+   "Ariel Herbert-Voss",
+   "William Hebgen Guss",
+   "Alex Nichol",
+   "Alex Paino",
+   "Nikolas Tezak",
+   "Jie Tang",
+   "Igor Babuschkin",
+   "Suchir Balaji",
+   "Shantanu Jain",
+   "William Saunders",
+   "Christopher Hesse",
+   "Andrew N. Carr",
+   "Jan Leike",
+   "Josh Achiam",
+   "Vedant Misra",
+   "Evan Morikawa",
+   "Alec Radford",
+   "Matthew Knight",
+   "Miles Brundage",
+   "Mira Murati",
+   "Katie Mayer",
+   "Peter Welinder",
+   "Bob McGrew",
+   "Dario Amodei",
+   "Sam McCandlish",
+   "Ilya Sutskever",
+   "Wojciech Zaremba"
+  ],
+  "abstract": "We introduce Codex, a GPT language model fine-tuned on publicly available code from GitHub, and study its Python code-writing capabilities. A distinct production version of Codex powers GitHub Copilot. On HumanEval, a new evaluation set we release to measure functional correctness for synthesizing programs from docstrings, our model solves 28.8% of the problems, while GPT-3 solves 0% and GPT-J solves 11.4%. Furthermore, we find that repeated sampling from the model is a surprisingly effective strategy for producing working solutions to difficult prompts. Using this method, we solve 70.2% of our problems with 100 samples per problem. Careful investigation of our model reveals its limitations, including difficulty with docstrings describing long chains of operations and with binding operations to variables. Finally, we discuss the potential broader impacts of deploying powerful code generation technologies, covering safety, security, and economics.",
+  "published": "2021-07-07T17:41:24+00:00",
+  "updated": "2021-07-14T17:16:02+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2107.03374v2",
+  "entry_id": "http://arxiv.org/abs/2107.03374v2",
+  "pdf_path": "data/papers/2107.03374.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 137808,
+ "word_count": 9925,
+ "models_extracted": 15,
+ "extraction_data": [
+  {
+   "model_name": "Codex",
+   "parameters": "12M, 16M, 25M, 42M, 85M, 125M, 300M, 350M, 679M, 760M, 1.3B, 2.5B, 2.7B, 3.5B, 6B, 6.7B, 12B, 20B, 28B, 34B, 52B, 67B, 137B, 175B",
+   "parameters_millions": 175000,
+   "model_family": "Codex",
+   "date_created": "2021-07-07",
+   "organization": "OpenAI",
+   "innovation": "Supervised fine-tuning on a curated dataset of ~40,000 programming problems derived from continuous integration traces, PyPI packages, and coding competitions; introduces a '1-shot' training format appending input/output examples to docstrings to improve code generation performance.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "Public code and natural language text (Common Crawl, GitHub, Stack Overflow)",
+   "finetuning_task": "Supervised fine-tuning on curated programming tasks",
+   "optimizer": "AdamW",
+   "hardware_used": "Nvidia V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Evaluating code generation and synthesis capabilities of large language models",
+   "application": "Code generation, function synthesis from docstrings, solving programming problems",
+   "paper_title": "Evaluating Large Language Models Trained on Code",
+   "training_corpus_size": "159GB",
+   "finetuning_data": "GitHub dataset (public code), Standalone, correctly implemented functions, APPS dataset, competitive programming websites, repositories with continuous integration, Curated programming problems from CI traces, PyPI packages, and coding competitions; docstring generation tasks, Public code repositories (GitHub)",
+   "tokenizer": "Byte-level BPE",
+   "supported_language": "English, Code, Python",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": "2048",
+   "activated_parameters": "12B (dense, all parameters active)",
+   "attention_mechanism": "Masked (causal) multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Supervised fine-tuning on curated code problems",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": "TPUv3 cluster",
+   "safety_evaluation_protocol": "Alignment evaluation, testing for buggy, insecure, and biased code generation",
+   "safety_defect_rate": "Frequent insecure configurations (e.g., short RSA keys, ECB mode) across all sizes",
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "GPT-3-12B",
+   "optimizer_innovation": null,
+   "benchmark_result": "HumanEval: 28.8% (single sample), 44.5% (highest mean log-probability), 77.5% (passing unittests with 100 samples); HumanEval: 28.8% (Codex-12B single sample), 13.2% (Codex-300M single sample), 37.7% (Codex-S single sample); HumanEval pass@1: 12M: 2.00%, 25M: 3.21%, 42M: 5.06%, 85M: 8.22%, 300M: 13.17%, 679M: 16.22%, 2.5B: 21.36%, 12B: 28.81%; pass@100: 12M: 8.58%, 25M: 12.89%, 42M: 15.55%, 85M: 22.4%, 300M: 36.27%, 679M: 40.95%, 2.5B: 59.5%, 12B: 72.31%; Codex-S-12B: 32.2%, 59.5%; Codex-D-12B: 20.3%, 46.5%; HumanEval: 48.8; HumanEval pass@1: 12B=28.2, 6B=26.3, 3.5B=22.3, 1.3B=19.4, 350M=15.8, 125M=12.9, 16M=8.5; HumanEval: 48.2 (12B), 26.2 (6.7B), 14.6 (1.3B), 2.0 (125M)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "96 (12B), 48 (6B), 36 (3.5B), 24 (1.3B), 16 (350M), 12 (125M), 6 (16M)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)",
+   "model_family": "Codex",
+   "date_created": "2021-07-07",
+   "organization": "OpenAI",
+   "innovation": "Systematic evaluation of large language models fine-tuned on code, demonstrating significant improvements in code generation, bug fixing, and semantic code search compared to prior models.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Code generation, bug fixing, semantic code search",
+   "license": "Closed source",
+   "research_problem": "Code generation and understanding",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Evaluating Large Language Models Trained on Code",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Codex": {
+   "application": [
+    "Code generation",
+    "function synthesis from docstrings",
+    "solving programming problems"
+   ],
+   "attention_mechanism": [
+    "Masked (causal) multi-head self-attention"
+   ],
+   "base_model": [
+    "GPT-3-12B"
+   ],
+   "finetuning_data": [
+    "GitHub dataset (public code)",
+    "APPS dataset",
+    "competitive programming websites",
+    "repositories with continuous integration",
+    "Curated programming problems from CI traces",
+    "PyPI packages",
+    "coding competitions",
+    "Public code repositories (GitHub)"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "Nvidia V100 GPU"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "Codex"
+   ],
+   "model_name": [
+    "Codex"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "parameters": [
+    "12M",
+    "16M",
+    "25M",
+    "42M",
+    "85M",
+    "125M",
+    "300M",
+    "350M",
+    "679M",
+    "760M",
+    "1.3B",
+    "2.5B",
+    "2.7B",
+    "3.5B",
+    "6B",
+    "6.7B",
+    "12B",
+    "20B",
+    "28B",
+    "34B",
+    "52B",
+    "67B",
+    "137B",
+    "175B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Public code and natural language text (Common Crawl, GitHub, Stack Overflow)"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)": {
+   "application": [
+    "Code generation",
+    "bug fixing",
+    "semantic code search"
+   ],
+   "license": [
+    "Closed source"
+   ],
+   "model_family": [
+    "Codex"
+   ],
+   "model_name": [
+    "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Code generation and understanding"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Codex": {
+    "finetuning_data": {
+     "candidates": [
+      "GitHub dataset (public code)",
+      "Standalone",
+      "correctly implemented functions",
+      "APPS dataset",
+      "competitive programming websites",
+      "repositories with continuous integration",
+      "Curated programming problems from CI traces",
+      "PyPI packages",
+      "coding competitions",
+      "docstring generation tasks",
+      "Public code repositories (GitHub)"
+     ],
+     "accepted": [
+      "GitHub dataset (public code)",
+      "APPS dataset",
+      "competitive programming websites",
+      "repositories with continuous integration",
+      "Curated programming problems from CI traces",
+      "PyPI packages",
+      "coding competitions",
+      "Public code repositories (GitHub)"
+     ],
+     "dropped": [
+      {
+       "value": "Standalone",
+       "reason": "Fragment/placeholder, not a dataset"
+      },
+      {
+       "value": "correctly implemented functions",
+       "reason": "Describes data content rather than naming a dataset"
+      },
+      {
+       "value": "docstring generation tasks",
+       "reason": "Names a task, not a dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on curated programming tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on curated programming tasks",
+       "reason": "Describes the training procedure rather than the specific task"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Evaluating code generation and synthesis capabilities of large language models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Evaluating code generation and synthesis capabilities of large language models",
+       "reason": "Describes an evaluation objective rather than the capability gap the model addresses"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Code",
+      "Python"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Python",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "Code",
+       "reason": "Programming language, not a natural language as defined"
+      }
+     ]
+    }
+   },
+   "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)": {}
+  },
+  "counts": {
+   "kept": 57,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 19
+  }
+ },
+ "contributions": [
+  {
+   "label": "Codex",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Codex",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Codex",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-07-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Supervised fine-tuning on a curated dataset of ~40,000 programming problems derived from continuous integration traces, PyPI packages, and coding competitions",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a '1-shot' training format appending input/output examples to docstrings to improve code generation performance.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Public code and natural language text (Common Crawl, GitHub, Stack Overflow)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-level BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "16M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "25M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "42M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "85M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "679M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "760M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "28B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "34B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "52B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "67B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "137B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "175B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 175000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Function synthesis from docstrings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Solving programming problems",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "159GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GitHub dataset (public code)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "APPS dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Competitive programming websites",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Repositories with continuous integration",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Curated programming problems from CI traces",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PyPI packages",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Coding competitions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Public code repositories (GitHub)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "12B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Masked (causal) multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Supervised fine-tuning on curated code problems",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "TPUv3 cluster",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Alignment evaluation, testing for buggy, insecure, and biased code generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203098",
+     "label": "safety_defect_rate",
+     "value": "Frequent insecure configurations (e.g., short RSA keys, ECB mode) across all sizes",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "GPT-3-12B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 28.8% (single sample), 44.5% (highest mean log-probability), 77.5% (passing unittests with 100 samples)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 28.8% (Codex-12B single sample), 13.2% (Codex-300M single sample), 37.7% (Codex-S single sample)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval pass@1: 12M: 2.00%, 25M: 3.21%, 42M: 5.06%, 85M: 8.22%, 300M: 13.17%, 679M: 16.22%, 2.5B: 21.36%, 12B: 28.81%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pass@100: 12M: 8.58%, 25M: 12.89%, 42M: 15.55%, 85M: 22.4%, 300M: 36.27%, 679M: 40.95%, 2.5B: 59.5%, 12B: 72.31%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Codex-S-12B: 32.2%, 59.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Codex-D-12B: 20.3%, 46.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 48.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval pass@1: 12B=28.2, 6B=26.3, 3.5B=22.3, 1.3B=19.4, 350M=15.8, 125M=12.9, 16M=8.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 48.2 (12B), 26.2 (6.7B), 14.6 (1.3B), 2.0 (125M)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "96 (12B), 48 (6B), 36 (3.5B), 24 (1.3B), 16 (350M), 12 (125M), 6 (16M)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OpenAI Codex models (code-davinci-002, code-davinci-001, code-cushman-001)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Codex",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-07-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic evaluation of large language models fine-tuned on code, demonstrating significant improvements in code generation, bug fixing, and semantic code search compared to prior models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Bug fixing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Semantic code search",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Code generation and understanding",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R472511",
+  "contribution_ids": [
+   "R472512",
+   "R1921292",
+   "R1921300"
+  ],
+  "new_contribution_ids": [
+   "R1921292",
+   "R1921300"
+  ],
+  "comparison_updated": null
+ }
+}

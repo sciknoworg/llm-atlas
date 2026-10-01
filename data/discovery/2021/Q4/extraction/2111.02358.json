@@ -1,0 +1,1529 @@
+{
+ "arxiv_id": "2111.02358",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:25:27.417760",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2111.02358",
+  "title": "VLMo: Unified Vision-Language Pre-Training with Mixture-of-Modality-Experts",
+  "authors": [
+   "Hangbo Bao",
+   "Wenhui Wang",
+   "Li Dong",
+   "Qiang Liu",
+   "Owais Khan Mohammed",
+   "Kriti Aggarwal",
+   "Subhojit Som",
+   "Furu Wei"
+  ],
+  "abstract": "We present a unified Vision-Language pretrained Model (VLMo) that jointly learns a dual encoder and a fusion encoder with a modular Transformer network. Specifically, we introduce Mixture-of-Modality-Experts (MoME) Transformer, where each block contains a pool of modality-specific experts and a shared self-attention layer. Because of the modeling flexibility of MoME, pretrained VLMo can be fine-tuned as a fusion encoder for vision-language classification tasks, or used as a dual encoder for efficient image-text retrieval. Moreover, we propose a stagewise pre-training strategy, which effectively leverages large-scale image-only and text-only data besides image-text pairs. Experimental results show that VLMo achieves state-of-the-art results on various vision-language tasks, including VQA, NLVR2 and image-text retrieval. The code and pretrained models are available at https://aka.ms/vlmo.",
+  "published": "2021-11-03T17:20:36+00:00",
+  "updated": "2022-05-27T15:44:26+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2111.02358v2",
+  "entry_id": "http://arxiv.org/abs/2111.02358v2",
+  "pdf_path": "data/papers/2111.02358.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 51917,
+ "word_count": 3023,
+ "models_extracted": 7,
+ "extraction_data": [
+  {
+   "model_name": "VLMo",
+   "parameters": "BASE, 110M, 340M",
+   "parameters_millions": 340,
+   "model_family": "VLMo",
+   "date_created": "2021-11-03",
+   "organization": "Microsoft",
+   "innovation": "Mixture-of-Modality-Experts (MOME) Transformer: replaces standard Transformer feed-forward networks with a pool of modality-specific experts (vision, language, vision-language) and a shared self-attention layer, enabling a single unified model to function as either a dual encoder for retrieval or a fusion encoder for classification; Stagewise pre-training strategy: leverages large-scale image-only and text-only data in addition to image-text pairs by first pretraining vision experts on image-only data (masked image modeling), then language experts on text-only data (masked language modeling), before joint vision-language pre-training.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Image-text contrastive learning, image-text matching, masked language modeling, masked image modeling",
+   "pretraining_corpus": "LAION-400M, Conceptual Captions, COCO, Visual Genome, SBU Caption, CC3M",
+   "finetuning_task": "Dual encoder (retrieval) or fusion encoder (classification), Visual question answering, natural language for visual reasoning, image-text retrieval, image classification, semantic segmentation",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA V100 GPU",
+   "extension": "Mixture-of-Modality-Experts (MOME) architecture with shared self-attention and modality-specific experts",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Unified vision-language pre-training for both understanding and generation",
+   "application": "Visual question answering, natural language for visual reasoning, image-text retrieval, image classification, semantic segmentation",
+   "paper_title": "VLMo: Unified Vision-Language Pre-Training with Mixture-of-Modality-Experts",
+   "training_corpus_size": "4M pairs",
+   "finetuning_data": "NLVR2, Flickr30k, COCO, VG, SBU, CC, ImageNet, ADE20K",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": "32 V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/microsoft/unilm/tree/master/vlmo",
+   "context_length": null,
+   "activated_parameters": "110M (BASE), 340M (LARGE) \u2014 dense, all parameters active",
+   "attention_mechanism": "Shared self-attention across modalities, Self-attention (ViT-based), Multi-head self-attention",
+   "context_length_max": "196",
+   "context_extension_method": null,
+   "training_pipeline": "Stagewise pre-training: (1) vision experts + shared self-attention on image-only data (masked image modeling); (2) language experts on text-only data (masked language modeling); (3) joint vision-language pre-training on image-text pairs.",
+   "reasoning_mode": null,
+   "moe_configuration": "Three modality experts (vision, language, vision-language) per block, shared self-attention layer",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mixture-of-Modality-Experts (MOME) Transformer with modality-specific experts replacing FFN and shared self-attention",
+   "vision_encoder": "ViT-Base, ViT (Vision Transformer) initialized with BEIT-Base",
+   "base_model": "BEIT-Base",
+   "optimizer_innovation": null,
+   "benchmark_result": "NLVR2 dev: 79.58, test-P: 80.11; Flickr30k IR: 94.50, ITM: 86.69; VQA2.0: 74.8; NLVR2 dev: 93.1; NLVR2 test: 96.9; COCO TR: 92.3; COCO IR: 99.4; Flickr30K TR: 79.3; Flickr30K IR: 95.7; ImageNet: 85.5; ADE20K: 53.4; VQA2.0: 78.2; NLVR2 dev: 94.4; NLVR2 test: 97.4; COCO TR: 95.3; COCO IR: 99.9; Flickr30K TR: 84.5; Flickr30K IR: 97.3; VQA v2: 76.28; GQA: 63.5; VizWiz: 52.1; COCO Captioning CIDEr: 130.5; Visual Genome VQA: 58.4; NLVR2: 86.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "VLMO",
+   "parameters": "86M, 307M",
+   "parameters_millions": 307,
+   "model_family": "VLMo",
+   "date_created": "2021-11-03",
+   "organization": "Microsoft",
+   "innovation": "Mixture-of-Modality-Experts (MOME) Transformer with distinct vision, language, and vision-language experts; two-stage initialization using image-only and text-only data to improve generalization on complex pairs; unified dual-encoder and fusion-encoder fine-tuning for retrieval and classification.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling, image-text alignment",
+   "pretraining_corpus": "Conceptual Captions, SBU Captions, COCO, Visual Genome",
+   "finetuning_task": "Supervised discriminative fine-tuning for classification and retrieval",
+   "optimizer": "AdamW",
+   "hardware_used": "Nvidia Tesla V100 32GB GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Unified Vision-Language Pre-Training",
+   "application": "Visual question answering, visual reasoning, vision-language retrieval, classification",
+   "paper_title": "VLMo: Unified Vision-Language Pre-Training with Mixture-of-Modality-Experts",
+   "training_corpus_size": "10M image-text pairs",
+   "finetuning_data": "VQA 2.0, NLVR2",
+   "tokenizer": "BERT uncased tokenizer",
+   "supported_language": "English",
+   "hardware_description": "64 Nvidia Tesla V100 32GB GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "40",
+   "context_extension_method": null,
+   "training_pipeline": "Vision pre-training (image-only) -> Language pre-training (text-only) -> Vision-language pre-training (image-text pairs) -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion (fusion encoder) and dual-encoder",
+   "vision_encoder": "ViT/BEIT configuration",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA test-dev: 76.64; VQA test-std: 76.89; NLVR2 dev: 82.77; NLVR2 test-P: 83.34; VQA test-dev: 79.94; VQA test-std: 79.98; NLVR2 dev: 85.64; NLVR2 test-P: 86.86",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "VLMo-Large++",
+   "model_family": "VLMo",
+   "date_created": "2021-11-03",
+   "organization": "Microsoft",
+   "innovation": "Mixture-of-Modality-Experts (MOME) Transformer: uses separate vision and text experts sharing a self-attention module; stagewise pre-training (image-only, then text-only, then vision-language); linear projection for image embedding instead of region features for speed.",
+   "pretraining_corpus": "COCO, Visual Genome (VG), SBU, Conceptual Captions (CC)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Visual question answering, natural language for visual reasoning, image-text retrieval, image classification, semantic segmentation",
+   "license": null,
+   "research_problem": "Vision-Language Pre-Training",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Vision-language pre-training",
+   "training_corpus_size": "1.0B pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Visual question answering, natural language for visual reasoning, image-text retrieval, image classification, semantic segmentation",
+   "finetuning_data": "COCO, VG, SBU, CC, NLVR2, Flickr30K, ImageNet, ADE20K",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Mixture-of-Modality-Experts (MOME) architecture with shared self-attention and modality-specific experts",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "VLMo: Unified Vision-Language Pre-Training with Mixture-of-Modality-Experts",
+   "activated_parameters": null,
+   "attention_mechanism": "Self-attention (ViT-based)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Stagewise pre-training: image-only -> text-only -> vision-language",
+   "reasoning_mode": null,
+   "moe_configuration": "Mixture-of-Modality-Experts (MOME) with separate vision and text experts sharing self-attention",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Early fusion via linear projection for images; separate encoding for retrieval",
+   "vision_encoder": "ViT (Vision Transformer) initialized with BEIT-Base",
+   "base_model": "BEIT-Base",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA2.0: 83.1; NLVR2 dev: 96.0; NLVR2 test: 98.2; COCO TR: 96.8; COCO IR: 100.0; Flickr30K TR: 88.1; Flickr30K IR: 98.4",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 7,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "VLMo": {
+   "application": [
+    "Visual question answering",
+    "natural language for visual reasoning",
+    "image-text retrieval",
+    "image classification",
+    "semantic segmentation"
+   ],
+   "attention_mechanism": [
+    "Shared self-attention across modalities",
+    "Self-attention (ViT-based)",
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "BEIT-Base"
+   ],
+   "finetuning_data": [
+    "NLVR2",
+    "Flickr30k",
+    "COCO",
+    "VG",
+    "SBU",
+    "CC",
+    "ImageNet",
+    "ADE20K"
+   ],
+   "finetuning_task": [
+    "Visual question answering",
+    "natural language for visual reasoning",
+    "image-text retrieval",
+    "image classification",
+    "semantic segmentation"
+   ],
+   "fusion_architecture": [
+    "Mixture-of-Modality-Experts (MOME) Transformer with modality-specific experts replacing FFN and shared self-attention"
+   ],
+   "hardware_used": [
+    "NVIDIA V100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "VLMo"
+   ],
+   "model_name": [
+    "VLMo"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "110M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-400M",
+    "Conceptual Captions",
+    "COCO",
+    "Visual Genome",
+    "SBU Caption",
+    "CC3M"
+   ],
+   "pretraining_task": [
+    "Image-text contrastive learning, image-text matching, masked language modeling, masked image modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT-Base",
+    "ViT (Vision Transformer) initialized with BEIT-Base"
+   ]
+  },
+  "VLMO": {
+   "application": [
+    "Visual question answering",
+    "visual reasoning",
+    "vision-language retrieval",
+    "classification"
+   ],
+   "finetuning_data": [
+    "VQA 2.0",
+    "NLVR2"
+   ],
+   "finetuning_task": [
+    "Supervised discriminative fine-tuning for classification and retrieval"
+   ],
+   "fusion_architecture": [
+    "Mid-fusion (fusion encoder) and dual-encoder"
+   ],
+   "hardware_used": [
+    "Nvidia Tesla V100 32GB GPU"
+   ],
+   "model_family": [
+    "VLMo"
+   ],
+   "model_name": [
+    "VLMO"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "86M",
+    "307M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions",
+    "SBU Captions",
+    "COCO",
+    "Visual Genome"
+   ],
+   "pretraining_task": [
+    "Masked language modeling, image-text alignment"
+   ],
+   "research_problem": [
+    "Unified Vision-Language Pre-Training"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT/BEIT configuration"
+   ]
+  },
+  "VLMo-Large++": {
+   "application": [
+    "Visual question answering",
+    "natural language for visual reasoning",
+    "image-text retrieval",
+    "image classification",
+    "semantic segmentation"
+   ],
+   "attention_mechanism": [
+    "Self-attention (ViT-based)"
+   ],
+   "base_model": [
+    "BEIT-Base"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "VG",
+    "SBU",
+    "CC",
+    "NLVR2",
+    "Flickr30K",
+    "ImageNet",
+    "ADE20K"
+   ],
+   "finetuning_task": [
+    "Visual question answering",
+    "natural language for visual reasoning",
+    "image-text retrieval",
+    "image classification",
+    "semantic segmentation"
+   ],
+   "fusion_architecture": [
+    "Early fusion via linear projection for images; separate encoding for retrieval"
+   ],
+   "model_family": [
+    "VLMo"
+   ],
+   "model_name": [
+    "VLMo-Large++"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome (VG)",
+    "SBU",
+    "Conceptual Captions (CC)"
+   ],
+   "pretraining_task": [
+    "Vision-language pre-training"
+   ],
+   "research_problem": [
+    "Vision-Language Pre-Training"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT (Vision Transformer) initialized with BEIT-Base"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "VLMo": {
+    "finetuning_task": {
+     "candidates": [
+      "Dual encoder (retrieval) or fusion encoder (classification)",
+      "Visual question answering",
+      "natural language for visual reasoning",
+      "image-text retrieval",
+      "image classification",
+      "semantic segmentation"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "natural language for visual reasoning",
+      "image-text retrieval",
+      "image classification",
+      "semantic segmentation"
+     ],
+     "dropped": [
+      {
+       "value": "Dual encoder (retrieval) or fusion encoder (classification)",
+       "reason": "Describes architectural setup rather than the specific fine-tuning task."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "BASE",
+      "110M",
+      "340M"
+     ],
+     "accepted": [
+      "110M",
+      "340M"
+     ],
+     "dropped": [
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unified vision-language pre-training for both understanding and generation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Unified vision-language pre-training for both understanding and generation",
+       "reason": "Describes a solution or method rather than the research problem or capability gap."
+      }
+     ]
+    }
+   },
+   "VLMO": {},
+   "VLMo-Large++": {}
+  },
+  "counts": {
+   "kept": 99,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 9
+  }
+ },
+ "contributions": [
+  {
+   "label": "VLMo",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "VLMo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "VLMo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-03",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Modality-Experts (MOME) Transformer: replaces standard Transformer feed-forward networks with a pool of modality-specific experts (vision, language, vision-language) and a shared self-attention layer, enabling a single unified model to function as either a dual encoder for retrieval or a fusion encoder for classification",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Stagewise pre-training strategy: leverages large-scale image-only and text-only data in addition to image-text pairs by first pretraining vision experts on image-only data (masked image modeling), then language experts on text-only data (masked language modeling), before joint vision-language pre-training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text contrastive learning, image-text matching, masked language modeling, masked image modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Natural language for visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Semantic segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language for visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Semantic segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/unilm/tree/master/vlmo",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "4M pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SBU",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ADE20K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "110M (BASE), 340M (LARGE) \u2014 dense, all parameters active",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Shared self-attention across modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention (ViT-based)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "196",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stagewise pre-training: (1) vision experts + shared self-attention on image-only data (masked image modeling); (2) language experts on text-only data (masked language modeling); (3) joint vision-language pre-training on image-text pairs.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Three modality experts (vision, language, vision-language) per block, shared self-attention layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mixture-of-Modality-Experts (MOME) Transformer with modality-specific experts replacing FFN and shared self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (Vision Transformer) initialized with BEIT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BEIT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 79.58, test-P: 80.11",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k IR: 94.50, ITM: 86.69",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA2.0: 74.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 93.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test: 96.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO TR: 92.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO IR: 99.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K TR: 79.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K IR: 95.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet: 85.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ADE20K: 53.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA2.0: 78.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 94.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test: 97.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO TR: 95.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO IR: 99.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K TR: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K IR: 97.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA v2: 76.28",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 63.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz: 52.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Captioning CIDEr: 130.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Genome VQA: 58.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2: 86.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "VLMO",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "VLMO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "VLMo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-03",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Modality-Experts (MOME) Transformer with distinct vision, language, and vision-language experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage initialization using image-only and text-only data to improve generalization on complex pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified dual-encoder and fusion-encoder fine-tuning for retrieval and classification.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling, image-text alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised discriminative fine-tuning for classification and retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BERT uncased tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "86M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "307M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 307,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia Tesla V100 32GB GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 Nvidia Tesla V100 32GB GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Vision-language retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unified Vision-Language Pre-Training",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "10M image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA 2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "40",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Vision pre-training (image-only) -> Language pre-training (text-only) -> Vision-language pre-training (image-text pairs) -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion (fusion encoder) and dual-encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT/BEIT configuration",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-dev: 76.64",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-std: 76.89",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 82.77",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-P: 83.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-dev: 79.94",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-std: 79.98",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 85.64",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-P: 86.86",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "VLMo-Large++",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "VLMo-Large++",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "VLMo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-03",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Modality-Experts (MOME) Transformer: uses separate vision and text experts sharing a self-attention module",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Stagewise pre-training (image-only, then text-only, then vision-language)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Linear projection for image embedding instead of region features for speed.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-language pre-training",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome (VG)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (CC)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Natural language for visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Semantic segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language for visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Semantic segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-Language Pre-Training",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.0B pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SBU",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ADE20K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention (ViT-based)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stagewise pre-training: image-only -> text-only -> vision-language",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Mixture-of-Modality-Experts (MOME) with separate vision and text experts sharing self-attention",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Early fusion via linear projection for images; separate encoding for retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (Vision Transformer) initialized with BEIT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BEIT-Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA2.0: 83.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 96.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test: 98.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO TR: 96.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO IR: 100.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K TR: 88.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K IR: 98.4",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467642",
+  "contribution_ids": [
+   "R467643",
+   "R1921448",
+   "R1921465",
+   "R1921473"
+  ],
+  "new_contribution_ids": [
+   "R1921448",
+   "R1921465",
+   "R1921473"
+  ],
+  "comparison_updated": null
+ }
+}

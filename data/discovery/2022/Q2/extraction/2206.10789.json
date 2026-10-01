@@ -1,0 +1,511 @@
+{
+ "arxiv_id": "2206.10789",
+ "status": "completed",
+ "timestamp": "2026-08-30T22:38:02.020788",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2206.10789",
+  "title": "Scaling Autoregressive Models for Content-Rich Text-to-Image Generation",
+  "authors": [
+   "Jiahui Yu",
+   "Yuanzhong Xu",
+   "Jing Yu Koh",
+   "Thang Luong",
+   "Gunjan Baid",
+   "Zirui Wang",
+   "Vijay Vasudevan",
+   "Alexander Ku",
+   "Yinfei Yang",
+   "Burcu Karagol Ayan",
+   "Ben Hutchinson",
+   "Wei Han",
+   "Zarana Parekh",
+   "Xin Li",
+   "Han Zhang",
+   "Jason Baldridge",
+   "Yonghui Wu"
+  ],
+  "abstract": "We present the Pathways Autoregressive Text-to-Image (Parti) model, which generates high-fidelity photorealistic images and supports content-rich synthesis involving complex compositions and world knowledge. Parti treats text-to-image generation as a sequence-to-sequence modeling problem, akin to machine translation, with sequences of image tokens as the target outputs rather than text tokens in another language. This strategy can naturally tap into the rich body of prior work on large language models, which have seen continued advances in capabilities and performance through scaling data and model sizes. Our approach is simple: First, Parti uses a Transformer-based image tokenizer, ViT-VQGAN, to encode images as sequences of discrete tokens. Second, we achieve consistent quality improvements by scaling the encoder-decoder Transformer model up to 20B parameters, with a new state-of-the-art zero-shot FID score of 7.23 and finetuned FID score of 3.22 on MS-COCO. Our detailed analysis on Localized Narratives as well as PartiPrompts (P2), a new holistic benchmark of over 1600 English prompts, demonstrate the effectiveness of Parti across a wide variety of categories and difficulty aspects. We also explore and highlight limitations of our models in order to define and exemplify key areas of focus for further improvements. See https://parti.research.google/ for high-resolution images.",
+  "published": "2022-06-22T01:11:29+00:00",
+  "updated": "2022-06-22T01:11:29+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2206.10789v1",
+  "entry_id": "http://arxiv.org/abs/2206.10789v1",
+  "pdf_path": "data/papers/2206.10789.pdf"
+ },
+ "text_length": 138959,
+ "word_count": 7596,
+ "models_extracted": 12,
+ "extraction_data": [
+  {
+   "model_name": "Parti",
+   "parameters": "350M, 750M, 3B, 20B",
+   "parameters_millions": 20000,
+   "model_family": "Parti",
+   "date_created": "2022-06-22",
+   "organization": "Google",
+   "innovation": "Autoregressive next-token prediction over a learned 8192-vocabulary image codebook for text-to-image generation; employs a CoCare ranking model to rerank 16 sampled images per prompt, demonstrating significant quality improvements when scaling model size.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "LAION-400M (incorporated during fine-tuning with classifier-free guidance), highly filtered dataset (pre-training)",
+   "finetuning_task": "Supervised fine-tuning for text-to-image generation, Fine-tuning with classifier-free guidance",
+   "optimizer": "Adafactor",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Text-to-image generation",
+   "application": "Text-to-image generation",
+   "paper_title": "Scaling Autoregressive Models for Content-Rich Text-to-Image Generation",
+   "training_corpus_size": "LAION-400M, FIT400M, JFT-4B",
+   "finetuning_data": "MS-COCO (2014), Localized Narratives (COCO subset), MS-COCO, Localized Narratives (LN-COCO)",
+   "tokenizer": "8192-vocabulary image codebook",
+   "supported_language": "English",
+   "hardware_description": "64-way data parallelism; 16-stage pipelines for encoder and decoder; circular schedule for decoder pipeline",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "20B (dense)",
+   "attention_mechanism": "Standard transformer attention",
+   "context_length_max": "1024 image tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Next-token prediction loss over 8192-vocab image codebook, averaged over 1024 output tokens; 16 images sampled per prompt and reranked using CoCare ranking model",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16 for attention and feed-forward layers; float32 for layer norms and model output",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "Informal testing, bias analysis, prompt filtering, output filtering, model recalibration",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ViT-VQGAN image tokenizer, ViT-VQGAN quantizer",
+   "base_model": null,
+   "optimizer_innovation": "Quantized first moments of optimizer slot variables from float32 to int8",
+   "benchmark_result": "MS-COCO FID: 350M: 14.10, 750M: 10.71, 3B: 8.10, 20B: 7.23; Human eval MS-COCO: 91.7% image realism, 90.5% image-text match; P2 benchmark: 20B preferred over retrieval baseline (63.2% realism, 75.9% match); MS-COCO FID: 7.23 (zero-shot), 3.22 (finetuned); LN-COCO FID: 15.97 (zero-shot), 8.29 (finetuned); Captioner BLEU: 26.4, METEOR: 23.9, CIDEr: 83.9, SPICE: 16.5; MS-COCO FID: 2.47 (Random), 17.97 (Retrieval), 9.33 (XMC-GAN)",
+   "weight_clipping_mechanism": "Gradient norm clipping to 4.0",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Parti": {
+   "application": [
+    "Text-to-image generation"
+   ],
+   "attention_mechanism": [
+    "Standard transformer attention"
+   ],
+   "finetuning_data": [
+    "MS-COCO (2014)",
+    "Localized Narratives (COCO subset)",
+    "MS-COCO",
+    "Localized Narratives (LN-COCO)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning for text-to-image generation"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Parti"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "350M",
+    "750M",
+    "3B",
+    "20B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-400M (incorporated during fine-tuning with classifier-free guidance)"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "bfloat16 for attention and feed-forward layers",
+    "float32 for layer norms and model output"
+   ],
+   "research_problem": [
+    "Text-to-image generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT-VQGAN image tokenizer",
+    "ViT-VQGAN quantizer"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Parti": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for text-to-image generation",
+      "Fine-tuning with classifier-free guidance"
+     ],
+     "accepted": [
+      "Supervised fine-tuning for text-to-image generation"
+     ],
+     "dropped": [
+      {
+       "value": "Fine-tuning with classifier-free guidance",
+       "reason": "Describes a training technique, not a specific task or objective."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Parti"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Parti",
+       "reason": "Specific model name, not a broader category or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "LAION-400M (incorporated during fine-tuning with classifier-free guidance)",
+      "highly filtered dataset (pre-training)"
+     ],
+     "accepted": [
+      "LAION-400M (incorporated during fine-tuning with classifier-free guidance)"
+     ],
+     "dropped": [
+      {
+       "value": "highly filtered dataset (pre-training)",
+       "reason": "Descriptive phrase rather than a named, identifiable dataset."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient norm clipping to 4.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient norm clipping to 4.0",
+       "reason": "Describes gradient clipping, not weight clipping as defined."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 24,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "Parti",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Parti",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-06-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Autoregressive next-token prediction over a learned 8192-vocabulary image codebook for text-to-image generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs a CoCare ranking model to rerank 16 sampled images per prompt, demonstrating significant quality improvements when scaling model size.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M (incorporated during fine-tuning with classifier-free guidance)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "8192-vocabulary image codebook",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "750M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "20B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 20000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64-way data parallelism; 16-stage pipelines for encoder and decoder; circular schedule for decoder pipeline",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "LAION-400M, FIT400M, JFT-4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MS-COCO (2014)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Localized Narratives (COCO subset)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MS-COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Localized Narratives (LN-COCO)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "20B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard transformer attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024 image tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Next-token prediction loss over 8192-vocab image codebook, averaged over 1024 output tokens; 16 images sampled per prompt and reranked using CoCare ranking model",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 for attention and feed-forward layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 for layer norms and model output",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Informal testing, bias analysis, prompt filtering, output filtering, model recalibration",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-VQGAN image tokenizer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-VQGAN quantizer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203102",
+     "label": "optimizer_innovation",
+     "value": "Quantized first moments of optimizer slot variables from float32 to int8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID: 350M: 14.10, 750M: 10.71, 3B: 8.10, 20B: 7.23",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human eval MS-COCO: 91.7% image realism, 90.5% image-text match",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "P2 benchmark: 20B preferred over retrieval baseline (63.2% realism, 75.9% match)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID: 7.23 (zero-shot), 3.22 (finetuned)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LN-COCO FID: 15.97 (zero-shot), 8.29 (finetuned)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Captioner BLEU: 26.4, METEOR: 23.9, CIDEr: 83.9, SPICE: 16.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID: 2.47 (Random), 17.97 (Retrieval), 9.33 (XMC-GAN)",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1411576",
+  "contribution_ids": [
+   "R1411578",
+   "R1927551"
+  ],
+  "new_contribution_ids": [
+   "R1927551"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,578 @@
+{
+ "arxiv_id": "2402.00838",
+ "status": "completed",
+ "timestamp": "2026-08-28T19:17:40.100219",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2402.00838",
+  "title": "OLMo: Accelerating the Science of Language Models",
+  "authors": [
+   "Dirk Groeneveld",
+   "Iz Beltagy",
+   "Pete Walsh",
+   "Akshita Bhagia",
+   "Rodney Kinney",
+   "Oyvind Tafjord",
+   "Ananya Harsh Jha",
+   "Hamish Ivison",
+   "Ian Magnusson",
+   "Yizhong Wang",
+   "Shane Arora",
+   "David Atkinson",
+   "Russell Authur",
+   "Khyathi Raghavi Chandu",
+   "Arman Cohan",
+   "Jennifer Dumas",
+   "Yanai Elazar",
+   "Yuling Gu",
+   "Jack Hessel",
+   "Tushar Khot",
+   "William Merrill",
+   "Jacob Morrison",
+   "Niklas Muennighoff",
+   "Aakanksha Naik",
+   "Crystal Nam",
+   "Matthew E. Peters",
+   "Valentina Pyatkin",
+   "Abhilasha Ravichander",
+   "Dustin Schwenk",
+   "Saurabh Shah",
+   "Will Smith",
+   "Emma Strubell",
+   "Nishant Subramani",
+   "Mitchell Wortsman",
+   "Pradeep Dasigi",
+   "Nathan Lambert",
+   "Kyle Richardson",
+   "Luke Zettlemoyer",
+   "Jesse Dodge",
+   "Kyle Lo",
+   "Luca Soldaini",
+   "Noah A. Smith",
+   "Hannaneh Hajishirzi"
+  ],
+  "abstract": "Language models (LMs) have become ubiquitous in both NLP research and in commercial product offerings. As their commercial importance has surged, the most powerful models have become closed off, gated behind proprietary interfaces, with important details of their training data, architectures, and development undisclosed. Given the importance of these details in scientifically studying these models, including their biases and potential risks, we believe it is essential for the research community to have access to powerful, truly open LMs. To this end, we have built OLMo, a competitive, truly Open Language Model, to enable the scientific study of language models. Unlike most prior efforts that have only released model weights and inference code, we release OLMo alongside open training data and training and evaluation code. We hope this release will empower the open research community and inspire a new wave of innovation.",
+  "published": "2024-02-01T18:28:55+00:00",
+  "updated": "2024-06-07T21:59:52+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2402.00838v4",
+  "entry_id": "http://arxiv.org/abs/2402.00838v4",
+  "pdf_path": "data/papers/2402.00838.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 77971,
+ "word_count": 6688,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "OLMo 2",
+   "parameters": "1B, 7B, 13B, 78B",
+   "parameters_millions": 78000,
+   "model_family": "OLMo",
+   "date_created": "2024-02-01",
+   "organization": "Allen Institute For Ai",
+   "innovation": "Explicit decontamination for perplexity evaluation: removes pretraining documents containing paragraphs leaked from evaluation data to prevent underestimating perplexity; in-loop training ablations: runs downstream evaluations every 1000 steps to guide architecture, optimizer, learning rate, and data mixture decisions during training; two-stage adaptation: combines instruction fine-tuning with Direct Preference Optimization (DPO) on distilled preference data to improve chat and safety; mixed-precision training: uses bfloat16 for most operations while keeping optimizer states and gradients in full precision for stability.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "C4, 18 separate data sources",
+   "finetuning_task": "Supervised fine-tuning (SFT), Direct Preference Optimization (DPO), Supervised fine-tuning and Direct Preference Optimization (DPO)",
+   "optimizer": "AdamW",
+   "hardware_used": "A100-80GB GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Accelerating the science of language models through open, reproducible training and evaluation",
+   "application": "Language modeling, downstream evaluation, chat capabilities",
+   "paper_title": "OLMo: Accelerating the Science of Language Models",
+   "training_corpus_size": "2.5 trillion tokens",
+   "finetuning_data": "distilled and human-written instruction data, distilled preference data",
+   "tokenizer": "Byte-level BPE",
+   "supported_language": "English",
+   "hardware_description": "128 A100-80GB GPUs",
+   "carbon_emitted": "69.78 tCO2eq",
+   "source_code": "https://github.com/allenai/OLMo",
+   "context_length": null,
+   "activated_parameters": "1B (dense)",
+   "attention_mechanism": "Grouped-Query Attention (GQA), Full attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training only",
+   "reasoning_mode": null,
+   "moe_configuration": "2 experts, 1 active",
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "DPO",
+   "reward_mechanism": "GPT-15 generated aspect-based scores",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "ToxiGen, TruthfulQA",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "arc_challenge: 34.5, boolq: 58.1, hellaswag: 60.7, openbookqa: 62.5, piqa: 46.4, sciq: 73.7, winogrande: 88.1, avg: 60.4; arc_challenge: 48.5, boolq: 65.4, hellaswag: 73.4, openbookqa: 76.4, piqa: 50.4, sciq: 78.4, winogrande: 93.8, avg: 69.3",
+   "weight_clipping_mechanism": "Global gradient clipping at 1.0",
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "OLMo 2": {
+   "application": [
+    "Language modeling",
+    "chat capabilities"
+   ],
+   "attention_mechanism": [
+    "Grouped-Query Attention (GQA)",
+    "Full attention"
+   ],
+   "finetuning_data": [
+    "distilled and human-written instruction data",
+    "distilled preference data"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)"
+   ],
+   "hardware_used": [
+    "A100-80GB GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "OLMo"
+   ],
+   "model_name": [
+    "OLMo 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Allen Institute For Ai"
+   ],
+   "parameters": [
+    "1B",
+    "7B",
+    "13B",
+    "78B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [
+    "reproducible training and evaluation"
+   ],
+   "reward_mechanism": [
+    "GPT-15 generated aspect-based scores"
+   ],
+   "rl_algorithm": [
+    "DPO"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "OLMo 2": {
+    "application": {
+     "candidates": [
+      "Language modeling",
+      "downstream evaluation",
+      "chat capabilities"
+     ],
+     "accepted": [
+      "Language modeling",
+      "chat capabilities"
+     ],
+     "dropped": [
+      {
+       "value": "downstream evaluation",
+       "reason": "Describes an evaluation process, not a concrete application or domain."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Direct Preference Optimization (DPO)",
+      "Supervised fine-tuning and Direct Preference Optimization (DPO)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Direct Preference Optimization (DPO)",
+       "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective."
+      },
+      {
+       "value": "Supervised fine-tuning and Direct Preference Optimization (DPO)",
+       "reason": "Describes fine-tuning procedures/methods, not a specific task."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "C4",
+      "18 separate data sources"
+     ],
+     "accepted": [
+      "C4"
+     ],
+     "dropped": [
+      {
+       "value": "18 separate data sources",
+       "reason": "Asserts quantity/breadth of sources rather than naming an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Accelerating the science of language models through open",
+      "reproducible training and evaluation"
+     ],
+     "accepted": [
+      "reproducible training and evaluation"
+     ],
+     "dropped": [
+      {
+       "value": "Accelerating the science of language models through open",
+       "reason": "Sentence fragment/title rather than a short noun phrase naming a problem."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Global gradient clipping at 1.0"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Global gradient clipping at 1.0",
+       "reason": "Describes gradient clipping, not weight clipping as defined."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 25,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "OLMo 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OLMo 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OLMo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-02-01",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Allen Institute For Ai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Explicit decontamination for perplexity evaluation: removes pretraining documents containing paragraphs leaked from evaluation data to prevent underestimating perplexity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "In-loop training ablations: runs downstream evaluations every 1000 steps to guide architecture, optimizer, learning rate, and data mixture decisions during training",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage adaptation: combines instruction fine-tuning with Direct Preference Optimization (DPO) on distilled preference data to improve chat and safety",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixed-precision training: uses bfloat16 for most operations while keeping optimizer states and gradients in full precision for stability.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-level BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 78000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "A100-80GB GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 A100-80GB GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P119142",
+     "label": "carbon_emitted",
+     "value": "69.78 tCO2eq",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat capabilities",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/allenai/OLMo",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Reproducible training and evaluation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "2.5 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Distilled and human-written instruction data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Distilled preference data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Full attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training only",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "2 experts, 1 active",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "GPT-15 generated aspect-based scores",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "ToxiGen, TruthfulQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arc_challenge: 34.5, boolq: 58.1, hellaswag: 60.7, openbookqa: 62.5, piqa: 46.4, sciq: 73.7, winogrande: 88.1, avg: 60.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arc_challenge: 48.5, boolq: 65.4, hellaswag: 73.4, openbookqa: 76.4, piqa: 50.4, sciq: 78.4, winogrande: 93.8, avg: 69.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R796032",
+  "contribution_ids": [
+   "R796034",
+   "R1924270"
+  ],
+  "new_contribution_ids": [
+   "R1924270"
+  ],
+  "comparison_updated": null
+ }
+}

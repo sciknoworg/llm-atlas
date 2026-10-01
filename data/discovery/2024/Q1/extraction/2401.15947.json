@@ -1,0 +1,2885 @@
+{
+ "arxiv_id": "2401.15947",
+ "status": "completed",
+ "timestamp": "2026-08-28T19:02:58.874431",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2401.15947",
+  "title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+  "authors": [
+   "Bin Lin",
+   "Zhenyu Tang",
+   "Yang Ye",
+   "Jinfa Huang",
+   "Junwu Zhang",
+   "Yatian Pang",
+   "Peng Jin",
+   "Munan Ning",
+   "Jiebo Luo",
+   "Li Yuan"
+  ],
+  "abstract": "Recent advances demonstrate that scaling Large Vision-Language Models (LVLMs) effectively improves downstream task performances. However, existing scaling methods enable all model parameters to be active for each token in the calculation, which brings massive training and inferring costs. In this work, we propose a simple yet effective training strategy MoE-Tuning for LVLMs. This strategy innovatively addresses the common issue of performance degradation in multi-modal sparsity learning, consequently constructing a sparse model with an outrageous number of parameters but a constant computational cost. Furthermore, we present the MoE-LLaVA, a MoE-based sparse LVLM architecture, which uniquely activates only the top-k experts through routers during deployment, keeping the remaining experts inactive. Extensive experiments show the significant performance of MoE-LLaVA in a variety of visual understanding and object hallucination benchmarks. Remarkably, with only approximately 3B sparsely activated parameters, MoE-LLaVA demonstrates performance comparable to the LLaVA-1.5-7B on various visual understanding datasets and even surpasses the LLaVA-1.5-13B in object hallucination benchmark. Through MoE-LLaVA, we aim to establish a baseline for sparse LVLMs and provide valuable insights for future research in developing more efficient and effective multi-modal learning systems. Code is released at https://github.com/PKU-YuanGroup/MoE-LLaVA.",
+  "published": "2024-01-29T08:13:40+00:00",
+  "updated": "2024-12-23T08:05:14+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2401.15947v5",
+  "entry_id": "http://arxiv.org/abs/2401.15947v5",
+  "pdf_path": "data/papers/2401.15947.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM variant release)"
+ },
+ "text_length": 87475,
+ "word_count": 8889,
+ "models_extracted": 31,
+ "extraction_data": [
+  {
+   "model_name": "MoE-LLaVA-1.8B\u00d74",
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "MoE-Tuning: a novel three-stage training strategy for adapting Mixture-of-Experts to LVLMs that prevents performance degradation caused by sparsity; uniquely activates only top-k experts through routers during deployment, keeping computational cost constant while scaling model capacity; differs from prior dense scaling methods by maintaining fixed computational cost per token despite massive parameter growth, directly addressing the performance degradation common in multi-modal sparsity learning.",
+   "pretraining_corpus": null,
+   "parameters": "1.8B\u00d74",
+   "parameters_millions": 3600,
+   "application": "Visual understanding, object hallucination mitigation, multi-modal learning",
+   "license": null,
+   "research_problem": "Scaling Large Vision-Language Models (LVLMs) efficiently by reducing training and inference costs while maintaining or improving performance through sparse activation.",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Visual instruction tuning / multi-modal alignment",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Visual understanding, object hallucination mitigation",
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/YuanGroup/MoE-LLaVA",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "activated_parameters": "1.8B per expert (top-2 activated, ~3B total)",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "3-stage MoE-Tuning: Stage I trains only MLP; Stage II trains all parameters except Vision Encoder; Stage III uses FFNs to initialize experts and trains only MoE layers",
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, top-2 activated per token via router",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP visual projection layer",
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "POPE (Adversarial/Random/Popular average); ScienceQA; MMBench; LLaVAW; MM-Vet (outperforms LLaVA-1.5-7B by 1.9%, 0.4%, 0.9%, 30.7%, and 3.8% respectively)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-2.7B\u00d74-Top 2",
+   "parameters": "3.6B, 5.3B",
+   "parameters_millions": 5300,
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference; three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal instruction tuning",
+   "pretraining_corpus": null,
+   "finetuning_task": "Visual understanding, object hallucination mitigation, Multi-modal instruction tuning, MoE tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+   "application": "Image understanding, multi-modal instruction following, image logical reasoning, text recognition",
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": "MIMIC-IT, SViT",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/YuanGroup/MoE-LLaVA",
+   "context_length": null,
+   "activated_parameters": "3.6B",
+   "attention_mechanism": "Multi-head self-attention (MSA)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "3-stage MoE-Tuning: Stage I trains only MLP; Stage II trains all parameters except Vision Encoder; Stage III uses FFNs to initialize experts and trains only MoE layers",
+   "reasoning_mode": null,
+   "moe_configuration": "Scaled to 3.6B sparse activated parameters",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP visual projection layer",
+   "vision_encoder": null,
+   "base_model": "Qwen-2.7B",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 77.6; GQA: 61.4; SQA: 43.9; POPE: 68.5; MMBench: 51.4; MMBench-CN: 86.3; MM-Vet: 34.3; AI2D: 65.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-1.6B\u00d74-Top 2",
+   "parameters": "2B, 2.9B",
+   "parameters_millions": 2900,
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": "Nanjing University, Baidu",
+   "innovation": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference; three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image token adaptation, multi-modal instruction tuning, MoE tuning",
+   "pretraining_corpus": null,
+   "finetuning_task": "Multi-modal instruction tuning, MoE tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+   "application": "Image understanding, multi-modal instruction following, image logical reasoning, text recognition",
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": "MIMIC-IT, SViT",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "2.0B",
+   "attention_mechanism": "Multi-head self-attention (MSA)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Stage I: Visual projection adaptation (MLP only, frozen LLM); Stage II: Dense LVLM multi-modal instruction tuning; Stage III: MoE tuning with FFN replication for expert initialization",
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, Top-2 activation, soft router",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion (concatenated visual and text tokens fed into LLM)",
+   "vision_encoder": null,
+   "base_model": "StableLM-1.6B",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 76.7; GQA: 60.3; SQA: 36.2; POPE: 62.6; MMBench: 50.1; MMBench-CN: 85.7; MM-Vet: 26.9; AI2D: 60.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-1.8B\u00d74-Top 2",
+   "parameters": "2.2B, 3.1B",
+   "parameters_millions": 3100,
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference; three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image token adaptation, multi-modal instruction tuning, MoE tuning",
+   "pretraining_corpus": null,
+   "finetuning_task": "Multi-modal instruction tuning, MoE tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+   "application": "Image understanding, multi-modal instruction following, image logical reasoning, text recognition",
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": "MIMIC-IT, SViT",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "2.2B",
+   "attention_mechanism": "Multi-head self-attention (MSA)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Stage I: Visual projection adaptation (MLP only, frozen LLM); Stage II: Dense LVLM multi-modal instruction tuning; Stage III: MoE tuning with FFN replication for expert initialization",
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, Top-2 activation, soft router",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Mid-fusion (concatenated visual and text tokens fed into LLM)",
+   "vision_encoder": null,
+   "base_model": "Qwen-1.8B",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 76.2; GQA: 61.5; SQA: 32.6; POPE: 63.1; MMBench: 48.0; MMBench-CN: 87.0; MM-Vet: 25.3; AI2D: 59.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-Phi-2.7B\u00d74",
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Replaces dense feed-forward networks (FFNs) with Mixture-of-Experts (MoE) layers in large vision-language models; uses a router to compute token-to-expert matching weights, activates top-k experts per token, and aggregates outputs via weighted summation; incorporates a differentiable load balancing loss to ensure balanced expert utilization, enabling infinitely sparse pathways and improved parameter efficiency.",
+   "pretraining_corpus": "LLaVA1.5-558k, SViT-157k, LVIS-220k, LRV-331k, MIMIC-IT-256k, LLaVA1.5-mix-665k",
+   "parameters": "10.8B",
+   "parameters_millions": 10800,
+   "application": "Image understanding, visual question answering, open-ended visual language tasks",
+   "license": null,
+   "research_problem": "Large Vision-Language Models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Auto-regressive language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Visual instruction tuning",
+   "finetuning_data": "LLaVA1.5-558k, SViT-157k, LVIS-220k, LRV-331k, MIMIC-IT-256k, LLaVA1.5-mix-665k",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "activated_parameters": "3.6B",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Three-stage: (1) Pretraining on LLaVA1.5-558k, (2) Hybrid fine-tuning on SViT, LVIS, LRV, MIMIC-IT, (3) Fine-tuning on LLaVA1.5-mix-665k",
+   "reasoning_mode": null,
+   "moe_configuration": "Top-k routing with weighted summation; differentiable load balancing loss",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP cross-modality projector",
+   "vision_encoder": "CLIP-Large",
+   "base_model": "Phi-2",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 71.4; GQA: 33.6; VisWiz: 35.9; SQAI: 68.4; VQAT: 48.6; POPE: 85.0; MME: 1335.1; MMB: 59.8; LLaVAW: 28.9",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-StableLM-1.6B\u00d74",
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Replaces dense feed-forward networks (FFNs) with Mixture-of-Experts (MoE) layers in large vision-language models; uses a router to compute token-to-expert matching weights, activates top-k experts per token, and aggregates outputs via weighted summation; incorporates a differentiable load balancing loss to ensure balanced expert utilization, enabling infinitely sparse pathways and improved parameter efficiency.",
+   "pretraining_corpus": "LLaVA1.5-558k, SViT-157k, LVIS-220k, LRV-331k, MIMIC-IT-256k, LLaVA1.5-mix-665k",
+   "parameters": "6.4B",
+   "parameters_millions": 10800,
+   "application": "Image understanding, visual question answering, open-ended visual language tasks",
+   "license": null,
+   "research_problem": "Large Vision-Language Models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Auto-regressive language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Visual instruction tuning",
+   "finetuning_data": "LLaVA1.5-558k, SViT-157k, LVIS-220k, LRV-331k, MIMIC-IT-256k, LLaVA1.5-mix-665k",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "activated_parameters": "2.0B",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Three-stage: (1) Pretraining on LLaVA1.5-558k, (2) Hybrid fine-tuning on SViT, LVIS, LRV, MIMIC-IT, (3) Fine-tuning on LLaVA1.5-mix-665k",
+   "reasoning_mode": null,
+   "moe_configuration": "Top-k routing with weighted summation; differentiable load balancing loss",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP cross-modality projector",
+   "vision_encoder": "CLIP-Large",
+   "base_model": "StableLM",
+   "optimizer_innovation": null,
+   "benchmark_result": "VQAv2: 76.7; GQA: 60.3; VisWiz: 36.2; SQAI: 62.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-1.6B\u00d74-Top 2\u2020",
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": "Nanjing University, Baidu",
+   "innovation": "Integrates Mixture-of-Experts (MoE) layers into Large Vision-Language Models (VLMs) to scale capacity without proportional compute increase; uses sparse top-k expert gating to activate only a subset of parameters per token, improving parameter efficiency and performance on vision-language tasks.",
+   "pretraining_corpus": null,
+   "parameters": "4.1B",
+   "parameters_millions": 4100,
+   "application": "Vision-language understanding, multimodal tasks",
+   "license": null,
+   "research_problem": "Scaling vision-language models efficiently using sparse mixture-of-experts architecture.",
+   "model_version": null,
+   "pretraining_architecture": null,
+   "pretraining_task": null,
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "activated_parameters": "2.5B",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, 2 active (Top-2 gating)",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "StableLM-1.6B",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-Phi-2.7B\u00d74-Top 2",
+   "parameters": "2.7B, 2.7B\u00d74",
+   "parameters_millions": 2700,
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Application of Mixture-of-Experts (MoE) architecture to Large Vision-Language Models (LVLMs) with Top-2 routing; enables modality-specific expert specialization (e.g., image vs text preference in specific layers) and analyzes expert loadings during multimodal fine-tuning.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": null,
+   "finetuning_task": "Visual instruction tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Large Vision-Language Models",
+   "application": "Visual question answering, text QA, hallucination detection, multimodal benchmark evaluation",
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "2.7B",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Multimodal fine-tuning (655k samples)",
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, Top-2 routing",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2",
+   "parameters": "1.6B, 1.6B\u00d74",
+   "parameters_millions": 1600,
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Mixture of Experts (MoE) architecture applied to Large Vision-Language Models, replacing dense feed-forward networks with MoE layers to scale model capacity and improve multimodal reasoning while maintaining inference efficiency.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": null,
+   "finetuning_task": "Visual instruction tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Large Vision-Language Models",
+   "application": "Visual question answering, multimodal understanding, benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)",
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "2 experts active per token (Top-2 routing)",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, 2 active per token (Top-2 routing)",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2",
+   "model_family": "MoE-LLaVA",
+   "date_created": "2024-01-29",
+   "organization": null,
+   "innovation": "Mixture of Experts (MoE) architecture applied to Large Vision-Language Models, replacing dense feed-forward networks with MoE layers to scale model capacity and improve multimodal reasoning while maintaining inference efficiency.",
+   "pretraining_corpus": null,
+   "parameters": "1.8B",
+   "parameters_millions": 1800,
+   "application": "Visual question answering, multimodal understanding, benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)",
+   "license": null,
+   "research_problem": "Large Vision-Language Models",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": null,
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MoE-LLaVA: Mixture of Experts for Large Vision-Language Models",
+   "activated_parameters": "2 experts active per layer (Top-2 routing)",
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": "4 experts, 2 active",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 15,
+ "models_after_merge": 10,
+ "validated_rows": {
+  "MoE-LLaVA-1.8B\u00d74": {
+   "application": [
+    "Visual understanding",
+    "object hallucination mitigation"
+   ],
+   "finetuning_task": [
+    "Visual understanding",
+    "object hallucination mitigation"
+   ],
+   "fusion_architecture": [
+    "MLP visual projection layer"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-1.8B\u00d74"
+   ],
+   "parameters": [
+    "1.8B\u00d74"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Visual instruction tuning / multi-modal alignment"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-2.7B\u00d74-Top 2": {
+   "application": [
+    "Image understanding",
+    "multi-modal instruction following",
+    "image logical reasoning",
+    "text recognition"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (MSA)"
+   ],
+   "base_model": [
+    "Qwen-2.7B"
+   ],
+   "finetuning_data": [
+    "MIMIC-IT",
+    "SViT"
+   ],
+   "finetuning_task": [
+    "Visual understanding",
+    "object hallucination mitigation",
+    "Multi-modal instruction tuning",
+    "MoE tuning"
+   ],
+   "fusion_architecture": [
+    "MLP visual projection layer"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-2.7B\u00d74-Top 2"
+   ],
+   "parameters": [
+    "3.6B",
+    "5.3B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Multimodal instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-1.6B\u00d74-Top 2": {
+   "application": [
+    "Image understanding",
+    "multi-modal instruction following",
+    "image logical reasoning",
+    "text recognition"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (MSA)"
+   ],
+   "base_model": [
+    "StableLM-1.6B"
+   ],
+   "finetuning_data": [
+    "MIMIC-IT",
+    "SViT"
+   ],
+   "finetuning_task": [
+    "Multi-modal instruction tuning",
+    "MoE tuning"
+   ],
+   "fusion_architecture": [
+    "Mid-fusion (concatenated visual and text tokens fed into LLM)"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-1.6B\u00d74-Top 2"
+   ],
+   "organization": [
+    "Nanjing University, Baidu"
+   ],
+   "parameters": [
+    "2B",
+    "2.9B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Image token adaptation, multi-modal instruction tuning, MoE tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-1.8B\u00d74-Top 2": {
+   "application": [
+    "Image understanding",
+    "multi-modal instruction following",
+    "image logical reasoning",
+    "text recognition"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (MSA)"
+   ],
+   "base_model": [
+    "Qwen-1.8B"
+   ],
+   "finetuning_data": [
+    "MIMIC-IT",
+    "SViT"
+   ],
+   "finetuning_task": [
+    "Multi-modal instruction tuning",
+    "MoE tuning"
+   ],
+   "fusion_architecture": [
+    "Mid-fusion (concatenated visual and text tokens fed into LLM)"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-1.8B\u00d74-Top 2"
+   ],
+   "parameters": [
+    "2.2B",
+    "3.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Image token adaptation, multi-modal instruction tuning, MoE tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-Phi-2.7B\u00d74": {
+   "application": [
+    "Image understanding",
+    "visual question answering",
+    "open-ended visual language tasks"
+   ],
+   "base_model": [
+    "Phi-2"
+   ],
+   "finetuning_data": [
+    "LLaVA1.5-558k",
+    "SViT-157k",
+    "LVIS-220k",
+    "LRV-331k",
+    "MIMIC-IT-256k",
+    "LLaVA1.5-mix-665k"
+   ],
+   "finetuning_task": [
+    "Visual instruction tuning"
+   ],
+   "fusion_architecture": [
+    "MLP cross-modality projector"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-Phi-2.7B\u00d74"
+   ],
+   "parameters": [
+    "10.8B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "LLaVA1.5-558k",
+    "SViT-157k",
+    "LVIS-220k",
+    "LRV-331k",
+    "MIMIC-IT-256k",
+    "LLaVA1.5-mix-665k"
+   ],
+   "pretraining_task": [
+    "Auto-regressive language modeling"
+   ],
+   "research_problem": [],
+   "vision_encoder": [
+    "CLIP-Large"
+   ]
+  },
+  "MoE-LLaVA-StableLM-1.6B\u00d74": {
+   "application": [
+    "Image understanding",
+    "visual question answering",
+    "open-ended visual language tasks"
+   ],
+   "base_model": [
+    "StableLM"
+   ],
+   "finetuning_data": [
+    "LLaVA1.5-558k",
+    "SViT-157k",
+    "LVIS-220k",
+    "LRV-331k",
+    "MIMIC-IT-256k",
+    "LLaVA1.5-mix-665k"
+   ],
+   "finetuning_task": [
+    "Visual instruction tuning"
+   ],
+   "fusion_architecture": [
+    "MLP cross-modality projector"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-StableLM-1.6B\u00d74"
+   ],
+   "parameters": [
+    "6.4B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "LLaVA1.5-558k",
+    "SViT-157k",
+    "LVIS-220k",
+    "LRV-331k",
+    "MIMIC-IT-256k",
+    "LLaVA1.5-mix-665k"
+   ],
+   "pretraining_task": [
+    "Auto-regressive language modeling"
+   ],
+   "research_problem": [],
+   "vision_encoder": [
+    "CLIP-Large"
+   ]
+  },
+  "MoE-LLaVA-1.6B\u00d74-Top 2\u2020": {
+   "application": [
+    "Vision-language understanding"
+   ],
+   "base_model": [
+    "StableLM-1.6B"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-1.6B\u00d74-Top 2\u2020"
+   ],
+   "organization": [
+    "Nanjing University, Baidu"
+   ],
+   "parameters": [
+    "4.1B"
+   ],
+   "research_problem": []
+  },
+  "MoE-LLaVA-Phi-2.7B\u00d74-Top 2": {
+   "application": [
+    "Visual question answering",
+    "text QA",
+    "hallucination detection"
+   ],
+   "finetuning_task": [
+    "Visual instruction tuning"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-Phi-2.7B\u00d74-Top 2"
+   ],
+   "parameters": [
+    "2.7B",
+    "2.7B\u00d74"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2": {
+   "application": [
+    "Visual question answering",
+    "multimodal understanding"
+   ],
+   "finetuning_task": [
+    "Visual instruction tuning"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2"
+   ],
+   "parameters": [
+    "1.6B",
+    "1.6B\u00d74"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2": {
+   "application": [
+    "Visual question answering",
+    "multimodal understanding"
+   ],
+   "model_family": [
+    "MoE-LLaVA"
+   ],
+   "model_name": [
+    "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2"
+   ],
+   "parameters": [
+    "1.8B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "MoE-LLaVA-1.8B\u00d74": {
+    "application": {
+     "candidates": [
+      "Visual understanding",
+      "object hallucination mitigation",
+      "multi-modal learning"
+     ],
+     "accepted": [
+      "Visual understanding",
+      "object hallucination mitigation"
+     ],
+     "dropped": [
+      {
+       "value": "multi-modal learning",
+       "reason": "Broad research paradigm, not a concrete application or task"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling Large Vision-Language Models (LVLMs) efficiently by reducing training and inference costs while maintaining or improving performance through sparse activation."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling Large Vision-Language Models (LVLMs) efficiently by reducing training and inference costs while maintaining or improving performance through sparse activation.",
+       "reason": "Describes a solution/method rather than a short noun phrase naming the problem"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-2.7B\u00d74-Top 2": {
+    "research_problem": {
+     "candidates": [
+      "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+       "reason": "Describes a solution/method rather than a short noun phrase naming the problem"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-1.6B\u00d74-Top 2": {
+    "research_problem": {
+     "candidates": [
+      "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+       "reason": "Describes a solution/method rather than a short noun phrase naming the problem"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-1.8B\u00d74-Top 2": {
+    "research_problem": {
+     "candidates": [
+      "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Reducing the cost of scaling up dense visual data and models for Large Vision-Language Models (LVLMs) by leveraging model sparsity.",
+       "reason": "Describes a solution/method rather than a short noun phrase naming the problem"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-Phi-2.7B\u00d74": {
+    "research_problem": {
+     "candidates": [
+      "Large Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large Vision-Language Models",
+       "reason": "Names a model category, not a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-StableLM-1.6B\u00d74": {
+    "research_problem": {
+     "candidates": [
+      "Large Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large Vision-Language Models",
+       "reason": "Names a model category, not a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-1.6B\u00d74-Top 2\u2020": {
+    "application": {
+     "candidates": [
+      "Vision-language understanding",
+      "multimodal tasks"
+     ],
+     "accepted": [
+      "Vision-language understanding"
+     ],
+     "dropped": [
+      {
+       "value": "multimodal tasks",
+       "reason": "Generic placeholder, not a concrete task or domain"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling vision-language models efficiently using sparse mixture-of-experts architecture."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling vision-language models efficiently using sparse mixture-of-experts architecture.",
+       "reason": "Describes a solution/method rather than a short noun phrase naming the problem"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-Phi-2.7B\u00d74-Top 2": {
+    "application": {
+     "candidates": [
+      "Visual question answering",
+      "text QA",
+      "hallucination detection",
+      "multimodal benchmark evaluation"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "text QA",
+      "hallucination detection"
+     ],
+     "dropped": [
+      {
+       "value": "multimodal benchmark evaluation",
+       "reason": "Describes an evaluation activity, not a practical application or domain"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Large Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large Vision-Language Models",
+       "reason": "Names a model category, not a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2": {
+    "application": {
+     "candidates": [
+      "Visual question answering",
+      "multimodal understanding",
+      "benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "multimodal understanding"
+     ],
+     "dropped": [
+      {
+       "value": "benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)",
+       "reason": "Describes an evaluation activity with dataset names, not a model application"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Large Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large Vision-Language Models",
+       "reason": "Names a model category, not a research problem or challenge"
+      }
+     ]
+    }
+   },
+   "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2": {
+    "application": {
+     "candidates": [
+      "Visual question answering",
+      "multimodal understanding",
+      "benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)"
+     ],
+     "accepted": [
+      "Visual question answering",
+      "multimodal understanding"
+     ],
+     "dropped": [
+      {
+       "value": "benchmark evaluation (ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet)",
+       "reason": "Describes an evaluation activity with dataset names, not a model application"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Large Vision-Language Models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large Vision-Language Models",
+       "reason": "Names a model category, not a research problem or challenge"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 149,
+   "dropped": 15,
+   "llm_calls": 1,
+   "values_sent_to_llm": 65
+  }
+ },
+ "contributions": [
+  {
+   "label": "MoE-LLaVA-1.8B\u00d74",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-1.8B\u00d74",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "MoE-Tuning: a novel three-stage training strategy for adapting Mixture-of-Experts to LVLMs that prevents performance degradation caused by sparsity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uniquely activates only top-k experts through routers during deployment, keeping computational cost constant while scaling model capacity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Differs from prior dense scaling methods by maintaining fixed computational cost per token despite massive parameter growth, directly addressing the performance degradation common in multi-modal sparsity learning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Visual instruction tuning / multi-modal alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Object hallucination mitigation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.8B\u00d74",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3600,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object hallucination mitigation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/YuanGroup/MoE-LLaVA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1.8B per expert (top-2 activated, ~3B total)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "3-stage MoE-Tuning: Stage I trains only MLP; Stage II trains all parameters except Vision Encoder; Stage III uses FFNs to initialize experts and trains only MoE layers",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, top-2 activated per token via router",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP visual projection layer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE (Adversarial/Random/Popular average)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVAW",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet (outperforms LLaVA-1.5-7B by 1.9%, 0.4%, 0.9%, 30.7%, and 3.8% respectively)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-2.7B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-2.7B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Object hallucination mitigation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-modal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "MoE tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 5300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/YuanGroup/MoE-LLaVA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MIMIC-IT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SViT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (MSA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "3-stage MoE-Tuning: Stage I trains only MLP; Stage II trains all parameters except Vision Encoder; Stage III uses FFNs to initialize experts and trains only MoE layers",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Scaled to 3.6B sparse activated parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP visual projection layer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen-2.7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 77.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 61.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQA: 43.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 51.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN: 86.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 34.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AI2D: 65.2",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-1.6B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-1.6B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Nanjing University, Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image token adaptation, multi-modal instruction tuning, MoE tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-modal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "MoE tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 2900,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MIMIC-IT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SViT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.0B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (MSA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage I: Visual projection adaptation (MLP only, frozen LLM); Stage II: Dense LVLM multi-modal instruction tuning; Stage III: MoE tuning with FFN replication for expert initialization",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, Top-2 activation, soft router",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion (concatenated visual and text tokens fed into LLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "StableLM-1.6B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 60.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQA: 36.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 62.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 50.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN: 85.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 26.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AI2D: 60.2",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-1.8B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-1.8B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Soft-router Mixture of Experts (MoE) for LVLMs: uses a lightweight linear router to predict token-to-expert assignment probabilities, enabling dynamic data allocation among experts for sparsity and reduced interference",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Three-stage training (visual projection adaptation, dense LVLM tuning, MoE tuning) to stabilize sparse model learning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image token adaptation, multi-modal instruction tuning, MoE tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-modal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "MoE tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image logical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MIMIC-IT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SViT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (MSA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage I: Visual projection adaptation (MLP only, frozen LLM); Stage II: Dense LVLM multi-modal instruction tuning; Stage III: MoE tuning with FFN replication for expert initialization",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, Top-2 activation, soft router",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Mid-fusion (concatenated visual and text tokens fed into LLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen-1.8B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 76.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 61.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQA: 32.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 63.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 48.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN: 87.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MM-Vet: 25.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AI2D: 59.7",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-Phi-2.7B\u00d74",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-Phi-2.7B\u00d74",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Replaces dense feed-forward networks (FFNs) with Mixture-of-Experts (MoE) layers in large vision-language models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a router to compute token-to-expert matching weights, activates top-k experts per token, and aggregates outputs via weighted summation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Incorporates a differentiable load balancing loss to ensure balanced expert utilization, enabling infinitely sparse pathways and improved parameter efficiency.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Auto-regressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA1.5-558k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SViT-157k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LVIS-220k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LRV-331k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MIMIC-IT-256k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA1.5-mix-665k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "10.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 10800,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended visual language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA1.5-558k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SViT-157k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LVIS-220k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LRV-331k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MIMIC-IT-256k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA1.5-mix-665k",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Three-stage: (1) Pretraining on LLaVA1.5-558k, (2) Hybrid fine-tuning on SViT, LVIS, LRV, MIMIC-IT, (3) Fine-tuning on LLaVA1.5-mix-665k",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Top-k routing with weighted summation; differentiable load balancing loss",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP cross-modality projector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP-Large",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Phi-2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 71.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 33.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisWiz: 35.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQAI: 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAT: 48.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 85.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 1335.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 59.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVAW: 28.9",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-StableLM-1.6B\u00d74",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-StableLM-1.6B\u00d74",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Replaces dense feed-forward networks (FFNs) with Mixture-of-Experts (MoE) layers in large vision-language models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a router to compute token-to-expert matching weights, activates top-k experts per token, and aggregates outputs via weighted summation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Incorporates a differentiable load balancing loss to ensure balanced expert utilization, enabling infinitely sparse pathways and improved parameter efficiency.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Auto-regressive language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA1.5-558k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SViT-157k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LVIS-220k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LRV-331k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MIMIC-IT-256k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVA1.5-mix-665k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 10800,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-ended visual language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA1.5-558k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SViT-157k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LVIS-220k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LRV-331k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MIMIC-IT-256k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA1.5-mix-665k",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.0B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Three-stage: (1) Pretraining on LLaVA1.5-558k, (2) Hybrid fine-tuning on SViT, LVIS, LRV, MIMIC-IT, (3) Fine-tuning on LLaVA1.5-mix-665k",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Top-k routing with weighted summation; differentiable load balancing loss",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP cross-modality projector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP-Large",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "StableLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 60.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisWiz: 36.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQAI: 62.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-1.6B\u00d74-Top 2\u2020",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-1.6B\u00d74-Top 2\u2020",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Nanjing University, Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Integrates Mixture-of-Experts (MoE) layers into Large Vision-Language Models (VLMs) to scale capacity without proportional compute increase",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses sparse top-k expert gating to activate only a subset of parameters per token, improving parameter efficiency and performance on vision-language tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 4100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Vision-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, 2 active (Top-2 gating)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "StableLM-1.6B",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-Phi-2.7B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-Phi-2.7B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Application of Mixture-of-Experts (MoE) architecture to Large Vision-Language Models (LVLMs) with Top-2 routing",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables modality-specific expert specialization (e.g., image vs text preference in specific layers) and analyzes expert loadings during multimodal fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B\u00d74",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 2700,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Hallucination detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Multimodal fine-tuning (655k samples)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, Top-2 routing",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA-IMG, TextQA, POPE, MMBench, Viswiz, MM-Vet",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-StableLM-1.6B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture of Experts (MoE) architecture applied to Large Vision-Language Models, replacing dense feed-forward networks with MoE layers to scale model capacity and improve multimodal reasoning while maintaining inference efficiency.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6B\u00d74",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1600,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2 experts active per token (Top-2 routing)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, 2 active per token (Top-2 routing)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE-LLaVA-Qwen-1.8B\u00d74-Top 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MoE-LLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-01-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture of Experts (MoE) architecture applied to Large Vision-Language Models, replacing dense feed-forward networks with MoE layers to scale model capacity and improve multimodal reasoning while maintaining inference efficiency.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1800,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2 experts active per layer (Top-2 routing)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "4 experts, 2 active",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1778457",
+  "contribution_ids": [
+   "R1778459",
+   "R1924219",
+   "R1924226",
+   "R1924235",
+   "R1924241",
+   "R1924244",
+   "R1924256",
+   "R1924259",
+   "R1924262",
+   "R1924266",
+   "R1924268"
+  ],
+  "new_contribution_ids": [
+   "R1924219",
+   "R1924226",
+   "R1924235",
+   "R1924241",
+   "R1924244",
+   "R1924256",
+   "R1924259",
+   "R1924262",
+   "R1924266",
+   "R1924268"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,563 @@
+{
+  "arxiv_id": "2212.11685",
+  "status": "completed",
+  "timestamp": "2026-08-28T01:04:17.819826",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2212.11685",
+    "title": "Text Generation with Diffusion Language Models: A Pre-training Approach with Continuous Paragraph Denoise",
+    "authors": [
+      "Zhenghao Lin",
+      "Yeyun Gong",
+      "Yelong Shen",
+      "Tong Wu",
+      "Zhihao Fan",
+      "Chen Lin",
+      "Nan Duan",
+      "Weizhu Chen"
+    ],
+    "abstract": "In this paper, we introduce a novel dIffusion language modEl pre-training framework for text generation, which we call GENIE. GENIE is a large-scale pretrained diffusion language model that consists of an encoder and a diffusion-based decoder, which can generate text by gradually transforming a random noise sequence into a coherent text sequence. To pre-train GENIE on a large-scale language corpus, we design a new continuous paragraph denoise objective, which encourages the diffusion-decoder to reconstruct a clean text paragraph from a corrupted version, while preserving the semantic and syntactic coherence. We evaluate GENIE on four downstream text generation benchmarks, namely XSum, CNN/DailyMail, Gigaword, and CommonGen. Our experimental results show that GENIE achieves comparable performance with the state-of-the-art autoregressive models on these benchmarks, and generates more diverse text samples. The code and models of GENIE are available at https://github.com/microsoft/ProphetNet/tree/master/GENIE.",
+    "published": "2022-12-22T13:17:11+00:00",
+    "updated": "2023-02-17T17:14:52+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2212.11685v2",
+    "entry_id": "http://arxiv.org/abs/2212.11685v2",
+    "pdf_path": "data/papers/2212.11685.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 51318,
+  "word_count": 3922,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "GENIE",
+      "model_family": "Diffusion Language Model",
+      "date_created": "2022-12-22",
+      "organization": "Microsoft",
+      "innovation": "Continuous Paragraph Denoise (CPD) pre-training objective: predicts the noise added to continuous paragraphs in the current timestep given the paragraph context and noisy paragraph information, enhancing paragraph-level coherence and diversity compared to prior masking or splitting token objectives; Diffusion-based decoder: generates text by gradually transforming a random Gaussian noise sequence into a coherent text sequence guided by encoder hidden vectors, enabling faster non-autoregressive generation while maintaining accuracy and producing more diverse samples than autoregressive decoding.",
+      "pretraining_corpus": "160GB of news, books, stories, and webtext",
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text generation, summarization, sequence-to-sequence tasks",
+      "license": null,
+      "research_problem": "Text generation",
+      "model_version": null,
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Continuous Paragraph Denoise (CPD)",
+      "training_corpus_size": "160GB",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Downstream text generation tasks",
+      "finetuning_data": "XSum, CNN/DailyMail, Gigaword, CommonGen",
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": "8x40GB NVIDIA A100 GPUs",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": "https://github.com/microsoft/ProphetNet/tree/master/GENIE",
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Text Generation with Diffusion Language Models: A Pre-training Approach with Continuous Paragraph Denoise",
+      "activated_parameters": null,
+      "attention_mechanism": "Self-attention",
+      "context_length_max": "512",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training with CPD objective followed by fine-tuning on downstream tasks",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "XSUM ROUGE-1: 42.9, ROUGE-2: 21.4, ROUGE-L: 35.1; CNN/DailyMail ROUGE-1: 45.6, ROUGE-2: 23.2, ROUGE-L: 43.1; GigaWord ROUGE-1: 45.7, ROUGE-2: 25.8, ROUGE-L: 42.9; CommonGen ROUGE-2/L: 26.2, BLEU-3/4: 43.9, CLDEr: 29.5, SPICE: 23.4",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Diffusion Language Model",
+      "model_family": "Diffusion",
+      "date_created": "2022-12-22",
+      "organization": "Microsoft",
+      "innovation": "Continuous paragraph denoise pre-training approach for diffusion language models",
+      "pretraining_corpus": null,
+      "parameters": null,
+      "parameters_millions": null,
+      "application": "Text generation",
+      "license": null,
+      "research_problem": "Text generation",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Continuous paragraph denoise",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": null,
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": null,
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Text Generation with Diffusion Language Models: A Pre-training Approach with Continuous Paragraph Denoise",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": null,
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": null,
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "GENIE": {
+      "application": [
+        "Text generation",
+        "summarization",
+        "sequence-to-sequence tasks"
+      ],
+      "attention_mechanism": [
+        "Self-attention"
+      ],
+      "finetuning_data": [
+        "XSum",
+        "CNN/DailyMail",
+        "Gigaword",
+        "CommonGen"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "8x40GB NVIDIA A100 GPUs"
+      ],
+      "model_family": [
+        "Diffusion Language Model"
+      ],
+      "model_name": [
+        "GENIE"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "books",
+        "stories",
+        "webtext"
+      ],
+      "pretraining_task": [
+        "Continuous Paragraph Denoise (CPD)"
+      ],
+      "research_problem": [
+        "Text generation"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "Diffusion Language Model": {
+      "application": [
+        "Text generation"
+      ],
+      "model_family": [
+        "Diffusion"
+      ],
+      "model_name": [],
+      "organization": [
+        "Microsoft"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Continuous paragraph denoise"
+      ],
+      "research_problem": [
+        "Text generation"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "GENIE": {
+        "finetuning_task": {
+          "candidates": [
+            "Downstream text generation tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Downstream text generation tasks",
+              "reason": "Generic category/placeholder rather than a specific fine-tuning task"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "160GB of news",
+            "books",
+            "stories",
+            "webtext"
+          ],
+          "accepted": [
+            "books",
+            "stories",
+            "webtext"
+          ],
+          "dropped": [
+            {
+              "value": "160GB of news",
+              "reason": "Describes size and type rather than naming an identifiable dataset or corpus"
+            }
+          ]
+        }
+      },
+      "Diffusion Language Model": {
+        "model_name": {
+          "candidates": [
+            "Diffusion Language Model"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Diffusion Language Model",
+              "reason": "Describes an architectural category, not a specific model name"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 26,
+      "dropped": 3,
+      "llm_calls": 1,
+      "values_sent_to_llm": 11
+    }
+  },
+  "contributions": [
+    {
+      "label": "GENIE",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GENIE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Diffusion Language Model",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-12-22",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Continuous Paragraph Denoise (CPD) pre-training objective: predicts the noise added to continuous paragraphs in the current timestep given the paragraph context and noisy paragraph information, enhancing paragraph-level coherence and diversity compared to prior masking or splitting token objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Diffusion-based decoder: generates text by gradually transforming a random Gaussian noise sequence into a coherent text sequence guided by encoder hidden vectors, enabling faster non-autoregressive generation while maintaining accuracy and producing more diverse samples than autoregressive decoding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Continuous Paragraph Denoise (CPD)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Books",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Stories",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Webtext",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "8x40GB NVIDIA A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Summarization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Sequence-to-sequence tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/microsoft/ProphetNet/tree/master/GENIE",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "160GB",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "XSum",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CNN/DailyMail",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Gigaword",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CommonGen",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Self-attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "512",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training with CPD objective followed by fine-tuning on downstream tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "XSUM ROUGE-1: 42.9, ROUGE-2: 21.4, ROUGE-L: 35.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CNN/DailyMail ROUGE-1: 45.6, ROUGE-2: 23.2, ROUGE-L: 43.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GigaWord ROUGE-1: 45.7, ROUGE-2: 25.8, ROUGE-L: 42.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CommonGen ROUGE-2/L: 26.2, BLEU-3/4: 43.9, CLDEr: 29.5, SPICE: 23.4",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Diffusion Language Model",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Diffusion",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-12-22",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Continuous paragraph denoise pre-training approach for diffusion language models",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Continuous paragraph denoise",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Text generation",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925724",
+    "contribution_ids": [
+      "R1925726",
+      "R1925727"
+    ],
+    "new_contribution_ids": [
+      "R1925726",
+      "R1925727"
+    ],
+    "comparison_updated": null
+  }
+}

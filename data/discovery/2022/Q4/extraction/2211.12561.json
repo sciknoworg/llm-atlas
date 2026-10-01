@@ -1,0 +1,762 @@
+{
+ "arxiv_id": "2211.12561",
+ "status": "completed",
+ "timestamp": "2026-08-28T00:57:06.962182",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2211.12561",
+  "title": "Retrieval-Augmented Multimodal Language Modeling",
+  "authors": [
+   "Michihiro Yasunaga",
+   "Armen Aghajanyan",
+   "Weijia Shi",
+   "Rich James",
+   "Jure Leskovec",
+   "Percy Liang",
+   "Mike Lewis",
+   "Luke Zettlemoyer",
+   "Wen-tau Yih"
+  ],
+  "abstract": "Recent multimodal models such as DALL-E and CM3 have achieved remarkable progress in text-to-image and image-to-text generation. However, these models store all learned knowledge (e.g., the appearance of the Eiffel Tower) in the model parameters, requiring increasingly larger models and training data to capture more knowledge. To integrate knowledge in a more scalable and modular way, we propose a retrieval-augmented multimodal model, which enables a base multimodal model (generator) to refer to relevant text and images fetched by a retriever from external memory (e.g., documents on the web). Specifically, for the retriever, we use a pretrained CLIP, and for the generator, we train a CM3 Transformer on the LAION dataset. Our resulting model, named Retrieval-Augmented CM3 (RA-CM3), is the first multimodal model that can retrieve and generate both text and images. We show that RA-CM3 significantly outperforms baseline multimodal models such as DALL-E and CM3 on both image and caption generation tasks (12 FID and 17 CIDEr improvements on MS-COCO), while requiring much less compute for training (<30% of DALL-E). Moreover, we show that RA-CM3 exhibits novel capabilities, such as faithful image generation and multimodal in-context learning (e.g., image generation from demonstrations).",
+  "published": "2022-11-22T20:26:44+00:00",
+  "updated": "2023-06-06T00:28:34+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2211.12561v2",
+  "entry_id": "http://arxiv.org/abs/2211.12561v2",
+  "pdf_path": "data/papers/2211.12561.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+ },
+ "text_length": 61832,
+ "word_count": 4406,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "Retrieval-Augmented CM 3 (RA-CM 3)",
+   "model_family": "CM3",
+   "date_created": "2022-11-22",
+   "organization": "Meta",
+   "innovation": "Retrieval-augmented multimodal modeling: uses a dense multimodal retriever with a mixed-modal encoder to fetch relevant text and image documents from an external memory, and prepends them to the main input for a CM3 Transformer generator, enabling scalable knowledge integration, entity knowledge, and in-context learning without increasing model parameters.",
+   "pretraining_corpus": "LAION dataset",
+   "parameters": "<30% of baseline (~10B)",
+   "parameters_millions": null,
+   "application": "Image generation, text generation, in-context learning",
+   "license": null,
+   "research_problem": "Multimodal Language Modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Autoregressive multimodal generation",
+   "training_corpus_size": "150M text-image pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Multimodal generation (text-to-image, image-to-text)",
+   "finetuning_data": "LAION multimodal dataset",
+   "optimizer": null,
+   "tokenizer": "VQGAN (for images), standard text tokenizers",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Retrieval-augmented multimodal modeling: integrates a dense multimodal retriever with a mixed-modal encoder to fetch relevant text and image documents from external memory, prepending them to the main input for the generator to enable scalable knowledge integration and in-context learning.",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Retrieval-Augmented Multimodal Language Modeling",
+   "activated_parameters": null,
+   "attention_mechanism": "Standard Transformer attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on LAION multimodal dataset",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Retrieval-augmented (prepends retrieved documents to main input)",
+   "vision_encoder": "CLIP (retriever), VQGAN (tokenization)",
+   "base_model": "CM3 Transformer",
+   "optimizer_innovation": null,
+   "benchmark_result": "MS-COCO: FID 12, CIDEr 17 improvements",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "RA-CM 3",
+   "parameters": "12.5M, 125M, 350M, 1.2B, 1.3B, 2.7B",
+   "parameters_millions": 2700,
+   "model_family": "CM3",
+   "date_created": "2022-11-22",
+   "organization": "Meta",
+   "innovation": "Retrieval-augmented training where the generator retrieves relevant multimodal documents (text and images) from an external memory at both training and inference time; trains the token prediction loss on both the main input document and retrieved documents; enables novel in-context learning abilities like controlled image generation while using <30% fewer parameters, compute, and training data than prior models.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Token prediction",
+   "pretraining_corpus": "LAION (150M text-image pairs)",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Multimodal language modeling with retrieval augmentation",
+   "application": "Image generation, caption generation, knowledge-intensive generation, in-context learning",
+   "paper_title": "Retrieval-Augmented Multimodal Language Modeling",
+   "training_corpus_size": "150M text-image pairs",
+   "finetuning_data": null,
+   "tokenizer": "VQGAN (for images)",
+   "supported_language": "English",
+   "hardware_description": "256 A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/facebookresearch/cm3",
+   "context_length": null,
+   "activated_parameters": "2.7B (dense, all parameters active)",
+   "attention_mechanism": null,
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training only (no fine-tuning)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Autoregressive Transformer with external memory retrieval",
+   "vision_encoder": "CLIP ViT-L/14 (for retrieval), VQGAN (for image tokenization), CLIP-based retriever (text/image encoder)",
+   "base_model": "CM3",
+   "optimizer_innovation": null,
+   "benchmark_result": "MS-COCO FID 15.7; MS-COCO CIDEr 89.1",
+   "weight_clipping_mechanism": "Gradient clipping of 1.0",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Retrieval-Augmented CM 3 (RA-CM 3)": {
+   "application": [
+    "Image generation",
+    "text generation"
+   ],
+   "attention_mechanism": [
+    "Standard Transformer attention"
+   ],
+   "base_model": [
+    "CM3 Transformer"
+   ],
+   "finetuning_data": [
+    "LAION multimodal dataset"
+   ],
+   "finetuning_task": [
+    "Multimodal generation (text-to-image, image-to-text)"
+   ],
+   "fusion_architecture": [
+    "Retrieval-augmented (prepends retrieved documents to main input)"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Retrieval-Augmented CM 3 (RA-CM 3)"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "<30% of baseline (~10B)"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION dataset"
+   ],
+   "pretraining_task": [
+    "Autoregressive multimodal generation"
+   ],
+   "research_problem": [
+    "Multimodal Language Modeling"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "CLIP (retriever)",
+    "VQGAN (tokenization)"
+   ]
+  },
+  "RA-CM 3": {
+   "application": [
+    "Image generation",
+    "caption generation",
+    "knowledge-intensive generation"
+   ],
+   "base_model": [
+    "CM3"
+   ],
+   "fusion_architecture": [
+    "Autoregressive Transformer with external memory retrieval"
+   ],
+   "hardware_used": [
+    "A100 GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "RA-CM 3"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "12.5M",
+    "125M",
+    "350M",
+    "1.2B",
+    "1.3B",
+    "2.7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION (150M text-image pairs)"
+   ],
+   "pretraining_task": [
+    "Token prediction"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "CLIP ViT-L/14 (for retrieval)",
+    "VQGAN (for image tokenization)",
+    "CLIP-based retriever (text/image encoder)"
+   ],
+   "weight_clipping_mechanism": [
+    "Gradient clipping of 1.0"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Retrieval-Augmented CM 3 (RA-CM 3)": {
+    "application": {
+     "candidates": [
+      "Image generation",
+      "text generation",
+      "in-context learning"
+     ],
+     "accepted": [
+      "Image generation",
+      "text generation"
+     ],
+     "dropped": [
+      {
+       "value": "in-context learning",
+       "reason": "Describes a learning paradigm, not a concrete application or domain. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "CM3"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "CM3",
+       "reason": "Names the specific model rather than a broader family or lineage."
+      }
+     ]
+    }
+   },
+   "RA-CM 3": {
+    "application": {
+     "candidates": [
+      "Image generation",
+      "caption generation",
+      "knowledge-intensive generation",
+      "in-context learning"
+     ],
+     "accepted": [
+      "Image generation",
+      "caption generation",
+      "knowledge-intensive generation"
+     ],
+     "dropped": [
+      {
+       "value": "in-context learning",
+       "reason": "Describes a learning paradigm, not a concrete application or domain. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "CM3"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "CM3",
+       "reason": "Names the specific model rather than a broader family or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal language modeling with retrieval augmentation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multimodal language modeling with retrieval augmentation",
+       "reason": "Describes a specific solution/method rather than the core research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 41,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 24
+  }
+ },
+ "contributions": [
+  {
+   "label": "Retrieval-Augmented CM 3 (RA-CM 3)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Retrieval-Augmented CM 3 (RA-CM 3)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Retrieval-augmented multimodal modeling: uses a dense multimodal retriever with a mixed-modal encoder to fetch relevant text and image documents from an external memory, and prepends them to the main input for a CM3 Transformer generator, enabling scalable knowledge integration, entity knowledge, and in-context learning without increasing model parameters.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Autoregressive multimodal generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal generation (text-to-image, image-to-text)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "VQGAN (for images), standard text tokenizers",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "<30% of baseline (~10B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal Language Modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "150M text-image pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LAION multimodal dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard Transformer attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on LAION multimodal dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Retrieval-augmented (prepends retrieved documents to main input)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP (retriever)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQGAN (tokenization)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "CM3 Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO: FID 12, CIDEr 17 improvements",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "RA-CM 3",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "RA-CM 3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-11-22",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Retrieval-augmented training where the generator retrieves relevant multimodal documents (text and images) from an external memory at both training and inference time",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Trains the token prediction loss on both the main input document and retrieved documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables novel in-context learning abilities like controlled image generation while using <30% fewer parameters, compute, and training data than prior models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION (150M text-image pairs)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "VQGAN (for images)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12.5M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 2700,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Caption generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-intensive generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/cm3",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "150M text-image pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.7B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training only (no fine-tuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Autoregressive Transformer with external memory retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-L/14 (for retrieval)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "VQGAN (for image tokenization)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP-based retriever (text/image encoder)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "CM3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO FID 15.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO CIDEr 89.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Gradient clipping of 1.0",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1741054",
+  "contribution_ids": [
+   "R1741056",
+   "R1741057",
+   "R1741058",
+   "R1741059",
+   "R1741060",
+   "R1741061",
+   "R1741062",
+   "R1741063",
+   "R1741064",
+   "R1741065",
+   "R1741066",
+   "R1923429",
+   "R1923438"
+  ],
+  "new_contribution_ids": [
+   "R1923429",
+   "R1923438"
+  ],
+  "comparison_updated": null
+ }
+}

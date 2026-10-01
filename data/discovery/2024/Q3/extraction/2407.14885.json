@@ -1,0 +1,489 @@
+{
+  "arxiv_id": "2407.14885",
+  "status": "completed",
+  "timestamp": "2026-08-29T04:43:01.974569",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2407.14885",
+    "title": "Falcon2-11B Technical Report",
+    "authors": [
+      "Quentin Malartic",
+      "Nilabhra Roy Chowdhury",
+      "Ruxandra Cojocaru",
+      "Mugariya Farooq",
+      "Giulia Campesan",
+      "Yasser Abdelaziz Dahou Djilali",
+      "Sanath Narayan",
+      "Ankit Singh",
+      "Maksim Velikanov",
+      "Basma El Amel Boussaha",
+      "Mohammed Al-Yafeai",
+      "Hamza Alobeidli",
+      "Leen Al Qadi",
+      "Mohamed El Amine Seddik",
+      "Kirill Fedyanin",
+      "Reda Alami",
+      "Hakim Hacid"
+    ],
+    "abstract": "We introduce Falcon2-11B, a foundation model trained on over five trillion tokens, and its multimodal counterpart, Falcon2-11B-vlm, which is a vision-to-text model. We report our findings during the training of the Falcon2-11B which follows a multi-stage approach where the early stages are distinguished by their context length and a final stage where we use a curated, high-quality dataset. Additionally, we report the effect of doubling the batch size mid-training and how training loss spikes are affected by the learning rate. The downstream performance of the foundation model is evaluated on established benchmarks, including multilingual and code datasets. The foundation model shows strong generalization across all the tasks which makes it suitable for downstream finetuning use cases. For the vision language model, we report the performance on several benchmarks and show that our model achieves a higher average score compared to open-source models of similar size. The model weights and code of both Falcon2-11B and Falcon2-11B-vlm are made available under a permissive license.",
+    "published": "2024-07-20T14:23:15+00:00",
+    "updated": "2024-07-20T14:23:15+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2407.14885v1",
+    "entry_id": "http://arxiv.org/abs/2407.14885v1",
+    "pdf_path": "data/papers/2407.14885.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM and VLM release)"
+  },
+  "text_length": 49870,
+  "word_count": 2946,
+  "models_extracted": 1,
+  "extraction_data": [
+    {
+      "model_name": "Falcon 2",
+      "model_family": "Falcon",
+      "date_created": "2024-07-20",
+      "organization": "Technology Innovation Institute",
+      "innovation": "Parallel transformer blocks (MLP and self-attention in parallel with a single layernorm per block); Grouped Query Attention (GQA) with n_kv=8; larger head dimension (128); increased RoPE theta for long context; multi-stage training with context length extension and batch size doubling mid-training.",
+      "pretraining_corpus": "RefinedWeb (English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech, Romanian, Swedish); curated corpora (code from The Stack, conversations, books, scientific publications, technical reports, encyclopedias, patents)",
+      "parameters": "11B",
+      "parameters_millions": 11000,
+      "application": "Downstream fine-tuning, multilingual tasks, code datasets",
+      "license": "Permissive open-source license",
+      "research_problem": "Large Language Models",
+      "model_version": null,
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "training_corpus_size": "Over five trillion tokens",
+      "knowledge_cutoff_date": null,
+      "finetuning_task": "Visual instruction tuning",
+      "finetuning_data": "1.2M image-text instruction data including multi-round conversations",
+      "optimizer": "AdamW",
+      "tokenizer": "BPE",
+      "context_length": null,
+      "supported_language": "Multilingual",
+      "hardware_used": "GT6, GT GPUs",
+      "hardware_description": "Stage 1: 4500 GT6 GPUs; Stage 2: 250 GT GPUs; Stage 3: 250 GT GPUs; Stage 4: 500 GT GPUs",
+      "carbon_emitted": null,
+      "extension": "Integration of FlashAttention-2 (FA2) to maximize GPU utilization, enabling 128-dimensional attention heads and up to 50% speedup for 8K context windows; multilingual data filtering adapted from English-only heuristics; conversation tree flattening with loss masking.",
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Falcon2-11B Technical Report",
+      "activated_parameters": "11B (dense, all parameters active)",
+      "attention_mechanism": "Grouped Query Attention (GQA) with n_kv=8",
+      "context_length_max": "8192",
+      "context_extension_method": "RoPE with dynamic theta scaling (θ = RoPE_M + 42, then θ = 500K + 42)",
+      "training_pipeline": "Multi-stage training (4 stages) with context length extension (2048 -> 4096 -> 8192) and a final stage using a curated, high-quality dataset; batch size doubled mid-training",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16 (parameters/gradients), float32 (optimizer state)",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Concatenation of projected patch embeddings and instruction embeddings along the sequence length",
+      "vision_encoder": "CLIP ViT-L/14",
+      "base_model": "Falcon2-11B",
+      "optimizer_innovation": null,
+      "benchmark_result": "Better performance on Open LLM Leaderboard compared to Mistral-7B and Llama3-8B, similar to Gemma-7B; surpasses Falcon-40B",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 1,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Falcon 2": {
+      "application": [
+        "multilingual tasks"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA) with n_kv=8"
+      ],
+      "base_model": [
+        "Falcon2-11B"
+      ],
+      "context_extension_method": [
+        "RoPE with dynamic theta scaling (θ = RoPE_M + 42, then θ = 500K + 42)"
+      ],
+      "finetuning_data": [
+        "1.2M image-text instruction data including multi-round conversations"
+      ],
+      "finetuning_task": [
+        "Visual instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Concatenation of projected patch embeddings and instruction embeddings along the sequence length"
+      ],
+      "hardware_used": [
+        "GT6, GT GPUs"
+      ],
+      "license": [],
+      "model_family": [
+        "Falcon"
+      ],
+      "model_name": [
+        "Falcon 2"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Technology Innovation Institute"
+      ],
+      "parameters": [
+        "11B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "RefinedWeb (English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech, Romanian, Swedish)",
+        "curated corpora (code from The Stack, conversations, books, scientific publications, technical reports, encyclopedias, patents)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "bfloat16 (parameters/gradients)",
+        "float32 (optimizer state)"
+      ],
+      "research_problem": [],
+      "supported_language": [],
+      "vision_encoder": [
+        "CLIP ViT-L/14"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Falcon 2": {
+        "application": {
+          "candidates": [
+            "Downstream fine-tuning",
+            "multilingual tasks",
+            "code datasets"
+          ],
+          "accepted": [
+            "multilingual tasks"
+          ],
+          "dropped": [
+            {
+              "value": "Downstream fine-tuning",
+              "reason": "Describes a training process, not a concrete application or domain."
+            },
+            {
+              "value": "code datasets",
+              "reason": "Refers to data sources, not a practical use or domain."
+            }
+          ]
+        },
+        "license": {
+          "candidates": [
+            "Permissive open-source license"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Permissive open-source license",
+              "reason": "Vague description/category rather than a specific license name."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Large Language Models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Large Language Models",
+              "reason": "Names a model category, not a research problem or challenge (cached)"
+            }
+          ]
+        },
+        "supported_language": {
+          "candidates": [
+            "Multilingual"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Multilingual",
+              "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 20,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "Falcon 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Falcon 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Falcon",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-07-20",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Technology Innovation Institute",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Parallel transformer blocks (MLP and self-attention in parallel with a single layernorm per block)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Grouped Query Attention (GQA) with n_kv=8",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Larger head dimension (128)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Increased RoPE theta for long context",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multi-stage training with context length extension and batch size doubling mid-training.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefinedWeb (English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech, Romanian, Swedish)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Curated corpora (code from The Stack, conversations, books, scientific publications, technical reports, encyclopedias, patents)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "11B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 11000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "GT6, GT GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Stage 1: 4500 GT6 GPUs; Stage 2: 250 GT GPUs; Stage 3: 250 GT GPUs; Stage 4: 500 GT GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multilingual tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "Over five trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "1.2M image-text instruction data including multi-round conversations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "11B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA) with n_kv=8",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8192",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE with dynamic theta scaling (θ = RoPE_M + 42, then θ = 500K + 42)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Multi-stage training (4 stages) with context length extension (2048 -> 4096 -> 8192) and a final stage using a curated, high-quality dataset; batch size doubled mid-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16 (parameters/gradients)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Float32 (optimizer state)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Concatenation of projected patch embeddings and instruction embeddings along the sequence length",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP ViT-L/14",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Falcon2-11B",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Better performance on Open LLM Leaderboard compared to Mistral-7B and Llama3-8B, similar to Gemma-7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Surpasses Falcon-40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926181",
+    "contribution_ids": [
+      "R1926183"
+    ],
+    "new_contribution_ids": [
+      "R1926183"
+    ],
+    "comparison_updated": null
+  }
+}

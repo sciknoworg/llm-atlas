@@ -1,0 +1,835 @@
+{
+ "arxiv_id": "2604.08644",
+ "status": "completed",
+ "timestamp": "2026-08-30T14:31:43.952616",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2604.08644",
+  "title": "EXAONE 4.5 Technical Report",
+  "authors": [
+   "Eunbi Choi",
+   "Kibong Choi",
+   "Sehyun Chun",
+   "Seokhee Hong",
+   "Junwon Hwang",
+   "Hyojin Jeon",
+   "Ahra Jo",
+   "Hyunjik Jo",
+   "Yeonsik Jo",
+   "Joonkee Kim",
+   "Seonghwan Kim",
+   "Soyeon Kim",
+   "Sunkyoung Kim",
+   "Yireun Kim",
+   "Yongil Kim",
+   "Changhun Lee",
+   "Haeju Lee",
+   "Jinsik Lee",
+   "Kyungmin Lee",
+   "Sangha Park",
+   "Kwangrok Ryoo",
+   "Minju Seo",
+   "Sejong Yang",
+   "Heuiyeen Yeen",
+   "Hwan Chang",
+   "Stanley Jungkyu Choi",
+   "Yejin Choi",
+   "Kyubeen Han",
+   "Joonwon Jang",
+   "Kijeong Jeon",
+   "Geunyeong Jeong",
+   "Gerrard Jeongwon Jo",
+   "Jiyeon Jung",
+   "Daeseong Kim",
+   "Dohoon Kim",
+   "Dohyun Kim",
+   "Hyunseo Kim",
+   "Minu Kim",
+   "Myoungshin Kim",
+   "Youchul Kim",
+   "Byungoh Ko",
+   "Christopher Lee",
+   "Edward Hwayoung Lee",
+   "Honglak Lee",
+   "Jiyoung Lee",
+   "Sangeun Lee",
+   "Seungwon Lim",
+   "Woohyung Lim",
+   "Jueun Mun",
+   "Jaewoo Park",
+   "Jimin Park",
+   "Jinho Park",
+   "Yongmin Park",
+   "Wooseok Seo",
+   "Yongwoo Song",
+   "Sihyuk Yi",
+   "Kyungjae Yoo",
+   "Sangyeon Yoon"
+  ],
+  "abstract": "This technical report introduces EXAONE 4.5, the first open-weight vision language model released by LG AI Research. EXAONE 4.5 is architected by integrating a dedicated visual encoder into the existing EXAONE 4.0 framework, enabling native multimodal pretraining over both visual and textual modalities. The model is trained on large-scale data with careful curation, particularly emphasizing document-centric corpora that align with LG's strategic application domains. This targeted data design enables substantial performance gains in document understanding and related tasks, while also delivering broad improvements across general language capabilities. EXAONE 4.5 extends context length up to 256K tokens, facilitating long-context reasoning and enterprise-scale use cases. Comparative evaluations demonstrate that EXAONE 4.5 achieves competitive performance in general benchmarks while outperforming state-of-the-art models of similar scale in document understanding and Korean contextual reasoning. As part of LG's ongoing effort toward practical industrial deployment, EXAONE 4.5 is designed to be continuously extended with additional domains and application scenarios to advance AI for a better life.",
+  "published": "2026-04-09T17:51:11+00:00",
+  "updated": "2026-04-09T17:51:11+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2604.08644v1",
+  "entry_id": "http://arxiv.org/abs/2604.08644v1",
+  "pdf_path": "data/papers/2604.08644.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+ },
+ "text_length": 65029,
+ "word_count": 4935,
+ "models_extracted": 3,
+ "extraction_data": [
+  {
+   "model_name": "EXAONE 4.5",
+   "parameters": "33B, 33.2B",
+   "parameters_millions": 33200,
+   "model_family": "EXAONE",
+   "date_created": "2026-04-09",
+   "organization": "LG",
+   "innovation": "Joint multimodal reinforcement learning: conducts RL across both text and vision modalities simultaneously to enhance reasoning capability, differing from prior approaches that typically process modalities separately or rely on unimodal RL; GRPO with IcePop setting and zero-variance filtering: adopts Group Relative Policy Optimization with IcePop and filters out groups whose advantages are all zero to preserve training stability and improve policy optimization, differing from standard GRPO implementations that may suffer from unstable advantage estimates.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Multimodal pretraining over visual and textual modalities",
+   "pretraining_corpus": "General domain image-text pairs, interleaved image-text documents, document understanding datasets, OCR-centric samples, text-only data from K-EXAONE pipeline",
+   "finetuning_task": "Supervised fine-tuning (SFT), Offline preference optimization, Multimodal instruction tuning, joint multimodal reinforcement learning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": "Context extension embedded directly into the supervised fine-tuning stage to achieve a stable and effective context length of 256K tokens without compromising cross-modal alignment.",
+   "blog_post": null,
+   "license": "open-weight",
+   "research_problem": "Vision-Language Models for industrial intelligence and document understanding",
+   "application": "Vision-language reasoning, STEM/puzzle solving, document understanding, coding, mathematical reasoning, agentic tool use, instruction following, long-context understanding, multilingual tasks",
+   "paper_title": "EXAONE 4.5 Technical Report",
+   "training_corpus_size": "420B image tokens, 400B text tokens (Stage 1); 225B image tokens, 110B text tokens (Stage 2)",
+   "finetuning_data": "Mathematics, coding, knowledge, instruction-following (text); general visual understanding, STEM reasoning, charts, OCR, document understanding, multi-image (vision)",
+   "tokenizer": "K-EXAONE tokenizer",
+   "supported_language": "Korean, English, Spanish, German, Japanese, Vietnamese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "33.2B (dense, all parameters active)",
+   "attention_mechanism": "Hybrid attention and Grouped Query Attention (GQA), 2D Rotary Positional Embedding (2DRoPE) for vision; 1D RoPE for text, Grouped-Query Attention (GQA) in vision encoder",
+   "context_length_max": "256K tokens",
+   "context_extension_method": "2D Rotary Positional Embedding (2DRoPE)",
+   "training_pipeline": "Native multimodal pretraining over visual and textual modalities",
+   "reasoning_mode": "Dual-mode: NON-REASONING mode for general-purpose tasks, REASONING mode for complex problems",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Synthetic captioning pipeline optimizing for visual information richness; synthetic OCR images with diverse backgrounds; synthetic grounding and counting data prioritized to mitigate noise",
+   "rl_algorithm": "RLVR, GRPO",
+   "reward_mechanism": "Task-specific reward functions for vision tasks; same reward system as previous model for text tasks",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Vision encoder integrated into language decoder",
+   "vision_encoder": "1.2B parameter vision encoder trained from scratch, Custom-built 1.2B-parameter vision encoder",
+   "base_model": "EXAONE 4.0 32B",
+   "optimizer_innovation": null,
+   "benchmark_result": "AIME 2026: 2nd overall; LIVECODEBENCH V6: best among compared models; \u03c42-BENCH: 72.0; IFBENCH: 62.6; IFEVAL: 89.6; MMMU: 78.7; MMMU-PRO: 68.6; MATH-VISION: 75.2; WE-MATH: 79.1; AI2D: 89.0; OMNIDOCBENCH V1.5: 81.2; BLINK: 68.7; CHARXIV(RQ): 71.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "Context Parallelism"
+  }
+ ],
+ "models_after_selection": 3,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "EXAONE 4.5": {
+   "application": [
+    "Vision-language reasoning",
+    "STEM/puzzle solving",
+    "document understanding",
+    "coding",
+    "mathematical reasoning",
+    "agentic tool use",
+    "instruction following",
+    "long-context understanding",
+    "multilingual tasks"
+   ],
+   "attention_mechanism": [
+    "Hybrid attention and Grouped Query Attention (GQA)",
+    "Grouped-Query Attention (GQA) in vision encoder"
+   ],
+   "base_model": [
+    "EXAONE 4.0 32B"
+   ],
+   "context_extension_method": [
+    "2D Rotary Positional Embedding (2DRoPE)"
+   ],
+   "finetuning_data": [
+    "Mathematics",
+    "instruction-following (text)",
+    "general visual understanding",
+    "STEM reasoning",
+    "charts",
+    "OCR",
+    "document understanding",
+    "multi-image (vision)"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)",
+    "Multimodal instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Vision encoder integrated into language decoder"
+   ],
+   "license": [
+    "open-weight"
+   ],
+   "model_family": [
+    "EXAONE"
+   ],
+   "model_name": [
+    "EXAONE 4.5"
+   ],
+   "organization": [
+    "LG"
+   ],
+   "parameters": [
+    "33B",
+    "33.2B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "text-only data from K-EXAONE pipeline"
+   ],
+   "pretraining_task": [
+    "Multimodal pretraining over visual and textual modalities"
+   ],
+   "reasoning_mode": [
+    "Dual-mode: NON-REASONING mode for general-purpose tasks, REASONING mode for complex problems"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Task-specific reward functions for vision tasks",
+    "same reward system as previous model for text tasks"
+   ],
+   "rl_algorithm": [
+    "RLVR",
+    "GRPO"
+   ],
+   "supported_language": [
+    "Korean",
+    "English",
+    "Spanish",
+    "German",
+    "Japanese",
+    "Vietnamese"
+   ],
+   "synthetic_data_generation_method": [
+    "Synthetic captioning pipeline optimizing for visual information richness"
+   ],
+   "vision_encoder": [
+    "1.2B parameter vision encoder trained from scratch",
+    "Custom-built 1.2B-parameter vision encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "EXAONE 4.5": {
+    "attention_mechanism": {
+     "candidates": [
+      "Hybrid attention and Grouped Query Attention (GQA)",
+      "2D Rotary Positional Embedding (2DRoPE) for vision",
+      "1D RoPE for text",
+      "Grouped-Query Attention (GQA) in vision encoder"
+     ],
+     "accepted": [
+      "Hybrid attention and Grouped Query Attention (GQA)",
+      "Grouped-Query Attention (GQA) in vision encoder"
+     ],
+     "dropped": [
+      {
+       "value": "2D Rotary Positional Embedding (2DRoPE) for vision",
+       "reason": "It is a positional encoding method, not an attention mechanism."
+      },
+      {
+       "value": "1D RoPE for text",
+       "reason": "It is a positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Mathematics",
+      "coding",
+      "knowledge",
+      "instruction-following (text)",
+      "general visual understanding",
+      "STEM reasoning",
+      "charts",
+      "OCR",
+      "document understanding",
+      "multi-image (vision)"
+     ],
+     "accepted": [
+      "Mathematics",
+      "instruction-following (text)",
+      "general visual understanding",
+      "STEM reasoning",
+      "charts",
+      "OCR",
+      "document understanding",
+      "multi-image (vision)"
+     ],
+     "dropped": [
+      {
+       "value": "coding",
+       "reason": "Refers to a domain/task rather than a specific dataset or collection of fine-tuning data. (cached)"
+      },
+      {
+       "value": "knowledge",
+       "reason": "Too vague and does not name a specific dataset or domain-specific data collection."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Offline preference optimization",
+      "Multimodal instruction tuning",
+      "joint multimodal reinforcement learning"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)",
+      "Multimodal instruction tuning"
+     ],
+     "dropped": [
+      {
+       "value": "Offline preference optimization",
+       "reason": "It is a training algorithm/method, not a fine-tuning task."
+      },
+      {
+       "value": "joint multimodal reinforcement learning",
+       "reason": "It is a training paradigm/method, not a specific fine-tuning task."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "General domain image-text pairs",
+      "interleaved image-text documents",
+      "document understanding datasets",
+      "OCR-centric samples",
+      "text-only data from K-EXAONE pipeline"
+     ],
+     "accepted": [
+      "text-only data from K-EXAONE pipeline"
+     ],
+     "dropped": [
+      {
+       "value": "General domain image-text pairs",
+       "reason": "Describes a data type rather than naming an identifiable dataset or corpus."
+      },
+      {
+       "value": "interleaved image-text documents",
+       "reason": "Describes data format/type rather than naming an identifiable dataset or corpus."
+      },
+      {
+       "value": "document understanding datasets",
+       "reason": "Generic plural reference, does not name a specific dataset or corpus."
+      },
+      {
+       "value": "OCR-centric samples",
+       "reason": "Generic description of data samples, not a named corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Vision-Language Models for industrial intelligence and document understanding"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Vision-Language Models for industrial intelligence and document understanding",
+       "reason": "Describes the model/application domain rather than a specific research problem or challenge."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "Synthetic captioning pipeline optimizing for visual information richness",
+      "synthetic OCR images with diverse backgrounds",
+      "synthetic grounding and counting data prioritized to mitigate noise"
+     ],
+     "accepted": [
+      "Synthetic captioning pipeline optimizing for visual information richness"
+     ],
+     "dropped": [
+      {
+       "value": "synthetic OCR images with diverse backgrounds",
+       "reason": "Describes the generated data itself, not the method or technique used to generate it."
+      },
+      {
+       "value": "synthetic grounding and counting data prioritized to mitigate noise",
+       "reason": "Describes the data or its properties, not the generation method or technique."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 47,
+   "dropped": 13,
+   "llm_calls": 1,
+   "values_sent_to_llm": 36
+  }
+ },
+ "contributions": [
+  {
+   "label": "EXAONE 4.5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "EXAONE 4.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "EXAONE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2026-04-09",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "LG",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Joint multimodal reinforcement learning: conducts RL across both text and vision modalities simultaneously to enhance reasoning capability, differing from prior approaches that typically process modalities separately or rely on unimodal RL",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "GRPO with IcePop setting and zero-variance filtering: adopts Group Relative Policy Optimization with IcePop and filters out groups whose advantages are all zero to preserve training stability and improve policy optimization, differing from standard GRPO implementations that may suffer from unstable advantage estimates.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal pretraining over visual and textual modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Text-only data from K-EXAONE pipeline",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "K-EXAONE tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 33200,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Vision-language reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "STEM/puzzle solving",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Mathematical reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Agentic tool use",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long-context understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "420B image tokens, 400B text tokens (Stage 1); 225B image tokens, 110B text tokens (Stage 2)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Mathematics",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Instruction-following (text)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "General visual understanding",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "STEM reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Charts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Document understanding",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi-image (vision)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "33.2B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Hybrid attention and Grouped Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA) in vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "2D Rotary Positional Embedding (2DRoPE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Native multimodal pretraining over visual and textual modalities",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Dual-mode: NON-REASONING mode for general-purpose tasks, REASONING mode for complex problems",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Synthetic captioning pipeline optimizing for visual information richness",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "RLVR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "GRPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Task-specific reward functions for vision tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Same reward system as previous model for text tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Vision encoder integrated into language decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "1.2B parameter vision encoder trained from scratch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Custom-built 1.2B-parameter vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "EXAONE 4.0 32B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AIME 2026: 2nd overall",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LIVECODEBENCH V6: best among compared models",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "\u03a42-BENCH: 72.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFBENCH: 62.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEVAL: 89.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 78.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-PRO: 68.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH-VISION: 75.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WE-MATH: 79.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AI2D: 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OMNIDOCBENCH V1.5: 81.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK: 68.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CHARXIV(RQ): 71.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Context Parallelism",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1925156",
+  "contribution_ids": [
+   "R1925158"
+  ],
+  "new_contribution_ids": [
+   "R1925158"
+  ],
+  "comparison_updated": null
+ }
+}

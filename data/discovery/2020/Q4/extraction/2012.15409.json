@@ -1,0 +1,852 @@
+{
+ "arxiv_id": "2012.15409",
+ "status": "completed",
+ "timestamp": "2026-08-24T22:18:22.779295",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2012.15409",
+  "title": "UNIMO: Towards Unified-Modal Understanding and Generation via Cross-Modal Contrastive Learning",
+  "authors": [
+   "Wei Li",
+   "Can Gao",
+   "Guocheng Niu",
+   "Xinyan Xiao",
+   "Hao Liu",
+   "Jiachen Liu",
+   "Hua Wu",
+   "Haifeng Wang"
+  ],
+  "abstract": "Existed pre-training methods either focus on single-modal tasks or multi-modal tasks, and cannot effectively adapt to each other. They can only utilize single-modal data (i.e. text or image) or limited multi-modal data (i.e. image-text pairs). In this work, we propose a unified-modal pre-training architecture, namely UNIMO, which can effectively adapt to both single-modal and multi-modal understanding and generation tasks. Large scale of free text corpus and image collections can be utilized to improve the capability of visual and textual understanding, and cross-modal contrastive learning (CMCL) is leveraged to align the textual and visual information into a unified semantic space over a corpus of image-text pairs. As the non-paired single-modal data is very rich, our model can utilize much larger scale of data to learn more generalizable representations. Moreover, the textual knowledge and visual knowledge can enhance each other in the unified semantic space. The experimental results show that UNIMO significantly improves the performance of several single-modal and multi-modal downstream tasks. Our code and pre-trained models are public at the UNIMO project page https://unimo-ptm.github.io/",
+  "published": "2020-12-31T02:46:47+00:00",
+  "updated": "2022-03-14T12:32:42+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2012.15409v4",
+  "entry_id": "http://arxiv.org/abs/2012.15409v4",
+  "pdf_path": "data/papers/2012.15409.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 65316,
+ "word_count": 7144,
+ "models_extracted": 7,
+ "extraction_data": [
+  {
+   "model_name": "UNIMO",
+   "parameters": "LARGE, BASE, 110M, 340M",
+   "parameters_millions": 340,
+   "model_family": "UNIMO",
+   "date_created": "2020-12-31",
+   "organization": "Baidu",
+   "innovation": "Unified encoder-decoder architecture: Trains a single model for both understanding and generation tasks using specific self-attention masks to control context, differing from prior work that typically uses separate models or architectures for each modality/task; Cross-Modal Contrastive Learning (CMCL): Uses back-translation to generate 3 positive samples and rewriting to create 100 hard negatives per image-text pair, improving cross-modal alignment by leveraging synthetic data and hard negatives rather than relying solely on naturally paired data; Alternating pre-training objectives: Uniformly alternates between bidirectional prediction and sequence-to-sequence generation tasks during pre-training to improve the language learning process, differing from single-objective pre-training approaches.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Cross-modal contrastive learning (CMCL), masked language modeling, image-text matching",
+   "pretraining_corpus": "BookWiki (English Wikipedia, BookCorpus), OpenWebText, VisualGenome dataset",
+   "finetuning_task": "Single-modal and multi-modal understanding and generation downstream tasks, Supervised fine-tuning on downstream single-modal and multi-modal tasks",
+   "optimizer": "Adam",
+   "hardware_used": "Nvidia Tesla V100 32GB GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Unified-modal understanding and generation; adapting to both single-modal and multi-modal tasks.",
+   "application": "Visual question answering, image-text retrieval, image captioning, visual reasoning, text generation",
+   "paper_title": "UNIMO: Towards Unified-Modal Understanding and Generation via Cross-Modal Contrastive Learning",
+   "training_corpus_size": null,
+   "finetuning_data": "VQAv2.0, Microsoft COCO Captions, Flickr30K, SNLI-VE, SST-2, MNLI, CoLA, STS-B, CNNDM, Gigaword, SQuAD-QG, CoQA, SQuAD 1.1, CNN/DailyMail, VQA v2.0, COCO, VQA, Visual Genome",
+   "tokenizer": "Byte-Pair Encoding (BPE)",
+   "supported_language": "English, Chinese, French, Spanish",
+   "hardware_description": "32 Nvidia Tesla V100 32GB GPU for 7 days",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "110M (dense, all parameters active)",
+   "attention_mechanism": "Multi-layer self-attention Transformer, Multi-head self-attention",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training via masked prediction and Cross-Modal Contrastive Learning (CMCL) -> Fine-tuning for downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "float16 mixed precision",
+   "synthetic_data_generation_method": "Text rewriting techniques to generate positive and hard negative examples, Back-translation to create 3 positive samples; rewriting to obtain 100 hard negatives per image-text pair",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-modal contrastive learning (CMCL) aligns visual and textual representations into a unified semantic space",
+   "vision_encoder": "Faster R-CNN (pooled ROI features), Faster R-CNN (pre-trained on VisualGenome), ROI-based visual features",
+   "base_model": "RoBERTa-base, RoBERTa-large",
+   "optimizer_innovation": null,
+   "benchmark_result": "Flickr30k-IR: 74.66/93.40/96.08; Flickr30k-TR: 89.70/98.40/99.10; SNLI-VE: 80.00; VQA: 73.79; CoCoCaption: 38.8/124.4; SST-2: 95.1; MNLI: 86.8/86.7; CoLA: 65.4; STS-B: 91.0; CoQA: 80.2; SQuAD-QG: 22.78/25.24/51.34; CNNDM: 42.42/20.12/39.61; Gigaword: 38.80/19.99/36.27; Flickr30k-IR Val/Test: 78.04/94.24/97.12; CoCoCaption BLUE4/CIDEr: 39.6/127.7; VQA: 75.06/75.27; SNLI-VE: 81.11/80.63; SST-2: 96.8; MNLI: 89.8/89.5; CoLA: 68.5; STS-B: 92.6; CoQA: 84.9; SQuAD-QG: 24.59/26.39/52.47; CNNDM: 43.51/20.65/40.63; Gigaword: 39.71/20.37/36.88",
+   "weight_clipping_mechanism": "Gradient clipping (1.0)",
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 7,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "UNIMO": {
+   "application": [
+    "Visual question answering",
+    "image-text retrieval",
+    "image captioning",
+    "visual reasoning",
+    "text generation"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "RoBERTa-base, RoBERTa-large"
+   ],
+   "finetuning_data": [
+    "VQAv2.0",
+    "Microsoft COCO Captions",
+    "Flickr30K",
+    "SNLI-VE",
+    "SST-2",
+    "MNLI",
+    "CoLA",
+    "STS-B",
+    "CNNDM",
+    "Gigaword",
+    "SQuAD-QG",
+    "CoQA",
+    "SQuAD 1.1",
+    "CNN/DailyMail",
+    "VQA v2.0",
+    "COCO",
+    "VQA",
+    "Visual Genome"
+   ],
+   "finetuning_task": [
+    "Single-modal and multi-modal understanding and generation downstream tasks"
+   ],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "Nvidia Tesla V100 32GB GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "UNIMO"
+   ],
+   "model_name": [
+    "UNIMO"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Baidu"
+   ],
+   "parameters": [
+    "110M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "BookWiki (English Wikipedia, BookCorpus)",
+    "OpenWebText",
+    "VisualGenome dataset"
+   ],
+   "pretraining_task": [
+    "Cross-modal contrastive learning (CMCL), masked language modeling, image-text matching"
+   ],
+   "quantization_precision": [
+    "float16 mixed precision"
+   ],
+   "research_problem": [
+    "Unified-modal understanding and generation"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "French",
+    "Spanish"
+   ],
+   "synthetic_data_generation_method": [
+    "Text rewriting techniques to generate positive and hard negative examples",
+    "Back-translation to create 3 positive samples",
+    "rewriting to obtain 100 hard negatives per image-text pair"
+   ],
+   "vision_encoder": [
+    "Faster R-CNN (pooled ROI features)",
+    "Faster R-CNN (pre-trained on VisualGenome)"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "UNIMO": {
+    "attention_mechanism": {
+     "candidates": [
+      "Multi-layer self-attention Transformer",
+      "Multi-head self-attention"
+     ],
+     "accepted": [
+      "Multi-head self-attention"
+     ],
+     "dropped": [
+      {
+       "value": "Multi-layer self-attention Transformer",
+       "reason": "Describes a model architecture rather than the specific attention method. (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Single-modal and multi-modal understanding and generation downstream tasks",
+      "Supervised fine-tuning on downstream single-modal and multi-modal tasks"
+     ],
+     "accepted": [
+      "Single-modal and multi-modal understanding and generation downstream tasks"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on downstream single-modal and multi-modal tasks",
+       "reason": "Describes the fine-tuning process/approach rather than naming a specific task."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Cross-modal contrastive learning (CMCL) aligns visual and textual representations into a unified semantic space"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-modal contrastive learning (CMCL) aligns visual and textual representations into a unified semantic space",
+       "reason": "Contains explanatory text and describes a learning objective, not the architectural design itself."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "LARGE",
+      "BASE",
+      "110M",
+      "340M"
+     ],
+     "accepted": [
+      "110M",
+      "340M"
+     ],
+     "dropped": [
+      {
+       "value": "LARGE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      },
+      {
+       "value": "BASE",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unified-modal understanding and generation",
+      "adapting to both single-modal and multi-modal tasks."
+     ],
+     "accepted": [
+      "Unified-modal understanding and generation"
+     ],
+     "dropped": [
+      {
+       "value": "adapting to both single-modal and multi-modal tasks.",
+       "reason": "Describes an action/process rather than naming the research problem or capability gap."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Faster R-CNN (pooled ROI features)",
+      "Faster R-CNN (pre-trained on VisualGenome)",
+      "ROI-based visual features"
+     ],
+     "accepted": [
+      "Faster R-CNN (pooled ROI features)",
+      "Faster R-CNN (pre-trained on VisualGenome)"
+     ],
+     "dropped": [
+      {
+       "value": "ROI-based visual features",
+       "reason": "Describes the type of features/output rather than naming the encoder model or component."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clipping (1.0)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clipping (1.0)",
+       "reason": "Describes gradient clipping, which constrains gradients rather than weight values as specified. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 50,
+   "dropped": 8,
+   "llm_calls": 1,
+   "values_sent_to_llm": 8
+  }
+ },
+ "contributions": [
+  {
+   "label": "UNIMO",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "UNIMO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "UNIMO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-12-31",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Baidu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified encoder-decoder architecture: Trains a single model for both understanding and generation tasks using specific self-attention masks to control context, differing from prior work that typically uses separate models or architectures for each modality/task",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Cross-Modal Contrastive Learning (CMCL): Uses back-translation to generate 3 positive samples and rewriting to create 100 hard negatives per image-text pair, improving cross-modal alignment by leveraging synthetic data and hard negatives rather than relying solely on naturally paired data",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Alternating pre-training objectives: Uniformly alternates between bidirectional prediction and sequence-to-sequence generation tasks during pre-training to improve the language learning process, differing from single-objective pre-training approaches.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Cross-modal contrastive learning (CMCL), masked language modeling, image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookWiki (English Wikipedia, BookCorpus)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualGenome dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Single-modal and multi-modal understanding and generation downstream tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-Pair Encoding (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia Tesla V100 32GB GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "32 Nvidia Tesla V100 32GB GPU for 7 days",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unified-modal understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Microsoft COCO Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SST-2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoLA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "STS-B",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNNDM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Gigaword",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD-QG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD 1.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNN/DailyMail",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Genome",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "110M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training via masked prediction and Cross-Modal Contrastive Learning (CMCL) -> Fine-tuning for downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float16 mixed precision",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Text rewriting techniques to generate positive and hard negative examples",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Back-translation to create 3 positive samples",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Rewriting to obtain 100 hard negatives per image-text pair",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Faster R-CNN (pooled ROI features)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Faster R-CNN (pre-trained on VisualGenome)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "RoBERTa-base, RoBERTa-large",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k-IR: 74.66/93.40/96.08",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k-TR: 89.70/98.40/99.10",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 80.00",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 73.79",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoCoCaption: 38.8/124.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST-2: 95.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI: 86.8/86.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA: 65.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STS-B: 91.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoQA: 80.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD-QG: 22.78/25.24/51.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNNDM: 42.42/20.12/39.61",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Gigaword: 38.80/19.99/36.27",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k-IR Val/Test: 78.04/94.24/97.12",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoCoCaption BLUE4/CIDEr: 39.6/127.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 75.06/75.27",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 81.11/80.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST-2: 96.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI: 89.8/89.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA: 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STS-B: 92.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoQA: 84.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD-QG: 24.59/26.39/52.47",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNNDM: 43.51/20.65/40.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Gigaword: 39.71/20.37/36.88",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R504505",
+  "contribution_ids": [
+   "R504506",
+   "R1920959"
+  ],
+  "new_contribution_ids": [
+   "R1920959"
+  ],
+  "comparison_updated": null
+ }
+}

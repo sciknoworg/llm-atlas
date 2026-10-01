@@ -1,0 +1,592 @@
+{
+ "arxiv_id": "2107.07651",
+ "status": "completed",
+ "timestamp": "2026-08-25T01:20:14.118806",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2107.07651",
+  "title": "Align before Fuse: Vision and Language Representation Learning with Momentum Distillation",
+  "authors": [
+   "Junnan Li",
+   "Ramprasaath R. Selvaraju",
+   "Akhilesh Deepak Gotmare",
+   "Shafiq Joty",
+   "Caiming Xiong",
+   "Steven Hoi"
+  ],
+  "abstract": "Large-scale vision and language representation learning has shown promising improvements on various vision-language tasks. Most existing methods employ a transformer-based multimodal encoder to jointly model visual tokens (region-based image features) and word tokens. Because the visual tokens and word tokens are unaligned, it is challenging for the multimodal encoder to learn image-text interactions. In this paper, we introduce a contrastive loss to ALign the image and text representations BEfore Fusing (ALBEF) them through cross-modal attention, which enables more grounded vision and language representation learning. Unlike most existing methods, our method does not require bounding box annotations nor high-resolution images. In order to improve learning from noisy web data, we propose momentum distillation, a self-training method which learns from pseudo-targets produced by a momentum model. We provide a theoretical analysis of ALBEF from a mutual information maximization perspective, showing that different training tasks can be interpreted as different ways to generate views for an image-text pair. ALBEF achieves state-of-the-art performance on multiple downstream vision-language tasks. On image-text retrieval, ALBEF outperforms methods that are pre-trained on orders of magnitude larger datasets. On VQA and NLVR$^2$, ALBEF achieves absolute improvements of 2.37% and 3.84% compared to the state-of-the-art, while enjoying faster inference speed. Code and pre-trained models are available at https://github.com/salesforce/ALBEF/.",
+  "published": "2021-07-16T00:19:22+00:00",
+  "updated": "2021-10-07T04:06:04+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2107.07651v2",
+  "entry_id": "http://arxiv.org/abs/2107.07651v2",
+  "pdf_path": "data/papers/2107.07651.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 50393,
+ "word_count": 3332,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "ALBEF",
+   "parameters": "196M",
+   "parameters_millions": 196,
+   "model_family": "ALBEF",
+   "date_created": "2021-07-16",
+   "organization": "Salesforce",
+   "innovation": "\"Align before Fuse\" pre-training strategy that aligns visual and textual representations via image-text contrastive learning (ITC) before fusing them in a multimodal encoder; hard negative mining for image-text matching (ITM); momentum distillation (MoD) to stabilize training and improve downstream performance. Note: \"4M\" and \"14M\" denote pre-training image counts, not parameter sizes.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Modeling (MLM), Image-Text Matching (ITM), Image-Text Contrastive (ITC) learning",
+   "pretraining_corpus": "Conceptual Captions, SBU Captions, COCO, Visual Genome, Conceptual Captions 12M",
+   "finetuning_task": "Image-text retrieval, VQA, NLVR, VE, visual grounding, Supervised fine-tuning for VQA, NLVR2, SNLI-VE, RefCOCO+, and image-text retrieval",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision-and-Language Representation Learning",
+   "application": "Visual Question Answering (VQA), Natural Language for Visual Reasoning (NLVR2), Visual Grounding (RefCOCO+), Image-Text Retrieval",
+   "paper_title": "Align before Fuse: Vision and Language Representation Learning with Momentum Distillation",
+   "training_corpus_size": "4M to 14M images",
+   "finetuning_data": "Flickr30K, COCO, VQA, NLVR2, SNLI-VE, RefCOCO+, MSCOCO",
+   "tokenizer": "BERT tokenizer (WordPiece)",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/salesforce/ALBEF",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Cross-modal attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training with ITC, MLM, ITM objectives; Momentum distillation",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross-modal attention fusion",
+   "vision_encoder": "Detector-free image encoder",
+   "base_model": "BERT base, ViT-B/16",
+   "optimizer_innovation": null,
+   "benchmark_result": "RefCOCO+ Val: 51.58, TestA: 60.09, TestB: 40.19; Image-text retrieval SOTA; VQA, NLVR2, SNLI-VE improvements; TR: 94.3, IR: 99.4, SNLI-VE: 80.24, NLVR2: 80.50, VQA: 74.54; Flickr30K TR: 90.5, IR: 99.7, COCO TR: 76.8, IR: 93.7; VQA: 74.54, NLVR2: 80.50, SNLI-VE: 80.14; TR: 95.9, IR: 100.0, SNLI-VE: 82.55, NLVR2: 83.14, VQA: 75.84; Flickr30K TR: 94.1, IR: 99.7, COCO TR: 82.8, IR: 96.3; VQA: 75.84, NLVR2: 83.14, SNLI-VE: 80.80",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "ALBEF": {
+   "application": [
+    "Visual Question Answering (VQA)",
+    "Visual Grounding (RefCOCO+)",
+    "Image-Text Retrieval"
+   ],
+   "attention_mechanism": [
+    "Cross-modal attention"
+   ],
+   "base_model": [
+    "BERT base, ViT-B/16"
+   ],
+   "finetuning_data": [
+    "Flickr30K",
+    "COCO",
+    "VQA",
+    "NLVR2",
+    "SNLI-VE",
+    "RefCOCO+",
+    "MSCOCO"
+   ],
+   "finetuning_task": [
+    "Image-text retrieval",
+    "VQA",
+    "NLVR",
+    "VE",
+    "visual grounding",
+    "Supervised fine-tuning for VQA",
+    "NLVR2"
+   ],
+   "fusion_architecture": [
+    "Cross-modal attention fusion"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPU"
+   ],
+   "model_family": [],
+   "model_name": [
+    "ALBEF"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Salesforce"
+   ],
+   "parameters": [
+    "196M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions",
+    "SBU Captions",
+    "COCO",
+    "Visual Genome",
+    "Conceptual Captions 12M"
+   ],
+   "pretraining_task": [
+    "Masked Language Modeling (MLM), Image-Text Matching (ITM), Image-Text Contrastive (ITC) learning"
+   ],
+   "research_problem": [
+    "Vision-and-Language Representation Learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Detector-free image encoder"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ALBEF": {
+    "application": {
+     "candidates": [
+      "Visual Question Answering (VQA)",
+      "Natural Language for Visual Reasoning (NLVR2)",
+      "Visual Grounding (RefCOCO+)",
+      "Image-Text Retrieval"
+     ],
+     "accepted": [
+      "Visual Question Answering (VQA)",
+      "Visual Grounding (RefCOCO+)",
+      "Image-Text Retrieval"
+     ],
+     "dropped": [
+      {
+       "value": "Natural Language for Visual Reasoning (NLVR2)",
+       "reason": "Dataset name, not a task or domain (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Image-text retrieval",
+      "VQA",
+      "NLVR",
+      "VE",
+      "visual grounding",
+      "Supervised fine-tuning for VQA",
+      "NLVR2",
+      "SNLI-VE",
+      "RefCOCO+"
+     ],
+     "accepted": [
+      "Image-text retrieval",
+      "VQA",
+      "NLVR",
+      "VE",
+      "visual grounding",
+      "Supervised fine-tuning for VQA",
+      "NLVR2"
+     ],
+     "dropped": [
+      {
+       "value": "SNLI-VE",
+       "reason": "Dataset name, not a task (cached)"
+      },
+      {
+       "value": "RefCOCO+",
+       "reason": "Dataset name, not a task (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "ALBEF"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "ALBEF",
+       "reason": "Specific model name, not a broader family or lineage (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 35,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 4
+  }
+ },
+ "contributions": [
+  {
+   "label": "ALBEF",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ALBEF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-07-16",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Salesforce",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "\"Align before Fuse\" pre-training strategy that aligns visual and textual representations via image-text contrastive learning (ITC) before fusing them in a multimodal encoder",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Hard negative mining for image-text matching (ITM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Momentum distillation (MoD) to stabilize training and improve downstream performance. Note: \"4M\" and \"14M\" denote pre-training image counts, not parameter sizes.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Modeling (MLM), Image-Text Matching (ITM), Image-Text Contrastive (ITC) learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions 12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "NLVR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "VE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "NLVR2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BERT tokenizer (WordPiece)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "196M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 196,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Question Answering (VQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual Grounding (RefCOCO+)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-Text Retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/salesforce/ALBEF",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-and-Language Representation Learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "4M to 14M images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO+",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-modal attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training with ITC, MLM, ITM objectives; Momentum distillation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross-modal attention fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Detector-free image encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT base, ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ Val: 51.58, TestA: 60.09, TestB: 40.19",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Image-text retrieval SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA, NLVR2, SNLI-VE improvements",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TR: 94.3, IR: 99.4, SNLI-VE: 80.24, NLVR2: 80.50, VQA: 74.54",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K TR: 90.5, IR: 99.7, COCO TR: 76.8, IR: 93.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 74.54, NLVR2: 80.50, SNLI-VE: 80.14",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TR: 95.9, IR: 100.0, SNLI-VE: 82.55, NLVR2: 83.14, VQA: 75.84",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K TR: 94.1, IR: 99.7, COCO TR: 82.8, IR: 96.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA: 75.84, NLVR2: 83.14, SNLI-VE: 80.80",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467847",
+  "contribution_ids": [
+   "R467848",
+   "R1921305"
+  ],
+  "new_contribution_ids": [
+   "R1921305"
+  ],
+  "comparison_updated": null
+ }
+}

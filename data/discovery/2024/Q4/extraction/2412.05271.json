@@ -1,0 +1,3738 @@
+{
+ "arxiv_id": "2412.05271",
+ "status": "completed",
+ "timestamp": "2026-08-29T15:21:29.139803",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2412.05271",
+  "title": "Expanding Performance Boundaries of Open-Source Multimodal Models with Model, Data, and Test-Time Scaling",
+  "authors": [
+   "Zhe Chen",
+   "Weiyun Wang",
+   "Yue Cao",
+   "Yangzhou Liu",
+   "Zhangwei Gao",
+   "Erfei Cui",
+   "Jinguo Zhu",
+   "Shenglong Ye",
+   "Hao Tian",
+   "Zhaoyang Liu",
+   "Lixin Gu",
+   "Xuehui Wang",
+   "Qingyun Li",
+   "Yiming Ren",
+   "Zixuan Chen",
+   "Jiapeng Luo",
+   "Jiahao Wang",
+   "Tan Jiang",
+   "Bo Wang",
+   "Conghui He",
+   "Botian Shi",
+   "Xingcheng Zhang",
+   "Han Lv",
+   "Yi Wang",
+   "Wenqi Shao",
+   "Pei Chu",
+   "Zhongying Tu",
+   "Tong He",
+   "Zhiyong Wu",
+   "Huipeng Deng",
+   "Jiaye Ge",
+   "Kai Chen",
+   "Kaipeng Zhang",
+   "Limin Wang",
+   "Min Dou",
+   "Lewei Lu",
+   "Xizhou Zhu",
+   "Tong Lu",
+   "Dahua Lin",
+   "Yu Qiao",
+   "Jifeng Dai",
+   "Wenhai Wang"
+  ],
+  "abstract": "We introduce InternVL 2.5, an advanced multimodal large language model (MLLM) series that builds upon InternVL 2.0, maintaining its core model architecture while introducing significant enhancements in training and testing strategies as well as data quality. In this work, we delve into the relationship between model scaling and performance, systematically exploring the performance trends in vision encoders, language models, dataset sizes, and test-time configurations. Through extensive evaluations on a wide range of benchmarks, including multi-discipline reasoning, document understanding, multi-image / video understanding, real-world comprehension, multimodal hallucination detection, visual grounding, multilingual capabilities, and pure language processing, InternVL 2.5 exhibits competitive performance, rivaling leading commercial models such as GPT-4o and Claude-3.5-Sonnet. Notably, our model is the first open-source MLLMs to surpass 70% on the MMMU benchmark, achieving a 3.7-point improvement through Chain-of-Thought (CoT) reasoning and showcasing strong potential for test-time scaling. We hope this model contributes to the open-source community by setting new standards for developing and applying multimodal AI systems. HuggingFace demo see https://huggingface.co/spaces/OpenGVLab/InternVL",
+  "published": "2024-12-06T18:57:08+00:00",
+  "updated": "2025-09-26T12:52:41+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2412.05271v5",
+  "entry_id": "http://arxiv.org/abs/2412.05271v5",
+  "pdf_path": "data/papers/2412.05271.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 198183,
+ "word_count": 13259,
+ "models_extracted": 41,
+ "extraction_data": [
+  {
+   "model_name": "InternVL 2.5",
+   "parameters": "0.9B, 1B, 2B, 2.2B, 3.7B, 4B, 8B, 8.1B, 25.5B, 26B, 38B, 38.4B, 76.3B, 78B, 78.4B",
+   "parameters_millions": 78400,
+   "model_family": "InternVL",
+   "date_created": "2024-12-06",
+   "organization": "OpenGVLab",
+   "innovation": "Data filtering pipeline (LLM-based quality scoring, repetition detection, heuristic rule-based filtering) to remove low-quality and repetitive samples that cause spiraling loops in long-form outputs and CoT reasoning; packing strategy to maintain independent positional indices and buffer efficiency for long sequences; test-time scaling strategies.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "FaceCaption, COCO-Caption, OpenImages-Caption, Objects365-Caption, TextCap, Laion-ZH, Laion-EN, Laion-COCO, LLaVAR, InternVL-SA-1B-Caption, Captioning, MMInstruct, GRIT-Caption, ShareGPT4V, LVIS-Instruct-4V, ShareCaptioner, OmniCorpus, ShareGPT4o, GQA, OKVQA, A-OKVQA, Visual7W, VisText, VSR, TallyQA, GeneralQA, Objects365-YorN, IconQA, Stanford40, VisDial, VQAv2, Hateful-Memes, MAVIS, GeomVerse, MetaMath-Rendered, MapQA, GeoQA+, Geometry3K, Mathematics, UniGeo, GEOS, CLEVR-Math, ChartQA, PlotQA, FigureQA, LRV-Instruction, ArxivQA, MMC-Inst, Chart, TabMWP, DVQA, UniChart, SimChart9K, Chart2Text, FinTabNet, SciTSR, SyntheticChart2Markdown, LaionCOCO-OCR, Wukong-OCR, ParsynthOCR, SynthDoG-EN, SynthDoG-ZH, SynthDoG-RU, SynthDoG-JP, SynthDoG-KO, IAM, EST-VQA, ST-VQA, NAF, InfoVQA, HME100K, OCRVQA, SROIE, POIE, CTW, OCR, SynthText, ArT, LSVT, RCTW-17, ReCTs, MTWI, TextVQA, CASIA, TextOCR, Chinese-OCR, EATEN, COCO-Text, SyntheticArxivOCR, SyntheticImage2Latex, SyntheticHandwrittenOCR, SyntheticInfographic2Markdown, KVQA, ViQuAE, iNaturalist2018, MovieNet, ART500K, Knowledge, KonIQ-10K, VisualMRC, ChemVLMData, ScienceQA, AI2D, TQA, Wikipedia-QA, SyntheticMultidisciplinaryKnowledge/QA, Objects365, GRIT, RefCOCO, GPT4Gen-RD-BoxCoT, All-Seeing-V1, All-Seeing-V2, V3Det, TolokaVQA, Document, DocReason25K, DocVQA, Docmatix, SyntheticArxivQA, ALLaVA, SVIT, Cambrain-GPT4o, TextOCR-GPT4V, MMDU, Conversation, SyntheticReal-WorldConversations, PMC-VQA, VQA-RAD, ImageCLEF, SLAKE, Medical-Diff-VQA, Medical, PMC-CaseReport, GMAI-VL, GUI, Screen2Words, WebSight, Video, Mementos, ShareGPT4Video, VideoGPT+, ShareGPT4o-Video, VideoChat2-IT, EgoTaskQA, NTURGB+D, CLEVRER, STAR, LSMDC",
+   "finetuning_task": "Multimodal instruction tuning, Fine-tuning on a subset of pre-training datasets, Instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100/H100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Expanding performance boundaries of open-source multimodal models with model, data, and test-time scaling",
+   "application": "Multi-discipline reasoning, document understanding, multi-image/video understanding, real-world comprehension, multimodal hallucination detection, visual grounding, multilingual capabilities, pure language processing",
+   "paper_title": "Expanding Performance Boundaries of Open-Source Multimodal Models with Model, Data, and Test-Time Scaling",
+   "training_corpus_size": "~76B tokens",
+   "finetuning_data": "High-quality multimodal instruction datasets, Subset of pre-training datasets, 16.3M samples spanning general QA, charts, documents, OCR, science, medical, GUI, code, mathematics, single-image, multi-image, video, and text",
+   "tokenizer": "LLaMA/Qwen tokenizer (varies by base LLM)",
+   "supported_language": "Multilingual, English, Chinese, Korean, Japanese, Italian, Russian, German, French, Thai, Arabic, Vietnamese, Portuguese, Turkish",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "Dense (all parameters active)",
+   "attention_mechanism": "Standard transformer attention (LLM) + CNN/ViT attention (Vision)",
+   "context_length_max": "16384",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> SFT -> test-time scaling",
+   "reasoning_mode": "Chain-of-thought (CoT)",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Systematic filtering, error correction, and synthetic augmentation",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Late fusion / MLP projector",
+   "vision_encoder": "Vision encoder (size unspecified), InternViT, InternViT-6B or InternViT-300M, InternViT-300M-448px-V2.5, InternViT-6B-448px-V2.5, 300M vision encoder paired with 1.8B language model",
+   "base_model": "InternVL 2.0",
+   "optimizer_innovation": null,
+   "benchmark_result": "MathVista test-mini: 72.3%; OlympiadBench: overall improvement over 2.0 series; MMMU 70.1 (with CoT); MMMU validation 70.1%; OpenCompass: 54.0; OpenCompass: 59.8; OpenCompass: 65.1; OpenCompass: 68.1; OpenCompass: 71.3; OpenCompass: 73.3; OpenCompass: 75.5; MMMU > 70%; BLINK val: 42.0; Eval Bench val: 51.2; QA (EN): 38.5; (winrate): 29.9; MIRB: 50.3; RealWorld: 35.6; MME-RW: 57.5; WildVision: 44.2; R-Bench: 43.4; MathVista test-mini: 72.3% (78B); VCR EM/Jaccard: 93.2/97.6; BLINK val: 44.0; Eval Bench val: 54.8; QA (EN): 43.5; (winrate): 40.6; MIRB: 54.5; RealWorld: 36.4; MME-RW: 60.1; WildVision: 48.8; R-Bench: 44.2; BLINK val: 50.8; Eval Bench val: 62.7; QA (EN): 43.8; (winrate): 45.2; MIRB: 62.4; RealWorld: 51.7; MME-RW: 64.3; WildVision: 55.3; R-Bench: 49.4; BLINK val: 54.8; Eval Bench val: 67.7; QA (EN): 46.7; (winrate): 51.1; MIRB: 62.3; RealWorld: 52.5; MME-RW: 70.1; WildVision: 59.1; R-Bench: 62.0; MME: 2373.3; MMB(EN/CN): 85.4/85.5; MMBv1.1: 84.2; MMVet: 65.0; MMVetv2: 60.8; HallusionBench: 66.5; MMHal: 55.0; CRPE: 3.70; POPE: 79.1; MMStar: 90.6; Various multimodal benchmarks; MMMU (val): 40.9, 43.6, 52.3; MMMU (test): 35.8, 38.2, 46.3; MMMU-Pro (std10/vision/overall): 23.3/15.5/19.4, 27.3/20.1/23.7, 36.4/29.0/32.7; MathVista (mini): 43.2, 51.3, 60.5; MathVision (mini/full): 16.8/14.4, 13.5/14.7, 21.7/20.9; MathVerse (mini): 28.0, 30.6, 37.1; Olympiad (mini): 1.7, 2.0, 3.0; MMMU-val: 70.1; MMMU-test: 61.8; MathVista: 51.4/45.9/48.6; MATH-Vision: 72.3; MathVerse: 34.9/32.2; OlympiadBench: 51.7; RefCOCO avg 87.6 (8B), 92.3 (78B); MMMB avg 79.5 (8B), 85.4 (78B); MultilingualMMBench avg 77.3 (8B), 86.3 (78B); MTVQA 27.6 (8B), 31.7 (78B); NaturalQuestions: 29.4; C3: 95.8; RACE-High: 92.2; WinoGrande: 87.9; HellaSwag: 95.8; BBH: 78.9; GSM8K: 82.9; MATH: 53.7; TheoremQA: 15.4; HumanEval: 68.9; MBPP: 72.0; MBPP-CN: 61.6; MVBench: 76.4; MMBench-Video: 1.97; Video-MME: 72.1/74.0; LongVideoBench: 63.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternVL 2.0",
+   "model_family": "InternVL",
+   "date_created": "2024-12-06",
+   "organization": "Shanghai Ai Laboratory",
+   "innovation": "Selective data augmentation, dynamic maximum tile number for resolution control, repeat factor for dataset sampling balance, and data packing strategy to maximize GPU utilization and sequence capacity.",
+   "pretraining_corpus": "Image-text, video, and text datasets",
+   "parameters": "1B, 2B, 7B, 26B, 78B",
+   "parameters_millions": 78000,
+   "application": "Image, video, and text understanding, reasoning",
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal understanding and reasoning",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal alignment, next-token prediction",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "AdamW",
+   "tokenizer": "LLaMA tokenizer",
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": "NVIDIA A100/H100 GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Expanding Performance Boundaries of Open-Source Multimodal Models with Model, Data, and Test-Time Scaling",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> SFT",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Various multimodal benchmarks",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "InternVL 2",
+   "parameters": "1B, 2B, 4B, 8B, 26B, 40B, 78B",
+   "parameters_millions": 78000,
+   "model_family": "InternVL",
+   "date_created": "2024-12-06",
+   "organization": "Shanghai Ai Laboratory",
+   "innovation": "Dynamic high-resolution patch merging for vision; test-time scaling (generating multiple responses with varied temperatures and selecting the best via a verifier); improved data curation and filtering pipeline for multimodal training.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Next-token prediction, image-text alignment",
+   "pretraining_corpus": "ShareGPT4V, ShareGPT4Video, DocVQA, MathVista",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A800 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal understanding and reasoning",
+   "application": "Visual question answering, image captioning, visual grounding, document understanding, chart understanding, OCR",
+   "paper_title": "Expanding Performance Boundaries of Open-Source Multimodal Models with Model, Data, and Test-Time Scaling",
+   "training_corpus_size": "5.5B image-text pairs",
+   "finetuning_data": "ShareGPT4V, LLaVA-Instruct-158K, MathVista, DocVQA, ChartQA, InternVL-Chat v1.2 data, high-quality instruction data",
+   "tokenizer": "Llama3 tokenizer (26B/78B), SentencePiece/BPE (1B/2B/8B)",
+   "supported_language": "English, Chinese",
+   "hardware_description": "1024 A800 GPUs",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/OpenGVLab/InternVL",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training -> Instruction tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Late fusion",
+   "vision_encoder": "High-resolution vision encoder (e.g., SigLIP-So400m-14p), High-resolution dynamic vision encoder (EVA02-CLIP-L / SigLIP)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MathVista 45.2; MMMU 48.5; MMBench 75.3; MathVista 52.1; MMMU 55.8; MMBench 80.1; MathVista 62.4; MMMU 65.2; MMBench 85.7; MathVista 66.8; MMMU 70.5; MMBench 87.9; MathVista 68.5; MMMU 72.8; MMBench 88.5; MMMU val 68.5, MathVista test 68.5, MMBench test 88.5, OCRBench 821, ChartQA 85.2; MMBench 85.6; MMMU 63.5; DocVQA 92.1; ChartQA 85.3; TextVQA 82.4; MMMU val 68.5; MMMU-Pro 58.4; MMMoT 68.2; AI2D 84.8; ChartQA 83.3; DocVQA 92.5; OCRBench 76.0; SQA 88.5; TextVQA 82.5; ScienceQA 91.5; MME 2583.5; MMBench 83.5; MMStar 64.5; SEED-Bench 75.5; LLaVA-Bench-Wild 78.5; LLaVA-Bench-In-the-Wild 78.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 31,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "InternVL 2.5": {
+   "application": [
+    "Multi-discipline reasoning",
+    "document understanding",
+    "multi-image/video understanding",
+    "real-world comprehension",
+    "multimodal hallucination detection",
+    "visual grounding",
+    "multilingual capabilities"
+   ],
+   "attention_mechanism": [
+    "Standard transformer attention (LLM) + CNN/ViT attention (Vision)"
+   ],
+   "base_model": [
+    "InternVL 2.0"
+   ],
+   "finetuning_data": [
+    "High-quality multimodal instruction datasets",
+    "Subset of pre-training datasets",
+    "charts",
+    "documents",
+    "OCR",
+    "science",
+    "medical",
+    "GUI",
+    "code",
+    "mathematics",
+    "single-image",
+    "multi-image",
+    "video",
+    "text"
+   ],
+   "finetuning_task": [
+    "Multimodal instruction tuning",
+    "Instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Late fusion / MLP projector"
+   ],
+   "hardware_used": [
+    "NVIDIA A100/H100 GPUs"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL 2.5"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "OpenGVLab"
+   ],
+   "parameters": [
+    "0.9B",
+    "1B",
+    "2B",
+    "2.2B",
+    "3.7B",
+    "4B",
+    "8B",
+    "8.1B",
+    "25.5B",
+    "26B",
+    "38B",
+    "38.4B",
+    "76.3B",
+    "78B",
+    "78.4B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "FaceCaption",
+    "COCO-Caption",
+    "OpenImages-Caption",
+    "Objects365-Caption",
+    "TextCap",
+    "Laion-ZH",
+    "Laion-EN",
+    "Laion-COCO",
+    "LLaVAR",
+    "InternVL-SA-1B-Caption",
+    "MMInstruct",
+    "GRIT-Caption",
+    "ShareGPT4V",
+    "LVIS-Instruct-4V",
+    "ShareCaptioner",
+    "OmniCorpus",
+    "ShareGPT4o",
+    "GQA",
+    "OKVQA",
+    "A-OKVQA",
+    "Visual7W",
+    "VisText",
+    "VSR",
+    "TallyQA",
+    "Objects365-YorN",
+    "IconQA",
+    "Stanford40",
+    "VisDial",
+    "VQAv2",
+    "Hateful-Memes",
+    "MAVIS",
+    "GeomVerse",
+    "MetaMath-Rendered",
+    "MapQA",
+    "GeoQA+",
+    "Geometry3K",
+    "UniGeo",
+    "GEOS",
+    "CLEVR-Math",
+    "ChartQA",
+    "PlotQA",
+    "FigureQA",
+    "LRV-Instruction",
+    "ArxivQA",
+    "MMC-Inst",
+    "TabMWP",
+    "DVQA",
+    "UniChart",
+    "SimChart9K",
+    "Chart2Text",
+    "FinTabNet",
+    "SciTSR",
+    "SyntheticChart2Markdown",
+    "LaionCOCO-OCR",
+    "Wukong-OCR",
+    "ParsynthOCR",
+    "SynthDoG-EN",
+    "SynthDoG-ZH",
+    "SynthDoG-RU",
+    "SynthDoG-JP",
+    "SynthDoG-KO",
+    "IAM",
+    "EST-VQA",
+    "ST-VQA",
+    "NAF",
+    "InfoVQA",
+    "HME100K",
+    "OCRVQA",
+    "SROIE",
+    "POIE",
+    "CTW",
+    "SynthText",
+    "ArT",
+    "LSVT",
+    "RCTW-17",
+    "ReCTs",
+    "MTWI",
+    "TextVQA",
+    "CASIA",
+    "TextOCR",
+    "Chinese-OCR",
+    "EATEN",
+    "COCO-Text",
+    "SyntheticArxivOCR",
+    "SyntheticImage2Latex",
+    "SyntheticHandwrittenOCR",
+    "SyntheticInfographic2Markdown",
+    "KVQA",
+    "ViQuAE",
+    "iNaturalist2018",
+    "MovieNet",
+    "ART500K",
+    "KonIQ-10K",
+    "VisualMRC",
+    "ChemVLMData",
+    "ScienceQA",
+    "AI2D",
+    "TQA",
+    "Wikipedia-QA",
+    "SyntheticMultidisciplinaryKnowledge/QA",
+    "Objects365",
+    "GRIT",
+    "RefCOCO",
+    "GPT4Gen-RD-BoxCoT",
+    "All-Seeing-V1",
+    "All-Seeing-V2",
+    "V3Det",
+    "TolokaVQA",
+    "DocReason25K",
+    "DocVQA",
+    "Docmatix",
+    "SyntheticArxivQA",
+    "ALLaVA",
+    "SVIT",
+    "Cambrain-GPT4o",
+    "TextOCR-GPT4V",
+    "MMDU",
+    "SyntheticReal-WorldConversations",
+    "PMC-VQA",
+    "VQA-RAD",
+    "ImageCLEF",
+    "SLAKE",
+    "Medical-Diff-VQA",
+    "PMC-CaseReport",
+    "GMAI-VL",
+    "Screen2Words",
+    "WebSight",
+    "Mementos",
+    "ShareGPT4Video",
+    "VideoGPT+",
+    "ShareGPT4o-Video",
+    "VideoChat2-IT",
+    "EgoTaskQA",
+    "NTURGB+D",
+    "CLEVRER",
+    "STAR",
+    "LSMDC"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "reasoning_mode": [
+    "Chain-of-thought (CoT)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Korean",
+    "Japanese",
+    "Italian",
+    "Russian",
+    "German",
+    "French",
+    "Thai",
+    "Arabic",
+    "Vietnamese",
+    "Portuguese",
+    "Turkish"
+   ],
+   "synthetic_data_generation_method": [
+    "Systematic filtering",
+    "error correction",
+    "synthetic augmentation"
+   ],
+   "vision_encoder": [
+    "Vision encoder (size unspecified)",
+    "InternViT",
+    "InternViT-6B or InternViT-300M",
+    "InternViT-300M-448px-V2.5",
+    "InternViT-6B-448px-V2.5",
+    "300M vision encoder paired with 1.8B language model"
+   ]
+  },
+  "InternVL 2.0": {
+   "application": [
+    "text understanding",
+    "reasoning"
+   ],
+   "hardware_used": [
+    "NVIDIA A100/H100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL 2.0"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Shanghai Ai Laboratory"
+   ],
+   "parameters": [
+    "1B",
+    "2B",
+    "7B",
+    "26B",
+    "78B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multimodal alignment, next-token prediction"
+   ],
+   "research_problem": [
+    "Multimodal understanding and reasoning"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ]
+  },
+  "InternVL 2": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual grounding",
+    "document understanding",
+    "chart understanding",
+    "OCR"
+   ],
+   "finetuning_data": [
+    "ShareGPT4V",
+    "LLaVA-Instruct-158K",
+    "MathVista",
+    "DocVQA",
+    "ChartQA",
+    "InternVL-Chat v1.2 data"
+   ],
+   "fusion_architecture": [
+    "Late fusion"
+   ],
+   "hardware_used": [
+    "NVIDIA A800 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "InternVL"
+   ],
+   "model_name": [
+    "InternVL 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Shanghai Ai Laboratory"
+   ],
+   "parameters": [
+    "1B",
+    "2B",
+    "4B",
+    "8B",
+    "26B",
+    "40B",
+    "78B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "ShareGPT4V",
+    "ShareGPT4Video",
+    "DocVQA",
+    "MathVista"
+   ],
+   "pretraining_task": [
+    "Next-token prediction, image-text alignment"
+   ],
+   "research_problem": [
+    "Multimodal understanding and reasoning"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "High-resolution vision encoder (e.g., SigLIP-So400m-14p)",
+    "High-resolution dynamic vision encoder (EVA02-CLIP-L / SigLIP)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "InternVL 2.5": {
+    "application": {
+     "candidates": [
+      "Multi-discipline reasoning",
+      "document understanding",
+      "multi-image/video understanding",
+      "real-world comprehension",
+      "multimodal hallucination detection",
+      "visual grounding",
+      "multilingual capabilities",
+      "pure language processing"
+     ],
+     "accepted": [
+      "Multi-discipline reasoning",
+      "document understanding",
+      "multi-image/video understanding",
+      "real-world comprehension",
+      "multimodal hallucination detection",
+      "visual grounding",
+      "multilingual capabilities"
+     ],
+     "dropped": [
+      {
+       "value": "pure language processing",
+       "reason": "Vague placeholder, not a concrete task or domain"
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "High-quality multimodal instruction datasets",
+      "Subset of pre-training datasets",
+      "16.3M samples spanning general QA",
+      "charts",
+      "documents",
+      "OCR",
+      "science",
+      "medical",
+      "GUI",
+      "code",
+      "mathematics",
+      "single-image",
+      "multi-image",
+      "video",
+      "text"
+     ],
+     "accepted": [
+      "High-quality multimodal instruction datasets",
+      "Subset of pre-training datasets",
+      "charts",
+      "documents",
+      "OCR",
+      "science",
+      "medical",
+      "GUI",
+      "code",
+      "mathematics",
+      "single-image",
+      "multi-image",
+      "video",
+      "text"
+     ],
+     "dropped": [
+      {
+       "value": "16.3M samples spanning general QA",
+       "reason": "Describes quantity and scope rather than naming a dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Multimodal instruction tuning",
+      "Fine-tuning on a subset of pre-training datasets",
+      "Instruction tuning"
+     ],
+     "accepted": [
+      "Multimodal instruction tuning",
+      "Instruction tuning"
+     ],
+     "dropped": [
+      {
+       "value": "Fine-tuning on a subset of pre-training datasets",
+       "reason": "Describes the fine-tuning process/source rather than naming a specific task or objective"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "FaceCaption",
+      "COCO-Caption",
+      "OpenImages-Caption",
+      "Objects365-Caption",
+      "TextCap",
+      "Laion-ZH",
+      "Laion-EN",
+      "Laion-COCO",
+      "LLaVAR",
+      "InternVL-SA-1B-Caption",
+      "Captioning",
+      "MMInstruct",
+      "GRIT-Caption",
+      "ShareGPT4V",
+      "LVIS-Instruct-4V",
+      "ShareCaptioner",
+      "OmniCorpus",
+      "ShareGPT4o",
+      "GQA",
+      "OKVQA",
+      "A-OKVQA",
+      "Visual7W",
+      "VisText",
+      "VSR",
+      "TallyQA",
+      "GeneralQA",
+      "Objects365-YorN",
+      "IconQA",
+      "Stanford40",
+      "VisDial",
+      "VQAv2",
+      "Hateful-Memes",
+      "MAVIS",
+      "GeomVerse",
+      "MetaMath-Rendered",
+      "MapQA",
+      "GeoQA+",
+      "Geometry3K",
+      "Mathematics",
+      "UniGeo",
+      "GEOS",
+      "CLEVR-Math",
+      "ChartQA",
+      "PlotQA",
+      "FigureQA",
+      "LRV-Instruction",
+      "ArxivQA",
+      "MMC-Inst",
+      "Chart",
+      "TabMWP",
+      "DVQA",
+      "UniChart",
+      "SimChart9K",
+      "Chart2Text",
+      "FinTabNet",
+      "SciTSR",
+      "SyntheticChart2Markdown",
+      "LaionCOCO-OCR",
+      "Wukong-OCR",
+      "ParsynthOCR",
+      "SynthDoG-EN",
+      "SynthDoG-ZH",
+      "SynthDoG-RU",
+      "SynthDoG-JP",
+      "SynthDoG-KO",
+      "IAM",
+      "EST-VQA",
+      "ST-VQA",
+      "NAF",
+      "InfoVQA",
+      "HME100K",
+      "OCRVQA",
+      "SROIE",
+      "POIE",
+      "CTW",
+      "OCR",
+      "SynthText",
+      "ArT",
+      "LSVT",
+      "RCTW-17",
+      "ReCTs",
+      "MTWI",
+      "TextVQA",
+      "CASIA",
+      "TextOCR",
+      "Chinese-OCR",
+      "EATEN",
+      "COCO-Text",
+      "SyntheticArxivOCR",
+      "SyntheticImage2Latex",
+      "SyntheticHandwrittenOCR",
+      "SyntheticInfographic2Markdown",
+      "KVQA",
+      "ViQuAE",
+      "iNaturalist2018",
+      "MovieNet",
+      "ART500K",
+      "Knowledge",
+      "KonIQ-10K",
+      "VisualMRC",
+      "ChemVLMData",
+      "ScienceQA",
+      "AI2D",
+      "TQA",
+      "Wikipedia-QA",
+      "SyntheticMultidisciplinaryKnowledge/QA",
+      "Objects365",
+      "GRIT",
+      "RefCOCO",
+      "GPT4Gen-RD-BoxCoT",
+      "All-Seeing-V1",
+      "All-Seeing-V2",
+      "V3Det",
+      "TolokaVQA",
+      "Document",
+      "DocReason25K",
+      "DocVQA",
+      "Docmatix",
+      "SyntheticArxivQA",
+      "ALLaVA",
+      "SVIT",
+      "Cambrain-GPT4o",
+      "TextOCR-GPT4V",
+      "MMDU",
+      "Conversation",
+      "SyntheticReal-WorldConversations",
+      "PMC-VQA",
+      "VQA-RAD",
+      "ImageCLEF",
+      "SLAKE",
+      "Medical-Diff-VQA",
+      "Medical",
+      "PMC-CaseReport",
+      "GMAI-VL",
+      "GUI",
+      "Screen2Words",
+      "WebSight",
+      "Video",
+      "Mementos",
+      "ShareGPT4Video",
+      "VideoGPT+",
+      "ShareGPT4o-Video",
+      "VideoChat2-IT",
+      "EgoTaskQA",
+      "NTURGB+D",
+      "CLEVRER",
+      "STAR",
+      "LSMDC"
+     ],
+     "accepted": [
+      "FaceCaption",
+      "COCO-Caption",
+      "OpenImages-Caption",
+      "Objects365-Caption",
+      "TextCap",
+      "Laion-ZH",
+      "Laion-EN",
+      "Laion-COCO",
+      "LLaVAR",
+      "InternVL-SA-1B-Caption",
+      "MMInstruct",
+      "GRIT-Caption",
+      "ShareGPT4V",
+      "LVIS-Instruct-4V",
+      "ShareCaptioner",
+      "OmniCorpus",
+      "ShareGPT4o",
+      "GQA",
+      "OKVQA",
+      "A-OKVQA",
+      "Visual7W",
+      "VisText",
+      "VSR",
+      "TallyQA",
+      "Objects365-YorN",
+      "IconQA",
+      "Stanford40",
+      "VisDial",
+      "VQAv2",
+      "Hateful-Memes",
+      "MAVIS",
+      "GeomVerse",
+      "MetaMath-Rendered",
+      "MapQA",
+      "GeoQA+",
+      "Geometry3K",
+      "UniGeo",
+      "GEOS",
+      "CLEVR-Math",
+      "ChartQA",
+      "PlotQA",
+      "FigureQA",
+      "LRV-Instruction",
+      "ArxivQA",
+      "MMC-Inst",
+      "TabMWP",
+      "DVQA",
+      "UniChart",
+      "SimChart9K",
+      "Chart2Text",
+      "FinTabNet",
+      "SciTSR",
+      "SyntheticChart2Markdown",
+      "LaionCOCO-OCR",
+      "Wukong-OCR",
+      "ParsynthOCR",
+      "SynthDoG-EN",
+      "SynthDoG-ZH",
+      "SynthDoG-RU",
+      "SynthDoG-JP",
+      "SynthDoG-KO",
+      "IAM",
+      "EST-VQA",
+      "ST-VQA",
+      "NAF",
+      "InfoVQA",
+      "HME100K",
+      "OCRVQA",
+      "SROIE",
+      "POIE",
+      "CTW",
+      "SynthText",
+      "ArT",
+      "LSVT",
+      "RCTW-17",
+      "ReCTs",
+      "MTWI",
+      "TextVQA",
+      "CASIA",
+      "TextOCR",
+      "Chinese-OCR",
+      "EATEN",
+      "COCO-Text",
+      "SyntheticArxivOCR",
+      "SyntheticImage2Latex",
+      "SyntheticHandwrittenOCR",
+      "SyntheticInfographic2Markdown",
+      "KVQA",
+      "ViQuAE",
+      "iNaturalist2018",
+      "MovieNet",
+      "ART500K",
+      "KonIQ-10K",
+      "VisualMRC",
+      "ChemVLMData",
+      "ScienceQA",
+      "AI2D",
+      "TQA",
+      "Wikipedia-QA",
+      "SyntheticMultidisciplinaryKnowledge/QA",
+      "Objects365",
+      "GRIT",
+      "RefCOCO",
+      "GPT4Gen-RD-BoxCoT",
+      "All-Seeing-V1",
+      "All-Seeing-V2",
+      "V3Det",
+      "TolokaVQA",
+      "DocReason25K",
+      "DocVQA",
+      "Docmatix",
+      "SyntheticArxivQA",
+      "ALLaVA",
+      "SVIT",
+      "Cambrain-GPT4o",
+      "TextOCR-GPT4V",
+      "MMDU",
+      "SyntheticReal-WorldConversations",
+      "PMC-VQA",
+      "VQA-RAD",
+      "ImageCLEF",
+      "SLAKE",
+      "Medical-Diff-VQA",
+      "PMC-CaseReport",
+      "GMAI-VL",
+      "Screen2Words",
+      "WebSight",
+      "Mementos",
+      "ShareGPT4Video",
+      "VideoGPT+",
+      "ShareGPT4o-Video",
+      "VideoChat2-IT",
+      "EgoTaskQA",
+      "NTURGB+D",
+      "CLEVRER",
+      "STAR",
+      "LSMDC"
+     ],
+     "dropped": [
+      {
+       "value": "Mathematics",
+       "reason": "Names a domain/subject, not a dataset or corpus. (cached)"
+      },
+      {
+       "value": "Conversation",
+       "reason": "Names a domain, not a pretraining corpus. (cached)"
+      },
+      {
+       "value": "Video",
+       "reason": "Lists a modality, not a dataset or corpus. (cached)"
+      },
+      {
+       "value": "Captioning",
+       "reason": "Names a task rather than a specific dataset or corpus"
+      },
+      {
+       "value": "GeneralQA",
+       "reason": "Placeholder/vague name, does not identify a specific corpus"
+      },
+      {
+       "value": "Chart",
+       "reason": "Vague descriptor, not a specific dataset name"
+      },
+      {
+       "value": "OCR",
+       "reason": "Names a task rather than a specific dataset or corpus"
+      },
+      {
+       "value": "Knowledge",
+       "reason": "Placeholder, does not name a specific dataset or corpus"
+      },
+      {
+       "value": "Document",
+       "reason": "Vague descriptor, not a specific dataset name"
+      },
+      {
+       "value": "Medical",
+       "reason": "Names a domain rather than a specific dataset or corpus"
+      },
+      {
+       "value": "GUI",
+       "reason": "Names a domain rather than a specific dataset or corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Expanding performance boundaries of open-source multimodal models with model, data, and test-time scaling"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Expanding performance boundaries of open-source multimodal models with model, data, and test-time scaling",
+       "reason": "Describes the solution/approach rather than naming the research problem or challenge"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "Multilingual",
+      "English",
+      "Chinese",
+      "Korean",
+      "Japanese",
+      "Italian",
+      "Russian",
+      "German",
+      "French",
+      "Thai",
+      "Arabic",
+      "Vietnamese",
+      "Portuguese",
+      "Turkish"
+     ],
+     "accepted": [
+      "English",
+      "Chinese",
+      "Korean",
+      "Japanese",
+      "Italian",
+      "Russian",
+      "German",
+      "French",
+      "Thai",
+      "Arabic",
+      "Vietnamese",
+      "Portuguese",
+      "Turkish"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "InternVL 2.0": {
+    "application": {
+     "candidates": [
+      "Image",
+      "video",
+      "text understanding",
+      "reasoning"
+     ],
+     "accepted": [
+      "text understanding",
+      "reasoning"
+     ],
+     "dropped": [
+      {
+       "value": "Image",
+       "reason": "Names a modality, not a concrete task or application domain. (cached)"
+      },
+      {
+       "value": "video",
+       "reason": "Names a modality, not a concrete task or application domain. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Image-text",
+      "video",
+      "text datasets"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "video",
+       "reason": "Lists a modality, not a dataset or corpus. (cached)"
+      },
+      {
+       "value": "Image-text",
+       "reason": "Vague descriptor, not a specific dataset name"
+      },
+      {
+       "value": "text datasets",
+       "reason": "Placeholder asserting breadth rather than naming a specific corpus"
+      }
+     ]
+    }
+   },
+   "InternVL 2": {
+    "finetuning_data": {
+     "candidates": [
+      "ShareGPT4V",
+      "LLaVA-Instruct-158K",
+      "MathVista",
+      "DocVQA",
+      "ChartQA",
+      "InternVL-Chat v1.2 data",
+      "high-quality instruction data"
+     ],
+     "accepted": [
+      "ShareGPT4V",
+      "LLaVA-Instruct-158K",
+      "MathVista",
+      "DocVQA",
+      "ChartQA",
+      "InternVL-Chat v1.2 data"
+     ],
+     "dropped": [
+      {
+       "value": "high-quality instruction data",
+       "reason": "Vague description/placeholder rather than a specific named dataset. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 264,
+   "dropped": 22,
+   "llm_calls": 1,
+   "values_sent_to_llm": 151
+  }
+ },
+ "contributions": [
+  {
+   "label": "InternVL 2.5",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL 2.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-12-06",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenGVLab",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Data filtering pipeline (LLM-based quality scoring, repetition detection, heuristic rule-based filtering) to remove low-quality and repetitive samples that cause spiraling loops in long-form outputs and CoT reasoning",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Packing strategy to maintain independent positional indices and buffer efficiency for long sequences",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Test-time scaling strategies.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "FaceCaption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO-Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenImages-Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Objects365-Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCap",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion-ZH",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion-EN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Laion-COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LLaVAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "InternVL-SA-1B-Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMInstruct",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GRIT-Caption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LVIS-Instruct-4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareCaptioner",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OmniCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4o",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "A-OKVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual7W",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VSR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TallyQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Objects365-YorN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IconQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stanford40",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisDial",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQAv2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Hateful-Memes",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MAVIS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GeomVerse",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MetaMath-Rendered",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MapQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GeoQA+",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Geometry3K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "UniGeo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GEOS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CLEVR-Math",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ChartQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PlotQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "FigureQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LRV-Instruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ArxivQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMC-Inst",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TabMWP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "UniChart",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SimChart9K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Chart2Text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "FinTabNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SciTSR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticChart2Markdown",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LaionCOCO-OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wukong-OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ParsynthOCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG-EN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG-ZH",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG-RU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG-JP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthDoG-KO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "IAM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EST-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ST-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NAF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "InfoVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HME100K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OCRVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SROIE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "POIE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CTW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SynthText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ArT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LSVT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RCTW-17",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ReCTs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MTWI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CASIA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextOCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Chinese-OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EATEN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO-Text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticArxivOCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticImage2Latex",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticHandwrittenOCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticInfographic2Markdown",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "KVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ViQuAE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "INaturalist2018",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MovieNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ART500K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "KonIQ-10K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VisualMRC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ChemVLMData",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AI2D",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia-QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticMultidisciplinaryKnowledge/QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Objects365",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GRIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GPT4Gen-RD-BoxCoT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "All-Seeing-V1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "All-Seeing-V2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "V3Det",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TolokaVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DocReason25K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DocVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Docmatix",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticArxivQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ALLaVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SVIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Cambrain-GPT4o",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextOCR-GPT4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMDU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SyntheticReal-WorldConversations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PMC-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQA-RAD",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ImageCLEF",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SLAKE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Medical-Diff-VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PMC-CaseReport",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GMAI-VL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Screen2Words",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebSight",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Mementos",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4Video",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VideoGPT+",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4o-Video",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VideoChat2-IT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EgoTaskQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NTURGB+D",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CLEVRER",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "STAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LSMDC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA/Qwen tokenizer (varies by base LLM)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.9B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "25.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "26B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "38B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "38.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "76.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 78400,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100/H100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-discipline reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-image/video understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Real-world comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal hallucination detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual capabilities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~76B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "High-quality multimodal instruction datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Subset of pre-training datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Charts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Science",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Medical",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GUI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Code",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Mathematics",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Single-image",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multi-image",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Video",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Text",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "Dense (all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard transformer attention (LLM) + CNN/ViT attention (Vision)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "16384",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> SFT -> test-time scaling",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Chain-of-thought (CoT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Systematic filtering",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Error correction",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Synthetic augmentation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Late fusion / MLP projector",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Vision encoder (size unspecified)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B or InternViT-300M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-300M-448px-V2.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "InternViT-6B-448px-V2.5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "300M vision encoder paired with 1.8B language model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "InternVL 2.0",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista test-mini: 72.3%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OlympiadBench: overall improvement over 2.0 series",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 70.1 (with CoT)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU validation 70.1%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 54.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 59.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 65.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 68.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 71.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 73.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenCompass: 75.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU > 70%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK val: 42.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Eval Bench val: 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QA (EN): 38.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "(winrate): 29.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIRB: 50.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealWorld: 35.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RW: 57.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WildVision: 44.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R-Bench: 43.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista test-mini: 72.3% (78B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VCR EM/Jaccard: 93.2/97.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK val: 44.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Eval Bench val: 54.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QA (EN): 43.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "(winrate): 40.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIRB: 54.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealWorld: 36.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RW: 60.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WildVision: 48.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R-Bench: 44.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK val: 50.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Eval Bench val: 62.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QA (EN): 43.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "(winrate): 45.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIRB: 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealWorld: 51.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RW: 64.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WildVision: 55.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R-Bench: 49.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLINK val: 54.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Eval Bench val: 67.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QA (EN): 46.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "(winrate): 51.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIRB: 62.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RealWorld: 52.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME-RW: 70.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WildVision: 59.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "R-Bench: 62.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME: 2373.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB(EN/CN): 85.4/85.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBv1.1: 84.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMVet: 65.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMVetv2: 60.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HallusionBench: 66.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMHal: 55.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CRPE: 3.70",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 79.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar: 90.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Various multimodal benchmarks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU (val): 40.9, 43.6, 52.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU (test): 35.8, 38.2, 46.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro (std10/vision/overall): 23.3/15.5/19.4, 27.3/20.1/23.7, 36.4/29.0/32.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista (mini): 43.2, 51.3, 60.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVision (mini/full): 16.8/14.4, 13.5/14.7, 21.7/20.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVerse (mini): 28.0, 30.6, 37.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Olympiad (mini): 1.7, 2.0, 3.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-val: 70.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-test: 61.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista: 51.4/45.9/48.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH-Vision: 72.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVerse: 34.9/32.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OlympiadBench: 51.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO avg 87.6 (8B), 92.3 (78B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMB avg 79.5 (8B), 85.4 (78B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultilingualMMBench avg 77.3 (8B), 86.3 (78B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MTVQA 27.6 (8B), 31.7 (78B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NaturalQuestions: 29.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C3: 95.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE-High: 92.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande: 87.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 95.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BBH: 78.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 82.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MATH: 53.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TheoremQA: 15.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 68.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 72.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP-CN: 61.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MVBench: 76.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-Video: 1.97",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MME: 72.1/74.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LongVideoBench: 63.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternVL 2.0",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL 2.0",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-12-06",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Shanghai Ai Laboratory",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Selective data augmentation, dynamic maximum tile number for resolution control, repeat factor for dataset sampling balance, and data packing strategy to maximize GPU utilization and sequence capacity.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment, next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "LLaMA tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "26B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 78000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100/H100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal understanding and reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> SFT",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Various multimodal benchmarks",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "InternVL 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "InternVL 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "InternVL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-12-06",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Shanghai Ai Laboratory",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dynamic high-resolution patch merging for vision",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Test-time scaling (generating multiple responses with varied temperatures and selecting the best via a verifier)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Improved data curation and filtering pipeline for multimodal training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction, image-text alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4V",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ShareGPT4Video",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DocVQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MathVista",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Llama3 tokenizer (26B/78B), SentencePiece/BPE (1B/2B/8B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "26B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "40B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "78B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 78000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A800 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "1024 A800 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chart understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/OpenGVLab/InternVL",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal understanding and reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "5.5B image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA-Instruct-158K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MathVista",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DocVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ChartQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "InternVL-Chat v1.2 data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training -> Instruction tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Late fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "High-resolution vision encoder (e.g., SigLIP-So400m-14p)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "High-resolution dynamic vision encoder (EVA02-CLIP-L / SigLIP)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista 45.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 48.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 75.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista 52.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 55.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 80.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 65.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 85.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista 66.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 70.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 87.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 72.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU val 68.5, MathVista test 68.5, MMBench test 88.5, OCRBench 821, ChartQA 85.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 85.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 63.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQA 92.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ChartQA 85.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA 82.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU val 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro 58.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMoT 68.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AI2D 84.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ChartQA 83.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQA 92.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench 76.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQA 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA 82.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA 91.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MME 2583.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench 83.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar 64.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED-Bench 75.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVA-Bench-Wild 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LLaVA-Bench-In-the-Wild 78.5",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1775488",
+  "contribution_ids": [
+   "R1775490",
+   "R1775491",
+   "R1775492",
+   "R1775493",
+   "R1775494",
+   "R1775495",
+   "R1775496",
+   "R1775497",
+   "R1775498",
+   "R1775499",
+   "R1924709",
+   "R1924812",
+   "R1924815"
+  ],
+  "new_contribution_ids": [
+   "R1924709",
+   "R1924812",
+   "R1924815"
+  ],
+  "comparison_updated": null
+ }
+}

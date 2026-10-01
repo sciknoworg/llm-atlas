@@ -146,6 +146,9 @@ KISSKI_BASE_URL=https://chat-ai.academiccloud.de/v1
 Use `https://sandbox.orkg.org/` for testing and `https://orkg.org/` for production uploads.
 The legacy values `sandbox`, `incubating`, and `production` are still accepted by the code,
 but the explicit endpoint URL is recommended for clarity.
+The bulk-upload scripts (`scripts/quarterly.py run --upload`, `scripts/reupload_pending.py`)
+ignore `ORKG_ENDPOINT_URL` and use `--host` instead (default `sandbox`), so writing to the
+live ORKG always requires an explicit `--host production`.
 
 > For Grete HPC users: `KISSKI_API_KEY` is not required when running GPU-based extraction. See [grete/README.md](grete/README.md).
 

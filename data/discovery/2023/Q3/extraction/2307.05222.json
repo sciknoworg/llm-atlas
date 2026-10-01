@@ -1,0 +1,658 @@
+{
+ "arxiv_id": "2307.05222",
+ "status": "completed",
+ "timestamp": "2026-08-28T07:27:15.862094",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2307.05222",
+  "title": "Emu: Generative Pretraining in Multimodality",
+  "authors": [
+   "Quan Sun",
+   "Qiying Yu",
+   "Yufeng Cui",
+   "Fan Zhang",
+   "Xiaosong Zhang",
+   "Yueze Wang",
+   "Hongcheng Gao",
+   "Jingjing Liu",
+   "Tiejun Huang",
+   "Xinlong Wang"
+  ],
+  "abstract": "We present Emu, a Transformer-based multimodal foundation model, which can seamlessly generate images and texts in multimodal context. This omnivore model can take in any single-modality or multimodal data input indiscriminately (e.g., interleaved image, text and video) through a one-model-for-all autoregressive training process. First, visual signals are encoded into embeddings, and together with text tokens form an interleaved input sequence. Emu is then end-to-end trained with a unified objective of classifying the next text token or regressing the next visual embedding in the multimodal sequence. This versatile multimodality empowers the exploration of diverse pretraining data sources at scale, such as videos with interleaved frames and text, webpages with interleaved images and text, as well as web-scale image-text pairs and video-text pairs. Emu can serve as a generalist multimodal interface for both image-to-text and text-to-image tasks, and supports in-context image and text generation. Across a broad range of zero-shot/few-shot tasks including image captioning, visual question answering, video question answering and text-to-image generation, Emu demonstrates superb performance compared to state-of-the-art large multimodal models. Extended capabilities such as multimodal assistants via instruction tuning are also demonstrated with impressive performance.",
+  "published": "2023-07-11T12:45:39+00:00",
+  "updated": "2024-05-08T02:46:43+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2307.05222v2",
+  "entry_id": "http://arxiv.org/abs/2307.05222v2",
+  "pdf_path": "data/papers/2307.05222.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 82582,
+ "word_count": 6022,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "Emu",
+   "parameters": "2B, 3B, 7B, 13B, 14B",
+   "parameters_millions": 14000,
+   "model_family": "Emu",
+   "date_created": "2023-07-11",
+   "organization": "Beijing Academy Of Artificial Intelligence",
+   "innovation": "Unified autoregressive training objective for interleaved image, text, and video; visual signals encoded into continuous embeddings via EVA-CLIP instead of discrete tokens, enabling end-to-end next-token/next-embedding prediction in a single model for both image-to-text and text-to-image generation.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction for text and next-embedding regression for visual signals",
+   "pretraining_corpus": "Web-scale image-text pairs, video-text pairs, videos with interleaved frames and text, webpages with interleaved images and text",
+   "finetuning_task": "Instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "16 A100-80G GPUs",
+   "extension": "CausalTransformer module to transform 2D spatial visual signals to 1D causal sequences in a latent space Z",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal foundation models / Generative pretraining in multimodality",
+   "application": "Image captioning, visual question answering, video question answering, text-to-image generation, in-context image and text generation, multimodal assistants",
+   "paper_title": "Emu: Generative Pretraining in Multimodality",
+   "training_corpus_size": "~2 billion image-text pairs, ~10 million video-text pairs",
+   "finetuning_data": "multimodal conversational data, ShareGPT, Alpaca, LLaVA, VideoChat, Video-ChatGPT",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": "16 A100-80G GPUs for ~16 hours",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/TencentARC/Emu; https://github.com/microsoft/Emu",
+   "context_length": "2048",
+   "activated_parameters": "14B (dense, all parameters active)",
+   "attention_mechanism": "causal self-attention layer, cross-attention layer, Causal self-attention, cross-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "pre-training on interleaved multimodal data under unified next-element prediction objective -> instruction tuning on multimodal conversational data -> fine-tuning Visual Decoder for image generation",
+   "reasoning_mode": "Multimodal Chain-of-Thought prompting",
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Early fusion via interleaved continuous visual embeddings and text tokens",
+   "vision_encoder": "EVA-CLIP, EVA-CLIP (large-sized)",
+   "base_model": "EVA-CLIP",
+   "optimizer_innovation": null,
+   "benchmark_result": "COCOText2Image Val FID; COCOCaption Test CIDEr; VQAv2 Test-dev VQA acc.; OKVQA Val VQA acc.; VizWiz Test-dev VQA acc.; VisDial Val NDCG; MSVDQA Test Top-1 acc.; MSRVTTQA Test Top-1 acc.; NextQA Test WUPS; COCO CIDEr 142.6; VQAv2 78.5; ImageReward 0.85; HPSv2 0.82; SOTA on COCO, Flickr30k, MSVD, MSRVTT, and VATEX at time of publication",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Emu": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "video question answering",
+    "text-to-image generation",
+    "in-context image and text generation",
+    "multimodal assistants"
+   ],
+   "attention_mechanism": [
+    "causal self-attention layer",
+    "cross-attention layer",
+    "Causal self-attention",
+    "cross-attention"
+   ],
+   "base_model": [
+    "EVA-CLIP"
+   ],
+   "finetuning_data": [
+    "multimodal conversational data",
+    "ShareGPT",
+    "Alpaca"
+   ],
+   "finetuning_task": [
+    "Instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Early fusion via interleaved continuous visual embeddings and text tokens"
+   ],
+   "hardware_used": [
+    "16 A100-80G GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Emu"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Beijing Academy Of Artificial Intelligence"
+   ],
+   "parameters": [
+    "2B",
+    "3B",
+    "7B",
+    "13B",
+    "14B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Web-scale image-text pairs",
+    "videos with interleaved frames and text",
+    "webpages with interleaved images and text"
+   ],
+   "pretraining_task": [
+    "Next-token prediction for text and next-embedding regression for visual signals"
+   ],
+   "reasoning_mode": [
+    "Multimodal Chain-of-Thought prompting"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EVA-CLIP",
+    "EVA-CLIP (large-sized)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Emu": {
+    "finetuning_data": {
+     "candidates": [
+      "multimodal conversational data",
+      "ShareGPT",
+      "Alpaca",
+      "LLaVA",
+      "VideoChat",
+      "Video-ChatGPT"
+     ],
+     "accepted": [
+      "multimodal conversational data",
+      "ShareGPT",
+      "Alpaca"
+     ],
+     "dropped": [
+      {
+       "value": "LLaVA",
+       "reason": "LLaVA is a model, not a dataset."
+      },
+      {
+       "value": "VideoChat",
+       "reason": "VideoChat is a model, not a dataset."
+      },
+      {
+       "value": "Video-ChatGPT",
+       "reason": "Video-ChatGPT is a model, not a dataset."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Emu"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Emu",
+       "reason": "Emu is a specific model name, not a broader family or lineage."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Web-scale image-text pairs",
+      "video-text pairs",
+      "videos with interleaved frames and text",
+      "webpages with interleaved images and text"
+     ],
+     "accepted": [
+      "Web-scale image-text pairs",
+      "videos with interleaved frames and text",
+      "webpages with interleaved images and text"
+     ],
+     "dropped": [
+      {
+       "value": "video-text pairs",
+       "reason": "Not a dataset or corpus name; describes data format. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal foundation models / Generative pretraining in multimodality"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Multimodal foundation models / Generative pretraining in multimodality",
+       "reason": "Names a model category/field rather than a specific research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 35,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 22
+  }
+ },
+ "contributions": [
+  {
+   "label": "Emu",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Emu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Beijing Academy Of Artificial Intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified autoregressive training objective for interleaved image, text, and video",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Visual signals encoded into continuous embeddings via EVA-CLIP instead of discrete tokens, enabling end-to-end next-token/next-embedding prediction in a single model for both image-to-text and text-to-image generation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction for text and next-embedding regression for visual signals",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Web-scale image-text pairs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Videos with interleaved frames and text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Webpages with interleaved images and text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 14000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 A100-80G GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "16 A100-80G GPUs for ~16 hours",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "In-context image and text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal assistants",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/TencentARC/Emu",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/Emu",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~2 billion image-text pairs, ~10 million video-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multimodal conversational data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Alpaca",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "14B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal self-attention layer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention layer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on interleaved multimodal data under unified next-element prediction objective -> instruction tuning on multimodal conversational data -> fine-tuning Visual Decoder for image generation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Multimodal Chain-of-Thought prompting",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Early fusion via interleaved continuous visual embeddings and text tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA-CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EVA-CLIP (large-sized)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "EVA-CLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCOText2Image Val FID",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCOCaption Test CIDEr",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 Test-dev VQA acc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OKVQA Val VQA acc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz Test-dev VQA acc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VisDial Val NDCG",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVDQA Test Top-1 acc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTTQA Test Top-1 acc.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NextQA Test WUPS",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO CIDEr 142.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageReward 0.85",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HPSv2 0.82",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on COCO, Flickr30k, MSVD, MSRVTT, and VATEX at time of publication",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1775193",
+  "contribution_ids": [
+   "R1775195",
+   "R1775196",
+   "R1775197",
+   "R1775198",
+   "R1923724"
+  ],
+  "new_contribution_ids": [
+   "R1923724"
+  ],
+  "comparison_updated": null
+ }
+}

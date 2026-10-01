@@ -1,0 +1,1053 @@
+{
+ "arxiv_id": "2004.08483",
+ "status": "completed",
+ "timestamp": "2026-08-24T18:57:58.234091",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2004.08483",
+  "title": "ETC: Encoding Long and Structured Inputs in Transformers",
+  "authors": [
+   "Joshua Ainslie",
+   "Santiago Ontanon",
+   "Chris Alberti",
+   "Vaclav Cvicek",
+   "Zachary Fisher",
+   "Philip Pham",
+   "Anirudh Ravula",
+   "Sumit Sanghai",
+   "Qifan Wang",
+   "Li Yang"
+  ],
+  "abstract": "Transformer models have advanced the state of the art in many Natural Language Processing (NLP) tasks. In this paper, we present a new Transformer architecture, Extended Transformer Construction (ETC), that addresses two key challenges of standard Transformer architectures, namely scaling input length and encoding structured inputs. To scale attention to longer inputs, we introduce a novel global-local attention mechanism between global tokens and regular input tokens. We also show that combining global-local attention with relative position encodings and a Contrastive Predictive Coding (CPC) pre-training objective allows ETC to encode structured inputs. We achieve state-of-the-art results on four natural language datasets requiring long and/or structured inputs.",
+  "published": "2020-04-17T23:10:18+00:00",
+  "updated": "2020-10-27T16:54:17+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "stat.ML"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2004.08483v5",
+  "entry_id": "http://arxiv.org/abs/2004.08483v5",
+  "pdf_path": "data/papers/2004.08483.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: model architecture)"
+ },
+ "text_length": 70948,
+ "word_count": 8500,
+ "models_extracted": 11,
+ "extraction_data": [
+  {
+   "model_name": "ETC",
+   "parameters": "~50% MORE THAN BERT BASE (~165M), SIMILAR TO BERT BASE (~110M), 110M, 166M, 340M, 539M",
+   "parameters_millions": 539,
+   "model_family": "ETC",
+   "date_created": "2020-04-17",
+   "organization": "Google",
+   "innovation": "Global-local attention with hard masking and flat structure: introduces a flat attention structure and hard global-to-local masking to efficiently encode long and structured inputs, reducing quadratic complexity while preserving performance on long documents; Contrastive Predictive Coding (CPC) pre-training: employs a contrastive objective to learn representations from long, unstructured text sequences, improving downstream QA performance compared to standard masked language modeling.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive Predictive Coding (CPC), Masked Language Modeling (MLM)",
+   "pretraining_corpus": "Wikipedia, Books (filtered to remove documents with fewer than 7 sentences)",
+   "finetuning_task": "Supervised fine-tuning for QA and classification, Supervised fine-tuning on QA tasks",
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Encoding long and structured inputs in Transformers",
+   "application": "Question answering, reading comprehension, knowledge base population",
+   "paper_title": "ETC: Encoding Long and Structured Inputs in Transformers",
+   "training_corpus_size": "3.3 billion words",
+   "finetuning_data": "Natural Questions (NQ), HotpotQA, WikiHop, OpenKP, Natural Questions",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": "256-core TPUv3 nodes",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/etc",
+   "context_length": null,
+   "activated_parameters": "166M",
+   "attention_mechanism": "Global-local attention mechanism, Global-local attention with hard masking and flat structure, Global-local attention (fixed number of global tokens attend to all local tokens, local tokens attend to their local window and global tokens)",
+   "context_length_max": "4096",
+   "context_extension_method": "Global-local attention",
+   "training_pipeline": "Pre-training with CPC and MLM (0.8 weight for MLM, 0.2 for CPC) followed by fine-tuning on downstream tasks.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT, RoBERTa",
+   "optimizer_innovation": null,
+   "benchmark_result": "HotpotQA: 0.751/0.869; WikiHop: 73.2; NQ long answer: 0.7778, short answer: 0.5786; HotpotQA: 0.813/0.894; WikiHop: 79.8; OpenKP: 0.423; SQuAD 1.1 EM/F1: 87.4/93.2 (BASE), 88.9/94.5 (LARGE); SQuAD 2.0 EM/F1: 80.0/83.1 (BASE), 81.0/84.0 (LARGE); RACE: 71.0 (BASE), 73.0 (LARGE); XSum: 43.1 ROUGE-L (BASE), 44.0 ROUGE-L (LARGE)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "ETC base (shared)",
+   "model_family": "ETC",
+   "date_created": "2020-04-17",
+   "organization": "Google",
+   "innovation": "Introduces a hierarchical structure encoding mechanism using global and long inputs with relative position encodings to efficiently handle long and structured documents, reducing quadratic attention complexity to linear with respect to long input size.",
+   "pretraining_corpus": null,
+   "parameters": "109M",
+   "parameters_millions": 109,
+   "application": "Keyphrase extraction, question answering",
+   "license": null,
+   "research_problem": "Encoding Long and Structured Inputs in Transformers",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive Predictive Coding (CPC)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "NQ, HotpotQA, WikiHop, OpenKP",
+   "optimizer": "Adam",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": "256-core TPUv3 nodes",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "ETC: Encoding Long and Structured Inputs in Transformers",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "4608 (4096 long + 512 global)",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (CPC loss) -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT / RoBERTa",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "ETC large (RoBERTa vocab)",
+   "model_family": "ETC",
+   "date_created": "2020-04-17",
+   "organization": "Google",
+   "innovation": "Introduces a hierarchical structure encoding mechanism using global and long inputs with relative position encodings to efficiently handle long and structured documents, reducing quadratic attention complexity to linear with respect to long input size.",
+   "pretraining_corpus": null,
+   "parameters": "558M",
+   "parameters_millions": 558,
+   "application": "Keyphrase extraction, question answering",
+   "license": null,
+   "research_problem": "Encoding Long and Structured Inputs in Transformers",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive Predictive Coding (CPC)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "NQ, HotpotQA, WikiHop, OpenKP",
+   "optimizer": "Adam",
+   "tokenizer": "RoBERTa vocabulary",
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": "512-core TPUv3 nodes",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "ETC: Encoding Long and Structured Inputs in Transformers",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "4608 (4096 long + 512 global)",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (CPC loss) -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT / RoBERTa",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "ETC": {
+   "application": [
+    "Question answering",
+    "reading comprehension",
+    "knowledge base population"
+   ],
+   "attention_mechanism": [
+    "Global-local attention mechanism",
+    "Global-local attention with hard masking and flat structure",
+    "Global-local attention (fixed number of global tokens attend to all local tokens, local tokens attend to their local window and global tokens)"
+   ],
+   "base_model": [
+    "BERT, RoBERTa"
+   ],
+   "context_extension_method": [],
+   "finetuning_data": [
+    "Natural Questions (NQ)",
+    "HotpotQA",
+    "WikiHop",
+    "OpenKP",
+    "Natural Questions"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning for QA and classification",
+    "Supervised fine-tuning on QA tasks"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "ETC"
+   ],
+   "model_name": [
+    "ETC"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "110M",
+    "166M",
+    "340M",
+    "539M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "Books (filtered to remove documents with fewer than 7 sentences)"
+   ],
+   "pretraining_task": [
+    "Contrastive Predictive Coding (CPC), Masked Language Modeling (MLM)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "ETC base (shared)": {
+   "application": [
+    "Keyphrase extraction",
+    "question answering"
+   ],
+   "base_model": [
+    "BERT / RoBERTa"
+   ],
+   "finetuning_data": [
+    "NQ",
+    "HotpotQA",
+    "WikiHop",
+    "OpenKP"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "ETC"
+   ],
+   "model_name": [
+    "ETC base (shared)"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "109M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Contrastive Predictive Coding (CPC)"
+   ],
+   "research_problem": []
+  },
+  "ETC large (RoBERTa vocab)": {
+   "application": [
+    "Keyphrase extraction",
+    "question answering"
+   ],
+   "base_model": [
+    "BERT / RoBERTa"
+   ],
+   "finetuning_data": [
+    "NQ",
+    "HotpotQA",
+    "WikiHop",
+    "OpenKP"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "ETC"
+   ],
+   "model_name": [
+    "ETC large (RoBERTa vocab)"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "558M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Contrastive Predictive Coding (CPC)"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ETC": {
+    "context_extension_method": {
+     "candidates": [
+      "Global-local attention"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Global-local attention",
+       "reason": "This is an attention mechanism, not a technique for extending context length."
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "~50% MORE THAN BERT BASE (~165M)",
+      "SIMILAR TO BERT BASE (~110M)",
+      "110M",
+      "166M",
+      "340M",
+      "539M"
+     ],
+     "accepted": [
+      "110M",
+      "166M",
+      "340M",
+      "539M"
+     ],
+     "dropped": [
+      {
+       "value": "~50% MORE THAN BERT BASE (~165M)",
+       "reason": "Contains comparative text and formatting, not a standalone parameter count."
+      },
+      {
+       "value": "SIMILAR TO BERT BASE (~110M)",
+       "reason": "Contains comparative text and formatting, not a standalone parameter count."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Encoding long and structured inputs in Transformers"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Encoding long and structured inputs in Transformers",
+       "reason": "Describes a method or capability rather than a research problem or challenge."
+      }
+     ]
+    }
+   },
+   "ETC base (shared)": {
+    "research_problem": {
+     "candidates": [
+      "Encoding Long and Structured Inputs in Transformers"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Encoding Long and Structured Inputs in Transformers",
+       "reason": "Describes a method or capability rather than a research problem or challenge."
+      }
+     ]
+    }
+   },
+   "ETC large (RoBERTa vocab)": {
+    "research_problem": {
+     "candidates": [
+      "Encoding Long and Structured Inputs in Transformers"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Encoding Long and Structured Inputs in Transformers",
+       "reason": "Describes a method or capability rather than a research problem or challenge."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 59,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 27
+  }
+ },
+ "contributions": [
+  {
+   "label": "ETC",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ETC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ETC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Global-local attention with hard masking and flat structure: introduces a flat attention structure and hard global-to-local masking to efficiently encode long and structured inputs, reducing quadratic complexity while preserving performance on long documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Contrastive Predictive Coding (CPC) pre-training: employs a contrastive objective to learn representations from long, unstructured text sequences, improving downstream QA performance compared to standard masked language modeling.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive Predictive Coding (CPC), Masked Language Modeling (MLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books (filtered to remove documents with fewer than 7 sentences)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning for QA and classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on QA tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "166M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "539M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 539,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256-core TPUv3 nodes",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge base population",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/etc",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.3 billion words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions (NQ)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HotpotQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiHop",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenKP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "166M",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Global-local attention mechanism",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Global-local attention with hard masking and flat structure",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Global-local attention (fixed number of global tokens attend to all local tokens, local tokens attend to their local window and global tokens)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training with CPC and MLM (0.8 weight for MLM, 0.2 for CPC) followed by fine-tuning on downstream tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT, RoBERTa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HotpotQA: 0.751/0.869",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiHop: 73.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NQ long answer: 0.7778, short answer: 0.5786",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HotpotQA: 0.813/0.894",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WikiHop: 79.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OpenKP: 0.423",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 1.1 EM/F1: 87.4/93.2 (BASE), 88.9/94.5 (LARGE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD 2.0 EM/F1: 80.0/83.1 (BASE), 81.0/84.0 (LARGE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE: 71.0 (BASE), 73.0 (LARGE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum: 43.1 ROUGE-L (BASE), 44.0 ROUGE-L (LARGE)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "ETC base (shared)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ETC base (shared)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ETC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a hierarchical structure encoding mechanism using global and long inputs with relative position encodings to efficiently handle long and structured documents, reducing quadratic attention complexity to linear with respect to long input size.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive Predictive Coding (CPC)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "109M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 109,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "256-core TPUv3 nodes",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Keyphrase extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HotpotQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiHop",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenKP",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4608 (4096 long + 512 global)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (CPC loss) -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT / RoBERTa",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "ETC large (RoBERTa vocab)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ETC large (RoBERTa vocab)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ETC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a hierarchical structure encoding mechanism using global and long inputs with relative position encodings to efficiently handle long and structured documents, reducing quadratic attention complexity to linear with respect to long input size.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive Predictive Coding (CPC)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "RoBERTa vocabulary",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "558M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 558,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "512-core TPUv3 nodes",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Keyphrase extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HotpotQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WikiHop",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenKP",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4608 (4096 long + 512 global)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (CPC loss) -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT / RoBERTa",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R216277",
+  "contribution_ids": [
+   "R216279",
+   "R464074",
+   "R1920625",
+   "R1920638",
+   "R1920644"
+  ],
+  "new_contribution_ids": [
+   "R1920625",
+   "R1920638",
+   "R1920644"
+  ],
+  "comparison_updated": null
+ }
+}

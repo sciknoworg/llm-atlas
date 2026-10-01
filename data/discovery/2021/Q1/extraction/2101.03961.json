@@ -1,0 +1,1511 @@
+{
+ "arxiv_id": "2101.03961",
+ "status": "completed",
+ "timestamp": "2026-08-24T22:34:18.184485",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2101.03961",
+  "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+  "authors": [
+   "William Fedus",
+   "Barret Zoph",
+   "Noam Shazeer"
+  ],
+  "abstract": "In deep learning, models typically reuse the same parameters for all inputs. Mixture of Experts (MoE) defies this and instead selects different parameters for each incoming example. The result is a sparsely-activated model -- with outrageous numbers of parameters -- but a constant computational cost. However, despite several notable successes of MoE, widespread adoption has been hindered by complexity, communication costs and training instability -- we address these with the Switch Transformer. We simplify the MoE routing algorithm and design intuitive improved models with reduced communication and computational costs. Our proposed training techniques help wrangle the instabilities and we show large sparse models may be trained, for the first time, with lower precision (bfloat16) formats. We design models based off T5-Base and T5-Large to obtain up to 7x increases in pre-training speed with the same computational resources. These improvements extend into multilingual settings where we measure gains over the mT5-Base version across all 101 languages. Finally, we advance the current scale of language models by pre-training up to trillion parameter models on the \"Colossal Clean Crawled Corpus\" and achieve a 4x speedup over the T5-XXL model.",
+  "published": "2021-01-11T16:11:52+00:00",
+  "updated": "2022-06-16T20:36:07+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2101.03961v3",
+  "entry_id": "http://arxiv.org/abs/2101.03961v3",
+  "pdf_path": "data/papers/2101.03961.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 113462,
+ "word_count": 17634,
+ "models_extracted": 30,
+ "extraction_data": [
+  {
+   "model_name": "Switch Transformer",
+   "parameters": "223M, 7.4B, 158B, 315B, 1T+",
+   "parameters_millions": 1000000,
+   "model_family": "Switch Transformer",
+   "date_created": "2021-01-11",
+   "organization": "Google",
+   "innovation": "Switch Transformer architecture: replaces dense feed-forward layers with sparse Mixture-of-Experts (MoE) layers to scale parameters without increasing FLOPs; Selective precision: casts only the router function to float32 for stability while keeping the rest in bfloat16 to avoid communication overhead; Reduced initialization scale: scales weight initialization down by a factor of 10 to improve quality and training stability; Expert dropout: applies a higher dropout rate (0.4) specifically to expert feed-forward layers during fine-tuning to mitigate overfitting on small downstream tasks.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Masked language modeling",
+   "pretraining_corpus": "Colossal Clean Crawled Corpus (C4)",
+   "finetuning_task": "Supervised fine-tuning on SuperGLUE",
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Scaling language models to trillion parameters with simple and efficient sparsity",
+   "application": "Language modeling, summarization, question answering, text classification",
+   "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+   "training_corpus_size": "34B tokens",
+   "finetuning_data": "GLUE, CNNDM, SQuAD, SuperGLUE",
+   "tokenizer": "BPE",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "7.4B",
+   "attention_mechanism": "Multi-head self-attention, Dense multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on C4 corpus followed by supervised fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": "32 experts",
+   "quantization_precision": "bfloat16 (with selective float32 for router)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5",
+   "optimizer_innovation": null,
+   "benchmark_result": "GLUE: 84.7; CNNDM: 19.1; SQuAD: 83.7; SuperGLUE: 73.0; SuperGLUE: 81.3 (Switch-Base); SuperGLUE: 76.6 (Distilled T5-Base)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Switch",
+   "parameters": "223M, 300M, 739M, 1.6B, 3.8B, 7B, 26B, 395B",
+   "parameters_millions": 395000,
+   "model_family": "Switch Transformer",
+   "date_created": "2021-01-11",
+   "organization": "Google",
+   "innovation": "Switch Mixture-of-Experts (MoE) layer: replaces standard feed-forward networks with expert layers where each token is deterministically routed to exactly one expert per layer, drastically reducing communication overhead and FLOPs per token compared to dense models and previous MoE variants; enables scaling to trillion-parameter models while maintaining sample efficiency and wall-clock speed.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Denoising autoencoder / Next-token prediction",
+   "pretraining_corpus": "C4 dataset (revised version removing intra-example text duplication)",
+   "finetuning_task": "Supervised fine-tuning on diverse NLP tasks, Multi-task fine-tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Scaling transformer models efficiently by reducing FLOPs per token while increasing parameters.",
+   "application": "Natural language understanding, language modeling, text summarization, question answering, reading comprehension.",
+   "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+   "training_corpus_size": "576B tokens",
+   "finetuning_data": "GLUE, SuperGLUE, CNN/DailyMail, XSum, SQuAD, ARC, Natural Questions, Web Questions, Trivia QA, Winogrande, ANLI, ARC Easy, ARC Challenge, Web QA, Natural QA, WebQuestions, TriviaQA",
+   "tokenizer": null,
+   "supported_language": "English, 101 languages",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "223M",
+   "attention_mechanism": "Standard multi-head self-attention, Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability), Dense multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on C4 -> Fine-tuning on diverse NLP tasks",
+   "reasoning_mode": null,
+   "moe_configuration": "Switched FFN layers with expert selection per token",
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5",
+   "optimizer_innovation": null,
+   "benchmark_result": "GLUE: 86.7; SQuAD: 87.2; SuperGLUE: 79.5; Winogrande: 73.3; GLUE: 88.5; SQuAD: 88.6; SuperGLUE: 84.7; Winogrande: 83.0; XSum 20.3; ANLI 54.0; ARC Easy 61.3; ARC Chal. 32.8; Web QA 27.4; Natural QA 26.8; Trivia QA 30.7; XSum 22.3; ANLI 58.6; ARC Easy 66.0; ARC Chal. 35.5; Web QA 31.3; Natural QA 29.5; Trivia QA 36.9; SQuAD val: 89.7; SuperGLUE test: 87.5; ANLI: 65.7; Natural Questions EM: 34.4; WebQuestions: 41.0; TriviaQA: 47.5; SQuAD exact match: 87.7 (Switch-C), 89.6 (Switch-XXL)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Switch-C",
+   "parameters": "12B, 1571B, 1.6T",
+   "parameters_millions": 1600000,
+   "model_family": "Switch Transformer",
+   "date_created": "2021-01-11",
+   "organization": "Google",
+   "innovation": "Switch Mixture-of-Experts (MoE) layer: replaces standard feed-forward networks with expert layers where each token is deterministically routed to exactly one expert per layer, drastically reducing communication overhead and FLOPs per token compared to dense models and previous MoE variants; enables scaling to trillion-parameter models while maintaining sample efficiency and wall-clock speed.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Language modeling / Text-to-text generation",
+   "pretraining_corpus": "C4",
+   "finetuning_task": "Multi-task fine-tuning",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Scaling neural language models efficiently using sparse expert models",
+   "application": "Natural language understanding, language modeling, pre-training, fine-tuning, multi-task training",
+   "paper_title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+   "training_corpus_size": null,
+   "finetuning_data": "SQuAD, SuperGLUE, ANLI, Natural Questions, WebQuestions, TriviaQA",
+   "tokenizer": null,
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "12B (activated per token)",
+   "attention_mechanism": "Dense multi-head self-attention, Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on C4 -> Multi-task fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": "2048 experts; expert frequency 1",
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "T5",
+   "optimizer_innovation": null,
+   "benchmark_result": "SQuAD val: 89.7; SuperGLUE test: 87.5; ANLI: 65.7; Natural Questions EM: 34.4; WebQuestions: 41.0; TriviaQA: 47.5; SQuAD exact match: 87.7",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 19,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "Switch Transformer": {
+   "application": [
+    "Language modeling",
+    "summarization",
+    "question answering",
+    "text classification"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Dense multi-head self-attention"
+   ],
+   "base_model": [
+    "T5"
+   ],
+   "finetuning_data": [
+    "GLUE",
+    "CNNDM",
+    "SQuAD",
+    "SuperGLUE"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on SuperGLUE"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "Switch Transformer"
+   ],
+   "model_name": [
+    "Switch Transformer"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "223M",
+    "7.4B",
+    "158B",
+    "315B",
+    "1T+"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Colossal Clean Crawled Corpus (C4)"
+   ],
+   "pretraining_task": [
+    "Masked language modeling"
+   ],
+   "quantization_precision": [
+    "bfloat16 (with selective float32 for router)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "Switch": {
+   "application": [
+    "Natural language understanding",
+    "language modeling",
+    "text summarization",
+    "question answering",
+    "reading comprehension."
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention",
+    "Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability)",
+    "Dense multi-head self-attention"
+   ],
+   "base_model": [
+    "T5"
+   ],
+   "finetuning_data": [
+    "GLUE",
+    "SuperGLUE",
+    "CNN/DailyMail",
+    "XSum",
+    "SQuAD",
+    "ARC",
+    "Natural Questions",
+    "Web Questions",
+    "Trivia QA",
+    "Winogrande",
+    "ANLI",
+    "ARC Easy",
+    "ARC Challenge",
+    "Web QA",
+    "Natural QA",
+    "WebQuestions",
+    "TriviaQA"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on diverse NLP tasks",
+    "Multi-task fine-tuning"
+   ],
+   "model_family": [
+    "Switch Transformer"
+   ],
+   "model_name": [
+    "Switch"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "223M",
+    "300M",
+    "739M",
+    "1.6B",
+    "3.8B",
+    "7B",
+    "26B",
+    "395B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4 dataset (revised version removing intra-example text duplication)"
+   ],
+   "pretraining_task": [
+    "Denoising autoencoder / Next-token prediction"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "Switch-C": {
+   "application": [
+    "Natural language understanding",
+    "language modeling"
+   ],
+   "attention_mechanism": [
+    "Dense multi-head self-attention",
+    "Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability)"
+   ],
+   "base_model": [
+    "T5"
+   ],
+   "finetuning_data": [
+    "SQuAD",
+    "SuperGLUE",
+    "ANLI",
+    "Natural Questions",
+    "WebQuestions",
+    "TriviaQA"
+   ],
+   "finetuning_task": [
+    "Multi-task fine-tuning"
+   ],
+   "model_family": [
+    "Switch Transformer"
+   ],
+   "model_name": [
+    "Switch-C"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "12B",
+    "1571B",
+    "1.6T"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4"
+   ],
+   "pretraining_task": [
+    "Language modeling / Text-to-text generation"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Switch Transformer": {
+    "research_problem": {
+     "candidates": [
+      "Scaling language models to trillion parameters with simple and efficient sparsity"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling language models to trillion parameters with simple and efficient sparsity",
+       "reason": "Describes a solution or methodology rather than a short noun phrase naming the research problem."
+      }
+     ]
+    }
+   },
+   "Switch": {
+    "research_problem": {
+     "candidates": [
+      "Scaling transformer models efficiently by reducing FLOPs per token while increasing parameters."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling transformer models efficiently by reducing FLOPs per token while increasing parameters.",
+       "reason": "Describes a solution or methodology rather than a short noun phrase naming the research problem."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "101 languages"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "101 languages",
+       "reason": "Counts languages instead of naming a specific natural language."
+      }
+     ]
+    }
+   },
+   "Switch-C": {
+    "application": {
+     "candidates": [
+      "Natural language understanding",
+      "language modeling",
+      "pre-training",
+      "fine-tuning",
+      "multi-task training"
+     ],
+     "accepted": [
+      "Natural language understanding",
+      "language modeling"
+     ],
+     "dropped": [
+      {
+       "value": "pre-training",
+       "reason": "Describes a training phase, not a practical application or domain."
+      },
+      {
+       "value": "fine-tuning",
+       "reason": "Describes a training method, not a practical application or domain."
+      },
+      {
+       "value": "multi-task training",
+       "reason": "Describes a training method, not a practical application or domain."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling neural language models efficiently using sparse expert models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling neural language models efficiently using sparse expert models",
+       "reason": "Describes a solution or methodology rather than a short noun phrase naming the research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 93,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 39
+  }
+ },
+ "contributions": [
+  {
+   "label": "Switch Transformer",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Switch Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Switch Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-01-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Switch Transformer architecture: replaces dense feed-forward layers with sparse Mixture-of-Experts (MoE) layers to scale parameters without increasing FLOPs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Selective precision: casts only the router function to float32 for stability while keeping the rest in bfloat16 to avoid communication overhead",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reduced initialization scale: scales weight initialization down by a factor of 10 to improve quality and training stability",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Expert dropout: applies a higher dropout rate (0.4) specifically to expert feed-forward layers during fine-tuning to mitigate overfitting on small downstream tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Colossal Clean Crawled Corpus (C4)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on SuperGLUE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "223M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "158B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "315B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1T+",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1000000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "34B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNNDM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dense multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on C4 corpus followed by supervised fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "32 experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (with selective float32 for router)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE: 84.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNNDM: 19.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD: 83.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 73.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 81.3 (Switch-Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 76.6 (Distilled T5-Base)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Switch",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Switch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Switch Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-01-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Switch Mixture-of-Experts (MoE) layer: replaces standard feed-forward networks with expert layers where each token is deterministically routed to exactly one expert per layer, drastically reducing communication overhead and FLOPs per token compared to dense models and previous MoE variants",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables scaling to trillion-parameter models while maintaining sample efficiency and wall-clock speed.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Denoising autoencoder / Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4 dataset (revised version removing intra-example text duplication)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on diverse NLP tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-task fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "223M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "739M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "26B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "395B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 395000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Reading comprehension.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "576B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNN/DailyMail",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Web Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Trivia QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ANLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARC Easy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARC Challenge",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Web QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "223M",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dense multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on C4 -> Fine-tuning on diverse NLP tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Switched FFN layers with expert selection per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE: 86.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD: 87.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 79.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 73.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD: 88.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 84.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande: 83.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum 20.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI 54.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Easy 61.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Chal. 32.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Web QA 27.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural QA 26.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Trivia QA 30.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum 22.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI 58.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Easy 66.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Chal. 35.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Web QA 31.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural QA 29.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Trivia QA 36.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD val: 89.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE test: 87.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI: 65.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions EM: 34.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQuestions: 41.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD exact match: 87.7 (Switch-C), 89.6 (Switch-XXL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Switch-C",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Switch-C",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Switch Transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-01-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Switch Mixture-of-Experts (MoE) layer: replaces standard feed-forward networks with expert layers where each token is deterministically routed to exactly one expert per layer, drastically reducing communication overhead and FLOPs per token compared to dense models and previous MoE variants",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables scaling to trillion-parameter models while maintaining sample efficiency and wall-clock speed.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Language modeling / Text-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-task fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1571B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.6T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1600000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ANLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "12B (activated per token)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dense multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (Switch layers in attention explored but excluded due to bfloat16 instability)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on C4 -> Multi-task fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "2048 experts; expert frequency 1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "T5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD val: 89.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE test: 87.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI: 65.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions EM: 34.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQuestions: 41.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TriviaQA: 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD exact match: 87.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R216396",
+  "contribution_ids": [
+   "R216399",
+   "R370905",
+   "R1921002",
+   "R1921010",
+   "R1921019"
+  ],
+  "new_contribution_ids": [
+   "R1921002",
+   "R1921010",
+   "R1921019"
+  ],
+  "comparison_updated": null
+ }
+}

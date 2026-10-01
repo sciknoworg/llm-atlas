@@ -1,0 +1,1854 @@
+{
+ "arxiv_id": "2111.09543",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:39:24.426413",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2111.09543",
+  "title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+  "authors": [
+   "Pengcheng He",
+   "Jianfeng Gao",
+   "Weizhu Chen"
+  ],
+  "abstract": "This paper presents a new pre-trained language model, DeBERTaV3, which improves the original DeBERTa model by replacing mask language modeling (MLM) with replaced token detection (RTD), a more sample-efficient pre-training task. Our analysis shows that vanilla embedding sharing in ELECTRA hurts training efficiency and model performance. This is because the training losses of the discriminator and the generator pull token embeddings in different directions, creating the \"tug-of-war\" dynamics. We thus propose a new gradient-disentangled embedding sharing method that avoids the tug-of-war dynamics, improving both training efficiency and the quality of the pre-trained model. We have pre-trained DeBERTaV3 using the same settings as DeBERTa to demonstrate its exceptional performance on a wide range of downstream natural language understanding (NLU) tasks. Taking the GLUE benchmark with eight tasks as an example, the DeBERTaV3 Large model achieves a 91.37% average score, which is 1.37% over DeBERTa and 1.91% over ELECTRA, setting a new state-of-the-art (SOTA) among the models with a similar structure. Furthermore, we have pre-trained a multi-lingual model mDeBERTa and observed a larger improvement over strong baselines compared to English models. For example, the mDeBERTa Base achieves a 79.8% zero-shot cross-lingual accuracy on XNLI and a 3.6% improvement over XLM-R Base, creating a new SOTA on this benchmark. We have made our pre-trained models and inference code publicly available at https://github.com/microsoft/DeBERTa.",
+  "published": "2021-11-18T06:48:00+00:00",
+  "updated": "2023-03-24T09:17:17+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2111.09543v4",
+  "entry_id": "http://arxiv.org/abs/2111.09543v4",
+  "pdf_path": "data/papers/2111.09543.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 54955,
+ "word_count": 4286,
+ "models_extracted": 13,
+ "extraction_data": [
+  {
+   "model_name": "DeBERTaV 3",
+   "parameters": "13M, 14M, 41M, 43M, 44M, 86M, 110M, 186M, 275M, 340M, 355M, 860M, 1.3B",
+   "parameters_millions": 1300,
+   "model_family": "DeBERTa",
+   "date_created": "2021-11-18",
+   "organization": "Microsoft",
+   "innovation": "Gradient-Disentangled Embedding Sharing (GDES): a novel embedding sharing paradigm for ELECTRA-style pre-training that allows the discriminator to leverage semantic information from the generator's embedding layer without interfering with the generator's gradients, solving the 'tug-of-war' dynamics and improving pre-training efficiency; Combines DeBERTa's relative position encoding with ELECTRA's replaced token detection (RTD) to establish a new state-of-the-art pre-training paradigm for language understanding.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Replaced Token Detection (RTD)",
+   "pretraining_corpus": "BooksCorpus, English Wikipedia, CC-News, OpenWebText, S2ORC, PubMed Abstracts",
+   "finetuning_task": "Supervised fine-tuning on downstream NLP tasks, Supervised fine-tuning on NLU tasks, Sentence classification, sequence tagging (token classification)",
+   "optimizer": "Adam",
+   "hardware_used": "DGX-2 node",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Improving pre-training efficiency and model quality of encoder-based language models.",
+   "application": "Question answering, natural language inference, named entity recognition, GLUE/SuperGLUE benchmarks",
+   "paper_title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+   "training_corpus_size": "160B tokens",
+   "finetuning_data": "GLUE benchmark, MNLI-matched, SQuAD v2.0, XNLI, MNLI, RACE, ReCoRD, SWAG, CoNLL-2003",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/microsoft/DeBERTa",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Disentangled Attention (DA)",
+   "context_length_max": "8192",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage joint optimization: generator trained with MLM, discriminator trained with RTD (lambda=50); multilingual variant mDeBERTaV3 trained on CC100",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "DeBERTa",
+   "optimizer_innovation": null,
+   "benchmark_result": "GLUE 91.37% (Large); MNLI-matched 90.6% (Base); SQuAD v2.0 F1 88.4% (Base); XNLI zero-shot cross-lingual 79.8% (mDeBERTaV3 Base); MNLI-m: 89.3; MNLI-mm: 89.0; SQuAD v2.0 F1: 87.2; SQuAD v2.0 EM: 84.5; MNLI-m/mm 91.8/91.9; SQuADv2.0 91.5/89.0; RACE 89.2; ReCoRD 92.3/91.8; SWAG 93.4; CoNLL2003 NER 93.9; MNLI-m/mm 90.6/90.7; SQuADv2.0 88.4/85.4; MNLI-m/mm 88.2/87.9; SQuADv2.0 82.9/80.4; GLUE 90.0 (Large); SQuAD v2.0 88.9 EM / 91.4 F1 (Large); MNLI 90.2 (Large); SST-2 95.8; QQP 91.8; QNLI 92.7; RTE 84.4; CoLA 68.2; MRPC 89.3; STS-B 90.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3",
+   "model_family": "DeBERTa",
+   "date_created": "2021-11-18",
+   "organization": "Microsoft",
+   "innovation": "Gradient-Disentangled Embedding Sharing (GDES): uses a stop-gradient operator to prevent Replaced Token Detection (RTD) loss from flowing into the generator embeddings, updating only the generator with MLM loss to ensure consistency and avoid conflicting objectives; combines RTD with Disentangled Attention (DA) for improved semantic encoding and faster convergence without sacrificing embedding quality.",
+   "pretraining_corpus": "160GB of text data (same as DeBERTaV2 and RoBERTa)",
+   "parameters": "30M, 110M, 340M",
+   "parameters_millions": 340,
+   "application": "Natural language understanding, question answering, text classification, named entity recognition",
+   "license": null,
+   "research_problem": "Language Understanding",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked LM (MLM), Replaced Token Detection (RTD)",
+   "training_corpus_size": "160GB",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "finetuning_data": "GLUE, SQuAD v2.0, RACE, ReCoRD, SWAG, MNLI, CoNLL-2003",
+   "optimizer": "AdamW",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "GLUE avg 91.37; RTE +4.4%; CoLA +4.8%",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "DeBERTaV 3 X",
+   "model_family": "DeBERTa",
+   "date_created": "2021-11-18",
+   "organization": "Microsoft",
+   "innovation": "ELECTRA-style pre-training (Replaced Token Detection) combined with gradient-disentangled embedding sharing to decouple content and position representations, improving reasoning and commonsense knowledge.",
+   "pretraining_corpus": null,
+   "parameters": "22M",
+   "parameters_millions": 275,
+   "application": "Question answering, natural language inference, named entity recognition, GLUE/SuperGLUE benchmarks",
+   "license": null,
+   "research_problem": "Natural Language Understanding (NLU)",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Modeling (MLM), Replaced Token Detection (RTD)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Sentence classification, sequence tagging (token classification)",
+   "finetuning_data": "SQuAD v2.0, RACE, ReCoRD, SWAG, MNLI, CoNLL-2003",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "MNLI-m/mm 88.1/88.3; SQuADv2.0 84.8/82.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "mDeBERTaV 3",
+   "parameters": "186M",
+   "parameters_millions": 186,
+   "model_family": "DeBERTa",
+   "date_created": "2021-11-18",
+   "organization": "Microsoft",
+   "innovation": "Multilingual extension of DeBERTaV3 using the same GDES pre-training paradigm and a 250k-token SentencePiece vocabulary (matching mT5), trained on a massive 2.5T-token multilingual corpus to achieve strong cross-lingual transfer without parallel data training.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Modeling (MLM), Replaced Token Detection (RTD)",
+   "pretraining_corpus": "2.5T CC100 multi-lingual dataset",
+   "finetuning_task": "Sentence classification, sequence tagging (token classification)",
+   "optimizer": "AdamW",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "MIT",
+   "research_problem": "Multilingual natural language understanding",
+   "application": "Question answering, natural language inference, named entity recognition, GLUE/SuperGLUE benchmarks",
+   "paper_title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+   "training_corpus_size": "2.5T tokens",
+   "finetuning_data": "SQuAD v2.0, RACE, ReCoRD, SWAG, MNLI, CoNLL-2003",
+   "tokenizer": "SentencePiece (250k vocab)",
+   "supported_language": "Multilingual, English, French, Spanish, German, Greek, Bulgarian, Russian, Turkish, Arabic, Vietnamese, Thai, Chinese, Hindi, Swahili, Urdu",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/microsoft/DeBERTa",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (500k steps) -> supervised fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "XNLI cross-lingual transfer avg 79.8; XNLI translate-train-all avg 82.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 13,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "DeBERTaV 3": {
+   "application": [
+    "Question answering",
+    "natural language inference",
+    "named entity recognition"
+   ],
+   "attention_mechanism": [
+    "Disentangled Attention (DA)"
+   ],
+   "base_model": [
+    "DeBERTa"
+   ],
+   "finetuning_data": [
+    "MNLI-matched",
+    "SQuAD v2.0",
+    "XNLI",
+    "MNLI",
+    "RACE",
+    "ReCoRD",
+    "SWAG",
+    "CoNLL-2003"
+   ],
+   "finetuning_task": [
+    "Sentence classification",
+    "sequence tagging (token classification)"
+   ],
+   "hardware_used": [
+    "DGX-2 node"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeBERTaV 3"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "13M",
+    "14M",
+    "41M",
+    "43M",
+    "44M",
+    "86M",
+    "110M",
+    "186M",
+    "275M",
+    "340M",
+    "355M",
+    "860M",
+    "1.3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "BooksCorpus",
+    "English Wikipedia",
+    "CC-News",
+    "OpenWebText",
+    "S2ORC",
+    "PubMed Abstracts"
+   ],
+   "pretraining_task": [
+    "Replaced Token Detection (RTD)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3": {
+   "application": [
+    "Natural language understanding",
+    "question answering",
+    "text classification",
+    "named entity recognition"
+   ],
+   "finetuning_data": [
+    "GLUE",
+    "SQuAD v2.0",
+    "RACE",
+    "ReCoRD",
+    "SWAG",
+    "MNLI",
+    "CoNLL-2003"
+   ],
+   "finetuning_task": [],
+   "model_family": [],
+   "model_name": [
+    "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "30M",
+    "110M",
+    "340M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Masked LM (MLM), Replaced Token Detection (RTD)"
+   ],
+   "research_problem": [
+    "Language Understanding"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "DeBERTaV 3 X": {
+   "application": [
+    "Question answering",
+    "natural language inference",
+    "named entity recognition"
+   ],
+   "finetuning_data": [
+    "SQuAD v2.0",
+    "RACE",
+    "ReCoRD",
+    "SWAG",
+    "MNLI",
+    "CoNLL-2003"
+   ],
+   "finetuning_task": [
+    "Sentence classification",
+    "sequence tagging (token classification)"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeBERTaV 3 X"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "22M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_task": [
+    "Masked Language Modeling (MLM), Replaced Token Detection (RTD)"
+   ],
+   "research_problem": [
+    "Natural Language Understanding (NLU)"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "mDeBERTaV 3": {
+   "application": [
+    "Question answering",
+    "natural language inference",
+    "named entity recognition"
+   ],
+   "finetuning_data": [
+    "SQuAD v2.0",
+    "RACE",
+    "ReCoRD",
+    "SWAG",
+    "MNLI",
+    "CoNLL-2003"
+   ],
+   "finetuning_task": [
+    "Sentence classification",
+    "sequence tagging (token classification)"
+   ],
+   "license": [
+    "MIT"
+   ],
+   "model_family": [],
+   "model_name": [
+    "mDeBERTaV 3"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "186M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "2.5T CC100 multi-lingual dataset"
+   ],
+   "pretraining_task": [
+    "Masked Language Modeling (MLM), Replaced Token Detection (RTD)"
+   ],
+   "research_problem": [
+    "Multilingual natural language understanding"
+   ],
+   "supported_language": [
+    "English",
+    "French",
+    "Spanish",
+    "German",
+    "Greek",
+    "Bulgarian",
+    "Russian",
+    "Turkish",
+    "Arabic",
+    "Vietnamese",
+    "Thai",
+    "Chinese",
+    "Hindi",
+    "Swahili",
+    "Urdu"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DeBERTaV 3": {
+    "application": {
+     "candidates": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition",
+      "GLUE/SuperGLUE benchmarks"
+     ],
+     "accepted": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition"
+     ],
+     "dropped": [
+      {
+       "value": "GLUE/SuperGLUE benchmarks",
+       "reason": "GLUE/SuperGLUE are evaluation benchmark suites, not practical applications or domains. (cached)"
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "GLUE benchmark",
+      "MNLI-matched",
+      "SQuAD v2.0",
+      "XNLI",
+      "MNLI",
+      "RACE",
+      "ReCoRD",
+      "SWAG",
+      "CoNLL-2003"
+     ],
+     "accepted": [
+      "MNLI-matched",
+      "SQuAD v2.0",
+      "XNLI",
+      "MNLI",
+      "RACE",
+      "ReCoRD",
+      "SWAG",
+      "CoNLL-2003"
+     ],
+     "dropped": [
+      {
+       "value": "GLUE benchmark",
+       "reason": "GLUE is an evaluation benchmark suite, not a curated fine-tuning dataset. (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on downstream NLP tasks",
+      "Supervised fine-tuning on NLU tasks",
+      "Sentence classification",
+      "sequence tagging (token classification)"
+     ],
+     "accepted": [
+      "Sentence classification",
+      "sequence tagging (token classification)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on downstream NLP tasks",
+       "reason": "Describes a training methodology rather than naming a specific task. (cached)"
+      },
+      {
+       "value": "Supervised fine-tuning on NLU tasks",
+       "reason": "Describes the fine-tuning process rather than naming a specific task. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Improving pre-training efficiency and model quality of encoder-based language models."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Improving pre-training efficiency and model quality of encoder-based language models.",
+       "reason": "Phrased as a goal or action rather than a noun phrase naming the problem."
+      }
+     ]
+    }
+   },
+   "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "160GB of text data (same as DeBERTaV2 and RoBERTa)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "160GB of text data (same as DeBERTaV2 and RoBERTa)",
+       "reason": "Does not name an identifiable dataset or corpus; only describes size and references other models."
+      }
+     ]
+    }
+   },
+   "DeBERTaV 3 X": {
+    "application": {
+     "candidates": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition",
+      "GLUE/SuperGLUE benchmarks"
+     ],
+     "accepted": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition"
+     ],
+     "dropped": [
+      {
+       "value": "GLUE/SuperGLUE benchmarks",
+       "reason": "GLUE/SuperGLUE are evaluation benchmark suites, not practical applications or domains. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    }
+   },
+   "mDeBERTaV 3": {
+    "application": {
+     "candidates": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition",
+      "GLUE/SuperGLUE benchmarks"
+     ],
+     "accepted": [
+      "Question answering",
+      "natural language inference",
+      "named entity recognition"
+     ],
+     "dropped": [
+      {
+       "value": "GLUE/SuperGLUE benchmarks",
+       "reason": "GLUE/SuperGLUE are evaluation benchmark suites, not practical applications or domains. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeBERTa"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeBERTa",
+       "reason": "It is a specific model name, not a broader category or lineage. (cached)"
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "Multilingual",
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Greek",
+      "Bulgarian",
+      "Russian",
+      "Turkish",
+      "Arabic",
+      "Vietnamese",
+      "Thai",
+      "Chinese",
+      "Hindi",
+      "Swahili",
+      "Urdu"
+     ],
+     "accepted": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Greek",
+      "Bulgarian",
+      "Russian",
+      "Turkish",
+      "Arabic",
+      "Vietnamese",
+      "Thai",
+      "Chinese",
+      "Hindi",
+      "Swahili",
+      "Urdu"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 116,
+   "dropped": 14,
+   "llm_calls": 1,
+   "values_sent_to_llm": 6
+  }
+ },
+ "contributions": [
+  {
+   "label": "DeBERTaV 3",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeBERTaV 3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-18",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Gradient-Disentangled Embedding Sharing (GDES): a novel embedding sharing paradigm for ELECTRA-style pre-training that allows the discriminator to leverage semantic information from the generator's embedding layer without interfering with the generator's gradients, solving the 'tug-of-war' dynamics and improving pre-training efficiency",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Combines DeBERTa's relative position encoding with ELECTRA's replaced token detection (RTD) to establish a new state-of-the-art pre-training paradigm for language understanding.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Replaced Token Detection (RTD)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BooksCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC-News",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "S2ORC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PubMed Abstracts",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sentence classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sequence tagging (token classification)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "14M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "41M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "43M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "44M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "86M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "186M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "275M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "355M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "860M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "DGX-2 node",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/DeBERTa",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "160B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI-matched",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReCoRD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SWAG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoNLL-2003",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Disentangled Attention (DA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "8192",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage joint optimization: generator trained with MLM, discriminator trained with RTD (lambda=50); multilingual variant mDeBERTaV3 trained on CC100",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "DeBERTa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE 91.37% (Large)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-matched 90.6% (Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 F1 88.4% (Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI zero-shot cross-lingual 79.8% (mDeBERTaV3 Base)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m: 89.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-mm: 89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 F1: 87.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 EM: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m/mm 91.8/91.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 91.5/89.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RACE 89.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReCoRD 92.3/91.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SWAG 93.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoNLL2003 NER 93.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m/mm 90.6/90.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 88.4/85.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m/mm 88.2/87.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 82.9/80.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE 90.0 (Large)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuAD v2.0 88.9 EM / 91.4 F1 (Large)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI 90.2 (Large)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SST-2 95.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QQP 91.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "QNLI 92.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RTE 84.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA 68.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MRPC 89.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "STS-B 90.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeBERTaV 3-large, DeBERTaV 3-base, DeBERTaV 3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-18",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Gradient-Disentangled Embedding Sharing (GDES): uses a stop-gradient operator to prevent Replaced Token Detection (RTD) loss from flowing into the generator embeddings, updating only the generator with MLM loss to ensure consistency and avoid conflicting objectives",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Combines RTD with Disentangled Attention (DA) for improved semantic encoding and faster convergence without sacrificing embedding quality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked LM (MLM), Replaced Token Detection (RTD)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "340M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 340,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language Understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "160GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReCoRD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SWAG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoNLL-2003",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GLUE avg 91.37",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RTE +4.4%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CoLA +4.8%",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "DeBERTaV 3 X",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeBERTaV 3 X",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-18",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "ELECTRA-style pre-training (Replaced Token Detection) combined with gradient-disentangled embedding sharing to decouple content and position representations, improving reasoning and commonsense knowledge.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Modeling (MLM), Replaced Token Detection (RTD)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sentence classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sequence tagging (token classification)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "22M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 275,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Natural Language Understanding (NLU)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReCoRD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SWAG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoNLL-2003",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MNLI-m/mm 88.1/88.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2.0 84.8/82.0",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "mDeBERTaV 3",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MDeBERTaV 3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-18",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual extension of DeBERTaV3 using the same GDES pre-training paradigm and a 250k-token SentencePiece vocabulary (matching mT5), trained on a massive 2.5T-token multilingual corpus to achieve strong cross-lingual transfer without parallel data training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Modeling (MLM), Replaced Token Detection (RTD)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "2.5T CC100 multi-lingual dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sentence classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sequence tagging (token classification)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (250k vocab)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "186M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 186,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language inference",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Named entity recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/microsoft/DeBERTa",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "2.5T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD v2.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RACE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReCoRD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SWAG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoNLL-2003",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Greek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (500k steps) -> supervised fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI cross-lingual transfer avg 79.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XNLI translate-train-all avg 82.2",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1769509",
+  "contribution_ids": [
+   "R1769511",
+   "R1921505",
+   "R1921511",
+   "R1921515",
+   "R1921520"
+  ],
+  "new_contribution_ids": [
+   "R1921505",
+   "R1921511",
+   "R1921515",
+   "R1921520"
+  ],
+  "comparison_updated": null
+ }
+}

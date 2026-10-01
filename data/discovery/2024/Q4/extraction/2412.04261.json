@@ -1,0 +1,654 @@
+{
+  "arxiv_id": "2412.04261",
+  "status": "completed",
+  "timestamp": "2026-08-29T15:49:35.498557",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2412.04261",
+    "title": "Aya Expanse: Combining Research Breakthroughs for a New Multilingual Frontier",
+    "authors": [
+      "John Dang",
+      "Shivalika Singh",
+      "Daniel D'souza",
+      "Arash Ahmadian",
+      "Alejandro Salamanca",
+      "Madeline Smith",
+      "Aidan Peppin",
+      "Sungjin Hong",
+      "Manoj Govindassamy",
+      "Terrence Zhao",
+      "Sandra Kublik",
+      "Meor Amer",
+      "Viraat Aryabumi",
+      "Jon Ander Campos",
+      "Yi-Chern Tan",
+      "Tom Kocmi",
+      "Florian Strub",
+      "Nathan Grinsztajn",
+      "Yannis Flet-Berliac",
+      "Acyr Locatelli",
+      "Hangyu Lin",
+      "Dwarak Talupuru",
+      "Bharat Venkitesh",
+      "David Cairuz",
+      "Bowen Yang",
+      "Tim Chung",
+      "Wei-Yin Ko",
+      "Sylvie Shang Shi",
+      "Amir Shukayev",
+      "Sammie Bae",
+      "Aleksandra Piktus",
+      "Roman Castagné",
+      "Felipe Cruz-Salinas",
+      "Eddie Kim",
+      "Lucas Crawhall-Stein",
+      "Adrien Morisot",
+      "Sudip Roy",
+      "Phil Blunsom",
+      "Ivan Zhang",
+      "Aidan Gomez",
+      "Nick Frosst",
+      "Marzieh Fadaee",
+      "Beyza Ermis",
+      "Ahmet Üstün",
+      "Sara Hooker"
+    ],
+    "abstract": "We introduce the Aya Expanse model family, a new generation of 8B and 32B parameter multilingual language models, aiming to address the critical challenge of developing highly performant multilingual models that match or surpass the capabilities of monolingual models. By leveraging several years of research at Cohere For AI and Cohere, including advancements in data arbitrage, multilingual preference training, and model merging, Aya Expanse sets a new state-of-the-art in multilingual performance. Our evaluations on the Arena-Hard-Auto dataset, translated into 23 languages, demonstrate that Aya Expanse 8B and 32B outperform leading open-weight models in their respective parameter classes, including Gemma 2, Qwen 2.5, and Llama 3.1, achieving up to a 76.6% win-rate. Notably, Aya Expanse 32B outperforms Llama 3.1 70B, a model with twice as many parameters, achieving a 54.0% win-rate. In this short technical report, we present extended evaluation results for the Aya Expanse model family and release their open-weights, together with a new multilingual evaluation dataset m-ArenaHard.",
+    "published": "2024-12-05T15:41:06+00:00",
+    "updated": "2024-12-05T15:41:06+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2412.04261v1",
+    "entry_id": "http://arxiv.org/abs/2412.04261v1",
+    "pdf_path": "data/papers/2412.04261.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 53301,
+  "word_count": 7138,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "Aya Expanse",
+      "parameters": "8B, 32B",
+      "parameters_millions": 32000,
+      "model_family": "Aya",
+      "date_created": "2024-12-05",
+      "organization": "Cohere",
+      "innovation": "Multilingual data arbitrage: leveraging high-resource language data to improve low-resource language performance, differing from standard multilingual training by explicitly balancing data distribution across languages; multilingual preference optimization and safety tuning: aligning the model across 23 languages using preference data and safety datasets, improving cross-lingual alignment and safety without degrading monolingual performance; model merging: combining multiple models to enhance multilingual capabilities, differing from single-model training by aggregating diverse linguistic knowledge.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": null,
+      "finetuning_task": "Multilingual instruction tuning, preference optimization, safety tuning, Supervised fine-tuning (SFT), Direct Preference Optimization (DPO)",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": "open-weights",
+      "research_problem": "Multilingual instruction following",
+      "application": "Multilingual instruction following, text generation, safety alignment",
+      "paper_title": "Aya Expanse: Combining Research Breakthroughs for a New Multilingual Frontier",
+      "training_corpus_size": null,
+      "finetuning_data": "m-ArenaHard (translated Arena-Hard-Auto dataset), synthetic multilingual datasets, preference data pairs",
+      "tokenizer": null,
+      "supported_language": "Arabic, Chinese, Czech, Dutch, English, French, German, Greek, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Persian, Polish, Portuguese, Romanian, Russian, Spanish, Turkish, Ukrainian, Vietnamese, Thai",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "8B (dense)",
+      "attention_mechanism": "Grouped-Query Attention (GQA)",
+      "context_length_max": "8K",
+      "context_extension_method": "RoPE",
+      "training_pipeline": "Pre-training on Command series -> multilingual instruction tuning -> multilingual preference optimization -> safety tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Data arbitrage: strategically sampling from a pool of teacher models and using an internal Reward Model (Arbiter) to score and select the optimal generation for each prompt",
+      "rl_algorithm": "Direct Preference Optimization (DPO)",
+      "reward_mechanism": "Internal Reward Model (Arbiter) to score model generations",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Cohere Command series",
+      "optimizer_innovation": null,
+      "benchmark_result": "Arena-Hard-Auto translated into 23 languages: up to 76.6% win-rate; Aya Expanse 32B outperforms Llama 3.1 70B with 54.0% win-rate; m-ArenaHard win rate: 70.6% (8B), 76.6% (32B); Dolly win rate: 83.9% (8B), 89.9% (32B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Aya Expanse": {
+      "application": [
+        "Multilingual instruction following",
+        "text generation"
+      ],
+      "attention_mechanism": [
+        "Grouped-Query Attention (GQA)"
+      ],
+      "base_model": [
+        "Cohere Command series"
+      ],
+      "context_extension_method": [
+        "RoPE"
+      ],
+      "finetuning_data": [
+        "m-ArenaHard (translated Arena-Hard-Auto dataset)",
+        "synthetic multilingual datasets",
+        "preference data pairs"
+      ],
+      "finetuning_task": [
+        "Multilingual instruction tuning",
+        "preference optimization",
+        "safety tuning",
+        "Supervised fine-tuning (SFT)"
+      ],
+      "license": [
+        "open-weights"
+      ],
+      "model_family": [
+        "Aya"
+      ],
+      "model_name": [
+        "Aya Expanse"
+      ],
+      "organization": [
+        "Cohere"
+      ],
+      "parameters": [
+        "8B",
+        "32B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [
+        "Multilingual instruction following"
+      ],
+      "reward_mechanism": [
+        "Internal Reward Model (Arbiter) to score model generations"
+      ],
+      "rl_algorithm": [
+        "Direct Preference Optimization (DPO)"
+      ],
+      "supported_language": [
+        "Arabic",
+        "Chinese",
+        "Czech",
+        "Dutch",
+        "English",
+        "French",
+        "German",
+        "Greek",
+        "Hebrew",
+        "Hindi",
+        "Indonesian",
+        "Italian",
+        "Japanese",
+        "Korean",
+        "Persian",
+        "Polish",
+        "Portuguese",
+        "Romanian",
+        "Russian",
+        "Spanish",
+        "Turkish",
+        "Ukrainian",
+        "Vietnamese",
+        "Thai"
+      ],
+      "synthetic_data_generation_method": [
+        "Data arbitrage: strategically sampling from a pool of teacher models and using an internal Reward Model (Arbiter) to score and select the optimal generation for each prompt"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Aya Expanse": {
+        "application": {
+          "candidates": [
+            "Multilingual instruction following",
+            "text generation",
+            "safety alignment"
+          ],
+          "accepted": [
+            "Multilingual instruction following",
+            "text generation"
+          ],
+          "dropped": [
+            {
+              "value": "safety alignment",
+              "reason": "Describes a training objective or technique rather than a concrete application domain or practical use case."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Multilingual instruction tuning",
+            "preference optimization",
+            "safety tuning",
+            "Supervised fine-tuning (SFT)",
+            "Direct Preference Optimization (DPO)"
+          ],
+          "accepted": [
+            "Multilingual instruction tuning",
+            "preference optimization",
+            "safety tuning",
+            "Supervised fine-tuning (SFT)"
+          ],
+          "dropped": [
+            {
+              "value": "Direct Preference Optimization (DPO)",
+              "reason": "DPO is a fine-tuning method/algorithm, not a specific task or objective. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 48,
+      "dropped": 2,
+      "llm_calls": 1,
+      "values_sent_to_llm": 12
+    }
+  },
+  "contributions": [
+    {
+      "label": "Aya Expanse",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Aya Expanse",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Aya",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-12-05",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Cohere",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multilingual data arbitrage: leveraging high-resource language data to improve low-resource language performance, differing from standard multilingual training by explicitly balancing data distribution across languages",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Multilingual preference optimization and safety tuning: aligning the model across 23 languages using preference data and safety datasets, improving cross-lingual alignment and safety without degrading monolingual performance",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Model merging: combining multiple models to enhance multilingual capabilities, differing from single-model training by aggregating diverse linguistic knowledge.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multilingual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Preference optimization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Safety tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "32B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 32000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multilingual instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multilingual instruction following",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "M-ArenaHard (translated Arena-Hard-Auto dataset)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthetic multilingual datasets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Preference data pairs",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Czech",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Dutch",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Greek",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hebrew",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Indonesian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Persian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Polish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Romanian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Ukrainian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Vietnamese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Thai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "8B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped-Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on Command series -> multilingual instruction tuning -> multilingual preference optimization -> safety tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Data arbitrage: strategically sampling from a pool of teacher models and using an internal Reward Model (Arbiter) to score and select the optimal generation for each prompt",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "Direct Preference Optimization (DPO)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Internal Reward Model (Arbiter) to score model generations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Cohere Command series",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Arena-Hard-Auto translated into 23 languages: up to 76.6% win-rate",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Aya Expanse 32B outperforms Llama 3.1 70B with 54.0% win-rate",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "M-ArenaHard win rate: 70.6% (8B), 76.6% (32B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Dolly win rate: 83.9% (8B), 89.9% (32B)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926459",
+    "contribution_ids": [
+      "R1926461"
+    ],
+    "new_contribution_ids": [
+      "R1926461"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,488 @@
+{
+ "arxiv_id": "2310.16944",
+ "status": "completed",
+ "timestamp": "2026-08-28T13:50:57.176195",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2310.16944",
+  "title": "Zephyr: Direct Distillation of LM Alignment",
+  "authors": [
+   "Lewis Tunstall",
+   "Edward Beeching",
+   "Nathan Lambert",
+   "Nazneen Rajani",
+   "Kashif Rasul",
+   "Younes Belkada",
+   "Shengyi Huang",
+   "Leandro von Werra",
+   "Cl\u00e9mentine Fourrier",
+   "Nathan Habib",
+   "Nathan Sarrazin",
+   "Omar Sanseviero",
+   "Alexander M. Rush",
+   "Thomas Wolf"
+  ],
+  "abstract": "We aim to produce a smaller language model that is aligned to user intent. Previous research has shown that applying distilled supervised fine-tuning (dSFT) on larger models significantly improves task accuracy; however, these models are unaligned, i.e. they do not respond well to natural prompts. To distill this property, we experiment with the use of preference data from AI Feedback (AIF). Starting from a dataset of outputs ranked by a teacher model, we apply distilled direct preference optimization (dDPO) to learn a chat model with significantly improved intent alignment. The approach requires only a few hours of training without any additional sampling during fine-tuning. The final result, Zephyr-7B, sets the state-of-the-art on chat benchmarks for 7B parameter models, and requires no human annotation. In particular, results on MT-Bench show that Zephyr-7B surpasses Llama2-Chat-70B, the best open-access RLHF-based model. Code, models, data, and tutorials for the system are available at https://github.com/huggingface/alignment-handbook.",
+  "published": "2023-10-25T19:25:16+00:00",
+  "updated": "2023-10-25T19:25:16+00:00",
+  "doi": null,
+  "primary_category": "cs.LG",
+  "categories": [
+   "cs.LG",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2310.16944v1",
+  "entry_id": "http://arxiv.org/abs/2310.16944v1",
+  "pdf_path": "data/papers/2310.16944.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+ },
+ "text_length": 42758,
+ "word_count": 4255,
+ "models_extracted": 2,
+ "extraction_data": [
+  {
+   "model_name": "Zephyr",
+   "parameters": "7B, 33B",
+   "parameters_millions": 33000,
+   "model_family": "Zephyr",
+   "date_created": "2023-10-25",
+   "organization": "Hugging Face",
+   "innovation": "Direct preference optimization (dDPO) and direct supervised fine-tuning (dSFT) to align language models without a separate reward model; distills alignment preferences from Llama 2 to produce instruction-following chat models.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "Inherited from Mistral-7B (The Pile, C4, The Stack, GitHub, ArXiv, PubMed)",
+   "finetuning_task": "Distilled supervised fine-tuning (dSFT) followed by distilled direct preference optimization (dDPO), Direct supervised fine-tuning (dSFT), Direct preference optimization (dDPO)",
+   "optimizer": "AdamW",
+   "hardware_used": "16 A100s (80GB)",
+   "extension": "dDPO (distilled direct preference optimization) using AI Feedback from teacher models",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Intent alignment of small open LLMs using AI Feedback and distillation",
+   "application": "Instruction following, chat, conversational AI",
+   "paper_title": "Zephyr: Direct Distillation of LM Alignment",
+   "training_corpus_size": "~200k examples (UltraChat), 64k prompts (UltraFeedback)",
+   "finetuning_data": "UltraChat, UltraFeedback, Preference dataset distilled from Llama 2",
+   "tokenizer": "Llama 2 tokenizer",
+   "supported_language": "English",
+   "hardware_description": "16 A100s (80GB)",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/huggingface/trl",
+   "context_length": null,
+   "activated_parameters": "7B",
+   "attention_mechanism": null,
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "dSFT on UltraChat -> dDPO on UltraFeedback",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "bfloat16",
+   "synthetic_data_generation_method": "AI Feedback (AIF) from an ensemble of teacher models",
+   "rl_algorithm": "dDPO",
+   "reward_mechanism": "Preference data from AI Feedback (AIF) from teacher models",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "Mistral-7B",
+   "optimizer_innovation": null,
+   "benchmark_result": "MT-Bench: 7.34; AlpacaEval: 90.60; ARC: 62.03; MMLU: 84.52; HellaSwag: 61.44; TruthfulQA: 57.44; MT-Bench",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 2,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Zephyr": {
+   "application": [
+    "Instruction following",
+    "chat",
+    "conversational AI"
+   ],
+   "base_model": [
+    "Mistral-7B"
+   ],
+   "finetuning_data": [
+    "UltraChat",
+    "UltraFeedback",
+    "Preference dataset distilled from Llama 2"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "16 A100s (80GB)"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Zephyr"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Hugging Face"
+   ],
+   "parameters": [
+    "7B",
+    "33B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Inherited from Mistral-7B (The Pile, C4, The Stack, GitHub, ArXiv, PubMed)"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "bfloat16"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "Preference data from AI Feedback (AIF) from teacher models"
+   ],
+   "rl_algorithm": [
+    "dDPO"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "synthetic_data_generation_method": [
+    "AI Feedback (AIF) from an ensemble of teacher models"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Zephyr": {
+    "finetuning_task": {
+     "candidates": [
+      "Distilled supervised fine-tuning (dSFT) followed by distilled direct preference optimization (dDPO)",
+      "Direct supervised fine-tuning (dSFT)",
+      "Direct preference optimization (dDPO)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Distilled supervised fine-tuning (dSFT) followed by distilled direct preference optimization (dDPO)",
+       "reason": "Describes the training pipeline/methodology rather than the specific task or objective."
+      },
+      {
+       "value": "Direct supervised fine-tuning (dSFT)",
+       "reason": "Describes a training method/stage rather than the specific task or objective."
+      },
+      {
+       "value": "Direct preference optimization (dDPO)",
+       "reason": "Describes a training algorithm/method rather than the specific task or objective."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Zephyr"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Zephyr",
+       "reason": "Zephyr is a specific model name, not a broader model family or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Intent alignment of small open LLMs using AI Feedback and distillation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Intent alignment of small open LLMs using AI Feedback and distillation",
+       "reason": "Describes the solution and methodology rather than naming the specific research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 22,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 16
+  }
+ },
+ "contributions": [
+  {
+   "label": "Zephyr",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Zephyr",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-10-25",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Hugging Face",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Direct preference optimization (dDPO) and direct supervised fine-tuning (dSFT) to align language models without a separate reward model",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Distills alignment preferences from Llama 2 to produce instruction-following chat models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Inherited from Mistral-7B (The Pile, C4, The Stack, GitHub, ArXiv, PubMed)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Llama 2 tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 33000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "16 A100s (80GB)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "16 A100s (80GB)",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Chat",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Conversational AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/huggingface/trl",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~200k examples (UltraChat), 64k prompts (UltraFeedback)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UltraChat",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UltraFeedback",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Preference dataset distilled from Llama 2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "DSFT on UltraChat -> dDPO on UltraFeedback",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "AI Feedback (AIF) from an ensemble of teacher models",
+     "datatype": "string"
+    },
+    {
+     "property": "P203093",
+     "label": "rl_algorithm",
+     "value": "DDPO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Preference data from AI Feedback (AIF) from teacher models",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Mistral-7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MT-Bench: 7.34",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AlpacaEval: 90.60",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC: 62.03",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 84.52",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 61.44",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TruthfulQA: 57.44",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MT-Bench",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1765875",
+  "contribution_ids": [
+   "R1765877",
+   "R1924033"
+  ],
+  "new_contribution_ids": [
+   "R1924033"
+  ],
+  "comparison_updated": null
+ }
+}

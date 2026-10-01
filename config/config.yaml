@@ -2,7 +2,23 @@
 orkg:
   host: sandbox  # Options: sandbox, incubating, production
   template_id: R609825  # LLM template ID
-  comparison_id: R2147679  # Generative AI Model Landscape comparison ID
+  comparison_id: R2147679  # sandbox: R2147679 / live: R1364660
+  # Title MUST match the target comparison — updating writes a new version with
+  # this title. live (R1364660): "A Catalog of Transformer Models".
+  # sandbox (R2147679): "Generative AI Model Landscape".
+  comparison_title: Generative AI Model Landscape
+  comparison_description: A landscape of Generative AI Models extracted from research papers.
+  # Whether an upload should also add its contributions to the comparison above.
+  # false = create/extend the paper only and leave the comparison untouched.
+  #
+  # Only LIVE comparisons can be updated. Published ones are frozen snapshots
+  # and the API rejects them — check with:
+  #   curl -s https://<host>/api/comparisons/<id> \
+  #        -H "Accept: application/vnd.orkg.comparison.v3+json"
+  # If "published" is true, use the id under versions.head instead.
+  #   sandbox R2147679 -> live   (published: false)
+  #   live    R1364660 -> PUBLISHED snapshot; its head is R763730
+  update_comparison: false
   timeout: 30  # API timeout in seconds
 
 # KISSKI Chat AI API Configuration (SAIA Platform)
@@ -21,9 +37,18 @@ kisski:
 arxiv:
   max_results: 10  # Maximum papers to fetch per query
   categories:
-    - cs.CL  # Computation and Language
-    - cs.AI  # Artificial Intelligence
-    - cs.LG  # Machine Learning
+    # All of computer science. The arXiv API supports the cs.* wildcard, and
+    # search_papers() joins this list into "cat:X OR cat:Y", so a single
+    # wildcard entry yields "(cat:cs.*)".
+    # Rationale: the classifier gates on title+abstract before any PDF download,
+    # so a wider net costs only classification time, not extraction time.
+    # Notably this picks up cs.CV (vision-language models), which the previous
+    # cs.CL/cs.AI/cs.LG list missed despite VLMs being in scope.
+    - cs.*
+    # Previous narrower set, kept for reference / quick rollback:
+    # - cs.CL  # Computation and Language
+    # - cs.AI  # Artificial Intelligence
+    # - cs.LG  # Machine Learning
   download_dir: data/papers
 
 # Extraction Configuration
@@ -48,6 +73,21 @@ extraction:
   # Enable extraction of multiple models from single paper
   multi_model_extraction: true
 
+# Semantic Validation Configuration
+# Checks each extracted value against its ORKG property description before the
+# value becomes an ORKG statement. Runs after variant merging, before mapping.
+semantic_validation:
+  enabled: true
+  layers:
+    - rules
+    - cache
+    - llm
+  # default = entity-like fields only (excludes innovation, benchmark_result,
+  #           hardware_description, moe_configuration, source_code)
+  # all     = every resource/multi-valued field
+  # or provide an explicit list of field names
+  scope: default
+
 # Logging Configuration
 logging:
   level: INFO  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -60,7 +100,7 @@ classifier:
   # Dedicated model for the classify step.
   model: meta-llama-3.1-8b-instruct 
   temperature: 0.0
-  max_tokens: 512
+  max_tokens: 1024
 
 # Pipeline Configuration
 pipeline:

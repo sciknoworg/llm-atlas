@@ -1,0 +1,756 @@
+{
+  "arxiv_id": "2310.09478",
+  "status": "completed",
+  "timestamp": "2026-08-28T13:32:40.866843",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2310.09478",
+    "title": "MiniGPT-v2: large language model as a unified interface for vision-language multi-task learning",
+    "authors": [
+      "Jun Chen",
+      "Deyao Zhu",
+      "Xiaoqian Shen",
+      "Xiang Li",
+      "Zechun Liu",
+      "Pengchuan Zhang",
+      "Raghuraman Krishnamoorthi",
+      "Vikas Chandra",
+      "Yunyang Xiong",
+      "Mohamed Elhoseiny"
+    ],
+    "abstract": "Large language models have shown their remarkable capabilities as a general interface for various language-related applications. Motivated by this, we target to build a unified interface for completing many vision-language tasks including image description, visual question answering, and visual grounding, among others. The challenge is to use a single model for performing diverse vision-language tasks effectively with simple multi-modal instructions. Towards this objective, we introduce MiniGPT-v2, a model that can be treated as a unified interface for better handling various vision-language tasks. We propose using unique identifiers for different tasks when training the model. These identifiers enable our model to better distinguish each task instruction effortlessly and also improve the model learning efficiency for each task. After the three-stage training, the experimental results show that MiniGPT-v2 achieves strong performance on many visual question-answering and visual grounding benchmarks compared to other vision-language generalist models. Our model and codes are available at https://minigpt-v2.github.io/",
+    "published": "2023-10-14T03:22:07+00:00",
+    "updated": "2023-11-07T18:25:48+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2310.09478v3",
+    "entry_id": "http://arxiv.org/abs/2310.09478v3",
+    "pdf_path": "data/papers/2310.09478.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 45553,
+  "word_count": 2503,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "MiniGPT-v 2",
+      "parameters": "7B, 13B",
+      "parameters_millions": 13000,
+      "model_family": "MiniGPT",
+      "date_created": "2023-10-14",
+      "organization": "Meta",
+      "innovation": "Task-orientated instruction training scheme with unique task identifier tokens (e.g., [vqa]) to reduce multi-modal instructional ambiguity and improve learning efficiency; visual token concatenation (every 4 neighboring tokens) to reduce visual token count by 75% for training efficiency; three-stage training strategy using a mix of weakly-labeled, fine-grained image-text, and multi-modal instruction datasets.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Vision-language alignment and instruction tuning",
+      "pretraining_corpus": "LAION, CC3M, SBU, GRIT-20M, COCO caption, Text Captions, RefCOCO, RefCOCO+, RefCOCOg, GQA, VQAv2, OCR-VQA, OK-VQA, AOK-VQA, LLaVA dataset, Flickr30k, UnnaturalInstructions",
+      "finetuning_task": "Multi-modal instruction tuning",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Vision-language multi-task learning",
+      "application": "Visual question answering, image captioning, grounded image captioning, referring expression comprehension, referring expression generation, phrase parsing and grounding, multi-modal chatbot",
+      "paper_title": "MiniGPT-v2: large language model as a unified interface for vision-language multi-task learning",
+      "training_corpus_size": null,
+      "finetuning_data": "Weakly-labeled image-text datasets, fine-grained image-text datasets, multi-modal instruction datasets, GRIT-20M, LAION, CC3M, SBU, COCO caption, Text Captions, RefCOCO, RefCOCOg, GQA, VQAv2, OCR-VQA, OK-VQA, AOK-VQA, LLaVA dataset, Flickr30k, UnnaturalInstructions, LLaVA-Instruct-150K, LLaVA-Direct-100K, LLaVA-Mix-350K",
+      "tokenizer": "LLaMA tokenizer",
+      "supported_language": "English",
+      "hardware_description": "8xA100 GPUs for stage 1 (400k steps), 4xA100 GPUs for stage 2 (50k steps) and stage 3 (35k steps)",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/Vision-CAIR/MiniGPT-2",
+      "context_length": null,
+      "activated_parameters": "7B (dense, all parameters active)",
+      "attention_mechanism": "Multi-head self-attention (LLaMA/Vicuna backbone)",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Three-stage training: visual alignment, instruction tuning, and multi-modal instruction tuning",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Token projection into LLM feature space",
+      "vision_encoder": "ViT vision encoder, EVA-CLIP",
+      "base_model": "Large Language Model (LLM)",
+      "optimizer_innovation": null,
+      "benchmark_result": "IconQA: 50, VSR: 61, VizWiz: 51, GQA: 37, HM: 33, OKVQA: 81, RefCOCO test-B: 74, RefCOCOg test: 74; OKVQA +20.3% vs MiniGPT-4; VizWiz +20.7% vs MiniGPT-v2; RefCOCO/+/g +8% vs OFA-L; Average REC accuracy 84.29% vs 83.96% (Shikra 13B); Reduced CHAIR hallucination scores",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "MiniGPT-v 2": {
+      "application": [
+        "Visual question answering",
+        "image captioning",
+        "grounded image captioning",
+        "referring expression comprehension",
+        "referring expression generation",
+        "phrase parsing and grounding",
+        "multi-modal chatbot"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention (LLaMA/Vicuna backbone)"
+      ],
+      "base_model": [],
+      "finetuning_data": [
+        "GRIT-20M",
+        "LAION",
+        "CC3M",
+        "SBU",
+        "COCO caption",
+        "Text Captions",
+        "RefCOCO",
+        "RefCOCOg",
+        "GQA",
+        "VQAv2",
+        "OCR-VQA",
+        "OK-VQA",
+        "AOK-VQA",
+        "LLaVA dataset",
+        "Flickr30k",
+        "UnnaturalInstructions",
+        "LLaVA-Instruct-150K",
+        "LLaVA-Direct-100K",
+        "LLaVA-Mix-350K"
+      ],
+      "finetuning_task": [
+        "Multi-modal instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Token projection into LLM feature space"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 GPU"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "MiniGPT"
+      ],
+      "model_name": [
+        "MiniGPT-v 2"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "7B",
+        "13B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [
+        "LAION",
+        "CC3M",
+        "SBU",
+        "GRIT-20M",
+        "COCO caption",
+        "Text Captions",
+        "RefCOCO",
+        "RefCOCOg",
+        "GQA",
+        "VQAv2",
+        "OCR-VQA",
+        "OK-VQA",
+        "AOK-VQA",
+        "LLaVA dataset",
+        "Flickr30k",
+        "UnnaturalInstructions"
+      ],
+      "pretraining_task": [
+        "Vision-language alignment and instruction tuning"
+      ],
+      "research_problem": [
+        "Vision-language multi-task learning"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "ViT vision encoder",
+        "EVA-CLIP"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiniGPT-v 2": {
+        "base_model": {
+          "candidates": [
+            "Large Language Model (LLM)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Large Language Model (LLM)",
+              "reason": "Generic category, not a specific pre-trained model"
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Weakly-labeled image-text datasets",
+            "fine-grained image-text datasets",
+            "multi-modal instruction datasets",
+            "GRIT-20M",
+            "LAION",
+            "CC3M",
+            "SBU",
+            "COCO caption",
+            "Text Captions",
+            "RefCOCO",
+            "RefCOCOg",
+            "GQA",
+            "VQAv2",
+            "OCR-VQA",
+            "OK-VQA",
+            "AOK-VQA",
+            "LLaVA dataset",
+            "Flickr30k",
+            "UnnaturalInstructions",
+            "LLaVA-Instruct-150K",
+            "LLaVA-Direct-100K",
+            "LLaVA-Mix-350K"
+          ],
+          "accepted": [
+            "GRIT-20M",
+            "LAION",
+            "CC3M",
+            "SBU",
+            "COCO caption",
+            "Text Captions",
+            "RefCOCO",
+            "RefCOCOg",
+            "GQA",
+            "VQAv2",
+            "OCR-VQA",
+            "OK-VQA",
+            "AOK-VQA",
+            "LLaVA dataset",
+            "Flickr30k",
+            "UnnaturalInstructions",
+            "LLaVA-Instruct-150K",
+            "LLaVA-Direct-100K",
+            "LLaVA-Mix-350K"
+          ],
+          "dropped": [
+            {
+              "value": "Weakly-labeled image-text datasets",
+              "reason": "Generic description of dataset type, not a specific dataset"
+            },
+            {
+              "value": "fine-grained image-text datasets",
+              "reason": "Generic description of dataset type, not a specific dataset"
+            },
+            {
+              "value": "multi-modal instruction datasets",
+              "reason": "Generic description of dataset type, not a specific dataset"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 59,
+      "dropped": 4,
+      "llm_calls": 1,
+      "values_sent_to_llm": 29
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiniGPT-v 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniGPT-v 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniGPT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-10-14",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Task-orientated instruction training scheme with unique task identifier tokens (e.g., [vqa]) to reduce multi-modal instructional ambiguity and improve learning efficiency",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Visual token concatenation (every 4 neighboring tokens) to reduce visual token count by 75% for training efficiency",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Three-stage training strategy using a mix of weakly-labeled, fine-grained image-text, and multi-modal instruction datasets.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Vision-language alignment and instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LAION",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "CC3M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "SBU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "GRIT-20M",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO caption",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Text Captions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "RefCOCOg",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "GQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQAv2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OCR-VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "OK-VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "AOK-VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA dataset",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "UnnaturalInstructions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Multi-modal instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "LLaMA tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 13000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "8xA100 GPUs for stage 1 (400k steps), 4xA100 GPUs for stage 2 (50k steps) and stage 3 (35k steps)",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Grounded image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring expression comprehension",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Referring expression generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Phrase parsing and grounding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multi-modal chatbot",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/Vision-CAIR/MiniGPT-2",
+          "datatype": "URI"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Vision-language multi-task learning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GRIT-20M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LAION",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "CC3M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "SBU",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO caption",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Text Captions",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCOg",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "GQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQAv2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OCR-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AOK-VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Flickr30k",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "UnnaturalInstructions",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Instruct-150K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Direct-100K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Mix-350K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention (LLaMA/Vicuna backbone)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Three-stage training: visual alignment, instruction tuning, and multi-modal instruction tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Token projection into LLM feature space",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ViT vision encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "EVA-CLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IconQA: 50, VSR: 61, VizWiz: 51, GQA: 37, HM: 33, OKVQA: 81, RefCOCO test-B: 74, RefCOCOg test: 74",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OKVQA +20.3% vs MiniGPT-4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VizWiz +20.7% vs MiniGPT-v2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RefCOCO/+/g +8% vs OFA-L",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Average REC accuracy 84.29% vs 83.96% (Shikra 13B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Reduced CHAIR hallucination scores",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925874",
+    "contribution_ids": [
+      "R1925876"
+    ],
+    "new_contribution_ids": [
+      "R1925876"
+    ],
+    "comparison_updated": null
+  }
+}

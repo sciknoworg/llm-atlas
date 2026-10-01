@@ -1,0 +1,528 @@
+{
+  "arxiv_id": "2005.06114",
+  "status": "completed",
+  "timestamp": "2026-08-24T20:08:14.453036",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2005.06114",
+    "title": "Large Scale Multi-Actor Generative Dialog Modeling",
+    "authors": [
+      "Alex Boyd",
+      "Raul Puri",
+      "Mohammad Shoeybi",
+      "Mostofa Patwary",
+      "Bryan Catanzaro"
+    ],
+    "abstract": "Non-goal oriented dialog agents (i.e. chatbots) aim to produce varying and engaging conversations with a user; however, they typically exhibit either inconsistent personality across conversations or the average personality of all users. This paper addresses these issues by controlling an agent's persona upon generation via conditioning on prior conversations of a target actor. In doing so, we are able to utilize more abstract patterns within a person's speech and better emulate them in generated responses. This work introduces the Generative Conversation Control model, an augmented and fine-tuned GPT-2 language model that conditions on past reference conversations to probabilistically model multi-turn conversations in the actor's persona. We introduce an accompanying data collection procedure to obtain 10.3M conversations from 6 months worth of Reddit comments. We demonstrate that scaling model sizes from 117M to 8.3B parameters yields an improvement from 23.14 to 13.14 perplexity on 1.7M held out Reddit conversations. Increasing model scale yielded similar improvements in human evaluations that measure preference of model samples to the held out target distribution in terms of realism (31% increased to 37% preference), style matching (37% to 42%), grammar and content quality (29% to 42%), and conversation coherency (32% to 40%). We find that conditionally modeling past conversations improves perplexity by 0.47 in automatic evaluations. Through human trials we identify positive trends between conditional modeling and style matching and outline steps to further improve persona control.",
+    "published": "2020-05-13T01:56:00+00:00",
+    "updated": "2020-05-13T01:56:00+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2005.06114v1",
+    "entry_id": "http://arxiv.org/abs/2005.06114v1",
+    "pdf_path": "data/papers/2005.06114.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 53333,
+  "word_count": 4465,
+  "models_extracted": 8,
+  "extraction_data": [
+    {
+      "model_name": "GCC-NRC",
+      "model_family": "GCC",
+      "date_created": "2020-05-13",
+      "organization": "NVIDIA",
+      "innovation": "Neural Response Classifier (NRC) for speaker-conditioned response selection in multi-actor dialog, trained on large-scale conversational data to improve coherence and style adherence.",
+      "pretraining_corpus": "Google Conversations Corpus (GCC)",
+      "parameters": "355M",
+      "parameters_millions": 355,
+      "application": "Conversational AI, dialog response generation",
+      "license": null,
+      "research_problem": "Generative Dialog Modeling",
+      "model_version": null,
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Next sentence prediction / response classification",
+      "training_corpus_size": null,
+      "knowledge_cutoff_date": null,
+      "finetuning_task": null,
+      "finetuning_data": null,
+      "optimizer": "Adam",
+      "tokenizer": null,
+      "context_length": null,
+      "supported_language": "English",
+      "hardware_used": null,
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "extension": null,
+      "source_code": null,
+      "blog_post": null,
+      "training_data": null,
+      "training_compute": null,
+      "performance_metrics": null,
+      "release_date": null,
+      "model_type": null,
+      "paper_title": "Large Scale Multi-Actor Generative Dialog Modeling",
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": "1024",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on large corpora using Megatron-LM, followed by fine-tuning on Reddit comments",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "Validation perplexity: 19.10",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "GCC-DEC",
+      "parameters": "117M, 355M, 774M, 1.2B, 8.3B",
+      "parameters_millions": 8300,
+      "model_family": "GCC",
+      "date_created": "2020-05-13",
+      "organization": "NVIDIA",
+      "innovation": "Pre-training on large-scale multi-actor conversational data followed by fine-tuning for dialog generation; demonstrates that pre-trained models quickly eclipse models trained from scratch and achieve better perplexity with less data.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Google Conversations Corpus (GCC)",
+      "finetuning_task": "Supervised fine-tuning for dialog generation",
+      "optimizer": null,
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Generative dialog modeling",
+      "application": "Conversational AI, dialog response generation",
+      "paper_title": "Large Scale Multi-Actor Generative Dialog Modeling",
+      "training_corpus_size": null,
+      "finetuning_data": "Reddit conversations",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": null,
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on conversational data followed by fine-tuning for dialog generation",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "PPL 19.10 (200K iterations), 18.92 (70K iterations)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 5,
+  "models_after_merge": 2,
+  "validated_rows": {
+    "GCC-NRC": {
+      "application": [
+        "Conversational AI",
+        "dialog response generation"
+      ],
+      "model_family": [
+        "GCC"
+      ],
+      "model_name": [
+        "GCC-NRC"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "355M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Google Conversations Corpus (GCC)"
+      ],
+      "pretraining_task": [
+        "Next sentence prediction / response classification"
+      ],
+      "research_problem": [
+        "Generative Dialog Modeling"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    },
+    "GCC-DEC": {
+      "application": [
+        "Conversational AI",
+        "dialog response generation"
+      ],
+      "finetuning_data": [
+        "Reddit conversations"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning for dialog generation"
+      ],
+      "model_family": [
+        "GCC"
+      ],
+      "model_name": [
+        "GCC-DEC"
+      ],
+      "organization": [
+        "NVIDIA"
+      ],
+      "parameters": [
+        "117M",
+        "355M",
+        "774M",
+        "1.2B",
+        "8.3B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "Google Conversations Corpus (GCC)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "research_problem": [
+        "Generative dialog modeling"
+      ],
+      "supported_language": [
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "GCC-NRC": {},
+      "GCC-DEC": {}
+    },
+    "counts": {
+      "kept": 29,
+      "dropped": 0,
+      "llm_calls": 1,
+      "values_sent_to_llm": 3
+    }
+  },
+  "contributions": [
+    {
+      "label": "GCC-NRC",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCC-NRC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-05-13",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Neural Response Classifier (NRC) for speaker-conditioned response selection in multi-actor dialog, trained on large-scale conversational data to improve coherence and style adherence.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next sentence prediction / response classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Google Conversations Corpus (GCC)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "355M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 355,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Conversational AI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialog response generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Generative Dialog Modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1024",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on large corpora using Megatron-LM, followed by fine-tuning on Reddit comments",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Validation perplexity: 19.10",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "GCC-DEC",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "GCC-DEC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "GCC",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-05-13",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "NVIDIA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Pre-training on large-scale multi-actor conversational data followed by fine-tuning for dialog generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates that pre-trained models quickly eclipse models trained from scratch and achieve better perplexity with less data.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Google Conversations Corpus (GCC)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for dialog generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "117M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "355M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "774M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1.2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8.3B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 8300,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Conversational AI",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Dialog response generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Generative dialog modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Reddit conversations",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on conversational data followed by fine-tuning for dialog generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PPL 19.10 (200K iterations), 18.92 (70K iterations)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925233",
+    "contribution_ids": [
+      "R1925235",
+      "R1925236"
+    ],
+    "new_contribution_ids": [
+      "R1925235",
+      "R1925236"
+    ],
+    "comparison_updated": null
+  }
+}

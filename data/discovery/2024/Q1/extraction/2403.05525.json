@@ -1,0 +1,1297 @@
+{
+ "arxiv_id": "2403.05525",
+ "status": "completed",
+ "timestamp": "2026-08-28T21:48:44.553270",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2403.05525",
+  "title": "DeepSeek-VL: Towards Real-World Vision-Language Understanding",
+  "authors": [
+   "Haoyu Lu",
+   "Wen Liu",
+   "Bo Zhang",
+   "Bingxuan Wang",
+   "Kai Dong",
+   "Bo Liu",
+   "Jingxiang Sun",
+   "Tongzheng Ren",
+   "Zhuoshu Li",
+   "Hao Yang",
+   "Yaofeng Sun",
+   "Chengqi Deng",
+   "Hanwei Xu",
+   "Zhenda Xie",
+   "Chong Ruan"
+  ],
+  "abstract": "We present DeepSeek-VL, an open-source Vision-Language (VL) Model designed for real-world vision and language understanding applications. Our approach is structured around three key dimensions:\n  We strive to ensure our data is diverse, scalable, and extensively covers real-world scenarios including web screenshots, PDFs, OCR, charts, and knowledge-based content, aiming for a comprehensive representation of practical contexts. Further, we create a use case taxonomy from real user scenarios and construct an instruction tuning dataset accordingly. The fine-tuning with this dataset substantially improves the model's user experience in practical applications. Considering efficiency and the demands of most real-world scenarios, DeepSeek-VL incorporates a hybrid vision encoder that efficiently processes high-resolution images (1024 x 1024), while maintaining a relatively low computational overhead. This design choice ensures the model's ability to capture critical semantic and detailed information across various visual tasks. We posit that a proficient Vision-Language Model should, foremost, possess strong language abilities. To ensure the preservation of LLM capabilities during pretraining, we investigate an effective VL pretraining strategy by integrating LLM training from the beginning and carefully managing the competitive dynamics observed between vision and language modalities.\n  The DeepSeek-VL family (both 1.3B and 7B models) showcases superior user experiences as a vision-language chatbot in real-world applications, achieving state-of-the-art or competitive performance across a wide range of visual-language benchmarks at the same model size while maintaining robust performance on language-centric benchmarks. We have made both 1.3B and 7B models publicly accessible to foster innovations based on this foundation model.",
+  "published": "2024-03-08T18:46:00+00:00",
+  "updated": "2024-03-11T16:47:41+00:00",
+  "doi": null,
+  "primary_category": "cs.AI",
+  "categories": [
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2403.05525v2",
+  "entry_id": "http://arxiv.org/abs/2403.05525v2",
+  "pdf_path": "data/papers/2403.05525.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+ },
+ "text_length": 95059,
+ "word_count": 9281,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "DeepSeek-VL",
+   "parameters": "1B, 1.3B, 6.7B, 7B",
+   "parameters_millions": 7000,
+   "model_family": "DeepSeek-VL",
+   "date_created": "2024-03-08",
+   "organization": "DeepSeek-AI",
+   "innovation": "Hybrid vision encoder: efficiently processes high-resolution images (1024x1024) within a fixed token budget to capture critical semantic and detailed information across various visual tasks; Training strategy: integrates LLM training from the beginning and carefully manages competitive dynamics between vision and language modalities by starting with a focus on text and gradually adjusting the ratio to facilitate balanced integration, preserving LLM capabilities during pretraining; Use case taxonomy: constructs an instruction-tuning dataset based on real user scenarios to improve user experience in practical applications.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Joint Vision-Language pretraining",
+   "pretraining_corpus": "CommonCrawl, WebCode, E-books, Educational Materials, arXiv Articles, MMC4, Wiki, Wikihow, Epub textbooks, Capsfusion, TaiSu, DetailedCaption, Chart2text, Geo170K, Unichart, Ureader, M-paper, ScienceQA, ScreenQA, SciGraphQA-295K, Paper2figure100k, WidgetCaptioning, Screen2words, Refexp, Websight",
+   "finetuning_task": "Supervised Fine-tuning, Supervised fine-tuning on VL chat and image-text pairs, Vision-language supervised fine-tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "Nvidia A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Open-source",
+   "research_problem": "Real-world vision-language understanding",
+   "application": "Logical diagrams, webpages, formula recognition, scientific literature, natural images, embodied intelligence, UI understanding, table/chart understanding, code reconstruction",
+   "paper_title": "DeepSeek-VL: Towards Real-World Vision-Language Understanding",
+   "training_corpus_size": "2T tokens",
+   "finetuning_data": "Instruction-tuning dataset constructed from real user scenarios, ShareGPT4V, Document OCR rendering pairs, VL chat data, image-text pairs, LAION-GPTV, LVIS-Instruct4V, textOCR-GPT4V, LLaVA1.6-GPT4V, IconQA, Ureader, ScreenQA, Geo170K, ScienceQA, Screen-to-code, DeepSeek-LLM, in-house SFT data, Manually gathered authentic test cases for GPT-4V and Gemini from the Internet, organized into a comprehensive taxonomy",
+   "tokenizer": "DeepSeek-LLM tokenizer",
+   "supported_language": "English, Chinese",
+   "hardware_description": "64 nodes x 8 A100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "7B (dense)",
+   "attention_mechanism": "Rotary Embedding, standard attention",
+   "context_length_max": "4096",
+   "context_extension_method": null,
+   "training_pipeline": "Stage 1: Training Vision-Language Adaptor -> Stage 2: Joint Vision-Language pretraining -> Stage 3: Supervised Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": "64 nodes x 8 A100 GPUs",
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Hybrid vision encoder with fixed token budget",
+   "vision_encoder": "Hybrid vision encoder, Hybrid encoder: high-resolution SAM-B (ViTDet) and low-resolution SigLIP-L, Hybrid vision encoder (text-aligned at 384x384 + high-resolution at 1024x1024), SigLIP, SigLIP+SAM, Hybrid vision encoder combining SigLIP and SAM",
+   "base_model": "DeepSeek-LLM-7B",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMB: 64.3; MMC: 61.3; SEED: 66.7; POPE: 87.6; MMMU: 32.2; Average: 62.4; Pile-test: 47.5; MMMU: 36.6; CMMMU: 37.9; MMB: 73.2; MMC: 72.8; SEED: 70.4; OCRB: 456; POPE: 88.1; MathV: 36.1; MMVet: 41.5; HellaSwag: 68.4; MMLU: 52.4; GSM8K: 55.0; MBPP: 35.2; AGIEval: 27.8; MMBench: 62.0; MMBench_CN: 60.1; SEED: 62.5; POPE: 86.6; ScienceQA: 54.7; MMMU: 30.2; OCRBench: 318; Average: 55.2",
+   "weight_clipping_mechanism": "Gradient clipping (1.0)",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "HAI-LLM framework"
+  },
+  {
+   "model_name": "DeepSeek-VL 1B,",
+   "model_family": "DeepSeek-VL",
+   "date_created": "2024-03-08",
+   "organization": "DeepSeek",
+   "innovation": "High-resolution image processing to overcome low-resolution limits (e.g., 336x336) for real-world tasks like OCR and tiny object discernment; a balanced multimodal training strategy that preserves language capabilities during prolonged multimodal pretraining; a scaling methodology enabling efficient model growth from 1B to 7B parameters.",
+   "pretraining_corpus": null,
+   "parameters": "1B, 7B",
+   "parameters_millions": 7000,
+   "application": "Real-world vision-language understanding, OCR, tiny object discernment, general multimodal tasks",
+   "license": "open-source",
+   "research_problem": "Vision-language understanding in real-world scenarios",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": null,
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "DeepSeek-VL: Towards Real-World Vision-Language Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "DeepSeek language model series",
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "DeepSeek-VL": {
+   "application": [
+    "Logical diagrams",
+    "webpages",
+    "formula recognition",
+    "scientific literature",
+    "natural images",
+    "embodied intelligence",
+    "UI understanding",
+    "table/chart understanding",
+    "code reconstruction"
+   ],
+   "attention_mechanism": [
+    "standard attention"
+   ],
+   "base_model": [
+    "DeepSeek-LLM-7B"
+   ],
+   "finetuning_data": [
+    "Instruction-tuning dataset constructed from real user scenarios",
+    "ShareGPT4V",
+    "Document OCR rendering pairs",
+    "VL chat data",
+    "image-text pairs",
+    "LAION-GPTV",
+    "LVIS-Instruct4V",
+    "textOCR-GPT4V",
+    "LLaVA1.6-GPT4V",
+    "IconQA",
+    "Ureader",
+    "ScreenQA",
+    "Geo170K",
+    "ScienceQA",
+    "Screen-to-code",
+    "in-house SFT data",
+    "Manually gathered authentic test cases for GPT-4V and Gemini from the Internet"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning on VL chat and image-text pairs",
+    "Vision-language supervised fine-tuning"
+   ],
+   "fusion_architecture": [
+    "Hybrid vision encoder with fixed token budget"
+   ],
+   "hardware_used": [
+    "Nvidia A100 GPUs"
+   ],
+   "license": [
+    "Open-source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeepSeek-VL"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "DeepSeek-AI"
+   ],
+   "parameters": [
+    "1B",
+    "1.3B",
+    "6.7B",
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "CommonCrawl",
+    "WebCode",
+    "E-books",
+    "Educational Materials",
+    "arXiv Articles",
+    "MMC4",
+    "Wiki",
+    "Wikihow",
+    "Epub textbooks",
+    "Capsfusion",
+    "TaiSu",
+    "DetailedCaption",
+    "Chart2text",
+    "Geo170K",
+    "Unichart",
+    "Ureader",
+    "M-paper",
+    "ScienceQA",
+    "ScreenQA",
+    "SciGraphQA-295K",
+    "Paper2figure100k",
+    "WidgetCaptioning",
+    "Screen2words",
+    "Refexp",
+    "Websight"
+   ],
+   "pretraining_task": [
+    "Joint Vision-Language pretraining"
+   ],
+   "research_problem": [
+    "Real-world vision-language understanding"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "Hybrid vision encoder",
+    "Hybrid encoder: high-resolution SAM-B (ViTDet) and low-resolution SigLIP-L",
+    "Hybrid vision encoder (text-aligned at 384x384 + high-resolution at 1024x1024)",
+    "SigLIP",
+    "SigLIP+SAM",
+    "Hybrid vision encoder combining SigLIP and SAM"
+   ],
+   "weight_clipping_mechanism": []
+  },
+  "DeepSeek-VL 1B,": {
+   "application": [
+    "Real-world vision-language understanding",
+    "OCR",
+    "tiny object discernment"
+   ],
+   "base_model": [],
+   "license": [
+    "open-source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "DeepSeek-VL 1B,"
+   ],
+   "organization": [
+    "DeepSeek"
+   ],
+   "parameters": [
+    "1B",
+    "7B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "research_problem": [
+    "Vision-language understanding in real-world scenarios"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DeepSeek-VL": {
+    "attention_mechanism": {
+     "candidates": [
+      "Rotary Embedding",
+      "standard attention"
+     ],
+     "accepted": [
+      "standard attention"
+     ],
+     "dropped": [
+      {
+       "value": "Rotary Embedding",
+       "reason": "Positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Instruction-tuning dataset constructed from real user scenarios",
+      "ShareGPT4V",
+      "Document OCR rendering pairs",
+      "VL chat data",
+      "image-text pairs",
+      "LAION-GPTV",
+      "LVIS-Instruct4V",
+      "textOCR-GPT4V",
+      "LLaVA1.6-GPT4V",
+      "IconQA",
+      "Ureader",
+      "ScreenQA",
+      "Geo170K",
+      "ScienceQA",
+      "Screen-to-code",
+      "DeepSeek-LLM",
+      "in-house SFT data",
+      "Manually gathered authentic test cases for GPT-4V and Gemini from the Internet",
+      "organized into a comprehensive taxonomy"
+     ],
+     "accepted": [
+      "Instruction-tuning dataset constructed from real user scenarios",
+      "ShareGPT4V",
+      "Document OCR rendering pairs",
+      "VL chat data",
+      "image-text pairs",
+      "LAION-GPTV",
+      "LVIS-Instruct4V",
+      "textOCR-GPT4V",
+      "LLaVA1.6-GPT4V",
+      "IconQA",
+      "Ureader",
+      "ScreenQA",
+      "Geo170K",
+      "ScienceQA",
+      "Screen-to-code",
+      "in-house SFT data",
+      "Manually gathered authentic test cases for GPT-4V and Gemini from the Internet"
+     ],
+     "dropped": [
+      {
+       "value": "DeepSeek-LLM",
+       "reason": "Names a model, not a fine-tuning dataset."
+      },
+      {
+       "value": "organized into a comprehensive taxonomy",
+       "reason": "Describes a data organization process, not a dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised Fine-tuning",
+      "Supervised fine-tuning on VL chat and image-text pairs",
+      "Vision-language supervised fine-tuning"
+     ],
+     "accepted": [
+      "Supervised fine-tuning on VL chat and image-text pairs",
+      "Vision-language supervised fine-tuning"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised Fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeepSeek-VL"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeepSeek-VL",
+       "reason": "Names a specific model, not a broader family or lineage."
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clipping (1.0)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clipping (1.0)",
+       "reason": "Describes gradient clipping, which constrains gradients rather than weight values as specified. (cached)"
+      }
+     ]
+    }
+   },
+   "DeepSeek-VL 1B,": {
+    "application": {
+     "candidates": [
+      "Real-world vision-language understanding",
+      "OCR",
+      "tiny object discernment",
+      "general multimodal tasks"
+     ],
+     "accepted": [
+      "Real-world vision-language understanding",
+      "OCR",
+      "tiny object discernment"
+     ],
+     "dropped": [
+      {
+       "value": "general multimodal tasks",
+       "reason": "Vague placeholder, not a concrete task or domain. (cached)"
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "DeepSeek language model series"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeepSeek language model series",
+       "reason": "Refers to a model series/category, not a specific base model."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "DeepSeek-VL"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "DeepSeek-VL",
+       "reason": "Names a specific model, not a broader family or lineage."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 86,
+   "dropped": 9,
+   "llm_calls": 1,
+   "values_sent_to_llm": 68
+  }
+ },
+ "contributions": [
+  {
+   "label": "DeepSeek-VL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeepSeek-VL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-08",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek-AI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Hybrid vision encoder: efficiently processes high-resolution images (1024x1024) within a fixed token budget to capture critical semantic and detailed information across various visual tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Training strategy: integrates LLM training from the beginning and carefully manages competitive dynamics between vision and language modalities by starting with a focus on text and gradually adjusting the ratio to facilitate balanced integration, preserving LLM capabilities during pretraining",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Use case taxonomy: constructs an instruction-tuning dataset based on real user scenarios to improve user experience in practical applications.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Joint Vision-Language pretraining",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CommonCrawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WebCode",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "E-books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Educational Materials",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ArXiv Articles",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MMC4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wiki",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikihow",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Epub textbooks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Capsfusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TaiSu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DetailedCaption",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Chart2text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Geo170K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Unichart",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Ureader",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "M-paper",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScienceQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ScreenQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SciGraphQA-295K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Paper2figure100k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WidgetCaptioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Screen2words",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Refexp",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Websight",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning on VL chat and image-text pairs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Vision-language supervised fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "DeepSeek-LLM tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "6.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Nvidia A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 nodes x 8 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Logical diagrams",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Webpages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Formula recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scientific literature",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural images",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Embodied intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "UI understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Table/chart understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code reconstruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Real-world vision-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "2T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Instruction-tuning dataset constructed from real user scenarios",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ShareGPT4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Document OCR rendering pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VL chat data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LAION-GPTV",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LVIS-Instruct4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextOCR-GPT4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "LLaVA1.6-GPT4V",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IconQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Ureader",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScreenQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Geo170K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ScienceQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Screen-to-code",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "In-house SFT data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Manually gathered authentic test cases for GPT-4V and Gemini from the Internet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7B (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Stage 1: Training Vision-Language Adaptor -> Stage 2: Joint Vision-Language pretraining -> Stage 3: Supervised Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "64 nodes x 8 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Hybrid vision encoder with fixed token budget",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Hybrid vision encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Hybrid encoder: high-resolution SAM-B (ViTDet) and low-resolution SigLIP-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Hybrid vision encoder (text-aligned at 384x384 + high-resolution at 1024x1024)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP+SAM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Hybrid vision encoder combining SigLIP and SAM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "DeepSeek-LLM-7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 64.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMC: 61.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 66.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 87.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 32.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Pile-test: 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 36.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CMMMU: 37.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMB: 73.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMC: 72.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 70.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRB: 456",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 88.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathV: 36.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMVet: 41.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HellaSwag: 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU: 52.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GSM8K: 55.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 35.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AGIEval: 27.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench: 62.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench_CN: 60.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SEED: 62.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "POPE: 86.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ScienceQA: 54.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU: 30.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench: 318",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Average: 55.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "HAI-LLM framework",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "DeepSeek-VL 1B,",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DeepSeek-VL 1B,",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-03-08",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "DeepSeek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "High-resolution image processing to overcome low-resolution limits (e.g., 336x336) for real-world tasks like OCR and tiny object discernment",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "A balanced multimodal training strategy that preserves language capabilities during prolonged multimodal pretraining",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "A scaling methodology enabling efficient model growth from 1B to 7B parameters.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Real-world vision-language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "OCR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Tiny object discernment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language understanding in real-world scenarios",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1778197",
+  "contribution_ids": [
+   "R1778199",
+   "R1924370",
+   "R1924415"
+  ],
+  "new_contribution_ids": [
+   "R1924370",
+   "R1924415"
+  ],
+  "comparison_updated": null
+ }
+}

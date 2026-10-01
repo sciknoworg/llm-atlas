@@ -1,0 +1,4788 @@
+{
+ "arxiv_id": "2207.04672",
+ "status": "completed",
+ "timestamp": "2026-08-27T20:02:56.509661",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2207.04672",
+  "title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+  "authors": [
+   " NLLB Team",
+   "Marta R. Costa-juss\u00e0",
+   "James Cross",
+   "Onur \u00c7elebi",
+   "Maha Elbayad",
+   "Kenneth Heafield",
+   "Kevin Heffernan",
+   "Elahe Kalbassi",
+   "Janice Lam",
+   "Daniel Licht",
+   "Jean Maillard",
+   "Anna Sun",
+   "Skyler Wang",
+   "Guillaume Wenzek",
+   "Al Youngblood",
+   "Bapi Akula",
+   "Loic Barrault",
+   "Gabriel Mejia Gonzalez",
+   "Prangthip Hansanti",
+   "John Hoffman",
+   "Semarley Jarrett",
+   "Kaushik Ram Sadagopan",
+   "Dirk Rowe",
+   "Shannon Spruit",
+   "Chau Tran",
+   "Pierre Andrews",
+   "Necip Fazil Ayan",
+   "Shruti Bhosale",
+   "Sergey Edunov",
+   "Angela Fan",
+   "Cynthia Gao",
+   "Vedanuj Goswami",
+   "Francisco Guzm\u00e1n",
+   "Philipp Koehn",
+   "Alexandre Mourachko",
+   "Christophe Ropers",
+   "Safiyyah Saleem",
+   "Holger Schwenk",
+   "Jeff Wang"
+  ],
+  "abstract": "Driven by the goal of eradicating language barriers on a global scale, machine translation has solidified itself as a key focus of artificial intelligence research today. However, such efforts have coalesced around a small subset of languages, leaving behind the vast majority of mostly low-resource languages. What does it take to break the 200 language barrier while ensuring safe, high quality results, all while keeping ethical considerations in mind? In No Language Left Behind, we took on this challenge by first contextualizing the need for low-resource language translation support through exploratory interviews with native speakers. Then, we created datasets and models aimed at narrowing the performance gap between low and high-resource languages. More specifically, we developed a conditional compute model based on Sparsely Gated Mixture of Experts that is trained on data obtained with novel and effective data mining techniques tailored for low-resource languages. We propose multiple architectural and training improvements to counteract overfitting while training on thousands of tasks. Critically, we evaluated the performance of over 40,000 different translation directions using a human-translated benchmark, Flores-200, and combined human evaluation with a novel toxicity benchmark covering all languages in Flores-200 to assess translation safety. Our model achieves an improvement of 44% BLEU relative to the previous state-of-the-art, laying important groundwork towards realizing a universal translation system. Finally, we open source all contributions described in this work, accessible at https://github.com/facebookresearch/fairseq/tree/nllb.",
+  "published": "2022-07-11T07:33:36+00:00",
+  "updated": "2022-08-25T17:10:53+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2207.04672v3",
+  "entry_id": "http://arxiv.org/abs/2207.04672v3",
+  "pdf_path": "data/papers/2207.04672.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 1249447,
+ "word_count": 151116,
+ "models_extracted": 73,
+ "extraction_data": [
+  {
+   "model_name": "NLLB-200",
+   "parameters": "54M, 60M, 110M, 137M, 200M, 219M, 275M, 400M, 500M, 514M, 545M, 600M, 615M, 617M, 776M, 1.3B, 1.4B, 3.3B, 5.4B, 13B, 13.7B, 22B, 54B, 54.5B, 55B, 60B, 200B",
+   "parameters_millions": 200000,
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Unified multilingual machine translation model scaling to 200 languages: trains a single encoder-decoder Transformer on all language pairs simultaneously, replacing per-pair models; Mixture-of-Experts (MoE) for efficient inference: routes tokens to a subset of experts (2 of 16), reducing compute while maintaining capacity; back-translation and denoising autoencoder: generates synthetic parallel data and reconstructs corrupted text to improve low-resource language performance; multilingual tokenization: shares a single SentencePiece BPE vocabulary across all 200 languages to improve cross-lingual transfer.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "pretraining_corpus": "AAU Ethiopian Languages, AI4D, DGT, ECB, EMEA, English-Twi, EU Bookshop, GlobalVoices, HornMT, InfoPankki v1, QCRI Educational Domain, JHU Bible, MADAR, Mburisano, MENYO-20k, MultiIndicMT, NLLB-Seed, OpenSubtitles v2018, Tanzil, Tatoeba, Tico19 v20201028, TWB-Gamayun, United Nations Resolutions, Turkic Interlingua (TIL), Wikimedia v20210402, XhosaNavy",
+   "finetuning_task": "Single-task fine-tuning for domain adaptation, In-domain fine-tuning, Multilingual machine translation, Supervised machine translation",
+   "optimizer": "Adam",
+   "hardware_used": "GPU",
+   "extension": "Mixture-of-Experts (MoE) architecture with load balancing regularization",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Scaling human-centered machine translation to 200+ languages, particularly low-resource and endangered languages.",
+   "application": "Machine translation, multilingual language understanding, low-resource language support",
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "training_corpus_size": "1.1 billion sentence pairs",
+   "finetuning_data": "FLORES devtest, mined bitexts, NLLB-MD dataset, Multilingual bitext data, WMT19, WMT20, FLORES-200, NLLB-Seed, NLLB Multi-Domain, WMT14, OPUS, Wikipedia, and other parallel corpora, Human-annotated parallel data, machine-translated data, back-translation data, WMT14-20 datasets, human translations for 100+ languages, WMT16, WMT17, WMT18, FLORES, CCMatrix, UN, TED, WMT datasets, ParaCrawl, Global Voices, TED Talks, UN documents",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English, French, Amharic, Tigrinya, Maltese, Ge'ez, Modern Standard Arabic, Afrikaans, Southern Sotho, Swahili, Tswana, Xhosa, Zulu, Wolof, German, Russian, Catalan, Assamese, Ligurian, Kinyarwanda, Yoruba, Yue, Chinese (Simplified), Chinese (Traditional), Standard Malay, Spanish, Arabic, Hindi, Bengali, Cantonese, Javanese, etc., Hausa, Igbo, Luganda, Luo, Gujarati, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, Telugu, Dutch, Italian, Japanese, Korean, Portuguese, Turkish, Vietnamese, Chinese, Polish, Thai, Indonesian, Malay, and 188 other languages, Urdu, 202 languages including English, Azerbaijani, Belarusian, Bosnian, Breton, Bulgarian, Burmese, Croatian, Czech, Danish, Estonian, Farsi, Filipino, Finnish, Galician, Georgian, Greek, Hebrew, Hungarian, Icelandic, Irish, Kazakh, Khmer, Kurdish, Kyrgyz, Lao, Latvian, Lithuanian, Macedonian, Malagasy, Mongolian, Nepali, Norwegian, Oriya, Pashto, Persian, Romanian, Scottish Gaelic, Serbian, Sindhi, Sinhala, Slovak, Slovenian, Somali, Sundanese, Swedish, Tagalog, Tajik, Tatar, Tibetan, Turkmen, Ukrainian, Uyghur, Uzbek, Welsh, Yiddish, Flores-200 languages, and 190 others, Armenian, Albanian, Basque, Luxembourgish, Latin, Oromo, Sanskrit, Dari, Kirundi, Chichewa, Shona, Bemba, Comorian, Mandinka, Bambara, Dyula, Soninke, Moor\u00e9, Ewe, Ga, Akan, Twi, Fante, Krio, Pidgin",
+   "hardware_description": "400W per GPU",
+   "carbon_emitted": "104.31 tCO2eq",
+   "source_code": "https://github.com/facebookresearch/fairseq/tree/nllb; https://github.com/facebookresearch/fairseq/tree/main/examples/nllb; https://github.com/facebookresearch/fairseq; https://github.com/facebookresearch/flores",
+   "context_length": "512",
+   "activated_parameters": "13.7B",
+   "attention_mechanism": "Multi-head self-attention, Multi-head attention, Standard multi-head self-attention, SparselyGated MoE",
+   "context_length_max": "512 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Teacher-student training combining supervised cosine loss and unsupervised masked LM; specific vocabularies for language subsets",
+   "reasoning_mode": null,
+   "moe_configuration": "Sparsely Gated Mixture of Experts",
+   "quantization_precision": "FP16, FP16/BF16",
+   "synthetic_data_generation_method": "Backtranslation",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": "128 TPUv3 chips",
+   "safety_evaluation_protocol": "Toxicity-200 evaluation, automated red-teaming for toxic content across 200 languages",
+   "safety_defect_rate": "0.80% on average (out of English), 0.27% on average (into English)",
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "NLLB-Seed",
+   "optimizer_innovation": null,
+   "benchmark_result": "BLEU 20.5 (Maori); xsim 0.1% (Amharic), 0.89% (Tigrinya); Flores-101: 40% better than previous SOTA; BLEU scores on FLORES-200 devtest; FLORES-200 BLEU: EN-ES 38.1, EN-HI 22.5, EN-ZU 20.8, ZH-EN 35.2, RU-EN 36.5; FLORES-101 BLEU: 38.5 (600M), 40.1 (1.3B); WMT20 BLEU scores across 10 language pairs; WMT20 EN-DE 28.4 BLEU, EN-FR 42.5 BLEU, ZH-EN 26.0 BLEU; Flores-200 devtest chrF++: NLLB-200 48.3 (all), 56.8 (eng_Latn-xx), 63.5 (xx-eng_Latn), 54.4 (xx-yy); distilled 1.3B 46.9; distilled 615M 44.6; FLORES-200 devtest: Arabic dialects-eng_Latn 44.4 spBLEU, 64.1 chrF++; Overall 33.7 spBLEU, 51.1 chrF++; FLORES-200 BLEU 30.5 (EN->X avg), BLEU 28.1 (X->EN avg); Flores-200 devtest spBLEU/chrF++: 38.8/56.9 (all), 41.7/59.3 (high), 35.8/54.3 (low), 33.4/52.6 (v.low); Flores-101 devtest spBLEU/chrF++: ibo_Latn-swh_Latn 21.8/37.3, swh_Latn-fra_Latn 27.2/46.2; Flores-200 devtest BLEU/chrF++ scores across 200 languages; Autshumato test set BLEU/chrF++; MADAR benchmark scores; BLEU scores on WMT20: EN-DE 30.1, EN-FR 43.5, DE-EN 31.2, FR-EN 44.1; BLEU on FLORES-200 devtest average 23.8; WMT20 BLEU: EN-DE 28.6, EN-FR 43.5, ZH-EN 26.8; WMT22 BLEU: EN-DE 28.8, EN-FR 43.8, ZH-EN 27.1; FLORES-200 BLEU: 23.8; FLORES-200, WMT20; WMT20 En-De BLEU 30.0; WMT20 En-Fr BLEU 28.5; FLORES-200 average BLEU 24.5; FLORES-200 BLEU: 30.0 (high-resource), 15.0 (low-resource); FLORES-101 BLEU: 30.0; COMET: 78.5; WMT14 EN-DE BLEU 28.4, WMT14 EN-FR BLEU 42.5; FLORES-200: 28.4 BLEU; WMT20: SOTA on 14/16 language pairs; FLORES-101 BLEU scores (e.g., EN-DE 30.1, EN-FR 38.5, EN-ZH 28.4); COMET-XXL 78.5 (high-resource); human evaluation shows parity with English on many languages; SOTA on many low-resource WMT tasks; Flores-200 X->En BLEU 28.4, En->X BLEU 27.8; FLORES-200 BLEU: EN-ES 38.5, EN-FR 36.2, EN-DE 34.8, EN-ZH 28.1, EN-SW 24.5; FLORES-101 devtest BLEU: 43.1; FLORES-200 devtest BLEU: 41.5; FLORES-200 BLEU scores across 202 languages; WMT20 English-to-X BLEU improvements; WMT20 BLEU scores across 202 languages; FLORES-200: 23.4 BLEU (avg); FLORES-200 BLEU: 30.5; WMT14 EN-DE BLEU: 28.4; WMT14 EN-FR BLEU: 41.0; FLORES-101 devtest BLEU: 45.8; FLORES-200 devtest BLEU: 44.2; Flores-200 COMET-22: 71.5 (54B); Flores-200 COMET-22: 68.2 (600M); FLORES-200 average BLEU 28.4",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "64",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB LID model",
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Language identification system trained on high-quality Flores-200 annotations to address domain mismatch and improve performance on low-resource languages compared to existing systems like CLD3.",
+   "pretraining_corpus": "Flores-200 dataset",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Language identification, machine translation",
+   "license": null,
+   "research_problem": "Language identification and machine translation for low-resource languages",
+   "model_version": null,
+   "pretraining_architecture": null,
+   "pretraining_task": "Multi-class language identification",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": "Character-level n-grams",
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-600M, NLLB",
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Teacher-student distillation from a 5.4B parameter model to 1.3B and 600M; shared tokenizer across 200 languages to reduce vocabulary size and improve low-resource performance; single model architecture for all language pairs.",
+   "pretraining_corpus": "1600B tokens of multilingual text",
+   "parameters": "600M, 1.3B",
+   "parameters_millions": 1300,
+   "application": "Machine translation, multilingual language understanding",
+   "license": "Apache 2.0",
+   "research_problem": "Scaling machine translation to low-resource and underrepresented languages",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Causal language modeling",
+   "training_corpus_size": "~300M sentences",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": "SentencePiece BPE (32k)",
+   "context_length": "512",
+   "supported_language": "Arabic, Bengali, Chinese, English, French, German, Hindi, Japanese, Korean, Portuguese, Russian, Spanish, Swahili, Thai, Turkish, Vietnamese",
+   "hardware_used": "NVIDIA V100 GPU",
+   "hardware_description": "128 V100 GPUs",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "activated_parameters": "600M, 1.3B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": "1024 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on multilingual corpus -> teacher-student distillation from 5.4B model -> fine-tuning on parallel data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "FLORES-200: 600M achieves 23.4 BLEU avg, 1.3B achieves 26.1 BLEU avg; WMT20: competitive with SOTA",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "16 (600M), 24 (1.3B)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-52",
+   "parameters": "610M, 54B",
+   "parameters_millions": 54000,
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Unified encoder-decoder Transformer trained on 200 languages with a single tokenization scheme and language ID prefixes, enabling scalable, human-centered machine translation for low-resource languages without separate per-language models.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "pretraining_corpus": "WMT, OPUS, FLORES-200, and other multilingual parallel corpora",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3-128",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Machine translation for under-resourced languages",
+   "application": "Machine translation, low-resource language support",
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "training_corpus_size": "1.6 trillion tokens",
+   "finetuning_data": null,
+   "tokenizer": "SentencePiece",
+   "supported_language": "English, Spanish, French, German, Chinese, Arabic, Hindi, Swahili, Yoruba, Zulu",
+   "hardware_description": "128 V100 GPUs for 10 days",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 200 languages -> fine-tuning on 52 high-quality languages",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "WMT20 BLEU scores (e.g., EN-DE 28.4, EN-FR 42.1)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-600",
+   "parameters": "600M, 1.3B, 54B, 54.5B",
+   "parameters_millions": 54500,
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Single encoder-decoder model scaled to 200 languages; language identification and routing mechanism; shared vocabulary across 200 languages to enable knowledge transfer; back-translation and data augmentation for low-resource languages; human-centered evaluation framework.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "pretraining_corpus": "WMT datasets, OPUS, Wikipedia, and other parallel corpora totaling 1.6B sentence pairs",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "TPUv3-128",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Low-resource and multilingual machine translation",
+   "application": "Machine translation",
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "training_corpus_size": "1.6 trillion tokens",
+   "finetuning_data": null,
+   "tokenizer": "SentencePiece BPE",
+   "supported_language": "200 languages (Flores language codes)",
+   "hardware_description": "128 TPUv3 chips",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/facebookresearch/fairseq; https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "1024",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 200 languages with shared vocabulary and language IDs, followed by fine-tuning on target language pairs",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Flores-101: 35.4 BLEU; WMT20 EN-DE: 28.4 BLEU; WMT20 EN-FR: 41.5 BLEU; FLORES-200 BLEU scores across 200 languages",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-125",
+   "parameters": "125M",
+   "parameters_millions": 125,
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Scaling human-centered machine translation to 200 languages with a single model; introduces toxicity detection and mitigation strategies for MT; proposes XSTS evaluation metric for assessing translation quality across diverse language pairs.",
+   "pretraining_architecture": null,
+   "pretraining_task": null,
+   "pretraining_corpus": null,
+   "finetuning_task": null,
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Multilingual machine translation scaling and human evaluation correlation",
+   "application": "Machine translation, multilingual translation",
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": null,
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-1300",
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Unified tokenization scheme (SentencePiece, 64k vocab) enabling a single model to handle 200 languages with diverse scripts without language-specific tokenizers; multi-lingual training recipe with back-translation and language ID/target language conditioning tokens to improve low-resource translation quality.",
+   "pretraining_corpus": "WMT, OPUS, Wikipedia, Flores-101/251, and other parallel corpora",
+   "parameters": "1.3B",
+   "parameters_millions": 1300,
+   "application": "Machine translation for 200 languages, including low-resource languages",
+   "license": "Apache 2.0",
+   "research_problem": "Machine Translation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "300B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": "SentencePiece (64k)",
+   "context_length": null,
+   "supported_language": "200 languages (Flores language codes)",
+   "hardware_used": "V100 GPU",
+   "hardware_description": "128 V100 GPUs",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Flores-101: 38.1 BLEU; WMT20 EN-DE: 29.1 BLEU; WMT20 EN-FR: 42.3 BLEU",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "NLLB-53M, NLLB-1.3B, NLLB",
+   "model_family": "NLLB",
+   "date_created": "2022-07-11",
+   "organization": "Meta",
+   "innovation": "Unified encoder-decoder architecture scaled to 200 languages; novel tokenization scheme (language-specific subword vocabulary) to handle diverse scripts and morphologically rich languages; large-scale back-translation and denoising autoencoding for low-resource language support.",
+   "pretraining_corpus": "OPUS, Wikipedia, UN, EU, TED, and multilingual web corpora",
+   "parameters": "53M, 1.3B, 3.3B",
+   "parameters_millions": 3300,
+   "application": "Machine translation, multilingual text processing",
+   "license": "Apache 2.0",
+   "research_problem": "Machine Translation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation (denoising autoencoding)",
+   "training_corpus_size": "1.2 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam",
+   "tokenizer": "SentencePiece BPE",
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": "TPUv3 cluster",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on monolingual/multilingual data with back-translation -> fine-tuning on parallel data",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "BLEU scores across WMT and FLORES benchmarks",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 58,
+ "models_after_merge": 8,
+ "validated_rows": {
+  "NLLB-200": {
+   "application": [
+    "Machine translation",
+    "multilingual language understanding",
+    "low-resource language support"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention",
+    "Multi-head attention",
+    "Standard multi-head self-attention"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "FLORES devtest",
+    "mined bitexts",
+    "NLLB-MD dataset",
+    "Multilingual bitext data",
+    "WMT19",
+    "WMT20",
+    "FLORES-200",
+    "NLLB-Seed",
+    "NLLB Multi-Domain",
+    "WMT14",
+    "OPUS",
+    "Wikipedia",
+    "Human-annotated parallel data",
+    "machine-translated data",
+    "back-translation data",
+    "WMT14-20 datasets",
+    "WMT16",
+    "WMT17",
+    "WMT18",
+    "FLORES",
+    "CCMatrix",
+    "UN",
+    "TED",
+    "ParaCrawl",
+    "Global Voices",
+    "TED Talks",
+    "UN documents"
+   ],
+   "finetuning_task": [
+    "Multilingual machine translation",
+    "Supervised machine translation"
+   ],
+   "hardware_used": [
+    "GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-200"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "54M",
+    "60M",
+    "110M",
+    "137M",
+    "200M",
+    "219M",
+    "275M",
+    "400M",
+    "500M",
+    "514M",
+    "545M",
+    "600M",
+    "615M",
+    "617M",
+    "776M",
+    "1.3B",
+    "1.4B",
+    "3.3B",
+    "5.4B",
+    "13B",
+    "13.7B",
+    "22B",
+    "54B",
+    "54.5B",
+    "55B",
+    "60B",
+    "200B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "AAU Ethiopian Languages",
+    "AI4D",
+    "DGT",
+    "ECB",
+    "EMEA",
+    "English-Twi",
+    "EU Bookshop",
+    "GlobalVoices",
+    "HornMT",
+    "InfoPankki v1",
+    "QCRI Educational Domain",
+    "JHU Bible",
+    "MADAR",
+    "Mburisano",
+    "MENYO-20k",
+    "MultiIndicMT",
+    "NLLB-Seed",
+    "OpenSubtitles v2018",
+    "Tanzil",
+    "Tatoeba",
+    "Tico19 v20201028",
+    "TWB-Gamayun",
+    "United Nations Resolutions",
+    "Turkic Interlingua (TIL)",
+    "Wikimedia v20210402",
+    "XhosaNavy"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "FP16",
+    "FP16/BF16"
+   ],
+   "research_problem": [
+    "Scaling human-centered machine translation to 200+ languages"
+   ],
+   "supported_language": [
+    "English",
+    "French",
+    "Amharic",
+    "Tigrinya",
+    "Maltese",
+    "Ge'ez",
+    "Modern Standard Arabic",
+    "Afrikaans",
+    "Southern Sotho",
+    "Swahili",
+    "Tswana",
+    "Xhosa",
+    "Zulu",
+    "Wolof",
+    "German",
+    "Russian",
+    "Catalan",
+    "Assamese",
+    "Ligurian",
+    "Kinyarwanda",
+    "Yoruba",
+    "Yue",
+    "Chinese (Simplified)",
+    "Chinese (Traditional)",
+    "Standard Malay",
+    "Spanish",
+    "Arabic",
+    "Hindi",
+    "Bengali",
+    "Cantonese",
+    "Javanese",
+    "Hausa",
+    "Igbo",
+    "Luganda",
+    "Luo",
+    "Gujarati",
+    "Kannada",
+    "Malayalam",
+    "Marathi",
+    "Odia",
+    "Punjabi",
+    "Tamil",
+    "Telugu",
+    "Dutch",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Portuguese",
+    "Turkish",
+    "Vietnamese",
+    "Chinese",
+    "Polish",
+    "Thai",
+    "Indonesian",
+    "Malay",
+    "Urdu",
+    "Azerbaijani",
+    "Belarusian",
+    "Bosnian",
+    "Breton",
+    "Bulgarian",
+    "Burmese",
+    "Croatian",
+    "Czech",
+    "Danish",
+    "Estonian",
+    "Farsi",
+    "Filipino",
+    "Finnish",
+    "Galician",
+    "Georgian",
+    "Greek",
+    "Hebrew",
+    "Hungarian",
+    "Icelandic",
+    "Irish",
+    "Kazakh",
+    "Khmer",
+    "Kurdish",
+    "Kyrgyz",
+    "Lao",
+    "Latvian",
+    "Lithuanian",
+    "Macedonian",
+    "Malagasy",
+    "Mongolian",
+    "Nepali",
+    "Norwegian",
+    "Oriya",
+    "Pashto",
+    "Persian",
+    "Romanian",
+    "Scottish Gaelic",
+    "Serbian",
+    "Sindhi",
+    "Sinhala",
+    "Slovak",
+    "Slovenian",
+    "Somali",
+    "Sundanese",
+    "Swedish",
+    "Tagalog",
+    "Tajik",
+    "Tatar",
+    "Tibetan",
+    "Turkmen",
+    "Ukrainian",
+    "Uyghur",
+    "Uzbek",
+    "Welsh",
+    "Yiddish",
+    "Armenian",
+    "Albanian",
+    "Basque",
+    "Luxembourgish",
+    "Latin",
+    "Oromo",
+    "Sanskrit",
+    "Dari",
+    "Kirundi",
+    "Chichewa",
+    "Shona",
+    "Bemba",
+    "Comorian",
+    "Mandinka",
+    "Bambara",
+    "Dyula",
+    "Soninke",
+    "Moor\u00e9",
+    "Ewe",
+    "Ga",
+    "Akan",
+    "Twi",
+    "Fante",
+    "Krio",
+    "Pidgin"
+   ],
+   "synthetic_data_generation_method": [
+    "Backtranslation"
+   ]
+  },
+  "NLLB LID model": {
+   "application": [
+    "Language identification",
+    "machine translation"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB LID model"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "pretraining_corpus": [
+    "Flores-200 dataset"
+   ],
+   "pretraining_task": [
+    "Multi-class language identification"
+   ],
+   "research_problem": [
+    "Language identification and machine translation for low-resource languages"
+   ]
+  },
+  "NLLB-600M, NLLB": {
+   "application": [
+    "Machine translation",
+    "multilingual language understanding"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "hardware_used": [
+    "NVIDIA V100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-600M, NLLB"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "600M",
+    "1.3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Scaling machine translation to low-resource and underrepresented languages"
+   ],
+   "supported_language": [
+    "Arabic",
+    "Bengali",
+    "Chinese",
+    "English",
+    "French",
+    "German",
+    "Hindi",
+    "Japanese",
+    "Korean",
+    "Portuguese",
+    "Russian",
+    "Spanish",
+    "Swahili",
+    "Thai",
+    "Turkish",
+    "Vietnamese"
+   ]
+  },
+  "NLLB-52": {
+   "application": [
+    "Machine translation",
+    "low-resource language support"
+   ],
+   "hardware_used": [
+    "TPUv3-128"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-52"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "610M",
+    "54B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "WMT",
+    "OPUS",
+    "FLORES-200"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "research_problem": [
+    "Machine translation for under-resourced languages"
+   ],
+   "supported_language": [
+    "English",
+    "Spanish",
+    "French",
+    "German",
+    "Chinese",
+    "Arabic",
+    "Hindi",
+    "Swahili",
+    "Yoruba",
+    "Zulu"
+   ]
+  },
+  "NLLB-600": {
+   "application": [
+    "Machine translation"
+   ],
+   "hardware_used": [
+    "TPUv3-128"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-600"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "600M",
+    "1.3B",
+    "54B",
+    "54.5B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "OPUS",
+    "Wikipedia"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "research_problem": [
+    "Low-resource and multilingual machine translation"
+   ],
+   "supported_language": []
+  },
+  "NLLB-125": {
+   "application": [
+    "Machine translation",
+    "multilingual translation"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-125"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "125M"
+   ],
+   "research_problem": [
+    "Multilingual machine translation scaling and human evaluation correlation"
+   ]
+  },
+  "NLLB-1300": {
+   "application": [
+    "Machine translation for 200 languages"
+   ],
+   "hardware_used": [
+    "V100 GPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-1300"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "1.3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "WMT",
+    "OPUS",
+    "Wikipedia",
+    "Flores-101/251"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "research_problem": [
+    "Machine Translation"
+   ],
+   "supported_language": []
+  },
+  "NLLB-53M, NLLB-1.3B, NLLB": {
+   "application": [
+    "Machine translation",
+    "multilingual text processing"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "NLLB"
+   ],
+   "model_name": [
+    "NLLB-53M, NLLB-1.3B, NLLB"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "53M",
+    "1.3B",
+    "3.3B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "OPUS",
+    "Wikipedia",
+    "UN",
+    "EU",
+    "TED"
+   ],
+   "pretraining_task": [
+    "Machine translation (denoising autoencoding)"
+   ],
+   "research_problem": [
+    "Machine Translation"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "NLLB-200": {
+    "attention_mechanism": {
+     "candidates": [
+      "Multi-head self-attention",
+      "Multi-head attention",
+      "Standard multi-head self-attention",
+      "SparselyGated MoE"
+     ],
+     "accepted": [
+      "Multi-head self-attention",
+      "Multi-head attention",
+      "Standard multi-head self-attention"
+     ],
+     "dropped": [
+      {
+       "value": "SparselyGated MoE",
+       "reason": "Names an architecture/component (Mixture of Experts), not an attention mechanism."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "NLLB-Seed"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "NLLB-Seed",
+       "reason": "Names a dataset/corpus, not a pre-trained model."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "FLORES devtest",
+      "mined bitexts",
+      "NLLB-MD dataset",
+      "Multilingual bitext data",
+      "WMT19",
+      "WMT20",
+      "FLORES-200",
+      "NLLB-Seed",
+      "NLLB Multi-Domain",
+      "WMT14",
+      "OPUS",
+      "Wikipedia",
+      "other parallel corpora",
+      "Human-annotated parallel data",
+      "machine-translated data",
+      "back-translation data",
+      "WMT14-20 datasets",
+      "human translations for 100+ languages",
+      "WMT16",
+      "WMT17",
+      "WMT18",
+      "FLORES",
+      "CCMatrix",
+      "UN",
+      "TED",
+      "WMT datasets",
+      "ParaCrawl",
+      "Global Voices",
+      "TED Talks",
+      "UN documents"
+     ],
+     "accepted": [
+      "FLORES devtest",
+      "mined bitexts",
+      "NLLB-MD dataset",
+      "Multilingual bitext data",
+      "WMT19",
+      "WMT20",
+      "FLORES-200",
+      "NLLB-Seed",
+      "NLLB Multi-Domain",
+      "WMT14",
+      "OPUS",
+      "Wikipedia",
+      "Human-annotated parallel data",
+      "machine-translated data",
+      "back-translation data",
+      "WMT14-20 datasets",
+      "WMT16",
+      "WMT17",
+      "WMT18",
+      "FLORES",
+      "CCMatrix",
+      "UN",
+      "TED",
+      "ParaCrawl",
+      "Global Voices",
+      "TED Talks",
+      "UN documents"
+     ],
+     "dropped": [
+      {
+       "value": "other parallel corpora",
+       "reason": "Generic placeholder rather than a specific dataset name."
+      },
+      {
+       "value": "human translations for 100+ languages",
+       "reason": "Descriptive phrase/qualifier rather than a standalone dataset name."
+      },
+      {
+       "value": "WMT datasets",
+       "reason": "Generic placeholder rather than a specific dataset name."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Single-task fine-tuning for domain adaptation",
+      "In-domain fine-tuning",
+      "Multilingual machine translation",
+      "Supervised machine translation"
+     ],
+     "accepted": [
+      "Multilingual machine translation",
+      "Supervised machine translation"
+     ],
+     "dropped": [
+      {
+       "value": "Single-task fine-tuning for domain adaptation",
+       "reason": "Describes a training process/method rather than naming the specific task."
+      },
+      {
+       "value": "In-domain fine-tuning",
+       "reason": "Describes a training strategy rather than the specific task."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling human-centered machine translation to 200+ languages",
+      "particularly low-resource and endangered languages."
+     ],
+     "accepted": [
+      "Scaling human-centered machine translation to 200+ languages"
+     ],
+     "dropped": [
+      {
+       "value": "particularly low-resource and endangered languages.",
+       "reason": "Sentence fragment/trailing qualifier rather than a standalone value."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "English",
+      "French",
+      "Amharic",
+      "Tigrinya",
+      "Maltese",
+      "Ge'ez",
+      "Modern Standard Arabic",
+      "Afrikaans",
+      "Southern Sotho",
+      "Swahili",
+      "Tswana",
+      "Xhosa",
+      "Zulu",
+      "Wolof",
+      "German",
+      "Russian",
+      "Catalan",
+      "Assamese",
+      "Ligurian",
+      "Kinyarwanda",
+      "Yoruba",
+      "Yue",
+      "Chinese (Simplified)",
+      "Chinese (Traditional)",
+      "Standard Malay",
+      "Spanish",
+      "Arabic",
+      "Hindi",
+      "Bengali",
+      "Cantonese",
+      "Javanese",
+      "etc.",
+      "Hausa",
+      "Igbo",
+      "Luganda",
+      "Luo",
+      "Gujarati",
+      "Kannada",
+      "Malayalam",
+      "Marathi",
+      "Odia",
+      "Punjabi",
+      "Tamil",
+      "Telugu",
+      "Dutch",
+      "Italian",
+      "Japanese",
+      "Korean",
+      "Portuguese",
+      "Turkish",
+      "Vietnamese",
+      "Chinese",
+      "Polish",
+      "Thai",
+      "Indonesian",
+      "Malay",
+      "188 other languages",
+      "Urdu",
+      "202 languages including English",
+      "Azerbaijani",
+      "Belarusian",
+      "Bosnian",
+      "Breton",
+      "Bulgarian",
+      "Burmese",
+      "Croatian",
+      "Czech",
+      "Danish",
+      "Estonian",
+      "Farsi",
+      "Filipino",
+      "Finnish",
+      "Galician",
+      "Georgian",
+      "Greek",
+      "Hebrew",
+      "Hungarian",
+      "Icelandic",
+      "Irish",
+      "Kazakh",
+      "Khmer",
+      "Kurdish",
+      "Kyrgyz",
+      "Lao",
+      "Latvian",
+      "Lithuanian",
+      "Macedonian",
+      "Malagasy",
+      "Mongolian",
+      "Nepali",
+      "Norwegian",
+      "Oriya",
+      "Pashto",
+      "Persian",
+      "Romanian",
+      "Scottish Gaelic",
+      "Serbian",
+      "Sindhi",
+      "Sinhala",
+      "Slovak",
+      "Slovenian",
+      "Somali",
+      "Sundanese",
+      "Swedish",
+      "Tagalog",
+      "Tajik",
+      "Tatar",
+      "Tibetan",
+      "Turkmen",
+      "Ukrainian",
+      "Uyghur",
+      "Uzbek",
+      "Welsh",
+      "Yiddish",
+      "Flores-200 languages",
+      "190 others",
+      "Armenian",
+      "Albanian",
+      "Basque",
+      "Luxembourgish",
+      "Latin",
+      "Oromo",
+      "Sanskrit",
+      "Dari",
+      "Kirundi",
+      "Chichewa",
+      "Shona",
+      "Bemba",
+      "Comorian",
+      "Mandinka",
+      "Bambara",
+      "Dyula",
+      "Soninke",
+      "Moor\u00e9",
+      "Ewe",
+      "Ga",
+      "Akan",
+      "Twi",
+      "Fante",
+      "Krio",
+      "Pidgin"
+     ],
+     "accepted": [
+      "English",
+      "French",
+      "Amharic",
+      "Tigrinya",
+      "Maltese",
+      "Ge'ez",
+      "Modern Standard Arabic",
+      "Afrikaans",
+      "Southern Sotho",
+      "Swahili",
+      "Tswana",
+      "Xhosa",
+      "Zulu",
+      "Wolof",
+      "German",
+      "Russian",
+      "Catalan",
+      "Assamese",
+      "Ligurian",
+      "Kinyarwanda",
+      "Yoruba",
+      "Yue",
+      "Chinese (Simplified)",
+      "Chinese (Traditional)",
+      "Standard Malay",
+      "Spanish",
+      "Arabic",
+      "Hindi",
+      "Bengali",
+      "Cantonese",
+      "Javanese",
+      "Hausa",
+      "Igbo",
+      "Luganda",
+      "Luo",
+      "Gujarati",
+      "Kannada",
+      "Malayalam",
+      "Marathi",
+      "Odia",
+      "Punjabi",
+      "Tamil",
+      "Telugu",
+      "Dutch",
+      "Italian",
+      "Japanese",
+      "Korean",
+      "Portuguese",
+      "Turkish",
+      "Vietnamese",
+      "Chinese",
+      "Polish",
+      "Thai",
+      "Indonesian",
+      "Malay",
+      "Urdu",
+      "Azerbaijani",
+      "Belarusian",
+      "Bosnian",
+      "Breton",
+      "Bulgarian",
+      "Burmese",
+      "Croatian",
+      "Czech",
+      "Danish",
+      "Estonian",
+      "Farsi",
+      "Filipino",
+      "Finnish",
+      "Galician",
+      "Georgian",
+      "Greek",
+      "Hebrew",
+      "Hungarian",
+      "Icelandic",
+      "Irish",
+      "Kazakh",
+      "Khmer",
+      "Kurdish",
+      "Kyrgyz",
+      "Lao",
+      "Latvian",
+      "Lithuanian",
+      "Macedonian",
+      "Malagasy",
+      "Mongolian",
+      "Nepali",
+      "Norwegian",
+      "Oriya",
+      "Pashto",
+      "Persian",
+      "Romanian",
+      "Scottish Gaelic",
+      "Serbian",
+      "Sindhi",
+      "Sinhala",
+      "Slovak",
+      "Slovenian",
+      "Somali",
+      "Sundanese",
+      "Swedish",
+      "Tagalog",
+      "Tajik",
+      "Tatar",
+      "Tibetan",
+      "Turkmen",
+      "Ukrainian",
+      "Uyghur",
+      "Uzbek",
+      "Welsh",
+      "Yiddish",
+      "Armenian",
+      "Albanian",
+      "Basque",
+      "Luxembourgish",
+      "Latin",
+      "Oromo",
+      "Sanskrit",
+      "Dari",
+      "Kirundi",
+      "Chichewa",
+      "Shona",
+      "Bemba",
+      "Comorian",
+      "Mandinka",
+      "Bambara",
+      "Dyula",
+      "Soninke",
+      "Moor\u00e9",
+      "Ewe",
+      "Ga",
+      "Akan",
+      "Twi",
+      "Fante",
+      "Krio",
+      "Pidgin"
+     ],
+     "dropped": [
+      {
+       "value": "etc.",
+       "reason": "Placeholder/trailing qualifier, not a specific language. (cached)"
+      },
+      {
+       "value": "188 other languages",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      },
+      {
+       "value": "202 languages including English",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      },
+      {
+       "value": "Flores-200 languages",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      },
+      {
+       "value": "190 others",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      }
+     ]
+    }
+   },
+   "NLLB LID model": {},
+   "NLLB-600M, NLLB": {
+    "pretraining_corpus": {
+     "candidates": [
+      "1600B tokens of multilingual text"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "1600B tokens of multilingual text",
+       "reason": "Asserts data size/breadth rather than naming an identifiable corpus."
+      }
+     ]
+    }
+   },
+   "NLLB-52": {
+    "pretraining_corpus": {
+     "candidates": [
+      "WMT",
+      "OPUS",
+      "FLORES-200",
+      "other multilingual parallel corpora"
+     ],
+     "accepted": [
+      "WMT",
+      "OPUS",
+      "FLORES-200"
+     ],
+     "dropped": [
+      {
+       "value": "other multilingual parallel corpora",
+       "reason": "Generic placeholder rather than a specific corpus name."
+      }
+     ]
+    }
+   },
+   "NLLB-600": {
+    "pretraining_corpus": {
+     "candidates": [
+      "WMT datasets",
+      "OPUS",
+      "Wikipedia",
+      "other parallel corpora totaling 1.6B sentence pairs"
+     ],
+     "accepted": [
+      "OPUS",
+      "Wikipedia"
+     ],
+     "dropped": [
+      {
+       "value": "WMT datasets",
+       "reason": "Generic placeholder rather than a specific corpus name."
+      },
+      {
+       "value": "other parallel corpora totaling 1.6B sentence pairs",
+       "reason": "Asserts data size/breadth rather than naming an identifiable corpus."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "200 languages (Flores language codes)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "200 languages (Flores language codes)",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      }
+     ]
+    }
+   },
+   "NLLB-125": {},
+   "NLLB-1300": {
+    "application": {
+     "candidates": [
+      "Machine translation for 200 languages",
+      "including low-resource languages"
+     ],
+     "accepted": [
+      "Machine translation for 200 languages"
+     ],
+     "dropped": [
+      {
+       "value": "including low-resource languages",
+       "reason": "Sentence fragment/trailing qualifier rather than a standalone value."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "WMT",
+      "OPUS",
+      "Wikipedia",
+      "Flores-101/251",
+      "other parallel corpora"
+     ],
+     "accepted": [
+      "WMT",
+      "OPUS",
+      "Wikipedia",
+      "Flores-101/251"
+     ],
+     "dropped": [
+      {
+       "value": "other parallel corpora",
+       "reason": "Generic placeholder rather than a specific corpus name."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "200 languages (Flores language codes)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "200 languages (Flores language codes)",
+       "reason": "Counts/characterises languages instead of naming a specific language."
+      }
+     ]
+    }
+   },
+   "NLLB-53M, NLLB-1.3B, NLLB": {
+    "pretraining_corpus": {
+     "candidates": [
+      "OPUS",
+      "Wikipedia",
+      "UN",
+      "EU",
+      "TED",
+      "multilingual web corpora"
+     ],
+     "accepted": [
+      "OPUS",
+      "Wikipedia",
+      "UN",
+      "EU",
+      "TED"
+     ],
+     "dropped": [
+      {
+       "value": "multilingual web corpora",
+       "reason": "Generic description rather than a specific named corpus."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 357,
+   "dropped": 22,
+   "llm_calls": 1,
+   "values_sent_to_llm": 168
+  }
+ },
+ "contributions": [
+  {
+   "label": "NLLB-200",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-200",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified multilingual machine translation model scaling to 200 languages: trains a single encoder-decoder Transformer on all language pairs simultaneously, replacing per-pair models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Experts (MoE) for efficient inference: routes tokens to a subset of experts (2 of 16), reducing compute while maintaining capacity",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Back-translation and denoising autoencoder: generates synthetic parallel data and reconstructs corrupted text to improve low-resource language performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multilingual tokenization: shares a single SentencePiece BPE vocabulary across all 200 languages to improve cross-lingual transfer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AAU Ethiopian Languages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "AI4D",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "DGT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ECB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EMEA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English-Twi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EU Bookshop",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GlobalVoices",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "HornMT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "InfoPankki v1",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "QCRI Educational Domain",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "JHU Bible",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MADAR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Mburisano",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MENYO-20k",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MultiIndicMT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "NLLB-Seed",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenSubtitles v2018",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Tanzil",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Tatoeba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Tico19 v20201028",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TWB-Gamayun",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "United Nations Resolutions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Turkic Interlingua (TIL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikimedia v20210402",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "XhosaNavy",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multilingual machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "60M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "137M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "200M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "219M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "275M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "400M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "500M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "514M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "545M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "615M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "617M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "776M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "22B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "55B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "60B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "200B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 200000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "400W per GPU",
+     "datatype": "string"
+    },
+    {
+     "property": "P119142",
+     "label": "carbon_emitted",
+     "value": "104.31 tCO2eq",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Low-resource language support",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/flores",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Scaling human-centered machine translation to 200+ languages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.1 billion sentence pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLORES devtest",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Mined bitexts",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLLB-MD dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multilingual bitext data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT19",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT20",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLORES-200",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLLB-Seed",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLLB Multi-Domain",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT14",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OPUS",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Wikipedia",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Human-annotated parallel data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Machine-translated data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Back-translation data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT14-20 datasets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT16",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT17",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WMT18",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FLORES",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CCMatrix",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UN",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TED",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ParaCrawl",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Global Voices",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TED Talks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UN documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Amharic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tigrinya",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Maltese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ge'ez",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Modern Standard Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Afrikaans",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Southern Sotho",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tswana",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Xhosa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Zulu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Wolof",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Catalan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Assamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ligurian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kinyarwanda",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Yoruba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Yue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese (Simplified)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese (Traditional)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Standard Malay",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Cantonese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Javanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hausa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Igbo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Luganda",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Luo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Gujarati",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kannada",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malayalam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Marathi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Odia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Punjabi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tamil",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Telugu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dutch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Indonesian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malay",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Azerbaijani",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Belarusian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bosnian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Breton",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Burmese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Croatian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Danish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Estonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Farsi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Filipino",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Finnish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Galician",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Georgian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Greek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hebrew",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hungarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Icelandic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Irish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kazakh",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Khmer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kurdish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kyrgyz",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Lao",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Latvian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Lithuanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Macedonian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Malagasy",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Mongolian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Nepali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Norwegian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Oriya",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Pashto",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Persian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Scottish Gaelic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Serbian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sindhi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sinhala",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovak",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovenian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Somali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sundanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swedish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tagalog",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tajik",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tatar",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Tibetan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkmen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ukrainian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Uyghur",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Uzbek",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Welsh",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Yiddish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Armenian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Albanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Basque",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Luxembourgish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Latin",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Oromo",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Sanskrit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dari",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Kirundi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chichewa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Shona",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bemba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Comorian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Mandinka",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bambara",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dyula",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Soninke",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Moor\u00e9",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ewe",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Ga",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Akan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Twi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Fante",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Krio",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Pidgin",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "13.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Teacher-student training combining supervised cosine loss and unsupervised masked LM; specific vocabularies for language subsets",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Sparsely Gated Mixture of Experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16/BF16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Backtranslation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "128 TPUv3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "Toxicity-200 evaluation, automated red-teaming for toxic content across 200 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203098",
+     "label": "safety_defect_rate",
+     "value": "0.80% on average (out of English), 0.27% on average (into English)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU 20.5 (Maori)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Xsim 0.1% (Amharic), 0.89% (Tigrinya)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-101: 40% better than previous SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU scores on FLORES-200 devtest",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU: EN-ES 38.1, EN-HI 22.5, EN-ZU 20.8, ZH-EN 35.2, RU-EN 36.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-101 BLEU: 38.5 (600M), 40.1 (1.3B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 BLEU scores across 10 language pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 EN-DE 28.4 BLEU, EN-FR 42.5 BLEU, ZH-EN 26.0 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 devtest chrF++: NLLB-200 48.3 (all), 56.8 (eng_Latn-xx), 63.5 (xx-eng_Latn), 54.4 (xx-yy)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Distilled 1.3B 46.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Distilled 615M 44.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 devtest: Arabic dialects-eng_Latn 44.4 spBLEU, 64.1 chrF++",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Overall 33.7 spBLEU, 51.1 chrF++",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU 30.5 (EN->X avg), BLEU 28.1 (X->EN avg)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 devtest spBLEU/chrF++: 38.8/56.9 (all), 41.7/59.3 (high), 35.8/54.3 (low), 33.4/52.6 (v.low)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-101 devtest spBLEU/chrF++: ibo_Latn-swh_Latn 21.8/37.3, swh_Latn-fra_Latn 27.2/46.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 devtest BLEU/chrF++ scores across 200 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Autshumato test set BLEU/chrF++",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MADAR benchmark scores",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU scores on WMT20: EN-DE 30.1, EN-FR 43.5, DE-EN 31.2, FR-EN 44.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU on FLORES-200 devtest average 23.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 BLEU: EN-DE 28.6, EN-FR 43.5, ZH-EN 26.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT22 BLEU: EN-DE 28.8, EN-FR 43.8, ZH-EN 27.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU: 23.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200, WMT20",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 En-De BLEU 30.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 En-Fr BLEU 28.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 average BLEU 24.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU: 30.0 (high-resource), 15.0 (low-resource)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-101 BLEU: 30.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COMET: 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-DE BLEU 28.4, WMT14 EN-FR BLEU 42.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200: 28.4 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20: SOTA on 14/16 language pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-101 BLEU scores (e.g., EN-DE 30.1, EN-FR 38.5, EN-ZH 28.4)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COMET-XXL 78.5 (high-resource)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human evaluation shows parity with English on many languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on many low-resource WMT tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 X->En BLEU 28.4, En->X BLEU 27.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU: EN-ES 38.5, EN-FR 36.2, EN-DE 34.8, EN-ZH 28.1, EN-SW 24.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-101 devtest BLEU: 43.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 devtest BLEU: 41.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU scores across 202 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 English-to-X BLEU improvements",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 BLEU scores across 202 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200: 23.4 BLEU (avg)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU: 30.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-DE BLEU: 28.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-FR BLEU: 41.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-101 devtest BLEU: 45.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 devtest BLEU: 44.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 COMET-22: 71.5 (54B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-200 COMET-22: 68.2 (600M)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 average BLEU 28.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "64",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "NLLB LID model",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB LID model",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Language identification system trained on high-quality Flores-200 annotations to address domain mismatch and improve performance on low-resource languages compared to existing systems like CLD3.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multi-class language identification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flores-200 dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Character-level n-grams",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language identification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Language identification and machine translation for low-resource languages",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-600M, NLLB",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-600M, NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Teacher-student distillation from a 5.4B parameter model to 1.3B and 600M",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Shared tokenizer across 200 languages to reduce vocabulary size and improve low-resource performance",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single model architecture for all language pairs.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE (32k)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Scaling machine translation to low-resource and underrepresented languages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~300M sentences",
+     "datatype": "string"
+    },
+    {
+     "property": "P163009",
+     "label": "context_length",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bengali",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Thai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Turkish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Vietnamese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "600M, 1.3B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on multilingual corpus -> teacher-student distillation from 5.4B model -> fine-tuning on parallel data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200: 600M achieves 23.4 BLEU avg, 1.3B achieves 26.1 BLEU avg",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20: competitive with SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "16 (600M), 24 (1.3B)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-52",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-52",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified encoder-decoder Transformer trained on 200 languages with a single tokenization scheme and language ID prefixes, enabling scalable, human-centered machine translation for low-resource languages without separate per-language models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WMT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPUS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "FLORES-200",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "610M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 54000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3-128",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 V100 GPUs for 10 days",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Low-resource language support",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Machine translation for under-resourced languages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.6 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Yoruba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Zulu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 200 languages -> fine-tuning on 52 high-quality languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 BLEU scores (e.g., EN-DE 28.4, EN-FR 42.1)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-600",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-600",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single encoder-decoder model scaled to 200 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Language identification and routing mechanism",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Shared vocabulary across 200 languages to enable knowledge transfer",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Back-translation and data augmentation for low-resource languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Human-centered evaluation framework.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPUS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "54.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 54500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3-128",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 TPUv3 chips",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Low-resource and multilingual machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.6 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 200 languages with shared vocabulary and language IDs, followed by fine-tuning on target language pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-101: 35.4 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 EN-DE: 28.4 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 EN-FR: 41.5 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FLORES-200 BLEU scores across 200 languages",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-125",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-125",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Scaling human-centered machine translation to 200 languages with a single model",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces toxicity detection and mitigation strategies for MT",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Proposes XSTS evaluation metric for assessing translation quality across diverse language pairs.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 125,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multilingual machine translation scaling and human evaluation correlation",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-1300",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-1300",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified tokenization scheme (SentencePiece, 64k vocab) enabling a single model to handle 200 languages with diverse scripts without language-specific tokenizers",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-lingual training recipe with back-translation and language ID/target language conditioning tokens to improve low-resource translation quality.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WMT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPUS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flores-101/251",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece (64k)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "128 V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation for 200 languages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Machine Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "300B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flores-101: 38.1 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 EN-DE: 29.1 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT20 EN-FR: 42.3 BLEU",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "NLLB-53M, NLLB-1.3B, NLLB",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "NLLB-53M, NLLB-1.3B, NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "NLLB",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-07-11",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified encoder-decoder architecture scaled to 200 languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Novel tokenization scheme (language-specific subword vocabulary) to handle diverse scripts and morphologically rich languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Large-scale back-translation and denoising autoencoding for low-resource language support.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation (denoising autoencoding)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OPUS",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "UN",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "EU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TED",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "53M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 3300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPUv3 cluster",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual text processing",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/nllb",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Machine Translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.2 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on monolingual/multilingual data with back-translation -> fine-tuning on parallel data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU scores across WMT and FLORES benchmarks",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1735175",
+  "contribution_ids": [
+   "R1735178",
+   "R1735179",
+   "R1923131",
+   "R1923216",
+   "R1923222",
+   "R1923225",
+   "R1923231",
+   "R1923234",
+   "R1923237",
+   "R1923241"
+  ],
+  "new_contribution_ids": [
+   "R1923131",
+   "R1923216",
+   "R1923222",
+   "R1923225",
+   "R1923231",
+   "R1923234",
+   "R1923237",
+   "R1923241"
+  ],
+  "comparison_updated": null
+ }
+}

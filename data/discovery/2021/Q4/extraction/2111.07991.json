@@ -1,0 +1,2070 @@
+{
+ "arxiv_id": "2111.07991",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:31:09.910187",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2111.07991",
+  "title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+  "authors": [
+   "Xiaohua Zhai",
+   "Xiao Wang",
+   "Basil Mustafa",
+   "Andreas Steiner",
+   "Daniel Keysers",
+   "Alexander Kolesnikov",
+   "Lucas Beyer"
+  ],
+  "abstract": "This paper presents contrastive-tuning, a simple method employing contrastive training to align image and text models while still taking advantage of their pre-training. In our empirical study we find that locked pre-trained image models with unlocked text models work best. We call this instance of contrastive-tuning \"Locked-image Tuning\" (LiT), which just teaches a text model to read out good representations from a pre-trained image model for new tasks. A LiT model gains the capability of zero-shot transfer to new vision tasks, such as image classification or retrieval. The proposed LiT is widely applicable; it works reliably with multiple pre-training methods (supervised and unsupervised) and across diverse architectures (ResNet, Vision Transformers and MLP-Mixer) using three different image-text datasets. With the transformer-based pre-trained ViT-g/14 model, the LiT model achieves 85.2% zero-shot transfer accuracy on the ImageNet test set, and 82.5% on the challenging out-of-distribution ObjectNet test set.",
+  "published": "2021-11-15T18:53:48+00:00",
+  "updated": "2022-06-22T14:43:02+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2111.07991v3",
+  "entry_id": "http://arxiv.org/abs/2111.07991v3",
+  "pdf_path": "data/papers/2111.07991.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 97235,
+ "word_count": 11357,
+ "models_extracted": 11,
+ "extraction_data": [
+  {
+   "model_name": "LiT",
+   "parameters": "VARIES BY BACKBONE (E.G., 86M TO 340M+), 110M, 901M, 18.2B",
+   "parameters_millions": 18200,
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image Tuning (LiT): A contrastive-tuning method that freezes a pre-trained image model (image tower) and trains only a text model (text tower) to align with image representations, making it highly data- and compute-efficient compared to training both towers from scratch or fine-tuning the image model.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Contrastive learning",
+   "pretraining_corpus": "Conceptual Captions 1B (CC1B), Conceptual Captions 3B (CC3M), LAION-400M, LAION-2B (Aesthetics), WIT",
+   "finetuning_task": "Zero-shot transfer tuning, Zero-shot transfer / downstream vision tasks",
+   "optimizer": "Adam, AdaFactor",
+   "hardware_used": "TPU cores",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer and cross-modal representation learning",
+   "application": "Zero-shot image classification, cross-modal retrieval, visual recognition",
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "training_corpus_size": "4 billion image-text pairs",
+   "finetuning_data": "YFCC100m-CLIP, CC12M",
+   "tokenizer": "WordPiece, SentencePiece",
+   "supported_language": "English",
+   "hardware_description": "8 TPUv3 cores",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/google-research/vision_transformer#lit-models; https://github.com/google-research/locked-image-text-tuning",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "16 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive tuning with locked image tower",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Contrastive alignment (separate image and text towers)",
+   "vision_encoder": "Pre-trained ViT-g/14, ViT (vit-g/14*), ViT (vit-B/32)",
+   "base_model": "Pre-trained ViT-g/14 (image tower), Transformer (text tower)",
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet zero-shot transfer accuracy: 85.2%; ObjectNet: 82.5%; VTAB T->I: 85.2, I->T: 41.9, Vn: 59.3, Vsp: 74.7; VTAB T->I: 70.1, I->T: 28.6, Vn: 43.8, Vsp: 66.6, Vst: 57.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-B/32 + T 5-base)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "105M",
+   "parameters_millions": 105,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "105M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 76.7; CIFAR100 10-shot: 58.5; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-L/16 + T 5-base)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "195M",
+   "parameters_millions": 195,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "195M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 78.2; CIFAR100 10-shot: 61.2; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-g/14 + T 5-base)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "320M",
+   "parameters_millions": 320,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "320M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 77.4; CIFAR100 10-shot: 63.9; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-B/32 + T 5-large)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "410M",
+   "parameters_millions": 410,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "410M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 77.7; CIFAR100 10-shot: 77.1; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-L/16 + T 5-large)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "640M",
+   "parameters_millions": 640,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "640M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 77.1; CIFAR100 10-shot: 22.5; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "LiT (ViT-g/14 + T 5-large)",
+   "model_family": "LiT",
+   "date_created": "2021-11-15",
+   "organization": "Google",
+   "innovation": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+   "pretraining_corpus": "CC12M, YFCC100M",
+   "parameters": "730M",
+   "parameters_millions": 730,
+   "application": "Zero-shot image classification, cross-modal retrieval",
+   "license": "Apache 2.0",
+   "research_problem": "Zero-shot transfer for vision-language models",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Contrastive image-text matching",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": "Adam, Adafactor",
+   "tokenizer": "SentencePiece",
+   "context_length": null,
+   "supported_language": "English, Multilingual",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "LiT: Zero-Shot Transfer with Locked-image text Tuning",
+   "activated_parameters": "730M (all active)",
+   "attention_mechanism": "Multi-head self-attention (ViT & T5)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ImageNet top-1: 78.2; CIFAR100 10-shot: 61.2; VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 11,
+ "models_after_merge": 7,
+ "validated_rows": {
+  "LiT": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval",
+    "visual recognition"
+   ],
+   "base_model": [
+    "Pre-trained ViT-g/14 (image tower), Transformer (text tower)"
+   ],
+   "finetuning_data": [
+    "YFCC100m-CLIP",
+    "CC12M"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [],
+   "hardware_used": [
+    "TPU cores"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT"
+   ],
+   "optimizer": [
+    "Adam, AdaFactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "VARIES BY BACKBONE (E.G., 86M TO 340M+)",
+    "110M",
+    "901M",
+    "18.2B"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions 1B (CC1B)",
+    "Conceptual Captions 3B (CC3M)",
+    "LAION-400M",
+    "LAION-2B (Aesthetics)",
+    "WIT"
+   ],
+   "pretraining_task": [
+    "Contrastive learning"
+   ],
+   "research_problem": [
+    "Zero-shot transfer and cross-modal representation learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Pre-trained ViT-g/14",
+    "ViT (vit-g/14*)",
+    "ViT (vit-B/32)"
+   ]
+  },
+  "LiT (ViT-B/32 + T 5-base)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-B/32 + T 5-base)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "105M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "LiT (ViT-L/16 + T 5-base)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-L/16 + T 5-base)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "195M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "LiT (ViT-g/14 + T 5-base)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-g/14 + T 5-base)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "320M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "LiT (ViT-B/32 + T 5-large)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-B/32 + T 5-large)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "410M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "LiT (ViT-L/16 + T 5-large)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-L/16 + T 5-large)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "640M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "LiT (ViT-g/14 + T 5-large)": {
+   "application": [
+    "Zero-shot image classification",
+    "cross-modal retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT & T5)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "LiT"
+   ],
+   "model_name": [
+    "LiT (ViT-g/14 + T 5-large)"
+   ],
+   "optimizer": [
+    "Adam, Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "730M"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "YFCC100M"
+   ],
+   "pretraining_task": [
+    "Contrastive image-text matching"
+   ],
+   "research_problem": [
+    "Zero-shot transfer for vision-language models"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "LiT": {
+    "finetuning_task": {
+     "candidates": [
+      "Zero-shot transfer tuning",
+      "Zero-shot transfer / downstream vision tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Zero-shot transfer tuning",
+       "reason": "Describes an evaluation protocol or capability rather than a specific fine-tuning task"
+      },
+      {
+       "value": "Zero-shot transfer / downstream vision tasks",
+       "reason": "Describes an evaluation setting or capability rather than a concrete fine-tuning task"
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Contrastive alignment (separate image and text towers)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive alignment (separate image and text towers)",
+       "reason": "Describes a training objective/loss function rather than an architectural fusion design"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-B/32 + T 5-base)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-L/16 + T 5-base)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-g/14 + T 5-base)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-B/32 + T 5-large)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-L/16 + T 5-large)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   },
+   "LiT (ViT-g/14 + T 5-large)": {
+    "supported_language": {
+     "candidates": [
+      "English",
+      "Multilingual"
+     ],
+     "accepted": [
+      "English"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 118,
+   "dropped": 9,
+   "llm_calls": 1,
+   "values_sent_to_llm": 36
+  }
+ },
+ "contributions": [
+  {
+   "label": "LiT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image Tuning (LiT): A contrastive-tuning method that freezes a pre-trained image model (image tower) and trains only a text model (text tower) to align with image representations, making it highly data- and compute-efficient compared to training both towers from scratch or fine-tuning the image model.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions 1B (CC1B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions 3B (CC3M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-2B (Aesthetics)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "WIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, AdaFactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece, SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "VARIES BY BACKBONE (E.G., 86M TO 340M+)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "901M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "18.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 18200,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU cores",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "8 TPUv3 cores",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/vision_transformer#lit-models",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/locked-image-text-tuning",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer and cross-modal representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "4 billion image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "YFCC100m-CLIP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CC12M",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "16 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive tuning with locked image tower",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Pre-trained ViT-g/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (vit-g/14*)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT (vit-B/32)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Pre-trained ViT-g/14 (image tower), Transformer (text tower)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet zero-shot transfer accuracy: 85.2%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ObjectNet: 82.5%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB T->I: 85.2, I->T: 41.9, Vn: 59.3, Vsp: 74.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB T->I: 70.1, I->T: 28.6, Vn: 43.8, Vsp: 66.6, Vst: 57.2",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-B/32 + T 5-base)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-B/32 + T 5-base)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "105M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 105,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "105M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 76.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 58.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-L/16 + T 5-base)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-L/16 + T 5-base)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "195M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 195,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "195M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 78.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 61.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-g/14 + T 5-base)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-g/14 + T 5-base)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "320M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 320,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "320M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 77.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 63.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-B/32 + T 5-large)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-B/32 + T 5-large)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "410M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 410,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "410M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 77.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 77.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-L/16 + T 5-large)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-L/16 + T 5-large)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "640M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 640,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "640M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 77.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 22.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "LiT (ViT-g/14 + T 5-large)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "LiT (ViT-g/14 + T 5-large)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "LiT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-11-15",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Locked-image text tuning (LiT): freezes a pre-trained image encoder and only fine-tunes the text encoder during contrastive learning, drastically reducing trainable parameters and training time while maintaining or improving zero-shot transfer performance compared to fully fine-tuned or from-scratch models.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Contrastive image-text matching",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam, Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "730M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 730,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot transfer for vision-language models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "730M (all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT & T5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Contrastive pre-training on image-text pairs \u2192 locked-image fine-tuning (only text encoder updated)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet top-1: 78.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CIFAR100 10-shot: 61.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VTAB natural: 17.2, specialized: 29.1, structured: 62.3",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R551338",
+  "contribution_ids": [
+   "R551339",
+   "R1921476",
+   "R1921490",
+   "R1921495",
+   "R1921497",
+   "R1921499",
+   "R1921501",
+   "R1921503"
+  ],
+  "new_contribution_ids": [
+   "R1921476",
+   "R1921490",
+   "R1921495",
+   "R1921497",
+   "R1921499",
+   "R1921501",
+   "R1921503"
+  ],
+  "comparison_updated": null
+ }
+}

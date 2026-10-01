@@ -1,0 +1,463 @@
+{
+  "arxiv_id": "2501.15383",
+  "status": "completed",
+  "timestamp": "2026-08-29T17:40:05.585609",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2501.15383",
+    "title": "Qwen2.5-1M Technical Report",
+    "authors": [
+      "An Yang",
+      "Bowen Yu",
+      "Chengyuan Li",
+      "Dayiheng Liu",
+      "Fei Huang",
+      "Haoyan Huang",
+      "Jiandong Jiang",
+      "Jianhong Tu",
+      "Jianwei Zhang",
+      "Jingren Zhou",
+      "Junyang Lin",
+      "Kai Dang",
+      "Kexin Yang",
+      "Le Yu",
+      "Mei Li",
+      "Minmin Sun",
+      "Qin Zhu",
+      "Rui Men",
+      "Tao He",
+      "Weijia Xu",
+      "Wenbiao Yin",
+      "Wenyuan Yu",
+      "Xiafei Qiu",
+      "Xingzhang Ren",
+      "Xinlong Yang",
+      "Yong Li",
+      "Zhiying Xu",
+      "Zipeng Zhang"
+    ],
+    "abstract": "We introduce Qwen2.5-1M, a series of models that extend the context length to 1 million tokens. Compared to the previous 128K version, the Qwen2.5-1M series have significantly enhanced long-context capabilities through long-context pre-training and post-training. Key techniques such as long data synthesis, progressive pre-training, and multi-stage supervised fine-tuning are employed to effectively enhance long-context performance while reducing training costs.\n  To promote the use of long-context models among a broader user base, we present and open-source our inference framework. This framework includes a length extrapolation method that can expand the model context lengths by at least four times, or even more, without additional training. To reduce inference costs, we implement a sparse attention method along with chunked prefill optimization for deployment scenarios and a sparsity refinement method to improve precision. Additionally, we detail our optimizations in the inference engine, including kernel optimization, pipeline parallelism, and scheduling optimization, which significantly enhance overall inference performance. By leveraging our inference framework, the Qwen2.5-1M models achieve a remarkable 3x to 7x prefill speedup in scenarios with 1 million tokens of context. This framework provides an efficient and powerful solution for developing applications that require long-context processing using open-source models.\n  The Qwen2.5-1M series currently includes the open-source models Qwen2.5-7B-Instruct-1M and Qwen2.5-14B-Instruct-1M, as well as the API-accessed model Qwen2.5-Turbo. Evaluations show that Qwen2.5-1M models have been greatly improved in long-context tasks without compromising performance in short-context scenarios. Specifically, the Qwen2.5-14B-Instruct-1M model significantly outperforms GPT-4o-mini in long-context tasks and supports contexts eight times longer.",
+    "published": "2025-01-26T03:47:25+00:00",
+    "updated": "2025-01-26T03:47:25+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2501.15383v1",
+    "entry_id": "http://arxiv.org/abs/2501.15383v1",
+    "pdf_path": "data/papers/2501.15383.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 64652,
+  "word_count": 4997,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "Qwen 2.5",
+      "parameters": "1M",
+      "parameters_millions": 1,
+      "model_family": "Qwen",
+      "date_created": "2025-01-26",
+      "organization": "Alibaba Group",
+      "innovation": "Extends context length to 1M tokens via long-context pre-training and post-training; employs progressive length extension strategy, multi-stage SFT, and RL; introduces training-free length extrapolation to scale from 256k to 1M without retraining; implements sparse attention with chunked prefill and sparsity refinement for efficient inference.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": null,
+      "finetuning_task": "Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL)",
+      "optimizer": null,
+      "hardware_used": "Nvidia H20 and A100 GPUs",
+      "extension": "Progressive length extension strategy; training-free length extrapolation method",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Extending LLM context length to 1M tokens for repository-level code generation and in-depth research",
+      "application": "Long-context processing, code generation, debugging, in-depth research, document understanding",
+      "paper_title": "Qwen2.5-1M Technical Report",
+      "training_corpus_size": null,
+      "finetuning_data": "Agent-generated large-scale instruction data",
+      "tokenizer": null,
+      "supported_language": null,
+      "hardware_description": "Tensor parallelism with 8-way partitioning (14B/Turbo), 4-way (7B); batch size 1",
+      "carbon_emitted": null,
+      "source_code": "https://huggingface.co/Qwen/Qwen2.5-Turbo",
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Sparse attention method",
+      "context_length_max": "1M tokens",
+      "context_extension_method": "Progressive length extension strategy; training-free length extrapolation method",
+      "training_pipeline": "Long-context pre-training (progressive length extension) -> Multi-stage SFT -> Reinforcement Learning (RL)",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Long data synthesis; agent-generated large-scale instruction data",
+      "rl_algorithm": "Reinforcement Learning (RL)",
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Qwen2.5 (128K version)",
+      "optimizer_innovation": null,
+      "benchmark_result": "Passkey Retrieval Test: accurate retrieval up to 1M tokens; outperforms GPT-4o-mini in long-context tasks",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Inference framework with sparse attention, chunked prefill optimization, sparsity refinement, kernel optimization, pipeline parallelism, scheduling optimization"
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Qwen 2.5": {
+      "application": [
+        "code generation",
+        "debugging",
+        "in-depth research",
+        "document understanding"
+      ],
+      "attention_mechanism": [],
+      "base_model": [
+        "Qwen2.5 (128K version)"
+      ],
+      "context_extension_method": [
+        "Progressive length extension strategy; training-free length extrapolation method"
+      ],
+      "finetuning_data": [],
+      "finetuning_task": [],
+      "hardware_used": [
+        "Nvidia H20 and A100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Qwen"
+      ],
+      "model_name": [
+        "Qwen 2.5"
+      ],
+      "organization": [
+        "Alibaba Group"
+      ],
+      "parameters": [
+        "1M"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "research_problem": [],
+      "rl_algorithm": [],
+      "synthetic_data_generation_method": [
+        "Long data synthesis"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Qwen 2.5": {
+        "application": {
+          "candidates": [
+            "Long-context processing",
+            "code generation",
+            "debugging",
+            "in-depth research",
+            "document understanding"
+          ],
+          "accepted": [
+            "code generation",
+            "debugging",
+            "in-depth research",
+            "document understanding"
+          ],
+          "dropped": [
+            {
+              "value": "Long-context processing",
+              "reason": "Describes a model capability rather than a concrete application or domain."
+            }
+          ]
+        },
+        "attention_mechanism": {
+          "candidates": [
+            "Sparse attention method"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Sparse attention method",
+              "reason": "Describes a category of attention rather than a specific named mechanism."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "Agent-generated large-scale instruction data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Agent-generated large-scale instruction data",
+              "reason": "Describes the source or type of data rather than naming a specific dataset."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised Fine-Tuning (SFT) and Reinforcement Learning (RL)",
+              "reason": "Describes training methods/objectives rather than the specific fine-tuning task."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Extending LLM context length to 1M tokens for repository-level code generation and in-depth research"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Extending LLM context length to 1M tokens for repository-level code generation and in-depth research",
+              "reason": "Describes a goal or solution rather than a short noun phrase naming the research problem."
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Reinforcement Learning (RL)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning (RL)",
+              "reason": "Category/framework rather than a specific algorithm. (cached)"
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Long data synthesis",
+            "agent-generated large-scale instruction data"
+          ],
+          "accepted": [
+            "Long data synthesis"
+          ],
+          "dropped": [
+            {
+              "value": "agent-generated large-scale instruction data",
+              "reason": "Names the generated data itself rather than the method or technique used to create it."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 15,
+      "dropped": 7,
+      "llm_calls": 1,
+      "values_sent_to_llm": 13
+    }
+  },
+  "contributions": [
+    {
+      "label": "Qwen 2.5",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Qwen 2.5",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Qwen",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-01-26",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Alibaba Group",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Extends context length to 1M tokens via long-context pre-training and post-training",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Employs progressive length extension strategy, multi-stage SFT, and RL",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces training-free length extrapolation to scale from 256k to 1M without retraining",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Implements sparse attention with chunked prefill and sparsity refinement for efficient inference.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "1M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 1,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia H20 and A100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Tensor parallelism with 8-way partitioning (14B/Turbo), 4-way (7B); batch size 1",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Debugging",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "In-depth research",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Document understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://huggingface.co/Qwen/Qwen2.5-Turbo",
+          "datatype": "URI"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1M tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "Progressive length extension strategy; training-free length extrapolation method",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Long-context pre-training (progressive length extension) -> Multi-stage SFT -> Reinforcement Learning (RL)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Long data synthesis",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Qwen2.5 (128K version)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Passkey Retrieval Test: accurate retrieval up to 1M tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Outperforms GPT-4o-mini in long-context tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Inference framework with sparse attention, chunked prefill optimization, sparsity refinement, kernel optimization, pipeline parallelism, scheduling optimization",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926628",
+    "contribution_ids": [
+      "R1926630"
+    ],
+    "new_contribution_ids": [
+      "R1926630"
+    ],
+    "comparison_updated": null
+  }
+}

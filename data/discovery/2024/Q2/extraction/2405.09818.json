@@ -1,0 +1,668 @@
+{
+  "arxiv_id": "2405.09818",
+  "status": "completed",
+  "timestamp": "2026-08-29T01:15:39.702515",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2405.09818",
+    "title": "Chameleon: Mixed-Modal Early-Fusion Foundation Models",
+    "authors": [
+      " Chameleon Team"
+    ],
+    "abstract": "We present Chameleon, a family of early-fusion token-based mixed-modal models capable of understanding and generating images and text in any arbitrary sequence. We outline a stable training approach from inception, an alignment recipe, and an architectural parameterization tailored for the early-fusion, token-based, mixed-modal setting. The models are evaluated on a comprehensive range of tasks, including visual question answering, image captioning, text generation, image generation, and long-form mixed modal generation. Chameleon demonstrates broad and general capabilities, including state-of-the-art performance in image captioning tasks, outperforms Llama-2 in text-only tasks while being competitive with models such as Mixtral 8x7B and Gemini-Pro, and performs non-trivial image generation, all in a single model. It also matches or exceeds the performance of much larger models, including Gemini Pro and GPT-4V, according to human judgments on a new long-form mixed-modal generation evaluation, where either the prompt or outputs contain mixed sequences of both images and text. Chameleon marks a significant step forward in a unified modeling of full multimodal documents.",
+    "published": "2024-05-16T05:23:41+00:00",
+    "updated": "2025-03-21T05:54:00+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2405.09818v2",
+    "entry_id": "http://arxiv.org/abs/2405.09818v2",
+    "pdf_path": "data/papers/2405.09818.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+  },
+  "text_length": 81367,
+  "word_count": 11861,
+  "models_extracted": 6,
+  "extraction_data": [
+    {
+      "model_name": "Chameleon",
+      "parameters": "7B, 8B, 10B, 30B, 34B, 40B",
+      "parameters_millions": 40000,
+      "model_family": "Chameleon",
+      "date_created": "2024-05-16",
+      "organization": "Meta",
+      "innovation": "Early-fusion architecture that converts 512x512 images into 1024 discrete tokens via an 8192-size codebook, mixing them with text in a unified 65,536-vocab BPE tokenizer; two-stage pre-training (80% unsupervised, 20% higher-quality + instruction tuning); QK-norm and dropout to stabilize training and prevent softmax logit drift/norm divergence across modalities.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Mixed-modal auto-regressive language modeling",
+      "pretraining_corpus": "LLaMA-2 and CodeLLaMa pre-training data (2.9T tokens), publicly available and licensed web sources (1.4B text-image pairs, 1.5T tokens), interleaved text-image data (400B tokens), higher-quality datasets, and instruction tuning sets",
+      "finetuning_task": "Supervised fine-tuning for alignment, Supervised fine-tuning for multi-modal tasks",
+      "optimizer": "AdamW",
+      "hardware_used": "NVIDIA A100 80 GB GPUs",
+      "extension": null,
+      "blog_post": null,
+      "license": "Apache 2.0",
+      "research_problem": "Unified modeling of full multimodal documents; mixed-modal reasoning and generation.",
+      "application": "Text generation, image captioning, visual question-answering, commonsense reasoning, mathematics, world knowledge",
+      "paper_title": "Chameleon: Mixed-Modal Early-Fusion Foundation Models",
+      "training_corpus_size": "~10T tokens",
+      "finetuning_data": "Chameleon-SFT (Text, Code, Visual Chat, Image Generation, Interleaved Generation, Safety), Instruction tuning sets, Multi-task fine-tuning data, task-specific fine-tuning data",
+      "tokenizer": "Custom image tokenizer (1024 discrete tokens per 512x512 image, codebook size 8192)",
+      "supported_language": "English",
+      "hardware_description": "Meta's Research Super Cluster (RSC) with NVIDIA Quantum InfiniBand; internal research cluster with Elastic Fabric",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "34B (dense, all parameters active)",
+      "attention_mechanism": "Standard transformer attention with query-key normalization, Multi-head attention with Query-Key normalization (QK-Norm)",
+      "context_length_max": "4096",
+      "context_extension_method": null,
+      "training_pipeline": "End-to-end pre-training on interleaved mixed-modal data -> supervised fine-tuning for alignment",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Manual curation of safety prompts for safety tuning",
+      "safety_defect_rate": "Crowdsourced (7B): Safe 99.2%, Unsafe 0.4%, Unsure 0.4%; Crowdsourced (34B): Safe 99.7%, Unsafe 0.1%, Unsure 0.2%; Red Team (34B): Safe 93.9%, Unsafe 1.6%, Unsure 4.5%",
+      "fusion_architecture": "Early-fusion",
+      "vision_encoder": "Discrete image tokens (quantized images), Discrete image tokenizer (codebook size 8192, 512x512 input -> 1024 tokens), Unified early-fusion tokens",
+      "base_model": "LLaMA-2",
+      "optimizer_innovation": "z-loss regularization (regularizing the partition function Z of the softmax function by adding 10^-5 log^2 Z to the loss)",
+      "benchmark_result": "VQA and image captioning SOTA; matches Mixtral 8x7B and Gemini-Pro on text-only benchmarks; 60.4% preference rate vs Gemini-Pro, 51.6% vs GPT-4V on long-form mixed-modal generation; GSM8k (SFT): 50.9 (7B), 77.0 (34B); MATH: 12.9 (7B), 24.7 (34B); MMLU: 52.1 (7B), 65.8 (34B); PIQA: 57.0/63.3; SIQA: 74.2/82.7; HellaSwag: 75.6/85.1; WinoGrande: 76.1/84.1; Arc-E: 46.5/59.7; Arc-C: 51.0/54.0; BoolQ: 81.4/86.0; Chameleon vs. Gemini win rate 69.1%; Chameleon vs. GPT-4V win rate 61.7%",
+      "weight_clipping_mechanism": "Global gradient clipping at a threshold of 1.0",
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 6,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Chameleon": {
+      "application": [
+        "Text generation",
+        "image captioning",
+        "visual question-answering",
+        "commonsense reasoning",
+        "mathematics"
+      ],
+      "attention_mechanism": [
+        "Standard transformer attention with query-key normalization",
+        "Multi-head attention with Query-Key normalization (QK-Norm)"
+      ],
+      "base_model": [
+        "LLaMA-2"
+      ],
+      "finetuning_data": [
+        "Chameleon-SFT (Text, Code, Visual Chat, Image Generation, Interleaved Generation, Safety)",
+        "Instruction tuning sets",
+        "Multi-task fine-tuning data",
+        "task-specific fine-tuning data"
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning for alignment",
+        "Supervised fine-tuning for multi-modal tasks"
+      ],
+      "fusion_architecture": [
+        "Early-fusion"
+      ],
+      "hardware_used": [
+        "NVIDIA A100 80 GB GPUs"
+      ],
+      "license": [
+        "Apache 2.0"
+      ],
+      "model_family": [
+        "Chameleon"
+      ],
+      "model_name": [
+        "Chameleon"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Meta"
+      ],
+      "parameters": [
+        "7B",
+        "8B",
+        "10B",
+        "30B",
+        "34B",
+        "40B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LLaMA-2 and CodeLLaMa pre-training data (2.9T tokens)",
+        "publicly available and licensed web sources (1.4B text-image pairs, 1.5T tokens)",
+        "interleaved text-image data (400B tokens)"
+      ],
+      "pretraining_task": [
+        "Mixed-modal auto-regressive language modeling"
+      ],
+      "research_problem": [
+        "Unified modeling of full multimodal documents",
+        "mixed-modal reasoning and generation."
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Discrete image tokenizer (codebook size 8192, 512x512 input -> 1024 tokens)"
+      ],
+      "weight_clipping_mechanism": [
+        "Global gradient clipping at a threshold of 1.0"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Chameleon": {
+        "application": {
+          "candidates": [
+            "Text generation",
+            "image captioning",
+            "visual question-answering",
+            "commonsense reasoning",
+            "mathematics",
+            "world knowledge"
+          ],
+          "accepted": [
+            "Text generation",
+            "image captioning",
+            "visual question-answering",
+            "commonsense reasoning",
+            "mathematics"
+          ],
+          "dropped": [
+            {
+              "value": "world knowledge",
+              "reason": "Describes a capability or knowledge domain rather than a concrete task or application."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "LLaMA-2 and CodeLLaMa pre-training data (2.9T tokens)",
+            "publicly available and licensed web sources (1.4B text-image pairs, 1.5T tokens)",
+            "interleaved text-image data (400B tokens)",
+            "higher-quality datasets",
+            "instruction tuning sets"
+          ],
+          "accepted": [
+            "LLaMA-2 and CodeLLaMa pre-training data (2.9T tokens)",
+            "publicly available and licensed web sources (1.4B text-image pairs, 1.5T tokens)",
+            "interleaved text-image data (400B tokens)"
+          ],
+          "dropped": [
+            {
+              "value": "higher-quality datasets",
+              "reason": "Vague descriptor asserting quality rather than naming an identifiable dataset or corpus."
+            },
+            {
+              "value": "instruction tuning sets",
+              "reason": "Refers to fine-tuning data, not a pretraining corpus."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "Discrete image tokens (quantized images)",
+            "Discrete image tokenizer (codebook size 8192, 512x512 input -> 1024 tokens)",
+            "Unified early-fusion tokens"
+          ],
+          "accepted": [
+            "Discrete image tokenizer (codebook size 8192, 512x512 input -> 1024 tokens)"
+          ],
+          "dropped": [
+            {
+              "value": "Discrete image tokens (quantized images)",
+              "reason": "Describes the output representation format rather than the encoder component itself."
+            },
+            {
+              "value": "Unified early-fusion tokens",
+              "reason": "Describes token representation rather than the vision encoder component."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 37,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 26
+    }
+  },
+  "contributions": [
+    {
+      "label": "Chameleon",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Chameleon",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Chameleon",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-05-16",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Meta",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Early-fusion architecture that converts 512x512 images into 1024 discrete tokens via an 8192-size codebook, mixing them with text in a unified 65,536-vocab BPE tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Two-stage pre-training (80% unsupervised, 20% higher-quality + instruction tuning)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "QK-norm and dropout to stabilize training and prevent softmax logit drift/norm divergence across modalities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Mixed-modal auto-regressive language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaMA-2 and CodeLLaMa pre-training data (2.9T tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Publicly available and licensed web sources (1.4B text-image pairs, 1.5T tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Interleaved text-image data (400B tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for alignment",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for multi-modal tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Custom image tokenizer (1024 discrete tokens per 512x512 image, codebook size 8192)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "10B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "30B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "34B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "40B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 40000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A100 80 GB GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Meta's Research Super Cluster (RSC) with NVIDIA Quantum InfiniBand; internal research cluster with Elastic Fabric",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question-answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Commonsense reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematics",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Unified modeling of full multimodal documents",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Mixed-modal reasoning and generation.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~10T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Chameleon-SFT (Text, Code, Visual Chat, Image Generation, Interleaved Generation, Safety)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Instruction tuning sets",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Multi-task fine-tuning data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Task-specific fine-tuning data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "34B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard transformer attention with query-key normalization",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention with Query-Key normalization (QK-Norm)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "End-to-end pre-training on interleaved mixed-modal data -> supervised fine-tuning for alignment",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Manual curation of safety prompts for safety tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203098",
+          "label": "safety_defect_rate",
+          "value": "Crowdsourced (7B): Safe 99.2%, Unsafe 0.4%, Unsure 0.4%; Crowdsourced (34B): Safe 99.7%, Unsafe 0.1%, Unsure 0.2%; Red Team (34B): Safe 93.9%, Unsafe 1.6%, Unsure 4.5%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Early-fusion",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Discrete image tokenizer (codebook size 8192, 512x512 input -> 1024 tokens)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaMA-2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203102",
+          "label": "optimizer_innovation",
+          "value": "Z-loss regularization (regularizing the partition function Z of the softmax function by adding 10^-5 log^2 Z to the loss)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA and image captioning SOTA",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Matches Mixtral 8x7B and Gemini-Pro on text-only benchmarks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "60.4% preference rate vs Gemini-Pro, 51.6% vs GPT-4V on long-form mixed-modal generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8k (SFT): 50.9 (7B), 77.0 (34B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 12.9 (7B), 24.7 (34B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 52.1 (7B), 65.8 (34B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PIQA: 57.0/63.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SIQA: 74.2/82.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HellaSwag: 75.6/85.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "WinoGrande: 76.1/84.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Arc-E: 46.5/59.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Arc-C: 51.0/54.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BoolQ: 81.4/86.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Chameleon vs. Gemini win rate 69.1%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Chameleon vs. GPT-4V win rate 61.7%",
+          "datatype": "string"
+        },
+        {
+          "property": "P203104",
+          "label": "weight_clipping_mechanism",
+          "value": "Global gradient clipping at a threshold of 1.0",
+          "datatype": "resource"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925994",
+    "contribution_ids": [
+      "R1925996"
+    ],
+    "new_contribution_ids": [
+      "R1925996"
+    ],
+    "comparison_updated": null
+  }
+}

@@ -1,0 +1,661 @@
+{
+  "arxiv_id": "2504.21318",
+  "status": "completed",
+  "timestamp": "2026-08-29T19:22:41.878537",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2504.21318",
+    "title": "Phi-4-reasoning Technical Report",
+    "authors": [
+      "Marah Abdin",
+      "Sahaj Agarwal",
+      "Ahmed Awadallah",
+      "Vidhisha Balachandran",
+      "Harkirat Behl",
+      "Lingjiao Chen",
+      "Gustavo de Rosa",
+      "Suriya Gunasekar",
+      "Mojan Javaheripi",
+      "Neel Joshi",
+      "Piero Kauffmann",
+      "Yash Lara",
+      "Caio César Teodoro Mendes",
+      "Arindam Mitra",
+      "Besmira Nushi",
+      "Dimitris Papailiopoulos",
+      "Olli Saarikivi",
+      "Shital Shah",
+      "Vaishnavi Shrivastava",
+      "Vibhav Vineet",
+      "Yue Wu",
+      "Safoora Yousefi",
+      "Guoqing Zheng"
+    ],
+    "abstract": "We introduce Phi-4-reasoning, a 14-billion parameter reasoning model that achieves strong performance on complex reasoning tasks. Trained via supervised fine-tuning of Phi-4 on carefully curated set of \"teachable\" prompts-selected for the right level of complexity and diversity-and reasoning demonstrations generated using o3-mini, Phi-4-reasoning generates detailed reasoning chains that effectively leverage inference-time compute. We further develop Phi-4-reasoning-plus, a variant enhanced through a short phase of outcome-based reinforcement learning that offers higher performance by generating longer reasoning traces. Across a wide range of reasoning tasks, both models outperform significantly larger open-weight models such as DeepSeek-R1-Distill-Llama-70B model and approach the performance levels of full DeepSeek-R1 model. Our comprehensive evaluations span benchmarks in math and scientific reasoning, coding, algorithmic problem solving, planning, and spatial understanding. Interestingly, we observe a non-trivial transfer of improvements to general-purpose benchmarks as well. In this report, we provide insights into our training data, our training methodologies, and our evaluations. We show that the benefit of careful data curation for supervised fine-tuning (SFT) extends to reasoning language models, and can be further amplified by reinforcement learning (RL). Finally, our evaluation points to opportunities for improving how we assess the performance and robustness of reasoning models.",
+    "published": "2025-04-30T05:05:09+00:00",
+    "updated": "2025-04-30T05:05:09+00:00",
+    "doi": null,
+    "primary_category": "cs.AI",
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2504.21318v1",
+    "entry_id": "http://arxiv.org/abs/2504.21318v1",
+    "pdf_path": "data/papers/2504.21318.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM version release)"
+  },
+  "text_length": 129583,
+  "word_count": 19615,
+  "models_extracted": 2,
+  "extraction_data": [
+    {
+      "model_name": "Phi-4-reasoning",
+      "parameters": "14B",
+      "parameters_millions": 14000,
+      "model_family": "Phi",
+      "date_created": "2025-04-30",
+      "organization": "Microsoft",
+      "innovation": "Supervised fine-tuning (SFT) on carefully curated 'teachable' prompts and reasoning demonstrations generated using o3-mini; enables detailed reasoning chains leveraging inference-time compute.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Causal language modeling",
+      "pretraining_corpus": "Raw web data, Synthetic Data",
+      "finetuning_task": "Supervised fine-tuning (SFT) on reasoning tasks, Supervised fine-tuning (SFT) on synthetic CoT data; Reinforcement Learning (RL) for the 'plus' variant.",
+      "optimizer": "AdamW",
+      "hardware_used": "Nvidia H100 GPU",
+      "extension": "Repurposes two placeholder tokens as explicit  reasoning tokens, and extends maximum context length to 32K by doubling the RoPE base frequency.",
+      "blog_post": null,
+      "license": "open weight",
+      "research_problem": "Unlocking structured reasoning behavior and extended chain-of-thought traces in compact models.",
+      "application": "Mathematical problem solving, logical reasoning, scientific reasoning, coding, algorithmic problem solving, planning, spatial understanding",
+      "paper_title": "Phi-4-reasoning Technical Report",
+      "training_corpus_size": "8.3 billion unique tokens",
+      "finetuning_data": "1.4M prompts with high-quality answers generated using o3-mini; STEM, coding, safety-focused tasks, Publicly available websites, existing datasets, licensed collections, synthetically generated problems, rewritten/transformed seeds.",
+      "tokenizer": "Byte-level BPE",
+      "supported_language": "English",
+      "hardware_description": "32 Nvidia H100 GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://github.com/microsoft/Phi-4-reasoning",
+      "context_length": null,
+      "activated_parameters": "14B (dense, all parameters active)",
+      "attention_mechanism": "Standard dense transformer attention",
+      "context_length_max": "32K",
+      "context_extension_method": "RoPE base frequency doubling",
+      "training_pipeline": "Supervised fine-tuning (SFT) on curated prompts and reasoning demonstrations",
+      "reasoning_mode": "Chain-of-thought reasoning",
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Reasoning demonstrations generated using o3-mini, Synthetic generation using o3-mini; rewriting and transforming filtered seeds into new synthetic datasets (e.g., coding to word problems, math with short solutions).",
+      "rl_algorithm": "Reinforcement Learning (RL), GRPO (Group Relative Policy Optimization)",
+      "reward_mechanism": "Verifiable solutions (outcome-based rewards), Accuracy-based reward (R_final) designed to reward longer responses for incorrect answers; max possible R ≈ 0.62",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "Automated RAI Measurement Framework using synthetic conversations with another LLM to evaluate jailbreaking success, potentially harmful content generation, and intellectual property leakage across multiple sub-categories",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Phi-4",
+      "optimizer_innovation": null,
+      "benchmark_result": "AIME 25: 82.5; HMMT Feb 25: 81.9; OmniMath: 85.0; GPQA: 63.1; LiveCodeBench 8/24-1/25: 78.0; AIME 2024, GPQA diamond (used as progress indicators); improves significantly over Phi-4 on general-purpose benchmarks",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "verl framework"
+    }
+  ],
+  "models_after_selection": 2,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Phi-4-reasoning": {
+      "application": [
+        "Mathematical problem solving",
+        "logical reasoning",
+        "scientific reasoning",
+        "coding",
+        "algorithmic problem solving",
+        "planning",
+        "spatial understanding"
+      ],
+      "attention_mechanism": [
+        "Standard dense transformer attention"
+      ],
+      "base_model": [
+        "Phi-4"
+      ],
+      "context_extension_method": [
+        "RoPE base frequency doubling"
+      ],
+      "finetuning_data": [
+        "1.4M prompts with high-quality answers generated using o3-mini",
+        "STEM",
+        "safety-focused tasks",
+        "Publicly available websites",
+        "synthetically generated problems",
+        "rewritten/transformed seeds."
+      ],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT) on reasoning tasks",
+        "Supervised fine-tuning (SFT) on synthetic CoT data",
+        "Reinforcement Learning (RL) for the 'plus' variant."
+      ],
+      "hardware_used": [
+        "Nvidia H100 GPU"
+      ],
+      "license": [
+        "open weight"
+      ],
+      "model_family": [
+        "Phi"
+      ],
+      "model_name": [
+        "Phi-4-reasoning"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "14B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Causal language modeling"
+      ],
+      "reasoning_mode": [
+        "Chain-of-thought reasoning"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Verifiable solutions (outcome-based rewards)",
+        "Accuracy-based reward (R_final) designed to reward longer responses for incorrect answers"
+      ],
+      "rl_algorithm": [
+        "GRPO (Group Relative Policy Optimization)"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Reasoning demonstrations generated using o3-mini",
+        "Synthetic generation using o3-mini",
+        "rewriting and transforming filtered seeds into new synthetic datasets (e.g., coding to word problems, math with short solutions)."
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Phi-4-reasoning": {
+        "finetuning_data": {
+          "candidates": [
+            "1.4M prompts with high-quality answers generated using o3-mini",
+            "STEM",
+            "coding",
+            "safety-focused tasks",
+            "Publicly available websites",
+            "existing datasets",
+            "licensed collections",
+            "synthetically generated problems",
+            "rewritten/transformed seeds."
+          ],
+          "accepted": [
+            "1.4M prompts with high-quality answers generated using o3-mini",
+            "STEM",
+            "safety-focused tasks",
+            "Publicly available websites",
+            "synthetically generated problems",
+            "rewritten/transformed seeds."
+          ],
+          "dropped": [
+            {
+              "value": "coding",
+              "reason": "Refers to a domain/task rather than a specific dataset or collection of fine-tuning data. (cached)"
+            },
+            {
+              "value": "existing datasets",
+              "reason": "Generic placeholder that does not name a specific dataset or collection"
+            },
+            {
+              "value": "licensed collections",
+              "reason": "Generic placeholder that does not name a specific dataset or collection"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Raw web data",
+            "Synthetic Data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Raw web data",
+              "reason": "Generic assertion of data type/breadth, does not name a specific corpus or collection"
+            },
+            {
+              "value": "Synthetic Data",
+              "reason": "Generic assertion of data type, does not name a specific corpus or collection"
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Unlocking structured reasoning behavior and extended chain-of-thought traces in compact models."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Unlocking structured reasoning behavior and extended chain-of-thought traces in compact models.",
+              "reason": "Describes a goal or solution rather than a short noun phrase naming the research problem"
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Verifiable solutions (outcome-based rewards)",
+            "Accuracy-based reward (R_final) designed to reward longer responses for incorrect answers",
+            "max possible R ≈ 0.62"
+          ],
+          "accepted": [
+            "Verifiable solutions (outcome-based rewards)",
+            "Accuracy-based reward (R_final) designed to reward longer responses for incorrect answers"
+          ],
+          "dropped": [
+            {
+              "value": "max possible R ≈ 0.62",
+              "reason": "Describes a numerical metric or value rather than a method or mechanism for providing rewards"
+            }
+          ]
+        },
+        "rl_algorithm": {
+          "candidates": [
+            "Reinforcement Learning (RL)",
+            "GRPO (Group Relative Policy Optimization)"
+          ],
+          "accepted": [
+            "GRPO (Group Relative Policy Optimization)"
+          ],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning (RL)",
+              "reason": "Category/framework rather than a specific algorithm. (cached)"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 36,
+      "dropped": 8,
+      "llm_calls": 1,
+      "values_sent_to_llm": 28
+    }
+  },
+  "contributions": [
+    {
+      "label": "Phi-4-reasoning",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Phi-4-reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Phi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2025-04-30",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Supervised fine-tuning (SFT) on carefully curated 'teachable' prompts and reasoning demonstrations generated using o3-mini",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Enables detailed reasoning chains leveraging inference-time compute.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Causal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) on reasoning tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) on synthetic CoT data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Reinforcement Learning (RL) for the 'plus' variant.",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-level BPE",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "14B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 14000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia H100 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "32 Nvidia H100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical problem solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Logical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Scientific reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Coding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Algorithmic problem solving",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Planning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Spatial understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/microsoft/Phi-4-reasoning",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "8.3 billion unique tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "1.4M prompts with high-quality answers generated using o3-mini",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "STEM",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Safety-focused tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Publicly available websites",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Synthetically generated problems",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Rewritten/transformed seeds.",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "14B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard dense transformer attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "32K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203087",
+          "label": "context_extension_method",
+          "value": "RoPE base frequency doubling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Supervised fine-tuning (SFT) on curated prompts and reasoning demonstrations",
+          "datatype": "string"
+        },
+        {
+          "property": "P203089",
+          "label": "reasoning_mode",
+          "value": "Chain-of-thought reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Reasoning demonstrations generated using o3-mini",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Synthetic generation using o3-mini",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Rewriting and transforming filtered seeds into new synthetic datasets (e.g., coding to word problems, math with short solutions).",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "GRPO (Group Relative Policy Optimization)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Verifiable solutions (outcome-based rewards)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Accuracy-based reward (R_final) designed to reward longer responses for incorrect answers",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Automated RAI Measurement Framework using synthetic conversations with another LLM to evaluate jailbreaking success, potentially harmful content generation, and intellectual property leakage across multiple sub-categories",
+          "datatype": "string"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "Phi-4",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 25: 82.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HMMT Feb 25: 81.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "OmniMath: 85.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 63.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LiveCodeBench 8/24-1/25: 78.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME 2024, GPQA diamond (used as progress indicators)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Improves significantly over Phi-4 on general-purpose benchmarks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Verl framework",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926758",
+    "contribution_ids": [
+      "R1926760"
+    ],
+    "new_contribution_ids": [
+      "R1926760"
+    ],
+    "comparison_updated": null
+  }
+}

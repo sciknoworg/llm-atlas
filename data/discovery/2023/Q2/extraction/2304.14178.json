@@ -1,0 +1,520 @@
+{
+ "arxiv_id": "2304.14178",
+ "status": "completed",
+ "timestamp": "2026-08-28T02:57:31.510877",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2304.14178",
+  "title": "mPLUG-Owl: Modularization Empowers Large Language Models with Multimodality",
+  "authors": [
+   "Qinghao Ye",
+   "Haiyang Xu",
+   "Guohai Xu",
+   "Jiabo Ye",
+   "Ming Yan",
+   "Yiyang Zhou",
+   "Junyang Wang",
+   "Anwen Hu",
+   "Pengcheng Shi",
+   "Yaya Shi",
+   "Chenliang Li",
+   "Yuanhong Xu",
+   "Hehong Chen",
+   "Junfeng Tian",
+   "Qi Qian",
+   "Ji Zhang",
+   "Fei Huang",
+   "Jingren Zhou"
+  ],
+  "abstract": "Large language models (LLMs) have demonstrated impressive zero-shot abilities on a variety of open-ended tasks, while recent research has also explored the use of LLMs for multi-modal generation. In this study, we introduce mPLUG-Owl, a novel training paradigm that equips LLMs with multi-modal abilities through modularized learning of foundation LLM, a visual knowledge module, and a visual abstractor module. This approach can support multiple modalities and facilitate diverse unimodal and multimodal abilities through modality collaboration. The training paradigm of mPLUG-Owl involves a two-stage method for aligning image and text, which learns visual knowledge with the assistance of LLM while maintaining and even improving the generation abilities of LLM. In the first stage, the visual knowledge module and abstractor module are trained with a frozen LLM module to align the image and text. In the second stage, language-only and multi-modal supervised datasets are used to jointly fine-tune a low-rank adaption (LoRA) module on LLM and the abstractor module by freezing the visual knowledge module. We carefully build a visually-related instruction evaluation set OwlEval. Experimental results show that our model outperforms existing multi-modal models, demonstrating mPLUG-Owl's impressive instruction and visual understanding ability, multi-turn conversation ability, and knowledge reasoning ability. Besides, we observe some unexpected and exciting abilities such as multi-image correlation and scene text understanding, which makes it possible to leverage it for harder real scenarios, such as vision-only document comprehension. Our code, pre-trained model, instruction-tuned models, and evaluation set are available at https://github.com/X-PLUG/mPLUG-Owl. The online demo is available at https://www.modelscope.cn/studios/damo/mPLUG-Owl.",
+  "published": "2023-04-27T13:27:01+00:00",
+  "updated": "2024-03-29T08:13:38+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2304.14178v3",
+  "entry_id": "http://arxiv.org/abs/2304.14178v3",
+  "pdf_path": "data/papers/2304.14178.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 140324,
+ "word_count": 37229,
+ "models_extracted": 9,
+ "extraction_data": [
+  {
+   "model_name": "mPLUG-Owl",
+   "parameters": "7B, 7.2B, 13B, 65B",
+   "parameters_millions": 65000,
+   "model_family": "mPLUG-Owl",
+   "date_created": "2023-04-27",
+   "organization": "Alibaba",
+   "innovation": "Modularized training paradigm equipping LLMs with multimodal abilities via a visual knowledge module and a visual abstractor module; two-stage training (Stage 1: aligns image-text with frozen LLM; Stage 2: joint LoRA fine-tuning on LLM and abstractor while freezing visual knowledge module) to unlock unimodal/multimodal abilities and enhance generation via modality collaboration.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal pre-training and instruction tuning",
+   "pretraining_corpus": "LAION-400M, COYO-700M, Conceptual Captions, MSCOCO",
+   "finetuning_task": "Multimodal instruction tuning, Joint instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Equipping large language models with multimodal abilities.",
+   "application": "Multimodal instruction understanding, visual understanding, knowledge transfer, multi-turn dialogue, multi-image correlation, scene text understanding.",
+   "paper_title": "mPLUG-Owl: Modularization Empowers Large Language Models with Multimodality",
+   "training_corpus_size": "104 billion tokens",
+   "finetuning_data": "OwlEval, Multimodal instruction tuning data, Vicuna text-only questions",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English, Chinese, French, Japanese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/X-PLUG/mPLUG-Owl",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Cross Attention",
+   "context_length_max": "512 (pre-training), 1024 (instruction tuning)",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: Stage 1 aligns image and text by training visual knowledge and abstractor modules with frozen LLM; Stage 2 jointly fine-tunes LoRA on LLM and abstractor module while freezing visual knowledge module.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Cross Attention / Visual Abstractor alignment",
+   "vision_encoder": "Frozen visual encoder (e.g., CLIP), CLIP ViT-L/14",
+   "base_model": "LLaMA, GPT",
+   "optimizer_innovation": null,
+   "benchmark_result": "OwlEval: IU 100.0, VU 95.2, OCR 56.7, KTA 87.5, RA 80.0, MDA 95.0; Vicuna text-only 86.71% score ratio",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "mPLUG-Owl": {
+   "application": [
+    "Multimodal instruction understanding",
+    "visual understanding",
+    "knowledge transfer",
+    "multi-turn dialogue",
+    "multi-image correlation",
+    "scene text understanding."
+   ],
+   "attention_mechanism": [
+    "Cross Attention"
+   ],
+   "base_model": [
+    "LLaMA, GPT"
+   ],
+   "finetuning_data": [
+    "OwlEval",
+    "Multimodal instruction tuning data",
+    "Vicuna text-only questions"
+   ],
+   "finetuning_task": [
+    "Multimodal instruction tuning",
+    "Joint instruction tuning"
+   ],
+   "fusion_architecture": [
+    "Cross Attention / Visual Abstractor alignment"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [],
+   "model_name": [
+    "mPLUG-Owl"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "7B",
+    "7.2B",
+    "13B",
+    "65B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "LAION-400M",
+    "COYO-700M",
+    "Conceptual Captions",
+    "MSCOCO"
+   ],
+   "pretraining_task": [
+    "Multimodal pre-training and instruction tuning"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "French",
+    "Japanese"
+   ],
+   "vision_encoder": [
+    "Frozen visual encoder (e.g., CLIP)",
+    "CLIP ViT-L/14"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "mPLUG-Owl": {
+    "model_family": {
+     "candidates": [
+      "mPLUG-Owl"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "mPLUG-Owl",
+       "reason": "Specific model name, not a broader family or lineage."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Equipping large language models with multimodal abilities."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Equipping large language models with multimodal abilities.",
+       "reason": "Describes a solution or action rather than naming a research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 35,
+   "dropped": 2,
+   "llm_calls": 1,
+   "values_sent_to_llm": 19
+  }
+ },
+ "contributions": [
+  {
+   "label": "mPLUG-Owl",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MPLUG-Owl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-04-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Modularized training paradigm equipping LLMs with multimodal abilities via a visual knowledge module and a visual abstractor module",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Two-stage training (Stage 1: aligns image-text with frozen LLM; Stage 2: joint LoRA fine-tuning on LLM and abstractor while freezing visual knowledge module) to unlock unimodal/multimodal abilities and enhance generation via modality collaboration.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal pre-training and instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COYO-700M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "MSCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Joint instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7.2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "65B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 65000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal instruction understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge transfer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn dialogue",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-image correlation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scene text understanding.",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/X-PLUG/mPLUG-Owl",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "104 billion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OwlEval",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multimodal instruction tuning data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Vicuna text-only questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross Attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 (pre-training), 1024 (instruction tuning)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: Stage 1 aligns image and text by training visual knowledge and abstractor modules with frozen LLM; Stage 2 jointly fine-tunes LoRA on LLM and abstractor module while freezing visual knowledge module.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Cross Attention / Visual Abstractor alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Frozen visual encoder (e.g., CLIP)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "LLaMA, GPT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OwlEval: IU 100.0, VU 95.2, OCR 56.7, KTA 87.5, RA 80.0, MDA 95.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Vicuna text-only 86.71% score ratio",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1773724",
+  "contribution_ids": [
+   "R1773726",
+   "R1773727",
+   "R1923553"
+  ],
+  "new_contribution_ids": [
+   "R1923553"
+  ],
+  "comparison_updated": null
+ }
+}

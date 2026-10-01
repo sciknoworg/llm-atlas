@@ -1,0 +1,663 @@
+{
+  "arxiv_id": "2602.11761",
+  "status": "completed",
+  "timestamp": "2026-08-30T07:41:37.076397",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2602.11761",
+    "title": "MiniCPM-SALA: Hybridizing Sparse and Linear Attention for Efficient Long-Context Modeling",
+    "authors": [
+      " MiniCPM Team",
+      "Wenhao An",
+      "Yingfa Chen",
+      "Yewei Fang",
+      "Jiayi Li",
+      "Xin Li",
+      "Yaohui Li",
+      "Yishan Li",
+      "Yuxuan Li",
+      "Biyuan Lin",
+      "Chuan Liu",
+      "Hezi Liu",
+      "Siyuan Liu",
+      "Hongya Lyu",
+      "Yinxu Pan",
+      "Shixin Ren",
+      "Xingyu Shen",
+      "Zhou Su",
+      "Haojun Sun",
+      "Yangang Sun",
+      "Zhen Leng Thai",
+      "Xin Tian",
+      "Rui Wang",
+      "Xiaorong Wang",
+      "Yudong Wang",
+      "Bo Wu",
+      "Xiaoyue Xu",
+      "Dong Xu",
+      "Shuaikang Xue",
+      "Jiawei Yang",
+      "Bowen Zhang",
+      "Jinqian Zhang",
+      "Letian Zhang",
+      "Shengnan Zhang",
+      "Xinyu Zhang",
+      "Xinyuan Zhang",
+      "Zhu Zhang",
+      "Hengyu Zhao",
+      "Jiacheng Zhao",
+      "Zhi Zheng",
+      "Jie Zhou",
+      "Zihan Zhou",
+      "Shuo Wang",
+      "Chaojun Xiao",
+      "Xu Han",
+      "Zhiyuan Liu",
+      "Maosong Sun"
+    ],
+    "abstract": "The evolution of large language models (LLMs) towards applications with ultra-long contexts faces challenges posed by the high computational and memory costs of the Transformer architecture. While existing sparse and linear attention mechanisms attempt to mitigate these issues, they typically involve a trade-off between memory efficiency and model performance. This paper introduces MiniCPM-SALA, a 9B-parameter hybrid architecture that integrates the high-fidelity long-context modeling of sparse attention (InfLLM-V2) with the global efficiency of linear attention (Lightning Attention). By employing a layer selection algorithm to integrate these mechanisms in a 1:3 ratio and utilizing a hybrid positional encoding (HyPE), the model maintains efficiency and performance for long-context tasks. Furthermore, we introduce a cost-effective continual training framework that transforms pre-trained Transformer-based models into hybrid models, which reduces training costs by approximately 75% compared to training from scratch. Extensive experiments show that MiniCPM-SALA maintains general capabilities comparable to full-attention models while offering improved efficiency. On a single NVIDIA A6000D GPU, the model achieves up to 3.5x the inference speed of the full-attention model at the sequence length of 256K tokens and supports context lengths of up to 1M tokens, a scale where traditional full-attention 8B models fail because of memory constraints.",
+    "published": "2026-02-12T09:37:05+00:00",
+    "updated": "2026-02-28T06:06:27+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2602.11761v2",
+    "entry_id": "http://arxiv.org/abs/2602.11761v2",
+    "pdf_path": "data/papers/2602.11761.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture release)"
+  },
+  "text_length": 49452,
+  "word_count": 2686,
+  "models_extracted": 3,
+  "extraction_data": [
+    {
+      "model_name": "MiniCPM-SALA",
+      "parameters": "8B, 9B",
+      "parameters_millions": 9000,
+      "model_family": "MiniCPM",
+      "date_created": "2026-02-12",
+      "organization": "Minicpm Team",
+      "innovation": "Hybrid sparse and linear attention mechanism integrating 25% InfLLM-V2 sparse attention and 75% LightningAttention linear attention to balance throughput and precision; layer selection algorithm to integrate mechanisms in a 1:3 ratio; hybrid positional encoding (HyPE); cost-effective continual training framework that transforms pre-trained Transformer models into hybrid models, reducing training costs by ~75%.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "L2 high-quality selection data, PDF corpora, L3 synthetic data, long-context data",
+      "finetuning_task": "Supervised fine-tuning",
+      "optimizer": null,
+      "hardware_used": "NVIDIA A6000D GPU",
+      "extension": "Transformer-to-hybrid paradigm via architectural transformation on pre-trained weights, reducing total training budget to ~25% relative to training from scratch.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Efficient long-context modeling for large language models",
+      "application": "Deep understanding and generation of ultra-long contexts, repository-scale code engineering, long-horizon agents",
+      "paper_title": "MiniCPM-SALA: Hybridizing Sparse and Linear Attention for Efficient Long-Context Modeling",
+      "training_corpus_size": "~1.63 trillion tokens",
+      "finetuning_data": "High-quality reasoning-intensive data (code, mathematics, knowledge, function calls, general dialogue), long-context data",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "9B (dense, all parameters active)",
+      "attention_mechanism": "Hybrid Sparse and Linear Attention (25% InfLLM-V2 sparse attention, 75% LightningAttention linear attention), Sparse-Linear hybrid (25% InfLLM-V2 sparse, 75% Lightning Attention linear), Hybrid Sparse and Linear Attention (SALA)",
+      "context_length_max": "1M tokens",
+      "context_extension_method": "Progressive context extension (4K -> 32K -> 160K -> 520K)",
+      "training_pipeline": "Continual training framework transforming pre-trained Transformer models into hybrid models",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "INT4 (GPTQ)",
+      "synthetic_data_generation_method": "L3 synthetic data, long-context data synthesis",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": "Pre-trained Transformer-based models",
+      "optimizer_innovation": null,
+      "benchmark_result": "CMMLU: 81.55; MMLU-Pro: 67.04; HumanEval: 95.12; LCB-v5: 60.48; LCB-v6: 52.00; MBPP: 89.11; AIME24: 83.75; AIME25: 78.33; BBH: 81.55; IFEval: 76.34; RULER 64K: 92.65; RULER 128K: 89.37; RULER 64K-2N: 29.77; RULER 64K-4N: 20.57; RULER 64K-8N: 16.56; MRCR 128K-2N: 28.62; MRCR 128K-4N: 19.62; MRCR 128K-8N: 10.12; NoLiMa 64K: 42.95; NoLiMa 128K: 23.86; RULER 89.37 (128K); NoLiMa 23.86 (128K); Long-context average 38.97; Ultra-long extrapolation 81.6 (2048K); NoLiMa: 38.97",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 3,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "MiniCPM-SALA": {
+      "application": [
+        "repository-scale code engineering",
+        "long-horizon agents"
+      ],
+      "attention_mechanism": [
+        "Hybrid Sparse and Linear Attention (25% InfLLM-V2 sparse attention, 75% LightningAttention linear attention)",
+        "Sparse-Linear hybrid (25% InfLLM-V2 sparse, 75% Lightning Attention linear)",
+        "Hybrid Sparse and Linear Attention (SALA)"
+      ],
+      "base_model": [],
+      "context_extension_method": [],
+      "finetuning_data": [
+        "High-quality reasoning-intensive data (code, mathematics, knowledge, function calls, general dialogue)",
+        "long-context data"
+      ],
+      "finetuning_task": [],
+      "hardware_used": [
+        "NVIDIA A6000D GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "MiniCPM"
+      ],
+      "model_name": [
+        "MiniCPM-SALA"
+      ],
+      "organization": [
+        "Minicpm Team"
+      ],
+      "parameters": [
+        "8B",
+        "9B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "L2 high-quality selection data",
+        "L3 synthetic data"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "INT4 (GPTQ)"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiniCPM-SALA": {
+        "application": {
+          "candidates": [
+            "Deep understanding and generation of ultra-long contexts",
+            "repository-scale code engineering",
+            "long-horizon agents"
+          ],
+          "accepted": [
+            "repository-scale code engineering",
+            "long-horizon agents"
+          ],
+          "dropped": [
+            {
+              "value": "Deep understanding and generation of ultra-long contexts",
+              "reason": "Describes a capability rather than a concrete task or domain."
+            }
+          ]
+        },
+        "base_model": {
+          "candidates": [
+            "Pre-trained Transformer-based models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Pre-trained Transformer-based models",
+              "reason": "Describes a category of models rather than a specific named base model."
+            }
+          ]
+        },
+        "context_extension_method": {
+          "candidates": [
+            "Progressive context extension (4K -> 32K -> 160K -> 520K)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Progressive context extension (4K -> 32K -> 160K -> 520K)",
+              "reason": "Describes a training schedule or process rather than a specific technique or method."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning",
+              "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "L2 high-quality selection data",
+            "PDF corpora",
+            "L3 synthetic data",
+            "long-context data"
+          ],
+          "accepted": [
+            "L2 high-quality selection data",
+            "L3 synthetic data"
+          ],
+          "dropped": [
+            {
+              "value": "PDF corpora",
+              "reason": "Describes a file format or type rather than a specific identifiable dataset or corpus."
+            },
+            {
+              "value": "long-context data",
+              "reason": "Describes a data characteristic rather than a specific identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Efficient long-context modeling for large language models"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Efficient long-context modeling for large language models",
+              "reason": "Describes a solution or modeling approach rather than a specific problem, challenge, or capability gap."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "L3 synthetic data",
+            "long-context data synthesis"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "L3 synthetic data",
+              "reason": "Names a dataset or data type rather than a generation method or technique."
+            },
+            {
+              "value": "long-context data synthesis",
+              "reason": "Describes a process or task rather than a specific generation method or technique."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 20,
+      "dropped": 9,
+      "llm_calls": 1,
+      "values_sent_to_llm": 21
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiniCPM-SALA",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniCPM-SALA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniCPM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2026-02-12",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Minicpm Team",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid sparse and linear attention mechanism integrating 25% InfLLM-V2 sparse attention and 75% LightningAttention linear attention to balance throughput and precision",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Layer selection algorithm to integrate mechanisms in a 1:3 ratio",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Hybrid positional encoding (HyPE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Cost-effective continual training framework that transforms pre-trained Transformer models into hybrid models, reducing training costs by ~75%.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "L2 high-quality selection data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "L3 synthetic data",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "8B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "9B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 9000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA A6000D GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Repository-scale code engineering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long-horizon agents",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~1.63 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "High-quality reasoning-intensive data (code, mathematics, knowledge, function calls, general dialogue)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Long-context data",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "9B (dense, all parameters active)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid Sparse and Linear Attention (25% InfLLM-V2 sparse attention, 75% LightningAttention linear attention)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Sparse-Linear hybrid (25% InfLLM-V2 sparse, 75% Lightning Attention linear)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Hybrid Sparse and Linear Attention (SALA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "1M tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Continual training framework transforming pre-trained Transformer models into hybrid models",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "INT4 (GPTQ)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMMLU: 81.55",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU-Pro: 67.04",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 95.12",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LCB-v5: 60.48",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LCB-v6: 52.00",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MBPP: 89.11",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME24: 83.75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "AIME25: 78.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "BBH: 81.55",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "IFEval: 76.34",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 64K: 92.65",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 128K: 89.37",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 64K-2N: 29.77",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 64K-4N: 20.57",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 64K-8N: 16.56",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MRCR 128K-2N: 28.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MRCR 128K-4N: 19.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MRCR 128K-8N: 10.12",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoLiMa 64K: 42.95",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoLiMa 128K: 23.86",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "RULER 89.37 (128K)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoLiMa 23.86 (128K)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Long-context average 38.97",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Ultra-long extrapolation 81.6 (2048K)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NoLiMa: 38.97",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1927255",
+    "contribution_ids": [
+      "R1927257"
+    ],
+    "new_contribution_ids": [
+      "R1927257"
+    ],
+    "comparison_updated": null
+  }
+}

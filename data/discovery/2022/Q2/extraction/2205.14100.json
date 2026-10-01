@@ -1,0 +1,2632 @@
+{
+ "arxiv_id": "2205.14100",
+ "status": "completed",
+ "timestamp": "2026-08-27T14:04:07.768677",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2205.14100",
+  "title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+  "authors": [
+   "Jianfeng Wang",
+   "Zhengyuan Yang",
+   "Xiaowei Hu",
+   "Linjie Li",
+   "Kevin Lin",
+   "Zhe Gan",
+   "Zicheng Liu",
+   "Ce Liu",
+   "Lijuan Wang"
+  ],
+  "abstract": "In this paper, we design and train a Generative Image-to-text Transformer, GIT, to unify vision-language tasks such as image/video captioning and question answering. While generative models provide a consistent network architecture between pre-training and fine-tuning, existing work typically contains complex structures (uni/multi-modal encoder/decoder) and depends on external modules such as object detectors/taggers and optical character recognition (OCR). In GIT, we simplify the architecture as one image encoder and one text decoder under a single language modeling task. We also scale up the pre-training data and the model size to boost the model performance. Without bells and whistles, our GIT establishes new state of the arts on 12 challenging benchmarks with a large margin. For instance, our model surpasses the human performance for the first time on TextCaps (138.2 vs. 125.5 in CIDEr). Furthermore, we present a new scheme of generation-based image classification and scene text recognition, achieving decent performance on standard benchmarks. Codes are released at \\url{https://github.com/microsoft/GenerativeImage2Text}.",
+  "published": "2022-05-27T17:03:38+00:00",
+  "updated": "2022-12-15T19:21:35+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2205.14100v5",
+  "entry_id": "http://arxiv.org/abs/2205.14100v5",
+  "pdf_path": "data/papers/2205.14100.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 151717,
+ "word_count": 25158,
+ "models_extracted": 23,
+ "extraction_data": [
+  {
+   "model_name": "GIT 2",
+   "parameters": "129M, 347M, 681M, 0.7B, 5.1B",
+   "parameters_millions": 5100,
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Generative image-to-text transformer combining a contrastive vision encoder with a decoder-only language model trained via causal language modeling on image-text pairs; enables free-form answer generation for VQA without predefined candidate answers; extends to video captioning via learnable temporal embeddings and to image classification via autoregressive prediction of class names.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image-to-text generation",
+   "pretraining_corpus": "COCO, Conceptual Captions (CC3M), SBU, Visual Genome, Conceptual Captions (CC12M), ALT200M, and an additional 0.6B image-text pairs",
+   "finetuning_task": "Image captioning, visual question answering, video captioning, image classification, Image/video captioning, Task-specific fine-tuning for captioning, VQA",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision and language understanding, image captioning",
+   "application": "Image captioning, video captioning, visual question answering, image classification, scene text recognition",
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "training_corpus_size": "0.8 billion image-text pairs",
+   "finetuning_data": "COCO, nocaps, TextCaps, Flickr30K, VQAv2, VizWiz-QA, TextVQA, ST-VQA, ImageNet-1K, VizWiz-Captions, scene-text VQA datasets, video captioning datasets, image classification datasets, MJSynth, SynthText, ICDAR 2013/2015, IIIT5K-Words, SVT, SVTP, CUTE80",
+   "tokenizer": null,
+   "supported_language": "English, French, Spanish, Arabic, Japanese, Korean, Chinese",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "5.1B (dense, all parameters active)",
+   "attention_mechanism": "Transformer decoder self-attention, Self-attention with seq2seq attention mask, Standard transformer attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Shared projection for image and text tokens in decoder",
+   "vision_encoder": "DaViT (4.8B), Swin-like vision transformer, ResNet-152, CLIP/ViT-B/16, CLIP/ViT-L/14, Florence/CoSwin",
+   "base_model": "Contrastive pre-trained image encoder",
+   "optimizer_innovation": null,
+   "benchmark_result": "MSVD CIDEr: 185.4; MSRVTT CIDEr: 75.9; YouCook2 CIDEr: 131.2; VATEX CIDEr: 94.5; TVC CIDEr: 66.1; MSVD-QA Accuracy: 58.2; MSRVTT-QA Accuracy: 45.6; TGIF-Frame Accuracy: 74.9; COCO Karpathy: BLEU@4 44.1, METEOR 31.4, ROUGE-L 57.0, CIDEr 145.0; COCO: 148.8; nocaps: 123.4; VizWiz-Caption: 114.4; TextCaps: 138.2; ST-VQA: 69.6; VizWiz-VQA: 67.5; OCR-VQA: 68.1; MSVD: 180.2; MSRVTT: 73.9; VATEX: 93.8; TVC: 61.2; MSVD-QA: 56.8; TGIF-Frame: 72.8; Text Rec.: 92.9; nocaps CIDEr 123.0; TextCaps SOTA; VizWiz-Captions SOTA; scene-text VQA SOTA; video captioning competitive/SOTA; image classification competitive; TextCaps: 89.9; MJ+ST scene text recognition: 92.9; ImageNet-1k 5-shot equal: 79.79, in: 80.15, voc-prior: 80.95; COCO Karpathy: BLEU@4 40.4, METEOR 30.0, ROUGE-L 55.0, CIDEr 131.4; COCO Karpathy: BLEU@4 42.0, METEOR 30.8, ROUGE-L 56.0, CIDEr 138.5; COCO Karpathy: BLEU@4 44.1, METEOR 31.5, ROUGE-L 57.0, CIDEr 144.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GIT Huge",
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Generative image-to-text transformer unifying vision and language tasks; vocabulary-constrained decoding via a trie structure to guarantee in-vocabulary output; lightweight fine-tuning for few-shot learning that updates parameters once and removes support shots during inference, reducing cost compared to methods like Flamingo.",
+   "pretraining_corpus": "COCO, SBU, CC3M, Visual Genome (VG), CC12M",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, scene text recognition, visual question answering, image classification",
+   "license": null,
+   "research_problem": "Vision and language understanding and generation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image-to-text generation",
+   "training_corpus_size": "145 million images",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Task-specific fine-tuning for captioning, VQA, video captioning",
+   "finetuning_data": "TextCaps, MJSynth, SynthText, COCO, VizWiz-QA, ICDAR 2013/2015, IIIT5K-Words, SVT, SVTP, CUTE80, ImageNet-1k",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Unified pre-training on image-to-text generation followed by task-specific fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ResNet-152",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "TextCaps: 89.9; MJ+ST scene text recognition: 92.9; ImageNet-1k 5-shot equal: 79.79, in: 80.15, voc-prior: 80.95",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GIT B",
+   "parameters": "0.1B",
+   "parameters_millions": 100,
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Unified generative framework for multiple vision-language tasks using a single autoregressive Transformer decoder, replacing discriminative classifiers with a captioning-based approach to enable zero/few-shot classification and flexible output generation.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image-to-text generation",
+   "pretraining_corpus": "COCO, TextCaps, VizWiz-QA, 20M curated image-text pairs, 0.8B web-crawled image-text pairs",
+   "finetuning_task": "Image captioning, visual question answering, video captioning, image classification",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision and Language",
+   "application": "Image captioning, visual question answering, video captioning, image classification",
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "training_corpus_size": null,
+   "finetuning_data": "COCO, TextCaps, VizWiz-QA, MSVD, MSRVTT, YouCook2, VATEX, TVC, IC13, SVT, IIIT, IC15, SVTP, CUTE, TextOCR, Flickr30K, VQAv2, TextVQA, ST-VQA, ImageNet-1K",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "0.1B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Shared projection for image and text tokens in decoder",
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VizWiz-Captions test-dev M: 30.6, R: 24.6, C: 50.3, S: 18.6, MTMA: 106.3; Flickr30K full-shot 68.5; VQAv2 test-dev 37.47; TextVQA val 62.4; VizWiz-QA val 32.3; ST-VQA val 59.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GIT L",
+   "parameters": "0.3B",
+   "parameters_millions": 300,
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Unified generative framework for multiple vision-language tasks using a single autoregressive Transformer decoder, replacing discriminative classifiers with a captioning-based approach to enable zero/few-shot classification and flexible output generation.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Image-to-text generation",
+   "pretraining_corpus": "COCO, TextCaps, VizWiz-QA, 20M curated image-text pairs, 0.8B web-crawled image-text pairs",
+   "finetuning_task": "Image captioning, visual question answering, video captioning, image classification",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision and Language",
+   "application": "Image captioning, visual question answering, video captioning, image classification",
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "training_corpus_size": null,
+   "finetuning_data": "COCO, TextCaps, VizWiz-QA, MSVD, MSRVTT, YouCook2, VATEX, TVC, IC13, SVT, IIIT, IC15, SVTP, CUTE, TextOCR, Flickr30K, VQAv2, TextVQA, ST-VQA, ImageNet-1K",
+   "tokenizer": null,
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "0.3B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Shared projection for image and text tokens in decoder",
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VizWiz-Captions test-dev M: 37.0, R: 27.6, C: 54.1, S: 21.1, MTMA: 143.7; Flickr30K full-shot 80.5; VQAv2 test-dev 59.93; TextVQA val 67.8; VizWiz-QA val 59.2; ST-VQA val 69.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GITTextcaps",
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Fine-tuned variant of GIT specifically on TextCaps caption data for image captioning.",
+   "pretraining_corpus": "CC12M",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning",
+   "license": null,
+   "research_problem": "Vision and Language",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Image captioning",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "TextCaps",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GITMJST",
+   "model_family": "GIT",
+   "date_created": "2022-05-27",
+   "organization": "Microsoft",
+   "innovation": "Fine-tuned variant of GIT specifically on MJ+ST scene text recognition data.",
+   "pretraining_corpus": "CC12M",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Scene text recognition",
+   "license": null,
+   "research_problem": "Vision and Language",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Scene text recognition",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "MJ+ST",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 16,
+ "models_after_merge": 6,
+ "validated_rows": {
+  "GIT 2": {
+   "application": [
+    "Image captioning",
+    "video captioning",
+    "visual question answering",
+    "image classification",
+    "scene text recognition"
+   ],
+   "attention_mechanism": [
+    "Transformer decoder self-attention",
+    "Self-attention with seq2seq attention mask",
+    "Standard transformer attention"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "COCO",
+    "nocaps",
+    "TextCaps",
+    "Flickr30K",
+    "VQAv2",
+    "VizWiz-QA",
+    "TextVQA",
+    "ST-VQA",
+    "ImageNet-1K",
+    "VizWiz-Captions",
+    "MJSynth",
+    "SynthText",
+    "ICDAR 2013/2015",
+    "IIIT5K-Words",
+    "SVT",
+    "SVTP",
+    "CUTE80"
+   ],
+   "finetuning_task": [
+    "Image captioning",
+    "visual question answering",
+    "video captioning",
+    "image classification",
+    "Image/video captioning",
+    "VQA"
+   ],
+   "fusion_architecture": [
+    "Shared projection for image and text tokens in decoder"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GIT 2"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "129M",
+    "347M",
+    "681M",
+    "0.7B",
+    "5.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Conceptual Captions (CC3M)",
+    "SBU",
+    "Visual Genome",
+    "Conceptual Captions (CC12M)",
+    "ALT200M"
+   ],
+   "pretraining_task": [
+    "Image-to-text generation"
+   ],
+   "research_problem": [
+    "Vision and language understanding",
+    "image captioning"
+   ],
+   "supported_language": [
+    "English",
+    "French",
+    "Spanish",
+    "Arabic",
+    "Japanese",
+    "Korean",
+    "Chinese"
+   ],
+   "vision_encoder": [
+    "DaViT (4.8B)",
+    "Swin-like vision transformer",
+    "ResNet-152",
+    "CLIP/ViT-B/16",
+    "CLIP/ViT-L/14",
+    "Florence/CoSwin"
+   ]
+  },
+  "GIT Huge": {
+   "application": [
+    "Image captioning",
+    "scene text recognition",
+    "visual question answering",
+    "image classification"
+   ],
+   "finetuning_data": [
+    "TextCaps",
+    "MJSynth",
+    "SynthText",
+    "COCO",
+    "VizWiz-QA",
+    "ICDAR 2013/2015",
+    "IIIT5K-Words",
+    "SVT",
+    "SVTP",
+    "CUTE80",
+    "ImageNet-1k"
+   ],
+   "finetuning_task": [
+    "VQA",
+    "video captioning"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GIT Huge"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "SBU",
+    "CC3M",
+    "Visual Genome (VG)",
+    "CC12M"
+   ],
+   "pretraining_task": [
+    "Image-to-text generation"
+   ],
+   "research_problem": [
+    "Vision and language understanding and generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ResNet-152"
+   ]
+  },
+  "GIT B": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "video captioning",
+    "image classification"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "TextCaps",
+    "VizWiz-QA",
+    "MSVD",
+    "MSRVTT",
+    "YouCook2",
+    "VATEX",
+    "TVC",
+    "IC13",
+    "SVT",
+    "IIIT",
+    "IC15",
+    "SVTP",
+    "CUTE",
+    "TextOCR",
+    "Flickr30K",
+    "VQAv2",
+    "TextVQA",
+    "ST-VQA",
+    "ImageNet-1K"
+   ],
+   "finetuning_task": [
+    "Image captioning",
+    "visual question answering",
+    "video captioning",
+    "image classification"
+   ],
+   "fusion_architecture": [
+    "Shared projection for image and text tokens in decoder"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GIT B"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "0.1B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "TextCaps",
+    "VizWiz-QA"
+   ],
+   "pretraining_task": [
+    "Image-to-text generation"
+   ],
+   "research_problem": [
+    "Vision and Language"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "GIT L": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "video captioning",
+    "image classification"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "finetuning_data": [
+    "COCO",
+    "TextCaps",
+    "VizWiz-QA",
+    "MSVD",
+    "MSRVTT",
+    "YouCook2",
+    "VATEX",
+    "TVC",
+    "IC13",
+    "SVT",
+    "IIIT",
+    "IC15",
+    "SVTP",
+    "CUTE",
+    "TextOCR",
+    "Flickr30K",
+    "VQAv2",
+    "TextVQA",
+    "ST-VQA",
+    "ImageNet-1K"
+   ],
+   "finetuning_task": [
+    "Image captioning",
+    "visual question answering",
+    "video captioning",
+    "image classification"
+   ],
+   "fusion_architecture": [
+    "Shared projection for image and text tokens in decoder"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GIT L"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "0.3B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "TextCaps",
+    "VizWiz-QA"
+   ],
+   "pretraining_task": [
+    "Image-to-text generation"
+   ],
+   "research_problem": [
+    "Vision and Language"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "GITTextcaps": {
+   "application": [
+    "Image captioning"
+   ],
+   "finetuning_data": [
+    "TextCaps"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GITTextcaps"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M"
+   ],
+   "pretraining_task": [
+    "Image captioning"
+   ],
+   "research_problem": [
+    "Vision and Language"
+   ]
+  },
+  "GITMJST": {
+   "application": [
+    "Scene text recognition"
+   ],
+   "finetuning_data": [
+    "MJ+ST"
+   ],
+   "model_family": [
+    "GIT"
+   ],
+   "model_name": [
+    "GITMJST"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M"
+   ],
+   "pretraining_task": [
+    "Scene text recognition"
+   ],
+   "research_problem": [
+    "Vision and Language"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "GIT 2": {
+    "base_model": {
+     "candidates": [
+      "Contrastive pre-trained image encoder"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Contrastive pre-trained image encoder",
+       "reason": "Describes a component type rather than a specific named base model"
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "COCO",
+      "nocaps",
+      "TextCaps",
+      "Flickr30K",
+      "VQAv2",
+      "VizWiz-QA",
+      "TextVQA",
+      "ST-VQA",
+      "ImageNet-1K",
+      "VizWiz-Captions",
+      "scene-text VQA datasets",
+      "video captioning datasets",
+      "image classification datasets",
+      "MJSynth",
+      "SynthText",
+      "ICDAR 2013/2015",
+      "IIIT5K-Words",
+      "SVT",
+      "SVTP",
+      "CUTE80"
+     ],
+     "accepted": [
+      "COCO",
+      "nocaps",
+      "TextCaps",
+      "Flickr30K",
+      "VQAv2",
+      "VizWiz-QA",
+      "TextVQA",
+      "ST-VQA",
+      "ImageNet-1K",
+      "VizWiz-Captions",
+      "MJSynth",
+      "SynthText",
+      "ICDAR 2013/2015",
+      "IIIT5K-Words",
+      "SVT",
+      "SVTP",
+      "CUTE80"
+     ],
+     "dropped": [
+      {
+       "value": "scene-text VQA datasets",
+       "reason": "Generic description/category rather than a specific named dataset"
+      },
+      {
+       "value": "video captioning datasets",
+       "reason": "Generic description/category rather than a specific named dataset"
+      },
+      {
+       "value": "image classification datasets",
+       "reason": "Generic description/category rather than a specific named dataset"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Image captioning",
+      "visual question answering",
+      "video captioning",
+      "image classification",
+      "Image/video captioning",
+      "Task-specific fine-tuning for captioning",
+      "VQA"
+     ],
+     "accepted": [
+      "Image captioning",
+      "visual question answering",
+      "video captioning",
+      "image classification",
+      "Image/video captioning",
+      "VQA"
+     ],
+     "dropped": [
+      {
+       "value": "Task-specific fine-tuning for captioning",
+       "reason": "Describes the fine-tuning process rather than naming the specific task"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "COCO",
+      "Conceptual Captions (CC3M)",
+      "SBU",
+      "Visual Genome",
+      "Conceptual Captions (CC12M)",
+      "ALT200M",
+      "an additional 0.6B image-text pairs"
+     ],
+     "accepted": [
+      "COCO",
+      "Conceptual Captions (CC3M)",
+      "SBU",
+      "Visual Genome",
+      "Conceptual Captions (CC12M)",
+      "ALT200M"
+     ],
+     "dropped": [
+      {
+       "value": "an additional 0.6B image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus"
+      }
+     ]
+    }
+   },
+   "GIT Huge": {
+    "finetuning_task": {
+     "candidates": [
+      "Task-specific fine-tuning for captioning",
+      "VQA",
+      "video captioning"
+     ],
+     "accepted": [
+      "VQA",
+      "video captioning"
+     ],
+     "dropped": [
+      {
+       "value": "Task-specific fine-tuning for captioning",
+       "reason": "Describes the fine-tuning process rather than naming the specific task"
+      }
+     ]
+    }
+   },
+   "GIT B": {
+    "pretraining_corpus": {
+     "candidates": [
+      "COCO",
+      "TextCaps",
+      "VizWiz-QA",
+      "20M curated image-text pairs",
+      "0.8B web-crawled image-text pairs"
+     ],
+     "accepted": [
+      "COCO",
+      "TextCaps",
+      "VizWiz-QA"
+     ],
+     "dropped": [
+      {
+       "value": "20M curated image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus"
+      },
+      {
+       "value": "0.8B web-crawled image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus"
+      }
+     ]
+    }
+   },
+   "GIT L": {
+    "pretraining_corpus": {
+     "candidates": [
+      "COCO",
+      "TextCaps",
+      "VizWiz-QA",
+      "20M curated image-text pairs",
+      "0.8B web-crawled image-text pairs"
+     ],
+     "accepted": [
+      "COCO",
+      "TextCaps",
+      "VizWiz-QA"
+     ],
+     "dropped": [
+      {
+       "value": "20M curated image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus"
+      },
+      {
+       "value": "0.8B web-crawled image-text pairs",
+       "reason": "Describes a quantity of data rather than naming an identifiable dataset or corpus"
+      }
+     ]
+    }
+   },
+   "GITTextcaps": {},
+   "GITMJST": {}
+  },
+  "counts": {
+   "kept": 193,
+   "dropped": 11,
+   "llm_calls": 1,
+   "values_sent_to_llm": 63
+  }
+ },
+ "contributions": [
+  {
+   "label": "GIT 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GIT 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Generative image-to-text transformer combining a contrastive vision encoder with a decoder-only language model trained via causal language modeling on image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Enables free-form answer generation for VQA without predefined candidate answers",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Extends to video captioning via learnable temporal embeddings and to image classification via autoregressive prediction of class names.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (CC3M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions (CC12M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ALT200M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image/video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "129M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "347M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "681M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 5100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scene text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "0.8 billion image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Nocaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ST-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-1K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-Captions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MJSynth",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SynthText",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICDAR 2013/2015",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IIIT5K-Words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVTP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CUTE80",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "5.1B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Transformer decoder self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention with seq2seq attention mask",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard transformer attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Shared projection for image and text tokens in decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "DaViT (4.8B)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Swin-like vision transformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-152",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP/ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CLIP/ViT-L/14",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Florence/CoSwin",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD CIDEr: 185.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT CIDEr: 75.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "YouCook2 CIDEr: 131.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VATEX CIDEr: 94.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TVC CIDEr: 66.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD-QA Accuracy: 58.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT-QA Accuracy: 45.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TGIF-Frame Accuracy: 74.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Karpathy: BLEU@4 44.1, METEOR 31.4, ROUGE-L 57.0, CIDEr 145.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO: 148.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Nocaps: 123.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Caption: 114.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextCaps: 138.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ST-VQA: 69.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-VQA: 67.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCR-VQA: 68.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD: 180.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSRVTT: 73.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VATEX: 93.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TVC: 61.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSVD-QA: 56.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TGIF-Frame: 72.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Text Rec.: 92.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Nocaps CIDEr 123.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextCaps SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Captions SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Scene-text VQA SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video captioning competitive/SOTA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Image classification competitive",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextCaps: 89.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MJ+ST scene text recognition: 92.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1k 5-shot equal: 79.79, in: 80.15, voc-prior: 80.95",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Karpathy: BLEU@4 40.4, METEOR 30.0, ROUGE-L 55.0, CIDEr 131.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Karpathy: BLEU@4 42.0, METEOR 30.8, ROUGE-L 56.0, CIDEr 138.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Karpathy: BLEU@4 44.1, METEOR 31.5, ROUGE-L 57.0, CIDEr 144.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GIT Huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GIT Huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Generative image-to-text transformer unifying vision and language tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Vocabulary-constrained decoding via a trie structure to guarantee in-vocabulary output",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Lightweight fine-tuning for few-shot learning that updates parameters once and removes support shots during inference, reducing cost compared to methods like Flamingo.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome (VG)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "VQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scene text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and language understanding and generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "145 million images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MJSynth",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SynthText",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ICDAR 2013/2015",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IIIT5K-Words",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVTP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CUTE80",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-1k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Unified pre-training on image-to-text generation followed by task-specific fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-152",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextCaps: 89.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MJ+ST scene text recognition: 92.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet-1k 5-shot equal: 79.79, in: 80.15, voc-prior: 80.95",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GIT B",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GIT B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified generative framework for multiple vision-language tasks using a single autoregressive Transformer decoder, replacing discriminative classifiers with a captioning-based approach to enable zero/few-shot classification and flexible output generation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz-QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 100,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSVD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSRVTT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "YouCook2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VATEX",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TVC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IC13",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IIIT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IC15",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVTP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CUTE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextOCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ST-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-1K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "0.1B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Shared projection for image and text tokens in decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Captions test-dev M: 30.6, R: 24.6, C: 50.3, S: 18.6, MTMA: 106.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K full-shot 68.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 test-dev 37.47",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA val 62.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-QA val 32.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ST-VQA val 59.2",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GIT L",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GIT L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified generative framework for multiple vision-language tasks using a single autoregressive Transformer decoder, replacing discriminative classifiers with a captioning-based approach to enable zero/few-shot classification and flexible output generation.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-to-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "TextCaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VizWiz-QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "0.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VizWiz-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSVD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSRVTT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "YouCook2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VATEX",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TVC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IC13",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IIIT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IC15",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SVTP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CUTE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextOCR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextVQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ST-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-1K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "0.3B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on large-scale image-text pairs -> fine-tuning on specific downstream tasks (captioning, VQA, video captioning, scene text recognition)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Shared projection for image and text tokens in decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-Captions test-dev M: 37.0, R: 27.6, C: 54.1, S: 21.1, MTMA: 143.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30K full-shot 80.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 test-dev 59.93",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "TextVQA val 67.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VizWiz-QA val 59.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ST-VQA val 69.1",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GITTextcaps",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GITTextcaps",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fine-tuned variant of GIT specifically on TextCaps caption data for image captioning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TextCaps",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GITMJST",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GITMJST",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GIT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-05-27",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fine-tuned variant of GIT specifically on MJ+ST scene text recognition data.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Scene text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Scene text recognition",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision and Language",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MJ+ST",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R504234",
+  "contribution_ids": [
+   "R504235",
+   "R1923025",
+   "R1923043",
+   "R1923046",
+   "R1923051",
+   "R1923053",
+   "R1923055"
+  ],
+  "new_contribution_ids": [
+   "R1923025",
+   "R1923043",
+   "R1923046",
+   "R1923051",
+   "R1923053",
+   "R1923055"
+  ],
+  "comparison_updated": null
+ }
+}

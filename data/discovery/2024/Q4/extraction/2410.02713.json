@@ -1,0 +1,575 @@
+{
+  "arxiv_id": "2410.02713",
+  "status": "completed",
+  "timestamp": "2026-08-29T14:27:21.035250",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2410.02713",
+    "title": "LLaVA-Video: Video Instruction Tuning With Synthetic Data",
+    "authors": [
+      "Yuanhan Zhang",
+      "Jinming Wu",
+      "Wei Li",
+      "Bo Li",
+      "Zejun Ma",
+      "Ziwei Liu",
+      "Chunyuan Li"
+    ],
+    "abstract": "The development of video large multimodal models (LMMs) has been hindered by the difficulty of curating large amounts of high-quality raw data from the web. To address this, we propose an alternative approach by creating a high-quality synthetic dataset specifically for video instruction-following, namely LLaVA-Video-178K. This dataset includes key tasks such as detailed captioning, open-ended question-answering (QA), and multiple-choice QA. By training on this dataset, in combination with existing visual instruction tuning data, we introduce LLaVA-Video, a new video LMM. Our experiments demonstrate that LLaVA-Video achieves strong performance across various video benchmarks, highlighting the effectiveness of our dataset. We plan to release the dataset, its generation pipeline, and the model checkpoints.",
+    "published": "2024-10-03T17:36:49+00:00",
+    "updated": "2025-08-01T16:40:14+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2410.02713v3",
+    "entry_id": "http://arxiv.org/abs/2410.02713v3",
+    "pdf_path": "data/papers/2410.02713.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 76478,
+  "word_count": 10769,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "LLaVA-Video",
+      "parameters": "7B, 13B, 72B",
+      "parameters_millions": 72000,
+      "model_family": "LLaVA",
+      "date_created": "2024-10-03",
+      "organization": "ByteDance",
+      "innovation": "Synthetic video instruction-tuning dataset generation (LLaVA-Video-178K) using a recurrent detailed caption pipeline with dense frame sampling (1 frame/sec) and GPT-4o prompt-based QA generation; demonstrates that dense frame sampling significantly outperforms sparse sampling for video-language understanding.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Instruction tuning",
+      "pretraining_corpus": "LLaVA-Video-178K (178,510 videos from 10 major video sources), combined with existing visual instruction tuning data",
+      "finetuning_task": "Video instruction tuning",
+      "optimizer": null,
+      "hardware_used": "NVIDIA H100 GPUs",
+      "extension": "SlowFast representation parameterized as V=(T,M,s,p) to balance frame count and visual tokens within LLM context/GPU memory limits.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Video instruction tuning with synthetic data",
+      "application": "Video understanding, video captioning, open-ended Q&A, multiple-choice Q&A, temporal understanding",
+      "paper_title": "LLaVA-Video: Video Instruction Tuning With Synthetic Data",
+      "training_corpus_size": "178,510 videos",
+      "finetuning_data": "LLaVA-Video-178K, existing visual instruction tuning data, ActivityNet-QA, NExT-QA, PerceptionTest, LLaVA-Hound-255K, LLaVA-OneVision image data",
+      "tokenizer": "LLaVA tokenizer",
+      "supported_language": "English",
+      "hardware_description": "128 NVIDIA H100 GPUs",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "7B (dense)",
+      "attention_mechanism": null,
+      "context_length_max": "8192",
+      "context_extension_method": null,
+      "training_pipeline": "Instruction tuning on video data",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Synthetic data (LLaVA-Video-178K dataset)",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Mid-fusion (vision encoder + MLP projector + LLM)",
+      "vision_encoder": "SigLIP, SigLIP or CLIP ViT-L/14",
+      "base_model": "LLaVA-OneVision (single-image stage checkpoint)",
+      "optimizer_innovation": null,
+      "benchmark_result": "NExT-QA: 80.1; ActivityNet-QA: 69.0; PerceptionTest: 55.6; VideoMME: 63.4; VideoDC: 3.66/3.73; VideoChatGPT: 32.5/34.0; NExT-QA: 56.5/63.4; PerceptionTest: 3.52/3.62; EgoSchema: 70.8/74.4; VideoMME: 58.6/64.1; LongVideoBench: 83.2/85.4; TemporalBench: 67.9/74.3; MLVU: 58.2/61.9; VideoDetailCaption: 22.9/33.7; SOTA on Video-MME, MLVU, Video-Bench, etc.",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "LLaVA-Video": {
+      "application": [
+        "Video understanding",
+        "video captioning",
+        "open-ended Q&A",
+        "multiple-choice Q&A",
+        "temporal understanding"
+      ],
+      "base_model": [
+        "LLaVA-OneVision (single-image stage checkpoint)"
+      ],
+      "finetuning_data": [
+        "LLaVA-Video-178K",
+        "ActivityNet-QA",
+        "NExT-QA",
+        "PerceptionTest",
+        "LLaVA-Hound-255K"
+      ],
+      "finetuning_task": [
+        "Video instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Mid-fusion (vision encoder + MLP projector + LLM)"
+      ],
+      "hardware_used": [
+        "NVIDIA H100 GPUs"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "LLaVA"
+      ],
+      "model_name": [
+        "LLaVA-Video"
+      ],
+      "organization": [
+        "ByteDance"
+      ],
+      "parameters": [
+        "7B",
+        "13B",
+        "72B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "LLaVA-Video-178K (178,510 videos from 10 major video sources)"
+      ],
+      "pretraining_task": [
+        "Instruction tuning"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [],
+      "vision_encoder": [
+        "SigLIP",
+        "SigLIP or CLIP ViT-L/14"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "LLaVA-Video": {
+        "finetuning_data": {
+          "candidates": [
+            "LLaVA-Video-178K",
+            "existing visual instruction tuning data",
+            "ActivityNet-QA",
+            "NExT-QA",
+            "PerceptionTest",
+            "LLaVA-Hound-255K",
+            "LLaVA-OneVision image data"
+          ],
+          "accepted": [
+            "LLaVA-Video-178K",
+            "ActivityNet-QA",
+            "NExT-QA",
+            "PerceptionTest",
+            "LLaVA-Hound-255K"
+          ],
+          "dropped": [
+            {
+              "value": "existing visual instruction tuning data",
+              "reason": "Vague placeholder/description rather than a specific dataset name."
+            },
+            {
+              "value": "LLaVA-OneVision image data",
+              "reason": "Descriptive phrase rather than a specific dataset name."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "LLaVA-Video-178K (178,510 videos from 10 major video sources)",
+            "combined with existing visual instruction tuning data"
+          ],
+          "accepted": [
+            "LLaVA-Video-178K (178,510 videos from 10 major video sources)"
+          ],
+          "dropped": [
+            {
+              "value": "combined with existing visual instruction tuning data",
+              "reason": "Sentence fragment describing a process rather than a specific corpus name."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Video instruction tuning with synthetic data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Video instruction tuning with synthetic data",
+              "reason": "Describes a method or task rather than a research problem or capability gap."
+            }
+          ]
+        },
+        "synthetic_data_generation_method": {
+          "candidates": [
+            "Synthetic data (LLaVA-Video-178K dataset)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Synthetic data (LLaVA-Video-178K dataset)",
+              "reason": "Names a dataset/type of data rather than a generation method or technique."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 27,
+      "dropped": 5,
+      "llm_calls": 1,
+      "values_sent_to_llm": 19
+    }
+  },
+  "contributions": [
+    {
+      "label": "LLaVA-Video",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "LLaVA-Video",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "LLaVA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-10-03",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "ByteDance",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Synthetic video instruction-tuning dataset generation (LLaVA-Video-178K) using a recurrent detailed caption pipeline with dense frame sampling (1 frame/sec) and GPT-4o prompt-based QA generation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Demonstrates that dense frame sampling significantly outperforms sparse sampling for video-language understanding.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "LLaVA-Video-178K (178,510 videos from 10 major video sources)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Video instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "LLaVA tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "72B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 72000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "NVIDIA H100 GPUs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "128 NVIDIA H100 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Video understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Video captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Open-ended Q&A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multiple-choice Q&A",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Temporal understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "178,510 videos",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Video-178K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ActivityNet-QA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NExT-QA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "PerceptionTest",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-Hound-255K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "8192",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Instruction tuning on video data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Mid-fusion (vision encoder + MLP projector + LLM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP or CLIP ViT-L/14",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaVA-OneVision (single-image stage checkpoint)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NExT-QA: 80.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ActivityNet-QA: 69.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PerceptionTest: 55.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoMME: 63.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoDC: 3.66/3.73",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoChatGPT: 32.5/34.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NExT-QA: 56.5/63.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PerceptionTest: 3.52/3.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "EgoSchema: 70.8/74.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoMME: 58.6/64.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "LongVideoBench: 83.2/85.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TemporalBench: 67.9/74.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MLVU: 58.2/61.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VideoDetailCaption: 22.9/33.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on Video-MME, MLVU, Video-Bench, etc.",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926466",
+    "contribution_ids": [
+      "R1926468"
+    ],
+    "new_contribution_ids": [
+      "R1926468"
+    ],
+    "comparison_updated": null
+  }
+}

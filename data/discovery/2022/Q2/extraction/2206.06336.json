@@ -1,0 +1,1657 @@
+{
+ "arxiv_id": "2206.06336",
+ "status": "completed",
+ "timestamp": "2026-08-27T14:39:22.437804",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2206.06336",
+  "title": "Language Models are General-Purpose Interfaces",
+  "authors": [
+   "Yaru Hao",
+   "Haoyu Song",
+   "Li Dong",
+   "Shaohan Huang",
+   "Zewen Chi",
+   "Wenhui Wang",
+   "Shuming Ma",
+   "Furu Wei"
+  ],
+  "abstract": "Foundation models have received much attention due to their effectiveness across a broad range of downstream applications. Though there is a big convergence in terms of architecture, most pretrained models are typically still developed for specific tasks or modalities. In this work, we propose to use language models as a general-purpose interface to various foundation models. A collection of pretrained encoders perceive diverse modalities (such as vision, and language), and they dock with a language model that plays the role of a universal task layer. We propose a semi-causal language modeling objective to jointly pretrain the interface and the modular encoders. We subsume the advantages and capabilities from both causal and non-causal modeling, thereby combining the best of two worlds. Specifically, the proposed method not only inherits the capabilities of in-context learning and open-ended generation from causal language modeling, but also is conducive to finetuning because of the bidirectional encoders. More importantly, our approach seamlessly unlocks the combinations of the above capabilities, e.g., enabling in-context learning or instruction following with finetuned encoders. Experimental results across various language-only and vision-language benchmarks show that our model outperforms or is competitive with specialized models on finetuning, zero-shot generalization, and few-shot learning.",
+  "published": "2022-06-13T17:34:22+00:00",
+  "updated": "2022-06-13T17:34:22+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2206.06336v1",
+  "entry_id": "http://arxiv.org/abs/2206.06336v1",
+  "pdf_path": "data/papers/2206.06336.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 95603,
+ "word_count": 6732,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "MetaLM",
+   "model_family": "MetaLM",
+   "date_created": "2022-06-13",
+   "organization": "Microsoft",
+   "innovation": "Semi-causal language modeling objective that jointly pretrains a universal task layer (language model) with modular encoders for diverse modalities; combines in-context learning and open-ended generation from causal modeling with bidirectional encoding capabilities for fine-tuning.",
+   "pretraining_corpus": null,
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "In-context learning, instruction following, zero-shot generalization, few-shot learning, visual question answering, visually grounded language generation, cross-lingual tasks",
+   "license": null,
+   "research_problem": "General-purpose interface for various foundation models across modalities",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Semi-causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Multitask fine-tuning, single-task fine-tuning, instruction tuning",
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Language Models are General-Purpose Interfaces",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Joint pretraining of interface and encoders -> multitask fine-tuning -> instruction tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "METALM",
+   "parameters": "1.3B",
+   "parameters_millions": 1300,
+   "model_family": "METALM",
+   "date_created": "2022-06-13",
+   "organization": "Microsoft",
+   "innovation": "Semi-causal language modeling: autoregressively generates tokens while some spans are represented by bidirectional encoders, enabling the model to process the whole session from left to right while leveraging bidirectional context for specific spans; Universal task layer docking: a unidirectional Transformer decoder acts as a general-purpose interface that docks with multiple bidirectional encoders via a connector layer, allowing natural language to serve as a programming language for underlying pretrained models; Multi-turn conversational support: natively supports multi-turn interactions by feeding encoded inputs to the interface layer and generating responses in a semi-causal manner, combining in-context learning and open-ended generation. Differs from standard causal LMs by incorporating bidirectional encoders for specific spans, and from encoder-decoder architectures by using a single unidirectional decoder as a universal task layer.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Semi-causal language modeling",
+   "pretraining_corpus": "Pile (19 sources excluding GitHub, arXiv, PubMed Central)",
+   "finetuning_task": "Multitask finetuning, single-task finetuning, instruction tuning, zero-/few-shot learning, Multitask finetuning on 34 NLP datasets",
+   "optimizer": "Adam",
+   "hardware_used": null,
+   "extension": "Combines causal and non-causal modeling to retain in-context learning capabilities while improving fine-tuning performance through bidirectional context.",
+   "blog_post": null,
+   "license": null,
+   "research_problem": "General-purpose interface for interacting with various foundation models using natural language; unifying various tasks as free-text generation.",
+   "application": "Multi-modal understanding, multi-turn conversational interactions, in-context learning, free-text generation, natural language interface for foundation models.",
+   "paper_title": "Language Models are General-Purpose Interfaces",
+   "training_corpus_size": null,
+   "finetuning_data": "VQAv2, OK-VQA, COCO Karpathy, NLVR2, ANLI, CB, MNLI, QNLI, RTE, SNLI, WNLI, IMDB, SST-2, Sentiment140, Yelp, QQP, MRPC, PawsWiki, DPR, Winogrande, WSC, HellaSwag, PiQA, COPA, DROP, SQuADv1, SQuADv2, OBQA, BoolQ, CoLA, WiC, TREC, ARC-easy, NQ, CommonGen, E2ENLG, AESLC, SamSum, XSum",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Multi-head self-attention with triangular matrix attention mask for the universal task layer; bidirectional encoders allow all tokens to access each other.",
+   "context_length_max": "512 (non-causal), 2048 (semi-causal)",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining with semi-causal language modeling objective, followed by supervised fine-tuning on downstream tasks.",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Connector layer projects vector representations of bidirectional encoders before feeding into the universal task layer; representations are summed with positional embeddings.",
+   "vision_encoder": null,
+   "base_model": "Pretrained bidirectional encoder (replaced token detection task)",
+   "optimizer_innovation": null,
+   "benchmark_result": "NoCaps CIDEr: 58.7; NoCaps SPICE: 8.6; Flickr30k CIDEr: 43.3; Flickr30k SPICE: 11.7; VQAv2 zero-shot: 41.1; OK-VQA zero-shot: 11.4; VQAv2 k=4 ICL: 45.3; OK-VQA k=4 ICL: 16.0; VQAv2 finetuned test-dev: 74.4; VQAv2 finetuned test-std: 74.5; NLVR2 in-domain: 77.9; NLVR2 out-domain: 21.1; NLVR2 test-P: 80.9; NLI: 79.1; Sentiment: 94.6; Paraphrase: 89.6; Coreference: 84.3; Commonsense: 84.2; Reading Comprehension: 73.1; Miscellaneous: 84.3; Closed-BookQA: 44.3; Struct2Text: 44.1; Summarization: 31.0",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "32 (semi-causal), 16 (non-causal)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MetaLM (Non-Causal)",
+   "model_family": "MetaLM",
+   "date_created": "2022-06-13",
+   "organization": "Microsoft",
+   "innovation": "Introduces a semi-causal language modeling objective for vision-language pretraining, enabling a single model to act as a general-purpose interface for both text and image tasks without requiring separate vision encoders or task-specific adapters.",
+   "pretraining_corpus": null,
+   "parameters": "150M",
+   "parameters_millions": 450,
+   "application": "Visual question answering, image captioning, visual reasoning, text generation",
+   "license": null,
+   "research_problem": "Vision-language modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Non-causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "VQAv2, VQAKarpathy, OK-VQA, COCOCaption, NLVR2, E-SNLI-VE",
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, Chinese, French",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Language Models are General-Purpose Interfaces",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "1024",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining -> Finetuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MetaLM (Semi-Causal)",
+   "model_family": "MetaLM",
+   "date_created": "2022-06-13",
+   "organization": "Microsoft",
+   "innovation": "Introduces a semi-causal language modeling objective for vision-language pretraining, enabling a single model to act as a general-purpose interface for both text and image tasks without requiring separate vision encoders or task-specific adapters.",
+   "pretraining_corpus": null,
+   "parameters": "450M",
+   "parameters_millions": 450,
+   "application": "Visual question answering, image captioning, visual reasoning, text generation",
+   "license": null,
+   "research_problem": "Vision-language modeling",
+   "model_version": null,
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Semi-causal language modeling",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": "VQAv2, VQAKarpathy, OK-VQA, COCOCaption, NLVR2, E-SNLI-VE",
+   "optimizer": "AdamW",
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, Chinese, French",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Language Models are General-Purpose Interfaces",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "1024",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining -> Finetuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "MetaLM": {
+   "application": [
+    "instruction following",
+    "visual question answering",
+    "visually grounded language generation",
+    "cross-lingual tasks"
+   ],
+   "finetuning_task": [
+    "Multitask fine-tuning",
+    "instruction tuning"
+   ],
+   "model_family": [
+    "MetaLM"
+   ],
+   "model_name": [
+    "MetaLM"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Semi-causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ]
+  },
+  "METALM": {
+   "application": [
+    "Multi-modal understanding",
+    "multi-turn conversational interactions",
+    "free-text generation",
+    "natural language interface for foundation models."
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention with triangular matrix attention mask for the universal task layer"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "VQAv2",
+    "OK-VQA",
+    "COCO Karpathy",
+    "NLVR2",
+    "ANLI",
+    "CB",
+    "MNLI",
+    "QNLI",
+    "RTE",
+    "SNLI",
+    "WNLI",
+    "IMDB",
+    "SST-2",
+    "Sentiment140",
+    "Yelp",
+    "QQP",
+    "MRPC",
+    "PawsWiki",
+    "DPR",
+    "Winogrande",
+    "WSC",
+    "HellaSwag",
+    "PiQA",
+    "COPA",
+    "DROP",
+    "SQuADv1",
+    "SQuADv2",
+    "OBQA",
+    "BoolQ",
+    "CoLA",
+    "WiC",
+    "TREC",
+    "ARC-easy",
+    "NQ",
+    "CommonGen",
+    "E2ENLG",
+    "AESLC",
+    "SamSum",
+    "XSum"
+   ],
+   "finetuning_task": [
+    "Multitask finetuning",
+    "single-task finetuning",
+    "instruction tuning"
+   ],
+   "fusion_architecture": [],
+   "model_family": [
+    "METALM"
+   ],
+   "model_name": [
+    "METALM"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "1.3B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Pile (19 sources excluding GitHub, arXiv, PubMed Central)"
+   ],
+   "pretraining_task": [
+    "Semi-causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "MetaLM (Non-Causal)": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "text generation"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "VQAKarpathy",
+    "OK-VQA",
+    "COCOCaption",
+    "NLVR2",
+    "E-SNLI-VE"
+   ],
+   "model_family": [
+    "MetaLM"
+   ],
+   "model_name": [
+    "MetaLM (Non-Causal)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "150M"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Non-causal language modeling"
+   ],
+   "research_problem": [
+    "Vision-language modeling"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "French"
+   ]
+  },
+  "MetaLM (Semi-Causal)": {
+   "application": [
+    "Visual question answering",
+    "image captioning",
+    "visual reasoning",
+    "text generation"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "VQAKarpathy",
+    "OK-VQA",
+    "COCOCaption",
+    "NLVR2",
+    "E-SNLI-VE"
+   ],
+   "model_family": [
+    "MetaLM"
+   ],
+   "model_name": [
+    "MetaLM (Semi-Causal)"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Microsoft"
+   ],
+   "parameters": [
+    "450M"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_task": [
+    "Semi-causal language modeling"
+   ],
+   "research_problem": [
+    "Vision-language modeling"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "French"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "MetaLM": {
+    "application": {
+     "candidates": [
+      "In-context learning",
+      "instruction following",
+      "zero-shot generalization",
+      "few-shot learning",
+      "visual question answering",
+      "visually grounded language generation",
+      "cross-lingual tasks"
+     ],
+     "accepted": [
+      "instruction following",
+      "visual question answering",
+      "visually grounded language generation",
+      "cross-lingual tasks"
+     ],
+     "dropped": [
+      {
+       "value": "zero-shot generalization",
+       "reason": "Describes a capability rather than a concrete application or domain. (cached)"
+      },
+      {
+       "value": "few-shot learning",
+       "reason": "Learning paradigm, not a concrete task or application domain (cached)"
+      },
+      {
+       "value": "In-context learning",
+       "reason": "Describes a learning paradigm, not a concrete application or domain."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Multitask fine-tuning",
+      "single-task fine-tuning",
+      "instruction tuning"
+     ],
+     "accepted": [
+      "Multitask fine-tuning",
+      "instruction tuning"
+     ],
+     "dropped": [
+      {
+       "value": "single-task fine-tuning",
+       "reason": "Describes a training strategy/paradigm rather than a specific task (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "General-purpose interface for various foundation models across modalities"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose interface for various foundation models across modalities",
+       "reason": "Describes a proposed solution or interface, not a research problem or capability gap."
+      }
+     ]
+    }
+   },
+   "METALM": {
+    "application": {
+     "candidates": [
+      "Multi-modal understanding",
+      "multi-turn conversational interactions",
+      "in-context learning",
+      "free-text generation",
+      "natural language interface for foundation models."
+     ],
+     "accepted": [
+      "Multi-modal understanding",
+      "multi-turn conversational interactions",
+      "free-text generation",
+      "natural language interface for foundation models."
+     ],
+     "dropped": [
+      {
+       "value": "in-context learning",
+       "reason": "Describes a learning paradigm, not a concrete application or domain."
+      }
+     ]
+    },
+    "attention_mechanism": {
+     "candidates": [
+      "Multi-head self-attention with triangular matrix attention mask for the universal task layer",
+      "bidirectional encoders allow all tokens to access each other."
+     ],
+     "accepted": [
+      "Multi-head self-attention with triangular matrix attention mask for the universal task layer"
+     ],
+     "dropped": [
+      {
+       "value": "bidirectional encoders allow all tokens to access each other.",
+       "reason": "Describes what the architecture does rather than naming the mechanism itself."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "Pretrained bidirectional encoder (replaced token detection task)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Pretrained bidirectional encoder (replaced token detection task)",
+       "reason": "Describes a component and task replacement rather than naming a specific pre-trained model."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Multitask finetuning",
+      "single-task finetuning",
+      "instruction tuning",
+      "zero-/few-shot learning",
+      "Multitask finetuning on 34 NLP datasets"
+     ],
+     "accepted": [
+      "Multitask finetuning",
+      "single-task finetuning",
+      "instruction tuning"
+     ],
+     "dropped": [
+      {
+       "value": "zero-/few-shot learning",
+       "reason": "Describes a learning paradigm, not a specific fine-tuning task or objective."
+      },
+      {
+       "value": "Multitask finetuning on 34 NLP datasets",
+       "reason": "Describes the scope and scale of the fine-tuning process rather than naming the task itself."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Connector layer projects vector representations of bidirectional encoders before feeding into the universal task layer; representations are summed with positional embeddings."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Connector layer projects vector representations of bidirectional encoders before feeding into the universal task layer; representations are summed with positional embeddings.",
+       "reason": "Detailed description of a process rather than naming an architectural design."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "General-purpose interface for interacting with various foundation models using natural language",
+      "unifying various tasks as free-text generation."
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "General-purpose interface for interacting with various foundation models using natural language",
+       "reason": "Describes a proposed solution or interface, not a research problem or capability gap."
+      },
+      {
+       "value": "unifying various tasks as free-text generation.",
+       "reason": "Describes a methodological approach rather than naming a problem or challenge."
+      }
+     ]
+    }
+   },
+   "MetaLM (Non-Causal)": {},
+   "MetaLM (Semi-Causal)": {}
+  },
+  "counts": {
+   "kept": 111,
+   "dropped": 13,
+   "llm_calls": 1,
+   "values_sent_to_llm": 51
+  }
+ },
+ "contributions": [
+  {
+   "label": "MetaLM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MetaLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MetaLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-06-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Semi-causal language modeling objective that jointly pretrains a universal task layer (language model) with modular encoders for diverse modalities",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Combines in-context learning and open-ended generation from causal modeling with bidirectional encoding capabilities for fine-tuning.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Semi-causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multitask fine-tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visually grounded language generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-lingual tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint pretraining of interface and encoders -> multitask fine-tuning -> instruction tuning",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "METALM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "METALM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "METALM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-06-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Semi-causal language modeling: autoregressively generates tokens while some spans are represented by bidirectional encoders, enabling the model to process the whole session from left to right while leveraging bidirectional context for specific spans",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Universal task layer docking: a unidirectional Transformer decoder acts as a general-purpose interface that docks with multiple bidirectional encoders via a connector layer, allowing natural language to serve as a programming language for underlying pretrained models",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-turn conversational support: natively supports multi-turn interactions by feeding encoded inputs to the interface layer and generating responses in a semi-causal manner, combining in-context learning and open-ended generation. Differs from standard causal LMs by incorporating bidirectional encoders for specific spans, and from encoder-decoder architectures by using a single unidirectional decoder as a universal task layer.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Semi-causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pile (19 sources excluding GitHub, arXiv, PubMed Central)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multitask finetuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Single-task finetuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1300,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-modal understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multi-turn conversational interactions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Free-text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language interface for foundation models.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OK-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO Karpathy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ANLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RTE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "IMDB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SST-2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Sentiment140",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Yelp",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QQP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MRPC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PawsWiki",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DPR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WSC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HellaSwag",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PiQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COPA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DROP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuADv1",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuADv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OBQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BoolQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoLA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WiC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TREC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARC-easy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NQ",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CommonGen",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "E2ENLG",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "AESLC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SamSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention with triangular matrix attention mask for the universal task layer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 (non-causal), 2048 (semi-causal)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining with semi-causal language modeling objective, followed by supervised fine-tuning on downstream tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps CIDEr: 58.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NoCaps SPICE: 8.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k CIDEr: 43.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k SPICE: 11.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 zero-shot: 41.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA zero-shot: 11.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 k=4 ICL: 45.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OK-VQA k=4 ICL: 16.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 finetuned test-dev: 74.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 finetuned test-std: 74.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 in-domain: 77.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 out-domain: 21.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-P: 80.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLI: 79.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Sentiment: 94.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Paraphrase: 89.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Coreference: 84.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Commonsense: 84.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Reading Comprehension: 73.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Miscellaneous: 84.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Closed-BookQA: 44.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Struct2Text: 44.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Summarization: 31.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "32 (semi-causal), 16 (non-causal)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MetaLM (Non-Causal)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MetaLM (Non-Causal)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MetaLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-06-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a semi-causal language modeling objective for vision-language pretraining, enabling a single model to act as a general-purpose interface for both text and image tasks without requiring separate vision encoders or task-specific adapters.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Non-causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "150M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 450,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAKarpathy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OK-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCOCaption",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "E-SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining -> Finetuning",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MetaLM (Semi-Causal)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MetaLM (Semi-Causal)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MetaLM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-06-13",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Microsoft",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Introduces a semi-causal language modeling objective for vision-language pretraining, enabling a single model to act as a general-purpose interface for both text and image tasks without requiring separate vision encoders or task-specific adapters.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Semi-causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "450M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 450,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAKarpathy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OK-VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCOCaption",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "E-SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining -> Finetuning",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1776716",
+  "contribution_ids": [
+   "R1776718",
+   "R1923087",
+   "R1923094",
+   "R1923103",
+   "R1923107"
+  ],
+  "new_contribution_ids": [
+   "R1923087",
+   "R1923094",
+   "R1923103",
+   "R1923107"
+  ],
+  "comparison_updated": null
+ }
+}

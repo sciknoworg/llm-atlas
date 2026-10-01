@@ -1,0 +1,595 @@
+{
+  "arxiv_id": "2012.06946",
+  "status": "completed",
+  "timestamp": "2026-08-24T22:13:48.820308",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2012.06946",
+    "title": "MiniVLM: A Smaller and Faster Vision-Language Model",
+    "authors": [
+      "Jianfeng Wang",
+      "Xiaowei Hu",
+      "Pengchuan Zhang",
+      "Xiujun Li",
+      "Lijuan Wang",
+      "Lei Zhang",
+      "Jianfeng Gao",
+      "Zicheng Liu"
+    ],
+    "abstract": "Recent vision-language (VL) studies have shown remarkable progress by learning generic representations from massive image-text pairs with transformer models and then fine-tuning on downstream VL tasks. While existing research has been focused on achieving high accuracy with large pre-trained models, building a lightweight model is of great value in practice but is less explored. In this paper, we propose a smaller and faster VL model, MiniVLM, which can be finetuned with good performance on various downstream tasks like its larger counterpart. MiniVLM consists of two modules, a vision feature extractor and a transformer-based vision-language fusion module. We design a Two-stage Efficient feature Extractor (TEE), inspired by the one-stage EfficientDet network, to significantly reduce the time cost of visual feature extraction by $95\\%$, compared to a baseline model. We adopt the MiniLM structure to reduce the computation cost of the transformer module after comparing different compact BERT models. In addition, we improve the MiniVLM pre-training by adding $7M$ Open Images data, which are pseudo-labeled by a state-of-the-art captioning model. We also pre-train with high-quality image tags obtained from a strong tagging model to enhance cross-modality alignment. The large models are used offline without adding any overhead in fine-tuning and inference. With the above design choices, our MiniVLM reduces the model size by $73\\%$ and the inference time cost by $94\\%$ while being able to retain $94-97\\%$ of the accuracy on multiple VL tasks. We hope that MiniVLM helps ease the use of the state-of-the-art VL research for on-the-edge applications.",
+    "published": "2020-12-13T03:02:06+00:00",
+    "updated": "2021-08-09T20:06:03+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2012.06946v2",
+    "entry_id": "http://arxiv.org/abs/2012.06946v2",
+    "pdf_path": "data/papers/2012.06946.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 52838,
+  "word_count": 5493,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "MiniVLM",
+      "parameters": "7.5M, 53.2M, 67.5M",
+      "parameters_millions": 67,
+      "model_family": "MiniVLM",
+      "date_created": "2020-12-13",
+      "organization": "Microsoft",
+      "innovation": "TEE (Tiny Encoder Extractor): (a) name: TEE; (b) mechanism: uses a simplified region proposal network with only two 1x1 convolutional layers for box regression and objectness prediction, reduces RoIAlign resolution to 4x4, reduces feature dimension, and employs depthwise/pointwise convolutions; (c) differs from prior work by drastically reducing parameters to 11.8% and FLOPS to 1% of ResNet-101 Faster R-CNN while maintaining competitive detection accuracy. ; Data distillation for compact VL models: (a) name: pseudocaptioning and tagging distillation; (b) mechanism: applies a state-of-the-art captioning model to generate pseudocaptions for 7M Open Images, combines human-verified tags with object class predictions, and uses a large tagging model to generate high-quality tags; (c) differs by enabling the small model to mimic large model behavior through expanded pre-training data without relying on large models at inference time.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Cross-modal representation learning on image-text pairs",
+      "pretraining_corpus": "Open Images V6 (7M images with pseudocaptions), Objects365, Visual Genome, MS COCO, Conceptual Captions, SBU captions, Flickr30k, GQA, VQA, VG-QA",
+      "finetuning_task": "Supervised fine-tuning on downstream vision-language tasks, Supervised fine-tuning on downstream VL tasks",
+      "optimizer": "AdamW",
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Efficient vision-language modeling for resource-constrained environments",
+      "application": "Image captioning, visual question answering, natural language visual reasoning, image-text retrieval",
+      "paper_title": "MiniVLM: A Smaller and Faster Vision-Language Model",
+      "training_corpus_size": "7M corpus",
+      "finetuning_data": "Task-specific downstream datasets for captioning, VQA, retrieval, NLVR2, Visual Genome, COCO (Karpathy split), VQA 2.0",
+      "tokenizer": null,
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": "53.2M",
+      "attention_mechanism": "Bottom-up top-down (BUTD) attention, Standard multi-head self-attention (MiniLM), Multi-head self-attention (BERT-style)",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training on large-scale image-text pairs -> fine-tuning on task-specific data",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Data distillation and pseudo-labeling using a state-of-the-art teacher captioning model and tagging model",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Bottom-up top-down (BUTD) attention with transformer-based fusion module",
+      "vision_encoder": "Two-stage Efficient feature Extractor (TEE), TEE-0 (lightweight region feature extractor)",
+      "base_model": "MiniLM",
+      "optimizer_innovation": null,
+      "benchmark_result": "Retains 94-97% accuracy of OSCAR on multiple VL tasks; mAP 9.9 on Visual Genome (TEE); CIDEr 35.6; SPICE 28.6; VQA Accuracy 21.6; Caption: 97% of OSCAR; VQA: 96% of OSCAR",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "MiniVLM": {
+      "application": [
+        "Image captioning",
+        "visual question answering",
+        "natural language visual reasoning",
+        "image-text retrieval"
+      ],
+      "attention_mechanism": [
+        "Bottom-up top-down (BUTD) attention",
+        "Standard multi-head self-attention (MiniLM)",
+        "Multi-head self-attention (BERT-style)"
+      ],
+      "base_model": [
+        "MiniLM"
+      ],
+      "finetuning_data": [
+        "VQA",
+        "NLVR2",
+        "Visual Genome",
+        "COCO (Karpathy split)",
+        "VQA 2.0"
+      ],
+      "finetuning_task": [],
+      "fusion_architecture": [
+        "Bottom-up top-down (BUTD) attention with transformer-based fusion module"
+      ],
+      "model_family": [
+        "MiniVLM"
+      ],
+      "model_name": [
+        "MiniVLM"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "7.5M",
+        "53.2M",
+        "67.5M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "Open Images V6 (7M images with pseudocaptions)",
+        "Objects365",
+        "Visual Genome",
+        "MS COCO",
+        "Conceptual Captions",
+        "SBU captions",
+        "Flickr30k",
+        "GQA",
+        "VQA",
+        "VG-QA"
+      ],
+      "pretraining_task": [
+        "Cross-modal representation learning on image-text pairs"
+      ],
+      "research_problem": [
+        "Efficient vision-language modeling for resource-constrained environments"
+      ],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Data distillation and pseudo-labeling using a state-of-the-art teacher captioning model and tagging model"
+      ],
+      "vision_encoder": [
+        "Two-stage Efficient feature Extractor (TEE)",
+        "TEE-0 (lightweight region feature extractor)"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "MiniVLM": {
+        "finetuning_data": {
+          "candidates": [
+            "Task-specific downstream datasets for captioning",
+            "VQA",
+            "retrieval",
+            "NLVR2",
+            "Visual Genome",
+            "COCO (Karpathy split)",
+            "VQA 2.0"
+          ],
+          "accepted": [
+            "VQA",
+            "NLVR2",
+            "Visual Genome",
+            "COCO (Karpathy split)",
+            "VQA 2.0"
+          ],
+          "dropped": [
+            {
+              "value": "Task-specific downstream datasets for captioning",
+              "reason": "Describes a category/type of data rather than naming a specific dataset (cached)"
+            },
+            {
+              "value": "retrieval",
+              "reason": "Names a task, not a dataset (cached)"
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning on downstream vision-language tasks",
+            "Supervised fine-tuning on downstream VL tasks"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Supervised fine-tuning on downstream vision-language tasks",
+              "reason": "Describes a training setup/process rather than a specific task (cached)"
+            },
+            {
+              "value": "Supervised fine-tuning on downstream VL tasks",
+              "reason": "Describes the fine-tuning methodology/process rather than a specific task or objective."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 38,
+      "dropped": 4,
+      "llm_calls": 1,
+      "values_sent_to_llm": 9
+    }
+  },
+  "contributions": [
+    {
+      "label": "MiniVLM",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "MiniVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "MiniVLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2020-12-13",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "TEE (Tiny Encoder Extractor): (a) name: TEE",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "(b) mechanism: uses a simplified region proposal network with only two 1x1 convolutional layers for box regression and objectness prediction, reduces RoIAlign resolution to 4x4, reduces feature dimension, and employs depthwise/pointwise convolutions",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "(c) differs from prior work by drastically reducing parameters to 11.8% and FLOPS to 1% of ResNet-101 Faster R-CNN while maintaining competitive detection accuracy.",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Data distillation for compact VL models: (a) name: pseudocaptioning and tagging distillation",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "(b) mechanism: applies a state-of-the-art captioning model to generate pseudocaptions for 7M Open Images, combines human-verified tags with object class predictions, and uses a large tagging model to generate high-quality tags",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "(c) differs by enabling the small model to mimic large model behavior through expanded pre-training data without relying on large models at inference time.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Cross-modal representation learning on image-text pairs",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Open Images V6 (7M images with pseudocaptions)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Objects365",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual Genome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "MS COCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Conceptual Captions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "SBU captions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Flickr30k",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "GQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "VG-QA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7.5M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "53.2M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "67.5M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 67,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Natural language visual reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image-text retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Efficient vision-language modeling for resource-constrained environments",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "7M corpus",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLVR2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual Genome",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO (Karpathy split)",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA 2.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "53.2M",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Bottom-up top-down (BUTD) attention",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Standard multi-head self-attention (MiniLM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention (BERT-style)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training on large-scale image-text pairs -> fine-tuning on task-specific data",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Data distillation and pseudo-labeling using a state-of-the-art teacher captioning model and tagging model",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Bottom-up top-down (BUTD) attention with transformer-based fusion module",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Two-stage Efficient feature Extractor (TEE)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "TEE-0 (lightweight region feature extractor)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "MiniLM",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Retains 94-97% accuracy of OSCAR on multiple VL tasks",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MAP 9.9 on Visual Genome (TEE)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CIDEr 35.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SPICE 28.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA Accuracy 21.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Caption: 97% of OSCAR",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA: 96% of OSCAR",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925433",
+    "contribution_ids": [
+      "R1925435"
+    ],
+    "new_contribution_ids": [
+      "R1925435"
+    ],
+    "comparison_updated": null
+  }
+}

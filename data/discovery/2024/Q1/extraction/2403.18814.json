@@ -1,0 +1,715 @@
+{
+  "arxiv_id": "2403.18814",
+  "status": "completed",
+  "timestamp": "2026-08-28T22:35:49.239766",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2403.18814",
+    "title": "Mini-Gemini: Mining the Potential of Multi-modality Vision Language Models",
+    "authors": [
+      "Yanwei Li",
+      "Yuechen Zhang",
+      "Chengyao Wang",
+      "Zhisheng Zhong",
+      "Yixin Chen",
+      "Ruihang Chu",
+      "Shaoteng Liu",
+      "Jiaya Jia"
+    ],
+    "abstract": "In this work, we introduce Mini-Gemini, a simple and effective framework enhancing multi-modality Vision Language Models (VLMs). Despite the advancements in VLMs facilitating basic visual dialog and reasoning, a performance gap persists compared to advanced models like GPT-4 and Gemini. We try to narrow the gap by mining the potential of VLMs for better performance and any-to-any workflow from three aspects, i.e., high-resolution visual tokens, high-quality data, and VLM-guided generation. To enhance visual tokens, we propose to utilize an additional visual encoder for high-resolution refinement without increasing the visual token count. We further construct a high-quality dataset that promotes precise image comprehension and reasoning-based generation, expanding the operational scope of current VLMs. In general, Mini-Gemini further mines the potential of VLMs and empowers current frameworks with image understanding, reasoning, and generation simultaneously. Mini-Gemini supports a series of dense and MoE Large Language Models (LLMs) from 2B to 34B. It is demonstrated to achieve leading performance in several zero-shot benchmarks and even surpasses the developed private models. Code and models are available at https://github.com/dvlab-research/MiniGemini.",
+    "published": "2024-03-27T17:59:04+00:00",
+    "updated": "2024-03-27T17:59:04+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.AI",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2403.18814v1",
+    "entry_id": "http://arxiv.org/abs/2403.18814v1",
+    "pdf_path": "data/papers/2403.18814.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM release)"
+  },
+  "text_length": 104754,
+  "word_count": 13093,
+  "models_extracted": 5,
+  "extraction_data": [
+    {
+      "model_name": "Mini-Ge",
+      "parameters": "192M, 2B, 2B-34B, 7B, 13B, 34B, 56B",
+      "parameters_millions": 56000,
+      "model_family": "Mini-Gemini",
+      "date_created": "2024-03-27",
+      "organization": "The Chinese University Of Hong Kong, Smartmore",
+      "innovation": "Introduces a unified any-to-any VLM framework supporting both text-image understanding and generation. Uses a dual-resolution vision encoder (ViT-L for LR, ConvNeXt-L for HR) with a patch info mining projector. Bridges the domain gap between LLM text embeddings and diffusion models by translating instructions into high-quality text prompts for SDXL, rather than aligning embedding spaces.",
+      "pretraining_architecture": "Encoder-Decoder",
+      "pretraining_task": "Visual instruction tuning, image-text alignment, generation",
+      "pretraining_corpus": "High-quality datasets from diverse public sources (task-oriented instructions, generation-related data, high-quality responses)",
+      "finetuning_task": "Instruction tuning, re-captioning activation, Visual instruction tuning",
+      "optimizer": "AdamW",
+      "hardware_used": null,
+      "extension": "Mini-Gemini-HD variant introduces dynamic resolution image processing to improve high-resolution understanding.",
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Bridging the performance gap between academic VLMs and advanced proprietary models (GPT-4, Gemini) by mining VLM potential for better performance and any-to-any workflow.",
+      "application": "Visual understanding, image generation, text-to-image captioning, OCR reasoning, chart analysis, code generation from plots",
+      "paper_title": "Mini-Gemini: Mining the Potential of Multi-modality Vision Language Models",
+      "training_corpus_size": "~1.2M image captions, ~1.5M instruction conversations, 13K generation instructions",
+      "finetuning_data": "13K pure text data, high-quality responses, task-oriented instructions, generation-related data, ShareGPT4V, LAION-GPT-4V, OCR-specific data, ALLaVA dataset, LLaVA-filtered CC3M, ALLaVA, LLaVA, LIMA, OpenAssistant2, DocVQA, ChartQA, DVQA, AI2D",
+      "tokenizer": "Llama tokenizer",
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Dual-encoder attention mechanism (low-res generates visual queries, high-res provides candidate keys/values)",
+      "context_length_max": "672",
+      "context_extension_method": null,
+      "training_pipeline": "Modality alignment (projector pretraining) -> Instruction tuning -> Generation tuning",
+      "reasoning_mode": null,
+      "moe_configuration": "Supports both dense and MoE LLMs (2B-34B)",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": "Information mining from existing VLMs (LLaVA, ShareGPT4V, etc.) and GPT-4V for captions and prompts",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Dual-encoder visual token enhancement (low-res queries + high-res keys/values via attention)",
+      "vision_encoder": "Dual-encoder system (one for high-resolution images, one for low-resolution visual embedding), ConvNeXt-L, CLIP-pretrained ViT-L (LR), LAION-pretrained ConvNeXt-L (HR), SigLIP",
+      "base_model": "LLaVA-1.5, LLaVA-NeXT, various dense/MoE LLMs (2B-34B)",
+      "optimizer_innovation": null,
+      "benchmark_result": "TextVQA: 74.6; MMB: 80.6; MM-Vet: 75.2; MMMU: 59.3; MME: 1933 (16M/4E/182); MMB: 69.3; MME: 1523/316; MM-Vet: 40.8; MMMUv: 36.1; MMMUt: 32.8; MathVista: 31.4 (Vicuna-13B); MMB: 68.6; MME: 1597/320; MM-Vet: 50.5; MMMUv: 37.3; MMMUt: 35.1; MathVista: 37.0 (HD Vicuna-13B)",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Mini-Ge": {
+      "application": [
+        "Visual understanding",
+        "image generation",
+        "text-to-image captioning",
+        "OCR reasoning",
+        "chart analysis",
+        "code generation from plots"
+      ],
+      "attention_mechanism": [
+        "Dual-encoder attention mechanism (low-res generates visual queries, high-res provides candidate keys/values)"
+      ],
+      "base_model": [
+        "LLaVA-1.5, LLaVA-NeXT, various dense/MoE LLMs (2B-34B)"
+      ],
+      "finetuning_data": [
+        "ShareGPT4V",
+        "LAION-GPT-4V",
+        "ALLaVA dataset",
+        "LLaVA-filtered CC3M",
+        "ALLaVA",
+        "LIMA",
+        "OpenAssistant2",
+        "DocVQA",
+        "ChartQA",
+        "DVQA",
+        "AI2D"
+      ],
+      "finetuning_task": [
+        "Instruction tuning",
+        "re-captioning activation",
+        "Visual instruction tuning"
+      ],
+      "fusion_architecture": [
+        "Dual-encoder visual token enhancement (low-res queries + high-res keys/values via attention)"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Mini-Gemini"
+      ],
+      "model_name": [
+        "Mini-Ge"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [
+        "The Chinese University Of Hong Kong, Smartmore"
+      ],
+      "parameters": [
+        "192M",
+        "2B",
+        "2B-34B",
+        "7B",
+        "13B",
+        "34B",
+        "56B"
+      ],
+      "pretraining_architecture": [
+        "Encoder-Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Visual instruction tuning, image-text alignment, generation"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "synthetic_data_generation_method": [
+        "Information mining from existing VLMs (LLaVA, ShareGPT4V, etc.) and GPT-4V for captions and prompts"
+      ],
+      "vision_encoder": [
+        "Dual-encoder system (one for high-resolution images, one for low-resolution visual embedding)",
+        "ConvNeXt-L",
+        "CLIP-pretrained ViT-L (LR)",
+        "LAION-pretrained ConvNeXt-L (HR)",
+        "SigLIP"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Mini-Ge": {
+        "finetuning_data": {
+          "candidates": [
+            "13K pure text data",
+            "high-quality responses",
+            "task-oriented instructions",
+            "generation-related data",
+            "ShareGPT4V",
+            "LAION-GPT-4V",
+            "OCR-specific data",
+            "ALLaVA dataset",
+            "LLaVA-filtered CC3M",
+            "ALLaVA",
+            "LLaVA",
+            "LIMA",
+            "OpenAssistant2",
+            "DocVQA",
+            "ChartQA",
+            "DVQA",
+            "AI2D"
+          ],
+          "accepted": [
+            "ShareGPT4V",
+            "LAION-GPT-4V",
+            "ALLaVA dataset",
+            "LLaVA-filtered CC3M",
+            "ALLaVA",
+            "LIMA",
+            "OpenAssistant2",
+            "DocVQA",
+            "ChartQA",
+            "DVQA",
+            "AI2D"
+          ],
+          "dropped": [
+            {
+              "value": "LLaVA",
+              "reason": "LLaVA is a model, not a dataset. (cached)"
+            },
+            {
+              "value": "13K pure text data",
+              "reason": "Describes quantity and type rather than naming a specific dataset."
+            },
+            {
+              "value": "high-quality responses",
+              "reason": "Describes content quality rather than naming a dataset."
+            },
+            {
+              "value": "task-oriented instructions",
+              "reason": "Describes content type rather than naming a dataset."
+            },
+            {
+              "value": "generation-related data",
+              "reason": "Describes content type rather than naming a dataset."
+            },
+            {
+              "value": "OCR-specific data",
+              "reason": "Describes content type rather than naming a dataset."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "High-quality datasets from diverse public sources (task-oriented instructions, generation-related data, high-quality responses)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "High-quality datasets from diverse public sources (task-oriented instructions, generation-related data, high-quality responses)",
+              "reason": "Asserts breadth and describes content rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Bridging the performance gap between academic VLMs and advanced proprietary models (GPT-4, Gemini) by mining VLM potential for better performance and any-to-any workflow."
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Bridging the performance gap between academic VLMs and advanced proprietary models (GPT-4, Gemini) by mining VLM potential for better performance and any-to-any workflow.",
+              "reason": "Describes a solution and goal rather than a short noun phrase naming the research problem."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 44,
+      "dropped": 8,
+      "llm_calls": 1,
+      "values_sent_to_llm": 32
+    }
+  },
+  "contributions": [
+    {
+      "label": "Mini-Ge",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Mini-Ge",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Mini-Gemini",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-03-27",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "The Chinese University Of Hong Kong, Smartmore",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Introduces a unified any-to-any VLM framework supporting both text-image understanding and generation. Uses a dual-resolution vision encoder (ViT-L for LR, ConvNeXt-L for HR) with a patch info mining projector. Bridges the domain gap between LLM text embeddings and diffusion models by translating instructions into high-quality text prompts for SDXL, rather than aligning embedding spaces.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder-Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Visual instruction tuning, image-text alignment, generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Re-captioning activation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual instruction tuning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Llama tokenizer",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "192M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "2B-34B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "34B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "56B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 56000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Text-to-image captioning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "OCR reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Chart analysis",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation from plots",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "~1.2M image captions, ~1.5M instruction conversations, 13K generation instructions",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ShareGPT4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LAION-GPT-4V",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ALLaVA dataset",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LLaVA-filtered CC3M",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ALLaVA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "LIMA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "OpenAssistant2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DocVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ChartQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "DVQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "AI2D",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Dual-encoder attention mechanism (low-res generates visual queries, high-res provides candidate keys/values)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "672",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Modality alignment (projector pretraining) -> Instruction tuning -> Generation tuning",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Supports both dense and MoE LLMs (2B-34B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Information mining from existing VLMs (LLaVA, ShareGPT4V, etc.) and GPT-4V for captions and prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Dual-encoder visual token enhancement (low-res queries + high-res keys/values via attention)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Dual-encoder system (one for high-resolution images, one for low-resolution visual embedding)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "ConvNeXt-L",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "CLIP-pretrained ViT-L (LR)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "LAION-pretrained ConvNeXt-L (HR)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "SigLIP",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "LLaVA-1.5, LLaVA-NeXT, various dense/MoE LLMs (2B-34B)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TextVQA: 74.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMB: 80.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-Vet: 75.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 59.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1933 (16M/4E/182)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMB: 69.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1523/316",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-Vet: 40.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUv: 36.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUt: 32.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 31.4 (Vicuna-13B)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMB: 68.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MME: 1597/320",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MM-Vet: 50.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUv: 37.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMUt: 35.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MathVista: 37.0 (HD Vicuna-13B)",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925956",
+    "contribution_ids": [
+      "R1925958"
+    ],
+    "new_contribution_ids": [
+      "R1925958"
+    ],
+    "comparison_updated": null
+  }
+}

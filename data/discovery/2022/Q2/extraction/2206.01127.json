@@ -1,0 +1,663 @@
+{
+  "arxiv_id": "2206.01127",
+  "status": "completed",
+  "timestamp": "2026-08-27T14:34:28.843679",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2206.01127",
+    "title": "VL-BEiT: Generative Vision-Language Pretraining",
+    "authors": [
+      "Hangbo Bao",
+      "Wenhui Wang",
+      "Li Dong",
+      "Furu Wei"
+    ],
+    "abstract": "We introduce a vision-language foundation model called VL-BEiT, which is a bidirectional multimodal Transformer learned by generative pretraining. Our minimalist solution conducts masked prediction on both monomodal and multimodal data with a shared Transformer. Specifically, we perform masked vision-language modeling on image-text pairs, masked language modeling on texts, and masked image modeling on images. VL-BEiT is learned from scratch with one unified pretraining task, one shared backbone, and one-stage training. Our method is conceptually simple and empirically effective. Experimental results show that VL-BEiT obtains strong results on various vision-language benchmarks, such as visual question answering, visual reasoning, and image-text retrieval. Moreover, our method learns transferable visual features, achieving competitive performance on image classification, and semantic segmentation.",
+    "published": "2022-06-02T16:14:19+00:00",
+    "updated": "2022-09-03T14:18:55+00:00",
+    "doi": null,
+    "primary_category": "cs.CV",
+    "categories": [
+      "cs.CV",
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2206.01127v2",
+    "entry_id": "http://arxiv.org/abs/2206.01127v2",
+    "pdf_path": "data/papers/2206.01127.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+  },
+  "text_length": 37072,
+  "word_count": 2151,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "VL-BEiT",
+      "parameters": "BASE-SIZE, BASE (12-LAYER, 768 HIDDEN, 12 HEADS), 230M, 860M",
+      "parameters_millions": 860,
+      "model_family": "BEiT",
+      "date_created": "2022-06-02",
+      "organization": "Microsoft",
+      "innovation": "Masked vision-language modeling (MVM): jointly models image-text pairs with masked tokens to provide richer visual supervision compared to prior contrastive or matching-based methods; Mixture-of-Modality-Experts (MOME) Transformer: employs a shared Transformer block with modality-specific experts to capture modality-specific information, outperforming standard Transformers on visual reasoning and image-text retrieval; one-stage training from scratch: eliminates the need for multi-stage or contrastive pretraining pipelines used in prior work.",
+      "pretraining_architecture": "Encoder",
+      "pretraining_task": "Masked language modeling (MLM), Masked image modeling (MIM), Masked vision-language modeling (MVM)",
+      "pretraining_corpus": "ImageNet-22K, English Wikipedia, BookCorpus, ConceptualCaptions, SBUCaptions, COCO, Visual Genome",
+      "finetuning_task": "Dual-encoder or fusion-encoder fine-tuning, Visual question answering, natural language for visual reasoning, image-text retrieval, Supervised fine-tuning for VQA, NLVR2, Image Classification, Semantic Segmentation",
+      "optimizer": "Adam",
+      "hardware_used": null,
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Vision-language pretraining",
+      "application": "Visual Question Answering, Visual Reasoning, Image-Text Retrieval, Image Classification, Semantic Segmentation",
+      "paper_title": "VL-BEiT: Generative Vision-Language Pretraining",
+      "training_corpus_size": null,
+      "finetuning_data": "VQA2.0, NLVR2, Flickr30k, COCO, ImageNet-1K, ADE20K, Visual Genome, VQA, RefCOCO",
+      "tokenizer": "BEiT Tokenizer (images), standard word tokenizer (text)",
+      "supported_language": "English",
+      "hardware_description": null,
+      "carbon_emitted": null,
+      "source_code": "https://github.com/microsoft/unilm/tree/master/vl-beit",
+      "context_length": null,
+      "activated_parameters": "All parameters active (dense)",
+      "attention_mechanism": "Multi-layer Transformer network with cross-modal attention, Multi-head self-attention (shared across modalities)",
+      "context_length_max": null,
+      "context_extension_method": null,
+      "training_pipeline": "One-stage training from scratch",
+      "reasoning_mode": null,
+      "moe_configuration": "Mixture-of-Modality-Experts (MOME) Transformer with modality-specific experts",
+      "quantization_precision": null,
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Fusion-encoder",
+      "vision_encoder": "Shared MOME Transformer network for image patches and word embeddings, Image patch embeddings with learnable position embeddings",
+      "base_model": "BEiT",
+      "optimizer_innovation": null,
+      "benchmark_result": "NLVR2 dev: 81.10, test: 82.19; Flickr30k dev: 92.2, test: 77.9; VQA test-dev: 79.5, test-std: 83.9; NLVR2 dev: 81.10, test-P: 82.19; COCO TR: 77.53, IR: 77.75; Flickr30K TR: 95.8, IR: 83.9; ImageNet-1K top-1: 85.9; ADE20K mIoU: 53.1",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "12",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "VL-BEiT": {
+      "application": [
+        "Visual Question Answering",
+        "Visual Reasoning",
+        "Image-Text Retrieval",
+        "Image Classification",
+        "Semantic Segmentation"
+      ],
+      "attention_mechanism": [
+        "Multi-head self-attention (shared across modalities)"
+      ],
+      "base_model": [
+        "BEiT"
+      ],
+      "finetuning_data": [
+        "VQA2.0",
+        "NLVR2",
+        "Flickr30k",
+        "COCO",
+        "ImageNet-1K",
+        "ADE20K",
+        "Visual Genome",
+        "VQA",
+        "RefCOCO"
+      ],
+      "finetuning_task": [
+        "Visual question answering",
+        "natural language for visual reasoning",
+        "image-text retrieval",
+        "Supervised fine-tuning for VQA",
+        "NLVR2",
+        "Image Classification",
+        "Semantic Segmentation"
+      ],
+      "fusion_architecture": [
+        "Fusion-encoder"
+      ],
+      "model_family": [
+        "BEiT"
+      ],
+      "model_name": [
+        "VL-BEiT"
+      ],
+      "optimizer": [
+        "Adam"
+      ],
+      "organization": [
+        "Microsoft"
+      ],
+      "parameters": [
+        "230M",
+        "860M"
+      ],
+      "pretraining_architecture": [
+        "Encoder"
+      ],
+      "pretraining_corpus": [
+        "ImageNet-22K",
+        "English Wikipedia",
+        "BookCorpus",
+        "ConceptualCaptions",
+        "SBUCaptions",
+        "COCO",
+        "Visual Genome"
+      ],
+      "pretraining_task": [
+        "Masked language modeling (MLM), Masked image modeling (MIM), Masked vision-language modeling (MVM)"
+      ],
+      "research_problem": [],
+      "supported_language": [
+        "English"
+      ],
+      "vision_encoder": [
+        "Shared MOME Transformer network for image patches and word embeddings"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "VL-BEiT": {
+        "attention_mechanism": {
+          "candidates": [
+            "Multi-layer Transformer network with cross-modal attention",
+            "Multi-head self-attention (shared across modalities)"
+          ],
+          "accepted": [
+            "Multi-head self-attention (shared across modalities)"
+          ],
+          "dropped": [
+            {
+              "value": "Multi-layer Transformer network with cross-modal attention",
+              "reason": "Describes a network architecture rather than the specific attention method."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Dual-encoder or fusion-encoder fine-tuning",
+            "Visual question answering",
+            "natural language for visual reasoning",
+            "image-text retrieval",
+            "Supervised fine-tuning for VQA",
+            "NLVR2",
+            "Image Classification",
+            "Semantic Segmentation"
+          ],
+          "accepted": [
+            "Visual question answering",
+            "natural language for visual reasoning",
+            "image-text retrieval",
+            "Supervised fine-tuning for VQA",
+            "NLVR2",
+            "Image Classification",
+            "Semantic Segmentation"
+          ],
+          "dropped": [
+            {
+              "value": "Dual-encoder or fusion-encoder fine-tuning",
+              "reason": "Describes a fine-tuning architecture or approach rather than the specific task or objective."
+            }
+          ]
+        },
+        "parameters": {
+          "candidates": [
+            "BASE-SIZE",
+            "BASE (12-LAYER, 768 HIDDEN, 12 HEADS)",
+            "230M",
+            "860M"
+          ],
+          "accepted": [
+            "230M",
+            "860M"
+          ],
+          "dropped": [
+            {
+              "value": "BASE-SIZE",
+              "reason": "Is a size label rather than a numerical count of parameters."
+            },
+            {
+              "value": "BASE (12-LAYER, 768 HIDDEN, 12 HEADS)",
+              "reason": "Describes architectural configuration rather than the total parameter count."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Vision-language pretraining"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Vision-language pretraining",
+              "reason": "Describes a methodology or task rather than a specific research problem or capability gap."
+            }
+          ]
+        },
+        "vision_encoder": {
+          "candidates": [
+            "Shared MOME Transformer network for image patches and word embeddings",
+            "Image patch embeddings with learnable position embeddings"
+          ],
+          "accepted": [
+            "Shared MOME Transformer network for image patches and word embeddings"
+          ],
+          "dropped": [
+            {
+              "value": "Image patch embeddings with learnable position embeddings",
+              "reason": "Describes an input embedding process rather than the encoder model component itself."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 41,
+      "dropped": 6,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "VL-BEiT",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "VL-BEiT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "BEiT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2022-06-02",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Microsoft",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Masked vision-language modeling (MVM): jointly models image-text pairs with masked tokens to provide richer visual supervision compared to prior contrastive or matching-based methods",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Mixture-of-Modality-Experts (MOME) Transformer: employs a shared Transformer block with modality-specific experts to capture modality-specific information, outperforming standard Transformers on visual reasoning and image-text retrieval",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "One-stage training from scratch: eliminates the need for multi-stage or contrastive pretraining pipelines used in prior work.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Masked language modeling (MLM), Masked image modeling (MIM), Masked vision-language modeling (MVM)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ImageNet-22K",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "English Wikipedia",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "BookCorpus",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "ConceptualCaptions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "SBUCaptions",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "COCO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Visual Genome",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Visual question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Natural language for visual reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image-text retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning for VQA",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "NLVR2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Image Classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Semantic Segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "Adam",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "BEiT Tokenizer (images), standard word tokenizer (text)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "230M",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "860M",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 860,
+          "datatype": "integer"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Question Answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Visual Reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image-Text Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Image Classification",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Semantic Segmentation",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/microsoft/unilm/tree/master/vl-beit",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA2.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "NLVR2",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Flickr30k",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "COCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ImageNet-1K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "ADE20K",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "Visual Genome",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "VQA",
+          "datatype": "string"
+        },
+        {
+          "property": "P163012",
+          "label": "finetuning_data",
+          "value": "RefCOCO",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "All parameters active (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head self-attention (shared across modalities)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "One-stage training from scratch",
+          "datatype": "string"
+        },
+        {
+          "property": "P203090",
+          "label": "moe_configuration",
+          "value": "Mixture-of-Modality-Experts (MOME) Transformer with modality-specific experts",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Fusion-encoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203100",
+          "label": "vision_encoder",
+          "value": "Shared MOME Transformer network for image patches and word embeddings",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203101",
+          "label": "base_model",
+          "value": "BEiT",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NLVR2 dev: 81.10, test: 82.19",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flickr30k dev: 92.2, test: 77.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQA test-dev: 79.5, test-std: 83.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "NLVR2 dev: 81.10, test-P: 82.19",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "COCO TR: 77.53, IR: 77.75",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flickr30K TR: 95.8, IR: 83.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ImageNet-1K top-1: 85.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ADE20K mIoU: 53.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "12",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925680",
+    "contribution_ids": [
+      "R1925682"
+    ],
+    "new_contribution_ids": [
+      "R1925682"
+    ],
+    "comparison_updated": null
+  }
+}

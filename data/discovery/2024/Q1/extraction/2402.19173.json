@@ -1,0 +1,846 @@
+{
+ "arxiv_id": "2402.19173",
+ "status": "completed",
+ "timestamp": "2026-08-28T20:57:16.948588",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2402.19173",
+  "title": "StarCoder 2 and The Stack v2: The Next Generation",
+  "authors": [
+   "Anton Lozhkov",
+   "Raymond Li",
+   "Loubna Ben Allal",
+   "Federico Cassano",
+   "Joel Lamy-Poirier",
+   "Nouamane Tazi",
+   "Ao Tang",
+   "Dmytro Pykhtar",
+   "Jiawei Liu",
+   "Yuxiang Wei",
+   "Tianyang Liu",
+   "Max Tian",
+   "Denis Kocetkov",
+   "Arthur Zucker",
+   "Younes Belkada",
+   "Zijian Wang",
+   "Qian Liu",
+   "Dmitry Abulkhanov",
+   "Indraneil Paul",
+   "Zhuang Li",
+   "Wen-Ding Li",
+   "Megan Risdal",
+   "Jia Li",
+   "Jian Zhu",
+   "Terry Yue Zhuo",
+   "Evgenii Zheltonozhskii",
+   "Nii Osae Osae Dade",
+   "Wenhao Yu",
+   "Lucas Krau\u00df",
+   "Naman Jain",
+   "Yixuan Su",
+   "Xuanli He",
+   "Manan Dey",
+   "Edoardo Abati",
+   "Yekun Chai",
+   "Niklas Muennighoff",
+   "Xiangru Tang",
+   "Muhtasham Oblokulov",
+   "Christopher Akiki",
+   "Marc Marone",
+   "Chenghao Mou",
+   "Mayank Mishra",
+   "Alex Gu",
+   "Binyuan Hui",
+   "Tri Dao",
+   "Armel Zebaze",
+   "Olivier Dehaene",
+   "Nicolas Patry",
+   "Canwen Xu",
+   "Julian McAuley",
+   "Han Hu",
+   "Torsten Scholak",
+   "Sebastien Paquet",
+   "Jennifer Robinson",
+   "Carolyn Jane Anderson",
+   "Nicolas Chapados",
+   "Mostofa Patwary",
+   "Nima Tajbakhsh",
+   "Yacine Jernite",
+   "Carlos Mu\u00f1oz Ferrandis",
+   "Lingming Zhang",
+   "Sean Hughes",
+   "Thomas Wolf",
+   "Arjun Guha",
+   "Leandro von Werra",
+   "Harm de Vries"
+  ],
+  "abstract": "The BigCode project, an open-scientific collaboration focused on the responsible development of Large Language Models for Code (Code LLMs), introduces StarCoder2. In partnership with Software Heritage (SWH), we build The Stack v2 on top of the digital commons of their source code archive. Alongside the SWH repositories spanning 619 programming languages, we carefully select other high-quality data sources, such as GitHub pull requests, Kaggle notebooks, and code documentation. This results in a training set that is 4x larger than the first StarCoder dataset. We train StarCoder2 models with 3B, 7B, and 15B parameters on 3.3 to 4.3 trillion tokens and thoroughly evaluate them on a comprehensive set of Code LLM benchmarks. We find that our small model, StarCoder2-3B, outperforms other Code LLMs of similar size on most benchmarks, and also outperforms StarCoderBase-15B. Our large model, StarCoder2- 15B, significantly outperforms other models of comparable size. In addition, it matches or outperforms CodeLlama-34B, a model more than twice its size. Although DeepSeekCoder- 33B is the best-performing model at code completion for high-resource languages, we find that StarCoder2-15B outperforms it on math and code reasoning benchmarks, as well as several low-resource languages. We make the model weights available under an OpenRAIL license and ensure full transparency regarding the training data by releasing the SoftWare Heritage persistent IDentifiers (SWHIDs) of the source code data.",
+  "published": "2024-02-29T13:53:35+00:00",
+  "updated": "2024-02-29T13:53:35+00:00",
+  "doi": null,
+  "primary_category": "cs.SE",
+  "categories": [
+   "cs.SE",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2402.19173v1",
+  "entry_id": "http://arxiv.org/abs/2402.19173v1",
+  "pdf_path": "data/papers/2402.19173.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 192884,
+ "word_count": 26542,
+ "models_extracted": 8,
+ "extraction_data": [
+  {
+   "model_name": "StarCoder 2",
+   "parameters": "3B, 7B, 15B",
+   "parameters_millions": 15000,
+   "model_family": "StarCoder",
+   "date_created": "2024-02-29",
+   "organization": "BigCode",
+   "innovation": "Repository-context-aware training grouping files from the same repository in random order; Fill-in-the-Middle (FIM) transformation at the file level to enable code infilling; systematic downsampling of high-resource languages (e.g., Java, JavaScript) to 200GB; inclusion of curated documentation and configuration languages; structured data formatting using sentinel tokens for repository metadata and file paths.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "The Stack v2 (the-stack-v2-train-smol, the-stack-v2-train-full), Pull requests, Issues, Jupyter structured, Jupyter scripts, Kaggle scripts, Documentation, OpenWebMath, Wikipedia, StackOverflow, Arxiv, LHQ, Intermediate Repr.",
+   "finetuning_task": "Instruction tuning",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA A100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Code generation and programming language understanding",
+   "application": "Code generation, programming language understanding, documentation parsing",
+   "paper_title": "StarCoder 2 and The Stack v2: The Next Generation",
+   "training_corpus_size": "1.2T tokens",
+   "finetuning_data": null,
+   "tokenizer": "StarTokenizer (BPE)",
+   "supported_language": "Java, JavaScript, C++, Python, PHP, English, Chinese, Japanese, German, French, Spanish, Italian, Portuguese, Russian, Korean, Arabic, Hindi, 619 programming languages, AsciiDoc, RDoc, Text, HTML, RMarkdown, reStructuredText, Markdown, plus configuration languages, code",
+   "hardware_description": "A100 SXM4 80 GB",
+   "carbon_emitted": "16,107.01 kgCO2eq",
+   "source_code": "https://github.com/bigcode-project/starcoder2",
+   "context_length": null,
+   "activated_parameters": "3B",
+   "attention_mechanism": "Grouped-Query Attention (GQA), Sliding window attention",
+   "context_length_max": "16K tokens",
+   "context_extension_method": "RoPE scaling",
+   "training_pipeline": "Pre-training on The Stack v2",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": "BOLD, WinoBias, HONEST, RealToxicityPrompts",
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "HumanEval: 31.7; HumanEval+: 27.4; MBPP: 57.4; MBPP+: 47.4; HumanEval: 35.4; HumanEval+: 29.9; MBPP: 54.4; MBPP+: 45.6; HumanEval: 46.3; HumanEval+: 37.8; MBPP: 66.2; MBPP+: 53.1; RepoBench v1.1 Python EM: 32.47 (3B), 33.72 (7B), 36.99 (15B); FIM Python exact match: 59.1 (3B), 61.1 (7B), 48.4 (15B); HumanEval: 48.8 (3B), 63.4 (7B); MBPP: 65.2 (3B), 78.5 (7B); MultiPL-E: 58.1 (3B), 74.2 (7B)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "24 (3B), 36 (7B), 48 (15B)",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "StarCoder 2": {
+   "application": [
+    "Code generation",
+    "programming language understanding",
+    "documentation parsing"
+   ],
+   "attention_mechanism": [
+    "Grouped-Query Attention (GQA)",
+    "Sliding window attention"
+   ],
+   "context_extension_method": [
+    "RoPE scaling"
+   ],
+   "finetuning_task": [
+    "Instruction tuning"
+   ],
+   "hardware_used": [
+    "NVIDIA A100 GPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "StarCoder"
+   ],
+   "model_name": [
+    "StarCoder 2"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "BigCode"
+   ],
+   "parameters": [
+    "3B",
+    "7B",
+    "15B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "The Stack v2 (the-stack-v2-train-smol, the-stack-v2-train-full)",
+    "Pull requests",
+    "Issues",
+    "Jupyter structured",
+    "Jupyter scripts",
+    "Kaggle scripts",
+    "Documentation",
+    "OpenWebMath",
+    "Wikipedia",
+    "StackOverflow",
+    "Arxiv",
+    "LHQ",
+    "Intermediate Repr."
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [
+    "Code generation and programming language understanding"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese",
+    "Japanese",
+    "German",
+    "French",
+    "Spanish",
+    "Italian",
+    "Portuguese",
+    "Russian",
+    "Korean",
+    "Arabic",
+    "Hindi"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "StarCoder 2": {
+    "supported_language": {
+     "candidates": [
+      "Java",
+      "JavaScript",
+      "C++",
+      "Python",
+      "PHP",
+      "English",
+      "Chinese",
+      "Japanese",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Portuguese",
+      "Russian",
+      "Korean",
+      "Arabic",
+      "Hindi",
+      "619 programming languages",
+      "AsciiDoc",
+      "RDoc",
+      "Text",
+      "HTML",
+      "RMarkdown",
+      "reStructuredText",
+      "Markdown",
+      "plus configuration languages",
+      "code"
+     ],
+     "accepted": [
+      "English",
+      "Chinese",
+      "Japanese",
+      "German",
+      "French",
+      "Spanish",
+      "Italian",
+      "Portuguese",
+      "Russian",
+      "Korean",
+      "Arabic",
+      "Hindi"
+     ],
+     "dropped": [
+      {
+       "value": "Java",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "JavaScript",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "C++",
+       "reason": "C++ is a programming language, not a natural language. (cached)"
+      },
+      {
+       "value": "Python",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "PHP",
+       "reason": "Names a programming language, not a natural language (cached)"
+      },
+      {
+       "value": "HTML",
+       "reason": "These are programming languages, not natural languages as required by the definition. (cached)"
+      },
+      {
+       "value": "code",
+       "reason": "Programming language, not a natural language as defined (cached)"
+      },
+      {
+       "value": "619 programming languages",
+       "reason": "Count/characterization, not a specific natural language"
+      },
+      {
+       "value": "AsciiDoc",
+       "reason": "Markup format, not a natural language"
+      },
+      {
+       "value": "RDoc",
+       "reason": "Markup format, not a natural language"
+      },
+      {
+       "value": "Text",
+       "reason": "Not a specific natural language"
+      },
+      {
+       "value": "RMarkdown",
+       "reason": "Markup format, not a natural language"
+      },
+      {
+       "value": "reStructuredText",
+       "reason": "Markup format, not a natural language"
+      },
+      {
+       "value": "Markdown",
+       "reason": "Markup format, not a natural language"
+      },
+      {
+       "value": "plus configuration languages",
+       "reason": "Trailing qualifier/category, not a natural language"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 44,
+   "dropped": 15,
+   "llm_calls": 1,
+   "values_sent_to_llm": 24
+  }
+ },
+ "contributions": [
+  {
+   "label": "StarCoder 2",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "StarCoder 2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "StarCoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2024-02-29",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "BigCode",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Repository-context-aware training grouping files from the same repository in random order",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Fill-in-the-Middle (FIM) transformation at the file level to enable code infilling",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic downsampling of high-resource languages (e.g., Java, JavaScript) to 200GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Inclusion of curated documentation and configuration languages",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Structured data formatting using sentinel tokens for repository metadata and file paths.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "The Stack v2 (the-stack-v2-train-smol, the-stack-v2-train-full)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pull requests",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Issues",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Jupyter structured",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Jupyter scripts",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Kaggle scripts",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Documentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebMath",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "StackOverflow",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Arxiv",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LHQ",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Intermediate Repr.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "StarTokenizer (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "15B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 15000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA A100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "A100 SXM4 80 GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P119142",
+     "label": "carbon_emitted",
+     "value": "16,107.01 kgCO2eq",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Code generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Programming language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Documentation parsing",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/bigcode-project/starcoder2",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Code generation and programming language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.2T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Korean",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Arabic",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Hindi",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Grouped-Query Attention (GQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sliding window attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "16K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "RoPE scaling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on The Stack v2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203097",
+     "label": "safety_evaluation_protocol",
+     "value": "BOLD, WinoBias, HONEST, RealToxicityPrompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 31.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 27.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 57.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 47.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 35.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 29.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 54.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 45.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 46.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval+: 37.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 66.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP+: 53.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RepoBench v1.1 Python EM: 32.47 (3B), 33.72 (7B), 36.99 (15B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FIM Python exact match: 59.1 (3B), 61.1 (7B), 48.4 (15B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HumanEval: 48.8 (3B), 63.4 (7B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MBPP: 65.2 (3B), 78.5 (7B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiPL-E: 58.1 (3B), 74.2 (7B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "24 (3B), 36 (7B), 48 (15B)",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1786652",
+  "contribution_ids": [
+   "R1786654",
+   "R1924324"
+  ],
+  "new_contribution_ids": [
+   "R1924324"
+  ],
+  "comparison_updated": null
+ }
+}

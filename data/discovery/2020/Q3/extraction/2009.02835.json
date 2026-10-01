@@ -1,0 +1,989 @@
+{
+ "arxiv_id": "2009.02835",
+ "status": "completed",
+ "timestamp": "2026-08-24T21:18:58.429180",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2009.02835",
+  "title": "E-BERT: A Phrase and Product Knowledge Enhanced Language Model for E-commerce",
+  "authors": [
+   "Zhang, Denghui",
+   "Yuan, Zixuan",
+   "Liu, Yanchi",
+   "Zhuang, Fuzhen",
+   "Chen, Haifeng",
+   "Xiong, Hui"
+  ],
+  "abstract": "",
+  "published": "2020-09-07T00:00:00+00:00",
+  "updated": "2020-09-07T00:00:00+00:00",
+  "doi": null,
+  "primary_category": null,
+  "categories": [],
+  "pdf_url": "https://arxiv.org/pdf/2009.02835",
+  "entry_id": "https://arxiv.org/abs/2009.02835",
+  "source": "arxiv-html-fallback",
+  "pdf_path": "data/papers/2009.02835.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: domain-specific LLM)"
+ },
+ "text_length": 40463,
+ "word_count": 4192,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "E-BERT",
+   "parameters": "110M",
+   "parameters_millions": 110,
+   "model_family": "BERT",
+   "date_created": "2020-09-07",
+   "organization": "Chinese Academy Of Sciences",
+   "innovation": "Adaptive Hybrid Masking (AHM): dynamically switches between word-level and phrase-level masking during pre-training based on the model's fitting progress, preserving both preliminary word knowledge and complex phrase understanding, unlike prior phrase masking that discards word masking or uses static chunking; Neighbor Product Reconstruction (NPR): introduces a denoising cross-attention layer to explicitly model product-level knowledge by predicting associated neighbor products, capturing factual product associations that co-occurrence alone misses.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked Language Model (MLM), Neighbor Product Reconstruction",
+   "pretraining_corpus": "E-commerce Corpus from Amazon Dataset (product titles, descriptions, and reviews)",
+   "finetuning_task": "Supervised fine-tuning for review QA, aspect extraction, aspect sentiment classification, product classification, Supervised fine-tuning for RQA, AE, ASC, and Product Classification",
+   "optimizer": null,
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "E-commerce language understanding, specifically capturing phrase-level and product-level domain knowledge.",
+   "application": "Review-based Question Answering (RQA), Aspect Extraction (AE), Aspect Sentiment Classification (ASC), Product Classification",
+   "paper_title": "E-BERT: A Phrase and Product Knowledge Enhanced Language Model for E-commerce",
+   "training_corpus_size": "3.7GB",
+   "finetuning_data": "ReviewQA, ReviewAE, ReviewASC, E-commerce Classification, Amazon dataset downstream tasks (RQA, AE, ASC, Product Classification)",
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "110M (dense, all parameters active)",
+   "attention_mechanism": "De-noising cross-attention layer for NPR",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (AHM + NPR) -> Supervised fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT Base",
+   "optimizer_innovation": null,
+   "benchmark_result": "ReviewQA F1 68.77, EM 45.40; ProductClassification Acc 88.42; ReviewAE F1 88.42; ReviewASC MaF1 69.32",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "E-BERT-DP",
+   "model_family": "BERT",
+   "date_created": "2020-09-07",
+   "organization": "Google",
+   "innovation": "Reduced variant of E-BERT that uses only the phrase masking mode, without word-level masking.",
+   "pretraining_corpus": "E-commerce corpus (product reviews and metadata)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Review-based question answering, product classification, review aspect extraction, review aspect sentiment classification",
+   "license": null,
+   "research_problem": "E-commerce language understanding",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling (phrase masking)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised fine-tuning for span-based QA, sequence labeling, and multi-label classification",
+   "finetuning_data": "Amazon QA dataset, SemEval 2014 Task 4, custom Amazon product metadata dataset",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "E-BERT: A Phrase and Product Knowledge Enhanced Language Model for E-commerce",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ReviewQA F1 65.77, EM 44.63; ProductClassification Acc 87.84; ReviewAE F1 86.28; ReviewASC MaF1 69.02",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "E-BERT-AHM",
+   "model_family": "BERT",
+   "date_created": "2020-09-07",
+   "organization": "Google",
+   "innovation": "E-BERT variant incorporating Adaptive Hybrid Masking (AHM) to coherently combine word-level and phrase-level masking, accelerating convergence without affecting performance.",
+   "pretraining_corpus": "E-commerce corpus (product reviews and metadata)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Review-based question answering, product classification, review aspect extraction, review aspect sentiment classification",
+   "license": null,
+   "research_problem": "E-commerce language understanding",
+   "model_version": null,
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling (phrase masking)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised fine-tuning for span-based QA, sequence labeling, and multi-label classification",
+   "finetuning_data": "Amazon QA dataset, SemEval 2014 Task 4, custom Amazon product metadata dataset",
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "E-BERT: A Phrase and Product Knowledge Enhanced Language Model for E-commerce",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "ReviewQA F1 66.18, EM 45.56; ProductClassification Acc 89.17; ReviewAE F1 87.32; ReviewASC MaF1 70.35",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "E-BERT": {
+   "application": [
+    "Review-based Question Answering (RQA)",
+    "Aspect Extraction (AE)",
+    "Aspect Sentiment Classification (ASC)",
+    "Product Classification"
+   ],
+   "attention_mechanism": [
+    "De-noising cross-attention layer for NPR"
+   ],
+   "base_model": [
+    "BERT Base"
+   ],
+   "finetuning_data": [
+    "ReviewQA",
+    "ReviewAE",
+    "ReviewASC",
+    "E-commerce Classification"
+   ],
+   "finetuning_task": [
+    "aspect extraction",
+    "aspect sentiment classification",
+    "product classification",
+    "AE",
+    "ASC"
+   ],
+   "model_family": [
+    "BERT"
+   ],
+   "model_name": [
+    "E-BERT"
+   ],
+   "organization": [
+    "Chinese Academy Of Sciences"
+   ],
+   "parameters": [
+    "110M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "E-commerce Corpus from Amazon Dataset (product titles, descriptions, and reviews)"
+   ],
+   "pretraining_task": [
+    "Masked Language Model (MLM), Neighbor Product Reconstruction"
+   ],
+   "research_problem": [
+    "E-commerce language understanding"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "E-BERT-DP": {
+   "application": [
+    "Review-based question answering",
+    "product classification",
+    "review aspect extraction",
+    "review aspect sentiment classification"
+   ],
+   "finetuning_data": [
+    "Amazon QA dataset",
+    "SemEval 2014 Task 4",
+    "custom Amazon product metadata dataset"
+   ],
+   "finetuning_task": [
+    "sequence labeling",
+    "multi-label classification"
+   ],
+   "model_family": [
+    "BERT"
+   ],
+   "model_name": [
+    "E-BERT-DP"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "E-commerce corpus (product reviews and metadata)"
+   ],
+   "pretraining_task": [
+    "Masked language modeling (phrase masking)"
+   ],
+   "research_problem": [
+    "E-commerce language understanding"
+   ]
+  },
+  "E-BERT-AHM": {
+   "application": [
+    "Review-based question answering",
+    "product classification",
+    "review aspect extraction",
+    "review aspect sentiment classification"
+   ],
+   "finetuning_data": [
+    "Amazon QA dataset",
+    "SemEval 2014 Task 4",
+    "custom Amazon product metadata dataset"
+   ],
+   "finetuning_task": [
+    "sequence labeling",
+    "multi-label classification"
+   ],
+   "model_family": [
+    "BERT"
+   ],
+   "model_name": [
+    "E-BERT-AHM"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "E-commerce corpus (product reviews and metadata)"
+   ],
+   "pretraining_task": [
+    "Masked language modeling (phrase masking)"
+   ],
+   "research_problem": [
+    "E-commerce language understanding"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "E-BERT": {
+    "finetuning_data": {
+     "candidates": [
+      "ReviewQA",
+      "ReviewAE",
+      "ReviewASC",
+      "E-commerce Classification",
+      "Amazon dataset downstream tasks (RQA, AE, ASC, Product Classification)"
+     ],
+     "accepted": [
+      "ReviewQA",
+      "ReviewAE",
+      "ReviewASC",
+      "E-commerce Classification"
+     ],
+     "dropped": [
+      {
+       "value": "Amazon dataset downstream tasks (RQA, AE, ASC, Product Classification)",
+       "reason": "Describes a list of downstream tasks rather than naming a specific dataset."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for review QA",
+      "aspect extraction",
+      "aspect sentiment classification",
+      "product classification",
+      "Supervised fine-tuning for RQA",
+      "AE",
+      "ASC"
+     ],
+     "accepted": [
+      "aspect extraction",
+      "aspect sentiment classification",
+      "product classification",
+      "AE",
+      "ASC"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for review QA",
+       "reason": "Describes the fine-tuning method/process rather than naming the specific task."
+      },
+      {
+       "value": "Supervised fine-tuning for RQA",
+       "reason": "Describes the fine-tuning method/process rather than naming the specific task."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "E-commerce language understanding",
+      "specifically capturing phrase-level and product-level domain knowledge."
+     ],
+     "accepted": [
+      "E-commerce language understanding"
+     ],
+     "dropped": [
+      {
+       "value": "specifically capturing phrase-level and product-level domain knowledge.",
+       "reason": "Sentence fragment describing a capability or solution rather than a noun phrase naming the research problem."
+      }
+     ]
+    }
+   },
+   "E-BERT-DP": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for span-based QA",
+      "sequence labeling",
+      "multi-label classification"
+     ],
+     "accepted": [
+      "sequence labeling",
+      "multi-label classification"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for span-based QA",
+       "reason": "Describes the fine-tuning method/process rather than naming the specific task."
+      }
+     ]
+    }
+   },
+   "E-BERT-AHM": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for span-based QA",
+      "sequence labeling",
+      "multi-label classification"
+     ],
+     "accepted": [
+      "sequence labeling",
+      "multi-label classification"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for span-based QA",
+       "reason": "Describes the fine-tuning method/process rather than naming the specific task."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 56,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 36
+  }
+ },
+ "contributions": [
+  {
+   "label": "E-BERT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "E-BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-09-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Chinese Academy Of Sciences",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adaptive Hybrid Masking (AHM): dynamically switches between word-level and phrase-level masking during pre-training based on the model's fitting progress, preserving both preliminary word knowledge and complex phrase understanding, unlike prior phrase masking that discards word masking or uses static chunking",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Neighbor Product Reconstruction (NPR): introduces a denoising cross-attention layer to explicitly model product-level knowledge by predicting associated neighbor products, capturing factual product associations that co-occurrence alone misses.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked Language Model (MLM), Neighbor Product Reconstruction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "E-commerce Corpus from Amazon Dataset (product titles, descriptions, and reviews)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Aspect extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Aspect sentiment classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Product classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "AE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "ASC",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 110,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review-based Question Answering (RQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Aspect Extraction (AE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Aspect Sentiment Classification (ASC)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Product Classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "E-commerce language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "3.7GB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReviewQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReviewAE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ReviewASC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "E-commerce Classification",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "110M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "De-noising cross-attention layer for NPR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (AHM + NPR) -> Supervised fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT Base",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewQA F1 68.77, EM 45.40",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ProductClassification Acc 88.42",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewAE F1 88.42",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewASC MaF1 69.32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "E-BERT-DP",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "E-BERT-DP",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-09-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Reduced variant of E-BERT that uses only the phrase masking mode, without word-level masking.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling (phrase masking)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "E-commerce corpus (product reviews and metadata)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sequence labeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-label classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review-based question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Product classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review aspect extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review aspect sentiment classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "E-commerce language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Amazon QA dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SemEval 2014 Task 4",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Custom Amazon product metadata dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewQA F1 65.77, EM 44.63",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ProductClassification Acc 87.84",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewAE F1 86.28",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewASC MaF1 69.02",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "E-BERT-AHM",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "E-BERT-AHM",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-09-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "E-BERT variant incorporating Adaptive Hybrid Masking (AHM) to coherently combine word-level and phrase-level masking, accelerating convergence without affecting performance.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling (phrase masking)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "E-commerce corpus (product reviews and metadata)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Sequence labeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multi-label classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review-based question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Product classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review aspect extraction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Review aspect sentiment classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "E-commerce language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Amazon QA dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SemEval 2014 Task 4",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Custom Amazon product metadata dataset",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewQA F1 66.18, EM 45.56",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ProductClassification Acc 89.17",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewAE F1 87.32",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ReviewASC MaF1 70.35",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R598313",
+  "contribution_ids": [
+   "R598314",
+   "R1920879",
+   "R1920895",
+   "R1920903"
+  ],
+  "new_contribution_ids": [
+   "R1920879",
+   "R1920895",
+   "R1920903"
+  ],
+  "comparison_updated": null
+ }
+}

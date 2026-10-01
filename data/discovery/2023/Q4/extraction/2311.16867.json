@@ -1,0 +1,860 @@
+{
+ "arxiv_id": "2311.16867",
+ "status": "completed",
+ "timestamp": "2026-08-30T21:35:39.043429",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2311.16867",
+  "title": "The Falcon Series of Open Language Models",
+  "authors": [
+   "Ebtesam Almazrouei",
+   "Hamza Alobeidli",
+   "Abdulaziz Alshamsi",
+   "Alessandro Cappelli",
+   "Ruxandra Cojocaru",
+   "M\u00e9rouane Debbah",
+   "\u00c9tienne Goffinet",
+   "Daniel Hesslow",
+   "Julien Launay",
+   "Quentin Malartic",
+   "Daniele Mazzotta",
+   "Badreddine Noune",
+   "Baptiste Pannier",
+   "Guilherme Penedo"
+  ],
+  "abstract": "We introduce the Falcon series: 7B, 40B, and 180B parameters causal decoder-only models trained on a diverse high-quality corpora predominantly assembled from web data. The largest model, Falcon-180B, has been trained on over 3.5 trillion tokens of text--the largest openly documented pretraining run. Falcon-180B significantly outperforms models such as PaLM or Chinchilla, and improves upon concurrently developed models such as LLaMA 2 or Inflection-1. It nears the performance of PaLM-2-Large at a reduced pretraining and inference cost, making it, to our knowledge, one of the three best language models in the world along with GPT-4 and PaLM-2-Large. We report detailed evaluations, as well as a deep dive into the methods and custom tooling employed to pretrain Falcon. Notably, we report on our custom distributed training codebase, allowing us to efficiently pretrain these models on up to 4,096 A100s on cloud AWS infrastructure with limited interconnect. We release a 600B tokens extract of our web dataset, as well as the Falcon-7/40/180B models under a permissive license to foster open-science and accelerate the development of an open ecosystem of large language models.",
+  "published": "2023-11-28T15:12:47+00:00",
+  "updated": "2023-11-29T19:45:10+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2311.16867v2",
+  "entry_id": "http://arxiv.org/abs/2311.16867v2",
+  "pdf_path": "data/papers/2311.16867.pdf"
+ },
+ "text_length": 186347,
+ "word_count": 9620,
+ "models_extracted": 8,
+ "extraction_data": [
+  {
+   "model_name": "Falcon",
+   "parameters": "1B, 3B, 7B, 40B, 180B",
+   "parameters_millions": 180000,
+   "model_family": "Falcon",
+   "date_created": "2023-11-28",
+   "organization": "Technology Innovation Institute",
+   "innovation": "RefinedWeb dataset (high-quality web data from Common Crawl); architectural optimizations including separate layernorms, tied embeddings, parallel layers, no biases in linear layers, z-loss, and weight decay; Multi-Group Query Attention (MGQA) for efficient inference; Triton kernels for state-of-the-art throughput; 3D parallelism combined with ZeRO for scalable training.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "RefinedWeb, Common Crawl, conversations, books, technical data, code, multilingual data",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "A100",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0, Responsible use license",
+   "research_problem": "Impact of curated data mixtures (multilingual, code, books, conversations, technical) on zero-shot performance of large language models",
+   "application": "Zero-shot natural language understanding, coding, multilingual tasks",
+   "paper_title": "The Falcon Series of Open Language Models",
+   "training_corpus_size": "1,500B tokens (7B), 1,000B tokens (40B), 3,500B tokens (180B)",
+   "finetuning_data": null,
+   "tokenizer": "Falcon tokenizer (BPE)",
+   "supported_language": "English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, Czech, Swedish, Romanian, Danish, Norwegian, Catalan, Slovene, Bulgarian",
+   "hardware_description": "up to 4,096 A100s on cost-efficient AWS cloud infrastructure with limited interconnect",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/TechnologyInstituteOfScience/Falcon; https://github.com/tiiuae/falcon-180B; https://github.com/TechnologyInnovation/falcon",
+   "context_length": null,
+   "activated_parameters": "Dense (all parameters active)",
+   "attention_mechanism": "Multi-Query Attention (MQA), Multi-Group Query Attention (MGQA)",
+   "context_length_max": "2048",
+   "context_extension_method": "Rotary position embeddings (RoPE)",
+   "training_pipeline": "Pre-training",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "BF16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": "Up to 4,096 A100 GPUs",
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Agg. performance: 60.8 (7B), 67.1 (40B), 70.3 (180B); 60.8; 67.1; 70.3; zs-web aggregate 59.8%",
+   "weight_clipping_mechanism": "Gradient clipping (1.0, 0.6, 0.4)",
+   "number_of_attention_heads": "71 (7B), 40 (40B), 232 (180B)",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Falcon-1/7B",
+   "model_family": "Falcon",
+   "date_created": "2023-11-28",
+   "organization": "Technology Innovation Institute",
+   "innovation": "Multigroup attention: extends multiquery attention to improve inference scalability by significantly reducing the size of the K,V-cache; conversational masking: applied during pretraining to improve performance on conversational tasks; 3D parallelism combined with ZeRO: distributed training strategy for running on cost-efficient cloud infrastructure; FlashAttention kernels in Triton and monolayer strategy: interventions for fast, memory-efficient training.",
+   "pretraining_corpus": "RefinedWeb (filtered and deduplicated web data)",
+   "parameters": "1/7B",
+   "parameters_millions": 143,
+   "application": "Natural language tasks, language modeling",
+   "license": "Apache 2.0",
+   "research_problem": "Large language models",
+   "model_version": null,
+   "pretraining_architecture": null,
+   "pretraining_task": null,
+   "training_corpus_size": "350B tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "The Falcon Series of Open Language Models",
+   "activated_parameters": null,
+   "attention_mechanism": "Multigroup attention (extension of multiquery attention)",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "Near PaLM-2 Large, between GPT-3.5 and GPT-4",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 8,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Falcon": {
+   "application": [
+    "Zero-shot natural language understanding",
+    "coding",
+    "multilingual tasks"
+   ],
+   "attention_mechanism": [
+    "Multi-Query Attention (MQA)",
+    "Multi-Group Query Attention (MGQA)"
+   ],
+   "context_extension_method": [
+    "Rotary position embeddings (RoPE)"
+   ],
+   "hardware_used": [
+    "A100"
+   ],
+   "license": [
+    "Apache 2.0, Responsible use license"
+   ],
+   "model_family": [
+    "Falcon"
+   ],
+   "model_name": [
+    "Falcon"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Technology Innovation Institute"
+   ],
+   "parameters": [
+    "1B",
+    "3B",
+    "7B",
+    "40B",
+    "180B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "RefinedWeb",
+    "Common Crawl",
+    "conversations",
+    "books"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "quantization_precision": [
+    "BF16"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "German",
+    "Spanish",
+    "French",
+    "Italian",
+    "Dutch",
+    "Polish",
+    "Portuguese",
+    "Czech",
+    "Swedish",
+    "Romanian",
+    "Danish",
+    "Norwegian",
+    "Catalan",
+    "Slovene",
+    "Bulgarian"
+   ],
+   "weight_clipping_mechanism": [
+    "Gradient clipping (1.0, 0.6, 0.4)"
+   ]
+  },
+  "Falcon-1/7B": {
+   "application": [
+    "language modeling"
+   ],
+   "attention_mechanism": [
+    "Multigroup attention (extension of multiquery attention)"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Falcon"
+   ],
+   "model_name": [
+    "Falcon-1/7B"
+   ],
+   "organization": [
+    "Technology Innovation Institute"
+   ],
+   "parameters": [],
+   "pretraining_corpus": [
+    "RefinedWeb (filtered and deduplicated web data)"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Falcon": {
+    "pretraining_corpus": {
+     "candidates": [
+      "RefinedWeb",
+      "Common Crawl",
+      "conversations",
+      "books",
+      "technical data",
+      "code",
+      "multilingual data"
+     ],
+     "accepted": [
+      "RefinedWeb",
+      "Common Crawl",
+      "conversations",
+      "books"
+     ],
+     "dropped": [
+      {
+       "value": "code",
+       "reason": "Too vague, does not name a specific corpus or dataset. (cached)"
+      },
+      {
+       "value": "multilingual data",
+       "reason": "Vague descriptor rather than an identifiable dataset or corpus. (cached)"
+      },
+      {
+       "value": "technical data",
+       "reason": "Too generic; does not name an identifiable dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Impact of curated data mixtures (multilingual, code, books, conversations, technical) on zero-shot performance of large language models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Impact of curated data mixtures (multilingual, code, books, conversations, technical) on zero-shot performance of large language models",
+       "reason": "Reads like a paper title or research objective description rather than a short noun phrase naming a problem."
+      }
+     ]
+    }
+   },
+   "Falcon-1/7B": {
+    "application": {
+     "candidates": [
+      "Natural language tasks",
+      "language modeling"
+     ],
+     "accepted": [
+      "language modeling"
+     ],
+     "dropped": [
+      {
+       "value": "Natural language tasks",
+       "reason": "Broad category/placeholder, not a concrete task or domain (cached)"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "1/7B"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "1/7B",
+       "reason": "Not a valid parameter count; appears to be a fragment or typo."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Large language models"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large language models",
+       "reason": "Names a model category, not a research problem or challenge (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 48,
+   "dropped": 7,
+   "llm_calls": 1,
+   "values_sent_to_llm": 14
+  }
+ },
+ "contributions": [
+  {
+   "label": "Falcon",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Falcon",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Falcon",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-11-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Technology Innovation Institute",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "RefinedWeb dataset (high-quality web data from Common Crawl)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Architectural optimizations including separate layernorms, tied embeddings, parallel layers, no biases in linear layers, z-loss, and weight decay",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multi-Group Query Attention (MGQA) for efficient inference",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Triton kernels for state-of-the-art throughput",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "3D parallelism combined with ZeRO for scalable training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefinedWeb",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Common Crawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conversations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Books",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Falcon tokenizer (BPE)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "40B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "180B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 180000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "A100",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Up to 4,096 A100s on cost-efficient AWS cloud infrastructure with limited interconnect",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot natural language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/TechnologyInstituteOfScience/Falcon",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/tiiuae/falcon-180B",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/TechnologyInnovation/falcon",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1,500B tokens (7B), 1,000B tokens (40B), 3,500B tokens (180B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Dutch",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Polish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Czech",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swedish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Romanian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Danish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Norwegian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Catalan",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Slovene",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Bulgarian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "Dense (all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-Query Attention (MQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-Group Query Attention (MGQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "Rotary position embeddings (RoPE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "BF16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "Up to 4,096 A100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Agg. performance: 60.8 (7B), 67.1 (40B), 70.3 (180B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "60.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "67.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "70.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Zs-web aggregate 59.8%",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Gradient clipping (1.0, 0.6, 0.4)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "71 (7B), 40 (40B), 232 (180B)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Falcon-1/7B",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Falcon-1/7B",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Falcon",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2023-11-28",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Technology Innovation Institute",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Multigroup attention: extends multiquery attention to improve inference scalability by significantly reducing the size of the K,V-cache",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Conversational masking: applied during pretraining to improve performance on conversational tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "3D parallelism combined with ZeRO: distributed training strategy for running on cost-efficient cloud infrastructure",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "FlashAttention kernels in Triton and monolayer strategy: interventions for fast, memory-efficient training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefinedWeb (filtered and deduplicated web data)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 143,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "350B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multigroup attention (extension of multiquery attention)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Near PaLM-2 Large, between GPT-3.5 and GPT-4",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1768892",
+  "contribution_ids": [
+   "R1768894",
+   "R1768895",
+   "R1768896",
+   "R1768897",
+   "R1768898",
+   "R1927439",
+   "R1927444"
+  ],
+  "new_contribution_ids": [
+   "R1927439",
+   "R1927444"
+  ],
+  "comparison_updated": null
+ }
+}

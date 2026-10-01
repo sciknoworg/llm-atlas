@@ -1,0 +1,2135 @@
+{
+ "arxiv_id": "2006.16668",
+ "status": "completed",
+ "timestamp": "2026-08-24T19:34:04.522475",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2006.16668",
+  "title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+  "authors": [
+   "Dmitry Lepikhin",
+   "HyoukJoong Lee",
+   "Yuanzhong Xu",
+   "Dehao Chen",
+   "Orhan Firat",
+   "Yanping Huang",
+   "Maxim Krikun",
+   "Noam Shazeer",
+   "Zhifeng Chen"
+  ],
+  "abstract": "Neural network scaling has been critical for improving the model quality in many real-world machine learning applications with vast amounts of training data and compute. Although this trend of scaling is affirmed to be a sure-fire approach for better model quality, there are challenges on the path such as the computation cost, ease of programming, and efficient implementation on parallel devices. GShard is a module composed of a set of lightweight annotation APIs and an extension to the XLA compiler. It provides an elegant way to express a wide range of parallel computation patterns with minimal changes to the existing model code. GShard enabled us to scale up multilingual neural machine translation Transformer model with Sparsely-Gated Mixture-of-Experts beyond 600 billion parameters using automatic sharding. We demonstrate that such a giant model can efficiently be trained on 2048 TPU v3 accelerators in 4 days to achieve far superior quality for translation from 100 languages to English compared to the prior art.",
+  "published": "2020-06-30T10:42:02+00:00",
+  "updated": "2020-06-30T10:42:02+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG",
+   "stat.ML"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2006.16668v1",
+  "entry_id": "http://arxiv.org/abs/2006.16668v1",
+  "pdf_path": "data/papers/2006.16668.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 118210,
+ "word_count": 7956,
+ "models_extracted": 24,
+ "extraction_data": [
+  {
+   "model_name": "GShard",
+   "parameters": "12.5B, 37B, 50B, 150B, 200B, 312B, 600B, 1T",
+   "parameters_millions": 1000000,
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Mixture-of-Experts (MoE) architecture with conditional computation; automatic sharding via an SPMD partitioner; GateEinsum operator for efficient expert dispatching and combining; sublinear communication scaling for AllToAll operations (O(sqrt(D))) enabling efficient cross-partition expert routing.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multilingual neural machine translation",
+   "pretraining_corpus": "Web-scale in-house dataset for multilingual machine translation",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "TPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Scaling giant models efficiently using conditional computation and automatic sharding",
+   "application": "Machine translation, multilingual translation",
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "training_corpus_size": "1T tokens",
+   "finetuning_data": null,
+   "tokenizer": "Sub-word segmentation",
+   "supported_language": "Multilingual (hundreds of languages), Multilingual, English, German",
+   "hardware_description": "2048 TPU cores for 4 days",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "16K (per token)",
+   "attention_mechanism": "Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on multilingual MT data",
+   "reasoning_mode": null,
+   "moe_configuration": "Sparsely gated mixture of experts",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": "2048 TPU cores",
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "BLEU avg: 44.3 (600B), 41.3 (200B), 43.7 (150B), 40.0 (50B), 39.0 (37B), 36.7 (12.5B)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "GShard MoE (2048E, 36L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Mixture-of-Experts (MoE) architecture with conditional computation; automatic SPMD sharding across devices; gate-based token routing to experts; constant per-device memory scaling with expert count; rematerialization for activation memory reduction",
+   "pretraining_corpus": "M4 multilingual machine translation dataset",
+   "parameters": "600B",
+   "parameters_millions": 600000,
+   "application": "Multilingual machine translation",
+   "license": "Apache 2.0",
+   "research_problem": "Scaling giant models efficiently via conditional computation and automatic sharding",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English, German, French, Russian, Chinese, Japanese",
+   "hardware_used": "TPU cores",
+   "hardware_description": "2048 TPU cores",
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": "https:",
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Transformer",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "Sparsely-Gated Mixture-of-Experts",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(2048E, 12L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "200B",
+   "parameters_millions": 200000,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "2048 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(512E, 36L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "150B",
+   "parameters_millions": 150000,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "512 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(512E, 12L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "50B",
+   "parameters_millions": 50000,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "512 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(128E, 36L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "37B",
+   "parameters_millions": 37000,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "128 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(128E, 12L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "12.5B",
+   "parameters_millions": 12500,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "128 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MoE(2048E, 60L)",
+   "model_family": "GShard",
+   "date_created": "2020-06-30",
+   "organization": "Google",
+   "innovation": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding; experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+   "pretraining_corpus": null,
+   "parameters": "1T",
+   "parameters_millions": 1000000,
+   "application": "Machine translation",
+   "license": null,
+   "research_problem": "Scaling giant models with conditional computation",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Machine translation",
+   "training_corpus_size": "1 trillion tokens",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": null,
+   "hardware_used": "TPUv3",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding",
+   "activated_parameters": "1 active per layer per token",
+   "attention_mechanism": "Standard multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1 trillion tokens",
+   "reasoning_mode": null,
+   "moe_configuration": "2048 experts, 1 active per layer, distributed every other layer",
+   "quantization_precision": "float32 (weights/activations); bfloat16 (for 1T model)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 11,
+ "models_after_merge": 8,
+ "validated_rows": {
+  "GShard": {
+   "application": [
+    "Machine translation",
+    "multilingual translation"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "GShard"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "12.5B",
+    "37B",
+    "50B",
+    "150B",
+    "200B",
+    "312B",
+    "600B",
+    "1T"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multilingual neural machine translation"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "German"
+   ]
+  },
+  "GShard MoE (2048E, 36L)": {
+   "application": [
+    "Multilingual machine translation"
+   ],
+   "attention_mechanism": [],
+   "hardware_used": [
+    "TPU cores"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "GShard MoE (2048E, 36L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "600B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "M4 multilingual machine translation dataset"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "German",
+    "French",
+    "Russian",
+    "Chinese",
+    "Japanese"
+   ]
+  },
+  "MoE(2048E, 12L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(2048E, 12L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "200B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  },
+  "MoE(512E, 36L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(512E, 36L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "150B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  },
+  "MoE(512E, 12L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(512E, 12L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "50B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  },
+  "MoE(128E, 36L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(128E, 36L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "37B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  },
+  "MoE(128E, 12L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(128E, 12L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "12.5B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  },
+  "MoE(2048E, 60L)": {
+   "application": [
+    "Machine translation"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "model_family": [
+    "GShard"
+   ],
+   "model_name": [
+    "MoE(2048E, 60L)"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "1T"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_task": [
+    "Machine translation"
+   ],
+   "quantization_precision": [
+    "float32 (weights/activations)",
+    "bfloat16 (for 1T model)"
+   ],
+   "research_problem": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "GShard": {
+    "pretraining_corpus": {
+     "candidates": [
+      "Web-scale in-house dataset for multilingual machine translation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Web-scale in-house dataset for multilingual machine translation",
+       "reason": "Descriptive phrase rather than a named dataset or corpus."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models efficiently using conditional computation and automatic sharding"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models efficiently using conditional computation and automatic sharding",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    },
+    "supported_language": {
+     "candidates": [
+      "Multilingual (hundreds of languages)",
+      "Multilingual",
+      "English",
+      "German"
+     ],
+     "accepted": [
+      "English",
+      "German"
+     ],
+     "dropped": [
+      {
+       "value": "Multilingual",
+       "reason": "Rejects values that characterize languages instead of naming a specific one. (cached)"
+      },
+      {
+       "value": "Multilingual (hundreds of languages)",
+       "reason": "Characterizes languages instead of naming a specific natural language."
+      }
+     ]
+    }
+   },
+   "GShard MoE (2048E, 36L)": {
+    "attention_mechanism": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Transformer is a model architecture, not a specific attention mechanism. (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models efficiently via conditional computation and automatic sharding"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models efficiently via conditional computation and automatic sharding",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(2048E, 12L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(512E, 36L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(512E, 12L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(128E, 36L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(128E, 12L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   },
+   "MoE(2048E, 60L)": {
+    "research_problem": {
+     "candidates": [
+      "Scaling giant models with conditional computation"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Scaling giant models with conditional computation",
+       "reason": "Describes a solution/method rather than naming the research problem."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 105,
+   "dropped": 12,
+   "llm_calls": 1,
+   "values_sent_to_llm": 30
+  }
+ },
+ "contributions": [
+  {
+   "label": "GShard",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Experts (MoE) architecture with conditional computation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Automatic sharding via an SPMD partitioner",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "GateEinsum operator for efficient expert dispatching and combining",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sublinear communication scaling for AllToAll operations (O(sqrt(D))) enabling efficient cross-partition expert routing.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multilingual neural machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Sub-word segmentation",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "37B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "50B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "150B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "200B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "312B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1000000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "2048 TPU cores for 4 days",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1T tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "16K (per token)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on multilingual MT data",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Sparsely gated mixture of experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "2048 TPU cores",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BLEU avg: 44.3 (600B), 41.3 (200B), 43.7 (150B), 40.0 (50B), 39.0 (37B), 36.7 (12.5B)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "GShard MoE (2048E, 36L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "GShard MoE (2048E, 36L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixture-of-Experts (MoE) architecture with conditional computation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Automatic SPMD sharding across devices",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Gate-based token routing to experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Constant per-device memory scaling with expert count",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Rematerialization for activation memory reduction",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "M4 multilingual machine translation dataset",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "600B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 600000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU cores",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "2048 TPU cores",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multilingual machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https:",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Japanese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Sparsely-Gated Mixture-of-Experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(2048E, 12L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(2048E, 12L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "200B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 200000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "2048 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(512E, 36L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(512E, 36L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "150B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 150000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "512 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(512E, 12L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(512E, 12L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "50B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 50000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "512 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(128E, 36L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(128E, 36L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "37B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 37000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "128 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(128E, 12L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(128E, 12L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 12500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "128 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  },
+  {
+   "label": "MoE(2048E, 60L)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MoE(2048E, 60L)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "GShard",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-06-30",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparsely-Gated Mixture-of-Experts (MoE) Transformer with conditional computation and automatic sharding",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Experts distributed every other layer to scale model capacity efficiently without proportional compute increase.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1T",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 1000000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Machine translation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "1 active per layer per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "2048 experts, 1 active per layer, distributed every other layer",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/activations)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (for 1T model)",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R216408",
+  "contribution_ids": [
+   "R216411",
+   "R1920713",
+   "R1920718",
+   "R1920725",
+   "R1920727",
+   "R1920729",
+   "R1920731",
+   "R1920733",
+   "R1920735"
+  ],
+  "new_contribution_ids": [
+   "R1920713",
+   "R1920718",
+   "R1920725",
+   "R1920727",
+   "R1920729",
+   "R1920731",
+   "R1920733",
+   "R1920735"
+  ],
+  "comparison_updated": null
+ }
+}

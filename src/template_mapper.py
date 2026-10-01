@@ -5,6 +5,7 @@ This module maps extracted LLM data to ORKG template format.
 """
 
 import logging
+import re
 from typing import Any, Dict, List, Optional
 
 from src.llm_extractor import LLMProperties, MultiModelResponse
@@ -36,6 +37,7 @@ _RESOURCE_FIELDS = {
     "vision_encoder",
     "base_model",
     "weight_clipping_mechanism",
+    "supported_language"
 }
 
 _MULTI_VALUED_FIELDS = {
@@ -55,6 +57,42 @@ _MULTI_VALUED_FIELDS = {
       "reward_mechanism": ",",
       "source_code": ";",
       "vision_encoder": ","
+  }
+
+# Comma-configured fields where a ";" in the value should be treated as the ONLY
+# top-level separator.
+#
+# Background: comma fields normally accept both "," and ";" because the model is
+# inconsistent about which it uses. But when a value contains BOTH, the ";" is
+# almost always the real top-level separator and the "," sits *inside* one value:
+#
+#   "Agentic, reasoning, and coding (ARC) capabilities; real-world software
+#    engineering challenges; long-horizon task execution"
+#
+# Splitting on both produces five rows and shreds the first concept into
+# "Agentic" / "reasoning" / "coding (ARC) capabilities". Honouring only the ";"
+# yields the correct three.
+#
+# This is opt-in per field rather than global on purpose. Only 48 values in the
+# whole extraction corpus contain both separators; for research_problem and
+# pretraining_corpus semicolon-precedence is clearly right, but for
+# reward_mechanism it wrongly joins values that really were comma-separated.
+_SEMICOLON_PRECEDENCE_FIELDS = {
+      "research_problem",
+      "pretraining_corpus",
+  }
+
+# Fields whose comma lists are often ONE coordinated phrase rather than several
+# values, and so need a grammatical check before splitting.
+#
+#   "Agentic, reasoning, and coding (ARC) capabilities"     -> 1 value
+#   "Agentic engineering, vibe coding, and slide generation" -> 3 values
+#
+# Both are "A, B, and C" — semicolon precedence alone cannot tell them apart, and
+# gets the first right only by accident of a ";" being present. See
+# _is_shared_head_coordination for the rule that separates them.
+_COORDINATION_AWARE_FIELDS = {
+      "research_problem",
   }
 
   #ORKG predicate IDs per field, one full mapping per target instance. Kept as
@@ -200,7 +238,10 @@ class TemplateMapper:
           )
           
     def map_model_to_orkg(
-        self, model: LLMProperties, paper_id: Optional[str] = None
+        self,
+        model: LLMProperties,
+        paper_id: Optional[str] = None,
+        rows: Optional[Dict[str, List[str]]] = None,
     ) -> Dict[str, Any]:
         """
         Map a single model to ORKG contribution format.
@@ -208,6 +249,8 @@ class TemplateMapper:
         Args:
             model: Extracted LLM properties
             paper_id: ORKG paper ID (optional)
+            rows: Optional {field_name: [row values]} from the semantic
+                  validator. Fields present here bypass the heuristic splitter.
 
         Returns:
             Dictionary in ORKG contribution format
@@ -225,8 +268,14 @@ class TemplateMapper:
         for field_name, property_id in self.field_mapping.items():
             value = getattr(model, field_name, None)
 
+            # A field the validator emptied has no value left to map, even though
+            # the model object still carries the original string.
+            if rows is not None and field_name in rows and not rows[field_name]:
+                logger.debug("Skipping %s — semantic validation rejected all values", field_name)
+                continue
+
             if value is not None:
-                props = self._create_properties(property_id, field_name, value)
+                props = self._create_properties(property_id, field_name, value, rows=rows)
                 if props:
                     contribution["properties"].extend(props)
 
@@ -274,24 +323,134 @@ class TemplateMapper:
           return parts
 
     @staticmethod
+    def _is_shared_head_coordination(parts: List[str]) -> bool:
+          """
+          Decide whether comma-separated parts are ONE phrase sharing a head noun.
+
+          A bare single-word conjunct is the tell. In "Agentic, reasoning, and
+          coding (ARC) capabilities" the words "Agentic" and "reasoning" are not
+          research problems on their own — they modify the trailing head noun
+          "capabilities", and splitting produces meaningless rows. In "Agentic
+          engineering, vibe coding, and slide generation" every conjunct is a
+          complete noun phrase that stands alone, so splitting is right.
+
+          Measured over the extraction corpus this keeps 113 of 278
+          comma-bearing research_problem values intact that were previously
+          shredded into fragments such as "honest", "harmless", "audio" and
+          "efficiency" (from "helpful, honest, and harmless" and "text, images,
+          and audio").
+
+          Deliberately limited to _COORDINATION_AWARE_FIELDS: on entity fields a
+          one-word value is perfectly normal ("English, German, French";
+          "WebText, BookCorpus"), and this rule would wrongly fuse them.
+          """
+          cleaned = [re.sub(r"^and\s+", "", p.strip(), flags=re.IGNORECASE) for p in parts]
+          cleaned = [c for c in cleaned if c]
+          if len(cleaned) < 2:
+              return False
+          return any(len(c.split()) == 1 for c in cleaned)
+
+    def _split_coordination_aware(self, text: str) -> List[str]:
+          """
+          Split on ";" always, and on "," only where the commas separate genuinely
+          independent values rather than conjuncts of one coordinated phrase.
+          """
+          rows: List[str] = []
+          for segment in self._split_top_level(text, (";",)):
+              if not segment.strip():
+                  continue
+              parts = self._split_top_level(segment, (","))
+              if len(parts) > 1 and not self._is_shared_head_coordination(parts):
+                  rows.extend(parts)
+              else:
+                  rows.append(segment)
+          return rows
+
+    @staticmethod
     def _strip_dangling_brackets(text: str) -> str:
           """
-          Remove a leftover unbalanced leading "(" or trailing ")" (e.g. "(knowledge"
-          or "knowledge)") that an earlier/unbalanced split left behind.
-          Balanced values like "reasoning (advanced)" are left untouched.
+          Remove bracket characters left without a partner by an earlier split.
+
+          Handles an unmatched bracket ANYWHERE in the value, not just at the
+          ends. The end-only version missed the common case where a split lands
+          mid-parenthetical:
+
+              "W4A8 (INT4 for MoE experts, INT8 for Attention/MLP)"
+                  -> "W4A8 (INT4 for MoE experts"   <- "(" opens, never closes
+                     "INT8 for Attention/MLP)"      <- ")" closes, never opened
+
+          The second row was already cleaned (trailing ")"), but the first was
+          not, because its stray "(" sits in the middle rather than at the start.
+          Both now come out as plain text.
+
+          Balanced values like "reasoning (advanced)" are left untouched, and
+          each bracket type is tracked separately so "f(x]" loses both.
           """
-          opens, closes = text.count("("), text.count(")")
-          if closes > opens and text.endswith(")"):
-              text = text[:-1].rstrip()
-          elif opens > closes and text.startswith("("):
-              text = text[1:].lstrip()
-          return text
+          pairs = {")": "(", "]": "[", "}": "{"}
+          open_positions = {"(": [], "[": [], "{": []}
+          unmatched = set()
+
+          for index, char in enumerate(text):
+              if char in open_positions:
+                  open_positions[char].append(index)
+              elif char in pairs:
+                  opener = pairs[char]
+                  if open_positions[opener]:
+                      open_positions[opener].pop()
+                  else:
+                      unmatched.add(index)  # closer with nothing to close
+
+          for positions in open_positions.values():
+              unmatched.update(positions)  # openers never closed
+
+          if not unmatched:
+              return text
+
+          cleaned = "".join(c for i, c in enumerate(text) if i not in unmatched)
+          # Dropping a bracket can leave a double space ("W4A8 ( INT4" -> "W4A8  INT4")
+          return re.sub(r"\s{2,}", " ", cleaned).strip()
     
-    def _split_values(self, property_name: str, value: Any) -> List[Any]:
+    @staticmethod
+    def _dedup_key(text: str) -> str:
+          """
+          Key used to spot values that are the same statement written differently.
+
+          Exact-match de-duplication is defeated by a single stray character.
+          Kimi K2 produced two rows for one method, differing only by a colon:
+
+              "Large-scale agentic data synthesis pipeline systematically generates ..."
+              "Large-scale agentic data synthesis pipeline: systematically generates ..."
+
+          Those arrive as genuinely different strings because different chunks of
+          the paper phrased the same fact slightly differently and the merge step
+          unions them. Comparing on letters and digits alone collapses such
+          near-identical variants, while still keeping actually-different values
+          apart. Casing is ignored too, since _capitalize_first would otherwise
+          make "fp8" and "FP8" identical only AFTER de-duplication has run.
+
+          The class must be "not a word character" rather than "not [a-z0-9]":
+          the latter erases every non-Latin value down to the empty string, so
+          "English, 中文, 日本語, 한국어" collapsed to two rows — every CJK name
+          keyed as "" and deduplicated against the others. supported_language is
+          a resource field, so that is a routine value, not an edge case.
+          """
+          # [\W_] is "not a letter or digit, in any script", plus underscore, so
+          # ASCII values key exactly as they did under [^a-z0-9].
+          key = re.sub(r"[\W_]+", " ", text.casefold()).strip()
+          # A value made only of punctuation still normalizes to nothing; key
+          # those on themselves rather than letting them collapse together.
+          return key or text.strip()
+
+    def _split_values(
+          self, property_name: str, value: Any, rows: Optional[Dict[str, List[str]]] = None
+      ) -> List[Any]:
           """
           Break a field value into the individual parts that should each become a
           separate ORKG statement (row).
 
+          - When ``rows`` supplies an entry for this field, it is used verbatim.
+            The semantic validator has already decided the row boundaries for that
+            field and its decision overrides the heuristics below.
           - List values are always expanded into their elements.
           - String values are split on commas only for fields in _MULTI_VALUED_FIELDS.
           - Everything else is returned as a single-element list unchanged.
@@ -299,6 +458,12 @@ class TemplateMapper:
           String parts are stripped and empty parts dropped; duplicates are removed
           while preserving first-seen order. Non-string/unhashable parts pass through.
           """
+          # Validator-supplied rows win outright. An empty list is a real answer
+          # ("every candidate value was rejected"), so test for presence of the
+          # key rather than truthiness of the list.
+          if rows is not None and property_name in rows:
+              return list(rows[property_name])
+
           if isinstance(value, list):
               raw_parts: List[Any] = value
               did_split = False
@@ -309,7 +474,16 @@ class TemplateMapper:
               # fields keep ";" only, because their values contain internal
               # commas (e.g. innovation) that must not be split.
               seps = (",", ";") if sep == "," else (";",)
-              raw_parts = self._split_top_level(value, seps)
+              if property_name in _COORDINATION_AWARE_FIELDS:
+                  # Grammar decides where the commas are real boundaries.
+                  raw_parts = self._split_coordination_aware(value)
+              else:
+                  # ...except for fields where a ";" present in the value marks
+                  # the real top-level boundary and the commas are internal. See
+                  # _SEMICOLON_PRECEDENCE_FIELDS.
+                  if sep == "," and property_name in _SEMICOLON_PRECEDENCE_FIELDS and ";" in value:
+                      seps = (";",)
+                  raw_parts = self._split_top_level(value, seps)
               did_split = True
           else:
               raw_parts = [value]
@@ -326,21 +500,29 @@ class TemplateMapper:
                     part = self._strip_dangling_brackets(part)
                   if not part:
                     continue
+              # Strings de-duplicate on their normalized form, so punctuation and
+              # casing differences don't yield two rows for one statement. The
+              # first spelling seen is the one kept.
+              marker = self._dedup_key(part) if isinstance(part, str) else part
               try:
-                  if part in seen:
+                  if marker in seen:
                       continue
-                  seen.add(part)
+                  seen.add(marker)
               except TypeError:
                   pass  # unhashable (e.g. dict) — keep without de-duping
               cleaned.append(part)
           return cleaned
 
     def _create_properties(
-          self, property_id: str, property_name: str, value: Any
+          self,
+          property_id: str,
+          property_name: str,
+          value: Any,
+          rows: Optional[Dict[str, List[str]]] = None,
       ) -> List[Dict[str, Any]]:
           """
           Create one or more ORKG property dicts from a single field value.
-  
+
           Multi-valued fields (and list values) are split into separate property
           dicts that share the same predicate ID, so the ORKG client emits each as
           its own statement row. Works identically for literals and resources
@@ -350,7 +532,7 @@ class TemplateMapper:
               return []
 
           props: List[Dict[str, Any]] = []
-          for part in self._split_values(property_name, value):
+          for part in self._split_values(property_name, value, rows=rows):
               prop = self._create_property(property_id, property_name, part)
               if prop:
                   props.append(prop)
@@ -445,7 +627,10 @@ class TemplateMapper:
         return "; ".join(items)
 
     def map_multiple_models(
-        self, models: List[LLMProperties], paper_id: Optional[str] = None
+        self,
+        models: List[LLMProperties],
+        paper_id: Optional[str] = None,
+        rows_by_model: Optional[Dict[str, Dict[str, List[str]]]] = None,
     ) -> List[Dict[str, Any]]:
         """
         Map multiple models to ORKG format.
@@ -453,6 +638,8 @@ class TemplateMapper:
         Args:
             models: List of extracted models
             paper_id: ORKG paper ID (optional)
+            rows_by_model: Optional {model_name: {field: [rows]}} from the
+                           semantic validator.
 
         Returns:
             List of ORKG contributions
@@ -461,13 +648,25 @@ class TemplateMapper:
 
         contributions = []
         for model in models:
-            contribution = self.map_model_to_orkg(model, paper_id)
+            # Keyed by model name because that is the only stable identifier the
+            # validator and the mapper share. A model renamed between the two
+            # steps simply misses its override and falls back to the heuristic
+            # split, which is the pre-existing behaviour.
+            rows = (rows_by_model or {}).get(model.model_name)
+            if rows_by_model and rows is None:
+                logger.debug(
+                    "No validated rows for model %r — using heuristic split", model.model_name
+                )
+            contribution = self.map_model_to_orkg(model, paper_id, rows=rows)
             contributions.append(contribution)
 
         return contributions
 
     def map_extraction_result(
-        self, extraction_result: MultiModelResponse, paper_id: Optional[str] = None
+        self,
+        extraction_result: MultiModelResponse,
+        paper_id: Optional[str] = None,
+        rows_by_model: Optional[Dict[str, Dict[str, List[str]]]] = None,
     ) -> Dict[str, Any]:
         """
         Map extraction result to ORKG format.
@@ -475,11 +674,15 @@ class TemplateMapper:
         Args:
             extraction_result: Result from LLM extraction
             paper_id: ORKG paper ID (optional)
+            rows_by_model: Optional {model_name: {field: [rows]}} from the
+                           semantic validator.
 
         Returns:
             Dictionary with mapped contributions
         """
-        contributions = self.map_multiple_models(extraction_result.models, paper_id)
+        contributions = self.map_multiple_models(
+            extraction_result.models, paper_id, rows_by_model=rows_by_model
+        )
 
         return {
             "contributions": contributions,

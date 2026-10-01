@@ -1,0 +1,780 @@
+{
+  "arxiv_id": "2309.10305",
+  "status": "completed",
+  "timestamp": "2026-08-28T08:36:39.626726",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2309.10305",
+    "title": "Baichuan 2: Open Large-scale Language Models",
+    "authors": [
+      "Aiyuan Yang",
+      "Bin Xiao",
+      "Bingning Wang",
+      "Borong Zhang",
+      "Ce Bian",
+      "Chao Yin",
+      "Chenxu Lv",
+      "Da Pan",
+      "Dian Wang",
+      "Dong Yan",
+      "Fan Yang",
+      "Fei Deng",
+      "Feng Wang",
+      "Feng Liu",
+      "Guangwei Ai",
+      "Guosheng Dong",
+      "Haizhou Zhao",
+      "Hang Xu",
+      "Haoze Sun",
+      "Hongda Zhang",
+      "Hui Liu",
+      "Jiaming Ji",
+      "Jian Xie",
+      "JunTao Dai",
+      "Kun Fang",
+      "Lei Su",
+      "Liang Song",
+      "Lifeng Liu",
+      "Liyun Ru",
+      "Luyao Ma",
+      "Mang Wang",
+      "Mickel Liu",
+      "MingAn Lin",
+      "Nuolan Nie",
+      "Peidong Guo",
+      "Ruiyang Sun",
+      "Tao Zhang",
+      "Tianpeng Li",
+      "Tianyu Li",
+      "Wei Cheng",
+      "Weipeng Chen",
+      "Xiangrong Zeng",
+      "Xiaochuan Wang",
+      "Xiaoxi Chen",
+      "Xin Men",
+      "Xin Yu",
+      "Xuehai Pan",
+      "Yanjun Shen",
+      "Yiding Wang",
+      "Yiyu Li",
+      "Youxin Jiang",
+      "Yuchen Gao",
+      "Yupeng Zhang",
+      "Zenan Zhou",
+      "Zhiying Wu"
+    ],
+    "abstract": "Large language models (LLMs) have demonstrated remarkable performance on a variety of natural language tasks based on just a few examples of natural language instructions, reducing the need for extensive feature engineering. However, most powerful LLMs are closed-source or limited in their capability for languages other than English. In this technical report, we present Baichuan 2, a series of large-scale multilingual language models containing 7 billion and 13 billion parameters, trained from scratch, on 2.6 trillion tokens. Baichuan 2 matches or outperforms other open-source models of similar size on public benchmarks like MMLU, CMMLU, GSM8K, and HumanEval. Furthermore, Baichuan 2 excels in vertical domains such as medicine and law. We will release all pre-training model checkpoints to benefit the research community in better understanding the training dynamics of Baichuan 2.",
+    "published": "2023-09-19T04:13:22+00:00",
+    "updated": "2025-04-17T08:34:42+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2309.10305v4",
+    "entry_id": "http://arxiv.org/abs/2309.10305v4",
+    "pdf_path": "data/papers/2309.10305.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+  },
+  "text_length": 83493,
+  "word_count": 8225,
+  "models_extracted": 4,
+  "extraction_data": [
+    {
+      "model_name": "Baichuan 2",
+      "parameters": "7B, 13B",
+      "parameters_millions": 13000,
+      "model_family": "Baichuan",
+      "date_created": "2023-09-19",
+      "organization": "Baichuan",
+      "innovation": "Grouped Query Attention (GQA) for efficient multi-head attention; RMSNorm for stable and efficient layer normalization; SwiGLU activation function for improved expressiveness; RoPE scaling to extend context window to 128K; high-quality multilingual pretraining corpus.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Chinese-English bilingual dataset comprising several million webpages from hundreds of reputable websites",
+      "finetuning_task": "Supervised fine-tuning (SFT), Reinforcement Learning from Human Feedback (RLHF) via PPO, Reinforcement Learning from Human Feedback (RLHF)",
+      "optimizer": "AdamW",
+      "hardware_used": "A800 GPU",
+      "extension": null,
+      "blog_post": null,
+      "license": "open source",
+      "research_problem": "Open large-scale language models with safety and alignment",
+      "application": "Multilingual understanding, code generation, mathematical reasoning, general NLP",
+      "paper_title": "Baichuan 2: Open Large-scale Language Models",
+      "training_corpus_size": "1.2 trillion tokens",
+      "finetuning_data": "100k supervised fine-tuning samples, 200K attack prompts from red-teaming",
+      "tokenizer": "Byte-pair encoding (BPE) from SentencePiece",
+      "supported_language": "Chinese, English",
+      "hardware_description": "3072 A800 GPUs",
+      "carbon_emitted": null,
+      "source_code": "https://huggingface.co/baichuan-inc/Baichuan2; https://github.com/baichuan-inc/Baichuan2",
+      "context_length": null,
+      "activated_parameters": "7B (dense)",
+      "attention_mechanism": "Multi-head attention with RoPE; memory-efficient attention via xFormers, Multi-head attention with ALiBi; memory-efficient attention via xFormers",
+      "context_length_max": "4,096",
+      "context_extension_method": null,
+      "training_pipeline": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning from Human Feedback (RLHF) via PPO",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "BFloat16, BFloat16 (forward/backward), Float32 (optimizer)",
+      "synthetic_data_generation_method": null,
+      "rl_algorithm": "DPO, PPO",
+      "reward_mechanism": "Reward model trained on human-labeled prompt-response pairs with diverse categories",
+      "tool_calling_format": null,
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": "red-blue confrontation attack prompts",
+      "safety_defect_rate": null,
+      "fusion_architecture": null,
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "GSM8K: 24.49; MATH: 5.58; HumanEval: 18.29; MBPP: 24.20; Flores-101 zh-en: 27.27; zh-fr: 20.87; zh-es: 16.17; zh-ar: 1.39; zh-ru: 11.21; zh-ja: 3.11; zh-de: 12.76; Average: 13.25; JEC-QA: 44.46; CMC: 56.39; MCMLE: 32.68; MedMCQA: 54.93; GSM8K: 52.77; MATH: 10.08; HumanEval: 17.07; MBPP: 30.20; Flores-101 zh-en: 30.61; zh-fr: 22.11; zh-es: 17.27; zh-ar: 2.39; zh-ru: 14.17; zh-ja: 11.58; zh-de: 14.53; Average: 16.09; JEC-QA: 47.40; CMC: 59.33; MCMLE: 40.38; MedMCQA: 61.62; SOTA on CMMLU, C-Eval, MMLU, and other multilingual benchmarks at release",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": "32",
+      "post_training_infrastructure": null
+    }
+  ],
+  "models_after_selection": 4,
+  "models_after_merge": 1,
+  "validated_rows": {
+    "Baichuan 2": {
+      "application": [
+        "Multilingual understanding",
+        "code generation",
+        "mathematical reasoning"
+      ],
+      "attention_mechanism": [
+        "Multi-head attention with RoPE",
+        "memory-efficient attention via xFormers",
+        "Multi-head attention with ALiBi"
+      ],
+      "finetuning_data": [],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT)",
+        "Reinforcement Learning from Human Feedback (RLHF)"
+      ],
+      "hardware_used": [
+        "A800 GPU"
+      ],
+      "license": [
+        "open source"
+      ],
+      "model_family": [
+        "Baichuan"
+      ],
+      "model_name": [
+        "Baichuan 2"
+      ],
+      "optimizer": [
+        "AdamW"
+      ],
+      "organization": [],
+      "parameters": [
+        "7B",
+        "13B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "BFloat16",
+        "BFloat16 (forward/backward)",
+        "Float32 (optimizer)"
+      ],
+      "research_problem": [],
+      "reward_mechanism": [
+        "Reward model trained on human-labeled prompt-response pairs with diverse categories"
+      ],
+      "rl_algorithm": [
+        "DPO",
+        "PPO"
+      ],
+      "supported_language": [
+        "Chinese",
+        "English"
+      ]
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Baichuan 2": {
+        "application": {
+          "candidates": [
+            "Multilingual understanding",
+            "code generation",
+            "mathematical reasoning",
+            "general NLP"
+          ],
+          "accepted": [
+            "Multilingual understanding",
+            "code generation",
+            "mathematical reasoning"
+          ],
+          "dropped": [
+            {
+              "value": "general NLP",
+              "reason": "Placeholder/category rather than a concrete task or domain."
+            }
+          ]
+        },
+        "finetuning_data": {
+          "candidates": [
+            "100k supervised fine-tuning samples",
+            "200K attack prompts from red-teaming"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "100k supervised fine-tuning samples",
+              "reason": "Describes quantity and composition rather than naming the dataset itself."
+            },
+            {
+              "value": "200K attack prompts from red-teaming",
+              "reason": "Describes quantity and composition rather than naming the dataset itself."
+            }
+          ]
+        },
+        "finetuning_task": {
+          "candidates": [
+            "Supervised fine-tuning (SFT)",
+            "Reinforcement Learning from Human Feedback (RLHF) via PPO",
+            "Reinforcement Learning from Human Feedback (RLHF)"
+          ],
+          "accepted": [
+            "Supervised fine-tuning (SFT)",
+            "Reinforcement Learning from Human Feedback (RLHF)"
+          ],
+          "dropped": [
+            {
+              "value": "Reinforcement Learning from Human Feedback (RLHF) via PPO",
+              "reason": "Describes a training methodology/framework rather than a specific fine-tuning task or objective."
+            }
+          ]
+        },
+        "organization": {
+          "candidates": [
+            "Baichuan"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Baichuan",
+              "reason": "Names the model/family rather than the developing organization."
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Chinese-English bilingual dataset comprising several million webpages from hundreds of reputable websites"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Chinese-English bilingual dataset comprising several million webpages from hundreds of reputable websites",
+              "reason": "Describes corpus composition rather than naming an identifiable dataset or corpus."
+            }
+          ]
+        },
+        "research_problem": {
+          "candidates": [
+            "Open large-scale language models with safety and alignment"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Open large-scale language models with safety and alignment",
+              "reason": "Describes a project goal or model type rather than a specific research problem or capability gap."
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 25,
+      "dropped": 7,
+      "llm_calls": 1,
+      "values_sent_to_llm": 16
+    }
+  },
+  "contributions": [
+    {
+      "label": "Baichuan 2",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Baichuan 2",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Baichuan",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2023-09-19",
+          "datatype": "date"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Grouped Query Attention (GQA) for efficient multi-head attention",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "RMSNorm for stable and efficient layer normalization",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "SwiGLU activation function for improved expressiveness",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "RoPE scaling to extend context window to 128K",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "High-quality multilingual pretraining corpus.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Reinforcement Learning from Human Feedback (RLHF)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P105017",
+          "label": "optimizer",
+          "value": "AdamW",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "Byte-pair encoding (BPE) from SentencePiece",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "13B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 13000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "A800 GPU",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "3072 A800 GPUs",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multilingual understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Code generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Mathematical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://huggingface.co/baichuan-inc/Baichuan2",
+          "datatype": "URI"
+        },
+        {
+          "property": "HAS_SOURCE_CODE",
+          "label": "source_code",
+          "value": "https://github.com/baichuan-inc/Baichuan2",
+          "datatype": "URI"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "1.2 trillion tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "English",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203084",
+          "label": "activated_parameters",
+          "value": "7B (dense)",
+          "datatype": "string"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention with RoPE",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Memory-efficient attention via xFormers",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Multi-head attention with ALiBi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "4,096",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Pre-training -> Supervised Fine-Tuning (SFT) -> Reinforcement Learning from Human Feedback (RLHF) via PPO",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BFloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "BFloat16 (forward/backward)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Float32 (optimizer)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "DPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "PPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203094",
+          "label": "reward_mechanism",
+          "value": "Reward model trained on human-labeled prompt-response pairs with diverse categories",
+          "datatype": "string"
+        },
+        {
+          "property": "P203097",
+          "label": "safety_evaluation_protocol",
+          "value": "Red-blue confrontation attack prompts",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 24.49",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 5.58",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 18.29",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MBPP: 24.20",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flores-101 zh-en: 27.27",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-fr: 20.87",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-es: 16.17",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ar: 1.39",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ru: 11.21",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ja: 3.11",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-de: 12.76",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Average: 13.25",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JEC-QA: 44.46",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMC: 56.39",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MCMLE: 32.68",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MedMCQA: 54.93",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 52.77",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH: 10.08",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 17.07",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MBPP: 30.20",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Flores-101 zh-en: 30.61",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-fr: 22.11",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-es: 17.27",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ar: 2.39",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ru: 14.17",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-ja: 11.58",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Zh-de: 14.53",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Average: 16.09",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "JEC-QA: 47.40",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "CMC: 59.33",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MCMLE: 40.38",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MedMCQA: 61.62",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "SOTA on CMMLU, C-Eval, MMLU, and other multilingual benchmarks at release",
+          "datatype": "string"
+        },
+        {
+          "property": "P203105",
+          "label": "number_of_attention_heads",
+          "value": "32",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1925809",
+    "contribution_ids": [
+      "R1925811"
+    ],
+    "new_contribution_ids": [
+      "R1925811"
+    ],
+    "comparison_updated": null
+  }
+}

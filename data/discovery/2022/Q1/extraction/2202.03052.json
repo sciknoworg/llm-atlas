@@ -1,0 +1,1303 @@
+{
+ "arxiv_id": "2202.03052",
+ "status": "completed",
+ "timestamp": "2026-08-25T04:52:01.436017",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2202.03052",
+  "title": "OFA: Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework",
+  "authors": [
+   "Peng Wang",
+   "An Yang",
+   "Rui Men",
+   "Junyang Lin",
+   "Shuai Bai",
+   "Zhikang Li",
+   "Jianxin Ma",
+   "Chang Zhou",
+   "Jingren Zhou",
+   "Hongxia Yang"
+  ],
+  "abstract": "In this work, we pursue a unified paradigm for multimodal pretraining to break the scaffolds of complex task/modality-specific customization. We propose OFA, a Task-Agnostic and Modality-Agnostic framework that supports Task Comprehensiveness. OFA unifies a diverse set of cross-modal and unimodal tasks, including image generation, visual grounding, image captioning, image classification, language modeling, etc., in a simple sequence-to-sequence learning framework. OFA follows the instruction-based learning in both pretraining and finetuning stages, requiring no extra task-specific layers for downstream tasks. In comparison with the recent state-of-the-art vision & language models that rely on extremely large cross-modal datasets, OFA is pretrained on only 20M publicly available image-text pairs. Despite its simplicity and relatively small-scale training data, OFA achieves new SOTAs in a series of cross-modal tasks while attaining highly competitive performances on uni-modal tasks. Our further analysis indicates that OFA can also effectively transfer to unseen tasks and unseen domains. Our code and models are publicly available at https://github.com/OFA-Sys/OFA.",
+  "published": "2022-02-07T10:38:21+00:00",
+  "updated": "2022-06-01T09:24:35+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2202.03052v2",
+  "entry_id": "http://arxiv.org/abs/2202.03052v2",
+  "pdf_path": "data/papers/2202.03052.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 75578,
+ "word_count": 3847,
+ "models_extracted": 10,
+ "extraction_data": [
+  {
+   "model_name": "OFA",
+   "parameters": "3 SIZES, 33M, 93M, 110M, 130M, 182M, 330M, 350M, 472M, 750M, 930M, 940M, 1.3B, 2.7B, 5.4B",
+   "parameters_millions": 5400,
+   "model_family": "OFA",
+   "date_created": "2022-02-07",
+   "organization": "Alibaba",
+   "innovation": "Unified sequence-to-sequence learning framework for multimodal tasks; sparse coding for image representation to reduce sequence length; unified vocabulary for linguistic and visual tokens; encoder-decoder Transformer backbone with head scaling, post-attention layer normalization, and decoupled position embeddings (1D relative bias for text, 2D for images); joint pretraining on cross-modal and uni-modal tasks to enable zero-shot and fine-tuning across diverse modalities.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Sequence-to-sequence learning",
+   "pretraining_corpus": "CC12M, CC3M, SBU, COCO, VG-Captions, VQAv2, VG-QA, GQA, RefCOCO, RefCOCO+, RefCOCOg, OpenImages, Object365, YFCC100M, ImageNet-21K, Pile (Filtered)",
+   "finetuning_task": "Cross-entropy optimization, CIDEr optimization based on reinforcement learning, Task-specific fine-tuning, Supervised fine-tuning and zero-shot instruction following",
+   "optimizer": "Cross-Entropy, CIDEr optimization based on reinforcement learning",
+   "hardware_used": null,
+   "extension": "Converts diverse modalities and tasks into a unified sequence-to-sequence format, eliminating the need for task-specific architectures or post-processing modules.",
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Unifying architectures, tasks, and modalities through a simple sequence-to-sequence learning framework",
+   "application": "Cross-modal understanding (visual question answering, visual entailment), multimodal generation (image captioning, referring expression comprehension, text-to-image generation)",
+   "paper_title": "OFA: Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework",
+   "training_corpus_size": "20M image-text pairs",
+   "finetuning_data": "MSCOCO Image Caption, RefCOCO, RefCOCOg, GLUE benchmark, Gigaword, ImageNet-1K, VQA, SNLI-VE, MSCOCO, VQAv2, VG-QA, GQA, OpenImages, Object365, COCO",
+   "tokenizer": "Byte-pair encoding (BPE) for text; image quantization/sparse coding for images.",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/OFA-Sys/OFA",
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Self-attention, cross-attention, head scaling, 1D/2D relative position bias",
+   "context_length_max": "1024",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining on plaintext data and image infilling; finetuning with Cross-Entropy and CIDEr optimization (RL)",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": "CIDEr optimization based on reinforcement learning",
+   "reward_mechanism": "CIDEr score",
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Globally shared multimodal vocabulary across all tasks",
+   "vision_encoder": "ResNet50, ResNet101, ResNet152, ResNet module (first three blocks) for image processing",
+   "base_model": "ResNet50, ResNet101, ResNet152",
+   "optimizer_innovation": null,
+   "benchmark_result": "SOTA in image captioning, VQA, visual entailment, referring expression comprehension; comparable to RoBERTa, ELECTRA, DeBERTa, UniLM, Pegasus, MoCo-v3, BEiT, MAE; VQA test-std: 91.2; SNLI-VE test-std: 91.2; MSCOCO CIDEr: 154.9",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "4, 8, 12, 16",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "OFA Huge",
+   "model_family": "OFA",
+   "date_created": "2022-02-07",
+   "organization": "Alibaba",
+   "innovation": "Unifies multiple architectures, tasks, and modalities into a single sequence-to-sequence model using a simple prefix-based instruction format; employs a shared encoder-decoder Transformer with a ResNet module for image processing and BPE tokenizer for text; supports zero-shot and fine-tuning across vision, language, and cross-modal tasks.",
+   "pretraining_corpus": "CC12M, CC3M, SBU, COCO, VG-Captions, VQAv2, VG-QA, GQA, RefCOCO, RefCOCO+, RefCOCOg, OpenImages, Object365, YFCC100M, ImageNet-21K, Pile (Filtered)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Image captioning, visual question answering, visual grounding, grounded captioning, object detection, image infilling, masked language modeling",
+   "license": null,
+   "research_problem": "Unifying architectures, tasks, and modalities",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Sequence-to-sequence learning (image captioning, image-text matching, VQA, visual grounding, grounded captioning, object detection, image infilling, masked language modeling)",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised fine-tuning and zero-shot instruction following",
+   "finetuning_data": "MSCOCO, RefCOCO, RefCOCO+, RefCOCOg, VQAv2, VG-QA, GQA, OpenImages, Object365, COCO",
+   "optimizer": "AdamW",
+   "tokenizer": "BPE Tokenizer",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "OFA: Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": "256",
+   "context_extension_method": null,
+   "training_pipeline": "Pretraining on mixed multimodal/uni-modal tasks -> Fine-tuning/Zero-shot on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "ResNet module (first three blocks) for image processing",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 10,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "OFA": {
+   "application": [
+    "Cross-modal understanding (visual question answering, visual entailment)",
+    "multimodal generation (image captioning, referring expression comprehension, text-to-image generation)"
+   ],
+   "attention_mechanism": [
+    "Self-attention",
+    "cross-attention",
+    "head scaling",
+    "1D/2D relative position bias"
+   ],
+   "base_model": [
+    "ResNet50, ResNet101, ResNet152"
+   ],
+   "finetuning_data": [
+    "MSCOCO Image Caption",
+    "RefCOCO",
+    "RefCOCOg",
+    "Gigaword",
+    "ImageNet-1K",
+    "VQA",
+    "SNLI-VE",
+    "MSCOCO",
+    "VQAv2",
+    "VG-QA",
+    "GQA",
+    "OpenImages",
+    "Object365",
+    "COCO"
+   ],
+   "finetuning_task": [],
+   "fusion_architecture": [],
+   "license": [
+    "open source"
+   ],
+   "model_family": [
+    "OFA"
+   ],
+   "model_name": [
+    "OFA"
+   ],
+   "optimizer": [],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "33M",
+    "93M",
+    "110M",
+    "130M",
+    "182M",
+    "330M",
+    "350M",
+    "472M",
+    "750M",
+    "930M",
+    "940M",
+    "1.3B",
+    "2.7B",
+    "5.4B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "CC3M",
+    "SBU",
+    "COCO",
+    "VG-Captions",
+    "VQAv2",
+    "VG-QA",
+    "GQA",
+    "RefCOCO",
+    "RefCOCOg",
+    "OpenImages",
+    "Object365",
+    "YFCC100M",
+    "ImageNet-21K",
+    "Pile (Filtered)"
+   ],
+   "pretraining_task": [
+    "Sequence-to-sequence learning"
+   ],
+   "research_problem": [],
+   "reward_mechanism": [
+    "CIDEr score"
+   ],
+   "rl_algorithm": [],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ResNet50",
+    "ResNet101",
+    "ResNet152",
+    "ResNet module (first three blocks) for image processing"
+   ]
+  },
+  "OFA Huge": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "visual grounding",
+    "grounded captioning",
+    "object detection",
+    "image infilling",
+    "masked language modeling"
+   ],
+   "finetuning_data": [
+    "MSCOCO",
+    "RefCOCO",
+    "RefCOCOg",
+    "VQAv2",
+    "VG-QA",
+    "GQA",
+    "OpenImages",
+    "Object365",
+    "COCO"
+   ],
+   "finetuning_task": [],
+   "model_family": [
+    "OFA"
+   ],
+   "model_name": [
+    "OFA Huge"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "CC12M",
+    "CC3M",
+    "SBU",
+    "COCO",
+    "VG-Captions",
+    "VQAv2",
+    "VG-QA",
+    "GQA",
+    "RefCOCO",
+    "RefCOCOg",
+    "OpenImages",
+    "Object365",
+    "YFCC100M",
+    "ImageNet-21K",
+    "Pile (Filtered)"
+   ],
+   "pretraining_task": [
+    "Sequence-to-sequence learning (image captioning, image-text matching, VQA, visual grounding, grounded captioning, object detection, image infilling, masked language modeling)"
+   ],
+   "research_problem": [
+    "Unifying architectures, tasks, and modalities"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ResNet module (first three blocks) for image processing"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "OFA": {
+    "finetuning_data": {
+     "candidates": [
+      "MSCOCO Image Caption",
+      "RefCOCO",
+      "RefCOCOg",
+      "GLUE benchmark",
+      "Gigaword",
+      "ImageNet-1K",
+      "VQA",
+      "SNLI-VE",
+      "MSCOCO",
+      "VQAv2",
+      "VG-QA",
+      "GQA",
+      "OpenImages",
+      "Object365",
+      "COCO"
+     ],
+     "accepted": [
+      "MSCOCO Image Caption",
+      "RefCOCO",
+      "RefCOCOg",
+      "Gigaword",
+      "ImageNet-1K",
+      "VQA",
+      "SNLI-VE",
+      "MSCOCO",
+      "VQAv2",
+      "VG-QA",
+      "GQA",
+      "OpenImages",
+      "Object365",
+      "COCO"
+     ],
+     "dropped": [
+      {
+       "value": "GLUE benchmark",
+       "reason": "GLUE is an evaluation benchmark suite, not a curated fine-tuning dataset. (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Cross-entropy optimization",
+      "CIDEr optimization based on reinforcement learning",
+      "Task-specific fine-tuning",
+      "Supervised fine-tuning and zero-shot instruction following"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-entropy optimization",
+       "reason": "Describes a loss function, not a fine-tuning task (cached)"
+      },
+      {
+       "value": "CIDEr optimization based on reinforcement learning",
+       "reason": "Describes an optimization method/reward setup, not a task (cached)"
+      },
+      {
+       "value": "Task-specific fine-tuning",
+       "reason": "Describes a fine-tuning methodology rather than a specific task or objective."
+      },
+      {
+       "value": "Supervised fine-tuning and zero-shot instruction following",
+       "reason": "Describes training paradigms and capabilities rather than a specific fine-tuning task."
+      }
+     ]
+    },
+    "fusion_architecture": {
+     "candidates": [
+      "Globally shared multimodal vocabulary across all tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Globally shared multimodal vocabulary across all tasks",
+       "reason": "Describes a vocabulary strategy, not an architectural design (cached)"
+      }
+     ]
+    },
+    "optimizer": {
+     "candidates": [
+      "Cross-Entropy, CIDEr optimization based on reinforcement learning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Cross-Entropy, CIDEr optimization based on reinforcement learning",
+       "reason": "Describes loss functions and reward mechanisms, not an optimization algorithm (cached)"
+      }
+     ]
+    },
+    "parameters": {
+     "candidates": [
+      "3 SIZES",
+      "33M",
+      "93M",
+      "110M",
+      "130M",
+      "182M",
+      "330M",
+      "350M",
+      "472M",
+      "750M",
+      "930M",
+      "940M",
+      "1.3B",
+      "2.7B",
+      "5.4B"
+     ],
+     "accepted": [
+      "33M",
+      "93M",
+      "110M",
+      "130M",
+      "182M",
+      "330M",
+      "350M",
+      "472M",
+      "750M",
+      "930M",
+      "940M",
+      "1.3B",
+      "2.7B",
+      "5.4B"
+     ],
+     "dropped": [
+      {
+       "value": "3 SIZES",
+       "reason": "Not a numerical value representing parameter count (cached)"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Unifying architectures, tasks, and modalities through a simple sequence-to-sequence learning framework"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Unifying architectures, tasks, and modalities through a simple sequence-to-sequence learning framework",
+       "reason": "Describes a solution/framework rather than the research problem itself (cached)"
+      }
+     ]
+    },
+    "rl_algorithm": {
+     "candidates": [
+      "CIDEr optimization based on reinforcement learning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "CIDEr optimization based on reinforcement learning",
+       "reason": "Describes an optimization method/reward setup, not a specific RL algorithm (cached)"
+      }
+     ]
+    }
+   },
+   "OFA Huge": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning and zero-shot instruction following"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning and zero-shot instruction following",
+       "reason": "Describes training paradigms and capabilities rather than a specific fine-tuning task."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 102,
+   "dropped": 11,
+   "llm_calls": 1,
+   "values_sent_to_llm": 12
+  }
+ },
+ "contributions": [
+  {
+   "label": "OFA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OFA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OFA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-02-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified sequence-to-sequence learning framework for multimodal tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sparse coding for image representation to reduce sequence length",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unified vocabulary for linguistic and visual tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Encoder-decoder Transformer backbone with head scaling, post-attention layer normalization, and decoupled position embeddings (1D relative bias for text, 2D for images)",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Joint pretraining on cross-modal and uni-modal tasks to enable zero-shot and fine-tuning across diverse modalities.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Sequence-to-sequence learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VG-Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQAv2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VG-QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCOg",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenImages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Object365",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ImageNet-21K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pile (Filtered)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Byte-pair encoding (BPE) for text; image quantization/sparse coding for images.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "33M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "93M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "110M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "130M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "182M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "330M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "350M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "472M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "750M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "930M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "940M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 5400,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Cross-modal understanding (visual question answering, visual entailment)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal generation (image captioning, referring expression comprehension, text-to-image generation)",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/OFA-Sys/OFA",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "20M image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO Image Caption",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCOg",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Gigaword",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet-1K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VG-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenImages",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Object365",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Head scaling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "1D/2D relative position bias",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1024",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining on plaintext data and image infilling; finetuning with Cross-Entropy and CIDEr optimization (RL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "CIDEr score",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet50",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet101",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet152",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet module (first three blocks) for image processing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "ResNet50, ResNet101, ResNet152",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA in image captioning, VQA, visual entailment, referring expression comprehension",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Comparable to RoBERTa, ELECTRA, DeBERTa, UniLM, Pegasus, MoCo-v3, BEiT, MAE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA test-std: 91.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE test-std: 91.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSCOCO CIDEr: 154.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "4, 8, 12, 16",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "OFA Huge",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "OFA Huge",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "OFA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-02-07",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Unifies multiple architectures, tasks, and modalities into a single sequence-to-sequence model using a simple prefix-based instruction format",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs a shared encoder-decoder Transformer with a ResNet module for image processing and BPE tokenizer for text",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Supports zero-shot and fine-tuning across vision, language, and cross-modal tasks.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Sequence-to-sequence learning (image captioning, image-text matching, VQA, visual grounding, grounded captioning, object detection, image infilling, masked language modeling)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VG-Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VQAv2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "VG-QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "GQA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RefCOCOg",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenImages",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Object365",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ImageNet-21K",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Pile (Filtered)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE Tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Grounded captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image infilling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Unifying architectures, tasks, and modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCOg",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VG-QA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "OpenImages",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Object365",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining on mixed multimodal/uni-modal tasks -> Fine-tuning/Zero-shot on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet module (first three blocks) for image processing",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1387524",
+  "contribution_ids": [
+   "R1387526",
+   "R1921683",
+   "R1921704"
+  ],
+  "new_contribution_ids": [
+   "R1921683",
+   "R1921704"
+  ],
+  "comparison_updated": null
+ }
+}

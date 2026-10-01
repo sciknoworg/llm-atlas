@@ -1,0 +1,1165 @@
+{
+ "arxiv_id": "2104.12763",
+ "status": "completed",
+ "timestamp": "2026-08-25T00:17:38.328761",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2104.12763",
+  "title": "MDETR -- Modulated Detection for End-to-End Multi-Modal Understanding",
+  "authors": [
+   "Aishwarya Kamath",
+   "Mannat Singh",
+   "Yann LeCun",
+   "Gabriel Synnaeve",
+   "Ishan Misra",
+   "Nicolas Carion"
+  ],
+  "abstract": "Multi-modal reasoning systems rely on a pre-trained object detector to extract regions of interest from the image. However, this crucial module is typically used as a black box, trained independently of the downstream task and on a fixed vocabulary of objects and attributes. This makes it challenging for such systems to capture the long tail of visual concepts expressed in free form text. In this paper we propose MDETR, an end-to-end modulated detector that detects objects in an image conditioned on a raw text query, like a caption or a question. We use a transformer-based architecture to reason jointly over text and image by fusing the two modalities at an early stage of the model. We pre-train the network on 1.3M text-image pairs, mined from pre-existing multi-modal datasets having explicit alignment between phrases in text and objects in the image. We then fine-tune on several downstream tasks such as phrase grounding, referring expression comprehension and segmentation, achieving state-of-the-art results on popular benchmarks. We also investigate the utility of our model as an object detector on a given label set when fine-tuned in a few-shot setting. We show that our pre-training approach provides a way to handle the long tail of object categories which have very few labelled instances. Our approach can be easily extended for visual question answering, achieving competitive performance on GQA and CLEVR. The code and models are available at https://github.com/ashkamath/mdetr.",
+  "published": "2021-04-26T17:55:33+00:00",
+  "updated": "2021-10-12T00:49:54+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2104.12763v2",
+  "entry_id": "http://arxiv.org/abs/2104.12763v2",
+  "pdf_path": "data/papers/2104.12763.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM)"
+ },
+ "text_length": 82853,
+ "word_count": 7053,
+ "models_extracted": 4,
+ "extraction_data": [
+  {
+   "model_name": "MDETR",
+   "model_family": "MDETR",
+   "date_created": "2021-04-26",
+   "organization": "Meta",
+   "innovation": "End-to-end text-modulated detection system derived from DETR that detects objects conditioned on free-form text queries, enabling joint reasoning over text and image by fusing modalities at an early stage; handles long-tail visual concepts and unseen combinations of categories/attributes without restricting to a fixed vocabulary.",
+   "pretraining_corpus": "1.3M text-image pairs mined from pre-existing multi-modal datasets with explicit phrase-object alignment",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Object detection conditioned on text, phrase grounding, referring expression comprehension and segmentation, visual question answering",
+   "license": null,
+   "research_problem": "Multi-modal understanding and text-conditioned object detection",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Text-modulated object detection / phrase grounding",
+   "training_corpus_size": "1.3M text-image pairs",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Phrase grounding, referring expression comprehension, referring expression segmentation, visual question answering",
+   "finetuning_data": "Flickr30k, RefCOCO/+/g, PhraseCut, GQA, CLEVR",
+   "optimizer": "AdamW",
+   "tokenizer": "BPE",
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": "32 V100 GPUs",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MDETR -- Modulated Detection for End-to-End Multi-Modal Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": "Transformer Encoder-Decoder with cross-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 1.3M aligned text-image pairs -> Fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Early fusion",
+   "vision_encoder": "CNN backbone (ResNet)",
+   "base_model": "DETR, RoBERTa, ResNet",
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on phrase grounding and referring expression comprehension; competitive performance on visual question answering, referring expression segmentation, and few-shot long-tailed object detection",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "8",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MDETR (ResNet-101)",
+   "model_family": "MDETR",
+   "date_created": "2021-04-26",
+   "organization": "Meta",
+   "innovation": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+   "pretraining_corpus": "COCO, Visual Genome, Flickr30k (200k images)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Referring expression comprehension, visual question answering, phrase grounding, referring expression segmentation",
+   "license": null,
+   "research_problem": "End-to-end multi-modal understanding and detection",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multi-modal detection and grounding",
+   "training_corpus_size": "200k images",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MDETR -- Modulated Detection for End-to-End Multi-Modal Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Modulated detection (text queries modulate visual features)",
+   "vision_encoder": "ResNet-101",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "RefCOCO val: 86.75, testA: 89.58, testB: 81.41; RefCOCO+ val: 79.52, testA: 84.09, testB: 70.62; RefCOCOg val: 81.64, testA: 80.89; PhraseCut Test-dev: 53.1, Test-std: 56.1; Flickr30k ANY-BOX val: 78.9, test: 88.8, 90.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MDETR (EfficientNet-B 3)",
+   "model_family": "MDETR",
+   "date_created": "2021-04-26",
+   "organization": "Meta",
+   "innovation": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+   "pretraining_corpus": "COCO, Visual Genome, Flickr30k (200k images)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Referring expression comprehension, visual question answering, phrase grounding, referring expression segmentation",
+   "license": null,
+   "research_problem": "End-to-end multi-modal understanding and detection",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multi-modal detection and grounding",
+   "training_corpus_size": "200k images",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MDETR -- Modulated Detection for End-to-End Multi-Modal Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Modulated detection (text queries modulate visual features)",
+   "vision_encoder": "EfficientNet-B3",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "RefCOCO val: 87.51, testA: 90.40, testB: 82.67; RefCOCO+ val: 81.13, testA: 85.52, testB: 72.96; RefCOCOg val: 83.35, testA: 83.31; Flickr30k ANY-BOX val: 82.5, test: 92.9, 94.9",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "MDETR (EfficientNet-B 5)",
+   "model_family": "MDETR",
+   "date_created": "2021-04-26",
+   "organization": "Meta",
+   "innovation": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+   "pretraining_corpus": "COCO, Visual Genome, Flickr30k (200k images)",
+   "parameters": null,
+   "parameters_millions": null,
+   "application": "Referring expression comprehension, visual question answering, phrase grounding, referring expression segmentation",
+   "license": null,
+   "research_problem": "End-to-end multi-modal understanding and detection",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multi-modal detection and grounding",
+   "training_corpus_size": "200k images",
+   "knowledge_cutoff_date": null,
+   "finetuning_task": null,
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": null,
+   "context_length": null,
+   "supported_language": "English",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": null,
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "MDETR -- Modulated Detection for End-to-End Multi-Modal Understanding",
+   "activated_parameters": null,
+   "attention_mechanism": null,
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": null,
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Modulated detection (text queries modulate visual features)",
+   "vision_encoder": "EfficientNet-B5",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "RefCOCO val: 83.6, testA: 93.4, testB: 95.1; RefCOCO+ val: 84.3, testA: 93.9, testB: 95.8; PhraseCut Test-dev: 62.95, Test-std: 62.45",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 4,
+ "models_after_merge": 4,
+ "validated_rows": {
+  "MDETR": {
+   "application": [
+    "Object detection conditioned on text",
+    "phrase grounding",
+    "referring expression comprehension and segmentation",
+    "visual question answering"
+   ],
+   "attention_mechanism": [
+    "Transformer Encoder-Decoder with cross-attention"
+   ],
+   "base_model": [
+    "DETR, RoBERTa, ResNet"
+   ],
+   "finetuning_data": [
+    "Flickr30k",
+    "RefCOCO/+/g",
+    "PhraseCut",
+    "GQA",
+    "CLEVR"
+   ],
+   "finetuning_task": [
+    "Phrase grounding",
+    "referring expression comprehension",
+    "referring expression segmentation",
+    "visual question answering"
+   ],
+   "fusion_architecture": [
+    "Early fusion"
+   ],
+   "hardware_used": [
+    "32 V100 GPUs"
+   ],
+   "model_family": [
+    "MDETR"
+   ],
+   "model_name": [
+    "MDETR"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "1.3M text-image pairs mined from pre-existing multi-modal datasets with explicit phrase-object alignment"
+   ],
+   "pretraining_task": [
+    "Text-modulated object detection / phrase grounding"
+   ],
+   "research_problem": [
+    "Multi-modal understanding and text-conditioned object detection"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "CNN backbone (ResNet)"
+   ]
+  },
+  "MDETR (ResNet-101)": {
+   "application": [
+    "Referring expression comprehension",
+    "visual question answering",
+    "phrase grounding",
+    "referring expression segmentation"
+   ],
+   "fusion_architecture": [
+    "Modulated detection (text queries modulate visual features)"
+   ],
+   "model_family": [
+    "MDETR"
+   ],
+   "model_name": [
+    "MDETR (ResNet-101)"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "Flickr30k (200k images)"
+   ],
+   "pretraining_task": [
+    "Multi-modal detection and grounding"
+   ],
+   "research_problem": [
+    "End-to-end multi-modal understanding and detection"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ResNet-101"
+   ]
+  },
+  "MDETR (EfficientNet-B 3)": {
+   "application": [
+    "Referring expression comprehension",
+    "visual question answering",
+    "phrase grounding",
+    "referring expression segmentation"
+   ],
+   "fusion_architecture": [
+    "Modulated detection (text queries modulate visual features)"
+   ],
+   "model_family": [
+    "MDETR"
+   ],
+   "model_name": [
+    "MDETR (EfficientNet-B 3)"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "Flickr30k (200k images)"
+   ],
+   "pretraining_task": [
+    "Multi-modal detection and grounding"
+   ],
+   "research_problem": [
+    "End-to-end multi-modal understanding and detection"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EfficientNet-B3"
+   ]
+  },
+  "MDETR (EfficientNet-B 5)": {
+   "application": [
+    "Referring expression comprehension",
+    "visual question answering",
+    "phrase grounding",
+    "referring expression segmentation"
+   ],
+   "fusion_architecture": [
+    "Modulated detection (text queries modulate visual features)"
+   ],
+   "model_family": [
+    "MDETR"
+   ],
+   "model_name": [
+    "MDETR (EfficientNet-B 5)"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "COCO",
+    "Visual Genome",
+    "Flickr30k (200k images)"
+   ],
+   "pretraining_task": [
+    "Multi-modal detection and grounding"
+   ],
+   "research_problem": [
+    "End-to-end multi-modal understanding and detection"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "EfficientNet-B5"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "MDETR": {},
+   "MDETR (ResNet-101)": {},
+   "MDETR (EfficientNet-B 3)": {},
+   "MDETR (EfficientNet-B 5)": {}
+  },
+  "counts": {
+   "kept": 75,
+   "dropped": 0,
+   "llm_calls": 1,
+   "values_sent_to_llm": 29
+  }
+ },
+ "contributions": [
+  {
+   "label": "MDETR",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MDETR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MDETR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-04-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "End-to-end text-modulated detection system derived from DETR that detects objects conditioned on free-form text queries, enabling joint reasoning over text and image by fusing modalities at an early stage",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Handles long-tail visual concepts and unseen combinations of categories/attributes without restricting to a fixed vocabulary.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Text-modulated object detection / phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "1.3M text-image pairs mined from pre-existing multi-modal datasets with explicit phrase-object alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Referring expression comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Referring expression segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "32 V100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Object detection conditioned on text",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression comprehension and segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multi-modal understanding and text-conditioned object detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.3M text-image pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30k",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RefCOCO/+/g",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PhraseCut",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CLEVR",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Transformer Encoder-Decoder with cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 1.3M aligned text-image pairs -> Fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Early fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "CNN backbone (ResNet)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "DETR, RoBERTa, ResNet",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on phrase grounding and referring expression comprehension",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Competitive performance on visual question answering, referring expression segmentation, and few-shot long-tailed object detection",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MDETR (ResNet-101)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MDETR (ResNet-101)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MDETR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-04-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multi-modal detection and grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30k (200k images)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "End-to-end multi-modal understanding and detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "200k images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Modulated detection (text queries modulate visual features)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-101",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO val: 86.75, testA: 89.58, testB: 81.41",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ val: 79.52, testA: 84.09, testB: 70.62",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg val: 81.64, testA: 80.89",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PhraseCut Test-dev: 53.1, Test-std: 56.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k ANY-BOX val: 78.9, test: 88.8, 90.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MDETR (EfficientNet-B 3)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MDETR (EfficientNet-B 3)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MDETR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-04-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multi-modal detection and grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30k (200k images)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "End-to-end multi-modal understanding and detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "200k images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Modulated detection (text queries modulate visual features)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EfficientNet-B3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO val: 87.51, testA: 90.40, testB: 82.67",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ val: 81.13, testA: 85.52, testB: 72.96",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg val: 83.35, testA: 83.31",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k ANY-BOX val: 82.5, test: 92.9, 94.9",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "MDETR (EfficientNet-B 5)",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "MDETR (EfficientNet-B 5)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "MDETR",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-04-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "End-to-end multi-modal detection framework that jointly learns to detect objects and ground text phrases without requiring pre-extracted bounding boxes or separate vision-language pre-training stages. Modulates visual features with text queries.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multi-modal detection and grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Flickr30k (200k images)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Phrase grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Referring expression segmentation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "End-to-end multi-modal understanding and detection",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "200k images",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Modulated detection (text queries modulate visual features)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "EfficientNet-B5",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO val: 83.6, testA: 93.4, testB: 95.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ val: 84.3, testA: 93.9, testB: 95.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PhraseCut Test-dev: 62.95, Test-std: 62.45",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467438",
+  "contribution_ids": [
+   "R467439",
+   "R467446",
+   "R467457",
+   "R1921213",
+   "R1921230",
+   "R1921236",
+   "R1921239"
+  ],
+  "new_contribution_ids": [
+   "R1921213",
+   "R1921230",
+   "R1921236",
+   "R1921239"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,883 @@
+{
+ "arxiv_id": "2112.04482",
+ "status": "completed",
+ "timestamp": "2026-08-25T02:59:58.158385",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2112.04482",
+  "title": "FLAVA: A Foundational Language And Vision Alignment Model",
+  "authors": [
+   "Amanpreet Singh",
+   "Ronghang Hu",
+   "Vedanuj Goswami",
+   "Guillaume Couairon",
+   "Wojciech Galuba",
+   "Marcus Rohrbach",
+   "Douwe Kiela"
+  ],
+  "abstract": "State-of-the-art vision and vision-and-language models rely on large-scale visio-linguistic pretraining for obtaining good performance on a variety of downstream tasks. Generally, such models are often either cross-modal (contrastive) or multi-modal (with earlier fusion) but not both; and they often only target specific modalities or tasks. A promising direction would be to use a single holistic universal model, as a \"foundation\", that targets all modalities at once -- a true vision and language foundation model should be good at vision tasks, language tasks, and cross- and multi-modal vision and language tasks. We introduce FLAVA as such a model and demonstrate impressive performance on a wide range of 35 tasks spanning these target modalities.",
+  "published": "2021-12-08T18:59:16+00:00",
+  "updated": "2022-03-29T18:22:08+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2112.04482v3",
+  "entry_id": "http://arxiv.org/abs/2112.04482v3",
+  "pdf_path": "data/papers/2112.04482.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 78604,
+ "word_count": 8025,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "FLAVA",
+   "parameters": "100M, 103M, 172M, 300M, 310M",
+   "parameters_millions": 310,
+   "model_family": "FLAVA",
+   "date_created": "2021-12-08",
+   "organization": "Meta",
+   "innovation": "Combines cross-modal contrastive alignment and multi-modal fusion (earlier fusion with shared self-attention) in a single holistic architecture to simultaneously target vision, language, and multimodal tasks; trained on a smaller, openly available 70M-pair corpus (PMD) rather than massive proprietary datasets.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Cross-modal contrastive alignment, Masked Language Modeling (MLM), Masked Image Modeling (MIM), Image-Text Matching (ITM), Multi-modal Masked Modeling (MMM)",
+   "pretraining_corpus": "Conceptual Captions, CC12M, CC3M, CC600M, SBU, YFCC100M, LAION-400M, Wikipedia, BookCorpus, OpenSubtitles, Common Crawl",
+   "finetuning_task": "Classification heads applied on outputs from image, text, and multimodal encoders for visual recognition, language understanding, and multimodal reasoning tasks",
+   "optimizer": "AdamW",
+   "hardware_used": "GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "open source",
+   "research_problem": "Foundational multimodal representation learning",
+   "application": "Image captioning, visual question answering, visual grounding, zero-shot classification, image-text retrieval",
+   "paper_title": "FLAVA: A Foundational Language And Vision Alignment Model",
+   "training_corpus_size": "70M pairs",
+   "finetuning_data": "MNLI, CoLA, MRPC, QQP, SST-2, QNLI, RTE, STS-B, ImageNet, Food101, CIFAR10, CIFAR100, Cars, Aircraft, DTD, Pets, Caltech101, Flowers102, MNIST, STL10, EuroSAT, GTSRB, KITTI, PCAM, UCF101, FER2013, SUN397, Country211, VQAv2, SNLI-VE, HatefulMemes, Flickr30K, COCO, Visual Entailment",
+   "tokenizer": "dVAE tokenizer (images), standard wordpiece/BPE (text)",
+   "supported_language": "English",
+   "hardware_description": "Google TPU",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/facebookresearch/flava",
+   "context_length": null,
+   "activated_parameters": "103M (dense)",
+   "attention_mechanism": "Shared self-attention across modalities (earlier fusion), Multi-head self-attention (BERT-base for text, ViT-base for vision)",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Joint pre-training on unimodal and multimodal data with cross-modal alignment and multi-modal fusion objectives",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "FP16",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Earlier fusion with shared self-attention across modalities",
+   "vision_encoder": "ViT-B/16, ResNet-50 or ViT-B/16",
+   "base_model": "ViT-B/16 architecture",
+   "optimizer_innovation": null,
+   "benchmark_result": "NLP Avg: 79.44, Vision Avg: 69.92, Multi-modal Avg: 75.85, Macro Avg: 75.85; VQA v2: 73.8; Visual Genome: 13.5; COCO captioning: 105.4 CIDEr; RefCOCO: 88.5; RefCOCO+: 82.5; RefCOCOg: 84.5; COCO captioning CIDEr 130.5; VQA 73.8; Visual Genome 18.5; RefCOCO+ 73.8; RefCOCOg 78.5; Flickr30k retrieval 92.1/88.2/78.5; ImageNet zero-shot 75.2",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "Fully-Sharded Data Parallel (FSDP)"
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "FLAVA": {
+   "application": [
+    "Image captioning",
+    "visual question answering",
+    "visual grounding",
+    "zero-shot classification",
+    "image-text retrieval"
+   ],
+   "attention_mechanism": [
+    "Shared self-attention across modalities (earlier fusion)",
+    "Multi-head self-attention (BERT-base for text, ViT-base for vision)"
+   ],
+   "base_model": [
+    "ViT-B/16 architecture"
+   ],
+   "finetuning_data": [
+    "MNLI",
+    "CoLA",
+    "MRPC",
+    "QQP",
+    "SST-2",
+    "QNLI",
+    "RTE",
+    "STS-B",
+    "ImageNet",
+    "Food101",
+    "CIFAR10",
+    "CIFAR100",
+    "Cars",
+    "Aircraft",
+    "DTD",
+    "Pets",
+    "Caltech101",
+    "Flowers102",
+    "MNIST",
+    "STL10",
+    "EuroSAT",
+    "GTSRB",
+    "KITTI",
+    "PCAM",
+    "UCF101",
+    "FER2013",
+    "SUN397",
+    "Country211",
+    "VQAv2",
+    "SNLI-VE",
+    "HatefulMemes",
+    "Flickr30K",
+    "COCO",
+    "Visual Entailment"
+   ],
+   "finetuning_task": [
+    "language understanding",
+    "multimodal reasoning tasks"
+   ],
+   "fusion_architecture": [
+    "Earlier fusion with shared self-attention across modalities"
+   ],
+   "hardware_used": [
+    "GPU"
+   ],
+   "license": [
+    "open source"
+   ],
+   "model_family": [],
+   "model_name": [
+    "FLAVA"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Meta"
+   ],
+   "parameters": [
+    "100M",
+    "103M",
+    "172M",
+    "300M",
+    "310M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions",
+    "CC12M",
+    "CC3M",
+    "CC600M",
+    "SBU",
+    "YFCC100M",
+    "LAION-400M",
+    "Wikipedia",
+    "BookCorpus",
+    "OpenSubtitles",
+    "Common Crawl"
+   ],
+   "pretraining_task": [
+    "Cross-modal contrastive alignment, Masked Language Modeling (MLM), Masked Image Modeling (MIM), Image-Text Matching (ITM), Multi-modal Masked Modeling (MMM)"
+   ],
+   "quantization_precision": [
+    "FP16"
+   ],
+   "research_problem": [
+    "Foundational multimodal representation learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "ViT-B/16",
+    "ResNet-50 or ViT-B/16"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "FLAVA": {
+    "finetuning_task": {
+     "candidates": [
+      "Classification heads applied on outputs from image",
+      "text",
+      "multimodal encoders for visual recognition",
+      "language understanding",
+      "multimodal reasoning tasks"
+     ],
+     "accepted": [
+      "language understanding",
+      "multimodal reasoning tasks"
+     ],
+     "dropped": [
+      {
+       "value": "Classification heads applied on outputs from image",
+       "reason": "Describes a model component/mechanism rather than the fine-tuning task itself."
+      },
+      {
+       "value": "text",
+       "reason": "Refers to a data modality, not a fine-tuning task."
+      },
+      {
+       "value": "multimodal encoders for visual recognition",
+       "reason": "Describes a model component or approach rather than the specific fine-tuning task."
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "FLAVA"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "FLAVA",
+       "reason": "Specific model name, not a broader category or lineage (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 73,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 6
+  }
+ },
+ "contributions": [
+  {
+   "label": "FLAVA",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "FLAVA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-12-08",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Meta",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Combines cross-modal contrastive alignment and multi-modal fusion (earlier fusion with shared self-attention) in a single holistic architecture to simultaneously target vision, language, and multimodal tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Trained on a smaller, openly available 70M-pair corpus (PMD) rather than massive proprietary datasets.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Cross-modal contrastive alignment, Masked Language Modeling (MLM), Masked Image Modeling (MIM), Image-Text Matching (ITM), Multi-modal Masked Modeling (MMM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC12M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC3M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "CC600M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "YFCC100M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "LAION-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BookCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenSubtitles",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Common Crawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Language understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Multimodal reasoning tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "DVAE tokenizer (images), standard wordpiece/BPE (text)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "100M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "103M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "172M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "300M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "310M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 310,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Google TPU",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual grounding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/facebookresearch/flava",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Foundational multimodal representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "70M pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CoLA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MRPC",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QQP",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SST-2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "QNLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "RTE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "STS-B",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ImageNet",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Food101",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CIFAR10",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CIFAR100",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Cars",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Aircraft",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "DTD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Pets",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Caltech101",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flowers102",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MNIST",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "STL10",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "EuroSAT",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GTSRB",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "KITTI",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "PCAM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "UCF101",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "FER2013",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SUN397",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Country211",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SNLI-VE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "HatefulMemes",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "COCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Visual Entailment",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "103M (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Shared self-attention across modalities (earlier fusion)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (BERT-base for text, ViT-base for vision)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Joint pre-training on unimodal and multimodal data with cross-modal alignment and multi-modal fusion objectives",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "FP16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Earlier fusion with shared self-attention across modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "ResNet-50 or ViT-B/16",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "ViT-B/16 architecture",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLP Avg: 79.44, Vision Avg: 69.92, Multi-modal Avg: 75.85, Macro Avg: 75.85",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA v2: 73.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Genome: 13.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO captioning: 105.4 CIDEr",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO: 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+: 82.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg: 84.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO captioning CIDEr 130.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA 73.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Genome 18.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCO+ 73.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "RefCOCOg 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Flickr30k retrieval 92.1/88.2/78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ImageNet zero-shot 75.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Fully-Sharded Data Parallel (FSDP)",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1823190",
+  "contribution_ids": [
+   "R1823192",
+   "R1823193",
+   "R1823194",
+   "R1921564"
+  ],
+  "new_contribution_ids": [
+   "R1921564"
+  ],
+  "comparison_updated": null
+ }
+}

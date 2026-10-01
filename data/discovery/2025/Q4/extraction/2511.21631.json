@@ -1,0 +1,2358 @@
+{
+ "arxiv_id": "2511.21631",
+ "status": "completed",
+ "timestamp": "2026-08-30T05:21:41.449389",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2511.21631",
+  "title": "Qwen3-VL Technical Report",
+  "authors": [
+   "Shuai Bai",
+   "Yuxuan Cai",
+   "Ruizhe Chen",
+   "Keqin Chen",
+   "Xionghui Chen",
+   "Zesen Cheng",
+   "Lianghao Deng",
+   "Wei Ding",
+   "Chang Gao",
+   "Chunjiang Ge",
+   "Wenbin Ge",
+   "Zhifang Guo",
+   "Qidong Huang",
+   "Jie Huang",
+   "Fei Huang",
+   "Binyuan Hui",
+   "Shutong Jiang",
+   "Zhaohai Li",
+   "Mingsheng Li",
+   "Mei Li",
+   "Kaixin Li",
+   "Zicheng Lin",
+   "Junyang Lin",
+   "Xuejing Liu",
+   "Jiawei Liu",
+   "Chenglong Liu",
+   "Yang Liu",
+   "Dayiheng Liu",
+   "Shixuan Liu",
+   "Dunjie Lu",
+   "Ruilin Luo",
+   "Chenxu Lv",
+   "Rui Men",
+   "Lingchen Meng",
+   "Xuancheng Ren",
+   "Xingzhang Ren",
+   "Sibo Song",
+   "Yuchong Sun",
+   "Jun Tang",
+   "Jianhong Tu",
+   "Jianqiang Wan",
+   "Peng Wang",
+   "Pengfei Wang",
+   "Qiuyue Wang",
+   "Yuxuan Wang",
+   "Tianbao Xie",
+   "Yiheng Xu",
+   "Haiyang Xu",
+   "Jin Xu",
+   "Zhibo Yang",
+   "Mingkun Yang",
+   "Jianxin Yang",
+   "An Yang",
+   "Bowen Yu",
+   "Fei Zhang",
+   "Hang Zhang",
+   "Xi Zhang",
+   "Bo Zheng",
+   "Humen Zhong",
+   "Jingren Zhou",
+   "Fan Zhou",
+   "Jing Zhou",
+   "Yuanzhi Zhu",
+   "Ke Zhu"
+  ],
+  "abstract": "We introduce Qwen3-VL, the most capable vision-language model in the Qwen series to date, achieving superior performance across a broad range of multimodal benchmarks. It natively supports interleaved contexts of up to 256K tokens, seamlessly integrating text, images, and video. The model family includes both dense (2B/4B/8B/32B) and mixture-of-experts (30B-A3B/235B-A22B) variants to accommodate diverse latency-quality trade-offs. Qwen3-VL delivers three core pillars: (i) markedly stronger pure-text understanding, surpassing comparable text-only backbones in several cases; (ii) robust long-context comprehension with a native 256K-token window for both text and interleaved multimodal inputs, enabling faithful retention, retrieval, and cross-referencing across long documents and videos; and (iii) advanced multimodal reasoning across single-image, multi-image, and video tasks, demonstrating leading performance on comprehensive evaluations such as MMMU and visual-math benchmarks (e.g., MathVista and MathVision). Architecturally, we introduce three key upgrades: (i) an enhanced interleaved-MRoPE for stronger spatial-temporal modeling across images and video; (ii) DeepStack integration, which effectively leverages multi-level ViT features to tighten vision-language alignment; and (iii) text-based time alignment for video, evolving from T-RoPE to explicit textual timestamp alignment for more precise temporal grounding. Under comparable token budgets and latency constraints, Qwen3-VL achieves superior performance in both dense and Mixture-of-Experts (MoE) architectures. We envision Qwen3-VL serving as a foundational engine for image-grounded reasoning, agentic decision-making, and multimodal code intelligence in real-world workflows.",
+  "published": "2025-11-26T17:59:08+00:00",
+  "updated": "2025-11-27T12:16:54+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.AI"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2511.21631v2",
+  "entry_id": "http://arxiv.org/abs/2511.21631v2",
+  "pdf_path": "data/papers/2511.21631.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM version release)"
+ },
+ "text_length": 145672,
+ "word_count": 10937,
+ "models_extracted": 18,
+ "extraction_data": [
+  {
+   "model_name": "Qwen 3-VL",
+   "parameters": "2B, 4B, 8B, 30B-A3B, 30B (3B ACTIVATED), 32B, 235B-A22B, 235B (22B ACTIVATED)",
+   "parameters_millions": 235000,
+   "model_family": "Qwen",
+   "date_created": "2025-11-26",
+   "organization": "Alibaba",
+   "innovation": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information; Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias; text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Next-token prediction, vision-language alignment",
+   "pretraining_corpus": "Image-caption pairs, interleaved text-image documents, video, agent-oriented instruction-following data, text-only data",
+   "finetuning_task": "Supervised fine-tuning, knowledge distillation, reinforcement learning, Instruct tuning, Thinking/Non-thinking hybrid reasoning tuning, Instruction tuning, reasoning tuning, Supervised Fine-Tuning (SFT), Strong-to-Weak Distillation, Reinforcement Learning (Reasoning RL and General RL)",
+   "optimizer": null,
+   "hardware_used": "Alibaba Cloud's PAI-Lingjun AI Computing Service",
+   "extension": "Dynamic-resolution vision encoder",
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal reasoning, visual question answering, document understanding, instruction following",
+   "application": "Image-grounded reasoning, agentic decision-making, multimodal code intelligence, long-context understanding, STEM reasoning, GUI comprehension",
+   "paper_title": "Qwen3-VL Technical Report",
+   "training_corpus_size": "~2.1 trillion tokens (67B + 1T + 1T + 100B)",
+   "finetuning_data": "Long chain-of-thought data, GUI-agent interaction data, ~1, 200, 000 samples (1/3 text-only, 2/3 image-text/video-text pairs); long-context technical documents, textbooks, videos up to 2 hours; multimodal function-calling trajectories",
+   "tokenizer": "BPE",
+   "supported_language": "English, Chinese",
+   "hardware_description": "Hybrid parallelism (Tensor, Pipeline, Context, Expert, ZeRO-1 Data) on Megatron-LM framework, up to 10,000 GPUs.",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "3B (30B-A3B), 22B (235B-A22B), 2B/4B/8B/32B (dense, all active)",
+   "attention_mechanism": "Interleaved MRoPE",
+   "context_length_max": "256K tokens",
+   "context_extension_method": "2D-RoPE, interpolation of absolute position embeddings",
+   "training_pipeline": "Pretraining (warm-up alignment -> full-parameter training with progressive context windows 8K/32K/256K) -> Post-training (SFT on long CoT -> knowledge distillation -> RL)",
+   "reasoning_mode": "Hybrid (non-thinking and thinking variants)",
+   "moe_configuration": "30B-A3B (30B total, 3B active); 235B-A22B (235B total, 22B active)",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Systematic filtering, error correction, and synthetic augmentation, LLM-generated descriptions for entities; pseudo-labels from Qwen2.5-VL and OCR-specialized models; synthetic HTML/Markdown corpus; long-document parsing sequences by merging single-page samples; VQA generation for multi-page PDFs; automated object annotation synthesis using Qwen2.5-VL and GroundingDINO",
+   "rl_algorithm": "Reinforcement Learning (Reasoning RL and General RL)",
+   "reward_mechanism": "Hybrid: Rule-Based rewards for verifiable tasks/format adherence; Model-Based rewards using Qwen2.5-VL-72B-Instructor as judge for open-ended tasks. Agentic RL uses Answer Accuracy, Multi-Turn Reasoning, and Tool-Calling rewards.",
+   "tool_calling_format": "XML tags for function calls with JSON arguments; computer_use action format",
+   "training_environment_scale": "Up to 10,000 GPUs",
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "DeepStack (cross-layer fusion via lightweight residual connections routing visual tokens from ViT to LLM layers)",
+   "vision_encoder": "Multi-level ViT features, SigLIP-2 Large (300M), SigLIP-2 SO-400M, SigLIP-2, High-resolution, dynamic-resolution encoders",
+   "base_model": "Qwen3 series",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMLU-Pro: 49.0 (Instruct), 62.3 (Thinking); MMLU-Redux: 66.5, 76.9; GPQA: 42.0, 49.5; SuperGPQA: 24.3, 34.6; AIME-25: 22.2, 39.0; HMMT-25: 10.9, 22.8; LiveBench2024-11-25: 39.5, 50.1; IFEval: 68.2, 75.1; Arena-HardV2: 6.4, 12.0; CreativeWritingv3: 48.6, 55.6; WritingBench: 73.0, 77.9; LiveCodeBenchv6: 20.3, 29.3; BFCL-v3: 55.4, 57.2; MultiIF: 43.2, 58.9; MMLU-ProX: 38.8, 55.1; INCLUDE: 45.8, 53.3; PolyMATH: 14.9, 28.0; MMLU-Pro: 67.1 (Instruct), 73.6 (Thinking); MMLU-Redux: 81.5, 86.0; GPQA: 55.9, 64.1; SuperGPQA: 40.3, 46.8; AIME-25: 46.6, 74.5; HMMT-25: 30.7, 53.1; LiveBench2024-11-25: 60.9, 68.4; IFEval: 82.3, 82.6; Arena-HardV2: 30.4, 36.8; CreativeWritingv3: 72.3, 76.1; WritingBench: 82.5, 84.0; LiveCodeBenchv6: 37.9, 51.3; BFCL-v3: 63.3, 67.3; MultiIF: 61.5, 73.6; MMLU-ProX: 59.4, 65.0; INCLUDE: 61.4, 64.6; PolyMATH: 28.8, 44.6; MMLU-Pro: 71.6 (Instruct), 77.3 (Thinking); MMLU-Redux: 84.9, 88.8; GPQA: 61.9, 69.9; SuperGPQA: 44.5, 51.2; AIME-25: 45.9, 80.3; HMMT-25: 32.5, 60.6; LiveBench2024-11-25: 62.0, 69.8; IFEval: 83.7, 83.2; Arena-HardV2: 46.3, 51.1; CreativeWritingv3: 77.0, 82.4; WritingBench: 83.1, 85.5; LiveCodeBenchv6: 39.3, 58.6; BFCL-v3: 66.3, 63.0; MultiIF: 66.8, 75.1; MMLU-ProX: 65.4, 70.7; INCLUDE: 67.0, 69.5; PolyMATH: 30.4, 47.5; MMMU 74.2; MMMU-Pro 60.4; MathVista mini 80.1; MathVision 60.2; MMBench-EN 86.1; MMBench-CN 85.3; MMStar 72.1; HallusionBench 61.5; MIA-Bench 91.2; DocVQAtest 91.5; OCRBench 787; MUIRBENCH 73.0; Video-MME 75.2; Design2Code 88.5; OSWorld 31.6; MMStar 78.7 (235B-A22B-Thinking), MMBench 89.3 (235B-A22B-Instruct), RealWorldQA 88.9 (235B-A22B-Instruct), MMBench 89.5 (32B-Thinking), RealWorldQA 79.4 (32B-Thinking), MMBench-EN 85.3 (8B-Thinking), HallusionBench +3.0 vs Gemini-2.5-pro, MIA-Bench best overall (Thinking)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": "Unified reward framework with shared infrastructure (data preprocessing, utility functions, reward manager); Alibaba Cloud's PAI-Lingjun AI Computing Service."
+  },
+  {
+   "model_name": "Qwen 3-VL-30B-A",
+   "model_family": "Qwen",
+   "date_created": "2025-11-26",
+   "organization": "Alibaba",
+   "innovation": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information; Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias; text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+   "pretraining_corpus": "Large-scale multimodal data (text, images, videos)",
+   "parameters": "30B",
+   "parameters_millions": 30000,
+   "application": "Vision-language tasks, video understanding, document understanding, real-world multimodal intelligence",
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal intelligence, vision-language foundation model",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal alignment, next-token prediction",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Instruction tuning, reasoning tuning",
+   "finetuning_data": null,
+   "optimizer": null,
+   "tokenizer": "BPE",
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Dynamic-resolution vision encoder",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Qwen3-VL Technical Report",
+   "activated_parameters": "3B",
+   "attention_mechanism": "Interleaved MRoPE",
+   "context_length_max": "256K",
+   "context_extension_method": "2D-RoPE, interpolation of absolute position embeddings",
+   "training_pipeline": "Pre-training (4 stages) -> Post-training (SFT on long CoT, knowledge distillation, RL)",
+   "reasoning_mode": "Hybrid reasoning/non-reasoning with explicit mode tokens",
+   "moe_configuration": "30B total parameters, 3B activated per token",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Systematic filtering, error correction, and synthetic augmentation",
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": "XML tags for function calls with JSON arguments; computer_use action format",
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP-based merger, DeepStack",
+   "vision_encoder": "SigLIP-2 SO-400M",
+   "base_model": "Qwen3",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMMU 76.0; MMMU-Pro 63.0; MathVista mini 81.9; MathVision 65.7; MMBench-EN 87.0; MMBench-CN 85.9; MMStar 75.5; HallusionBench 66.0; MIA-Bench 91.6; DocVQAtest 91.5; OCRBench 787; MUIRBENCH 73.0; Video-MME 75.2; Design2Code 88.5; OSWorld 31.6",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "Qwen 3-VL-235B-A",
+   "model_family": "Qwen",
+   "date_created": "2025-11-26",
+   "organization": "Alibaba",
+   "innovation": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information; Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias; text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+   "pretraining_corpus": "Large-scale multimodal data (text, images, videos)",
+   "parameters": "235B",
+   "parameters_millions": 235000,
+   "application": "Vision-language tasks, video understanding, document understanding, real-world multimodal intelligence",
+   "license": "Apache 2.0",
+   "research_problem": "Multimodal intelligence, vision-language foundation model",
+   "model_version": null,
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Multimodal alignment, next-token prediction",
+   "training_corpus_size": null,
+   "knowledge_cutoff_date": null,
+   "finetuning_task": "Supervised fine-tuning (SFT), Reinforcement Learning (RL)",
+   "finetuning_data": "Long-CoT cold start data, ~30K RL queries",
+   "optimizer": null,
+   "tokenizer": "BPE",
+   "context_length": null,
+   "supported_language": "English, Chinese",
+   "hardware_used": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "extension": "Strong-to-weak distillation pipeline",
+   "source_code": null,
+   "blog_post": null,
+   "training_data": null,
+   "training_compute": null,
+   "performance_metrics": null,
+   "release_date": null,
+   "model_type": null,
+   "paper_title": "Qwen3-VL Technical Report",
+   "activated_parameters": "22B",
+   "attention_mechanism": "Interleaved MRoPE",
+   "context_length_max": "256K",
+   "context_extension_method": "2D-RoPE, interpolation of absolute position embeddings",
+   "training_pipeline": "Pre-training (4 stages) -> Post-training (SFT on long CoT, knowledge distillation, RL)",
+   "reasoning_mode": "Long Chain-of-Thought (CoT)",
+   "moe_configuration": "235B total parameters, 22B activated per token",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": "Systematic filtering, error correction, and synthetic augmentation",
+   "rl_algorithm": null,
+   "reward_mechanism": "Unified reward framework with task-specific format prompts, penalty for code-switching, deterministic verification via rules or code executors",
+   "tool_calling_format": "XML tags for function calls with JSON arguments; computer_use action format",
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "MLP-based merger, DeepStack",
+   "vision_encoder": "SigLIP-2 SO-400M",
+   "base_model": "Qwen3",
+   "optimizer_innovation": null,
+   "benchmark_result": "MMMU 80.6; MMMU-Pro 69.3; MathVista mini 85.8; MathVision 74.6; MMBench-EN 88.8; MMBench-CN 88.6; MMStar 78.7; HallusionBench 66.7; MIA-Bench 92.7; DocVQAtest 96.5; OCRBench 875; MUIRBENCH 80.1; Video-MME 79.0; Design2Code 93.4; OSWorld 38.1",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 9,
+ "models_after_merge": 3,
+ "validated_rows": {
+  "Qwen 3-VL": {
+   "application": [
+    "Image-grounded reasoning",
+    "agentic decision-making",
+    "multimodal code intelligence",
+    "long-context understanding",
+    "STEM reasoning",
+    "GUI comprehension"
+   ],
+   "attention_mechanism": [],
+   "base_model": [
+    "Qwen3 series"
+   ],
+   "context_extension_method": [
+    "2D-RoPE, interpolation of absolute position embeddings"
+   ],
+   "finetuning_data": [
+    "Long chain-of-thought data",
+    "GUI-agent interaction data",
+    "long-context technical documents",
+    "textbooks",
+    "videos up to 2 hours",
+    "multimodal function-calling trajectories"
+   ],
+   "finetuning_task": [
+    "knowledge distillation",
+    "Instruct tuning",
+    "Thinking/Non-thinking hybrid reasoning tuning",
+    "Instruction tuning",
+    "reasoning tuning",
+    "Supervised Fine-Tuning (SFT)",
+    "Strong-to-Weak Distillation",
+    "Reinforcement Learning (Reasoning RL and General RL)"
+   ],
+   "fusion_architecture": [
+    "DeepStack (cross-layer fusion via lightweight residual connections routing visual tokens from ViT to LLM layers)"
+   ],
+   "hardware_used": [
+    "Alibaba Cloud's PAI-Lingjun AI Computing Service"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 3-VL"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "2B",
+    "4B",
+    "8B",
+    "30B-A3B",
+    "30B (3B ACTIVATED)",
+    "32B",
+    "235B-A22B",
+    "235B (22B ACTIVATED)"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "Image-caption pairs",
+    "interleaved text-image documents",
+    "agent-oriented instruction-following data"
+   ],
+   "pretraining_task": [
+    "Next-token prediction, vision-language alignment"
+   ],
+   "reasoning_mode": [
+    "Hybrid (non-thinking and thinking variants)"
+   ],
+   "research_problem": [
+    "Multimodal reasoning",
+    "visual question answering",
+    "document understanding",
+    "instruction following"
+   ],
+   "reward_mechanism": [
+    "Hybrid: Rule-Based rewards for verifiable tasks/format adherence",
+    "Model-Based rewards using Qwen2.5-VL-72B-Instructor as judge for open-ended tasks. Agentic RL uses Answer Accuracy",
+    "Tool-Calling rewards."
+   ],
+   "rl_algorithm": [],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "Systematic filtering",
+    "error correction",
+    "synthetic augmentation",
+    "LLM-generated descriptions for entities",
+    "pseudo-labels from Qwen2.5-VL and OCR-specialized models",
+    "long-document parsing sequences by merging single-page samples",
+    "VQA generation for multi-page PDFs",
+    "automated object annotation synthesis using Qwen2.5-VL and GroundingDINO"
+   ],
+   "tool_calling_format": [
+    "XML tags for function calls with JSON arguments; computer_use action format"
+   ],
+   "vision_encoder": [
+    "SigLIP-2 Large (300M)",
+    "SigLIP-2 SO-400M",
+    "SigLIP-2",
+    "dynamic-resolution encoders"
+   ]
+  },
+  "Qwen 3-VL-30B-A": {
+   "application": [
+    "Vision-language tasks",
+    "video understanding",
+    "document understanding",
+    "real-world multimodal intelligence"
+   ],
+   "attention_mechanism": [],
+   "base_model": [
+    "Qwen3"
+   ],
+   "context_extension_method": [
+    "2D-RoPE, interpolation of absolute position embeddings"
+   ],
+   "finetuning_task": [
+    "Instruction tuning",
+    "reasoning tuning"
+   ],
+   "fusion_architecture": [
+    "MLP-based merger, DeepStack"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 3-VL-30B-A"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "30B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multimodal alignment, next-token prediction"
+   ],
+   "reasoning_mode": [
+    "Hybrid reasoning/non-reasoning with explicit mode tokens"
+   ],
+   "research_problem": [
+    "Multimodal intelligence"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "Systematic filtering",
+    "error correction",
+    "synthetic augmentation"
+   ],
+   "tool_calling_format": [
+    "XML tags for function calls with JSON arguments; computer_use action format"
+   ],
+   "vision_encoder": [
+    "SigLIP-2 SO-400M"
+   ]
+  },
+  "Qwen 3-VL-235B-A": {
+   "application": [
+    "Vision-language tasks",
+    "video understanding",
+    "document understanding",
+    "real-world multimodal intelligence"
+   ],
+   "attention_mechanism": [],
+   "base_model": [
+    "Qwen3"
+   ],
+   "context_extension_method": [
+    "2D-RoPE, interpolation of absolute position embeddings"
+   ],
+   "finetuning_data": [
+    "Long-CoT cold start data"
+   ],
+   "finetuning_task": [
+    "Supervised fine-tuning (SFT)"
+   ],
+   "fusion_architecture": [
+    "MLP-based merger, DeepStack"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Qwen"
+   ],
+   "model_name": [
+    "Qwen 3-VL-235B-A"
+   ],
+   "organization": [
+    "Alibaba"
+   ],
+   "parameters": [
+    "235B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Multimodal alignment, next-token prediction"
+   ],
+   "reasoning_mode": [
+    "Long Chain-of-Thought (CoT)"
+   ],
+   "research_problem": [
+    "Multimodal intelligence"
+   ],
+   "reward_mechanism": [
+    "Unified reward framework with task-specific format prompts",
+    "penalty for code-switching",
+    "deterministic verification via rules or code executors"
+   ],
+   "supported_language": [
+    "English",
+    "Chinese"
+   ],
+   "synthetic_data_generation_method": [
+    "Systematic filtering",
+    "error correction",
+    "synthetic augmentation"
+   ],
+   "tool_calling_format": [
+    "XML tags for function calls with JSON arguments; computer_use action format"
+   ],
+   "vision_encoder": [
+    "SigLIP-2 SO-400M"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Qwen 3-VL": {
+    "attention_mechanism": {
+     "candidates": [
+      "Interleaved MRoPE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Interleaved MRoPE",
+       "reason": "It is a positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Long chain-of-thought data",
+      "GUI-agent interaction data",
+      "~1",
+      "200",
+      "000 samples (1/3 text-only, 2/3 image-text/video-text pairs)",
+      "long-context technical documents",
+      "textbooks",
+      "videos up to 2 hours",
+      "multimodal function-calling trajectories"
+     ],
+     "accepted": [
+      "Long chain-of-thought data",
+      "GUI-agent interaction data",
+      "long-context technical documents",
+      "textbooks",
+      "videos up to 2 hours",
+      "multimodal function-calling trajectories"
+     ],
+     "dropped": [
+      {
+       "value": "~1",
+       "reason": "Truncated number/fragment, not a dataset or data description."
+      },
+      {
+       "value": "200",
+       "reason": "Standalone number/fragment, not a dataset or data description."
+      },
+      {
+       "value": "000 samples (1/3 text-only, 2/3 image-text/video-text pairs)",
+       "reason": "Quantity and composition fragment, not a dataset name or type."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning",
+      "knowledge distillation",
+      "reinforcement learning",
+      "Instruct tuning",
+      "Thinking/Non-thinking hybrid reasoning tuning",
+      "Instruction tuning",
+      "reasoning tuning",
+      "Supervised Fine-Tuning (SFT)",
+      "Strong-to-Weak Distillation",
+      "Reinforcement Learning (Reasoning RL and General RL)"
+     ],
+     "accepted": [
+      "knowledge distillation",
+      "Instruct tuning",
+      "Thinking/Non-thinking hybrid reasoning tuning",
+      "Instruction tuning",
+      "reasoning tuning",
+      "Supervised Fine-Tuning (SFT)",
+      "Strong-to-Weak Distillation",
+      "Reinforcement Learning (Reasoning RL and General RL)"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning",
+       "reason": "Describes a training paradigm/method rather than the specific fine-tuning task. (cached)"
+      },
+      {
+       "value": "reinforcement learning",
+       "reason": "Describes a training paradigm/method, not a specific fine-tuning task or objective. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Image-caption pairs",
+      "interleaved text-image documents",
+      "video",
+      "agent-oriented instruction-following data",
+      "text-only data"
+     ],
+     "accepted": [
+      "Image-caption pairs",
+      "interleaved text-image documents",
+      "agent-oriented instruction-following data"
+     ],
+     "dropped": [
+      {
+       "value": "video",
+       "reason": "Lists a modality, not a dataset or corpus. (cached)"
+      },
+      {
+       "value": "text-only data",
+       "reason": "Too broad; asserts only a data modality rather than a specific corpus."
+      }
+     ]
+    },
+    "reward_mechanism": {
+     "candidates": [
+      "Hybrid: Rule-Based rewards for verifiable tasks/format adherence",
+      "Model-Based rewards using Qwen2.5-VL-72B-Instructor as judge for open-ended tasks. Agentic RL uses Answer Accuracy",
+      "Multi-Turn Reasoning",
+      "Tool-Calling rewards."
+     ],
+     "accepted": [
+      "Hybrid: Rule-Based rewards for verifiable tasks/format adherence",
+      "Model-Based rewards using Qwen2.5-VL-72B-Instructor as judge for open-ended tasks. Agentic RL uses Answer Accuracy",
+      "Tool-Calling rewards."
+     ],
+     "dropped": [
+      {
+       "value": "Multi-Turn Reasoning",
+       "reason": "Describes a reasoning strategy/task, not a reward calculation method."
+      }
+     ]
+    },
+    "rl_algorithm": {
+     "candidates": [
+      "Reinforcement Learning (Reasoning RL and General RL)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Reinforcement Learning (Reasoning RL and General RL)",
+       "reason": "Names a training paradigm/category rather than a specific RL algorithm (e.g., PPO, GRPO, DPO)."
+      }
+     ]
+    },
+    "synthetic_data_generation_method": {
+     "candidates": [
+      "Systematic filtering",
+      "error correction",
+      "synthetic augmentation",
+      "LLM-generated descriptions for entities",
+      "pseudo-labels from Qwen2.5-VL and OCR-specialized models",
+      "synthetic HTML/Markdown corpus",
+      "long-document parsing sequences by merging single-page samples",
+      "VQA generation for multi-page PDFs",
+      "automated object annotation synthesis using Qwen2.5-VL and GroundingDINO"
+     ],
+     "accepted": [
+      "Systematic filtering",
+      "error correction",
+      "synthetic augmentation",
+      "LLM-generated descriptions for entities",
+      "pseudo-labels from Qwen2.5-VL and OCR-specialized models",
+      "long-document parsing sequences by merging single-page samples",
+      "VQA generation for multi-page PDFs",
+      "automated object annotation synthesis using Qwen2.5-VL and GroundingDINO"
+     ],
+     "dropped": [
+      {
+       "value": "synthetic HTML/Markdown corpus",
+       "reason": "Names a dataset/corpus type, not a data generation method or technique."
+      }
+     ]
+    },
+    "vision_encoder": {
+     "candidates": [
+      "Multi-level ViT features",
+      "SigLIP-2 Large (300M)",
+      "SigLIP-2 SO-400M",
+      "SigLIP-2",
+      "High-resolution",
+      "dynamic-resolution encoders"
+     ],
+     "accepted": [
+      "SigLIP-2 Large (300M)",
+      "SigLIP-2 SO-400M",
+      "SigLIP-2",
+      "dynamic-resolution encoders"
+     ],
+     "dropped": [
+      {
+       "value": "High-resolution",
+       "reason": "Adjective describing a feature, not a model component (cached)"
+      },
+      {
+       "value": "Multi-level ViT features",
+       "reason": "Describes feature representations/outputs, not the encoder model component."
+      }
+     ]
+    }
+   },
+   "Qwen 3-VL-30B-A": {
+    "attention_mechanism": {
+     "candidates": [
+      "Interleaved MRoPE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Interleaved MRoPE",
+       "reason": "It is a positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Large-scale multimodal data (text, images, videos)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-scale multimodal data (text, images, videos)",
+       "reason": "Asserts only breadth and scale rather than naming a specific corpus or collection."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal intelligence",
+      "vision-language foundation model"
+     ],
+     "accepted": [
+      "Multimodal intelligence"
+     ],
+     "dropped": [
+      {
+       "value": "vision-language foundation model",
+       "reason": "Names a model type/architecture, not a research problem or capability gap."
+      }
+     ]
+    }
+   },
+   "Qwen 3-VL-235B-A": {
+    "attention_mechanism": {
+     "candidates": [
+      "Interleaved MRoPE"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Interleaved MRoPE",
+       "reason": "It is a positional encoding method, not an attention mechanism."
+      }
+     ]
+    },
+    "finetuning_data": {
+     "candidates": [
+      "Long-CoT cold start data",
+      "~30K RL queries"
+     ],
+     "accepted": [
+      "Long-CoT cold start data"
+     ],
+     "dropped": [
+      {
+       "value": "~30K RL queries",
+       "reason": "Quantity description, not a dataset or data type."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning (SFT)",
+      "Reinforcement Learning (RL)"
+     ],
+     "accepted": [
+      "Supervised fine-tuning (SFT)"
+     ],
+     "dropped": [
+      {
+       "value": "Reinforcement Learning (RL)",
+       "reason": "Names a training paradigm/method, not a specific fine-tuning task or objective. (cached)"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Large-scale multimodal data (text, images, videos)"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Large-scale multimodal data (text, images, videos)",
+       "reason": "Asserts only breadth and scale rather than naming a specific corpus or collection."
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Multimodal intelligence",
+      "vision-language foundation model"
+     ],
+     "accepted": [
+      "Multimodal intelligence"
+     ],
+     "dropped": [
+      {
+       "value": "vision-language foundation model",
+       "reason": "Names a model type/architecture, not a research problem or capability gap."
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 117,
+   "dropped": 21,
+   "llm_calls": 1,
+   "values_sent_to_llm": 65
+  }
+ },
+ "contributions": [
+  {
+   "label": "Qwen 3-VL",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 3-VL",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-11-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction, vision-language alignment",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Image-caption pairs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Interleaved text-image documents",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Agent-oriented instruction-following data",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Knowledge distillation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruct tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Thinking/Non-thinking hybrid reasoning tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reasoning tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised Fine-Tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Strong-to-Weak Distillation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reinforcement Learning (Reasoning RL and General RL)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "4B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B-A3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B (3B ACTIVATED)",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "32B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "235B-A22B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "235B (22B ACTIVATED)",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 235000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Alibaba Cloud's PAI-Lingjun AI Computing Service",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "Hybrid parallelism (Tensor, Pipeline, Context, Expert, ZeRO-1 Data) on Megatron-LM framework, up to 10,000 GPUs.",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-grounded reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Agentic decision-making",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Multimodal code intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long-context understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "STEM reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "GUI comprehension",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Instruction following",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "~2.1 trillion tokens (67B + 1T + 1T + 100B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long chain-of-thought data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "GUI-agent interaction data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long-context technical documents",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Textbooks",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Videos up to 2 hours",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Multimodal function-calling trajectories",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B (30B-A3B), 22B (235B-A22B), 2B/4B/8B/32B (dense, all active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256K tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "2D-RoPE, interpolation of absolute position embeddings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pretraining (warm-up alignment -> full-parameter training with progressive context windows 8K/32K/256K) -> Post-training (SFT on long CoT -> knowledge distillation -> RL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Hybrid (non-thinking and thinking variants)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "30B-A3B (30B total, 3B active); 235B-A22B (235B total, 22B active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Systematic filtering",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Error correction",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Synthetic augmentation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "LLM-generated descriptions for entities",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Pseudo-labels from Qwen2.5-VL and OCR-specialized models",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Long-document parsing sequences by merging single-page samples",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "VQA generation for multi-page PDFs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Automated object annotation synthesis using Qwen2.5-VL and GroundingDINO",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Hybrid: Rule-Based rewards for verifiable tasks/format adherence",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Model-Based rewards using Qwen2.5-VL-72B-Instructor as judge for open-ended tasks. Agentic RL uses Answer Accuracy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Tool-Calling rewards.",
+     "datatype": "string"
+    },
+    {
+     "property": "P203095",
+     "label": "tool_calling_format",
+     "value": "XML tags for function calls with JSON arguments; computer_use action format",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203096",
+     "label": "training_environment_scale",
+     "value": "Up to 10,000 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "DeepStack (cross-layer fusion via lightweight residual connections routing visual tokens from ViT to LLM layers)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-2 Large (300M)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-2 SO-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-2",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Dynamic-resolution encoders",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen3 series",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 49.0 (Instruct), 62.3 (Thinking)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Redux: 66.5, 76.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 42.0, 49.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGPQA: 24.3, 34.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AIME-25: 22.2, 39.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HMMT-25: 10.9, 22.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveBench2024-11-25: 39.5, 50.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval: 68.2, 75.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arena-HardV2: 6.4, 12.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CreativeWritingv3: 48.6, 55.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WritingBench: 73.0, 77.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveCodeBenchv6: 20.3, 29.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BFCL-v3: 55.4, 57.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiIF: 43.2, 58.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-ProX: 38.8, 55.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "INCLUDE: 45.8, 53.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PolyMATH: 14.9, 28.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 67.1 (Instruct), 73.6 (Thinking)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Redux: 81.5, 86.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 55.9, 64.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGPQA: 40.3, 46.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AIME-25: 46.6, 74.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HMMT-25: 30.7, 53.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveBench2024-11-25: 60.9, 68.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval: 82.3, 82.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arena-HardV2: 30.4, 36.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CreativeWritingv3: 72.3, 76.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WritingBench: 82.5, 84.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveCodeBenchv6: 37.9, 51.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BFCL-v3: 63.3, 67.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiIF: 61.5, 73.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-ProX: 59.4, 65.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "INCLUDE: 61.4, 64.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PolyMATH: 28.8, 44.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Pro: 71.6 (Instruct), 77.3 (Thinking)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-Redux: 84.9, 88.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GPQA: 61.9, 69.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGPQA: 44.5, 51.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "AIME-25: 45.9, 80.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HMMT-25: 32.5, 60.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveBench2024-11-25: 62.0, 69.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IFEval: 83.7, 83.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Arena-HardV2: 46.3, 51.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CreativeWritingv3: 77.0, 82.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WritingBench: 83.1, 85.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "LiveCodeBenchv6: 39.3, 58.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "BFCL-v3: 66.3, 63.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MultiIF: 66.8, 75.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMLU-ProX: 65.4, 70.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "INCLUDE: 67.0, 69.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "PolyMATH: 30.4, 47.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 74.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro 60.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista mini 80.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVision 60.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-EN 86.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN 85.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar 72.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HallusionBench 61.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIA-Bench 91.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQAtest 91.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench 787",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUIRBENCH 73.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MME 75.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Design2Code 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OSWorld 31.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar 78.7 (235B-A22B-Thinking), MMBench 89.3 (235B-A22B-Instruct), RealWorldQA 88.9 (235B-A22B-Instruct), MMBench 89.5 (32B-Thinking), RealWorldQA 79.4 (32B-Thinking), MMBench-EN 85.3 (8B-Thinking), HallusionBench +3.0 vs Gemini-2.5-pro, MIA-Bench best overall (Thinking)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203106",
+     "label": "post_training_infrastructure",
+     "value": "Unified reward framework with shared infrastructure (data preprocessing, utility functions, reward manager); Alibaba Cloud's PAI-Lingjun AI Computing Service.",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Qwen 3-VL-30B-A",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 3-VL-30B-A",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-11-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment, next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Instruction tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Reasoning tuning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "30B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 30000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Vision-language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Real-world multimodal intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "2D-RoPE, interpolation of absolute position embeddings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (4 stages) -> Post-training (SFT on long CoT, knowledge distillation, RL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Hybrid reasoning/non-reasoning with explicit mode tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "30B total parameters, 3B activated per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Systematic filtering",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Error correction",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Synthetic augmentation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203095",
+     "label": "tool_calling_format",
+     "value": "XML tags for function calls with JSON arguments; computer_use action format",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP-based merger, DeepStack",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-2 SO-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 76.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro 63.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista mini 81.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVision 65.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-EN 87.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN 85.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar 75.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HallusionBench 66.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIA-Bench 91.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQAtest 91.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench 787",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUIRBENCH 73.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MME 75.2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Design2Code 88.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OSWorld 31.6",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "Qwen 3-VL-235B-A",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Qwen 3-VL-235B-A",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Qwen",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2025-11-26",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Alibaba",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "DeepStack mechanism: injects visual tokens from multiple layers of the vision encoder into corresponding layers of the LLM to preserve rich visual information",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Interleaved MRoPE: redesigns frequency allocation by interleaving temporal, horizontal, and vertical components across embedding dimensions to ensure uniform representation and mitigate spectral bias",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Text-based timestamp tokens: prefixes each video temporal patch with a formatted text string to effectively capture temporal structure.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Multimodal alignment, next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Supervised fine-tuning (SFT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "235B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 235000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Vision-language tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Video understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Document understanding",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Real-world multimodal intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Multimodal intelligence",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Long-CoT cold start data",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "22B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "256K",
+     "datatype": "string"
+    },
+    {
+     "property": "P203087",
+     "label": "context_extension_method",
+     "value": "2D-RoPE, interpolation of absolute position embeddings",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (4 stages) -> Post-training (SFT on long CoT, knowledge distillation, RL)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203089",
+     "label": "reasoning_mode",
+     "value": "Long Chain-of-Thought (CoT)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "235B total parameters, 22B activated per token",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Systematic filtering",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Error correction",
+     "datatype": "string"
+    },
+    {
+     "property": "P203092",
+     "label": "synthetic_data_generation_method",
+     "value": "Synthetic augmentation",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Unified reward framework with task-specific format prompts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Penalty for code-switching",
+     "datatype": "string"
+    },
+    {
+     "property": "P203094",
+     "label": "reward_mechanism",
+     "value": "Deterministic verification via rules or code executors",
+     "datatype": "string"
+    },
+    {
+     "property": "P203095",
+     "label": "tool_calling_format",
+     "value": "XML tags for function calls with JSON arguments; computer_use action format",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "MLP-based merger, DeepStack",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "SigLIP-2 SO-400M",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "Qwen3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU 80.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMMU-Pro 69.3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVista mini 85.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MathVision 74.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-EN 88.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMBench-CN 88.6",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MMStar 78.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "HallusionBench 66.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MIA-Bench 92.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DocVQAtest 96.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OCRBench 875",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MUIRBENCH 80.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Video-MME 79.0",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Design2Code 93.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "OSWorld 38.1",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R1911363",
+  "contribution_ids": [
+   "R1911365",
+   "R1911366",
+   "R1911367",
+   "R1911368",
+   "R1911369",
+   "R1911370",
+   "R1925020",
+   "R1925046",
+   "R1925053"
+  ],
+  "new_contribution_ids": [
+   "R1925020",
+   "R1925046",
+   "R1925053"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,2056 @@
+{
+  "arxiv_id": "2404.12387",
+  "status": "completed",
+  "timestamp": "2026-08-29T00:27:18.436771",
+  "steps": {
+    "fetch": "success",
+    "classify": "success",
+    "parse": "success",
+    "extract": "success",
+    "map": "success",
+    "update_orkg": "success"
+  },
+  "paper_metadata": {
+    "arxiv_id": "2404.12387",
+    "title": "Reka Core, Flash, and Edge: A Series of Powerful Multimodal Language Models",
+    "authors": [
+      " Reka Team",
+      "Aitor Ormazabal",
+      "Che Zheng",
+      "Cyprien de Masson d'Autume",
+      "Dani Yogatama",
+      "Deyu Fu",
+      "Donovan Ong",
+      "Eric Chen",
+      "Eugenie Lamprecht",
+      "Hai Pham",
+      "Isaac Ong",
+      "Kaloyan Aleksiev",
+      "Lei Li",
+      "Matthew Henderson",
+      "Max Bain",
+      "Mikel Artetxe",
+      "Nishant Relan",
+      "Piotr Padlewski",
+      "Qi Liu",
+      "Ren Chen",
+      "Samuel Phua",
+      "Yazheng Yang",
+      "Yi Tay",
+      "Yuqi Wang",
+      "Zhongkai Zhu",
+      "Zhihui Xie"
+    ],
+    "abstract": "We introduce Reka Core, Flash, and Edge, a series of powerful multimodal language models trained from scratch by Reka. Reka models are able to process and reason with text, images, video, and audio inputs. This technical report discusses details of training some of these models and provides comprehensive evaluation results. We show that Reka Edge and Reka Flash are not only state-of-the-art but also outperform many much larger models, delivering outsized values for their respective compute class. Meanwhile, our most capable and largest model, Reka Core, approaches the best frontier models on both automatic evaluations and blind human evaluations. On image question answering benchmarks (e.g. MMMU, VQAv2), Core performs competitively to GPT4-V. Meanwhile, on multimodal chat, Core ranks as the second most preferred model under a blind third-party human evaluation setup, outperforming other models such as Claude 3 Opus. On text benchmarks, Core not only performs competitively to other frontier models on a set of well-established benchmarks (e.g. MMLU, GSM8K) but also outperforms GPT4-0613 on human evaluation. On video question answering (Perception-Test), Core outperforms Gemini Ultra. Models are shipped in production at http://chat.reka.ai . A showcase of non cherry picked qualitative examples can also be found at http://showcase.reka.ai .",
+    "published": "2024-04-18T17:59:48+00:00",
+    "updated": "2024-04-18T17:59:48+00:00",
+    "doi": null,
+    "primary_category": "cs.CL",
+    "categories": [
+      "cs.CL",
+      "cs.CV"
+    ],
+    "pdf_url": "https://arxiv.org/pdf/2404.12387v1",
+    "entry_id": "http://arxiv.org/abs/2404.12387v1",
+    "pdf_path": "data/papers/2404.12387.pdf"
+  },
+  "classification": {
+    "is_valid": true,
+    "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+  },
+  "text_length": 41288,
+  "word_count": 1801,
+  "models_extracted": 6,
+  "extraction_data": [
+    {
+      "model_name": "Reka Edge",
+      "parameters": "7B",
+      "parameters_millions": 7000,
+      "model_family": "Reka",
+      "date_created": "2024-04-18",
+      "organization": "Reka",
+      "innovation": "Modular encoder-decoder architecture supporting multimodal inputs (image, text, video, audio) with text output; curriculum-based pretraining across multiple stages; reverse instruction tuning for long documents; integrated tool-use/function calling capabilities.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Multimodal data (images, videos, documents, webpages); multilingual Wikipedia (110 languages); ~15% explicitly multilingual data (32 languages tier-weighted)",
+      "finetuning_task": null,
+      "optimizer": null,
+      "hardware_used": "Nvidia H100, Nvidia A100",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multimodal language modeling, long-context understanding, tool use",
+      "application": "Retrieval, long document tasks, function calling (web search, code execution), multimodal understanding",
+      "paper_title": "Reka Core, Flash, and Edge: A Series of Powerful Multimodal Language Models",
+      "training_corpus_size": "4.5T tokens",
+      "finetuning_data": null,
+      "tokenizer": "SentencePiece (100K vocab based on tiktoken)",
+      "supported_language": "German, Chinese, Japanese, French, Korean, Spanish, Italian, Arabic, Hindi, Indonesian, Vietnamese, Thai, Czech, Dutch, Finnish, Bulgarian, Portuguese, Tamil, Persian, Greek, Russian, Turkish, Telugu, Burmese, Swahili, Urdu, Estonian, Malay, Basque, Swedish, Norwegian",
+      "hardware_description": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Grouped Query Attention (GQA)",
+      "context_length_max": "64K",
+      "context_extension_method": null,
+      "training_pipeline": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": "Reverse instruction tuning from long documents",
+      "rl_algorithm": null,
+      "reward_mechanism": null,
+      "tool_calling_format": "Text output invokes function calls (web search, code execution)",
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Modular encoder-decoder supporting multimodal input",
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU 5-shot: 65.7; GSM8K: 66.2; MATH 4-shot: 23.2; HumanEval 0-shot: 54.3; MedMCQA: 52.6; PubMedQA: 71.6; MMLU(Medical): 65.7; XQuAD 0-shot: 54.2; TydiQA 0-shot: 61.5; TydiQA 0-shot (w/o context): 6.9; Belebele 0-shot: 37.1",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": null
+    },
+    {
+      "model_name": "Reka Flash",
+      "parameters": "21B",
+      "parameters_millions": 21000,
+      "model_family": "Reka",
+      "date_created": "2024-04-18",
+      "organization": "Reka",
+      "innovation": "Modular encoder-decoder architecture supporting multimodal inputs (image, text, video, audio) with text output; curriculum-based pretraining across multiple stages; reverse instruction tuning for long documents; integrated tool-use/function calling capabilities.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Multimodal data (images, videos, documents, webpages); multilingual Wikipedia (110 languages); ~15% explicitly multilingual data (32 languages tier-weighted)",
+      "finetuning_task": "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)",
+      "optimizer": null,
+      "hardware_used": "Nvidia H100, Nvidia A100",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multimodal language modeling, long-context understanding, tool use",
+      "application": "Retrieval, long document tasks, function calling (web search, code execution), multimodal understanding",
+      "paper_title": "Reka Core, Flash, and Edge: A Series of Powerful Multimodal Language Models",
+      "training_corpus_size": "5T tokens",
+      "finetuning_data": "Proprietary and publicly available data",
+      "tokenizer": "SentencePiece (100K vocab based on tiktoken)",
+      "supported_language": "German, Chinese, Japanese, French, Korean, Spanish, Italian, Arabic, Hindi, Indonesian, Vietnamese, Thai, Czech, Dutch, Finnish, Bulgarian, Portuguese, Tamil, Persian, Greek, Russian, Turkish, Telugu, Burmese, Swahili, Urdu, Estonian, Malay, Basque, Swedish, Norwegian",
+      "hardware_description": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Grouped Query Attention (GQA)",
+      "context_length_max": "128K",
+      "context_extension_method": null,
+      "training_pipeline": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": "Reverse instruction tuning from long documents",
+      "rl_algorithm": "PPO",
+      "reward_mechanism": "Same family of Reka models as the reward model",
+      "tool_calling_format": "Text output invokes function calls (web search, code execution)",
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Modular encoder-decoder supporting multimodal input",
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU 5-shot: 75.9; GSM8K: 85.8; MATH 4-shot: 29.6; HumanEval 0-shot: 72.0; MMMU(vision) 0-shot: 53.3; VQAv2 0-shot: 78.4; Perception-test 0-shot: 56.4; MedMCQA: 71.3; PubMedQA: 69.0; MMLU(Medical): 79.5; MoviePlots: 79.7; ToSContract: 90.0; MMLU: 75.9; HumanEval: 72.0; GPQA: 34.0; MMMU: 53.3; VQAv2: 78.4; Perception-test: 56.4",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Custom inference stack for text and multi-modality running on a combination of A10s and A100s, managed via Kubernetes"
+    },
+    {
+      "model_name": "Reka Core",
+      "parameters": "70B",
+      "parameters_millions": 70000,
+      "model_family": "Reka",
+      "date_created": "2024-04-18",
+      "organization": "Reka",
+      "innovation": "A new series of powerful multimodal language models. Core approaches frontier-class models on both human evaluation and automatic benchmarks.",
+      "pretraining_architecture": "Decoder",
+      "pretraining_task": "Next-token prediction",
+      "pretraining_corpus": "Multimodal data (images, videos, documents, webpages); multilingual Wikipedia (110 languages); ~15% explicitly multilingual data (32 languages tier-weighted)",
+      "finetuning_task": "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)",
+      "optimizer": null,
+      "hardware_used": "Nvidia H100, Nvidia A100",
+      "extension": null,
+      "blog_post": null,
+      "license": null,
+      "research_problem": "Multimodal language understanding and generation",
+      "application": "Long context question answering, medical reasoning, general vision-language tasks",
+      "paper_title": "Reka Core, Flash, and Edge: A Series of Powerful Multimodal Language Models",
+      "training_corpus_size": null,
+      "finetuning_data": "Proprietary and publicly available data",
+      "tokenizer": "SentencePiece (100K vocab based on tiktoken)",
+      "supported_language": "German, Chinese, Japanese, French, Korean, Spanish, Italian, Arabic, Hindi, Indonesian, Vietnamese, Thai, Czech, Dutch, Finnish, Bulgarian, Portuguese, Tamil, Persian, Greek, Russian, Turkish, Telugu, Burmese, Swahili, Urdu, Estonian, Malay, Basque, Swedish, Norwegian",
+      "hardware_description": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+      "carbon_emitted": null,
+      "source_code": null,
+      "context_length": null,
+      "activated_parameters": null,
+      "attention_mechanism": "Grouped Query Attention (GQA)",
+      "context_length_max": "128K",
+      "context_extension_method": null,
+      "training_pipeline": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+      "reasoning_mode": null,
+      "moe_configuration": null,
+      "quantization_precision": "bfloat16",
+      "synthetic_data_generation_method": "Reverse instruction tuning from long documents",
+      "rl_algorithm": "PPO",
+      "reward_mechanism": "Same family of Reka models as the reward model",
+      "tool_calling_format": "Text output invokes function calls (web search, code execution)",
+      "training_environment_scale": null,
+      "safety_evaluation_protocol": null,
+      "safety_defect_rate": null,
+      "fusion_architecture": "Modular encoder-decoder supporting multimodal input",
+      "vision_encoder": null,
+      "base_model": null,
+      "optimizer_innovation": null,
+      "benchmark_result": "MMLU: 83.2; GSM8K: 92.2; HumanEval: 76.8; GPQA: 38.2; MMMU: 56.3; VQAv2: 78.1; Perception-test: 59.3; MMLU 5-shot: 75.9; GSM8K: 85.8; MATH 4-shot: 29.6; HumanEval 0-shot: 72.0; MMMU(vision) 0-shot: 56.3; MedMCQA: 80.6; PubMedQA: 74.6; MMLU(Medical): 88.3; MoviePlots: 83.6; ToSContract: 87.5",
+      "weight_clipping_mechanism": null,
+      "number_of_attention_heads": null,
+      "post_training_infrastructure": "Custom inference stack for text and multi-modality running on a combination of A10s and A100s, managed via Kubernetes"
+    }
+  ],
+  "models_after_selection": 6,
+  "models_after_merge": 3,
+  "validated_rows": {
+    "Reka Edge": {
+      "application": [
+        "Retrieval",
+        "long document tasks",
+        "function calling (web search, code execution)",
+        "multimodal understanding"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA)"
+      ],
+      "fusion_architecture": [
+        "Modular encoder-decoder supporting multimodal input"
+      ],
+      "hardware_used": [
+        "Nvidia H100, Nvidia A100"
+      ],
+      "model_family": [
+        "Reka"
+      ],
+      "model_name": [
+        "Reka Edge"
+      ],
+      "organization": [
+        "Reka"
+      ],
+      "parameters": [
+        "7B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "multilingual Wikipedia (110 languages)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "research_problem": [
+        "Multimodal language modeling",
+        "long-context understanding",
+        "tool use"
+      ],
+      "supported_language": [
+        "German",
+        "Chinese",
+        "Japanese",
+        "French",
+        "Korean",
+        "Spanish",
+        "Italian",
+        "Arabic",
+        "Hindi",
+        "Indonesian",
+        "Vietnamese",
+        "Thai",
+        "Czech",
+        "Dutch",
+        "Finnish",
+        "Bulgarian",
+        "Portuguese",
+        "Tamil",
+        "Persian",
+        "Greek",
+        "Russian",
+        "Turkish",
+        "Telugu",
+        "Burmese",
+        "Swahili",
+        "Urdu",
+        "Estonian",
+        "Malay",
+        "Basque",
+        "Swedish",
+        "Norwegian"
+      ],
+      "synthetic_data_generation_method": [
+        "Reverse instruction tuning from long documents"
+      ],
+      "tool_calling_format": []
+    },
+    "Reka Flash": {
+      "application": [
+        "Retrieval",
+        "long document tasks",
+        "function calling (web search, code execution)",
+        "multimodal understanding"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA)"
+      ],
+      "finetuning_data": [],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)"
+      ],
+      "fusion_architecture": [
+        "Modular encoder-decoder supporting multimodal input"
+      ],
+      "hardware_used": [
+        "Nvidia H100, Nvidia A100"
+      ],
+      "model_family": [
+        "Reka"
+      ],
+      "model_name": [
+        "Reka Flash"
+      ],
+      "organization": [
+        "Reka"
+      ],
+      "parameters": [
+        "21B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "multilingual Wikipedia (110 languages)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "research_problem": [
+        "Multimodal language modeling",
+        "long-context understanding",
+        "tool use"
+      ],
+      "reward_mechanism": [],
+      "rl_algorithm": [
+        "PPO"
+      ],
+      "supported_language": [
+        "German",
+        "Chinese",
+        "Japanese",
+        "French",
+        "Korean",
+        "Spanish",
+        "Italian",
+        "Arabic",
+        "Hindi",
+        "Indonesian",
+        "Vietnamese",
+        "Thai",
+        "Czech",
+        "Dutch",
+        "Finnish",
+        "Bulgarian",
+        "Portuguese",
+        "Tamil",
+        "Persian",
+        "Greek",
+        "Russian",
+        "Turkish",
+        "Telugu",
+        "Burmese",
+        "Swahili",
+        "Urdu",
+        "Estonian",
+        "Malay",
+        "Basque",
+        "Swedish",
+        "Norwegian"
+      ],
+      "synthetic_data_generation_method": [
+        "Reverse instruction tuning from long documents"
+      ],
+      "tool_calling_format": []
+    },
+    "Reka Core": {
+      "application": [
+        "Long context question answering",
+        "medical reasoning",
+        "general vision-language tasks"
+      ],
+      "attention_mechanism": [
+        "Grouped Query Attention (GQA)"
+      ],
+      "finetuning_data": [],
+      "finetuning_task": [
+        "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)"
+      ],
+      "fusion_architecture": [
+        "Modular encoder-decoder supporting multimodal input"
+      ],
+      "hardware_used": [
+        "Nvidia H100, Nvidia A100"
+      ],
+      "model_family": [
+        "Reka"
+      ],
+      "model_name": [
+        "Reka Core"
+      ],
+      "organization": [
+        "Reka"
+      ],
+      "parameters": [
+        "70B"
+      ],
+      "pretraining_architecture": [
+        "Decoder"
+      ],
+      "pretraining_corpus": [
+        "multilingual Wikipedia (110 languages)"
+      ],
+      "pretraining_task": [
+        "Next-token prediction"
+      ],
+      "quantization_precision": [
+        "bfloat16"
+      ],
+      "research_problem": [
+        "Multimodal language understanding and generation"
+      ],
+      "reward_mechanism": [],
+      "rl_algorithm": [
+        "PPO"
+      ],
+      "supported_language": [
+        "German",
+        "Chinese",
+        "Japanese",
+        "French",
+        "Korean",
+        "Spanish",
+        "Italian",
+        "Arabic",
+        "Hindi",
+        "Indonesian",
+        "Vietnamese",
+        "Thai",
+        "Czech",
+        "Dutch",
+        "Finnish",
+        "Bulgarian",
+        "Portuguese",
+        "Tamil",
+        "Persian",
+        "Greek",
+        "Russian",
+        "Turkish",
+        "Telugu",
+        "Burmese",
+        "Swahili",
+        "Urdu",
+        "Estonian",
+        "Malay",
+        "Basque",
+        "Swedish",
+        "Norwegian"
+      ],
+      "synthetic_data_generation_method": [
+        "Reverse instruction tuning from long documents"
+      ],
+      "tool_calling_format": []
+    }
+  },
+  "semantic_validation": {
+    "enabled": true,
+    "layers": {
+      "rules": true,
+      "cache": true,
+      "llm": true
+    },
+    "models": {
+      "Reka Edge": {
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (images, videos, documents, webpages)",
+            "multilingual Wikipedia (110 languages)",
+            "~15% explicitly multilingual data (32 languages tier-weighted)"
+          ],
+          "accepted": [
+            "multilingual Wikipedia (110 languages)"
+          ],
+          "dropped": [
+            {
+              "value": "Multimodal data (images, videos, documents, webpages)",
+              "reason": "Lists data types rather than naming a specific corpus or dataset"
+            },
+            {
+              "value": "~15% explicitly multilingual data (32 languages tier-weighted)",
+              "reason": "Describes data composition/proportion rather than naming a specific corpus"
+            }
+          ]
+        },
+        "tool_calling_format": {
+          "candidates": [
+            "Text output invokes function calls (web search, code execution)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Text output invokes function calls (web search, code execution)",
+              "reason": "Describes the invocation behavior rather than the structural format or protocol for tool calls"
+            }
+          ]
+        }
+      },
+      "Reka Flash": {
+        "finetuning_data": {
+          "candidates": [
+            "Proprietary and publicly available data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Proprietary and publicly available data",
+              "reason": "Vague description of data sources, not a specific dataset or domain"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (images, videos, documents, webpages)",
+            "multilingual Wikipedia (110 languages)",
+            "~15% explicitly multilingual data (32 languages tier-weighted)"
+          ],
+          "accepted": [
+            "multilingual Wikipedia (110 languages)"
+          ],
+          "dropped": [
+            {
+              "value": "Multimodal data (images, videos, documents, webpages)",
+              "reason": "Lists data types rather than naming a specific corpus or dataset"
+            },
+            {
+              "value": "~15% explicitly multilingual data (32 languages tier-weighted)",
+              "reason": "Describes data composition/proportion rather than naming a specific corpus"
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Same family of Reka models as the reward model"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Same family of Reka models as the reward model",
+              "reason": "Identifies the model used rather than describing the reward calculation method or mechanism"
+            }
+          ]
+        },
+        "tool_calling_format": {
+          "candidates": [
+            "Text output invokes function calls (web search, code execution)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Text output invokes function calls (web search, code execution)",
+              "reason": "Describes the invocation behavior rather than the structural format or protocol for tool calls"
+            }
+          ]
+        }
+      },
+      "Reka Core": {
+        "finetuning_data": {
+          "candidates": [
+            "Proprietary and publicly available data"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Proprietary and publicly available data",
+              "reason": "Vague description of data sources, not a specific dataset or domain"
+            }
+          ]
+        },
+        "pretraining_corpus": {
+          "candidates": [
+            "Multimodal data (images, videos, documents, webpages)",
+            "multilingual Wikipedia (110 languages)",
+            "~15% explicitly multilingual data (32 languages tier-weighted)"
+          ],
+          "accepted": [
+            "multilingual Wikipedia (110 languages)"
+          ],
+          "dropped": [
+            {
+              "value": "Multimodal data (images, videos, documents, webpages)",
+              "reason": "Lists data types rather than naming a specific corpus or dataset"
+            },
+            {
+              "value": "~15% explicitly multilingual data (32 languages tier-weighted)",
+              "reason": "Describes data composition/proportion rather than naming a specific corpus"
+            }
+          ]
+        },
+        "reward_mechanism": {
+          "candidates": [
+            "Same family of Reka models as the reward model"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Same family of Reka models as the reward model",
+              "reason": "Identifies the model used rather than describing the reward calculation method or mechanism"
+            }
+          ]
+        },
+        "tool_calling_format": {
+          "candidates": [
+            "Text output invokes function calls (web search, code execution)"
+          ],
+          "accepted": [],
+          "dropped": [
+            {
+              "value": "Text output invokes function calls (web search, code execution)",
+              "reason": "Describes the invocation behavior rather than the structural format or protocol for tool calls"
+            }
+          ]
+        }
+      }
+    },
+    "counts": {
+      "kept": 151,
+      "dropped": 13,
+      "llm_calls": 1,
+      "values_sent_to_llm": 22
+    }
+  },
+  "contributions": [
+    {
+      "label": "Reka Edge",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Reka Edge",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04-18",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Modular encoder-decoder architecture supporting multimodal inputs (image, text, video, audio) with text output",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Curriculum-based pretraining across multiple stages",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Reverse instruction tuning for long documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Integrated tool-use/function calling capabilities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multilingual Wikipedia (110 languages)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "SentencePiece (100K vocab based on tiktoken)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "7B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 7000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia H100, Nvidia A100",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long document tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Function calling (web search, code execution)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long-context understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Tool use",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "4.5T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Indonesian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Vietnamese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Thai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Czech",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Dutch",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Finnish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bulgarian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Tamil",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Persian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Greek",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Telugu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Burmese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swahili",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Urdu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Estonian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Malay",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Basque",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swedish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Norwegian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "64K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Reverse instruction tuning from long documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Modular encoder-decoder supporting multimodal input",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU 5-shot: 65.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 66.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH 4-shot: 23.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval 0-shot: 54.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MedMCQA: 52.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PubMedQA: 71.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU(Medical): 65.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "XQuAD 0-shot: 54.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TydiQA 0-shot: 61.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "TydiQA 0-shot (w/o context): 6.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Belebele 0-shot: 37.1",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Reka Flash",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Reka Flash",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04-18",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Modular encoder-decoder architecture supporting multimodal inputs (image, text, video, audio) with text output",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Curriculum-based pretraining across multiple stages",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Reverse instruction tuning for long documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "Integrated tool-use/function calling capabilities.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multilingual Wikipedia (110 languages)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "SentencePiece (100K vocab based on tiktoken)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "21B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 21000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia H100, Nvidia A100",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Retrieval",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long document tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Function calling (web search, code execution)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Multimodal understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language modeling",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Long-context understanding",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Tool use",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163013",
+          "label": "training_corpus_size",
+          "value": "5T tokens",
+          "datatype": "string"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Indonesian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Vietnamese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Thai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Czech",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Dutch",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Finnish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bulgarian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Tamil",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Persian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Greek",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Telugu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Burmese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swahili",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Urdu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Estonian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Malay",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Basque",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swedish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Norwegian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "128K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Reverse instruction tuning from long documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "PPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Modular encoder-decoder supporting multimodal input",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU 5-shot: 75.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 85.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH 4-shot: 29.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval 0-shot: 72.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU(vision) 0-shot: 53.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2 0-shot: 78.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Perception-test 0-shot: 56.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MedMCQA: 71.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PubMedQA: 69.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU(Medical): 79.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MoviePlots: 79.7",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ToSContract: 90.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 75.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 72.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 34.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 53.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 78.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Perception-test: 56.4",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Custom inference stack for text and multi-modality running on a combination of A10s and A100s, managed via Kubernetes",
+          "datatype": "string"
+        }
+      ]
+    },
+    {
+      "label": "Reka Core",
+      "template": "R609825",
+      "properties": [
+        {
+          "property": "HAS_MODEL",
+          "label": "model_name",
+          "value": "Reka Core",
+          "datatype": "resource"
+        },
+        {
+          "property": "P7121",
+          "label": "model_family",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P49020",
+          "label": "date_created",
+          "value": "2024-04-18",
+          "datatype": "date"
+        },
+        {
+          "property": "P18097",
+          "label": "organization",
+          "value": "Reka",
+          "datatype": "resource"
+        },
+        {
+          "property": "P15156",
+          "label": "innovation",
+          "value": "A new series of powerful multimodal language models. Core approaches frontier-class models on both human evaluation and automatic benchmarks.",
+          "datatype": "string"
+        },
+        {
+          "property": "P103000",
+          "label": "pretraining_architecture",
+          "value": "Decoder",
+          "datatype": "resource"
+        },
+        {
+          "property": "P103001",
+          "label": "pretraining_task",
+          "value": "Next-token prediction",
+          "datatype": "resource"
+        },
+        {
+          "property": "P41655",
+          "label": "pretraining_corpus",
+          "value": "Multilingual Wikipedia (110 languages)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P116000",
+          "label": "finetuning_task",
+          "value": "Supervised fine-tuning (SFT) and Reinforcement Learning from Human Feedback (RLHF)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P43065",
+          "label": "tokenizer",
+          "value": "SentencePiece (100K vocab based on tiktoken)",
+          "datatype": "string"
+        },
+        {
+          "property": "P103002",
+          "label": "parameters",
+          "value": "70B",
+          "datatype": "string"
+        },
+        {
+          "property": "P110076",
+          "label": "parameters_millions",
+          "value": 70000,
+          "datatype": "integer"
+        },
+        {
+          "property": "P119138",
+          "label": "hardware_used",
+          "value": "Nvidia H100, Nvidia A100",
+          "datatype": "resource"
+        },
+        {
+          "property": "P119137",
+          "label": "hardware_description",
+          "value": "Clusters from a mixture of vendors, peak ~2.5K H100s and 2.5K A100s",
+          "datatype": "string"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Long context question answering",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "Medical reasoning",
+          "datatype": "resource"
+        },
+        {
+          "property": "P37544",
+          "label": "application",
+          "value": "General vision-language tasks",
+          "datatype": "resource"
+        },
+        {
+          "property": "P32",
+          "label": "research_problem",
+          "value": "Multimodal language understanding and generation",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "German",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Chinese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Japanese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "French",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Korean",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Spanish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Italian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Arabic",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Hindi",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Indonesian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Vietnamese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Thai",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Czech",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Dutch",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Finnish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Bulgarian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Portuguese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Tamil",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Persian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Greek",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Russian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Turkish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Telugu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Burmese",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swahili",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Urdu",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Estonian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Malay",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Basque",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Swedish",
+          "datatype": "resource"
+        },
+        {
+          "property": "P163010",
+          "label": "supported_language",
+          "value": "Norwegian",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203085",
+          "label": "attention_mechanism",
+          "value": "Grouped Query Attention (GQA)",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203086",
+          "label": "context_length_max",
+          "value": "128K",
+          "datatype": "string"
+        },
+        {
+          "property": "P203088",
+          "label": "training_pipeline",
+          "value": "Curriculum-based pretraining with multiple stages, different mixture distributions, context lengths, and objectives",
+          "datatype": "string"
+        },
+        {
+          "property": "P203091",
+          "label": "quantization_precision",
+          "value": "Bfloat16",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203092",
+          "label": "synthetic_data_generation_method",
+          "value": "Reverse instruction tuning from long documents",
+          "datatype": "string"
+        },
+        {
+          "property": "P203093",
+          "label": "rl_algorithm",
+          "value": "PPO",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203099",
+          "label": "fusion_architecture",
+          "value": "Modular encoder-decoder supporting multimodal input",
+          "datatype": "resource"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU: 83.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 92.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval: 76.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GPQA: 38.2",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU: 56.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "VQAv2: 78.1",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "Perception-test: 59.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU 5-shot: 75.9",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "GSM8K: 85.8",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MATH 4-shot: 29.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "HumanEval 0-shot: 72.0",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMMU(vision) 0-shot: 56.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MedMCQA: 80.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "PubMedQA: 74.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MMLU(Medical): 88.3",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "MoviePlots: 83.6",
+          "datatype": "string"
+        },
+        {
+          "property": "P203103",
+          "label": "benchmark_result",
+          "value": "ToSContract: 87.5",
+          "datatype": "string"
+        },
+        {
+          "property": "P203106",
+          "label": "post_training_infrastructure",
+          "value": "Custom inference stack for text and multi-modality running on a combination of A10s and A100s, managed via Kubernetes",
+          "datatype": "string"
+        }
+      ]
+    }
+  ],
+  "orkg_results": {
+    "paper_id": "R1926036",
+    "contribution_ids": [
+      "R1926038",
+      "R1926039",
+      "R1926040"
+    ],
+    "new_contribution_ids": [
+      "R1926038",
+      "R1926039",
+      "R1926040"
+    ],
+    "comparison_updated": null
+  }
+}

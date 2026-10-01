@@ -1,0 +1,1001 @@
+{
+ "arxiv_id": "2112.04426",
+ "status": "completed",
+ "timestamp": "2026-08-25T03:07:01.233316",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2112.04426",
+  "title": "Improving language models by retrieving from trillions of tokens",
+  "authors": [
+   "Sebastian Borgeaud",
+   "Arthur Mensch",
+   "Jordan Hoffmann",
+   "Trevor Cai",
+   "Eliza Rutherford",
+   "Katie Millican",
+   "George van den Driessche",
+   "Jean-Baptiste Lespiau",
+   "Bogdan Damoc",
+   "Aidan Clark",
+   "Diego de Las Casas",
+   "Aurelia Guy",
+   "Jacob Menick",
+   "Roman Ring",
+   "Tom Hennigan",
+   "Saffron Huang",
+   "Loren Maggiore",
+   "Chris Jones",
+   "Albin Cassirer",
+   "Andy Brock",
+   "Michela Paganini",
+   "Geoffrey Irving",
+   "Oriol Vinyals",
+   "Simon Osindero",
+   "Karen Simonyan",
+   "Jack W. Rae",
+   "Erich Elsen",
+   "Laurent Sifre"
+  ],
+  "abstract": "We enhance auto-regressive language models by conditioning on document chunks retrieved from a large corpus, based on local similarity with preceding tokens. With a $2$ trillion token database, our Retrieval-Enhanced Transformer (RETRO) obtains comparable performance to GPT-3 and Jurassic-1 on the Pile, despite using 25$\\times$ fewer parameters. After fine-tuning, RETRO performance translates to downstream knowledge-intensive tasks such as question answering. RETRO combines a frozen Bert retriever, a differentiable encoder and a chunked cross-attention mechanism to predict tokens based on an order of magnitude more data than what is typically consumed during training. We typically train RETRO from scratch, yet can also rapidly RETROfit pre-trained transformers with retrieval and still achieve good performance. Our work opens up new avenues for improving language models through explicit memory at unprecedented scale.",
+  "published": "2021-12-08T17:32:34+00:00",
+  "updated": "2022-02-07T21:07:59+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2112.04426v3",
+  "entry_id": "http://arxiv.org/abs/2112.04426v3",
+  "pdf_path": "data/papers/2112.04426.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 158574,
+ "word_count": 19181,
+ "models_extracted": 24,
+ "extraction_data": [
+  {
+   "model_name": "Retro",
+   "parameters": "132M, 172M, 247M, 250M, 368M, 425M, 564M, 1.1B, 1.3B, 1.5B, 7B, 7.5B",
+   "parameters_millions": 7500,
+   "model_family": "Retro",
+   "date_created": "2021-12-08",
+   "organization": "Google",
+   "innovation": "Chunked cross-attention mechanism: retrieves relevant passages from a massive external database (trillions of tokens) during generation, decoupling model capacity from storage and enabling scaling via data rather than parameters; Retro-fitting: randomly initializing and training only the chunked cross-attention and retrieval encoder weights to fine-tune any baseline transformer into a retrieval-enhanced transformer, quickly recovering and surpassing non-retrieval performance with only 3% the tokens of full pre-training.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "C4, Curation Corpus, Wikipedia, The Pile",
+   "finetuning_task": "Supervised fine-tuning for question answering",
+   "optimizer": "AdamW",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Improving language models by retrieving from trillions of tokens",
+   "application": "Language modeling, knowledge-intensive natural language processing",
+   "paper_title": "Improving language models by retrieving from trillions of tokens",
+   "training_corpus_size": "over 5 trillion tokens",
+   "finetuning_data": "Natural Questions, Dpr",
+   "tokenizer": "SentencePiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/deepmind/retro",
+   "context_length": null,
+   "activated_parameters": "7.5B",
+   "attention_mechanism": "Chunked cross-attention (CCA), Causal self-attention with chunked cross-attention to retrieved neighbor chunks, Chunked cross-attention for retrieval, Chunked cross-attention, Multi-chunk cross-attention, Cross-attention to retrieved neighbours and their continuations, Multi-head self-attention",
+   "context_length_max": "2048",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training with retrieval integrated throughout the process",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "BERT",
+   "optimizer_innovation": null,
+   "benchmark_result": "Wikitext103 valid: 10.23, test: 3.92; Wikitext103 valid: 18.97, test: 18.46; Natural Questions Exact Match: 45.5; Wikitext103 valid perplexity 18.46; C4 bytes-per-bits; C4Eval bpb: 0.82 (172M), 0.77 (425M), 0.71 (1.5B), 0.66 (7.5B); SOTA on 10 of 11 datasets (e.g., LAMBADA, WikiText-103, HellaSwag, PIQA, WinoGrande, OpenBookQA, BoolQ)",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "RETRO",
+   "parameters": "125M, 269M, 420M, 2.7B, 11B, 13.7B, 137B",
+   "parameters_millions": 137000,
+   "model_family": "RETRO",
+   "date_created": "2021-12-08",
+   "organization": "Google",
+   "innovation": "Retrieval-augmented language model that uses a learned retriever to fetch relevant document chunks from a massive corpus to condition the decoder, replacing the need to store all knowledge in parameters; uses Local Context Prediction (LCP) to align retrieved representations with decoder hidden states for efficient training.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Causal language modeling",
+   "pretraining_corpus": "Wikipedia, C4, BooksCorpus, ArXiv, PubMed, OpenWebText, Common Crawl",
+   "finetuning_task": null,
+   "optimizer": "AdamW",
+   "hardware_used": "TPUv3",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Improving language models by retrieving from trillions of tokens",
+   "application": "Text generation, open-domain question answering, knowledge-intensive NLP",
+   "paper_title": "Improving language models by retrieving from trillions of tokens",
+   "training_corpus_size": "1.44 trillion tokens",
+   "finetuning_data": null,
+   "tokenizer": "BPE",
+   "supported_language": "English, Russian, Spanish, Chinese, French, German, Portuguese, Italian, Urdu, Swahili",
+   "hardware_description": "TPUv3 pods",
+   "carbon_emitted": null,
+   "source_code": "https://github.com/deepmind/retro",
+   "context_length": null,
+   "activated_parameters": "2.7B, 11B, 137B (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention with cross-attention to retrieved documents",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on MassiveText",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": null,
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 14,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "Retro": {
+   "application": [
+    "Language modeling",
+    "knowledge-intensive natural language processing"
+   ],
+   "attention_mechanism": [
+    "Chunked cross-attention (CCA)",
+    "Causal self-attention with chunked cross-attention to retrieved neighbor chunks",
+    "Chunked cross-attention for retrieval",
+    "Chunked cross-attention",
+    "Multi-chunk cross-attention",
+    "Cross-attention to retrieved neighbours and their continuations",
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "BERT"
+   ],
+   "finetuning_data": [
+    "Natural Questions",
+    "Dpr"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "Retro"
+   ],
+   "model_name": [
+    "Retro"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "132M",
+    "172M",
+    "247M",
+    "250M",
+    "368M",
+    "425M",
+    "564M",
+    "1.1B",
+    "1.3B",
+    "1.5B",
+    "7B",
+    "7.5B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4",
+    "Wikipedia",
+    "The Pile"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English"
+   ]
+  },
+  "RETRO": {
+   "application": [
+    "Text generation",
+    "open-domain question answering",
+    "knowledge-intensive NLP"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention with cross-attention to retrieved documents"
+   ],
+   "hardware_used": [
+    "TPUv3"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "RETRO"
+   ],
+   "model_name": [
+    "RETRO"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "125M",
+    "269M",
+    "420M",
+    "2.7B",
+    "11B",
+    "13.7B",
+    "137B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "Wikipedia",
+    "C4",
+    "BooksCorpus",
+    "ArXiv",
+    "PubMed",
+    "OpenWebText",
+    "Common Crawl"
+   ],
+   "pretraining_task": [
+    "Causal language modeling"
+   ],
+   "research_problem": [],
+   "supported_language": [
+    "English",
+    "Russian",
+    "Spanish",
+    "Chinese",
+    "French",
+    "German",
+    "Portuguese",
+    "Italian",
+    "Urdu",
+    "Swahili"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Retro": {
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning for question answering"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for question answering",
+       "reason": "Describes the fine-tuning process rather than naming the specific task itself"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "C4",
+      "Curation Corpus",
+      "Wikipedia",
+      "The Pile"
+     ],
+     "accepted": [
+      "C4",
+      "Wikipedia",
+      "The Pile"
+     ],
+     "dropped": [
+      {
+       "value": "Curation Corpus",
+       "reason": "Vague descriptive phrase rather than a named, identifiable dataset or corpus"
+      }
+     ]
+    },
+    "research_problem": {
+     "candidates": [
+      "Improving language models by retrieving from trillions of tokens"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Improving language models by retrieving from trillions of tokens",
+       "reason": "Describes a solution or goal rather than naming the research problem as a short noun phrase"
+      }
+     ]
+    }
+   },
+   "RETRO": {
+    "research_problem": {
+     "candidates": [
+      "Improving language models by retrieving from trillions of tokens"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Improving language models by retrieving from trillions of tokens",
+       "reason": "Describes a solution or goal rather than naming the research problem as a short noun phrase"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 72,
+   "dropped": 4,
+   "llm_calls": 1,
+   "values_sent_to_llm": 25
+  }
+ },
+ "contributions": [
+  {
+   "label": "Retro",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Retro",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "Retro",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-12-08",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Chunked cross-attention mechanism: retrieves relevant passages from a massive external database (trillions of tokens) during generation, decoupling model capacity from storage and enabling scaling via data rather than parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Retro-fitting: randomly initializing and training only the chunked cross-attention and retrieval encoder weights to fine-tune any baseline transformer into a retrieval-enhanced transformer, quickly recovering and surpassing non-retrieval performance with only 3% the tokens of full pre-training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "The Pile",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "132M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "172M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "247M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "250M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "368M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "425M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "564M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.3B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "7.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 7500,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-intensive natural language processing",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/deepmind/retro",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "Over 5 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Dpr",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "7.5B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Chunked cross-attention (CCA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Causal self-attention with chunked cross-attention to retrieved neighbor chunks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Chunked cross-attention for retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Chunked cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-chunk cross-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention to retrieved neighbours and their continuations",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "2048",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training with retrieval integrated throughout the process",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "BERT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Wikitext103 valid: 10.23, test: 3.92",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Wikitext103 valid: 18.97, test: 18.46",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions Exact Match: 45.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Wikitext103 valid perplexity 18.46",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C4 bytes-per-bits",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "C4Eval bpb: 0.82 (172M), 0.77 (425M), 0.71 (1.5B), 0.66 (7.5B)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SOTA on 10 of 11 datasets (e.g., LAMBADA, WikiText-103, HellaSwag, PIQA, WinoGrande, OpenBookQA, BoolQ)",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "RETRO",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "RETRO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "RETRO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-12-08",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Retrieval-augmented language model that uses a learned retriever to fetch relevant document chunks from a massive corpus to condition the decoder, replacing the need to store all knowledge in parameters",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses Local Context Prediction (LCP) to align retrieved representations with decoder hidden states for efficient training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Causal language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BooksCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "ArXiv",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "PubMed",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "OpenWebText",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Common Crawl",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "125M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "269M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "420M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "11B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "13.7B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "137B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 137000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUv3",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "TPUv3 pods",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Open-domain question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Knowledge-intensive NLP",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/deepmind/retro",
+     "datatype": "URI"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "1.44 trillion tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Russian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Spanish",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Chinese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "French",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "German",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Portuguese",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Italian",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Urdu",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "Swahili",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "2.7B, 11B, 137B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention with cross-attention to retrieved documents",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on MassiveText",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R461808",
+  "contribution_ids": [
+   "R461809",
+   "R1921577",
+   "R1921588"
+  ],
+  "new_contribution_ids": [
+   "R1921577",
+   "R1921588"
+  ],
+  "comparison_updated": null
+ }
+}

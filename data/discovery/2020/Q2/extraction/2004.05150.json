@@ -1,0 +1,548 @@
+{
+ "arxiv_id": "2004.05150",
+ "status": "completed",
+ "timestamp": "2026-08-24T18:50:32.981638",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2004.05150",
+  "title": "Longformer: The Long-Document Transformer",
+  "authors": [
+   "Iz Beltagy",
+   "Matthew E. Peters",
+   "Arman Cohan"
+  ],
+  "abstract": "Transformer-based models are unable to process long sequences due to their self-attention operation, which scales quadratically with the sequence length. To address this limitation, we introduce the Longformer with an attention mechanism that scales linearly with sequence length, making it easy to process documents of thousands of tokens or longer. Longformer's attention mechanism is a drop-in replacement for the standard self-attention and combines a local windowed attention with a task motivated global attention. Following prior work on long-sequence transformers, we evaluate Longformer on character-level language modeling and achieve state-of-the-art results on text8 and enwik8. In contrast to most prior work, we also pretrain Longformer and finetune it on a variety of downstream tasks. Our pretrained Longformer consistently outperforms RoBERTa on long document tasks and sets new state-of-the-art results on WikiHop and TriviaQA. We finally introduce the Longformer-Encoder-Decoder (LED), a Longformer variant for supporting long document generative sequence-to-sequence tasks, and demonstrate its effectiveness on the arXiv summarization dataset.",
+  "published": "2020-04-10T17:54:09+00:00",
+  "updated": "2020-12-02T17:52:35+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2004.05150v2",
+  "entry_id": "http://arxiv.org/abs/2004.05150v2",
+  "pdf_path": "data/papers/2004.05150.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM architecture and pretraining)"
+ },
+ "text_length": 65399,
+ "word_count": 5643,
+ "models_extracted": 11,
+ "extraction_data": [
+  {
+   "model_name": "Longformer",
+   "parameters": "41M, 102M, 277M",
+   "parameters_millions": 277,
+   "model_family": "Transformer",
+   "date_created": "2020-04-10",
+   "organization": "Allen Institute For Ai",
+   "innovation": "Sliding window attention with increasing window sizes across layers to balance efficiency and representation power; dilated sliding windows on a few heads to attend to distant tokens without sacrificing local context; staged training procedure increasing window size and sequence length across multiple phases; extra position embeddings initialized by copying from RoBERTa to preserve local structure.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Masked language modeling (MLM)",
+   "pretraining_corpus": "BooksCorpus, English Wikipedia, RealNews, Stories",
+   "finetuning_task": "Supervised fine-tuning on downstream tasks",
+   "optimizer": "Adam",
+   "hardware_used": "modern GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Processing long sequences/documents efficiently with linear scaling attention",
+   "application": "Long document classification, question answering, coreference resolution, character-level language modeling, summarization",
+   "paper_title": "Longformer: The Long-Document Transformer",
+   "training_corpus_size": null,
+   "finetuning_data": "SQuAD, MRQA, T12, enwik8",
+   "tokenizer": "RoBERTa wordpiece tokenizer",
+   "supported_language": "English",
+   "hardware_description": "4 GPUs for small model, 8 GPUs for large model",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": null,
+   "attention_mechanism": "Sparse attention (sliding window, dilated sliding window, global attention), Dilated sliding window attention, global attention, Sliding window attention with increasing window sizes across layers; dilated sliding windows on 2 heads, Sliding window attention, global attention tokens, sparse diagonal attention",
+   "context_length_max": "4,096",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training (MLM) -> Fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "RoBERTa",
+   "optimizer_innovation": null,
+   "benchmark_result": "State-of-the-art on text8 and enwik8; outperforms RoBERTa on document-level tasks; T12: 1.04 BPC; enwik8: 1.02 BPC; text8 BPC 1.10; enwik8 BPC 1.00; DevBPC base 1.24, large 1.02",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "Longformer": {
+   "application": [
+    "Long document classification",
+    "question answering",
+    "coreference resolution",
+    "character-level language modeling",
+    "summarization"
+   ],
+   "attention_mechanism": [
+    "Sparse attention (sliding window, dilated sliding window, global attention)",
+    "Dilated sliding window attention",
+    "global attention",
+    "Sliding window attention with increasing window sizes across layers",
+    "dilated sliding windows on 2 heads",
+    "Sliding window attention",
+    "sparse diagonal attention"
+   ],
+   "base_model": [
+    "RoBERTa"
+   ],
+   "finetuning_data": [
+    "SQuAD",
+    "MRQA",
+    "T12",
+    "enwik8"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "modern GPUs"
+   ],
+   "model_family": [],
+   "model_name": [
+    "Longformer"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "Allen Institute For Ai"
+   ],
+   "parameters": [
+    "41M",
+    "102M",
+    "277M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "BooksCorpus",
+    "English Wikipedia",
+    "RealNews",
+    "Stories"
+   ],
+   "pretraining_task": [
+    "Masked language modeling (MLM)"
+   ],
+   "research_problem": [
+    "Processing long sequences/documents efficiently with linear scaling attention"
+   ],
+   "supported_language": [
+    "English"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "Longformer": {
+    "attention_mechanism": {
+     "candidates": [
+      "Sparse attention (sliding window, dilated sliding window, global attention)",
+      "Dilated sliding window attention",
+      "global attention",
+      "Sliding window attention with increasing window sizes across layers",
+      "dilated sliding windows on 2 heads",
+      "Sliding window attention",
+      "global attention tokens",
+      "sparse diagonal attention"
+     ],
+     "accepted": [
+      "Sparse attention (sliding window, dilated sliding window, global attention)",
+      "Dilated sliding window attention",
+      "global attention",
+      "Sliding window attention with increasing window sizes across layers",
+      "dilated sliding windows on 2 heads",
+      "Sliding window attention",
+      "sparse diagonal attention"
+     ],
+     "dropped": [
+      {
+       "value": "global attention tokens",
+       "reason": "Refers to tokens rather than the attention mechanism/method itself (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised fine-tuning on downstream tasks"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning on downstream tasks",
+       "reason": "Describes a training process/method rather than naming a specific task or objective. (cached)"
+      }
+     ]
+    },
+    "model_family": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "Describes a neural network architecture rather than a model family or lineage (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 32,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 12
+  }
+ },
+ "contributions": [
+  {
+   "label": "Longformer",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "Longformer",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2020-04-10",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Allen Institute For Ai",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Sliding window attention with increasing window sizes across layers to balance efficiency and representation power",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Dilated sliding windows on a few heads to attend to distant tokens without sacrificing local context",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Staged training procedure increasing window size and sequence length across multiple phases",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Extra position embeddings initialized by copying from RoBERTa to preserve local structure.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Masked language modeling (MLM)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "BooksCorpus",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "English Wikipedia",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "RealNews",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Stories",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "RoBERTa wordpiece tokenizer",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "41M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "102M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "277M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 277,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "Modern GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "4 GPUs for small model, 8 GPUs for large model",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Long document classification",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Coreference resolution",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Character-level language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Processing long sequences/documents efficiently with linear scaling attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MRQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "T12",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Enwik8",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention (sliding window, dilated sliding window, global attention)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dilated sliding window attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Global attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sliding window attention with increasing window sizes across layers",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Dilated sliding windows on 2 heads",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sliding window attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse diagonal attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "4,096",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training (MLM) -> Fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "RoBERTa",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "State-of-the-art on text8 and enwik8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Outperforms RoBERTa on document-level tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "T12: 1.04 BPC",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Enwik8: 1.02 BPC",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Text8 BPC 1.10",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Enwik8 BPC 1.00",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "DevBPC base 1.24, large 1.02",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R465243",
+  "contribution_ids": [
+   "R465244",
+   "R465248",
+   "R465254",
+   "R465260",
+   "R465266",
+   "R1920607"
+  ],
+  "new_contribution_ids": [
+   "R1920607"
+  ],
+  "comparison_updated": null
+ }
+}

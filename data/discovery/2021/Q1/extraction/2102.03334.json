@@ -1,0 +1,897 @@
+{
+ "arxiv_id": "2102.03334",
+ "status": "completed",
+ "timestamp": "2026-08-24T22:46:05.863843",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2102.03334",
+  "title": "ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision",
+  "authors": [
+   "Kim, Wonjae",
+   "Son, Bokyung",
+   "Kim, Ildoo"
+  ],
+  "abstract": "",
+  "published": "2021-02-05T00:00:00+00:00",
+  "updated": "2021-02-05T00:00:00+00:00",
+  "doi": null,
+  "primary_category": null,
+  "categories": [],
+  "pdf_url": "https://arxiv.org/pdf/2102.03334",
+  "entry_id": "https://arxiv.org/abs/2102.03334",
+  "source": "arxiv-html-fallback",
+  "pdf_path": "data/papers/2102.03334.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: VLM pretraining)"
+ },
+ "text_length": 49240,
+ "word_count": 3635,
+ "models_extracted": 6,
+ "extraction_data": [
+  {
+   "model_name": "ViLT-B/32",
+   "parameters": "240M",
+   "parameters_millions": 240,
+   "model_family": "ViLT",
+   "date_created": "2021-02-05",
+   "organization": "Kakao Brain",
+   "innovation": "Eliminates convolutional neural networks and region supervision from Vision-and-Language Pre-training (VLP) pipelines; replaces heavy visual embedders (e.g., ResNet, object detectors) with a simple linear projection of image patches; employs whole-word masking and image augmentation during pre-training to boost downstream performance.",
+   "pretraining_architecture": "Transformer",
+   "pretraining_task": "Image-text matching, masked language modeling",
+   "pretraining_corpus": "Aligned image-text descriptions",
+   "finetuning_task": "Vision-and-language downstream tasks, Supervised fine-tuning for Visual Question Answering, Natural Language Visual Reasoning, and Image-Text Retrieval",
+   "optimizer": "AdamW",
+   "hardware_used": "NVIDIA V100 GPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": null,
+   "research_problem": "Vision-and-Language Pre-training (VLP)",
+   "application": "Visual question answering, natural language visual reasoning, image-text retrieval",
+   "paper_title": "ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision",
+   "training_corpus_size": null,
+   "finetuning_data": "VQAv2, NLVR2, MSCOCO, Flickr30K, F30K",
+   "tokenizer": "bert-base-uncased WordPiece",
+   "supported_language": "English",
+   "hardware_description": "64 NVIDIA V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "240M (dense)",
+   "attention_mechanism": "Multi-head self-attention (ViT-B/32 for vision, BERT-based for text), Multi-head self-attention",
+   "context_length_max": null,
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on 4 datasets (100K or 200K steps) followed by supervised fine-tuning on downstream tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Single transformer processing both modalities",
+   "vision_encoder": "Linear projection of image patches, Patch-based vision transformer (ViT-B/32 backbone, 384x640 resolution)",
+   "base_model": "ViT-B/32, BERT-base-uncased",
+   "optimizer_innovation": null,
+   "benchmark_result": "NLVR2 test-P Acc.: 76.1; F30K TR: 83.5; F30K IR: 64.4; VQAv2 test-dev: 71.26; NLVR2 dev: 76.13; MSCOCO IR(ZS): 83.50; F30K TR(ZS): 64.36",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": "12",
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "ViLT",
+   "parameters": "43M, 86M, 150M",
+   "parameters_millions": 150,
+   "model_family": "ViLT",
+   "date_created": "2021-02-05",
+   "organization": "KAIST",
+   "innovation": "Shallow, convolution-free embedding of pixel-level inputs using simple linear projection of patches instead of heavy region/grid features or CNN backbones; single unified transformer architecture handling both modalities in place of separate heavy embedders, concentrating computation on modality interaction.",
+   "pretraining_architecture": "Encoder",
+   "pretraining_task": "Vision-and-language representation learning",
+   "pretraining_corpus": "Conceptual Captions, COCO, Visual Genome, SBU",
+   "finetuning_task": "Visual Question Answering (VQA), Visual Reasoning, Image-Text Retrieval",
+   "optimizer": "AdamW",
+   "hardware_used": null,
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Vision-and-language representation learning",
+   "application": "Visual question answering, visual reasoning, image-text retrieval, image captioning",
+   "paper_title": "ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision",
+   "training_corpus_size": null,
+   "finetuning_data": null,
+   "tokenizer": "WordPiece",
+   "supported_language": "English",
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/dkiat/ViLT; https://github.com/dankal444/vilt",
+   "context_length": null,
+   "activated_parameters": "86M (dense, all parameters active)",
+   "attention_mechanism": "Multi-head self-attention (MSA) with pre-normalization, Cross-attention between image patches and text tokens; standard multi-head self-attention within modalities",
+   "context_length_max": "512",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: unsupervised pre-training on CC3M with MLM and MVM objectives, followed by supervised fine-tuning on downstream vision-language tasks",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": "Single-stream early fusion",
+   "vision_encoder": "Linear projection of flattened 32x32 image patches, Simple patch embedding (no CNN)",
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "VQA 73.8 (test-dev), VCR 58.4, RefCOCO 88.5, RefCOCO+ 80.5, RefCOCOg 84.5, COCO 86.5, Visual Genome 78.5; VQA v2.0 Test-Dev: 72.8; GQA: 63.8; SNLI-VE: 90.8; Visual Genome: 28.5; VQA-E: 73.1; F30K Retrieval R@1: 85.1; COCO Retrieval R@1: 88.5",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 6,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "ViLT-B/32": {
+   "application": [
+    "Visual question answering",
+    "natural language visual reasoning",
+    "image-text retrieval"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (ViT-B/32 for vision, BERT-based for text)",
+    "Multi-head self-attention"
+   ],
+   "base_model": [
+    "ViT-B/32, BERT-base-uncased"
+   ],
+   "finetuning_data": [
+    "VQAv2",
+    "NLVR2",
+    "MSCOCO",
+    "Flickr30K",
+    "F30K"
+   ],
+   "finetuning_task": [
+    "Vision-and-language downstream tasks",
+    "Natural Language Visual Reasoning",
+    "Image-Text Retrieval"
+   ],
+   "fusion_architecture": [
+    "Single transformer processing both modalities"
+   ],
+   "hardware_used": [
+    "NVIDIA V100 GPUs"
+   ],
+   "model_family": [
+    "ViLT"
+   ],
+   "model_name": [
+    "ViLT-B/32"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "Kakao Brain"
+   ],
+   "parameters": [
+    "240M"
+   ],
+   "pretraining_architecture": [],
+   "pretraining_corpus": [],
+   "pretraining_task": [
+    "Image-text matching, masked language modeling"
+   ],
+   "research_problem": [
+    "Vision-and-Language Pre-training (VLP)"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Linear projection of image patches",
+    "Patch-based vision transformer (ViT-B/32 backbone, 384x640 resolution)"
+   ]
+  },
+  "ViLT": {
+   "application": [
+    "Visual question answering",
+    "visual reasoning",
+    "image-text retrieval",
+    "image captioning"
+   ],
+   "attention_mechanism": [
+    "Multi-head self-attention (MSA) with pre-normalization",
+    "Cross-attention between image patches and text tokens",
+    "standard multi-head self-attention within modalities"
+   ],
+   "finetuning_task": [
+    "Visual Question Answering (VQA)",
+    "Visual Reasoning",
+    "Image-Text Retrieval"
+   ],
+   "fusion_architecture": [
+    "Single-stream early fusion"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "ViLT"
+   ],
+   "model_name": [
+    "ViLT"
+   ],
+   "optimizer": [
+    "AdamW"
+   ],
+   "organization": [
+    "KAIST"
+   ],
+   "parameters": [
+    "43M",
+    "86M",
+    "150M"
+   ],
+   "pretraining_architecture": [
+    "Encoder"
+   ],
+   "pretraining_corpus": [
+    "Conceptual Captions",
+    "COCO",
+    "Visual Genome",
+    "SBU"
+   ],
+   "pretraining_task": [
+    "Vision-and-language representation learning"
+   ],
+   "research_problem": [
+    "Vision-and-language representation learning"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "Linear projection of flattened 32x32 image patches",
+    "Simple patch embedding (no CNN)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ViLT-B/32": {
+    "finetuning_task": {
+     "candidates": [
+      "Vision-and-language downstream tasks",
+      "Supervised fine-tuning for Visual Question Answering",
+      "Natural Language Visual Reasoning",
+      "Image-Text Retrieval"
+     ],
+     "accepted": [
+      "Vision-and-language downstream tasks",
+      "Natural Language Visual Reasoning",
+      "Image-Text Retrieval"
+     ],
+     "dropped": [
+      {
+       "value": "Supervised fine-tuning for Visual Question Answering",
+       "reason": "Describes the training process/method rather than naming the specific task itself"
+      }
+     ]
+    },
+    "pretraining_architecture": {
+     "candidates": [
+      "Transformer"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Transformer",
+       "reason": "pretraining_architecture accepts only ['Decoder', 'Encoder', 'Encoder-Decoder']; got 'Transformer'"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "Aligned image-text descriptions"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Aligned image-text descriptions",
+       "reason": "Generic description of data type, not a named dataset or corpus"
+      }
+     ]
+    }
+   },
+   "ViLT": {}
+  },
+  "counts": {
+   "kept": 55,
+   "dropped": 3,
+   "llm_calls": 1,
+   "values_sent_to_llm": 26
+  }
+ },
+ "contributions": [
+  {
+   "label": "ViLT-B/32",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ViLT-B/32",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ViLT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-02-05",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Kakao Brain",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Eliminates convolutional neural networks and region supervision from Vision-and-Language Pre-training (VLP) pipelines",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Replaces heavy visual embedders (e.g., ResNet, object detectors) with a simple linear projection of image patches",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Employs whole-word masking and image augmentation during pre-training to boost downstream performance.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Image-text matching, masked language modeling",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Vision-and-language downstream tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Natural Language Visual Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-Text Retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "Bert-base-uncased WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "240M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 240,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "64 NVIDIA V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Natural language visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-and-Language Pre-training (VLP)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "VQAv2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "NLVR2",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "MSCOCO",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Flickr30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "F30K",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "240M (dense)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (ViT-B/32 for vision, BERT-based for text)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on 4 datasets (100K or 200K steps) followed by supervised fine-tuning on downstream tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Single transformer processing both modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Linear projection of image patches",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Patch-based vision transformer (ViT-B/32 backbone, 384x640 resolution)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203101",
+     "label": "base_model",
+     "value": "ViT-B/32, BERT-base-uncased",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 test-P Acc.: 76.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "F30K TR: 83.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "F30K IR: 64.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQAv2 test-dev: 71.26",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "NLVR2 dev: 76.13",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MSCOCO IR(ZS): 83.50",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "F30K TR(ZS): 64.36",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "12",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "ViLT",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ViLT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ViLT",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-02-05",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "KAIST",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Shallow, convolution-free embedding of pixel-level inputs using simple linear projection of patches instead of heavy region/grid features or CNN backbones",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Single unified transformer architecture handling both modalities in place of separate heavy embedders, concentrating computation on modality interaction.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Vision-and-language representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Conceptual Captions",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "COCO",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "Visual Genome",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "SBU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual Question Answering (VQA)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Visual Reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P116000",
+     "label": "finetuning_task",
+     "value": "Image-Text Retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "AdamW",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "WordPiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "43M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "86M",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "150M",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 150,
+     "datatype": "integer"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual question answering",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Visual reasoning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image-text retrieval",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image captioning",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/dkiat/ViLT",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/dankal444/vilt",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Vision-and-language representation learning",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "86M (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (MSA) with pre-normalization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Cross-attention between image patches and text tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention within modalities",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: unsupervised pre-training on CC3M with MLM and MVM objectives, followed by supervised fine-tuning on downstream vision-language tasks",
+     "datatype": "string"
+    },
+    {
+     "property": "P203099",
+     "label": "fusion_architecture",
+     "value": "Single-stream early fusion",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Linear projection of flattened 32x32 image patches",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Simple patch embedding (no CNN)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA 73.8 (test-dev), VCR 58.4, RefCOCO 88.5, RefCOCO+ 80.5, RefCOCOg 84.5, COCO 86.5, Visual Genome 78.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA v2.0 Test-Dev: 72.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "GQA: 63.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SNLI-VE: 90.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Visual Genome: 28.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "VQA-E: 73.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "F30K Retrieval R@1: 85.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "COCO Retrieval R@1: 88.5",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R467947",
+  "contribution_ids": [
+   "R467948",
+   "R1921022",
+   "R1921035"
+  ],
+  "new_contribution_ids": [
+   "R1921022",
+   "R1921035"
+  ],
+  "comparison_updated": null
+ }
+}

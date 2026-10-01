@@ -1,0 +1,519 @@
+{
+ "arxiv_id": "2102.12092",
+ "status": "completed",
+ "timestamp": "2026-08-30T22:19:45.956139",
+ "steps": {
+  "fetch": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2102.12092",
+  "title": "Zero-Shot Text-to-Image Generation",
+  "authors": [
+   "Aditya Ramesh",
+   "Mikhail Pavlov",
+   "Gabriel Goh",
+   "Scott Gray",
+   "Chelsea Voss",
+   "Alec Radford",
+   "Mark Chen",
+   "Ilya Sutskever"
+  ],
+  "abstract": "Text-to-image generation has traditionally focused on finding better modeling assumptions for training on a fixed dataset. These assumptions might involve complex architectures, auxiliary losses, or side information such as object part labels or segmentation masks supplied during training. We describe a simple approach for this task based on a transformer that autoregressively models the text and image tokens as a single stream of data. With sufficient data and scale, our approach is competitive with previous domain-specific models when evaluated in a zero-shot fashion.",
+  "published": "2021-02-24T06:42:31+00:00",
+  "updated": "2021-02-26T23:26:05+00:00",
+  "doi": null,
+  "primary_category": "cs.CV",
+  "categories": [
+   "cs.CV",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2102.12092v2",
+  "entry_id": "http://arxiv.org/abs/2102.12092v2",
+  "pdf_path": "data/papers/2102.12092.pdf"
+ },
+ "text_length": 62604,
+ "word_count": 3132,
+ "models_extracted": 5,
+ "extraction_data": [
+  {
+   "model_name": "DALL-E",
+   "parameters": "1B, 2.8B, 5.6B, 12B",
+   "parameters_millions": 12000,
+   "model_family": "DALL-E",
+   "date_created": "2021-02-24",
+   "organization": "OpenAI",
+   "innovation": "Autoregressive transformer that models text and image tokens as a single stream of data; uses a discrete VAE (dVAE) with an 8192-vocabulary codebook to compress images into tokens, eliminating the need for complex architectures, auxiliary losses, or side information (e.g., segmentation masks) during training.",
+   "pretraining_architecture": "Decoder",
+   "pretraining_task": "Autoregressive modeling of the joint distribution over text and image tokens",
+   "pretraining_corpus": "250 million text-image pairs from the internet (JFT-300M scale), including Conceptual Captions and a filtered subset of YFCC100M",
+   "finetuning_task": null,
+   "optimizer": "Adam",
+   "hardware_used": "NVIDIA V100 GPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "closed source",
+   "research_problem": "Zero-shot text-to-image generation",
+   "application": "Text-to-image generation, image editing, zero-shot visual synthesis",
+   "paper_title": "Zero-Shot Text-to-Image Generation",
+   "training_corpus_size": "250 million image-text pairs",
+   "finetuning_data": null,
+   "tokenizer": "BPE for text, discrete VAE (dVAE) with 8192 vocabulary for images",
+   "supported_language": "English",
+   "hardware_description": "1024 16GB NVIDIA V100 GPUs",
+   "carbon_emitted": null,
+   "source_code": null,
+   "context_length": null,
+   "activated_parameters": "12B (dense, all parameters active)",
+   "attention_mechanism": "Sparse decoder-only self-attention with causal, row, column, and convolutional masks, Standard multi-head self-attention (Transformer), Sparse attention (row, column, convolutional masks), Multi-head self-attention (qkv matrices)",
+   "context_length_max": "1280 tokens",
+   "context_extension_method": null,
+   "training_pipeline": "Two-stage: (1) Train discrete VAE encoder/decoder on images; (2) Concatenate up to 256 BPE-encoded text tokens with 1024 image tokens and train autoregressive transformer to model joint distribution",
+   "reasoning_mode": null,
+   "moe_configuration": null,
+   "quantization_precision": "16-bit mixed precision (1-6-9 format for running mean, 0-6-10 for running variance), 16-bit, 16-bit floating point, 16-bit (bfloat16/float16), 1-6-9 format for gradients",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": "dVAE encoder, discrete VAE (dVAE)",
+   "base_model": null,
+   "optimizer_innovation": "Adaptation of PowerSGD for billion-parameter scale with custom 1-6-9 format and grouped all-reduce to fix performance regressions",
+   "benchmark_result": "MS-COCO zero-shot generation preferred over prior work by human evaluators 90% of the time; FID: best by ~6 points with slight blur; IS: highest with blur radius >= 2; Human evaluation: chosen as most realistic 90.0% of time, best matching caption 93.3% of time",
+   "weight_clipping_mechanism": "Gradient clipping by norm (threshold 4) during warm-up; per-resblock gradient scaling",
+   "number_of_attention_heads": "96",
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 1,
+ "validated_rows": {
+  "DALL-E": {
+   "application": [
+    "Text-to-image generation",
+    "image editing",
+    "zero-shot visual synthesis"
+   ],
+   "attention_mechanism": [
+    "Standard multi-head self-attention (Transformer)",
+    "Sparse attention (row, column, convolutional masks)",
+    "Multi-head self-attention (qkv matrices)"
+   ],
+   "hardware_used": [
+    "NVIDIA V100 GPU"
+   ],
+   "license": [
+    "closed source"
+   ],
+   "model_family": [
+    "DALL-E"
+   ],
+   "model_name": [
+    "DALL-E"
+   ],
+   "optimizer": [
+    "Adam"
+   ],
+   "organization": [
+    "OpenAI"
+   ],
+   "parameters": [
+    "1B",
+    "2.8B",
+    "5.6B",
+    "12B"
+   ],
+   "pretraining_architecture": [
+    "Decoder"
+   ],
+   "pretraining_corpus": [
+    "250 million text-image pairs from the internet (JFT-300M scale)"
+   ],
+   "pretraining_task": [
+    "Autoregressive modeling of the joint distribution over text and image tokens"
+   ],
+   "quantization_precision": [
+    "16-bit mixed precision (1-6-9 format for running mean, 0-6-10 for running variance)",
+    "16-bit",
+    "16-bit floating point",
+    "16-bit (bfloat16/float16)",
+    "1-6-9 format for gradients"
+   ],
+   "research_problem": [
+    "Zero-shot text-to-image generation"
+   ],
+   "supported_language": [
+    "English"
+   ],
+   "vision_encoder": [
+    "dVAE encoder",
+    "discrete VAE (dVAE)"
+   ],
+   "weight_clipping_mechanism": []
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "DALL-E": {
+    "attention_mechanism": {
+     "candidates": [
+      "Sparse decoder-only self-attention with causal",
+      "row",
+      "column",
+      "convolutional masks",
+      "Standard multi-head self-attention (Transformer)",
+      "Sparse attention (row, column, convolutional masks)",
+      "Multi-head self-attention (qkv matrices)"
+     ],
+     "accepted": [
+      "Standard multi-head self-attention (Transformer)",
+      "Sparse attention (row, column, convolutional masks)",
+      "Multi-head self-attention (qkv matrices)"
+     ],
+     "dropped": [
+      {
+       "value": "Sparse decoder-only self-attention with causal",
+       "reason": "Trailing fragment/cutoff phrase"
+      },
+      {
+       "value": "row",
+       "reason": "Fragment, not a standalone mechanism"
+      },
+      {
+       "value": "column",
+       "reason": "Fragment, not a standalone mechanism"
+      },
+      {
+       "value": "convolutional masks",
+       "reason": "Fragment/component description, not a full mechanism"
+      }
+     ]
+    },
+    "pretraining_corpus": {
+     "candidates": [
+      "250 million text-image pairs from the internet (JFT-300M scale)",
+      "including Conceptual Captions and a filtered subset of YFCC100M"
+     ],
+     "accepted": [
+      "250 million text-image pairs from the internet (JFT-300M scale)"
+     ],
+     "dropped": [
+      {
+       "value": "including Conceptual Captions and a filtered subset of YFCC100M",
+       "reason": "starts with a connective, so it is a fragment of a longer phrase rather than a pretraining_corpus name: 'including Conceptual Captions and a filtered subset of YFCC100M'"
+      }
+     ]
+    },
+    "weight_clipping_mechanism": {
+     "candidates": [
+      "Gradient clipping by norm (threshold 4) during warm-up; per-resblock gradient scaling"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Gradient clipping by norm (threshold 4) during warm-up; per-resblock gradient scaling",
+       "reason": "Describes gradient clipping, not weight clipping"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 28,
+   "dropped": 6,
+   "llm_calls": 1,
+   "values_sent_to_llm": 21
+  }
+ },
+ "contributions": [
+  {
+   "label": "DALL-E",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "DALL-E",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "DALL-E",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2021-02-24",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "OpenAI",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Autoregressive transformer that models text and image tokens as a single stream of data",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Uses a discrete VAE (dVAE) with an 8192-vocabulary codebook to compress images into tokens, eliminating the need for complex architectures, auxiliary losses, or side information (e.g., segmentation masks) during training.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Autoregressive modeling of the joint distribution over text and image tokens",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "250 million text-image pairs from the internet (JFT-300M scale)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adam",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "BPE for text, discrete VAE (dVAE) with 8192 vocabulary for images",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "2.8B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "5.6B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "12B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 12000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "NVIDIA V100 GPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P119137",
+     "label": "hardware_description",
+     "value": "1024 16GB NVIDIA V100 GPUs",
+     "datatype": "string"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Image editing",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Zero-shot visual synthesis",
+     "datatype": "resource"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Zero-shot text-to-image generation",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "250 million image-text pairs",
+     "datatype": "string"
+    },
+    {
+     "property": "P163010",
+     "label": "supported_language",
+     "value": "English",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "12B (dense, all parameters active)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Standard multi-head self-attention (Transformer)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Sparse attention (row, column, convolutional masks)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head self-attention (qkv matrices)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "1280 tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Two-stage: (1) Train discrete VAE encoder/decoder on images; (2) Concatenate up to 256 BPE-encoded text tokens with 1024 image tokens and train autoregressive transformer to model joint distribution",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "16-bit mixed precision (1-6-9 format for running mean, 0-6-10 for running variance)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "16-bit",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "16-bit floating point",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "16-bit (bfloat16/float16)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "1-6-9 format for gradients",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "DVAE encoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203100",
+     "label": "vision_encoder",
+     "value": "Discrete VAE (dVAE)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203102",
+     "label": "optimizer_innovation",
+     "value": "Adaptation of PowerSGD for billion-parameter scale with custom 1-6-9 format and grouped all-reduce to fix performance regressions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "MS-COCO zero-shot generation preferred over prior work by human evaluators 90% of the time",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "FID: best by ~6 points with slight blur",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "IS: highest with blur radius >= 2",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Human evaluation: chosen as most realistic 90.0% of time, best matching caption 93.3% of time",
+     "datatype": "string"
+    },
+    {
+     "property": "P203105",
+     "label": "number_of_attention_heads",
+     "value": "96",
+     "datatype": "string"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R370903",
+  "contribution_ids": [
+   "R370904",
+   "R426500",
+   "R1927526"
+  ],
+  "new_contribution_ids": [
+   "R1927526"
+  ],
+  "comparison_updated": null
+ }
+}

@@ -1,0 +1,1062 @@
+{
+ "arxiv_id": "2202.08906",
+ "status": "completed",
+ "timestamp": "2026-08-25T04:59:35.802641",
+ "steps": {
+  "fetch": "success",
+  "classify": "success",
+  "parse": "success",
+  "extract": "success",
+  "map": "success",
+  "update_orkg": "success"
+ },
+ "paper_metadata": {
+  "arxiv_id": "2202.08906",
+  "title": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+  "authors": [
+   "Barret Zoph",
+   "Irwan Bello",
+   "Sameer Kumar",
+   "Nan Du",
+   "Yanping Huang",
+   "Jeff Dean",
+   "Noam Shazeer",
+   "William Fedus"
+  ],
+  "abstract": "Scale has opened new frontiers in natural language processing -- but at a high cost. In response, Mixture-of-Experts (MoE) and Switch Transformers have been proposed as an energy efficient path to even larger and more capable language models. But advancing the state-of-the-art across a broad set of natural language tasks has been hindered by training instabilities and uncertain quality during fine-tuning. Our work focuses on these issues and acts as a design guide. We conclude by scaling a sparse model to 269B parameters, with a computational cost comparable to a 32B dense encoder-decoder Transformer (Stable and Transferable Mixture-of-Experts or ST-MoE-32B). For the first time, a sparse model achieves state-of-the-art performance in transfer learning, across a diverse set of tasks including reasoning (SuperGLUE, ARC Easy, ARC Challenge), summarization (XSum, CNN-DM), closed book question answering (WebQA, Natural Questions), and adversarially constructed tasks (Winogrande, ANLI R3).",
+  "published": "2022-02-17T21:39:10+00:00",
+  "updated": "2022-04-29T23:24:20+00:00",
+  "doi": null,
+  "primary_category": "cs.CL",
+  "categories": [
+   "cs.CL",
+   "cs.LG"
+  ],
+  "pdf_url": "https://arxiv.org/pdf/2202.08906v2",
+  "entry_id": "http://arxiv.org/abs/2202.08906v2",
+  "pdf_path": "data/papers/2202.08906.pdf"
+ },
+ "classification": {
+  "is_valid": true,
+  "reason": "LLM classification: IN_DOMAIN (domain: LLM pretraining)"
+ },
+ "text_length": 119784,
+ "word_count": 11437,
+ "models_extracted": 15,
+ "extraction_data": [
+  {
+   "model_name": "ST-MoE-L",
+   "parameters": "1B, 137B",
+   "parameters_millions": 137000,
+   "model_family": "ST-MoE",
+   "date_created": "2022-02-17",
+   "organization": "Google",
+   "innovation": "Router z-loss to resolve training instability; systematic fine-tuning analysis showing sparse and dense models require different hyperparameter protocols; design guide for capacity factor, routing algorithm, and expert count.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "C4",
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "optimizer": "Adafactor",
+   "hardware_used": "TPU",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Stable and transferable training of sparse expert models",
+   "application": "Transfer learning across diverse NLP tasks including reasoning, summarization, closed-book QA, and adversarial tasks",
+   "paper_title": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+   "training_corpus_size": "524B tokens",
+   "finetuning_data": "SuperGLUE, SQuAD, CNN-DM, BBC XSum, ARCEasy, ARCReasoningChallenge, Natural Questions, WebQuestions, TriviaQA, Winogrande, ANLI",
+   "tokenizer": null,
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/tensorflow/mesh",
+   "context_length": null,
+   "activated_parameters": "137B (all active per token)",
+   "attention_mechanism": "Multi-head attention",
+   "context_length_max": "512 (encoder), 114 (decoder)",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on C4 -> fine-tuning on task mixtures",
+   "reasoning_mode": null,
+   "moe_configuration": "Sparse Mixture-of-Experts",
+   "quantization_precision": null,
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": null,
+   "optimizer_innovation": null,
+   "benchmark_result": "SuperGLUE; ARC Easy; ARC Challenge; XSum; CNN-DM; WebQA; Natural Questions; Winogrande; ANLI R3; SuperGLUE avg dev 87.4; SQuADv2 F1 dev 94.5; XSum ROUGE-2 dev 21.8; WinoGrande acc dev 81.7; ARC-Easy acc dev 75.4; ClosedBookTriviaQA acc dev 33.8",
+   "weight_clipping_mechanism": null,
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  },
+  {
+   "model_name": "ST-MoE",
+   "parameters": "32B, 157B, 269B",
+   "parameters_millions": 269000,
+   "model_family": "ST-MoE",
+   "date_created": "2022-02-17",
+   "organization": "Google",
+   "innovation": "Router z-loss: penalizes large logits into the gating network to stabilize training without quality degradation; Update clipping: constrains weight changes to a small norm to prevent exploding updates; Mixed precision training: uses bfloat16 for activations and matrix multiplications while keeping float32 for weights, gradients, and allreduce communications to balance efficiency and stability; Adafactor optimizer: memory-efficient optimizer used instead of gradient clipping.",
+   "pretraining_architecture": "Encoder-Decoder",
+   "pretraining_task": "Next-token prediction",
+   "pretraining_corpus": "C4",
+   "finetuning_task": "Supervised discriminative fine-tuning",
+   "optimizer": "Adafactor",
+   "hardware_used": "TPUs",
+   "extension": null,
+   "blog_post": null,
+   "license": "Apache 2.0",
+   "research_problem": "Stable and transferable training of sparse Mixture-of-Experts (MoE) language models.",
+   "application": "Transfer learning across diverse NLP tasks including reasoning, summarization, closed-book QA, and adversarial tasks",
+   "paper_title": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+   "training_corpus_size": "524B tokens",
+   "finetuning_data": "SuperGLUE, SQuAD, CNN-DM, BBC XSum, ARCEasy, ARCReasoningChallenge, Natural Questions, WebQuestions, TriviaQA, Winogrande, ANLI",
+   "tokenizer": "SentencePiece",
+   "supported_language": null,
+   "hardware_description": null,
+   "carbon_emitted": null,
+   "source_code": "https://github.com/tensorflow/mesh; https://github.com/google-research/st-moe",
+   "context_length": null,
+   "activated_parameters": "32B",
+   "attention_mechanism": "Multi-head attention",
+   "context_length_max": "512 (encoder), 114 (decoder)",
+   "context_extension_method": null,
+   "training_pipeline": "Pre-training on C4 -> fine-tuning",
+   "reasoning_mode": null,
+   "moe_configuration": "Sparse Mixture-of-Experts",
+   "quantization_precision": "bfloat16 (activations/matrix mults), float32 (weights/updates/allreduce)",
+   "synthetic_data_generation_method": null,
+   "rl_algorithm": null,
+   "reward_mechanism": null,
+   "tool_calling_format": null,
+   "training_environment_scale": null,
+   "safety_evaluation_protocol": null,
+   "safety_defect_rate": null,
+   "fusion_architecture": null,
+   "vision_encoder": null,
+   "base_model": "FLOP-matched to T5-Large",
+   "optimizer_innovation": null,
+   "benchmark_result": "SuperGLUE; ARC Easy; ARC Challenge; XSum; CNN-DM; WebQA; Natural Questions; Winogrande; ANLI R3; SuperGLUE: 86.9; WMT14 EN-DE 30.5 BLEU; WMT16 EN-RO 33.1 BLEU; CNN/DailyMail ROUGE-2 43.5; XSum ROUGE-2 44.1",
+   "weight_clipping_mechanism": "Update clipping (constrains weight changes to a small norm)",
+   "number_of_attention_heads": null,
+   "post_training_infrastructure": null
+  }
+ ],
+ "models_after_selection": 5,
+ "models_after_merge": 2,
+ "validated_rows": {
+  "ST-MoE-L": {
+   "application": [
+    "summarization",
+    "closed-book QA",
+    "adversarial tasks"
+   ],
+   "attention_mechanism": [
+    "Multi-head attention"
+   ],
+   "finetuning_data": [
+    "SuperGLUE",
+    "SQuAD",
+    "CNN-DM",
+    "BBC XSum",
+    "ARCEasy",
+    "ARCReasoningChallenge",
+    "Natural Questions",
+    "WebQuestions",
+    "TriviaQA",
+    "Winogrande",
+    "ANLI"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "TPU"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "ST-MoE"
+   ],
+   "model_name": [
+    "ST-MoE-L"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "1B",
+    "137B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "research_problem": [
+    "Stable and transferable training of sparse expert models"
+   ]
+  },
+  "ST-MoE": {
+   "application": [
+    "summarization",
+    "closed-book QA",
+    "adversarial tasks"
+   ],
+   "attention_mechanism": [
+    "Multi-head attention"
+   ],
+   "base_model": [],
+   "finetuning_data": [
+    "SuperGLUE",
+    "SQuAD",
+    "CNN-DM",
+    "BBC XSum",
+    "ARCEasy",
+    "ARCReasoningChallenge",
+    "Natural Questions",
+    "WebQuestions",
+    "TriviaQA",
+    "Winogrande",
+    "ANLI"
+   ],
+   "finetuning_task": [],
+   "hardware_used": [
+    "TPUs"
+   ],
+   "license": [
+    "Apache 2.0"
+   ],
+   "model_family": [
+    "ST-MoE"
+   ],
+   "model_name": [
+    "ST-MoE"
+   ],
+   "optimizer": [
+    "Adafactor"
+   ],
+   "organization": [
+    "Google"
+   ],
+   "parameters": [
+    "32B",
+    "157B",
+    "269B"
+   ],
+   "pretraining_architecture": [
+    "Encoder-Decoder"
+   ],
+   "pretraining_corpus": [
+    "C4"
+   ],
+   "pretraining_task": [
+    "Next-token prediction"
+   ],
+   "quantization_precision": [
+    "bfloat16 (activations/matrix mults)",
+    "float32 (weights/updates/allreduce)"
+   ],
+   "research_problem": [
+    "Stable and transferable training of sparse Mixture-of-Experts (MoE) language models."
+   ],
+   "weight_clipping_mechanism": [
+    "Update clipping (constrains weight changes to a small norm)"
+   ]
+  }
+ },
+ "semantic_validation": {
+  "enabled": true,
+  "layers": {
+   "rules": true,
+   "cache": true,
+   "llm": true
+  },
+  "models": {
+   "ST-MoE-L": {
+    "application": {
+     "candidates": [
+      "Transfer learning across diverse NLP tasks including reasoning",
+      "summarization",
+      "closed-book QA",
+      "adversarial tasks"
+     ],
+     "accepted": [
+      "summarization",
+      "closed-book QA",
+      "adversarial tasks"
+     ],
+     "dropped": [
+      {
+       "value": "Transfer learning across diverse NLP tasks including reasoning",
+       "reason": "Describes a technique/approach and uses a broad placeholder rather than naming a concrete task or domain."
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    }
+   },
+   "ST-MoE": {
+    "application": {
+     "candidates": [
+      "Transfer learning across diverse NLP tasks including reasoning",
+      "summarization",
+      "closed-book QA",
+      "adversarial tasks"
+     ],
+     "accepted": [
+      "summarization",
+      "closed-book QA",
+      "adversarial tasks"
+     ],
+     "dropped": [
+      {
+       "value": "Transfer learning across diverse NLP tasks including reasoning",
+       "reason": "Describes a technique/approach and uses a broad placeholder rather than naming a concrete task or domain."
+      }
+     ]
+    },
+    "base_model": {
+     "candidates": [
+      "FLOP-matched to T5-Large"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "FLOP-matched to T5-Large",
+       "reason": "Trailing qualifier/comparison rather than a standalone model name (cached)"
+      }
+     ]
+    },
+    "finetuning_task": {
+     "candidates": [
+      "Supervised discriminative fine-tuning"
+     ],
+     "accepted": [],
+     "dropped": [
+      {
+       "value": "Supervised discriminative fine-tuning",
+       "reason": "Describes a training paradigm/method rather than a specific task or objective. (cached)"
+      }
+     ]
+    }
+   }
+  },
+  "counts": {
+   "kept": 58,
+   "dropped": 5,
+   "llm_calls": 1,
+   "values_sent_to_llm": 7
+  }
+ },
+ "contributions": [
+  {
+   "label": "ST-MoE-L",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ST-MoE-L",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ST-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-02-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Router z-loss to resolve training instability",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Systematic fine-tuning analysis showing sparse and dense models require different hyperparameter protocols",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Design guide for capacity factor, routing algorithm, and expert count.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "1B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "137B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 137000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPU",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Closed-book QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Adversarial tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/tensorflow/mesh",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Stable and transferable training of sparse expert models",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "524B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNN-DM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BBC XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARCEasy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARCReasoningChallenge",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ANLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "137B (all active per token)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 (encoder), 114 (decoder)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on C4 -> fine-tuning on task mixtures",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Sparse Mixture-of-Experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Easy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Challenge",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN-DM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI R3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE avg dev 87.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SQuADv2 F1 dev 94.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum ROUGE-2 dev 21.8",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WinoGrande acc dev 81.7",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC-Easy acc dev 75.4",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ClosedBookTriviaQA acc dev 33.8",
+     "datatype": "string"
+    }
+   ]
+  },
+  {
+   "label": "ST-MoE",
+   "template": "R609825",
+   "properties": [
+    {
+     "property": "HAS_MODEL",
+     "label": "model_name",
+     "value": "ST-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P7121",
+     "label": "model_family",
+     "value": "ST-MoE",
+     "datatype": "resource"
+    },
+    {
+     "property": "P49020",
+     "label": "date_created",
+     "value": "2022-02-17",
+     "datatype": "date"
+    },
+    {
+     "property": "P18097",
+     "label": "organization",
+     "value": "Google",
+     "datatype": "resource"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Router z-loss: penalizes large logits into the gating network to stabilize training without quality degradation",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Update clipping: constrains weight changes to a small norm to prevent exploding updates",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Mixed precision training: uses bfloat16 for activations and matrix multiplications while keeping float32 for weights, gradients, and allreduce communications to balance efficiency and stability",
+     "datatype": "string"
+    },
+    {
+     "property": "P15156",
+     "label": "innovation",
+     "value": "Adafactor optimizer: memory-efficient optimizer used instead of gradient clipping.",
+     "datatype": "string"
+    },
+    {
+     "property": "P103000",
+     "label": "pretraining_architecture",
+     "value": "Encoder-Decoder",
+     "datatype": "resource"
+    },
+    {
+     "property": "P103001",
+     "label": "pretraining_task",
+     "value": "Next-token prediction",
+     "datatype": "resource"
+    },
+    {
+     "property": "P41655",
+     "label": "pretraining_corpus",
+     "value": "C4",
+     "datatype": "resource"
+    },
+    {
+     "property": "P105017",
+     "label": "optimizer",
+     "value": "Adafactor",
+     "datatype": "resource"
+    },
+    {
+     "property": "P43065",
+     "label": "tokenizer",
+     "value": "SentencePiece",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "32B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "157B",
+     "datatype": "string"
+    },
+    {
+     "property": "P103002",
+     "label": "parameters",
+     "value": "269B",
+     "datatype": "string"
+    },
+    {
+     "property": "P110076",
+     "label": "parameters_millions",
+     "value": 269000,
+     "datatype": "integer"
+    },
+    {
+     "property": "P119138",
+     "label": "hardware_used",
+     "value": "TPUs",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Summarization",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Closed-book QA",
+     "datatype": "resource"
+    },
+    {
+     "property": "P37544",
+     "label": "application",
+     "value": "Adversarial tasks",
+     "datatype": "resource"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/tensorflow/mesh",
+     "datatype": "URI"
+    },
+    {
+     "property": "HAS_SOURCE_CODE",
+     "label": "source_code",
+     "value": "https://github.com/google-research/st-moe",
+     "datatype": "URI"
+    },
+    {
+     "property": "P32",
+     "label": "research_problem",
+     "value": "Stable and transferable training of sparse Mixture-of-Experts (MoE) language models.",
+     "datatype": "resource"
+    },
+    {
+     "property": "P163013",
+     "label": "training_corpus_size",
+     "value": "524B tokens",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "SQuAD",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "CNN-DM",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "BBC XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARCEasy",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ARCReasoningChallenge",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "WebQuestions",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "TriviaQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P163012",
+     "label": "finetuning_data",
+     "value": "ANLI",
+     "datatype": "string"
+    },
+    {
+     "property": "P203084",
+     "label": "activated_parameters",
+     "value": "32B",
+     "datatype": "string"
+    },
+    {
+     "property": "P203085",
+     "label": "attention_mechanism",
+     "value": "Multi-head attention",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203086",
+     "label": "context_length_max",
+     "value": "512 (encoder), 114 (decoder)",
+     "datatype": "string"
+    },
+    {
+     "property": "P203088",
+     "label": "training_pipeline",
+     "value": "Pre-training on C4 -> fine-tuning",
+     "datatype": "string"
+    },
+    {
+     "property": "P203090",
+     "label": "moe_configuration",
+     "value": "Sparse Mixture-of-Experts",
+     "datatype": "string"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Bfloat16 (activations/matrix mults)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203091",
+     "label": "quantization_precision",
+     "value": "Float32 (weights/updates/allreduce)",
+     "datatype": "resource"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Easy",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ARC Challenge",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN-DM",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WebQA",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Natural Questions",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "Winogrande",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "ANLI R3",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "SuperGLUE: 86.9",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT14 EN-DE 30.5 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "WMT16 EN-RO 33.1 BLEU",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "CNN/DailyMail ROUGE-2 43.5",
+     "datatype": "string"
+    },
+    {
+     "property": "P203103",
+     "label": "benchmark_result",
+     "value": "XSum ROUGE-2 44.1",
+     "datatype": "string"
+    },
+    {
+     "property": "P203104",
+     "label": "weight_clipping_mechanism",
+     "value": "Update clipping (constrains weight changes to a small norm)",
+     "datatype": "resource"
+    }
+   ]
+  }
+ ],
+ "orkg_results": {
+  "paper_id": "R216402",
+  "contribution_ids": [
+   "R216404",
+   "R1921714",
+   "R1921720"
+  ],
+  "new_contribution_ids": [
+   "R1921714",
+   "R1921720"
+  ],
+  "comparison_updated": null
+ }
+}
