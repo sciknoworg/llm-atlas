@@ -193,7 +193,8 @@ data/discovery/
 python scripts/quarterly.py init
 python scripts/quarterly.py validate --check-arxiv
 python scripts/quarterly.py run --quarter 2024-Q1   # extract, no upload
-python scripts/quarterly.py run --all --upload      # extract everything, push to ORKG
+python scripts/quarterly.py run --all --upload      # extract everything, push to ORKG sandbox
+python scripts/quarterly.py run --all --upload --host production   # push to the LIVE ORKG
 python scripts/quarterly.py status
 python scripts/quarterly.py recall -v
 ```
@@ -216,6 +217,7 @@ python scripts/quarterly.py recall -v
 | `--verbose`, `-v` | `validate`, `recall` | flag | off | Also print clean quarters / list the missed gold papers. |
 | `--all` | `run` | flag | off | Every quarter that has a folder. |
 | `--upload` | `run` | flag | off | Upload to ORKG. Without it, extraction is written to disk only. |
+| `--host` | `run` | str | `sandbox` | ORKG instance for `--upload`: `sandbox`, `incubating` or `production`. Overrides `ORKG_ENDPOINT_URL`/`ORKG_HOST` in `.env`. |
 | `--redo` | `run` | flag | off | Re-process papers that already have an extraction file. |
 | `--skip` | `run` | ids | none | Never process these arXiv ids, even with `--redo`; their existing results still go into the ledger. |
 | `--only` | `run` | ids | none | Process **only** these ids. With `--all`, re-runs scattered papers without naming their quarters. |
@@ -360,8 +362,11 @@ Run it whenever predicates are added or their descriptions edited.
 
 ## ORKG
 
-Both upload scripts default to **`sandbox`**. Pass `--host production` to write
-to the live system.
+Every script that writes to ORKG — `append_to_paper.py`, `sandbox_upload.py`,
+`reupload_pending.py` and `quarterly.py run --upload` — defaults to
+**`sandbox`**. Pass `--host production` to write to the live system. `--host`
+overrides `ORKG_ENDPOINT_URL`/`ORKG_HOST` in `.env`, so a production URL left
+in the environment does not redirect a bulk upload to the live graph.
 
 ### 8. `append_to_paper.py`
 
@@ -433,7 +438,8 @@ classification, no LLM calls, no KISSKI quota.
 ```bash
 python scripts/reupload_pending.py --dry-run      # show what would upload
 python scripts/reupload_pending.py --limit 1      # one paper, to prove it works
-python scripts/reupload_pending.py                # the rest
+python scripts/reupload_pending.py                # the rest (sandbox)
+python scripts/reupload_pending.py --host production   # the rest, to the LIVE ORKG
 ```
 
 **Options**
@@ -445,6 +451,7 @@ python scripts/reupload_pending.py                # the rest
 | `--arxiv-id` | str | all | Upload only this arXiv id. Repeatable. |
 | `--dry-run` | flag | off | List what would be uploaded and whether its extraction file exists. Touches nothing. |
 | `--delay` | float | `1.0` | Seconds between uploads. |
+| `--host` | str | `sandbox` | ORKG instance: `sandbox`, `incubating` or `production`. Overrides `ORKG_ENDPOINT_URL`/`ORKG_HOST` in `.env`. |
 
 **Input:** the quarterly ledger, plus the saved extraction at
 `data/discovery/<year>/Q<n>/extraction/<arxiv_id>.json` for each pending row.

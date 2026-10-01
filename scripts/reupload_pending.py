@@ -20,13 +20,15 @@ USAGE
 -----
     python scripts/reupload_pending.py --dry-run      # show what would upload
     python scripts/reupload_pending.py --limit 1      # one paper, to prove it works
-    python scripts/reupload_pending.py                # the rest
+    python scripts/reupload_pending.py                # the rest (sandbox)
+    python scripts/reupload_pending.py --host production   # the rest, to the LIVE ORKG
 """
 
 import argparse
 import csv
 import json
 import logging
+import os
 import sys
 import time
 from pathlib import Path
@@ -202,6 +204,9 @@ def main() -> int:
                         help="list what would be uploaded, touch nothing")
     parser.add_argument("--delay", type=float, default=1.0,
                         help="seconds between uploads (default 1.0)")
+    parser.add_argument("--host", default="sandbox",
+                        help="ORKG instance: sandbox (default), incubating or production. "
+                             "Overrides ORKG_ENDPOINT_URL/ORKG_HOST in .env")
     args = parser.parse_args()
 
     rows = pending_rows(args.ledger)
@@ -231,7 +236,12 @@ def main() -> int:
             logger.warning("%d paper(s) have no saved extraction and cannot be re-uploaded", missing)
         return 0
 
-    pipeline = ExtractionPipeline()
+    # --host outranks ORKG_ENDPOINT_URL / ORKG_HOST in .env, so the live ORKG is
+    # only written to when asked for. ORKG_HOST_ACTIVE keeps the ledger's
+    # orkg_url links on the same instance (see quarterly.orkg_paper_url).
+    pipeline = ExtractionPipeline(orkg_endpoint_url=args.host)
+    os.environ["ORKG_HOST_ACTIVE"] = pipeline.config["orkg"]["host"]
+    logger.info("ORKG upload target: %s", pipeline.config["orkg"]["endpoint_url"])
 
     uploaded = skipped = failed = 0
     for index, row in enumerate(rows, start=1):

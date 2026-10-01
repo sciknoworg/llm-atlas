@@ -2,6 +2,7 @@ import argparse
 import csv
 import json
 import logging
+import os
 import re
 import sys
 import time
@@ -230,19 +231,18 @@ def save_ledger(rows: Dict[str, Dict[str, Any]]) -> None:
 
 
 def orkg_paper_url(paper_id: Optional[str]) -> str:
-    """Public ORKG link for a paper, on whichever instance the config targets."""
+    """
+    Public ORKG link for a paper, on the instance this run uploads to.
+
+    The host comes from ORKG_HOST_ACTIVE, which the upload scripts set from the
+    pipeline's resolved --host; config.yaml alone would point a production run's
+    links at sandbox.
+    """
     if not paper_id:
         return ""
-    try:
-        import yaml
+    from src.orkg_client import orkg_frontend_url
 
-        from src.orkg_client import orkg_frontend_url
-
-        config = yaml.safe_load((PROJECT_ROOT / "config" / "config.yaml").read_text())
-        base = orkg_frontend_url(config.get("orkg", {}).get("host", "sandbox"))
-    except Exception:  # noqa: BLE001 - a missing link must not break a run
-        base = "https://sandbox.orkg.org"
-    return f"{base}/paper/{paper_id}"
+    return f"{orkg_frontend_url(os.getenv('ORKG_HOST_ACTIVE', 'sandbox'))}/paper/{paper_id}"
 
 
 def load_index() -> Dict[str, Any]:
@@ -604,7 +604,12 @@ def cmd_run(args) -> int:
 
     # One pipeline for the whole run so the value-validation, resource and
     # property-description caches are shared across every paper.
-    pipeline = ExtractionPipeline()
+    # --host is passed as the endpoint override so it outranks ORKG_ENDPOINT_URL
+    # / ORKG_HOST in .env: production is only ever written to when asked for.
+    pipeline = ExtractionPipeline(orkg_endpoint_url=args.host)
+    os.environ["ORKG_HOST_ACTIVE"] = pipeline.config["orkg"]["host"]
+    if args.upload:
+        logger.info("ORKG upload target: %s", pipeline.config["orkg"]["endpoint_url"])
 
     # The classifier exists to filter a firehose of arXiv categories down to
     # LLM/VLM papers. In this workflow discovery has ALREADY made that decision,
@@ -959,6 +964,9 @@ def main() -> int:
     p_run.add_argument("--quarter", type=parse_quarter, metavar="YYYY-Qn")
     p_run.add_argument("--all", action="store_true", help="every quarter with a folder")
     p_run.add_argument("--upload", action="store_true", help="also upload to ORKG")
+    p_run.add_argument("--host", default="sandbox",
+                       help="ORKG instance for --upload: sandbox (default), incubating "
+                            "or production. Overrides ORKG_ENDPOINT_URL/ORKG_HOST in .env")
     p_run.add_argument("--redo", action="store_true", help="re-process papers already done")
     p_run.add_argument("--skip", nargs="*", default=[], metavar="ID",
                        help="never process these papers (arXiv ids), even with --redo; "
