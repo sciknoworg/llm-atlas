@@ -13,7 +13,7 @@
 
 <h3 align="center">LLM Atlas: Automated Knowledge Extraction for a Large-Scale Catalog of Generative AI Models</h3>
 
-**LLM Atlas** is an end-to-end pipeline that keeps a structured, machine-readable catalog of Large Language Models (LLMs) and Vision-Language Models (VLMs) up to date. It reads model papers from arXiv, extracts their key properties with an LLM, including parameters, architecture, training data, organisation, release date and license, and publishes the results as contributions to the [Open Research Knowledge Graph (ORKG)](https://orkg.org/), where they feed the comparison [*A Catalog of Transformer Models*](https://orkg.org/comparisons/R1364660).
+**LLM Atlas** is an end-to-end pipeline that keeps a structured, machine-readable catalog of Large Language Models (LLMs) and Vision-Language Models (VLMs) up to date. It reads model papers from arXiv, extracts their key properties with an LLM, including parameters, architecture, training data, organisation, release date and license, and publishes the results as papers and contributions in the [Open Research Knowledge Graph (ORKG)](https://orkg.org/), structured by the ORKG LLM template. The project grows the ORKG comparison [*A Catalog of Transformer Models*](https://orkg.org/comparisons/R1364660). Adding new contributions to a comparison is a separate step you turn on yourself (`orkg.update_comparison`, off by default).
 
 Generative AI models are released faster than anyone can catalog them by hand. LLM Atlas automates the work in one repeatable flow: **discover → classify → parse → extract → normalise → validate → map → upload**. 
 
@@ -23,7 +23,7 @@ Generative AI models are released faster than anyone can catalog them by hand. L
 - **Quarterly catalog runs**: a resumable runner processes a curated paper list per quarter (2020-Q1 → 2026-Q2) and keeps a full ledger of every outcome.
 - **Domain classification**: papers are screened on title and abstract before the costly PDF parsing, so out-of-scope work is filtered early.
 - **Multi-model extraction**: a single paper can produce several model entries. Size variants (e.g. 7B / 13B / 70B) are merged into one entry, and baselines and auxiliary artefacts are dropped.
-- **Normalisation & semantic validation**: dates, organisations and parameter counts are converted to canonical forms, and every value is checked against its ORKG property description before upload.
+- **Normalisation & semantic validation**: dates, organisations and parameter counts are converted to canonical forms. Entity-like values such as organisation, license, optimizer and pre-training corpus are checked against their ORKG property descriptions before upload. Free-text fields such as innovations and benchmark results are not validated.
 - **ORKG-native output**: results are mapped to the ORKG LLM template [R609825](https://orkg.org/templates/R609825) and uploaded with duplicate detection. Uploads go to the sandbox by default.
 - **Flexible inference backends**: the hosted [KISSKI Chat AI](https://chat-ai.academiccloud.de) API (OpenAI-compatible), or local GPU inference with Hugging Face Transformers on the GWDG Grete HPC cluster.
 - **Rigorous evaluation**: strict match-based precision/recall/F1 for structured fields and BERTScore for free-text fields, measured against an ORKG-derived gold standard.
@@ -119,6 +119,7 @@ Pipeline behaviour is configured in [`config/config.yaml`](config/config.yaml):
 | `orkg` | `host` | Fallback ORKG host (`sandbox`, `incubating`, `production`) when `ORKG_ENDPOINT_URL` is not set |
 | `orkg` | `template_id` | ORKG LLM template (`R609825`) |
 | `orkg` | `comparison_id` | Target comparison (sandbox `R2147679`, live `R1364660`) |
+| `orkg` | `update_comparison` | Also add uploaded contributions to the target comparison (default `false`). Only unpublished comparisons can be updated |
 | `kisski` | `model` | LLM used for extraction |
 | `kisski` | `temperature` | `0.0` for deterministic extraction |
 | `extraction` | `max_chunk_size` | Maximum characters per PDF chunk |
@@ -129,23 +130,26 @@ Pipeline behaviour is configured in [`config/config.yaml`](config/config.yaml):
 
 ### Process a single paper
 
-Extract one paper and upload it to ORKG:
+Start with an extraction-only run. Nothing is written to ORKG, so you can inspect the result first:
 
 ```bash
-python -m src.pipeline --arxiv-id 2302.13971
+python -m src.pipeline --arxiv-id 2302.13971 --no-update
+```
+
+The result is saved as `results/extracted/2302.13971_<timestamp>.json`. Once it looks right, upload it to the ORKG instance set in `ORKG_ENDPOINT_URL`. Make sure that points at the sandbox while you're testing:
+
+```bash
+python -m src.pipeline --json-file results/extracted/2302.13971_<timestamp>.json
 ```
 
 Common variations:
 
 ```bash
-# Extraction only, no ORKG upload
-python -m src.pipeline --arxiv-id 2302.13971 --no-update
+# Extract and upload in one step
+python -m src.pipeline --arxiv-id 2302.13971
 
 # From a PDF URL instead of an arXiv ID
 python -m src.pipeline --pdf-url https://example.org/paper.pdf --paper-title "Paper Title"
-
-# Upload an existing extraction JSON
-python -m src.pipeline --json-file results/extracted/2302.13971_20260101_120000.json
 
 # Choose the extraction model and ORKG endpoint
 python -m src.pipeline --arxiv-id 2302.13971 --model llama-3.3-70b-instruct \
@@ -168,9 +172,36 @@ python -m src.pipeline --status
 from src.pipeline import ExtractionPipeline
 
 pipeline = ExtractionPipeline()
-result = pipeline.process_paper("2302.13971")
-print(result["extraction_data"])
+result = pipeline.process_paper("2302.13971", update_orkg=False)  # extraction only
+
+print(result["status"])           # "completed"
+print(result["saved_path"])       # results/extracted/2302.13971_<timestamp>.json
+print(result["extraction_data"])  # one entry per model
 ```
+
+Example `extraction_data` for the LLaMA paper (trimmed):
+
+```json
+[
+  {
+    "model_name": "LLaMA",
+    "model_family": "LLaMA",
+    "organization": "Meta",
+    "date_created": "2023-02-27",
+    "parameters": "7B, 13B, 30B, 33B, 65B",
+    "parameters_millions": 65000,
+    "pretraining_architecture": "Decoder",
+    "pretraining_task": "Next token prediction",
+    "pretraining_corpus": "Common Crawl, C4, GitHub, Wikipedia, Gutenberg Project, Books3, ArXiv, StackExchange",
+    "optimizer": "Adam",
+    "tokenizer": "SentencePiece",
+    "context_length": "2048",
+    "source_code": "https://github.com/facebookresearch/llama"
+  }
+]
+```
+
+The paper's size variants (7B to 65B) are merged into a single entry. After an upload, `result["orkg_results"]` contains the ORKG paper ID and contribution IDs.
 
 ### Build the catalog quarter by quarter
 
@@ -278,9 +309,17 @@ llm-atlas/
 | [`finetuning/README.md`](finetuning/README.md) | LoRA/QLoRA fine-tuning workflow |
 | [`KISSKI_SETUP.md`](KISSKI_SETUP.md) | Obtaining and configuring KISSKI API access |
 
+## 🧑‍💻 Development
+
+```bash
+pip install -r requirements-dev.txt
+pytest tests/ -v
+pytest tests/ -v --cov=src --cov-report=term-missing   # with coverage
+```
+
 ## 👥 Contact & Contributions
 
-Contributions are welcome. To report a bug or suggest a feature, please open an [issue](https://github.com/sciknoworg/llm-atlas/issues). To contribute code, open a pull request against `main`.
+Contributions are welcome. To report a bug or suggest a feature, please open an [issue](https://github.com/sciknoworg/llm-atlas/issues). To contribute code, make sure the test suite passes and open a pull request against `main`.
 
 ## 💡 Acknowledgements
 
