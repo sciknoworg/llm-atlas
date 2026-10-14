@@ -327,6 +327,31 @@ Contributions are welcome. To report a bug or suggest a feature, please open an 
 - [GWDG](https://gwdg.de/) for HPC resources on the Grete cluster and for KISSKI Chat AI API access
 - [arXiv](https://arxiv.org/) for open access to its paper metadata and full texts
 
+## 📝 Citation
+
+If you use LLM Atlas in your work, please cite the following related works:
+
+```bibtex
+@misc{kefi2026automated,
+  author = {Kefi, Alaa},
+  title  = {Automated Knowledge Extraction from Large Language Model Research Papers for the ORKG Model Landscape},
+  year   = {2026},
+  doi    = {10.15488/20883},
+  url    = {https://doi.org/10.15488/20883}
+}
+```
+```bibtex
+@article{dsouza2025taming,
+  author  = {D'Souza, Jennifer},
+  title   = {Taming the Generative AI Wild West: Integrating Knowledge Graphs in Digital Library Systems},
+  journal = {The Code4Lib Journal},
+  number  = {60},
+  year    = {2025},
+  month   = apr,
+  url     = {https://journal.code4lib.org/articles/18277}
+}
+```
+
 ## 📃 License
 
 This software is licensed under the [MIT License](LICENSE).
