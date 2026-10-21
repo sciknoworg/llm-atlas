@@ -8,6 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![ORKG Template](https://img.shields.io/badge/ORKG-Template%20R609825-brightgreen)](https://orkg.org/templates/R609825)
 [![ORKG Comparison](https://img.shields.io/badge/ORKG-Comparison%20R1364660-brightgreen)](https://orkg.org/comparisons/R1364660)
+[![ORKG Comparison](https://img.shields.io/badge/ORKG-Comparison%20R1979627-brightgreen)](https://orkg.org/comparisons/R1979627)
 
 </div>
 
@@ -326,6 +327,15 @@ Contributions are welcome. To report a bug or suggest a feature, please open an 
 - The [Open Research Knowledge Graph (ORKG)](https://orkg.org/) for the knowledge graph infrastructure
 - [GWDG](https://gwdg.de/) for HPC resources on the Grete cluster and for KISSKI Chat AI API access
 - [arXiv](https://arxiv.org/) for open access to its paper metadata and full texts
+
+## 🔗 ORKG Comparisons
+
+LLM Atlas is linked to two ORKG comparisons. *A Catalog of Transformer Models* is the original, manually curated catalog. *A Catalog of Transformer Models (2020–2026)* holds the models extracted automatically by the LLM Atlas pipeline.
+
+| Comparison | URL |
+|---|---|
+| *A Catalog of Transformer Models* | [orkg.org/comparisons/R1364660](https://orkg.org/comparisons/R1364660) |
+| *A Catalog of Transformer Models (2020–2026)* | [orkg.org/comparisons/R1979627](https://orkg.org/comparisons/R1979627) |
 
 ## 📝 Citation
 
